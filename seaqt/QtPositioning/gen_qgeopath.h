@@ -29,13 +29,13 @@ typedef struct QVariant QVariant;
 #endif
 
 QGeoPath* QGeoPath_new();
-QGeoPath* QGeoPath_new2(struct seaqt_array /* of QGeoCoordinate* */  path);
-QGeoPath* QGeoPath_new3(QGeoPath* other);
-QGeoPath* QGeoPath_new4(QGeoShape* other);
-QGeoPath* QGeoPath_new5(struct seaqt_array /* of QGeoCoordinate* */  path, const double* width);
+QGeoPath* QGeoPath_new_path(struct seaqt_array /* of QGeoCoordinate* */  path);
+QGeoPath* QGeoPath_new_from(QGeoPath* from);
+QGeoPath* QGeoPath_new_other(QGeoShape* other);
+QGeoPath* QGeoPath_new_path_width(struct seaqt_array /* of QGeoCoordinate* */  path, const double* width);
 
 void QGeoPath_virtbase(QGeoPath* src, QGeoShape** outptr_QGeoShape);
-void QGeoPath_operatorAssign(QGeoPath* self, QGeoPath* other);
+void QGeoPath_operatorAssign(QGeoPath* self, QGeoPath* from);
 void QGeoPath_setPath(QGeoPath* self, struct seaqt_array /* of QGeoCoordinate* */  path);
 struct seaqt_array /* of QGeoCoordinate* */  QGeoPath_path(const QGeoPath* self);
 void QGeoPath_clearPath(QGeoPath* self);
@@ -52,11 +52,11 @@ void QGeoPath_insertCoordinate(QGeoPath* self, ptrdiff_t index, QGeoCoordinate* 
 void QGeoPath_replaceCoordinate(QGeoPath* self, ptrdiff_t index, QGeoCoordinate* coordinate);
 QGeoCoordinate* QGeoPath_coordinateAt(const QGeoPath* self, ptrdiff_t index);
 bool QGeoPath_containsCoordinate(const QGeoPath* self, QGeoCoordinate* coordinate);
-void QGeoPath_removeCoordinate(QGeoPath* self, QGeoCoordinate* coordinate);
-void QGeoPath_removeCoordinateWithIndex(QGeoPath* self, ptrdiff_t index);
+void QGeoPath_removeCoordinate_coordinate(QGeoPath* self, QGeoCoordinate* coordinate);
+void QGeoPath_removeCoordinate_index(QGeoPath* self, ptrdiff_t index);
 struct seaqt_string QGeoPath_toString(const QGeoPath* self);
-double QGeoPath_lengthWithIndexFrom(const QGeoPath* self, ptrdiff_t indexFrom);
-double QGeoPath_length2(const QGeoPath* self, ptrdiff_t indexFrom, ptrdiff_t indexTo);
+double QGeoPath_length_indexFrom(const QGeoPath* self, ptrdiff_t indexFrom);
+double QGeoPath_length_indexFrom_indexTo(const QGeoPath* self, ptrdiff_t indexFrom, ptrdiff_t indexTo);
 
 const QMetaObject* QGeoPath_staticMetaObject();
 void QGeoPath_delete(QGeoPath* self);

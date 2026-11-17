@@ -61,11 +61,11 @@ type cQAudioSink*{.exportc: "QAudioSink", incompleteStruct.} = object
 proc fcQAudioSink_metaObject(self: pointer): pointer {.importc: "QAudioSink_metaObject".}
 proc fcQAudioSink_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioSink_metacast".}
 proc fcQAudioSink_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioSink_metacall".}
-proc fcQAudioSink_tr(s: cstring): struct_seaqt_string {.importc: "QAudioSink_tr".}
+proc fcQAudioSink_trS(s: cstring): struct_seaqt_string {.importc: "QAudioSink_tr_s".}
 proc fcQAudioSink_isNull(self: pointer): bool {.importc: "QAudioSink_isNull".}
 proc fcQAudioSink_format(self: pointer): pointer {.importc: "QAudioSink_format".}
-proc fcQAudioSink_start(self: pointer, device: pointer): void {.importc: "QAudioSink_start".}
-proc fcQAudioSink_start2(self: pointer): pointer {.importc: "QAudioSink_start2".}
+proc fcQAudioSink_startDevice(self: pointer, device: pointer): void {.importc: "QAudioSink_start_device".}
+proc fcQAudioSink_start(self: pointer): pointer {.importc: "QAudioSink_start".}
 proc fcQAudioSink_stop(self: pointer): void {.importc: "QAudioSink_stop".}
 proc fcQAudioSink_reset(self: pointer): void {.importc: "QAudioSink_reset".}
 proc fcQAudioSink_suspend(self: pointer): void {.importc: "QAudioSink_suspend".}
@@ -81,8 +81,8 @@ proc fcQAudioSink_setVolume(self: pointer, volume: float64): void {.importc: "QA
 proc fcQAudioSink_volume(self: pointer): float64 {.importc: "QAudioSink_volume".}
 proc fcQAudioSink_stateChanged(self: pointer, state: cint): void {.importc: "QAudioSink_stateChanged".}
 proc fcQAudioSink_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, state: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioSink_connect_stateChanged".}
-proc fcQAudioSink_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioSink_tr2".}
-proc fcQAudioSink_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioSink_tr3".}
+proc fcQAudioSink_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioSink_tr_s_c".}
+proc fcQAudioSink_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioSink_tr_s_c_n".}
 proc fcQAudioSink_vdata(self: pointer): ptr pointer {.importc: "QAudioSink_vdata".}
 proc fvdata_cQAudioSink(self: pointer): pointer {.importc: "vdata_QAudioSink".}
 
@@ -113,11 +113,11 @@ proc fcQAudioSink_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQAudioSink_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioSink_protectedbase_receivers".}
 proc fcQAudioSink_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioSink_protectedbase_isSignalConnected".}
 proc fcQAudioSink_new(vtbl: pointer, vdata: csize_t): ptr cQAudioSink {.importc: "QAudioSink_new".}
-proc fcQAudioSink_new2(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer): ptr cQAudioSink {.importc: "QAudioSink_new2".}
-proc fcQAudioSink_new3(vtbl: pointer, vdata: csize_t, format: pointer): ptr cQAudioSink {.importc: "QAudioSink_new3".}
-proc fcQAudioSink_new4(vtbl: pointer, vdata: csize_t, format: pointer, parent: pointer): ptr cQAudioSink {.importc: "QAudioSink_new4".}
-proc fcQAudioSink_new5(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer): ptr cQAudioSink {.importc: "QAudioSink_new5".}
-proc fcQAudioSink_new6(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer, parent: pointer): ptr cQAudioSink {.importc: "QAudioSink_new6".}
+proc fcQAudioSink_new2(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer): ptr cQAudioSink {.importc: "QAudioSink_new_audioDeviceInfo".}
+proc fcQAudioSink_new3(vtbl: pointer, vdata: csize_t, format: pointer): ptr cQAudioSink {.importc: "QAudioSink_new_format".}
+proc fcQAudioSink_new4(vtbl: pointer, vdata: csize_t, format: pointer, parent: pointer): ptr cQAudioSink {.importc: "QAudioSink_new_format_parent".}
+proc fcQAudioSink_new5(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer): ptr cQAudioSink {.importc: "QAudioSink_new_audioDeviceInfo_format".}
+proc fcQAudioSink_new6(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer, parent: pointer): ptr cQAudioSink {.importc: "QAudioSink_new_audioDeviceInfo_format_parent".}
 proc fcQAudioSink_staticMetaObject(): pointer {.importc: "QAudioSink_staticMetaObject".}
 
 proc metaObject*(self: gen_qaudiosink_types.QAudioSink): gen_qobjectdefs_types.QMetaObject =
@@ -130,7 +130,7 @@ proc metacall*(self: gen_qaudiosink_types.QAudioSink, param1: cint, param2: cint
   fcQAudioSink_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudiosink_types.QAudioSink, s: cstring): string =
-  let v_ms = fcQAudioSink_tr(s)
+  let v_ms = fcQAudioSink_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -142,10 +142,10 @@ proc format*(self: gen_qaudiosink_types.QAudioSink): gen_qaudioformat_types.QAud
   gen_qaudioformat_types.QAudioFormat(h: fcQAudioSink_format(self.h), owned: true)
 
 proc start*(self: gen_qaudiosink_types.QAudioSink, device: gen_qiodevice_types.QIODevice): void =
-  fcQAudioSink_start(self.h, device.h)
+  fcQAudioSink_startDevice(self.h, device.h)
 
 proc start*(self: gen_qaudiosink_types.QAudioSink): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQAudioSink_start2(self.h), owned: false)
+  gen_qiodevice_types.QIODevice(h: fcQAudioSink_start(self.h), owned: false)
 
 proc stop*(self: gen_qaudiosink_types.QAudioSink): void =
   fcQAudioSink_stop(self.h)
@@ -207,13 +207,13 @@ proc onStateChanged*(self: gen_qaudiosink_types.QAudioSink, slot: QAudioSinkstat
   fcQAudioSink_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQAudioSink_slot_callback_stateChanged, fcQAudioSink_slot_callback_stateChanged_release)
 
 proc tr*(_: type gen_qaudiosink_types.QAudioSink, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioSink_tr2(s, c)
+  let v_ms = fcQAudioSink_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudiosink_types.QAudioSink, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioSink_tr3(s, c, n)
+  let v_ms = fcQAudioSink_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

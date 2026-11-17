@@ -70,7 +70,7 @@ proc fcQIconEngine_availableSizes(self: pointer, mode: cint, state: cint): struc
 proc fcQIconEngine_iconName(self: pointer): struct_seaqt_string {.importc: "QIconEngine_iconName".}
 proc fcQIconEngine_isNull(self: pointer): bool {.importc: "QIconEngine_isNull".}
 proc fcQIconEngine_scaledPixmap(self: pointer, size: pointer, mode: cint, state: cint, scale: float64): pointer {.importc: "QIconEngine_scaledPixmap".}
-proc fcQIconEngine_virtualHook(self: pointer, id: cint, data: pointer): void {.importc: "QIconEngine_virtualHook".}
+proc fcQIconEngine_virtualHook(self: pointer, id: cint, data: pointer): void {.importc: "QIconEngine_virtual_hook".}
 proc fcQIconEngine_vdata(self: pointer): ptr pointer {.importc: "QIconEngine_vdata".}
 proc fvdata_cQIconEngine(self: pointer): pointer {.importc: "vdata_QIconEngine".}
 
@@ -101,7 +101,7 @@ proc fcQIconEngine_virtualbase_availableSizes(self: pointer, mode: cint, state: 
 proc fcQIconEngine_virtualbase_iconName(self: pointer): struct_seaqt_string {.importc: "QIconEngine_virtualbase_iconName".}
 proc fcQIconEngine_virtualbase_isNull(self: pointer): bool {.importc: "QIconEngine_virtualbase_isNull".}
 proc fcQIconEngine_virtualbase_scaledPixmap(self: pointer, size: pointer, mode: cint, state: cint, scale: float64): pointer {.importc: "QIconEngine_virtualbase_scaledPixmap".}
-proc fcQIconEngine_virtualbase_virtualHook(self: pointer, id: cint, data: pointer): void {.importc: "QIconEngine_virtualbase_virtualHook".}
+proc fcQIconEngine_virtualbase_virtualHook(self: pointer, id: cint, data: pointer): void {.importc: "QIconEngine_virtualbase_virtual_hook".}
 proc fcQIconEngine_new(vtbl: pointer, vdata: csize_t): ptr cQIconEngine {.importc: "QIconEngine_new".}
 proc fcQIconEngineScaledPixmapArgument_size(self: pointer): pointer {.importc: "QIconEngine__ScaledPixmapArgument_size".}
 proc fcQIconEngineScaledPixmapArgument_setSize(self: pointer, size: pointer): void {.importc: "QIconEngine__ScaledPixmapArgument_setSize".}
@@ -113,8 +113,8 @@ proc fcQIconEngineScaledPixmapArgument_scale(self: pointer): float64 {.importc: 
 proc fcQIconEngineScaledPixmapArgument_setScale(self: pointer, scale: float64): void {.importc: "QIconEngine__ScaledPixmapArgument_setScale".}
 proc fcQIconEngineScaledPixmapArgument_pixmap(self: pointer): pointer {.importc: "QIconEngine__ScaledPixmapArgument_pixmap".}
 proc fcQIconEngineScaledPixmapArgument_setPixmap(self: pointer, pixmap: pointer): void {.importc: "QIconEngine__ScaledPixmapArgument_setPixmap".}
-proc fcQIconEngineScaledPixmapArgument_operatorAssign(self: pointer, param1: pointer): void {.importc: "QIconEngine__ScaledPixmapArgument_operatorAssign".}
-proc fcQIconEngineScaledPixmapArgument_new(param1: pointer): ptr cQIconEngineScaledPixmapArgument {.importc: "QIconEngine__ScaledPixmapArgument_new".}
+proc fcQIconEngineScaledPixmapArgument_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QIconEngine__ScaledPixmapArgument_operatorAssign".}
+proc fcQIconEngineScaledPixmapArgument_new(fromVal: pointer): ptr cQIconEngineScaledPixmapArgument {.importc: "QIconEngine__ScaledPixmapArgument_new".}
 
 proc paint*(self: gen_qiconengine_types.QIconEngine, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, mode: cint, state: cint): void =
   fcQIconEngine_paint(self.h, painter.h, rect.h, cint(mode), cint(state))
@@ -632,10 +632,10 @@ proc pixmap*(self: gen_qiconengine_types.QIconEngineScaledPixmapArgument): gen_q
 proc setPixmap*(self: gen_qiconengine_types.QIconEngineScaledPixmapArgument, pixmap: gen_qpixmap_types.QPixmap): void =
   fcQIconEngineScaledPixmapArgument_setPixmap(self.h, pixmap.h)
 
-proc operatorAssign*(self: gen_qiconengine_types.QIconEngineScaledPixmapArgument, param1: gen_qiconengine_types.QIconEngineScaledPixmapArgument): void =
-  fcQIconEngineScaledPixmapArgument_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qiconengine_types.QIconEngineScaledPixmapArgument, fromVal: gen_qiconengine_types.QIconEngineScaledPixmapArgument): void =
+  fcQIconEngineScaledPixmapArgument_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qiconengine_types.QIconEngineScaledPixmapArgument,
-    param1: gen_qiconengine_types.QIconEngineScaledPixmapArgument): gen_qiconengine_types.QIconEngineScaledPixmapArgument =
-  let tmp = gen_qiconengine_types.QIconEngineScaledPixmapArgument(h: fcQIconEngineScaledPixmapArgument_new(param1.h), owned: true)
+    fromVal: gen_qiconengine_types.QIconEngineScaledPixmapArgument): gen_qiconengine_types.QIconEngineScaledPixmapArgument =
+  let tmp = gen_qiconengine_types.QIconEngineScaledPixmapArgument(h: fcQIconEngineScaledPixmapArgument_new(fromVal.h), owned: true)
   tmp

@@ -45,9 +45,9 @@ type cQWebEngineFindTextResult*{.exportc: "QWebEngineFindTextResult", incomplete
 
 proc fcQWebEngineFindTextResult_numberOfMatches(self: pointer): cint {.importc: "QWebEngineFindTextResult_numberOfMatches".}
 proc fcQWebEngineFindTextResult_activeMatch(self: pointer): cint {.importc: "QWebEngineFindTextResult_activeMatch".}
-proc fcQWebEngineFindTextResult_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineFindTextResult_operatorAssign".}
+proc fcQWebEngineFindTextResult_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineFindTextResult_operatorAssign".}
 proc fcQWebEngineFindTextResult_new(): ptr cQWebEngineFindTextResult {.importc: "QWebEngineFindTextResult_new".}
-proc fcQWebEngineFindTextResult_new2(other: pointer): ptr cQWebEngineFindTextResult {.importc: "QWebEngineFindTextResult_new2".}
+proc fcQWebEngineFindTextResult_new2(fromVal: pointer): ptr cQWebEngineFindTextResult {.importc: "QWebEngineFindTextResult_new_from".}
 proc fcQWebEngineFindTextResult_staticMetaObject(): pointer {.importc: "QWebEngineFindTextResult_staticMetaObject".}
 
 proc numberOfMatches*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): cint =
@@ -56,15 +56,15 @@ proc numberOfMatches*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTex
 proc activeMatch*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): cint =
   fcQWebEngineFindTextResult_activeMatch(self.h)
 
-proc operatorAssign*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult, other: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): void =
-  fcQWebEngineFindTextResult_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult, fromVal: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): void =
+  fcQWebEngineFindTextResult_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): gen_qwebenginefindtextresult_types.QWebEngineFindTextResult =
   let tmp = gen_qwebenginefindtextresult_types.QWebEngineFindTextResult(h: fcQWebEngineFindTextResult_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebenginefindtextresult_types.QWebEngineFindTextResult,
-    other: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): gen_qwebenginefindtextresult_types.QWebEngineFindTextResult =
-  let tmp = gen_qwebenginefindtextresult_types.QWebEngineFindTextResult(h: fcQWebEngineFindTextResult_new2(other.h), owned: true)
+    fromVal: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): gen_qwebenginefindtextresult_types.QWebEngineFindTextResult =
+  let tmp = gen_qwebenginefindtextresult_types.QWebEngineFindTextResult(h: fcQWebEngineFindTextResult_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineFindTextResult_staticMetaObject())

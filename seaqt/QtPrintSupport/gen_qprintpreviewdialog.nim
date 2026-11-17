@@ -75,14 +75,14 @@ type cQPrintPreviewDialog*{.exportc: "QPrintPreviewDialog", incompleteStruct.} =
 proc fcQPrintPreviewDialog_metaObject(self: pointer): pointer {.importc: "QPrintPreviewDialog_metaObject".}
 proc fcQPrintPreviewDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QPrintPreviewDialog_metacast".}
 proc fcQPrintPreviewDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPrintPreviewDialog_metacall".}
-proc fcQPrintPreviewDialog_tr(s: cstring): struct_seaqt_string {.importc: "QPrintPreviewDialog_tr".}
+proc fcQPrintPreviewDialog_trS(s: cstring): struct_seaqt_string {.importc: "QPrintPreviewDialog_tr_s".}
 proc fcQPrintPreviewDialog_printer(self: pointer): pointer {.importc: "QPrintPreviewDialog_printer".}
 proc fcQPrintPreviewDialog_setVisible(self: pointer, visible: bool): void {.importc: "QPrintPreviewDialog_setVisible".}
 proc fcQPrintPreviewDialog_done(self: pointer, resultVal: cint): void {.importc: "QPrintPreviewDialog_done".}
 proc fcQPrintPreviewDialog_paintRequested(self: pointer, printer: pointer): void {.importc: "QPrintPreviewDialog_paintRequested".}
 proc fcQPrintPreviewDialog_connect_paintRequested(self: pointer, slot: int, callback: proc (slot: int, printer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPrintPreviewDialog_connect_paintRequested".}
-proc fcQPrintPreviewDialog_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPrintPreviewDialog_tr2".}
-proc fcQPrintPreviewDialog_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPrintPreviewDialog_tr3".}
+proc fcQPrintPreviewDialog_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPrintPreviewDialog_tr_s_c".}
+proc fcQPrintPreviewDialog_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPrintPreviewDialog_tr_s_c_n".}
 proc fcQPrintPreviewDialog_vdata(self: pointer): ptr pointer {.importc: "QPrintPreviewDialog_vdata".}
 proc fvdata_cQPrintPreviewDialog(self: pointer): pointer {.importc: "vdata_QPrintPreviewDialog".}
 
@@ -209,11 +209,11 @@ proc fcQPrintPreviewDialog_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQPrintPreviewDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPrintPreviewDialog_protectedbase_receivers".}
 proc fcQPrintPreviewDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPrintPreviewDialog_protectedbase_isSignalConnected".}
 proc fcQPrintPreviewDialog_new(vtbl: pointer, vdata: csize_t): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new".}
-proc fcQPrintPreviewDialog_new2(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new2".}
-proc fcQPrintPreviewDialog_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new3".}
-proc fcQPrintPreviewDialog_new4(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new4".}
-proc fcQPrintPreviewDialog_new5(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new5".}
-proc fcQPrintPreviewDialog_new6(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer, flags: cint): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new6".}
+proc fcQPrintPreviewDialog_new2(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new_printer".}
+proc fcQPrintPreviewDialog_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new_parent".}
+proc fcQPrintPreviewDialog_new4(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new_parent_flags".}
+proc fcQPrintPreviewDialog_new5(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new_printer_parent".}
+proc fcQPrintPreviewDialog_new6(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer, flags: cint): ptr cQPrintPreviewDialog {.importc: "QPrintPreviewDialog_new_printer_parent_flags".}
 proc fcQPrintPreviewDialog_staticMetaObject(): pointer {.importc: "QPrintPreviewDialog_staticMetaObject".}
 
 proc metaObject*(self: gen_qprintpreviewdialog_types.QPrintPreviewDialog): gen_qobjectdefs_types.QMetaObject =
@@ -226,7 +226,7 @@ proc metacall*(self: gen_qprintpreviewdialog_types.QPrintPreviewDialog, param1: 
   fcQPrintPreviewDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qprintpreviewdialog_types.QPrintPreviewDialog, s: cstring): string =
-  let v_ms = fcQPrintPreviewDialog_tr(s)
+  let v_ms = fcQPrintPreviewDialog_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -261,13 +261,13 @@ proc onPaintRequested*(self: gen_qprintpreviewdialog_types.QPrintPreviewDialog, 
   fcQPrintPreviewDialog_connect_paintRequested(self.h, cast[int](addr tmp[]), fcQPrintPreviewDialog_slot_callback_paintRequested, fcQPrintPreviewDialog_slot_callback_paintRequested_release)
 
 proc tr*(_: type gen_qprintpreviewdialog_types.QPrintPreviewDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQPrintPreviewDialog_tr2(s, c)
+  let v_ms = fcQPrintPreviewDialog_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qprintpreviewdialog_types.QPrintPreviewDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPrintPreviewDialog_tr3(s, c, n)
+  let v_ms = fcQPrintPreviewDialog_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

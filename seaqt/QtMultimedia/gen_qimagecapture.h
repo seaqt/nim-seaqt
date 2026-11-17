@@ -61,13 +61,13 @@ void* QImageCapture_vdata(VirtualQImageCapture* self);
 VirtualQImageCapture* vdata_QImageCapture(void* vdata);
 
 VirtualQImageCapture* QImageCapture_new(const QImageCapture_VTable* vtbl, size_t vdata);
-VirtualQImageCapture* QImageCapture_new2(const QImageCapture_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQImageCapture* QImageCapture_new_parent(const QImageCapture_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QImageCapture_virtbase(QImageCapture* src, QObject** outptr_QObject);
 QMetaObject* QImageCapture_metaObject(const QImageCapture* self);
 void* QImageCapture_metacast(QImageCapture* self, const char* param1);
 int QImageCapture_metacall(QImageCapture* self, int param1, int param2, void** param3);
-struct seaqt_string QImageCapture_tr(const char* s);
+struct seaqt_string QImageCapture_tr_s(const char* s);
 bool QImageCapture_isAvailable(const QImageCapture* self);
 QMediaCaptureSession* QImageCapture_captureSession(const QImageCapture* self);
 int QImageCapture_error(const QImageCapture* self);
@@ -79,8 +79,8 @@ struct seaqt_array /* of int */  QImageCapture_supportedFormats();
 struct seaqt_string QImageCapture_fileFormatName(int c);
 struct seaqt_string QImageCapture_fileFormatDescription(int c);
 QSize* QImageCapture_resolution(const QImageCapture* self);
-void QImageCapture_setResolution(QImageCapture* self, QSize* resolution);
-void QImageCapture_setResolution2(QImageCapture* self, int width, int height);
+void QImageCapture_setResolution_resolution(QImageCapture* self, QSize* resolution);
+void QImageCapture_setResolution_width_height(QImageCapture* self, int width, int height);
 int QImageCapture_quality(const QImageCapture* self);
 void QImageCapture_setQuality(QImageCapture* self, int quality);
 QMediaMetaData* QImageCapture_metaData(const QImageCapture* self);
@@ -112,9 +112,9 @@ void QImageCapture_imageAvailable(QImageCapture* self, int id, QVideoFrame* fram
 void QImageCapture_connect_imageAvailable(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, QVideoFrame*), void (*release)(intptr_t));
 void QImageCapture_imageSaved(QImageCapture* self, int id, struct seaqt_string fileName);
 void QImageCapture_connect_imageSaved(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t));
-struct seaqt_string QImageCapture_tr2(const char* s, const char* c);
-struct seaqt_string QImageCapture_tr3(const char* s, const char* c, int n);
-int QImageCapture_captureToFileWithLocation(QImageCapture* self, struct seaqt_string location);
+struct seaqt_string QImageCapture_tr_s_c(const char* s, const char* c);
+struct seaqt_string QImageCapture_tr_s_c_n(const char* s, const char* c, int n);
+int QImageCapture_captureToFile_location(QImageCapture* self, struct seaqt_string location);
 
 QMetaObject* QImageCapture_virtualbase_metaObject(const VirtualQImageCapture* self);
 void* QImageCapture_virtualbase_metacast(VirtualQImageCapture* self, const char* param1);

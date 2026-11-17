@@ -59,7 +59,7 @@ type cQPluginLoader*{.exportc: "QPluginLoader", incompleteStruct.} = object
 proc fcQPluginLoader_metaObject(self: pointer): pointer {.importc: "QPluginLoader_metaObject".}
 proc fcQPluginLoader_metacast(self: pointer, param1: cstring): pointer {.importc: "QPluginLoader_metacast".}
 proc fcQPluginLoader_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPluginLoader_metacall".}
-proc fcQPluginLoader_tr(s: cstring): struct_seaqt_string {.importc: "QPluginLoader_tr".}
+proc fcQPluginLoader_trS(s: cstring): struct_seaqt_string {.importc: "QPluginLoader_tr_s".}
 proc fcQPluginLoader_instance(self: pointer): pointer {.importc: "QPluginLoader_instance".}
 proc fcQPluginLoader_metaData(self: pointer): pointer {.importc: "QPluginLoader_metaData".}
 proc fcQPluginLoader_staticInstances(): struct_seaqt_array {.importc: "QPluginLoader_staticInstances".}
@@ -72,8 +72,8 @@ proc fcQPluginLoader_fileName(self: pointer): struct_seaqt_string {.importc: "QP
 proc fcQPluginLoader_errorString(self: pointer): struct_seaqt_string {.importc: "QPluginLoader_errorString".}
 proc fcQPluginLoader_setLoadHints(self: pointer, loadHints: cint): void {.importc: "QPluginLoader_setLoadHints".}
 proc fcQPluginLoader_loadHints(self: pointer): cint {.importc: "QPluginLoader_loadHints".}
-proc fcQPluginLoader_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPluginLoader_tr2".}
-proc fcQPluginLoader_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPluginLoader_tr3".}
+proc fcQPluginLoader_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPluginLoader_tr_s_c".}
+proc fcQPluginLoader_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPluginLoader_tr_s_c_n".}
 proc fcQPluginLoader_vdata(self: pointer): ptr pointer {.importc: "QPluginLoader_vdata".}
 proc fvdata_cQPluginLoader(self: pointer): pointer {.importc: "vdata_QPluginLoader".}
 
@@ -104,9 +104,9 @@ proc fcQPluginLoader_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQPluginLoader_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPluginLoader_protectedbase_receivers".}
 proc fcQPluginLoader_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPluginLoader_protectedbase_isSignalConnected".}
 proc fcQPluginLoader_new(vtbl: pointer, vdata: csize_t): ptr cQPluginLoader {.importc: "QPluginLoader_new".}
-proc fcQPluginLoader_new2(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQPluginLoader {.importc: "QPluginLoader_new2".}
-proc fcQPluginLoader_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPluginLoader {.importc: "QPluginLoader_new3".}
-proc fcQPluginLoader_new4(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, parent: pointer): ptr cQPluginLoader {.importc: "QPluginLoader_new4".}
+proc fcQPluginLoader_new2(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQPluginLoader {.importc: "QPluginLoader_new_fileName".}
+proc fcQPluginLoader_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPluginLoader {.importc: "QPluginLoader_new_parent".}
+proc fcQPluginLoader_new4(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, parent: pointer): ptr cQPluginLoader {.importc: "QPluginLoader_new_fileName_parent".}
 proc fcQPluginLoader_staticMetaObject(): pointer {.importc: "QPluginLoader_staticMetaObject".}
 
 proc metaObject*(self: gen_qpluginloader_types.QPluginLoader): gen_qobjectdefs_types.QMetaObject =
@@ -119,7 +119,7 @@ proc metacall*(self: gen_qpluginloader_types.QPluginLoader, param1: cint, param2
   fcQPluginLoader_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpluginloader_types.QPluginLoader, s: cstring): string =
-  let v_ms = fcQPluginLoader_tr(s)
+  let v_ms = fcQPluginLoader_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -179,13 +179,13 @@ proc loadHints*(self: gen_qpluginloader_types.QPluginLoader): cint =
   cint(fcQPluginLoader_loadHints(self.h))
 
 proc tr*(_: type gen_qpluginloader_types.QPluginLoader, s: cstring, c: cstring): string =
-  let v_ms = fcQPluginLoader_tr2(s, c)
+  let v_ms = fcQPluginLoader_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpluginloader_types.QPluginLoader, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPluginLoader_tr3(s, c, n)
+  let v_ms = fcQPluginLoader_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -151,15 +151,15 @@ void* QCheckBox_vdata(VirtualQCheckBox* self);
 VirtualQCheckBox* vdata_QCheckBox(void* vdata);
 
 VirtualQCheckBox* QCheckBox_new(const QCheckBox_VTable* vtbl, size_t vdata);
-VirtualQCheckBox* QCheckBox_new2(const QCheckBox_VTable* vtbl, size_t vdata, struct seaqt_string text);
-VirtualQCheckBox* QCheckBox_new3(const QCheckBox_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQCheckBox* QCheckBox_new4(const QCheckBox_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent);
+VirtualQCheckBox* QCheckBox_new_text(const QCheckBox_VTable* vtbl, size_t vdata, struct seaqt_string text);
+VirtualQCheckBox* QCheckBox_new_parent(const QCheckBox_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQCheckBox* QCheckBox_new_text_parent(const QCheckBox_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent);
 
 void QCheckBox_virtbase(QCheckBox* src, QAbstractButton** outptr_QAbstractButton);
 QMetaObject* QCheckBox_metaObject(const QCheckBox* self);
 void* QCheckBox_metacast(QCheckBox* self, const char* param1);
 int QCheckBox_metacall(QCheckBox* self, int param1, int param2, void** param3);
-struct seaqt_string QCheckBox_tr(const char* s);
+struct seaqt_string QCheckBox_tr_s(const char* s);
 QSize* QCheckBox_sizeHint(const QCheckBox* self);
 QSize* QCheckBox_minimumSizeHint(const QCheckBox* self);
 void QCheckBox_setTristate(QCheckBox* self);
@@ -175,9 +175,9 @@ void QCheckBox_nextCheckState(QCheckBox* self);
 void QCheckBox_paintEvent(QCheckBox* self, QPaintEvent* param1);
 void QCheckBox_mouseMoveEvent(QCheckBox* self, QMouseEvent* param1);
 void QCheckBox_initStyleOption(const QCheckBox* self, QStyleOptionButton* option);
-struct seaqt_string QCheckBox_tr2(const char* s, const char* c);
-struct seaqt_string QCheckBox_tr3(const char* s, const char* c, int n);
-void QCheckBox_setTristateWithBool(QCheckBox* self, bool y);
+struct seaqt_string QCheckBox_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCheckBox_tr_s_c_n(const char* s, const char* c, int n);
+void QCheckBox_setTristate_y(QCheckBox* self, bool y);
 
 QMetaObject* QCheckBox_virtualbase_metaObject(const VirtualQCheckBox* self);
 void* QCheckBox_virtualbase_metacast(VirtualQCheckBox* self, const char* param1);

@@ -59,8 +59,8 @@ type cQDesignerLayoutDecorationExtension*{.exportc: "QDesignerLayoutDecorationEx
 
 proc fcQDesignerLayoutDecorationExtension_widgets(self: pointer, layout: pointer): struct_seaqt_array {.importc: "QDesignerLayoutDecorationExtension_widgets".}
 proc fcQDesignerLayoutDecorationExtension_itemInfo(self: pointer, index: cint): pointer {.importc: "QDesignerLayoutDecorationExtension_itemInfo".}
-proc fcQDesignerLayoutDecorationExtension_indexOf(self: pointer, widget: pointer): cint {.importc: "QDesignerLayoutDecorationExtension_indexOf".}
-proc fcQDesignerLayoutDecorationExtension_indexOfWithItem(self: pointer, item: pointer): cint {.importc: "QDesignerLayoutDecorationExtension_indexOfWithItem".}
+proc fcQDesignerLayoutDecorationExtension_indexOfWidget(self: pointer, widget: pointer): cint {.importc: "QDesignerLayoutDecorationExtension_indexOf_widget".}
+proc fcQDesignerLayoutDecorationExtension_indexOfItem(self: pointer, item: pointer): cint {.importc: "QDesignerLayoutDecorationExtension_indexOf_item".}
 proc fcQDesignerLayoutDecorationExtension_currentInsertMode(self: pointer): cint {.importc: "QDesignerLayoutDecorationExtension_currentInsertMode".}
 proc fcQDesignerLayoutDecorationExtension_currentIndex(self: pointer): cint {.importc: "QDesignerLayoutDecorationExtension_currentIndex".}
 proc fcQDesignerLayoutDecorationExtension_currentCell(self: pointer): struct_seaqt_map {.importc: "QDesignerLayoutDecorationExtension_currentCell".}
@@ -69,8 +69,8 @@ proc fcQDesignerLayoutDecorationExtension_removeWidget(self: pointer, widget: po
 proc fcQDesignerLayoutDecorationExtension_insertRow(self: pointer, row: cint): void {.importc: "QDesignerLayoutDecorationExtension_insertRow".}
 proc fcQDesignerLayoutDecorationExtension_insertColumn(self: pointer, column: cint): void {.importc: "QDesignerLayoutDecorationExtension_insertColumn".}
 proc fcQDesignerLayoutDecorationExtension_simplify(self: pointer): void {.importc: "QDesignerLayoutDecorationExtension_simplify".}
-proc fcQDesignerLayoutDecorationExtension_findItemAt(self: pointer, pos: pointer): cint {.importc: "QDesignerLayoutDecorationExtension_findItemAt".}
-proc fcQDesignerLayoutDecorationExtension_findItemAt2(self: pointer, row: cint, column: cint): cint {.importc: "QDesignerLayoutDecorationExtension_findItemAt2".}
+proc fcQDesignerLayoutDecorationExtension_findItemAtPos(self: pointer, pos: pointer): cint {.importc: "QDesignerLayoutDecorationExtension_findItemAt_pos".}
+proc fcQDesignerLayoutDecorationExtension_findItemAtRowColumn(self: pointer, row: cint, column: cint): cint {.importc: "QDesignerLayoutDecorationExtension_findItemAt_row_column".}
 proc fcQDesignerLayoutDecorationExtension_adjustIndicator(self: pointer, pos: pointer, index: cint): void {.importc: "QDesignerLayoutDecorationExtension_adjustIndicator".}
 proc fcQDesignerLayoutDecorationExtension_vdata(self: pointer): ptr pointer {.importc: "QDesignerLayoutDecorationExtension_vdata".}
 proc fvdata_cQDesignerLayoutDecorationExtension(self: pointer): pointer {.importc: "vdata_QDesignerLayoutDecorationExtension".}
@@ -79,8 +79,8 @@ type cQDesignerLayoutDecorationExtensionVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   widgets*: proc(self: pointer, layout: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
   itemInfo*: proc(self: pointer, index: cint): pointer {.cdecl, raises: [], gcsafe.}
-  indexOf*: proc(self: pointer, widget: pointer): cint {.cdecl, raises: [], gcsafe.}
-  indexOfWithItem*: proc(self: pointer, item: pointer): cint {.cdecl, raises: [], gcsafe.}
+  indexOfWidget*: proc(self: pointer, widget: pointer): cint {.cdecl, raises: [], gcsafe.}
+  indexOfItem*: proc(self: pointer, item: pointer): cint {.cdecl, raises: [], gcsafe.}
   currentInsertMode*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   currentIndex*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   currentCell*: proc(self: pointer): struct_seaqt_map {.cdecl, raises: [], gcsafe.}
@@ -89,8 +89,8 @@ type cQDesignerLayoutDecorationExtensionVTable {.pure.} = object
   insertRow*: proc(self: pointer, row: cint): void {.cdecl, raises: [], gcsafe.}
   insertColumn*: proc(self: pointer, column: cint): void {.cdecl, raises: [], gcsafe.}
   simplify*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
-  findItemAt*: proc(self: pointer, pos: pointer): cint {.cdecl, raises: [], gcsafe.}
-  findItemAt2*: proc(self: pointer, row: cint, column: cint): cint {.cdecl, raises: [], gcsafe.}
+  findItemAtPos*: proc(self: pointer, pos: pointer): cint {.cdecl, raises: [], gcsafe.}
+  findItemAtRowColumn*: proc(self: pointer, row: cint, column: cint): cint {.cdecl, raises: [], gcsafe.}
   adjustIndicator*: proc(self: pointer, pos: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerLayoutDecorationExtension_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerLayoutDecorationExtension {.importc: "QDesignerLayoutDecorationExtension_new".}
 
@@ -107,10 +107,10 @@ proc itemInfo*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtensi
   gen_qrect_types.QRect(h: fcQDesignerLayoutDecorationExtension_itemInfo(self.h, index), owned: true)
 
 proc indexOf*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtension, widget: gen_qwidget_types.QWidget): cint =
-  fcQDesignerLayoutDecorationExtension_indexOf(self.h, widget.h)
+  fcQDesignerLayoutDecorationExtension_indexOfWidget(self.h, widget.h)
 
 proc indexOf*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtension, item: gen_qlayoutitem_types.QLayoutItem): cint =
-  fcQDesignerLayoutDecorationExtension_indexOfWithItem(self.h, item.h)
+  fcQDesignerLayoutDecorationExtension_indexOfItem(self.h, item.h)
 
 proc currentInsertMode*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtension): cint =
   cint(fcQDesignerLayoutDecorationExtension_currentInsertMode(self.h))
@@ -150,18 +150,18 @@ proc simplify*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtensi
   fcQDesignerLayoutDecorationExtension_simplify(self.h)
 
 proc findItemAt*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtension, pos: gen_qpoint_types.QPoint): cint =
-  fcQDesignerLayoutDecorationExtension_findItemAt(self.h, pos.h)
+  fcQDesignerLayoutDecorationExtension_findItemAtPos(self.h, pos.h)
 
 proc findItemAt*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtension, row: cint, column: cint): cint =
-  fcQDesignerLayoutDecorationExtension_findItemAt2(self.h, row, column)
+  fcQDesignerLayoutDecorationExtension_findItemAtRowColumn(self.h, row, column)
 
 proc adjustIndicator*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtension, pos: gen_qpoint_types.QPoint, index: cint): void =
   fcQDesignerLayoutDecorationExtension_adjustIndicator(self.h, pos.h, index)
 
 type QDesignerLayoutDecorationExtensionwidgetsProc* = proc(self: QDesignerLayoutDecorationExtension, layout: gen_qlayout_types.QLayout): seq[gen_qwidget_types.QWidget] {.raises: [], gcsafe.}
 type QDesignerLayoutDecorationExtensionitemInfoProc* = proc(self: QDesignerLayoutDecorationExtension, index: cint): gen_qrect_types.QRect {.raises: [], gcsafe.}
-type QDesignerLayoutDecorationExtensionindexOfProc* = proc(self: QDesignerLayoutDecorationExtension, widget: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
-type QDesignerLayoutDecorationExtensionindexOfWithItemProc* = proc(self: QDesignerLayoutDecorationExtension, item: gen_qlayoutitem_types.QLayoutItem): cint {.raises: [], gcsafe.}
+type QDesignerLayoutDecorationExtensionindexOfWidgetProc* = proc(self: QDesignerLayoutDecorationExtension, widget: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
+type QDesignerLayoutDecorationExtensionindexOfItemProc* = proc(self: QDesignerLayoutDecorationExtension, item: gen_qlayoutitem_types.QLayoutItem): cint {.raises: [], gcsafe.}
 type QDesignerLayoutDecorationExtensioncurrentInsertModeProc* = proc(self: QDesignerLayoutDecorationExtension): cint {.raises: [], gcsafe.}
 type QDesignerLayoutDecorationExtensioncurrentIndexProc* = proc(self: QDesignerLayoutDecorationExtension): cint {.raises: [], gcsafe.}
 type QDesignerLayoutDecorationExtensioncurrentCellProc* = proc(self: QDesignerLayoutDecorationExtension): tuple[first: cint, second: cint] {.raises: [], gcsafe.}
@@ -170,16 +170,16 @@ type QDesignerLayoutDecorationExtensionremoveWidgetProc* = proc(self: QDesignerL
 type QDesignerLayoutDecorationExtensioninsertRowProc* = proc(self: QDesignerLayoutDecorationExtension, row: cint): void {.raises: [], gcsafe.}
 type QDesignerLayoutDecorationExtensioninsertColumnProc* = proc(self: QDesignerLayoutDecorationExtension, column: cint): void {.raises: [], gcsafe.}
 type QDesignerLayoutDecorationExtensionsimplifyProc* = proc(self: QDesignerLayoutDecorationExtension): void {.raises: [], gcsafe.}
-type QDesignerLayoutDecorationExtensionfindItemAtProc* = proc(self: QDesignerLayoutDecorationExtension, pos: gen_qpoint_types.QPoint): cint {.raises: [], gcsafe.}
-type QDesignerLayoutDecorationExtensionfindItemAt2Proc* = proc(self: QDesignerLayoutDecorationExtension, row: cint, column: cint): cint {.raises: [], gcsafe.}
+type QDesignerLayoutDecorationExtensionfindItemAtPosProc* = proc(self: QDesignerLayoutDecorationExtension, pos: gen_qpoint_types.QPoint): cint {.raises: [], gcsafe.}
+type QDesignerLayoutDecorationExtensionfindItemAtRowColumnProc* = proc(self: QDesignerLayoutDecorationExtension, row: cint, column: cint): cint {.raises: [], gcsafe.}
 type QDesignerLayoutDecorationExtensionadjustIndicatorProc* = proc(self: QDesignerLayoutDecorationExtension, pos: gen_qpoint_types.QPoint, index: cint): void {.raises: [], gcsafe.}
 
 type QDesignerLayoutDecorationExtensionVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerLayoutDecorationExtensionVTable
   widgets*: QDesignerLayoutDecorationExtensionwidgetsProc
   itemInfo*: QDesignerLayoutDecorationExtensionitemInfoProc
-  indexOf*: QDesignerLayoutDecorationExtensionindexOfProc
-  indexOfWithItem*: QDesignerLayoutDecorationExtensionindexOfWithItemProc
+  indexOfWidget*: QDesignerLayoutDecorationExtensionindexOfWidgetProc
+  indexOfItem*: QDesignerLayoutDecorationExtensionindexOfItemProc
   currentInsertMode*: QDesignerLayoutDecorationExtensioncurrentInsertModeProc
   currentIndex*: QDesignerLayoutDecorationExtensioncurrentIndexProc
   currentCell*: QDesignerLayoutDecorationExtensioncurrentCellProc
@@ -188,8 +188,8 @@ type QDesignerLayoutDecorationExtensionVTable* {.inheritable, pure.} = object
   insertRow*: QDesignerLayoutDecorationExtensioninsertRowProc
   insertColumn*: QDesignerLayoutDecorationExtensioninsertColumnProc
   simplify*: QDesignerLayoutDecorationExtensionsimplifyProc
-  findItemAt*: QDesignerLayoutDecorationExtensionfindItemAtProc
-  findItemAt2*: QDesignerLayoutDecorationExtensionfindItemAt2Proc
+  findItemAtPos*: QDesignerLayoutDecorationExtensionfindItemAtPosProc
+  findItemAtRowColumn*: QDesignerLayoutDecorationExtensionfindItemAtRowColumnProc
   adjustIndicator*: QDesignerLayoutDecorationExtensionadjustIndicatorProc
 
 
@@ -217,18 +217,18 @@ proc fcQDesignerLayoutDecorationExtension_vtable_callback_itemInfo(self: pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQDesignerLayoutDecorationExtension_vtable_callback_indexOf(self: pointer, widget: pointer): cint {.cdecl.} =
+proc fcQDesignerLayoutDecorationExtension_vtable_callback_indexOfWidget(self: pointer, widget: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
-  var virtualReturn = vtbl[].indexOf(self, slotval1)
+  var virtualReturn = vtbl[].indexOfWidget(self, slotval1)
   virtualReturn
 
-proc fcQDesignerLayoutDecorationExtension_vtable_callback_indexOfWithItem(self: pointer, item: pointer): cint {.cdecl.} =
+proc fcQDesignerLayoutDecorationExtension_vtable_callback_indexOfItem(self: pointer, item: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
   let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: item, owned: false)
-  var virtualReturn = vtbl[].indexOfWithItem(self, slotval1)
+  var virtualReturn = vtbl[].indexOfItem(self, slotval1)
   virtualReturn
 
 proc fcQDesignerLayoutDecorationExtension_vtable_callback_currentInsertMode(self: pointer): cint {.cdecl.} =
@@ -292,19 +292,19 @@ proc fcQDesignerLayoutDecorationExtension_vtable_callback_simplify(self: pointer
   let self = QDesignerLayoutDecorationExtension(h: self)
   vtbl[].simplify(self)
 
-proc fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAt(self: pointer, pos: pointer): cint {.cdecl.} =
+proc fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAtPos(self: pointer, pos: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
-  var virtualReturn = vtbl[].findItemAt(self, slotval1)
+  var virtualReturn = vtbl[].findItemAtPos(self, slotval1)
   virtualReturn
 
-proc fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAt2(self: pointer, row: cint, column: cint): cint {.cdecl.} =
+proc fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAtRowColumn(self: pointer, row: cint, column: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
   let slotval1 = row
   let slotval2 = column
-  var virtualReturn = vtbl[].findItemAt2(self, slotval1, slotval2)
+  var virtualReturn = vtbl[].findItemAtRowColumn(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQDesignerLayoutDecorationExtension_vtable_callback_adjustIndicator(self: pointer, pos: pointer, index: cint): void {.cdecl.} =
@@ -370,13 +370,13 @@ proc fcQDesignerLayoutDecorationExtension_method_callback_itemInfo(self: pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQDesignerLayoutDecorationExtension_method_callback_indexOf(self: pointer, widget: pointer): cint {.cdecl.} =
+proc fcQDesignerLayoutDecorationExtension_method_callback_indexOfWidget(self: pointer, widget: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
   virtualReturn
 
-proc fcQDesignerLayoutDecorationExtension_method_callback_indexOfWithItem(self: pointer, item: pointer): cint {.cdecl.} =
+proc fcQDesignerLayoutDecorationExtension_method_callback_indexOfItem(self: pointer, item: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: item, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
@@ -435,13 +435,13 @@ proc fcQDesignerLayoutDecorationExtension_method_callback_simplify(self: pointer
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   inst.simplify()
 
-proc fcQDesignerLayoutDecorationExtension_method_callback_findItemAt(self: pointer, pos: pointer): cint {.cdecl.} =
+proc fcQDesignerLayoutDecorationExtension_method_callback_findItemAtPos(self: pointer, pos: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   var virtualReturn = inst.findItemAt(slotval1)
   virtualReturn
 
-proc fcQDesignerLayoutDecorationExtension_method_callback_findItemAt2(self: pointer, row: cint, column: cint): cint {.cdecl.} =
+proc fcQDesignerLayoutDecorationExtension_method_callback_findItemAtRowColumn(self: pointer, row: cint, column: cint): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
@@ -466,10 +466,10 @@ proc create*(T: type gen_layoutdecoration_types.QDesignerLayoutDecorationExtensi
     vtbl[].vtbl.widgets = fcQDesignerLayoutDecorationExtension_vtable_callback_widgets
   if not isNil(vtbl[].itemInfo):
     vtbl[].vtbl.itemInfo = fcQDesignerLayoutDecorationExtension_vtable_callback_itemInfo
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQDesignerLayoutDecorationExtension_vtable_callback_indexOf
-  if not isNil(vtbl[].indexOfWithItem):
-    vtbl[].vtbl.indexOfWithItem = fcQDesignerLayoutDecorationExtension_vtable_callback_indexOfWithItem
+  if not isNil(vtbl[].indexOfWidget):
+    vtbl[].vtbl.indexOfWidget = fcQDesignerLayoutDecorationExtension_vtable_callback_indexOfWidget
+  if not isNil(vtbl[].indexOfItem):
+    vtbl[].vtbl.indexOfItem = fcQDesignerLayoutDecorationExtension_vtable_callback_indexOfItem
   if not isNil(vtbl[].currentInsertMode):
     vtbl[].vtbl.currentInsertMode = fcQDesignerLayoutDecorationExtension_vtable_callback_currentInsertMode
   if not isNil(vtbl[].currentIndex):
@@ -486,10 +486,10 @@ proc create*(T: type gen_layoutdecoration_types.QDesignerLayoutDecorationExtensi
     vtbl[].vtbl.insertColumn = fcQDesignerLayoutDecorationExtension_vtable_callback_insertColumn
   if not isNil(vtbl[].simplify):
     vtbl[].vtbl.simplify = fcQDesignerLayoutDecorationExtension_vtable_callback_simplify
-  if not isNil(vtbl[].findItemAt):
-    vtbl[].vtbl.findItemAt = fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAt
-  if not isNil(vtbl[].findItemAt2):
-    vtbl[].vtbl.findItemAt2 = fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAt2
+  if not isNil(vtbl[].findItemAtPos):
+    vtbl[].vtbl.findItemAtPos = fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAtPos
+  if not isNil(vtbl[].findItemAtRowColumn):
+    vtbl[].vtbl.findItemAtRowColumn = fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAtRowColumn
   if not isNil(vtbl[].adjustIndicator):
     vtbl[].vtbl.adjustIndicator = fcQDesignerLayoutDecorationExtension_vtable_callback_adjustIndicator
   let tmp = gen_layoutdecoration_types.QDesignerLayoutDecorationExtension(h: fcQDesignerLayoutDecorationExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
@@ -503,8 +503,8 @@ const cQDesignerLayoutDecorationExtension_mvtbl = cQDesignerLayoutDecorationExte
 
   widgets: fcQDesignerLayoutDecorationExtension_method_callback_widgets,
   itemInfo: fcQDesignerLayoutDecorationExtension_method_callback_itemInfo,
-  indexOf: fcQDesignerLayoutDecorationExtension_method_callback_indexOf,
-  indexOfWithItem: fcQDesignerLayoutDecorationExtension_method_callback_indexOfWithItem,
+  indexOfWidget: fcQDesignerLayoutDecorationExtension_method_callback_indexOfWidget,
+  indexOfItem: fcQDesignerLayoutDecorationExtension_method_callback_indexOfItem,
   currentInsertMode: fcQDesignerLayoutDecorationExtension_method_callback_currentInsertMode,
   currentIndex: fcQDesignerLayoutDecorationExtension_method_callback_currentIndex,
   currentCell: fcQDesignerLayoutDecorationExtension_method_callback_currentCell,
@@ -513,8 +513,8 @@ const cQDesignerLayoutDecorationExtension_mvtbl = cQDesignerLayoutDecorationExte
   insertRow: fcQDesignerLayoutDecorationExtension_method_callback_insertRow,
   insertColumn: fcQDesignerLayoutDecorationExtension_method_callback_insertColumn,
   simplify: fcQDesignerLayoutDecorationExtension_method_callback_simplify,
-  findItemAt: fcQDesignerLayoutDecorationExtension_method_callback_findItemAt,
-  findItemAt2: fcQDesignerLayoutDecorationExtension_method_callback_findItemAt2,
+  findItemAtPos: fcQDesignerLayoutDecorationExtension_method_callback_findItemAtPos,
+  findItemAtRowColumn: fcQDesignerLayoutDecorationExtension_method_callback_findItemAtRowColumn,
   adjustIndicator: fcQDesignerLayoutDecorationExtension_method_callback_adjustIndicator,
 )
 proc create*(T: type gen_layoutdecoration_types.QDesignerLayoutDecorationExtension,

@@ -45,8 +45,8 @@ proc fcqfloat16_isFinite(self: pointer): bool {.importc: "qfloat16_isFinite".}
 proc fcqfloat16_fpClassify(self: pointer): cint {.importc: "qfloat16_fpClassify".}
 proc fcqfloat16_isNormal(self: pointer): bool {.importc: "qfloat16_isNormal".}
 proc fcqfloat16_new(): ptr cqfloat16 {.importc: "qfloat16_new".}
-proc fcqfloat16_new2(param1: cint): ptr cqfloat16 {.importc: "qfloat16_new2".}
-proc fcqfloat16_new3(f: float32): ptr cqfloat16 {.importc: "qfloat16_new3".}
+proc fcqfloat16_new2(param1: cint): ptr cqfloat16 {.importc: "qfloat16_new_Qt_Initialization".}
+proc fcqfloat16_new3(f: float32): ptr cqfloat16 {.importc: "qfloat16_new_float".}
 
 proc isInf*(self: gen_qfloat16_types.qfloat16): bool =
   fcqfloat16_isInf(self.h)

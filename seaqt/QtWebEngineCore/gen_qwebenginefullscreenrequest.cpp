@@ -14,12 +14,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QWebEngineFullScreenRequest* QWebEngineFullScreenRequest_new(QWebEngineFullScreenRequest* other) {
-	return new (std::nothrow) QWebEngineFullScreenRequest(*other);
+QWebEngineFullScreenRequest* QWebEngineFullScreenRequest_new(QWebEngineFullScreenRequest* from) {
+	return new (std::nothrow) QWebEngineFullScreenRequest(*from);
 }
 
-void QWebEngineFullScreenRequest_operatorAssign(QWebEngineFullScreenRequest* self, QWebEngineFullScreenRequest* other) {
-	self->operator=(*other);
+void QWebEngineFullScreenRequest_operatorAssign(QWebEngineFullScreenRequest* self, QWebEngineFullScreenRequest* from) {
+	self->operator=(*from);
 }
 
 void QWebEngineFullScreenRequest_reject(QWebEngineFullScreenRequest* self) {

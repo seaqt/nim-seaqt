@@ -323,7 +323,7 @@ int QGeoPositionInfoSource_metacall(QGeoPositionInfoSource* self, int param1, in
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGeoPositionInfoSource_tr(const char* s) {
+struct seaqt_string QGeoPositionInfoSource_tr_s(const char* s) {
 	QString _ret = QGeoPositionInfoSource::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -385,11 +385,11 @@ QVariant* QGeoPositionInfoSource_backendProperty(const QGeoPositionInfoSource* s
 	return new QVariant(self->backendProperty(name_QString));
 }
 
-QGeoPositionInfoSource* QGeoPositionInfoSource_createDefaultSource(QObject* parent) {
+QGeoPositionInfoSource* QGeoPositionInfoSource_createDefaultSource_QObject(QObject* parent) {
 	return QGeoPositionInfoSource::createDefaultSource(parent);
 }
 
-QGeoPositionInfoSource* QGeoPositionInfoSource_createDefaultSource2(struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent) {
+QGeoPositionInfoSource* QGeoPositionInfoSource_createDefaultSource_QVariantMap_QObject(struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent) {
 	QVariantMap parameters_QMap;
 	struct seaqt_string* parameters_karr = static_cast<struct seaqt_string*>(parameters.keys);
 	QVariant** parameters_varr = static_cast<QVariant**>(parameters.values);
@@ -400,12 +400,12 @@ QGeoPositionInfoSource* QGeoPositionInfoSource_createDefaultSource2(struct seaqt
 	return QGeoPositionInfoSource::createDefaultSource(parameters_QMap, parent);
 }
 
-QGeoPositionInfoSource* QGeoPositionInfoSource_createSource(struct seaqt_string sourceName, QObject* parent) {
+QGeoPositionInfoSource* QGeoPositionInfoSource_createSource_QString_QObject(struct seaqt_string sourceName, QObject* parent) {
 	QString sourceName_QString = QString::fromUtf8(sourceName.data, sourceName.len);
 	return QGeoPositionInfoSource::createSource(sourceName_QString, parent);
 }
 
-QGeoPositionInfoSource* QGeoPositionInfoSource_createSource2(struct seaqt_string sourceName, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent) {
+QGeoPositionInfoSource* QGeoPositionInfoSource_createSource_QString_QVariantMap_QObject(struct seaqt_string sourceName, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent) {
 	QString sourceName_QString = QString::fromUtf8(sourceName.data, sourceName.len);
 	QVariantMap parameters_QMap;
 	struct seaqt_string* parameters_karr = static_cast<struct seaqt_string*>(parameters.keys);
@@ -504,7 +504,7 @@ void QGeoPositionInfoSource_connect_supportedPositioningMethodsChanged(QGeoPosit
 	QGeoPositionInfoSource::connect(self, static_cast<void (QGeoPositionInfoSource::*)()>(&QGeoPositionInfoSource::supportedPositioningMethodsChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGeoPositionInfoSource_tr2(const char* s, const char* c) {
+struct seaqt_string QGeoPositionInfoSource_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGeoPositionInfoSource::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -515,7 +515,7 @@ struct seaqt_string QGeoPositionInfoSource_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGeoPositionInfoSource_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGeoPositionInfoSource_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGeoPositionInfoSource::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

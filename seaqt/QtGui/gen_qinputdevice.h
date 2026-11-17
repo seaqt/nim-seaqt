@@ -53,16 +53,16 @@ void* QInputDevice_vdata(VirtualQInputDevice* self);
 VirtualQInputDevice* vdata_QInputDevice(void* vdata);
 
 VirtualQInputDevice* QInputDevice_new(const QInputDevice_VTable* vtbl, size_t vdata);
-VirtualQInputDevice* QInputDevice_new2(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type);
-VirtualQInputDevice* QInputDevice_new3(const QInputDevice_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQInputDevice* QInputDevice_new4(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type, struct seaqt_string seatName);
-VirtualQInputDevice* QInputDevice_new5(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type, struct seaqt_string seatName, QObject* parent);
+VirtualQInputDevice* QInputDevice_new_name_systemId_type(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type);
+VirtualQInputDevice* QInputDevice_new_parent(const QInputDevice_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQInputDevice* QInputDevice_new_name_systemId_type_seatName(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type, struct seaqt_string seatName);
+VirtualQInputDevice* QInputDevice_new_name_systemId_type_seatName_parent(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type, struct seaqt_string seatName, QObject* parent);
 
 void QInputDevice_virtbase(QInputDevice* src, QObject** outptr_QObject);
 QMetaObject* QInputDevice_metaObject(const QInputDevice* self);
 void* QInputDevice_metacast(QInputDevice* self, const char* param1);
 int QInputDevice_metacall(QInputDevice* self, int param1, int param2, void** param3);
-struct seaqt_string QInputDevice_tr(const char* s);
+struct seaqt_string QInputDevice_tr_s(const char* s);
 struct seaqt_string QInputDevice_name(const QInputDevice* self);
 int QInputDevice_type(const QInputDevice* self);
 int QInputDevice_capabilities(const QInputDevice* self);
@@ -76,9 +76,9 @@ QInputDevice* QInputDevice_primaryKeyboard();
 bool QInputDevice_operatorEqual(const QInputDevice* self, QInputDevice* other);
 void QInputDevice_availableVirtualGeometryChanged(QInputDevice* self, QRect* area);
 void QInputDevice_connect_availableVirtualGeometryChanged(QInputDevice* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t));
-struct seaqt_string QInputDevice_tr2(const char* s, const char* c);
-struct seaqt_string QInputDevice_tr3(const char* s, const char* c, int n);
-QInputDevice* QInputDevice_primaryKeyboardWithSeatName(struct seaqt_string seatName);
+struct seaqt_string QInputDevice_tr_s_c(const char* s, const char* c);
+struct seaqt_string QInputDevice_tr_s_c_n(const char* s, const char* c, int n);
+QInputDevice* QInputDevice_primaryKeyboard_seatName(struct seaqt_string seatName);
 
 QMetaObject* QInputDevice_virtualbase_metaObject(const VirtualQInputDevice* self);
 void* QInputDevice_virtualbase_metacast(VirtualQInputDevice* self, const char* param1);

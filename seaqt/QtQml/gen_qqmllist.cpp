@@ -20,28 +20,28 @@ QQmlListReference* QQmlListReference_new() {
 	return new (std::nothrow) QQmlListReference();
 }
 
-QQmlListReference* QQmlListReference_new2(QVariant* variant, QQmlEngine* engine) {
+QQmlListReference* QQmlListReference_new_variant_engine(QVariant* variant, QQmlEngine* engine) {
 	return new (std::nothrow) QQmlListReference(*variant, engine);
 }
 
-QQmlListReference* QQmlListReference_new3(QObject* o, const char* property, QQmlEngine* engine) {
+QQmlListReference* QQmlListReference_new_o_property_engine(QObject* o, const char* property, QQmlEngine* engine) {
 	return new (std::nothrow) QQmlListReference(o, property, engine);
 }
 
-QQmlListReference* QQmlListReference_new4(QVariant* variant) {
+QQmlListReference* QQmlListReference_new_variant(QVariant* variant) {
 	return new (std::nothrow) QQmlListReference(*variant);
 }
 
-QQmlListReference* QQmlListReference_new5(QObject* o, const char* property) {
+QQmlListReference* QQmlListReference_new_o_property(QObject* o, const char* property) {
 	return new (std::nothrow) QQmlListReference(o, property);
 }
 
-QQmlListReference* QQmlListReference_new6(QQmlListReference* param1) {
-	return new (std::nothrow) QQmlListReference(*param1);
+QQmlListReference* QQmlListReference_new_from(QQmlListReference* from) {
+	return new (std::nothrow) QQmlListReference(*from);
 }
 
-void QQmlListReference_operatorAssign(QQmlListReference* self, QQmlListReference* param1) {
-	self->operator=(*param1);
+void QQmlListReference_operatorAssign(QQmlListReference* self, QQmlListReference* from) {
+	self->operator=(*from);
 }
 
 bool QQmlListReference_isValid(const QQmlListReference* self) {

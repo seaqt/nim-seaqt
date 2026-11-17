@@ -87,13 +87,13 @@ void* QStyledItemDelegate_vdata(VirtualQStyledItemDelegate* self);
 VirtualQStyledItemDelegate* vdata_QStyledItemDelegate(void* vdata);
 
 VirtualQStyledItemDelegate* QStyledItemDelegate_new(const QStyledItemDelegate_VTable* vtbl, size_t vdata);
-VirtualQStyledItemDelegate* QStyledItemDelegate_new2(const QStyledItemDelegate_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQStyledItemDelegate* QStyledItemDelegate_new_parent(const QStyledItemDelegate_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QStyledItemDelegate_virtbase(QStyledItemDelegate* src, QAbstractItemDelegate** outptr_QAbstractItemDelegate);
 QMetaObject* QStyledItemDelegate_metaObject(const QStyledItemDelegate* self);
 void* QStyledItemDelegate_metacast(QStyledItemDelegate* self, const char* param1);
 int QStyledItemDelegate_metacall(QStyledItemDelegate* self, int param1, int param2, void** param3);
-struct seaqt_string QStyledItemDelegate_tr(const char* s);
+struct seaqt_string QStyledItemDelegate_tr_s(const char* s);
 void QStyledItemDelegate_paint(const QStyledItemDelegate* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
 QSize* QStyledItemDelegate_sizeHint(const QStyledItemDelegate* self, QStyleOptionViewItem* option, QModelIndex* index);
 QWidget* QStyledItemDelegate_createEditor(const QStyledItemDelegate* self, QWidget* parent, QStyleOptionViewItem* option, QModelIndex* index);
@@ -106,8 +106,8 @@ struct seaqt_string QStyledItemDelegate_displayText(const QStyledItemDelegate* s
 void QStyledItemDelegate_initStyleOption(const QStyledItemDelegate* self, QStyleOptionViewItem* option, QModelIndex* index);
 bool QStyledItemDelegate_eventFilter(QStyledItemDelegate* self, QObject* object, QEvent* event);
 bool QStyledItemDelegate_editorEvent(QStyledItemDelegate* self, QEvent* event, QAbstractItemModel* model, QStyleOptionViewItem* option, QModelIndex* index);
-struct seaqt_string QStyledItemDelegate_tr2(const char* s, const char* c);
-struct seaqt_string QStyledItemDelegate_tr3(const char* s, const char* c, int n);
+struct seaqt_string QStyledItemDelegate_tr_s_c(const char* s, const char* c);
+struct seaqt_string QStyledItemDelegate_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QStyledItemDelegate_virtualbase_metaObject(const VirtualQStyledItemDelegate* self);
 void* QStyledItemDelegate_virtualbase_metacast(VirtualQStyledItemDelegate* self, const char* param1);

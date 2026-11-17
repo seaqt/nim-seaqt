@@ -26,8 +26,8 @@ QSqlDriver* QSqlDriverCreatorBase_createObject(const QSqlDriverCreatorBase* self
 	return self->createObject();
 }
 
-void QSqlDriverCreatorBase_operatorAssign(QSqlDriverCreatorBase* self, QSqlDriverCreatorBase* param1) {
-	self->operator=(*param1);
+void QSqlDriverCreatorBase_operatorAssign(QSqlDriverCreatorBase* self, QSqlDriverCreatorBase* from) {
+	self->operator=(*from);
 }
 
 void QSqlDriverCreatorBase_delete(QSqlDriverCreatorBase* self) {
@@ -38,19 +38,19 @@ QSqlDatabase* QSqlDatabase_new() {
 	return new (std::nothrow) QSqlDatabase();
 }
 
-QSqlDatabase* QSqlDatabase_new2(QSqlDatabase* other) {
-	return new (std::nothrow) QSqlDatabase(*other);
+QSqlDatabase* QSqlDatabase_new_from(QSqlDatabase* from) {
+	return new (std::nothrow) QSqlDatabase(*from);
 }
 
-void QSqlDatabase_operatorAssign(QSqlDatabase* self, QSqlDatabase* other) {
-	self->operator=(*other);
+void QSqlDatabase_operatorAssign(QSqlDatabase* self, QSqlDatabase* from) {
+	self->operator=(*from);
 }
 
 bool QSqlDatabase_open(QSqlDatabase* self) {
 	return self->open();
 }
 
-bool QSqlDatabase_open2(QSqlDatabase* self, struct seaqt_string user, struct seaqt_string password) {
+bool QSqlDatabase_open_user_password(QSqlDatabase* self, struct seaqt_string user, struct seaqt_string password) {
 	QString user_QString = QString::fromUtf8(user.data, user.len);
 	QString password_QString = QString::fromUtf8(password.data, password.len);
 	return self->open(user_QString, password_QString);
@@ -244,21 +244,21 @@ QSqlDriver* QSqlDatabase_driver(const QSqlDatabase* self) {
 	return self->driver();
 }
 
-QSqlDatabase* QSqlDatabase_addDatabase(struct seaqt_string type) {
+QSqlDatabase* QSqlDatabase_addDatabase_type(struct seaqt_string type) {
 	QString type_QString = QString::fromUtf8(type.data, type.len);
 	return new QSqlDatabase(QSqlDatabase::addDatabase(type_QString));
 }
 
-QSqlDatabase* QSqlDatabase_addDatabaseWithDriver(QSqlDriver* driver) {
+QSqlDatabase* QSqlDatabase_addDatabase_driver(QSqlDriver* driver) {
 	return new QSqlDatabase(QSqlDatabase::addDatabase(driver));
 }
 
-QSqlDatabase* QSqlDatabase_cloneDatabase(QSqlDatabase* other, struct seaqt_string connectionName) {
+QSqlDatabase* QSqlDatabase_cloneDatabase_QSqlDatabase_QString(QSqlDatabase* other, struct seaqt_string connectionName) {
 	QString connectionName_QString = QString::fromUtf8(connectionName.data, connectionName.len);
 	return new QSqlDatabase(QSqlDatabase::cloneDatabase(*other, connectionName_QString));
 }
 
-QSqlDatabase* QSqlDatabase_cloneDatabase2(struct seaqt_string other, struct seaqt_string connectionName) {
+QSqlDatabase* QSqlDatabase_cloneDatabase_QString_QString(struct seaqt_string other, struct seaqt_string connectionName) {
 	QString other_QString = QString::fromUtf8(other.data, other.len);
 	QString connectionName_QString = QString::fromUtf8(connectionName.data, connectionName.len);
 	return new QSqlDatabase(QSqlDatabase::cloneDatabase(other_QString, connectionName_QString));
@@ -327,7 +327,7 @@ bool QSqlDatabase_isDriverAvailable(struct seaqt_string name) {
 	return QSqlDatabase::isDriverAvailable(name_QString);
 }
 
-struct seaqt_array /* of struct seaqt_string */  QSqlDatabase_tablesWithType(const QSqlDatabase* self, int type) {
+struct seaqt_array /* of struct seaqt_string */  QSqlDatabase_tables_type(const QSqlDatabase* self, int type) {
 	QStringList _ret = self->tables(static_cast<QSql::TableType>(type));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
@@ -347,38 +347,38 @@ struct seaqt_array /* of struct seaqt_string */  QSqlDatabase_tablesWithType(con
 	return _out;
 }
 
-QSqlQuery* QSqlDatabase_execWithQuery(const QSqlDatabase* self, struct seaqt_string query) {
+QSqlQuery* QSqlDatabase_exec_query(const QSqlDatabase* self, struct seaqt_string query) {
 	QString query_QString = QString::fromUtf8(query.data, query.len);
 	return new QSqlQuery(self->exec(query_QString));
 }
 
-void QSqlDatabase_setConnectOptionsWithOptions(QSqlDatabase* self, struct seaqt_string options) {
+void QSqlDatabase_setConnectOptions_options(QSqlDatabase* self, struct seaqt_string options) {
 	QString options_QString = QString::fromUtf8(options.data, options.len);
 	self->setConnectOptions(options_QString);
 }
 
-QSqlDatabase* QSqlDatabase_addDatabase2(struct seaqt_string type, struct seaqt_string connectionName) {
+QSqlDatabase* QSqlDatabase_addDatabase_type_connectionName(struct seaqt_string type, struct seaqt_string connectionName) {
 	QString type_QString = QString::fromUtf8(type.data, type.len);
 	QString connectionName_QString = QString::fromUtf8(connectionName.data, connectionName.len);
 	return new QSqlDatabase(QSqlDatabase::addDatabase(type_QString, connectionName_QString));
 }
 
-QSqlDatabase* QSqlDatabase_addDatabase3(QSqlDriver* driver, struct seaqt_string connectionName) {
+QSqlDatabase* QSqlDatabase_addDatabase_driver_connectionName(QSqlDriver* driver, struct seaqt_string connectionName) {
 	QString connectionName_QString = QString::fromUtf8(connectionName.data, connectionName.len);
 	return new QSqlDatabase(QSqlDatabase::addDatabase(driver, connectionName_QString));
 }
 
-QSqlDatabase* QSqlDatabase_databaseWithConnectionName(struct seaqt_string connectionName) {
+QSqlDatabase* QSqlDatabase_database_connectionName(struct seaqt_string connectionName) {
 	QString connectionName_QString = QString::fromUtf8(connectionName.data, connectionName.len);
 	return new QSqlDatabase(QSqlDatabase::database(connectionName_QString));
 }
 
-QSqlDatabase* QSqlDatabase_database2(struct seaqt_string connectionName, bool open) {
+QSqlDatabase* QSqlDatabase_database_connectionName_open(struct seaqt_string connectionName, bool open) {
 	QString connectionName_QString = QString::fromUtf8(connectionName.data, connectionName.len);
 	return new QSqlDatabase(QSqlDatabase::database(connectionName_QString, open));
 }
 
-bool QSqlDatabase_containsWithConnectionName(struct seaqt_string connectionName) {
+bool QSqlDatabase_contains_connectionName(struct seaqt_string connectionName) {
 	QString connectionName_QString = QString::fromUtf8(connectionName.data, connectionName.len);
 	return QSqlDatabase::contains(connectionName_QString);
 }

@@ -42,7 +42,7 @@ int QDesignerFormWindowInterface_metacall(QDesignerFormWindowInterface* self, in
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDesignerFormWindowInterface_tr(const char* s) {
+struct seaqt_string QDesignerFormWindowInterface_tr_s(const char* s) {
 	QString _ret = QDesignerFormWindowInterface::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -294,11 +294,11 @@ bool QDesignerFormWindowInterface_isDirty(const QDesignerFormWindowInterface* se
 	return self->isDirty();
 }
 
-QDesignerFormWindowInterface* QDesignerFormWindowInterface_findFormWindow(QWidget* w) {
+QDesignerFormWindowInterface* QDesignerFormWindowInterface_findFormWindow_w(QWidget* w) {
 	return QDesignerFormWindowInterface::findFormWindow(w);
 }
 
-QDesignerFormWindowInterface* QDesignerFormWindowInterface_findFormWindowWithObj(QObject* obj) {
+QDesignerFormWindowInterface* QDesignerFormWindowInterface_findFormWindow_obj(QObject* obj) {
 	return QDesignerFormWindowInterface::findFormWindow(obj);
 }
 
@@ -396,7 +396,7 @@ void QDesignerFormWindowInterface_setFileName(QDesignerFormWindowInterface* self
 	self->setFileName(fileName_QString);
 }
 
-bool QDesignerFormWindowInterface_setContentsWithContents(QDesignerFormWindowInterface* self, struct seaqt_string contents) {
+bool QDesignerFormWindowInterface_setContents_contents(QDesignerFormWindowInterface* self, struct seaqt_string contents) {
 	QString contents_QString = QString::fromUtf8(contents.data, contents.len);
 	return self->setContents(contents_QString);
 }
@@ -405,7 +405,7 @@ void QDesignerFormWindowInterface_editWidgets(QDesignerFormWindowInterface* self
 	self->editWidgets();
 }
 
-void QDesignerFormWindowInterface_activateResourceFilePaths(QDesignerFormWindowInterface* self, struct seaqt_array /* of struct seaqt_string */  paths) {
+void QDesignerFormWindowInterface_activateResourceFilePaths_paths(QDesignerFormWindowInterface* self, struct seaqt_array /* of struct seaqt_string */  paths) {
 	QStringList paths_QList;
 	paths_QList.reserve(paths.len);
 	struct seaqt_string* paths_arr = static_cast<struct seaqt_string*>(paths.data);
@@ -645,7 +645,7 @@ void QDesignerFormWindowInterface_connect_objectRemoved(QDesignerFormWindowInter
 	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QObject*)>(&QDesignerFormWindowInterface::objectRemoved), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDesignerFormWindowInterface_tr2(const char* s, const char* c) {
+struct seaqt_string QDesignerFormWindowInterface_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDesignerFormWindowInterface::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -656,7 +656,7 @@ struct seaqt_string QDesignerFormWindowInterface_tr2(const char* s, const char* 
 	return _ms;
 }
 
-struct seaqt_string QDesignerFormWindowInterface_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDesignerFormWindowInterface_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDesignerFormWindowInterface::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -667,7 +667,7 @@ struct seaqt_string QDesignerFormWindowInterface_tr3(const char* s, const char* 
 	return _ms;
 }
 
-void QDesignerFormWindowInterface_activateResourceFilePaths2(QDesignerFormWindowInterface* self, struct seaqt_array /* of struct seaqt_string */  paths, int* errorCount) {
+void QDesignerFormWindowInterface_activateResourceFilePaths_paths_errorCount(QDesignerFormWindowInterface* self, struct seaqt_array /* of struct seaqt_string */  paths, int* errorCount) {
 	QStringList paths_QList;
 	paths_QList.reserve(paths.len);
 	struct seaqt_string* paths_arr = static_cast<struct seaqt_string*>(paths.data);

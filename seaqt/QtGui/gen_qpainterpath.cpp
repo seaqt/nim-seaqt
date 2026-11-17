@@ -27,16 +27,16 @@ QPainterPath* QPainterPath_new() {
 	return new (std::nothrow) QPainterPath();
 }
 
-QPainterPath* QPainterPath_new2(QPointF* startPoint) {
+QPainterPath* QPainterPath_new_startPoint(QPointF* startPoint) {
 	return new (std::nothrow) QPainterPath(*startPoint);
 }
 
-QPainterPath* QPainterPath_new3(QPainterPath* other) {
-	return new (std::nothrow) QPainterPath(*other);
+QPainterPath* QPainterPath_new_from(QPainterPath* from) {
+	return new (std::nothrow) QPainterPath(*from);
 }
 
-void QPainterPath_operatorAssign(QPainterPath* self, QPainterPath* other) {
-	self->operator=(*other);
+void QPainterPath_operatorAssign(QPainterPath* self, QPainterPath* from) {
+	self->operator=(*from);
 }
 
 void QPainterPath_swap(QPainterPath* self, QPainterPath* other) {
@@ -59,51 +59,51 @@ void QPainterPath_closeSubpath(QPainterPath* self) {
 	self->closeSubpath();
 }
 
-void QPainterPath_moveTo(QPainterPath* self, QPointF* p) {
+void QPainterPath_moveTo_p(QPainterPath* self, QPointF* p) {
 	self->moveTo(*p);
 }
 
-void QPainterPath_moveTo2(QPainterPath* self, double x, double y) {
+void QPainterPath_moveTo_x_y(QPainterPath* self, double x, double y) {
 	self->moveTo(static_cast<qreal>(x), static_cast<qreal>(y));
 }
 
-void QPainterPath_lineTo(QPainterPath* self, QPointF* p) {
+void QPainterPath_lineTo_p(QPainterPath* self, QPointF* p) {
 	self->lineTo(*p);
 }
 
-void QPainterPath_lineTo2(QPainterPath* self, double x, double y) {
+void QPainterPath_lineTo_x_y(QPainterPath* self, double x, double y) {
 	self->lineTo(static_cast<qreal>(x), static_cast<qreal>(y));
 }
 
-void QPainterPath_arcMoveTo(QPainterPath* self, QRectF* rect, double angle) {
+void QPainterPath_arcMoveTo_rect_angle(QPainterPath* self, QRectF* rect, double angle) {
 	self->arcMoveTo(*rect, static_cast<qreal>(angle));
 }
 
-void QPainterPath_arcMoveTo2(QPainterPath* self, double x, double y, double w, double h, double angle) {
+void QPainterPath_arcMoveTo_x_y_w_h_angle(QPainterPath* self, double x, double y, double w, double h, double angle) {
 	self->arcMoveTo(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<qreal>(angle));
 }
 
-void QPainterPath_arcTo(QPainterPath* self, QRectF* rect, double startAngle, double arcLength) {
+void QPainterPath_arcTo_rect_startAngle_arcLength(QPainterPath* self, QRectF* rect, double startAngle, double arcLength) {
 	self->arcTo(*rect, static_cast<qreal>(startAngle), static_cast<qreal>(arcLength));
 }
 
-void QPainterPath_arcTo2(QPainterPath* self, double x, double y, double w, double h, double startAngle, double arcLength) {
+void QPainterPath_arcTo_x_y_w_h_startAngle_arcLength(QPainterPath* self, double x, double y, double w, double h, double startAngle, double arcLength) {
 	self->arcTo(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<qreal>(startAngle), static_cast<qreal>(arcLength));
 }
 
-void QPainterPath_cubicTo(QPainterPath* self, QPointF* ctrlPt1, QPointF* ctrlPt2, QPointF* endPt) {
+void QPainterPath_cubicTo_ctrlPt1_ctrlPt2_endPt(QPainterPath* self, QPointF* ctrlPt1, QPointF* ctrlPt2, QPointF* endPt) {
 	self->cubicTo(*ctrlPt1, *ctrlPt2, *endPt);
 }
 
-void QPainterPath_cubicTo2(QPainterPath* self, double ctrlPt1x, double ctrlPt1y, double ctrlPt2x, double ctrlPt2y, double endPtx, double endPty) {
+void QPainterPath_cubicTo_ctrlPt1x_ctrlPt1y_ctrlPt2x_ctrlPt2y_endPtx_endPty(QPainterPath* self, double ctrlPt1x, double ctrlPt1y, double ctrlPt2x, double ctrlPt2y, double endPtx, double endPty) {
 	self->cubicTo(static_cast<qreal>(ctrlPt1x), static_cast<qreal>(ctrlPt1y), static_cast<qreal>(ctrlPt2x), static_cast<qreal>(ctrlPt2y), static_cast<qreal>(endPtx), static_cast<qreal>(endPty));
 }
 
-void QPainterPath_quadTo(QPainterPath* self, QPointF* ctrlPt, QPointF* endPt) {
+void QPainterPath_quadTo_ctrlPt_endPt(QPainterPath* self, QPointF* ctrlPt, QPointF* endPt) {
 	self->quadTo(*ctrlPt, *endPt);
 }
 
-void QPainterPath_quadTo2(QPainterPath* self, double ctrlPtx, double ctrlPty, double endPtx, double endPty) {
+void QPainterPath_quadTo_ctrlPtx_ctrlPty_endPtx_endPty(QPainterPath* self, double ctrlPtx, double ctrlPty, double endPtx, double endPty) {
 	self->quadTo(static_cast<qreal>(ctrlPtx), static_cast<qreal>(ctrlPty), static_cast<qreal>(endPtx), static_cast<qreal>(endPty));
 }
 
@@ -111,32 +111,32 @@ QPointF* QPainterPath_currentPosition(const QPainterPath* self) {
 	return new QPointF(self->currentPosition());
 }
 
-void QPainterPath_addRect(QPainterPath* self, QRectF* rect) {
+void QPainterPath_addRect_rect(QPainterPath* self, QRectF* rect) {
 	self->addRect(*rect);
 }
 
-void QPainterPath_addRect2(QPainterPath* self, double x, double y, double w, double h) {
+void QPainterPath_addRect_x_y_w_h(QPainterPath* self, double x, double y, double w, double h) {
 	self->addRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
-void QPainterPath_addEllipse(QPainterPath* self, QRectF* rect) {
+void QPainterPath_addEllipse_rect(QPainterPath* self, QRectF* rect) {
 	self->addEllipse(*rect);
 }
 
-void QPainterPath_addEllipse2(QPainterPath* self, double x, double y, double w, double h) {
+void QPainterPath_addEllipse_x_y_w_h(QPainterPath* self, double x, double y, double w, double h) {
 	self->addEllipse(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
-void QPainterPath_addEllipse3(QPainterPath* self, QPointF* center, double rx, double ry) {
+void QPainterPath_addEllipse_center_rx_ry(QPainterPath* self, QPointF* center, double rx, double ry) {
 	self->addEllipse(*center, static_cast<qreal>(rx), static_cast<qreal>(ry));
 }
 
-void QPainterPath_addText(QPainterPath* self, QPointF* point, QFont* f, struct seaqt_string text) {
+void QPainterPath_addText_point_f_text(QPainterPath* self, QPointF* point, QFont* f, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->addText(*point, *f, text_QString);
 }
 
-void QPainterPath_addText2(QPainterPath* self, double x, double y, QFont* f, struct seaqt_string text) {
+void QPainterPath_addText_x_y_f_text(QPainterPath* self, double x, double y, QFont* f, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->addText(static_cast<qreal>(x), static_cast<qreal>(y), *f, text_QString);
 }
@@ -149,11 +149,11 @@ void QPainterPath_addRegion(QPainterPath* self, QRegion* region) {
 	self->addRegion(*region);
 }
 
-void QPainterPath_addRoundedRect(QPainterPath* self, QRectF* rect, double xRadius, double yRadius) {
+void QPainterPath_addRoundedRect_rect_xRadius_yRadius(QPainterPath* self, QRectF* rect, double xRadius, double yRadius) {
 	self->addRoundedRect(*rect, static_cast<qreal>(xRadius), static_cast<qreal>(yRadius));
 }
 
-void QPainterPath_addRoundedRect2(QPainterPath* self, double x, double y, double w, double h, double xRadius, double yRadius) {
+void QPainterPath_addRoundedRect_x_y_w_h_xRadius_yRadius(QPainterPath* self, double x, double y, double w, double h, double xRadius, double yRadius) {
 	self->addRoundedRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<qreal>(xRadius), static_cast<qreal>(yRadius));
 }
 
@@ -161,31 +161,31 @@ void QPainterPath_connectPath(QPainterPath* self, QPainterPath* path) {
 	self->connectPath(*path);
 }
 
-bool QPainterPath_contains(const QPainterPath* self, QPointF* pt) {
+bool QPainterPath_contains_pt(const QPainterPath* self, QPointF* pt) {
 	return self->contains(*pt);
 }
 
-bool QPainterPath_containsWithRect(const QPainterPath* self, QRectF* rect) {
+bool QPainterPath_contains_rect(const QPainterPath* self, QRectF* rect) {
 	return self->contains(*rect);
 }
 
-bool QPainterPath_intersects(const QPainterPath* self, QRectF* rect) {
+bool QPainterPath_intersects_rect(const QPainterPath* self, QRectF* rect) {
 	return self->intersects(*rect);
 }
 
-void QPainterPath_translate(QPainterPath* self, double dx, double dy) {
+void QPainterPath_translate_dx_dy(QPainterPath* self, double dx, double dy) {
 	self->translate(static_cast<qreal>(dx), static_cast<qreal>(dy));
 }
 
-void QPainterPath_translateWithOffset(QPainterPath* self, QPointF* offset) {
+void QPainterPath_translate_offset(QPainterPath* self, QPointF* offset) {
 	self->translate(*offset);
 }
 
-QPainterPath* QPainterPath_translated(const QPainterPath* self, double dx, double dy) {
+QPainterPath* QPainterPath_translated_dx_dy(const QPainterPath* self, double dx, double dy) {
 	return new QPainterPath(self->translated(static_cast<qreal>(dx), static_cast<qreal>(dy)));
 }
 
-QPainterPath* QPainterPath_translatedWithOffset(const QPainterPath* self, QPointF* offset) {
+QPainterPath* QPainterPath_translated_offset(const QPainterPath* self, QPointF* offset) {
 	return new QPainterPath(self->translated(*offset));
 }
 
@@ -250,11 +250,11 @@ double QPainterPath_slopeAtPercent(const QPainterPath* self, double t) {
 	return static_cast<double>(_ret);
 }
 
-bool QPainterPath_intersectsWithQPainterPath(const QPainterPath* self, QPainterPath* p) {
+bool QPainterPath_intersects_p(const QPainterPath* self, QPainterPath* p) {
 	return self->intersects(*p);
 }
 
-bool QPainterPath_containsWithQPainterPath(const QPainterPath* self, QPainterPath* p) {
+bool QPainterPath_contains_p(const QPainterPath* self, QPainterPath* p) {
 	return self->contains(*p);
 }
 
@@ -318,11 +318,11 @@ QPainterPath* QPainterPath_operatorMinusAssign(QPainterPath* self, QPainterPath*
 	return &_ret;
 }
 
-void QPainterPath_addRoundedRect3(QPainterPath* self, QRectF* rect, double xRadius, double yRadius, int mode) {
+void QPainterPath_addRoundedRect_rect_xRadius_yRadius_mode(QPainterPath* self, QRectF* rect, double xRadius, double yRadius, int mode) {
 	self->addRoundedRect(*rect, static_cast<qreal>(xRadius), static_cast<qreal>(yRadius), static_cast<Qt::SizeMode>(mode));
 }
 
-void QPainterPath_addRoundedRect4(QPainterPath* self, double x, double y, double w, double h, double xRadius, double yRadius, int mode) {
+void QPainterPath_addRoundedRect_x_y_w_h_xRadius_yRadius_mode(QPainterPath* self, double x, double y, double w, double h, double xRadius, double yRadius, int mode) {
 	self->addRoundedRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<qreal>(xRadius), static_cast<qreal>(yRadius), static_cast<Qt::SizeMode>(mode));
 }
 
@@ -334,7 +334,7 @@ QPainterPathStroker* QPainterPathStroker_new() {
 	return new (std::nothrow) QPainterPathStroker();
 }
 
-QPainterPathStroker* QPainterPathStroker_new2(QPen* pen) {
+QPainterPathStroker* QPainterPathStroker_new_pen(QPen* pen) {
 	return new (std::nothrow) QPainterPathStroker(*pen);
 }
 
@@ -383,11 +383,11 @@ double QPainterPathStroker_curveThreshold(const QPainterPathStroker* self) {
 	return static_cast<double>(_ret);
 }
 
-void QPainterPathStroker_setDashPattern(QPainterPathStroker* self, int dashPattern) {
+void QPainterPathStroker_setDashPattern_Qt_PenStyle(QPainterPathStroker* self, int dashPattern) {
 	self->setDashPattern(static_cast<Qt::PenStyle>(dashPattern));
 }
 
-void QPainterPathStroker_setDashPatternWithDashPattern(QPainterPathStroker* self, struct seaqt_array /* of double */  dashPattern) {
+void QPainterPathStroker_setDashPattern_QListOfqreal(QPainterPathStroker* self, struct seaqt_array /* of double */  dashPattern) {
 	QList<qreal> dashPattern_QList;
 	dashPattern_QList.reserve(dashPattern.len);
 	double* dashPattern_arr = static_cast<double*>(dashPattern.data);

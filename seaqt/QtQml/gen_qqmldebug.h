@@ -23,7 +23,7 @@ typedef struct QVariant QVariant;
 #endif
 
 QQmlDebuggingEnabler* QQmlDebuggingEnabler_new();
-QQmlDebuggingEnabler* QQmlDebuggingEnabler_new2(bool printWarning);
+QQmlDebuggingEnabler* QQmlDebuggingEnabler_new_printWarning(bool printWarning);
 
 void QQmlDebuggingEnabler_enableDebugging(bool printWarning);
 struct seaqt_array /* of struct seaqt_string */  QQmlDebuggingEnabler_debuggerServices();
@@ -31,13 +31,13 @@ struct seaqt_array /* of struct seaqt_string */  QQmlDebuggingEnabler_inspectorS
 struct seaqt_array /* of struct seaqt_string */  QQmlDebuggingEnabler_profilerServices();
 struct seaqt_array /* of struct seaqt_string */  QQmlDebuggingEnabler_nativeDebuggerServices();
 void QQmlDebuggingEnabler_setServices(struct seaqt_array /* of struct seaqt_string */  services);
-bool QQmlDebuggingEnabler_startTcpDebugServer(int port);
-bool QQmlDebuggingEnabler_connectToLocalDebugger(struct seaqt_string socketFileName);
-bool QQmlDebuggingEnabler_startDebugConnector(struct seaqt_string pluginName);
-bool QQmlDebuggingEnabler_startTcpDebugServer2(int port, int mode);
-bool QQmlDebuggingEnabler_startTcpDebugServer3(int port, int mode, struct seaqt_string hostName);
-bool QQmlDebuggingEnabler_connectToLocalDebugger2(struct seaqt_string socketFileName, int mode);
-bool QQmlDebuggingEnabler_startDebugConnector2(struct seaqt_string pluginName, struct seaqt_map /* of struct seaqt_string to QVariant* */  configuration);
+bool QQmlDebuggingEnabler_startTcpDebugServer_port(int port);
+bool QQmlDebuggingEnabler_connectToLocalDebugger_socketFileName(struct seaqt_string socketFileName);
+bool QQmlDebuggingEnabler_startDebugConnector_pluginName(struct seaqt_string pluginName);
+bool QQmlDebuggingEnabler_startTcpDebugServer_port_mode(int port, int mode);
+bool QQmlDebuggingEnabler_startTcpDebugServer_port_mode_hostName(int port, int mode, struct seaqt_string hostName);
+bool QQmlDebuggingEnabler_connectToLocalDebugger_socketFileName_mode(struct seaqt_string socketFileName, int mode);
+bool QQmlDebuggingEnabler_startDebugConnector_pluginName_configuration(struct seaqt_string pluginName, struct seaqt_map /* of struct seaqt_string to QVariant* */  configuration);
 
 void QQmlDebuggingEnabler_delete(QQmlDebuggingEnabler* self);
 

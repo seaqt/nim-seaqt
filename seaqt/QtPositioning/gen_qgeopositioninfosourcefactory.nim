@@ -55,7 +55,7 @@ type cQGeoPositionInfoSourceFactory*{.exportc: "QGeoPositionInfoSourceFactory", 
 proc fcQGeoPositionInfoSourceFactory_positionInfoSource(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.importc: "QGeoPositionInfoSourceFactory_positionInfoSource".}
 proc fcQGeoPositionInfoSourceFactory_satelliteInfoSource(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.importc: "QGeoPositionInfoSourceFactory_satelliteInfoSource".}
 proc fcQGeoPositionInfoSourceFactory_areaMonitor(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.importc: "QGeoPositionInfoSourceFactory_areaMonitor".}
-proc fcQGeoPositionInfoSourceFactory_operatorAssign(self: pointer, param1: pointer): void {.importc: "QGeoPositionInfoSourceFactory_operatorAssign".}
+proc fcQGeoPositionInfoSourceFactory_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGeoPositionInfoSourceFactory_operatorAssign".}
 
 proc positionInfoSource*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory, parent: gen_qobject_types.QObject, parameters: Table[string,gen_qvariant_types.QVariant]): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
@@ -99,6 +99,6 @@ proc areaMonitor*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfo
 
   gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoPositionInfoSourceFactory_areaMonitor(self.h, parent.h, struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),)), owned: false)
 
-proc operatorAssign*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory, param1: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory): void =
-  fcQGeoPositionInfoSourceFactory_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory, fromVal: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory): void =
+  fcQGeoPositionInfoSourceFactory_operatorAssign(self.h, fromVal.h)
 

@@ -61,11 +61,11 @@ type cQAudioSource*{.exportc: "QAudioSource", incompleteStruct.} = object
 proc fcQAudioSource_metaObject(self: pointer): pointer {.importc: "QAudioSource_metaObject".}
 proc fcQAudioSource_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioSource_metacast".}
 proc fcQAudioSource_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioSource_metacall".}
-proc fcQAudioSource_tr(s: cstring): struct_seaqt_string {.importc: "QAudioSource_tr".}
+proc fcQAudioSource_trS(s: cstring): struct_seaqt_string {.importc: "QAudioSource_tr_s".}
 proc fcQAudioSource_isNull(self: pointer): bool {.importc: "QAudioSource_isNull".}
 proc fcQAudioSource_format(self: pointer): pointer {.importc: "QAudioSource_format".}
-proc fcQAudioSource_start(self: pointer, device: pointer): void {.importc: "QAudioSource_start".}
-proc fcQAudioSource_start2(self: pointer): pointer {.importc: "QAudioSource_start2".}
+proc fcQAudioSource_startDevice(self: pointer, device: pointer): void {.importc: "QAudioSource_start_device".}
+proc fcQAudioSource_start(self: pointer): pointer {.importc: "QAudioSource_start".}
 proc fcQAudioSource_stop(self: pointer): void {.importc: "QAudioSource_stop".}
 proc fcQAudioSource_reset(self: pointer): void {.importc: "QAudioSource_reset".}
 proc fcQAudioSource_suspend(self: pointer): void {.importc: "QAudioSource_suspend".}
@@ -81,8 +81,8 @@ proc fcQAudioSource_error(self: pointer): cint {.importc: "QAudioSource_error".}
 proc fcQAudioSource_state(self: pointer): cint {.importc: "QAudioSource_state".}
 proc fcQAudioSource_stateChanged(self: pointer, state: cint): void {.importc: "QAudioSource_stateChanged".}
 proc fcQAudioSource_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, state: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioSource_connect_stateChanged".}
-proc fcQAudioSource_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioSource_tr2".}
-proc fcQAudioSource_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioSource_tr3".}
+proc fcQAudioSource_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioSource_tr_s_c".}
+proc fcQAudioSource_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioSource_tr_s_c_n".}
 proc fcQAudioSource_vdata(self: pointer): ptr pointer {.importc: "QAudioSource_vdata".}
 proc fvdata_cQAudioSource(self: pointer): pointer {.importc: "vdata_QAudioSource".}
 
@@ -113,11 +113,11 @@ proc fcQAudioSource_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQAudioSource_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioSource_protectedbase_receivers".}
 proc fcQAudioSource_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioSource_protectedbase_isSignalConnected".}
 proc fcQAudioSource_new(vtbl: pointer, vdata: csize_t): ptr cQAudioSource {.importc: "QAudioSource_new".}
-proc fcQAudioSource_new2(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer): ptr cQAudioSource {.importc: "QAudioSource_new2".}
-proc fcQAudioSource_new3(vtbl: pointer, vdata: csize_t, format: pointer): ptr cQAudioSource {.importc: "QAudioSource_new3".}
-proc fcQAudioSource_new4(vtbl: pointer, vdata: csize_t, format: pointer, parent: pointer): ptr cQAudioSource {.importc: "QAudioSource_new4".}
-proc fcQAudioSource_new5(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer): ptr cQAudioSource {.importc: "QAudioSource_new5".}
-proc fcQAudioSource_new6(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer, parent: pointer): ptr cQAudioSource {.importc: "QAudioSource_new6".}
+proc fcQAudioSource_new2(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer): ptr cQAudioSource {.importc: "QAudioSource_new_audioDeviceInfo".}
+proc fcQAudioSource_new3(vtbl: pointer, vdata: csize_t, format: pointer): ptr cQAudioSource {.importc: "QAudioSource_new_format".}
+proc fcQAudioSource_new4(vtbl: pointer, vdata: csize_t, format: pointer, parent: pointer): ptr cQAudioSource {.importc: "QAudioSource_new_format_parent".}
+proc fcQAudioSource_new5(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer): ptr cQAudioSource {.importc: "QAudioSource_new_audioDeviceInfo_format".}
+proc fcQAudioSource_new6(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer, parent: pointer): ptr cQAudioSource {.importc: "QAudioSource_new_audioDeviceInfo_format_parent".}
 proc fcQAudioSource_staticMetaObject(): pointer {.importc: "QAudioSource_staticMetaObject".}
 
 proc metaObject*(self: gen_qaudiosource_types.QAudioSource): gen_qobjectdefs_types.QMetaObject =
@@ -130,7 +130,7 @@ proc metacall*(self: gen_qaudiosource_types.QAudioSource, param1: cint, param2: 
   fcQAudioSource_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudiosource_types.QAudioSource, s: cstring): string =
-  let v_ms = fcQAudioSource_tr(s)
+  let v_ms = fcQAudioSource_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -142,10 +142,10 @@ proc format*(self: gen_qaudiosource_types.QAudioSource): gen_qaudioformat_types.
   gen_qaudioformat_types.QAudioFormat(h: fcQAudioSource_format(self.h), owned: true)
 
 proc start*(self: gen_qaudiosource_types.QAudioSource, device: gen_qiodevice_types.QIODevice): void =
-  fcQAudioSource_start(self.h, device.h)
+  fcQAudioSource_startDevice(self.h, device.h)
 
 proc start*(self: gen_qaudiosource_types.QAudioSource): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQAudioSource_start2(self.h), owned: false)
+  gen_qiodevice_types.QIODevice(h: fcQAudioSource_start(self.h), owned: false)
 
 proc stop*(self: gen_qaudiosource_types.QAudioSource): void =
   fcQAudioSource_stop(self.h)
@@ -207,13 +207,13 @@ proc onStateChanged*(self: gen_qaudiosource_types.QAudioSource, slot: QAudioSour
   fcQAudioSource_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQAudioSource_slot_callback_stateChanged, fcQAudioSource_slot_callback_stateChanged_release)
 
 proc tr*(_: type gen_qaudiosource_types.QAudioSource, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioSource_tr2(s, c)
+  let v_ms = fcQAudioSource_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudiosource_types.QAudioSource, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioSource_tr3(s, c, n)
+  let v_ms = fcQAudioSource_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

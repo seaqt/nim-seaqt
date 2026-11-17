@@ -57,10 +57,10 @@ type cQIconEnginePlugin*{.exportc: "QIconEnginePlugin", incompleteStruct.} = obj
 proc fcQIconEnginePlugin_metaObject(self: pointer): pointer {.importc: "QIconEnginePlugin_metaObject".}
 proc fcQIconEnginePlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QIconEnginePlugin_metacast".}
 proc fcQIconEnginePlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QIconEnginePlugin_metacall".}
-proc fcQIconEnginePlugin_tr(s: cstring): struct_seaqt_string {.importc: "QIconEnginePlugin_tr".}
+proc fcQIconEnginePlugin_trS(s: cstring): struct_seaqt_string {.importc: "QIconEnginePlugin_tr_s".}
 proc fcQIconEnginePlugin_createX(self: pointer, filename: struct_seaqt_string): pointer {.importc: "QIconEnginePlugin_create".}
-proc fcQIconEnginePlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIconEnginePlugin_tr2".}
-proc fcQIconEnginePlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIconEnginePlugin_tr3".}
+proc fcQIconEnginePlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIconEnginePlugin_tr_s_c".}
+proc fcQIconEnginePlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIconEnginePlugin_tr_s_c_n".}
 proc fcQIconEnginePlugin_vdata(self: pointer): ptr pointer {.importc: "QIconEnginePlugin_vdata".}
 proc fvdata_cQIconEnginePlugin(self: pointer): pointer {.importc: "vdata_QIconEnginePlugin".}
 
@@ -92,7 +92,7 @@ proc fcQIconEnginePlugin_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQIconEnginePlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QIconEnginePlugin_protectedbase_receivers".}
 proc fcQIconEnginePlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QIconEnginePlugin_protectedbase_isSignalConnected".}
 proc fcQIconEnginePlugin_new(vtbl: pointer, vdata: csize_t): ptr cQIconEnginePlugin {.importc: "QIconEnginePlugin_new".}
-proc fcQIconEnginePlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQIconEnginePlugin {.importc: "QIconEnginePlugin_new2".}
+proc fcQIconEnginePlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQIconEnginePlugin {.importc: "QIconEnginePlugin_new_parent".}
 proc fcQIconEnginePlugin_staticMetaObject(): pointer {.importc: "QIconEnginePlugin_staticMetaObject".}
 
 proc metaObject*(self: gen_qiconengineplugin_types.QIconEnginePlugin): gen_qobjectdefs_types.QMetaObject =
@@ -105,7 +105,7 @@ proc metacall*(self: gen_qiconengineplugin_types.QIconEnginePlugin, param1: cint
   fcQIconEnginePlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring): string =
-  let v_ms = fcQIconEnginePlugin_tr(s)
+  let v_ms = fcQIconEnginePlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -114,13 +114,13 @@ proc createX*(self: gen_qiconengineplugin_types.QIconEnginePlugin, filename: ope
   gen_qiconengine_types.QIconEngine(h: fcQIconEnginePlugin_createX(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename)))), owned: false)
 
 proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQIconEnginePlugin_tr2(s, c)
+  let v_ms = fcQIconEnginePlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQIconEnginePlugin_tr3(s, c, n)
+  let v_ms = fcQIconEnginePlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -64,24 +64,24 @@ typedef struct QQmlContext_VTable{
 void* QQmlContext_vdata(VirtualQQmlContext* self);
 VirtualQQmlContext* vdata_QQmlContext(void* vdata);
 
-VirtualQQmlContext* QQmlContext_new(const QQmlContext_VTable* vtbl, size_t vdata, QQmlEngine* parent);
-VirtualQQmlContext* QQmlContext_new2(const QQmlContext_VTable* vtbl, size_t vdata, QQmlContext* parent);
-VirtualQQmlContext* QQmlContext_new3(const QQmlContext_VTable* vtbl, size_t vdata, QQmlEngine* parent, QObject* objParent);
-VirtualQQmlContext* QQmlContext_new4(const QQmlContext_VTable* vtbl, size_t vdata, QQmlContext* parent, QObject* objParent);
+VirtualQQmlContext* QQmlContext_new_QQmlEngine(const QQmlContext_VTable* vtbl, size_t vdata, QQmlEngine* parent);
+VirtualQQmlContext* QQmlContext_new_QQmlContext(const QQmlContext_VTable* vtbl, size_t vdata, QQmlContext* parent);
+VirtualQQmlContext* QQmlContext_new_QQmlEngine_QObject(const QQmlContext_VTable* vtbl, size_t vdata, QQmlEngine* parent, QObject* objParent);
+VirtualQQmlContext* QQmlContext_new_QQmlContext_QObject(const QQmlContext_VTable* vtbl, size_t vdata, QQmlContext* parent, QObject* objParent);
 
 void QQmlContext_virtbase(QQmlContext* src, QObject** outptr_QObject);
 QMetaObject* QQmlContext_metaObject(const QQmlContext* self);
 void* QQmlContext_metacast(QQmlContext* self, const char* param1);
 int QQmlContext_metacall(QQmlContext* self, int param1, int param2, void** param3);
-struct seaqt_string QQmlContext_tr(const char* s);
+struct seaqt_string QQmlContext_tr_s(const char* s);
 bool QQmlContext_isValid(const QQmlContext* self);
 QQmlEngine* QQmlContext_engine(const QQmlContext* self);
 QQmlContext* QQmlContext_parentContext(const QQmlContext* self);
 QObject* QQmlContext_contextObject(const QQmlContext* self);
 void QQmlContext_setContextObject(QQmlContext* self, QObject* contextObject);
 QVariant* QQmlContext_contextProperty(const QQmlContext* self, struct seaqt_string param1);
-void QQmlContext_setContextProperty(QQmlContext* self, struct seaqt_string param1, QObject* param2);
-void QQmlContext_setContextProperty2(QQmlContext* self, struct seaqt_string param1, QVariant* param2);
+void QQmlContext_setContextProperty_QString_QObject(QQmlContext* self, struct seaqt_string param1, QObject* param2);
+void QQmlContext_setContextProperty_QString_QVariant(QQmlContext* self, struct seaqt_string param1, QVariant* param2);
 void QQmlContext_setContextProperties(QQmlContext* self, struct seaqt_array /* of QQmlContext__PropertyPair* */  properties);
 struct seaqt_string QQmlContext_nameForObject(const QQmlContext* self, QObject* param1);
 QObject* QQmlContext_objectForName(const QQmlContext* self, struct seaqt_string param1);
@@ -89,8 +89,8 @@ QUrl* QQmlContext_resolvedUrl(const QQmlContext* self, QUrl* param1);
 void QQmlContext_setBaseUrl(QQmlContext* self, QUrl* baseUrl);
 QUrl* QQmlContext_baseUrl(const QQmlContext* self);
 QJSValue* QQmlContext_importedScript(const QQmlContext* self, struct seaqt_string name);
-struct seaqt_string QQmlContext_tr2(const char* s, const char* c);
-struct seaqt_string QQmlContext_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQmlContext_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQmlContext_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQmlContext_virtualbase_metaObject(const VirtualQQmlContext* self);
 void* QQmlContext_virtualbase_metacast(VirtualQQmlContext* self, const char* param1);
@@ -111,13 +111,13 @@ bool QQmlContext_protectedbase_isSignalConnected(const VirtualQQmlContext* self,
 const QMetaObject* QQmlContext_staticMetaObject();
 void QQmlContext_delete(QQmlContext* self);
 
-QQmlContext__PropertyPair* QQmlContext__PropertyPair_new(QQmlContext__PropertyPair* param1);
+QQmlContext__PropertyPair* QQmlContext__PropertyPair_new(QQmlContext__PropertyPair* from);
 
 struct seaqt_string QQmlContext__PropertyPair_name(const QQmlContext__PropertyPair* self);
 void QQmlContext__PropertyPair_setName(QQmlContext__PropertyPair* self, struct seaqt_string name);
 QVariant* QQmlContext__PropertyPair_value(const QQmlContext__PropertyPair* self);
 void QQmlContext__PropertyPair_setValue(QQmlContext__PropertyPair* self, QVariant* value);
-void QQmlContext__PropertyPair_operatorAssign(QQmlContext__PropertyPair* self, QQmlContext__PropertyPair* param1);
+void QQmlContext__PropertyPair_operatorAssign(QQmlContext__PropertyPair* self, QQmlContext__PropertyPair* from);
 
 void QQmlContext__PropertyPair_delete(QQmlContext__PropertyPair* self);
 

@@ -25,14 +25,14 @@ typedef struct QVariant QVariant;
 #endif
 
 QSqlField* QSqlField_new();
-QSqlField* QSqlField_new2(QSqlField* other);
-QSqlField* QSqlField_new3(struct seaqt_string fieldName, int type);
-QSqlField* QSqlField_new4(struct seaqt_string fieldName);
-QSqlField* QSqlField_new5(struct seaqt_string fieldName, QMetaType* type);
-QSqlField* QSqlField_new6(struct seaqt_string fieldName, QMetaType* type, struct seaqt_string tableName);
-QSqlField* QSqlField_new7(struct seaqt_string fieldName, int type, struct seaqt_string tableName);
+QSqlField* QSqlField_new_QSqlField(QSqlField* from);
+QSqlField* QSqlField_new_QString_QVariant_Type(struct seaqt_string fieldName, int type);
+QSqlField* QSqlField_new_QString(struct seaqt_string fieldName);
+QSqlField* QSqlField_new_QString_QMetaType(struct seaqt_string fieldName, QMetaType* type);
+QSqlField* QSqlField_new_QString_QMetaType_QString(struct seaqt_string fieldName, QMetaType* type, struct seaqt_string tableName);
+QSqlField* QSqlField_new_QString_QVariant_Type_QString(struct seaqt_string fieldName, int type, struct seaqt_string tableName);
 
-void QSqlField_operatorAssign(QSqlField* self, QSqlField* other);
+void QSqlField_operatorAssign(QSqlField* self, QSqlField* from);
 bool QSqlField_operatorEqual(const QSqlField* self, QSqlField* other);
 bool QSqlField_operatorNotEqual(const QSqlField* self, QSqlField* other);
 void QSqlField_setValue(QSqlField* self, QVariant* value);

@@ -35,7 +35,7 @@ int QNetworkInformation_metacall(QNetworkInformation* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QNetworkInformation_tr(const char* s) {
+struct seaqt_string QNetworkInformation_tr_s(const char* s) {
 	QString _ret = QNetworkInformation::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -92,7 +92,7 @@ bool QNetworkInformation_loadBackendByFeatures(int features) {
 	return QNetworkInformation::loadBackendByFeatures(static_cast<QNetworkInformation::Features>(features));
 }
 
-bool QNetworkInformation_loadWithFeatures(int features) {
+bool QNetworkInformation_load_features(int features) {
 	return QNetworkInformation::load(static_cast<QNetworkInformation::Features>(features));
 }
 
@@ -186,7 +186,7 @@ void QNetworkInformation_connect_isMeteredChanged(QNetworkInformation* self, int
 	QNetworkInformation::connect(self, static_cast<void (QNetworkInformation::*)(bool)>(&QNetworkInformation::isMeteredChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QNetworkInformation_tr2(const char* s, const char* c) {
+struct seaqt_string QNetworkInformation_tr_s_c(const char* s, const char* c) {
 	QString _ret = QNetworkInformation::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -197,7 +197,7 @@ struct seaqt_string QNetworkInformation_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QNetworkInformation_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QNetworkInformation_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QNetworkInformation::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

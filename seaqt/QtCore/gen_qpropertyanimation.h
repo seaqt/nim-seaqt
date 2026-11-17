@@ -63,15 +63,15 @@ void* QPropertyAnimation_vdata(VirtualQPropertyAnimation* self);
 VirtualQPropertyAnimation* vdata_QPropertyAnimation(void* vdata);
 
 VirtualQPropertyAnimation* QPropertyAnimation_new(const QPropertyAnimation_VTable* vtbl, size_t vdata);
-VirtualQPropertyAnimation* QPropertyAnimation_new2(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* target, struct seaqt_string propertyName);
-VirtualQPropertyAnimation* QPropertyAnimation_new3(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQPropertyAnimation* QPropertyAnimation_new4(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* target, struct seaqt_string propertyName, QObject* parent);
+VirtualQPropertyAnimation* QPropertyAnimation_new_target_propertyName(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* target, struct seaqt_string propertyName);
+VirtualQPropertyAnimation* QPropertyAnimation_new_parent(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPropertyAnimation* QPropertyAnimation_new_target_propertyName_parent(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* target, struct seaqt_string propertyName, QObject* parent);
 
 void QPropertyAnimation_virtbase(QPropertyAnimation* src, QVariantAnimation** outptr_QVariantAnimation);
 QMetaObject* QPropertyAnimation_metaObject(const QPropertyAnimation* self);
 void* QPropertyAnimation_metacast(QPropertyAnimation* self, const char* param1);
 int QPropertyAnimation_metacall(QPropertyAnimation* self, int param1, int param2, void** param3);
-struct seaqt_string QPropertyAnimation_tr(const char* s);
+struct seaqt_string QPropertyAnimation_tr_s(const char* s);
 QObject* QPropertyAnimation_targetObject(const QPropertyAnimation* self);
 void QPropertyAnimation_setTargetObject(QPropertyAnimation* self, QObject* target);
 struct seaqt_string QPropertyAnimation_propertyName(const QPropertyAnimation* self);
@@ -79,8 +79,8 @@ void QPropertyAnimation_setPropertyName(QPropertyAnimation* self, struct seaqt_s
 bool QPropertyAnimation_event(QPropertyAnimation* self, QEvent* event);
 void QPropertyAnimation_updateCurrentValue(QPropertyAnimation* self, QVariant* value);
 void QPropertyAnimation_updateState(QPropertyAnimation* self, int newState, int oldState);
-struct seaqt_string QPropertyAnimation_tr2(const char* s, const char* c);
-struct seaqt_string QPropertyAnimation_tr3(const char* s, const char* c, int n);
+struct seaqt_string QPropertyAnimation_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPropertyAnimation_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPropertyAnimation_virtualbase_metaObject(const VirtualQPropertyAnimation* self);
 void* QPropertyAnimation_virtualbase_metacast(VirtualQPropertyAnimation* self, const char* param1);

@@ -22,7 +22,7 @@ public:
 	friend void* QTest__QTouchEventWidgetSequence_vdata(VirtualQTestQTouchEventWidgetSequence* self);
 	friend VirtualQTestQTouchEventWidgetSequence* vdata_QTest__QTouchEventWidgetSequence(void* vdata);
 
-	VirtualQTestQTouchEventWidgetSequence(const QTest__QTouchEventWidgetSequence_VTable* vtbl, const QTest::QTouchEventWidgetSequence& param1): QTest::QTouchEventWidgetSequence(param1), vtbl(vtbl) {}
+	VirtualQTestQTouchEventWidgetSequence(const QTest__QTouchEventWidgetSequence_VTable* vtbl, const QTest::QTouchEventWidgetSequence& from): QTest::QTouchEventWidgetSequence(from), vtbl(vtbl) {}
 
 	virtual ~VirtualQTestQTouchEventWidgetSequence() override { if(vtbl->destructor) vtbl->destructor(this); }
 
@@ -56,28 +56,28 @@ public:
 	friend QEventPoint* QTest__QTouchEventWidgetSequence_protectedbase_pointOrPreviousPoint(VirtualQTestQTouchEventWidgetSequence* self, int touchId);
 };
 
-VirtualQTestQTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_new(const QTest__QTouchEventWidgetSequence_VTable* vtbl, size_t vdata, QTest__QTouchEventWidgetSequence* param1) {
+VirtualQTestQTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_new(const QTest__QTouchEventWidgetSequence_VTable* vtbl, size_t vdata, QTest__QTouchEventWidgetSequence* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTestQTouchEventWidgetSequence>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQTestQTouchEventWidgetSequence(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQTestQTouchEventWidgetSequence(vtbl, *from) : nullptr;
 }
 
 void QTest__QTouchEventWidgetSequence_virtbase(QTest__QTouchEventWidgetSequence* src, QTest::QTouchEventSequence** outptr_QTest__QTouchEventSequence) {
 	*outptr_QTest__QTouchEventSequence = static_cast<QTest::QTouchEventSequence*>(src);
 }
 
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_press(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt) {
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_press_touchId_pt(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt) {
 	QTest::QTouchEventWidgetSequence& _ret = self->press(static_cast<int>(touchId), *pt);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_move(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt) {
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_move_touchId_pt(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt) {
 	QTest::QTouchEventWidgetSequence& _ret = self->move(static_cast<int>(touchId), *pt);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_release(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt) {
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_release_touchId_pt(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt) {
 	QTest::QTouchEventWidgetSequence& _ret = self->release(static_cast<int>(touchId), *pt);
 	// Cast returned reference into pointer
 	return &_ret;
@@ -93,23 +93,23 @@ bool QTest__QTouchEventWidgetSequence_commit(QTest__QTouchEventWidgetSequence* s
 	return self->commit(processEvents);
 }
 
-void QTest__QTouchEventWidgetSequence_operatorAssign(QTest__QTouchEventWidgetSequence* self, QTest__QTouchEventWidgetSequence* param1) {
-	self->operator=(*param1);
+void QTest__QTouchEventWidgetSequence_operatorAssign(QTest__QTouchEventWidgetSequence* self, QTest__QTouchEventWidgetSequence* from) {
+	self->operator=(*from);
 }
 
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_press2(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget) {
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_press_touchId_pt_widget(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget) {
 	QTest::QTouchEventWidgetSequence& _ret = self->press(static_cast<int>(touchId), *pt, widget);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_move2(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget) {
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_move_touchId_pt_widget(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget) {
 	QTest::QTouchEventWidgetSequence& _ret = self->move(static_cast<int>(touchId), *pt, widget);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_release2(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget) {
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_release_touchId_pt_widget(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget) {
 	QTest::QTouchEventWidgetSequence& _ret = self->release(static_cast<int>(touchId), *pt, widget);
 	// Cast returned reference into pointer
 	return &_ret;

@@ -19,12 +19,12 @@ QMetaContainer* QMetaContainer_new() {
 	return new (std::nothrow) QMetaContainer();
 }
 
-QMetaContainer* QMetaContainer_new2(const void* d) {
+QMetaContainer* QMetaContainer_new_d(const void* d) {
 	return new (std::nothrow) QMetaContainer(static_cast<const QtMetaContainerPrivate::QMetaContainerInterface*>(d));
 }
 
-QMetaContainer* QMetaContainer_new3(QMetaContainer* param1) {
-	return new (std::nothrow) QMetaContainer(*param1);
+QMetaContainer* QMetaContainer_new_from(QMetaContainer* from) {
+	return new (std::nothrow) QMetaContainer(*from);
 }
 
 bool QMetaContainer_hasInputIterator(const QMetaContainer* self) {
@@ -134,7 +134,7 @@ QMetaSequence* QMetaSequence_new() {
 	return new (std::nothrow) QMetaSequence();
 }
 
-QMetaSequence* QMetaSequence_new2(const void* d) {
+QMetaSequence* QMetaSequence_new_d(const void* d) {
 	return new (std::nothrow) QMetaSequence(static_cast<const QtMetaContainerPrivate::QMetaSequenceInterface*>(d));
 }
 
@@ -270,7 +270,7 @@ QMetaAssociation* QMetaAssociation_new() {
 	return new (std::nothrow) QMetaAssociation();
 }
 
-QMetaAssociation* QMetaAssociation_new2(const void* d) {
+QMetaAssociation* QMetaAssociation_new_d(const void* d) {
 	return new (std::nothrow) QMetaAssociation(static_cast<const QtMetaContainerPrivate::QMetaAssociationInterface*>(d));
 }
 

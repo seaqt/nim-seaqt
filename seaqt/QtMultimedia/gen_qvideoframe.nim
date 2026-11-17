@@ -78,7 +78,7 @@ type cQVideoFrame*{.exportc: "QVideoFrame", incompleteStruct.} = object
 type cQVideoFramePaintOptions*{.exportc: "QVideoFrame__PaintOptions", incompleteStruct.} = object
 
 proc fcQVideoFrame_swap(self: pointer, other: pointer): void {.importc: "QVideoFrame_swap".}
-proc fcQVideoFrame_operatorAssign(self: pointer, other: pointer): void {.importc: "QVideoFrame_operatorAssign".}
+proc fcQVideoFrame_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QVideoFrame_operatorAssign".}
 proc fcQVideoFrame_operatorEqual(self: pointer, other: pointer): bool {.importc: "QVideoFrame_operatorEqual".}
 proc fcQVideoFrame_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QVideoFrame_operatorNotEqual".}
 proc fcQVideoFrame_isValid(self: pointer): bool {.importc: "QVideoFrame_isValid".}
@@ -95,8 +95,8 @@ proc fcQVideoFrame_mapMode(self: pointer): cint {.importc: "QVideoFrame_mapMode"
 proc fcQVideoFrame_map(self: pointer, mode: cint): bool {.importc: "QVideoFrame_map".}
 proc fcQVideoFrame_unmap(self: pointer): void {.importc: "QVideoFrame_unmap".}
 proc fcQVideoFrame_bytesPerLine(self: pointer, plane: cint): cint {.importc: "QVideoFrame_bytesPerLine".}
-proc fcQVideoFrame_bits(self: pointer, plane: cint): ptr uint8 {.importc: "QVideoFrame_bits".}
-proc fcQVideoFrame_bitsWithPlane(self: pointer, plane: cint): ptr uint8 {.importc: "QVideoFrame_bitsWithPlane".}
+proc fcQVideoFrame_bitsInt(self: pointer, plane: cint): ptr uint8 {.importc: "QVideoFrame_bits_int".}
+proc fcQVideoFrame_bitsConstInt(self: pointer, plane: cint): ptr uint8 {.importc: "QVideoFrame_bits_const_int".}
 proc fcQVideoFrame_mappedBytes(self: pointer, plane: cint): cint {.importc: "QVideoFrame_mappedBytes".}
 proc fcQVideoFrame_planeCount(self: pointer): cint {.importc: "QVideoFrame_planeCount".}
 proc fcQVideoFrame_startTime(self: pointer): clonglong {.importc: "QVideoFrame_startTime".}
@@ -112,8 +112,8 @@ proc fcQVideoFrame_subtitleText(self: pointer): struct_seaqt_string {.importc: "
 proc fcQVideoFrame_setSubtitleText(self: pointer, text: struct_seaqt_string): void {.importc: "QVideoFrame_setSubtitleText".}
 proc fcQVideoFrame_paint(self: pointer, painter: pointer, rect: pointer, options: pointer): void {.importc: "QVideoFrame_paint".}
 proc fcQVideoFrame_new(): ptr cQVideoFrame {.importc: "QVideoFrame_new".}
-proc fcQVideoFrame_new2(format: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new2".}
-proc fcQVideoFrame_new3(other: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new3".}
+proc fcQVideoFrame_new2(format: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new_format".}
+proc fcQVideoFrame_new3(fromVal: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new_from".}
 proc fcQVideoFramePaintOptions_backgroundColor(self: pointer): pointer {.importc: "QVideoFrame__PaintOptions_backgroundColor".}
 proc fcQVideoFramePaintOptions_setBackgroundColor(self: pointer, backgroundColor: pointer): void {.importc: "QVideoFrame__PaintOptions_setBackgroundColor".}
 proc fcQVideoFramePaintOptions_aspectRatioMode(self: pointer): cint {.importc: "QVideoFrame__PaintOptions_aspectRatioMode".}
@@ -124,8 +124,8 @@ proc fcQVideoFramePaintOptions_setPaintFlags(self: pointer, paintFlags: cint): v
 proc swap*(self: gen_qvideoframe_types.QVideoFrame, other: gen_qvideoframe_types.QVideoFrame): void =
   fcQVideoFrame_swap(self.h, other.h)
 
-proc operatorAssign*(self: gen_qvideoframe_types.QVideoFrame, other: gen_qvideoframe_types.QVideoFrame): void =
-  fcQVideoFrame_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qvideoframe_types.QVideoFrame, fromVal: gen_qvideoframe_types.QVideoFrame): void =
+  fcQVideoFrame_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qvideoframe_types.QVideoFrame, other: gen_qvideoframe_types.QVideoFrame): bool =
   fcQVideoFrame_operatorEqual(self.h, other.h)
@@ -176,10 +176,10 @@ proc bytesPerLine*(self: gen_qvideoframe_types.QVideoFrame, plane: cint): cint =
   fcQVideoFrame_bytesPerLine(self.h, plane)
 
 proc bits*(self: gen_qvideoframe_types.QVideoFrame, plane: cint): ptr uint8 =
-  fcQVideoFrame_bits(self.h, plane)
+  fcQVideoFrame_bitsInt(self.h, plane)
 
 proc bits2*(self: gen_qvideoframe_types.QVideoFrame, plane: cint): ptr uint8 =
-  fcQVideoFrame_bitsWithPlane(self.h, plane)
+  fcQVideoFrame_bitsConstInt(self.h, plane)
 
 proc mappedBytes*(self: gen_qvideoframe_types.QVideoFrame, plane: cint): cint =
   fcQVideoFrame_mappedBytes(self.h, plane)
@@ -234,8 +234,8 @@ proc create*(T: type gen_qvideoframe_types.QVideoFrame,
   let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new2(format.h), owned: true)
   tmp
 proc create*(T: type gen_qvideoframe_types.QVideoFrame,
-    other: gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
-  let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new3(other.h), owned: true)
+    fromVal: gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
+  let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new3(fromVal.h), owned: true)
   tmp
 proc backgroundColor*(self: gen_qvideoframe_types.QVideoFramePaintOptions): gen_qcolor_types.QColor =
   gen_qcolor_types.QColor(h: fcQVideoFramePaintOptions_backgroundColor(self.h), owned: true)

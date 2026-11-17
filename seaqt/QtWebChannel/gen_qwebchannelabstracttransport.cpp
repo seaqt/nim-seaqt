@@ -184,7 +184,7 @@ VirtualQWebChannelAbstractTransport* QWebChannelAbstractTransport_new(const QWeb
 	return _mem_ ? new (_mem_)VirtualQWebChannelAbstractTransport(vtbl) : nullptr;
 }
 
-VirtualQWebChannelAbstractTransport* QWebChannelAbstractTransport_new2(const QWebChannelAbstractTransport_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQWebChannelAbstractTransport* QWebChannelAbstractTransport_new_parent(const QWebChannelAbstractTransport_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebChannelAbstractTransport>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebChannelAbstractTransport(vtbl, parent) : nullptr;
 }
@@ -205,7 +205,7 @@ int QWebChannelAbstractTransport_metacall(QWebChannelAbstractTransport* self, in
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebChannelAbstractTransport_tr(const char* s) {
+struct seaqt_string QWebChannelAbstractTransport_tr_s(const char* s) {
 	QString _ret = QWebChannelAbstractTransport::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -239,7 +239,7 @@ void QWebChannelAbstractTransport_connect_messageReceived(QWebChannelAbstractTra
 	QWebChannelAbstractTransport::connect(self, static_cast<void (QWebChannelAbstractTransport::*)(const QJsonObject&, QWebChannelAbstractTransport*)>(&QWebChannelAbstractTransport::messageReceived), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebChannelAbstractTransport_tr2(const char* s, const char* c) {
+struct seaqt_string QWebChannelAbstractTransport_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebChannelAbstractTransport::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -250,7 +250,7 @@ struct seaqt_string QWebChannelAbstractTransport_tr2(const char* s, const char* 
 	return _ms;
 }
 
-struct seaqt_string QWebChannelAbstractTransport_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebChannelAbstractTransport_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebChannelAbstractTransport::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

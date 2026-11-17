@@ -119,7 +119,7 @@ type cQWidget*{.exportc: "QWidget", incompleteStruct.} = object
 proc fcQWidget_metaObject(self: pointer): pointer {.importc: "QWidget_metaObject".}
 proc fcQWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QWidget_metacast".}
 proc fcQWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWidget_metacall".}
-proc fcQWidget_tr(s: cstring): struct_seaqt_string {.importc: "QWidget_tr".}
+proc fcQWidget_trS(s: cstring): struct_seaqt_string {.importc: "QWidget_tr_s".}
 proc fcQWidget_devType(self: pointer): cint {.importc: "QWidget_devType".}
 proc fcQWidget_winId(self: pointer): uint {.importc: "QWidget_winId".}
 proc fcQWidget_createWinId(self: pointer): void {.importc: "QWidget_createWinId".}
@@ -156,36 +156,36 @@ proc fcQWidget_minimumWidth(self: pointer): cint {.importc: "QWidget_minimumWidt
 proc fcQWidget_minimumHeight(self: pointer): cint {.importc: "QWidget_minimumHeight".}
 proc fcQWidget_maximumWidth(self: pointer): cint {.importc: "QWidget_maximumWidth".}
 proc fcQWidget_maximumHeight(self: pointer): cint {.importc: "QWidget_maximumHeight".}
-proc fcQWidget_setMinimumSize(self: pointer, minimumSize: pointer): void {.importc: "QWidget_setMinimumSize".}
-proc fcQWidget_setMinimumSize2(self: pointer, minw: cint, minh: cint): void {.importc: "QWidget_setMinimumSize2".}
-proc fcQWidget_setMaximumSize(self: pointer, maximumSize: pointer): void {.importc: "QWidget_setMaximumSize".}
-proc fcQWidget_setMaximumSize2(self: pointer, maxw: cint, maxh: cint): void {.importc: "QWidget_setMaximumSize2".}
+proc fcQWidget_setMinimumSizeMinimumSize(self: pointer, minimumSize: pointer): void {.importc: "QWidget_setMinimumSize_minimumSize".}
+proc fcQWidget_setMinimumSizeMinwMinh(self: pointer, minw: cint, minh: cint): void {.importc: "QWidget_setMinimumSize_minw_minh".}
+proc fcQWidget_setMaximumSizeMaximumSize(self: pointer, maximumSize: pointer): void {.importc: "QWidget_setMaximumSize_maximumSize".}
+proc fcQWidget_setMaximumSizeMaxwMaxh(self: pointer, maxw: cint, maxh: cint): void {.importc: "QWidget_setMaximumSize_maxw_maxh".}
 proc fcQWidget_setMinimumWidth(self: pointer, minw: cint): void {.importc: "QWidget_setMinimumWidth".}
 proc fcQWidget_setMinimumHeight(self: pointer, minh: cint): void {.importc: "QWidget_setMinimumHeight".}
 proc fcQWidget_setMaximumWidth(self: pointer, maxw: cint): void {.importc: "QWidget_setMaximumWidth".}
 proc fcQWidget_setMaximumHeight(self: pointer, maxh: cint): void {.importc: "QWidget_setMaximumHeight".}
 proc fcQWidget_sizeIncrement(self: pointer): pointer {.importc: "QWidget_sizeIncrement".}
-proc fcQWidget_setSizeIncrement(self: pointer, sizeIncrement: pointer): void {.importc: "QWidget_setSizeIncrement".}
-proc fcQWidget_setSizeIncrement2(self: pointer, w: cint, h: cint): void {.importc: "QWidget_setSizeIncrement2".}
+proc fcQWidget_setSizeIncrementSizeIncrement(self: pointer, sizeIncrement: pointer): void {.importc: "QWidget_setSizeIncrement_sizeIncrement".}
+proc fcQWidget_setSizeIncrementWH(self: pointer, w: cint, h: cint): void {.importc: "QWidget_setSizeIncrement_w_h".}
 proc fcQWidget_baseSize(self: pointer): pointer {.importc: "QWidget_baseSize".}
-proc fcQWidget_setBaseSize(self: pointer, baseSize: pointer): void {.importc: "QWidget_setBaseSize".}
-proc fcQWidget_setBaseSize2(self: pointer, basew: cint, baseh: cint): void {.importc: "QWidget_setBaseSize2".}
-proc fcQWidget_setFixedSize(self: pointer, fixedSize: pointer): void {.importc: "QWidget_setFixedSize".}
-proc fcQWidget_setFixedSize2(self: pointer, w: cint, h: cint): void {.importc: "QWidget_setFixedSize2".}
+proc fcQWidget_setBaseSizeBaseSize(self: pointer, baseSize: pointer): void {.importc: "QWidget_setBaseSize_baseSize".}
+proc fcQWidget_setBaseSizeBasewBaseh(self: pointer, basew: cint, baseh: cint): void {.importc: "QWidget_setBaseSize_basew_baseh".}
+proc fcQWidget_setFixedSizeFixedSize(self: pointer, fixedSize: pointer): void {.importc: "QWidget_setFixedSize_fixedSize".}
+proc fcQWidget_setFixedSizeWH(self: pointer, w: cint, h: cint): void {.importc: "QWidget_setFixedSize_w_h".}
 proc fcQWidget_setFixedWidth(self: pointer, w: cint): void {.importc: "QWidget_setFixedWidth".}
 proc fcQWidget_setFixedHeight(self: pointer, h: cint): void {.importc: "QWidget_setFixedHeight".}
-proc fcQWidget_mapToGlobal(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapToGlobal".}
-proc fcQWidget_mapToGlobalWithQPoint(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapToGlobalWithQPoint".}
-proc fcQWidget_mapFromGlobal(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapFromGlobal".}
-proc fcQWidget_mapFromGlobalWithQPoint(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapFromGlobalWithQPoint".}
-proc fcQWidget_mapToParent(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapToParent".}
-proc fcQWidget_mapToParentWithQPoint(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapToParentWithQPoint".}
-proc fcQWidget_mapFromParent(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapFromParent".}
-proc fcQWidget_mapFromParentWithQPoint(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapFromParentWithQPoint".}
-proc fcQWidget_mapTo(self: pointer, param1: pointer, param2: pointer): pointer {.importc: "QWidget_mapTo".}
-proc fcQWidget_mapTo2(self: pointer, param1: pointer, param2: pointer): pointer {.importc: "QWidget_mapTo2".}
-proc fcQWidget_mapFrom(self: pointer, param1: pointer, param2: pointer): pointer {.importc: "QWidget_mapFrom".}
-proc fcQWidget_mapFrom2(self: pointer, param1: pointer, param2: pointer): pointer {.importc: "QWidget_mapFrom2".}
+proc fcQWidget_mapToGlobal_QPointF(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapToGlobal_QPointF".}
+proc fcQWidget_mapToGlobal_QPoint(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapToGlobal_QPoint".}
+proc fcQWidget_mapFromGlobal_QPointF(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapFromGlobal_QPointF".}
+proc fcQWidget_mapFromGlobal_QPoint(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapFromGlobal_QPoint".}
+proc fcQWidget_mapToParent_QPointF(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapToParent_QPointF".}
+proc fcQWidget_mapToParent_QPoint(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapToParent_QPoint".}
+proc fcQWidget_mapFromParent_QPointF(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapFromParent_QPointF".}
+proc fcQWidget_mapFromParent_QPoint(self: pointer, param1: pointer): pointer {.importc: "QWidget_mapFromParent_QPoint".}
+proc fcQWidget_mapTo_QWidget_QPointF(self: pointer, param1: pointer, param2: pointer): pointer {.importc: "QWidget_mapTo_QWidget_QPointF".}
+proc fcQWidget_mapTo_QWidget_QPoint(self: pointer, param1: pointer, param2: pointer): pointer {.importc: "QWidget_mapTo_QWidget_QPoint".}
+proc fcQWidget_mapFrom_QWidget_QPointF(self: pointer, param1: pointer, param2: pointer): pointer {.importc: "QWidget_mapFrom_QWidget_QPointF".}
+proc fcQWidget_mapFrom_QWidget_QPoint(self: pointer, param1: pointer, param2: pointer): pointer {.importc: "QWidget_mapFrom_QWidget_QPoint".}
 proc fcQWidget_window(self: pointer): pointer {.importc: "QWidget_window".}
 proc fcQWidget_nativeParentWidget(self: pointer): pointer {.importc: "QWidget_nativeParentWidget".}
 proc fcQWidget_topLevelWidget(self: pointer): pointer {.importc: "QWidget_topLevelWidget".}
@@ -207,16 +207,16 @@ proc fcQWidget_hasMouseTracking(self: pointer): bool {.importc: "QWidget_hasMous
 proc fcQWidget_underMouse(self: pointer): bool {.importc: "QWidget_underMouse".}
 proc fcQWidget_setTabletTracking(self: pointer, enable: bool): void {.importc: "QWidget_setTabletTracking".}
 proc fcQWidget_hasTabletTracking(self: pointer): bool {.importc: "QWidget_hasTabletTracking".}
-proc fcQWidget_setMask(self: pointer, mask: pointer): void {.importc: "QWidget_setMask".}
-proc fcQWidget_setMaskWithMask(self: pointer, mask: pointer): void {.importc: "QWidget_setMaskWithMask".}
+proc fcQWidget_setMask_QBitmap(self: pointer, mask: pointer): void {.importc: "QWidget_setMask_QBitmap".}
+proc fcQWidget_setMask_QRegion(self: pointer, mask: pointer): void {.importc: "QWidget_setMask_QRegion".}
 proc fcQWidget_mask(self: pointer): pointer {.importc: "QWidget_mask".}
 proc fcQWidget_clearMask(self: pointer): void {.importc: "QWidget_clearMask".}
-proc fcQWidget_render(self: pointer, target: pointer): void {.importc: "QWidget_render".}
-proc fcQWidget_renderWithPainter(self: pointer, painter: pointer): void {.importc: "QWidget_renderWithPainter".}
+proc fcQWidget_renderTarget(self: pointer, target: pointer): void {.importc: "QWidget_render_target".}
+proc fcQWidget_renderPainter(self: pointer, painter: pointer): void {.importc: "QWidget_render_painter".}
 proc fcQWidget_grab(self: pointer): pointer {.importc: "QWidget_grab".}
 proc fcQWidget_graphicsEffect(self: pointer): pointer {.importc: "QWidget_graphicsEffect".}
 proc fcQWidget_setGraphicsEffect(self: pointer, effect: pointer): void {.importc: "QWidget_setGraphicsEffect".}
-proc fcQWidget_grabGesture(self: pointer, typeVal: cint): void {.importc: "QWidget_grabGesture".}
+proc fcQWidget_grabGestureType(self: pointer, typeVal: cint): void {.importc: "QWidget_grabGesture_type".}
 proc fcQWidget_ungrabGesture(self: pointer, typeVal: cint): void {.importc: "QWidget_ungrabGesture".}
 proc fcQWidget_setWindowTitle(self: pointer, windowTitle: struct_seaqt_string): void {.importc: "QWidget_setWindowTitle".}
 proc fcQWidget_setStyleSheet(self: pointer, styleSheet: struct_seaqt_string): void {.importc: "QWidget_setStyleSheet".}
@@ -257,7 +257,7 @@ proc fcQWidget_setFocus(self: pointer): void {.importc: "QWidget_setFocus".}
 proc fcQWidget_isActiveWindow(self: pointer): bool {.importc: "QWidget_isActiveWindow".}
 proc fcQWidget_activateWindow(self: pointer): void {.importc: "QWidget_activateWindow".}
 proc fcQWidget_clearFocus(self: pointer): void {.importc: "QWidget_clearFocus".}
-proc fcQWidget_setFocusWithReason(self: pointer, reason: cint): void {.importc: "QWidget_setFocusWithReason".}
+proc fcQWidget_setFocusReason(self: pointer, reason: cint): void {.importc: "QWidget_setFocus_reason".}
 proc fcQWidget_focusPolicy(self: pointer): cint {.importc: "QWidget_focusPolicy".}
 proc fcQWidget_setFocusPolicy(self: pointer, policy: cint): void {.importc: "QWidget_setFocusPolicy".}
 proc fcQWidget_hasFocus(self: pointer): bool {.importc: "QWidget_hasFocus".}
@@ -267,14 +267,14 @@ proc fcQWidget_focusProxy(self: pointer): pointer {.importc: "QWidget_focusProxy
 proc fcQWidget_contextMenuPolicy(self: pointer): cint {.importc: "QWidget_contextMenuPolicy".}
 proc fcQWidget_setContextMenuPolicy(self: pointer, policy: cint): void {.importc: "QWidget_setContextMenuPolicy".}
 proc fcQWidget_grabMouse(self: pointer): void {.importc: "QWidget_grabMouse".}
-proc fcQWidget_grabMouseWithQCursor(self: pointer, param1: pointer): void {.importc: "QWidget_grabMouseWithQCursor".}
+proc fcQWidget_grabMouse_QCursor(self: pointer, param1: pointer): void {.importc: "QWidget_grabMouse_QCursor".}
 proc fcQWidget_releaseMouse(self: pointer): void {.importc: "QWidget_releaseMouse".}
 proc fcQWidget_grabKeyboard(self: pointer): void {.importc: "QWidget_grabKeyboard".}
 proc fcQWidget_releaseKeyboard(self: pointer): void {.importc: "QWidget_releaseKeyboard".}
-proc fcQWidget_grabShortcut(self: pointer, key: pointer): cint {.importc: "QWidget_grabShortcut".}
+proc fcQWidget_grabShortcutKey(self: pointer, key: pointer): cint {.importc: "QWidget_grabShortcut_key".}
 proc fcQWidget_releaseShortcut(self: pointer, id: cint): void {.importc: "QWidget_releaseShortcut".}
-proc fcQWidget_setShortcutEnabled(self: pointer, id: cint): void {.importc: "QWidget_setShortcutEnabled".}
-proc fcQWidget_setShortcutAutoRepeat(self: pointer, id: cint): void {.importc: "QWidget_setShortcutAutoRepeat".}
+proc fcQWidget_setShortcutEnabledId(self: pointer, id: cint): void {.importc: "QWidget_setShortcutEnabled_id".}
+proc fcQWidget_setShortcutAutoRepeatId(self: pointer, id: cint): void {.importc: "QWidget_setShortcutAutoRepeat_id".}
 proc fcQWidget_mouseGrabber(): pointer {.importc: "QWidget_mouseGrabber".}
 proc fcQWidget_keyboardGrabber(): pointer {.importc: "QWidget_keyboardGrabber".}
 proc fcQWidget_updatesEnabled(self: pointer): bool {.importc: "QWidget_updatesEnabled".}
@@ -282,12 +282,12 @@ proc fcQWidget_setUpdatesEnabled(self: pointer, enable: bool): void {.importc: "
 proc fcQWidget_graphicsProxyWidget(self: pointer): pointer {.importc: "QWidget_graphicsProxyWidget".}
 proc fcQWidget_update(self: pointer): void {.importc: "QWidget_update".}
 proc fcQWidget_repaint(self: pointer): void {.importc: "QWidget_repaint".}
-proc fcQWidget_update2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QWidget_update2".}
-proc fcQWidget_updateWithQRect(self: pointer, param1: pointer): void {.importc: "QWidget_updateWithQRect".}
-proc fcQWidget_updateWithQRegion(self: pointer, param1: pointer): void {.importc: "QWidget_updateWithQRegion".}
-proc fcQWidget_repaint2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QWidget_repaint2".}
-proc fcQWidget_repaintWithQRect(self: pointer, param1: pointer): void {.importc: "QWidget_repaintWithQRect".}
-proc fcQWidget_repaintWithQRegion(self: pointer, param1: pointer): void {.importc: "QWidget_repaintWithQRegion".}
+proc fcQWidget_updateIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QWidget_update_int_int_int_int".}
+proc fcQWidget_update_QRect(self: pointer, param1: pointer): void {.importc: "QWidget_update_QRect".}
+proc fcQWidget_update_QRegion(self: pointer, param1: pointer): void {.importc: "QWidget_update_QRegion".}
+proc fcQWidget_repaintIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QWidget_repaint_int_int_int_int".}
+proc fcQWidget_repaint_QRect(self: pointer, param1: pointer): void {.importc: "QWidget_repaint_QRect".}
+proc fcQWidget_repaint_QRegion(self: pointer, param1: pointer): void {.importc: "QWidget_repaint_QRegion".}
 proc fcQWidget_setVisible(self: pointer, visible: bool): void {.importc: "QWidget_setVisible".}
 proc fcQWidget_setHidden(self: pointer, hidden: bool): void {.importc: "QWidget_setHidden".}
 proc fcQWidget_show(self: pointer): void {.importc: "QWidget_show".}
@@ -300,12 +300,12 @@ proc fcQWidget_close(self: pointer): bool {.importc: "QWidget_close".}
 proc fcQWidget_raiseX(self: pointer): void {.importc: "QWidget_raise".}
 proc fcQWidget_lower(self: pointer): void {.importc: "QWidget_lower".}
 proc fcQWidget_stackUnder(self: pointer, param1: pointer): void {.importc: "QWidget_stackUnder".}
-proc fcQWidget_move(self: pointer, x: cint, y: cint): void {.importc: "QWidget_move".}
-proc fcQWidget_moveWithQPoint(self: pointer, param1: pointer): void {.importc: "QWidget_moveWithQPoint".}
-proc fcQWidget_resize(self: pointer, w: cint, h: cint): void {.importc: "QWidget_resize".}
-proc fcQWidget_resizeWithQSize(self: pointer, param1: pointer): void {.importc: "QWidget_resizeWithQSize".}
-proc fcQWidget_setGeometry(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QWidget_setGeometry".}
-proc fcQWidget_setGeometryWithGeometry(self: pointer, geometry: pointer): void {.importc: "QWidget_setGeometryWithGeometry".}
+proc fcQWidget_moveIntInt(self: pointer, x: cint, y: cint): void {.importc: "QWidget_move_int_int".}
+proc fcQWidget_move_QPoint(self: pointer, param1: pointer): void {.importc: "QWidget_move_QPoint".}
+proc fcQWidget_resizeIntInt(self: pointer, w: cint, h: cint): void {.importc: "QWidget_resize_int_int".}
+proc fcQWidget_resize_QSize(self: pointer, param1: pointer): void {.importc: "QWidget_resize_QSize".}
+proc fcQWidget_setGeometryXYWH(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QWidget_setGeometry_x_y_w_h".}
+proc fcQWidget_setGeometryGeometry(self: pointer, geometry: pointer): void {.importc: "QWidget_setGeometry_geometry".}
 proc fcQWidget_saveGeometry(self: pointer): struct_seaqt_string {.importc: "QWidget_saveGeometry".}
 proc fcQWidget_restoreGeometry(self: pointer, geometry: struct_seaqt_string): bool {.importc: "QWidget_restoreGeometry".}
 proc fcQWidget_adjustSize(self: pointer): void {.importc: "QWidget_adjustSize".}
@@ -321,47 +321,47 @@ proc fcQWidget_overrideWindowState(self: pointer, state: cint): void {.importc: 
 proc fcQWidget_sizeHint(self: pointer): pointer {.importc: "QWidget_sizeHint".}
 proc fcQWidget_minimumSizeHint(self: pointer): pointer {.importc: "QWidget_minimumSizeHint".}
 proc fcQWidget_sizePolicy(self: pointer): pointer {.importc: "QWidget_sizePolicy".}
-proc fcQWidget_setSizePolicy(self: pointer, sizePolicy: pointer): void {.importc: "QWidget_setSizePolicy".}
-proc fcQWidget_setSizePolicy2(self: pointer, horizontal: cint, vertical: cint): void {.importc: "QWidget_setSizePolicy2".}
+proc fcQWidget_setSizePolicySizePolicy(self: pointer, sizePolicy: pointer): void {.importc: "QWidget_setSizePolicy_sizePolicy".}
+proc fcQWidget_setSizePolicyHorizontalVertical(self: pointer, horizontal: cint, vertical: cint): void {.importc: "QWidget_setSizePolicy_horizontal_vertical".}
 proc fcQWidget_heightForWidth(self: pointer, param1: cint): cint {.importc: "QWidget_heightForWidth".}
 proc fcQWidget_hasHeightForWidth(self: pointer): bool {.importc: "QWidget_hasHeightForWidth".}
 proc fcQWidget_visibleRegion(self: pointer): pointer {.importc: "QWidget_visibleRegion".}
-proc fcQWidget_setContentsMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QWidget_setContentsMargins".}
-proc fcQWidget_setContentsMarginsWithMargins(self: pointer, margins: pointer): void {.importc: "QWidget_setContentsMarginsWithMargins".}
+proc fcQWidget_setContentsMarginsLeftTopRightBottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QWidget_setContentsMargins_left_top_right_bottom".}
+proc fcQWidget_setContentsMarginsMargins(self: pointer, margins: pointer): void {.importc: "QWidget_setContentsMargins_margins".}
 proc fcQWidget_contentsMargins(self: pointer): pointer {.importc: "QWidget_contentsMargins".}
 proc fcQWidget_contentsRect(self: pointer): pointer {.importc: "QWidget_contentsRect".}
 proc fcQWidget_layout(self: pointer): pointer {.importc: "QWidget_layout".}
 proc fcQWidget_setLayout(self: pointer, layout: pointer): void {.importc: "QWidget_setLayout".}
 proc fcQWidget_updateGeometry(self: pointer): void {.importc: "QWidget_updateGeometry".}
-proc fcQWidget_setParent(self: pointer, parent: pointer): void {.importc: "QWidget_setParent".}
-proc fcQWidget_setParent2(self: pointer, parent: pointer, f: cint): void {.importc: "QWidget_setParent2".}
-proc fcQWidget_scroll(self: pointer, dx: cint, dy: cint): void {.importc: "QWidget_scroll".}
-proc fcQWidget_scroll2(self: pointer, dx: cint, dy: cint, param3: pointer): void {.importc: "QWidget_scroll2".}
+proc fcQWidget_setParentParent(self: pointer, parent: pointer): void {.importc: "QWidget_setParent_parent".}
+proc fcQWidget_setParentParentF(self: pointer, parent: pointer, f: cint): void {.importc: "QWidget_setParent_parent_f".}
+proc fcQWidget_scrollIntInt(self: pointer, dx: cint, dy: cint): void {.importc: "QWidget_scroll_int_int".}
+proc fcQWidget_scrollIntInt_QRect(self: pointer, dx: cint, dy: cint, param3: pointer): void {.importc: "QWidget_scroll_int_int_QRect".}
 proc fcQWidget_focusWidget(self: pointer): pointer {.importc: "QWidget_focusWidget".}
 proc fcQWidget_nextInFocusChain(self: pointer): pointer {.importc: "QWidget_nextInFocusChain".}
 proc fcQWidget_previousInFocusChain(self: pointer): pointer {.importc: "QWidget_previousInFocusChain".}
 proc fcQWidget_acceptDrops(self: pointer): bool {.importc: "QWidget_acceptDrops".}
 proc fcQWidget_setAcceptDrops(self: pointer, on: bool): void {.importc: "QWidget_setAcceptDrops".}
-proc fcQWidget_addAction(self: pointer, action: pointer): void {.importc: "QWidget_addAction".}
+proc fcQWidget_addActionAction(self: pointer, action: pointer): void {.importc: "QWidget_addAction_action".}
 proc fcQWidget_addActions(self: pointer, actions: struct_seaqt_array): void {.importc: "QWidget_addActions".}
 proc fcQWidget_insertActions(self: pointer, before: pointer, actions: struct_seaqt_array): void {.importc: "QWidget_insertActions".}
 proc fcQWidget_insertAction(self: pointer, before: pointer, action: pointer): void {.importc: "QWidget_insertAction".}
 proc fcQWidget_removeAction(self: pointer, action: pointer): void {.importc: "QWidget_removeAction".}
 proc fcQWidget_actions(self: pointer): struct_seaqt_array {.importc: "QWidget_actions".}
-proc fcQWidget_addActionWithText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QWidget_addActionWithText".}
-proc fcQWidget_addAction2(self: pointer, icon: pointer, text: struct_seaqt_string): pointer {.importc: "QWidget_addAction2".}
-proc fcQWidget_addAction3(self: pointer, text: struct_seaqt_string, shortcut: pointer): pointer {.importc: "QWidget_addAction3".}
-proc fcQWidget_addAction4(self: pointer, icon: pointer, text: struct_seaqt_string, shortcut: pointer): pointer {.importc: "QWidget_addAction4".}
+proc fcQWidget_addActionText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QWidget_addAction_text".}
+proc fcQWidget_addActionIconText(self: pointer, icon: pointer, text: struct_seaqt_string): pointer {.importc: "QWidget_addAction_icon_text".}
+proc fcQWidget_addActionTextShortcut(self: pointer, text: struct_seaqt_string, shortcut: pointer): pointer {.importc: "QWidget_addAction_text_shortcut".}
+proc fcQWidget_addActionIconTextShortcut(self: pointer, icon: pointer, text: struct_seaqt_string, shortcut: pointer): pointer {.importc: "QWidget_addAction_icon_text_shortcut".}
 proc fcQWidget_parentWidget(self: pointer): pointer {.importc: "QWidget_parentWidget".}
 proc fcQWidget_setWindowFlags(self: pointer, typeVal: cint): void {.importc: "QWidget_setWindowFlags".}
 proc fcQWidget_windowFlags(self: pointer): cint {.importc: "QWidget_windowFlags".}
-proc fcQWidget_setWindowFlag(self: pointer, param1: cint): void {.importc: "QWidget_setWindowFlag".}
+proc fcQWidget_setWindowFlag_Qt_WindowType(self: pointer, param1: cint): void {.importc: "QWidget_setWindowFlag_Qt_WindowType".}
 proc fcQWidget_overrideWindowFlags(self: pointer, typeVal: cint): void {.importc: "QWidget_overrideWindowFlags".}
 proc fcQWidget_windowType(self: pointer): cint {.importc: "QWidget_windowType".}
 proc fcQWidget_find(param1: uint): pointer {.importc: "QWidget_find".}
-proc fcQWidget_childAt(self: pointer, x: cint, y: cint): pointer {.importc: "QWidget_childAt".}
-proc fcQWidget_childAtWithQPoint(self: pointer, p: pointer): pointer {.importc: "QWidget_childAtWithQPoint".}
-proc fcQWidget_setAttribute(self: pointer, param1: cint): void {.importc: "QWidget_setAttribute".}
+proc fcQWidget_childAtXY(self: pointer, x: cint, y: cint): pointer {.importc: "QWidget_childAt_x_y".}
+proc fcQWidget_childAtP(self: pointer, p: pointer): pointer {.importc: "QWidget_childAt_p".}
+proc fcQWidget_setAttribute_Qt_WidgetAttribute(self: pointer, param1: cint): void {.importc: "QWidget_setAttribute_Qt_WidgetAttribute".}
 proc fcQWidget_testAttribute(self: pointer, param1: cint): bool {.importc: "QWidget_testAttribute".}
 proc fcQWidget_paintEngine(self: pointer): pointer {.importc: "QWidget_paintEngine".}
 proc fcQWidget_ensurePolished(self: pointer): void {.importc: "QWidget_ensurePolished".}
@@ -372,7 +372,7 @@ proc fcQWidget_backingStore(self: pointer): pointer {.importc: "QWidget_backingS
 proc fcQWidget_windowHandle(self: pointer): pointer {.importc: "QWidget_windowHandle".}
 proc fcQWidget_screen(self: pointer): pointer {.importc: "QWidget_screen".}
 proc fcQWidget_setScreen(self: pointer, screen: pointer): void {.importc: "QWidget_setScreen".}
-proc fcQWidget_createWindowContainer(window: pointer): pointer {.importc: "QWidget_createWindowContainer".}
+proc fcQWidget_createWindowContainerWindow(window: pointer): pointer {.importc: "QWidget_createWindowContainer_window".}
 proc fcQWidget_windowTitleChanged(self: pointer, title: struct_seaqt_string): void {.importc: "QWidget_windowTitleChanged".}
 proc fcQWidget_connect_windowTitleChanged(self: pointer, slot: int, callback: proc (slot: int, title: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWidget_connect_windowTitleChanged".}
 proc fcQWidget_windowIconChanged(self: pointer, icon: pointer): void {.importc: "QWidget_windowIconChanged".}
@@ -384,23 +384,23 @@ proc fcQWidget_connect_customContextMenuRequested(self: pointer, slot: int, call
 proc fcQWidget_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QWidget_inputMethodQuery".}
 proc fcQWidget_inputMethodHints(self: pointer): cint {.importc: "QWidget_inputMethodHints".}
 proc fcQWidget_setInputMethodHints(self: pointer, hints: cint): void {.importc: "QWidget_setInputMethodHints".}
-proc fcQWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWidget_tr2".}
-proc fcQWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWidget_tr3".}
-proc fcQWidget_render2(self: pointer, target: pointer, targetOffset: pointer): void {.importc: "QWidget_render2".}
-proc fcQWidget_render3(self: pointer, target: pointer, targetOffset: pointer, sourceRegion: pointer): void {.importc: "QWidget_render3".}
-proc fcQWidget_render4(self: pointer, target: pointer, targetOffset: pointer, sourceRegion: pointer, renderFlags: cint): void {.importc: "QWidget_render4".}
-proc fcQWidget_render5(self: pointer, painter: pointer, targetOffset: pointer): void {.importc: "QWidget_render5".}
-proc fcQWidget_render6(self: pointer, painter: pointer, targetOffset: pointer, sourceRegion: pointer): void {.importc: "QWidget_render6".}
-proc fcQWidget_render7(self: pointer, painter: pointer, targetOffset: pointer, sourceRegion: pointer, renderFlags: cint): void {.importc: "QWidget_render7".}
-proc fcQWidget_grabWithRectangle(self: pointer, rectangle: pointer): pointer {.importc: "QWidget_grabWithRectangle".}
-proc fcQWidget_grabGesture2(self: pointer, typeVal: cint, flags: cint): void {.importc: "QWidget_grabGesture2".}
-proc fcQWidget_grabShortcut2(self: pointer, key: pointer, context: cint): cint {.importc: "QWidget_grabShortcut2".}
-proc fcQWidget_setShortcutEnabled2(self: pointer, id: cint, enable: bool): void {.importc: "QWidget_setShortcutEnabled2".}
-proc fcQWidget_setShortcutAutoRepeat2(self: pointer, id: cint, enable: bool): void {.importc: "QWidget_setShortcutAutoRepeat2".}
-proc fcQWidget_setWindowFlag2(self: pointer, param1: cint, on: bool): void {.importc: "QWidget_setWindowFlag2".}
-proc fcQWidget_setAttribute2(self: pointer, param1: cint, on: bool): void {.importc: "QWidget_setAttribute2".}
-proc fcQWidget_createWindowContainer2(window: pointer, parent: pointer): pointer {.importc: "QWidget_createWindowContainer2".}
-proc fcQWidget_createWindowContainer3(window: pointer, parent: pointer, flags: cint): pointer {.importc: "QWidget_createWindowContainer3".}
+proc fcQWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWidget_tr_s_c".}
+proc fcQWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWidget_tr_s_c_n".}
+proc fcQWidget_renderTargetTargetOffset(self: pointer, target: pointer, targetOffset: pointer): void {.importc: "QWidget_render_target_targetOffset".}
+proc fcQWidget_renderTargetTargetOffsetSourceRegion(self: pointer, target: pointer, targetOffset: pointer, sourceRegion: pointer): void {.importc: "QWidget_render_target_targetOffset_sourceRegion".}
+proc fcQWidget_renderTargetTargetOffsetSourceRegionRenderFlags(self: pointer, target: pointer, targetOffset: pointer, sourceRegion: pointer, renderFlags: cint): void {.importc: "QWidget_render_target_targetOffset_sourceRegion_renderFlags".}
+proc fcQWidget_renderPainterTargetOffset(self: pointer, painter: pointer, targetOffset: pointer): void {.importc: "QWidget_render_painter_targetOffset".}
+proc fcQWidget_renderPainterTargetOffsetSourceRegion(self: pointer, painter: pointer, targetOffset: pointer, sourceRegion: pointer): void {.importc: "QWidget_render_painter_targetOffset_sourceRegion".}
+proc fcQWidget_renderPainterTargetOffsetSourceRegionRenderFlags(self: pointer, painter: pointer, targetOffset: pointer, sourceRegion: pointer, renderFlags: cint): void {.importc: "QWidget_render_painter_targetOffset_sourceRegion_renderFlags".}
+proc fcQWidget_grabRectangle(self: pointer, rectangle: pointer): pointer {.importc: "QWidget_grab_rectangle".}
+proc fcQWidget_grabGestureTypeFlags(self: pointer, typeVal: cint, flags: cint): void {.importc: "QWidget_grabGesture_type_flags".}
+proc fcQWidget_grabShortcutKeyContext(self: pointer, key: pointer, context: cint): cint {.importc: "QWidget_grabShortcut_key_context".}
+proc fcQWidget_setShortcutEnabledIdEnable(self: pointer, id: cint, enable: bool): void {.importc: "QWidget_setShortcutEnabled_id_enable".}
+proc fcQWidget_setShortcutAutoRepeatIdEnable(self: pointer, id: cint, enable: bool): void {.importc: "QWidget_setShortcutAutoRepeat_id_enable".}
+proc fcQWidget_setWindowFlag_Qt_WindowTypeBool(self: pointer, param1: cint, on: bool): void {.importc: "QWidget_setWindowFlag_Qt_WindowType_bool".}
+proc fcQWidget_setAttribute_Qt_WidgetAttributeBool(self: pointer, param1: cint, on: bool): void {.importc: "QWidget_setAttribute_Qt_WidgetAttribute_bool".}
+proc fcQWidget_createWindowContainerWindowParent(window: pointer, parent: pointer): pointer {.importc: "QWidget_createWindowContainer_window_parent".}
+proc fcQWidget_createWindowContainerWindowParentFlags(window: pointer, parent: pointer, flags: cint): pointer {.importc: "QWidget_createWindowContainer_window_parent_flags".}
 proc fcQWidget_vdata(self: pointer): ptr pointer {.importc: "QWidget_vdata".}
 proc fvdata_cQWidget(self: pointer): pointer {.importc: "vdata_QWidget".}
 
@@ -511,19 +511,19 @@ proc fcQWidget_protectedbase_create(self: pointer): void {.importc: "QWidget_pro
 proc fcQWidget_protectedbase_destroy(self: pointer): void {.importc: "QWidget_protectedbase_destroy".}
 proc fcQWidget_protectedbase_focusNextChild(self: pointer): bool {.importc: "QWidget_protectedbase_focusNextChild".}
 proc fcQWidget_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QWidget_protectedbase_focusPreviousChild".}
-proc fcQWidget_protectedbase_updateMicroFocusWithQuery(self: pointer, query: cint): void {.importc: "QWidget_protectedbase_updateMicroFocusWithQuery".}
-proc fcQWidget_protectedbase_createWithWId(self: pointer, param1: uint): void {.importc: "QWidget_protectedbase_createWithWId".}
-proc fcQWidget_protectedbase_create2(self: pointer, param1: uint, initializeWindow: bool): void {.importc: "QWidget_protectedbase_create2".}
-proc fcQWidget_protectedbase_create3(self: pointer, param1: uint, initializeWindow: bool, destroyOldWindow: bool): void {.importc: "QWidget_protectedbase_create3".}
-proc fcQWidget_protectedbase_destroyWithDestroyWindow(self: pointer, destroyWindow: bool): void {.importc: "QWidget_protectedbase_destroyWithDestroyWindow".}
-proc fcQWidget_protectedbase_destroy2(self: pointer, destroyWindow: bool, destroySubWindows: bool): void {.importc: "QWidget_protectedbase_destroy2".}
+proc fcQWidget_protectedbase_updateMicroFocus_query(self: pointer, query: cint): void {.importc: "QWidget_protectedbase_updateMicroFocus_query".}
+proc fcQWidget_protectedbase_create_WId(self: pointer, param1: uint): void {.importc: "QWidget_protectedbase_create_WId".}
+proc fcQWidget_protectedbase_create_WId_bool(self: pointer, param1: uint, initializeWindow: bool): void {.importc: "QWidget_protectedbase_create_WId_bool".}
+proc fcQWidget_protectedbase_create_WId_bool_bool(self: pointer, param1: uint, initializeWindow: bool, destroyOldWindow: bool): void {.importc: "QWidget_protectedbase_create_WId_bool_bool".}
+proc fcQWidget_protectedbase_destroy_destroyWindow(self: pointer, destroyWindow: bool): void {.importc: "QWidget_protectedbase_destroy_destroyWindow".}
+proc fcQWidget_protectedbase_destroy_destroyWindow_destroySubWindows(self: pointer, destroyWindow: bool, destroySubWindows: bool): void {.importc: "QWidget_protectedbase_destroy_destroyWindow_destroySubWindows".}
 proc fcQWidget_protectedbase_sender(self: pointer): pointer {.importc: "QWidget_protectedbase_sender".}
 proc fcQWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWidget_protectedbase_senderSignalIndex".}
 proc fcQWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWidget_protectedbase_receivers".}
 proc fcQWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWidget_protectedbase_isSignalConnected".}
 proc fcQWidget_new(vtbl: pointer, vdata: csize_t): ptr cQWidget {.importc: "QWidget_new".}
-proc fcQWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWidget {.importc: "QWidget_new2".}
-proc fcQWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQWidget {.importc: "QWidget_new3".}
+proc fcQWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWidget {.importc: "QWidget_new_parent".}
+proc fcQWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQWidget {.importc: "QWidget_new_parent_f".}
 proc fcQWidget_staticMetaObject(): pointer {.importc: "QWidget_staticMetaObject".}
 
 proc metaObject*(self: gen_qwidget_types.QWidget): gen_qobjectdefs_types.QMetaObject =
@@ -536,7 +536,7 @@ proc metacall*(self: gen_qwidget_types.QWidget, param1: cint, param2: cint, para
   fcQWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwidget_types.QWidget, s: cstring): string =
-  let v_ms = fcQWidget_tr(s)
+  let v_ms = fcQWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -650,16 +650,16 @@ proc maximumHeight*(self: gen_qwidget_types.QWidget): cint =
   fcQWidget_maximumHeight(self.h)
 
 proc setMinimumSize*(self: gen_qwidget_types.QWidget, minimumSize: gen_qsize_types.QSize): void =
-  fcQWidget_setMinimumSize(self.h, minimumSize.h)
+  fcQWidget_setMinimumSizeMinimumSize(self.h, minimumSize.h)
 
 proc setMinimumSize*(self: gen_qwidget_types.QWidget, minw: cint, minh: cint): void =
-  fcQWidget_setMinimumSize2(self.h, minw, minh)
+  fcQWidget_setMinimumSizeMinwMinh(self.h, minw, minh)
 
 proc setMaximumSize*(self: gen_qwidget_types.QWidget, maximumSize: gen_qsize_types.QSize): void =
-  fcQWidget_setMaximumSize(self.h, maximumSize.h)
+  fcQWidget_setMaximumSizeMaximumSize(self.h, maximumSize.h)
 
 proc setMaximumSize*(self: gen_qwidget_types.QWidget, maxw: cint, maxh: cint): void =
-  fcQWidget_setMaximumSize2(self.h, maxw, maxh)
+  fcQWidget_setMaximumSizeMaxwMaxh(self.h, maxw, maxh)
 
 proc setMinimumWidth*(self: gen_qwidget_types.QWidget, minw: cint): void =
   fcQWidget_setMinimumWidth(self.h, minw)
@@ -677,25 +677,25 @@ proc sizeIncrement*(self: gen_qwidget_types.QWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQWidget_sizeIncrement(self.h), owned: true)
 
 proc setSizeIncrement*(self: gen_qwidget_types.QWidget, sizeIncrement: gen_qsize_types.QSize): void =
-  fcQWidget_setSizeIncrement(self.h, sizeIncrement.h)
+  fcQWidget_setSizeIncrementSizeIncrement(self.h, sizeIncrement.h)
 
 proc setSizeIncrement*(self: gen_qwidget_types.QWidget, w: cint, h: cint): void =
-  fcQWidget_setSizeIncrement2(self.h, w, h)
+  fcQWidget_setSizeIncrementWH(self.h, w, h)
 
 proc baseSize*(self: gen_qwidget_types.QWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQWidget_baseSize(self.h), owned: true)
 
 proc setBaseSize*(self: gen_qwidget_types.QWidget, baseSize: gen_qsize_types.QSize): void =
-  fcQWidget_setBaseSize(self.h, baseSize.h)
+  fcQWidget_setBaseSizeBaseSize(self.h, baseSize.h)
 
 proc setBaseSize*(self: gen_qwidget_types.QWidget, basew: cint, baseh: cint): void =
-  fcQWidget_setBaseSize2(self.h, basew, baseh)
+  fcQWidget_setBaseSizeBasewBaseh(self.h, basew, baseh)
 
 proc setFixedSize*(self: gen_qwidget_types.QWidget, fixedSize: gen_qsize_types.QSize): void =
-  fcQWidget_setFixedSize(self.h, fixedSize.h)
+  fcQWidget_setFixedSizeFixedSize(self.h, fixedSize.h)
 
 proc setFixedSize*(self: gen_qwidget_types.QWidget, w: cint, h: cint): void =
-  fcQWidget_setFixedSize2(self.h, w, h)
+  fcQWidget_setFixedSizeWH(self.h, w, h)
 
 proc setFixedWidth*(self: gen_qwidget_types.QWidget, w: cint): void =
   fcQWidget_setFixedWidth(self.h, w)
@@ -704,40 +704,40 @@ proc setFixedHeight*(self: gen_qwidget_types.QWidget, h: cint): void =
   fcQWidget_setFixedHeight(self.h, h)
 
 proc mapToGlobal*(self: gen_qwidget_types.QWidget, param1: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQWidget_mapToGlobal(self.h, param1.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQWidget_mapToGlobal_QPointF(self.h, param1.h), owned: true)
 
 proc mapToGlobal*(self: gen_qwidget_types.QWidget, param1: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWidget_mapToGlobalWithQPoint(self.h, param1.h), owned: true)
+  gen_qpoint_types.QPoint(h: fcQWidget_mapToGlobal_QPoint(self.h, param1.h), owned: true)
 
 proc mapFromGlobal*(self: gen_qwidget_types.QWidget, param1: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQWidget_mapFromGlobal(self.h, param1.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQWidget_mapFromGlobal_QPointF(self.h, param1.h), owned: true)
 
 proc mapFromGlobal*(self: gen_qwidget_types.QWidget, param1: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWidget_mapFromGlobalWithQPoint(self.h, param1.h), owned: true)
+  gen_qpoint_types.QPoint(h: fcQWidget_mapFromGlobal_QPoint(self.h, param1.h), owned: true)
 
 proc mapToParent*(self: gen_qwidget_types.QWidget, param1: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQWidget_mapToParent(self.h, param1.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQWidget_mapToParent_QPointF(self.h, param1.h), owned: true)
 
 proc mapToParent*(self: gen_qwidget_types.QWidget, param1: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWidget_mapToParentWithQPoint(self.h, param1.h), owned: true)
+  gen_qpoint_types.QPoint(h: fcQWidget_mapToParent_QPoint(self.h, param1.h), owned: true)
 
 proc mapFromParent*(self: gen_qwidget_types.QWidget, param1: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQWidget_mapFromParent(self.h, param1.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQWidget_mapFromParent_QPointF(self.h, param1.h), owned: true)
 
 proc mapFromParent*(self: gen_qwidget_types.QWidget, param1: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWidget_mapFromParentWithQPoint(self.h, param1.h), owned: true)
+  gen_qpoint_types.QPoint(h: fcQWidget_mapFromParent_QPoint(self.h, param1.h), owned: true)
 
 proc mapTo*(self: gen_qwidget_types.QWidget, param1: gen_qwidget_types.QWidget, param2: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQWidget_mapTo(self.h, param1.h, param2.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQWidget_mapTo_QWidget_QPointF(self.h, param1.h, param2.h), owned: true)
 
 proc mapTo*(self: gen_qwidget_types.QWidget, param1: gen_qwidget_types.QWidget, param2: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWidget_mapTo2(self.h, param1.h, param2.h), owned: true)
+  gen_qpoint_types.QPoint(h: fcQWidget_mapTo_QWidget_QPoint(self.h, param1.h, param2.h), owned: true)
 
 proc mapFrom*(self: gen_qwidget_types.QWidget, param1: gen_qwidget_types.QWidget, param2: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQWidget_mapFrom(self.h, param1.h, param2.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQWidget_mapFrom_QWidget_QPointF(self.h, param1.h, param2.h), owned: true)
 
 proc mapFrom*(self: gen_qwidget_types.QWidget, param1: gen_qwidget_types.QWidget, param2: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWidget_mapFrom2(self.h, param1.h, param2.h), owned: true)
+  gen_qpoint_types.QPoint(h: fcQWidget_mapFrom_QWidget_QPoint(self.h, param1.h, param2.h), owned: true)
 
 proc window*(self: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQWidget_window(self.h), owned: false)
@@ -803,10 +803,10 @@ proc hasTabletTracking*(self: gen_qwidget_types.QWidget): bool =
   fcQWidget_hasTabletTracking(self.h)
 
 proc setMask*(self: gen_qwidget_types.QWidget, mask: gen_qbitmap_types.QBitmap): void =
-  fcQWidget_setMask(self.h, mask.h)
+  fcQWidget_setMask_QBitmap(self.h, mask.h)
 
 proc setMask*(self: gen_qwidget_types.QWidget, mask: gen_qregion_types.QRegion): void =
-  fcQWidget_setMaskWithMask(self.h, mask.h)
+  fcQWidget_setMask_QRegion(self.h, mask.h)
 
 proc mask*(self: gen_qwidget_types.QWidget): gen_qregion_types.QRegion =
   gen_qregion_types.QRegion(h: fcQWidget_mask(self.h), owned: true)
@@ -815,10 +815,10 @@ proc clearMask*(self: gen_qwidget_types.QWidget): void =
   fcQWidget_clearMask(self.h)
 
 proc render*(self: gen_qwidget_types.QWidget, target: gen_qpaintdevice_types.QPaintDevice): void =
-  fcQWidget_render(self.h, target.h)
+  fcQWidget_renderTarget(self.h, target.h)
 
 proc render*(self: gen_qwidget_types.QWidget, painter: gen_qpainter_types.QPainter): void =
-  fcQWidget_renderWithPainter(self.h, painter.h)
+  fcQWidget_renderPainter(self.h, painter.h)
 
 proc grab*(self: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap =
   gen_qpixmap_types.QPixmap(h: fcQWidget_grab(self.h), owned: true)
@@ -830,7 +830,7 @@ proc setGraphicsEffect*(self: gen_qwidget_types.QWidget, effect: gen_qgraphicsef
   fcQWidget_setGraphicsEffect(self.h, effect.h)
 
 proc grabGesture*(self: gen_qwidget_types.QWidget, typeVal: cint): void =
-  fcQWidget_grabGesture(self.h, cint(typeVal))
+  fcQWidget_grabGestureType(self.h, cint(typeVal))
 
 proc ungrabGesture*(self: gen_qwidget_types.QWidget, typeVal: cint): void =
   fcQWidget_ungrabGesture(self.h, cint(typeVal))
@@ -983,7 +983,7 @@ proc clearFocus*(self: gen_qwidget_types.QWidget): void =
   fcQWidget_clearFocus(self.h)
 
 proc setFocus*(self: gen_qwidget_types.QWidget, reason: cint): void =
-  fcQWidget_setFocusWithReason(self.h, cint(reason))
+  fcQWidget_setFocusReason(self.h, cint(reason))
 
 proc focusPolicy*(self: gen_qwidget_types.QWidget): cint =
   cint(fcQWidget_focusPolicy(self.h))
@@ -1013,7 +1013,7 @@ proc grabMouse*(self: gen_qwidget_types.QWidget): void =
   fcQWidget_grabMouse(self.h)
 
 proc grabMouse*(self: gen_qwidget_types.QWidget, param1: gen_qcursor_types.QCursor): void =
-  fcQWidget_grabMouseWithQCursor(self.h, param1.h)
+  fcQWidget_grabMouse_QCursor(self.h, param1.h)
 
 proc releaseMouse*(self: gen_qwidget_types.QWidget): void =
   fcQWidget_releaseMouse(self.h)
@@ -1025,16 +1025,16 @@ proc releaseKeyboard*(self: gen_qwidget_types.QWidget): void =
   fcQWidget_releaseKeyboard(self.h)
 
 proc grabShortcut*(self: gen_qwidget_types.QWidget, key: gen_qkeysequence_types.QKeySequence): cint =
-  fcQWidget_grabShortcut(self.h, key.h)
+  fcQWidget_grabShortcutKey(self.h, key.h)
 
 proc releaseShortcut*(self: gen_qwidget_types.QWidget, id: cint): void =
   fcQWidget_releaseShortcut(self.h, id)
 
 proc setShortcutEnabled*(self: gen_qwidget_types.QWidget, id: cint): void =
-  fcQWidget_setShortcutEnabled(self.h, id)
+  fcQWidget_setShortcutEnabledId(self.h, id)
 
 proc setShortcutAutoRepeat*(self: gen_qwidget_types.QWidget, id: cint): void =
-  fcQWidget_setShortcutAutoRepeat(self.h, id)
+  fcQWidget_setShortcutAutoRepeatId(self.h, id)
 
 proc mouseGrabber*(_: type gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQWidget_mouseGrabber(), owned: false)
@@ -1058,22 +1058,22 @@ proc repaint*(self: gen_qwidget_types.QWidget): void =
   fcQWidget_repaint(self.h)
 
 proc update*(self: gen_qwidget_types.QWidget, x: cint, y: cint, w: cint, h: cint): void =
-  fcQWidget_update2(self.h, x, y, w, h)
+  fcQWidget_updateIntIntIntInt(self.h, x, y, w, h)
 
 proc update*(self: gen_qwidget_types.QWidget, param1: gen_qrect_types.QRect): void =
-  fcQWidget_updateWithQRect(self.h, param1.h)
+  fcQWidget_update_QRect(self.h, param1.h)
 
 proc update*(self: gen_qwidget_types.QWidget, param1: gen_qregion_types.QRegion): void =
-  fcQWidget_updateWithQRegion(self.h, param1.h)
+  fcQWidget_update_QRegion(self.h, param1.h)
 
 proc repaint*(self: gen_qwidget_types.QWidget, x: cint, y: cint, w: cint, h: cint): void =
-  fcQWidget_repaint2(self.h, x, y, w, h)
+  fcQWidget_repaintIntIntIntInt(self.h, x, y, w, h)
 
 proc repaint*(self: gen_qwidget_types.QWidget, param1: gen_qrect_types.QRect): void =
-  fcQWidget_repaintWithQRect(self.h, param1.h)
+  fcQWidget_repaint_QRect(self.h, param1.h)
 
 proc repaint*(self: gen_qwidget_types.QWidget, param1: gen_qregion_types.QRegion): void =
-  fcQWidget_repaintWithQRegion(self.h, param1.h)
+  fcQWidget_repaint_QRegion(self.h, param1.h)
 
 proc setVisible*(self: gen_qwidget_types.QWidget, visible: bool): void =
   fcQWidget_setVisible(self.h, visible)
@@ -1112,22 +1112,22 @@ proc stackUnder*(self: gen_qwidget_types.QWidget, param1: gen_qwidget_types.QWid
   fcQWidget_stackUnder(self.h, param1.h)
 
 proc move*(self: gen_qwidget_types.QWidget, x: cint, y: cint): void =
-  fcQWidget_move(self.h, x, y)
+  fcQWidget_moveIntInt(self.h, x, y)
 
 proc move*(self: gen_qwidget_types.QWidget, param1: gen_qpoint_types.QPoint): void =
-  fcQWidget_moveWithQPoint(self.h, param1.h)
+  fcQWidget_move_QPoint(self.h, param1.h)
 
 proc resize*(self: gen_qwidget_types.QWidget, w: cint, h: cint): void =
-  fcQWidget_resize(self.h, w, h)
+  fcQWidget_resizeIntInt(self.h, w, h)
 
 proc resize*(self: gen_qwidget_types.QWidget, param1: gen_qsize_types.QSize): void =
-  fcQWidget_resizeWithQSize(self.h, param1.h)
+  fcQWidget_resize_QSize(self.h, param1.h)
 
 proc setGeometry*(self: gen_qwidget_types.QWidget, x: cint, y: cint, w: cint, h: cint): void =
-  fcQWidget_setGeometry(self.h, x, y, w, h)
+  fcQWidget_setGeometryXYWH(self.h, x, y, w, h)
 
 proc setGeometry*(self: gen_qwidget_types.QWidget, geometry: gen_qrect_types.QRect): void =
-  fcQWidget_setGeometryWithGeometry(self.h, geometry.h)
+  fcQWidget_setGeometryGeometry(self.h, geometry.h)
 
 proc saveGeometry*(self: gen_qwidget_types.QWidget): seq[byte] =
   var v_bytearray = fcQWidget_saveGeometry(self.h)
@@ -1178,10 +1178,10 @@ proc sizePolicy*(self: gen_qwidget_types.QWidget): gen_qsizepolicy_types.QSizePo
   gen_qsizepolicy_types.QSizePolicy(h: fcQWidget_sizePolicy(self.h), owned: true)
 
 proc setSizePolicy*(self: gen_qwidget_types.QWidget, sizePolicy: gen_qsizepolicy_types.QSizePolicy): void =
-  fcQWidget_setSizePolicy(self.h, sizePolicy.h)
+  fcQWidget_setSizePolicySizePolicy(self.h, sizePolicy.h)
 
 proc setSizePolicy*(self: gen_qwidget_types.QWidget, horizontal: cint, vertical: cint): void =
-  fcQWidget_setSizePolicy2(self.h, cint(horizontal), cint(vertical))
+  fcQWidget_setSizePolicyHorizontalVertical(self.h, cint(horizontal), cint(vertical))
 
 proc heightForWidth*(self: gen_qwidget_types.QWidget, param1: cint): cint =
   fcQWidget_heightForWidth(self.h, param1)
@@ -1193,10 +1193,10 @@ proc visibleRegion*(self: gen_qwidget_types.QWidget): gen_qregion_types.QRegion 
   gen_qregion_types.QRegion(h: fcQWidget_visibleRegion(self.h), owned: true)
 
 proc setContentsMargins*(self: gen_qwidget_types.QWidget, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQWidget_setContentsMargins(self.h, left, top, right, bottom)
+  fcQWidget_setContentsMarginsLeftTopRightBottom(self.h, left, top, right, bottom)
 
 proc setContentsMargins*(self: gen_qwidget_types.QWidget, margins: gen_qmargins_types.QMargins): void =
-  fcQWidget_setContentsMarginsWithMargins(self.h, margins.h)
+  fcQWidget_setContentsMarginsMargins(self.h, margins.h)
 
 proc contentsMargins*(self: gen_qwidget_types.QWidget): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQWidget_contentsMargins(self.h), owned: true)
@@ -1214,16 +1214,16 @@ proc updateGeometry*(self: gen_qwidget_types.QWidget): void =
   fcQWidget_updateGeometry(self.h)
 
 proc setParent*(self: gen_qwidget_types.QWidget, parent: gen_qwidget_types.QWidget): void =
-  fcQWidget_setParent(self.h, parent.h)
+  fcQWidget_setParentParent(self.h, parent.h)
 
 proc setParent*(self: gen_qwidget_types.QWidget, parent: gen_qwidget_types.QWidget, f: cint): void =
-  fcQWidget_setParent2(self.h, parent.h, cint(f))
+  fcQWidget_setParentParentF(self.h, parent.h, cint(f))
 
 proc scroll*(self: gen_qwidget_types.QWidget, dx: cint, dy: cint): void =
-  fcQWidget_scroll(self.h, dx, dy)
+  fcQWidget_scrollIntInt(self.h, dx, dy)
 
 proc scroll*(self: gen_qwidget_types.QWidget, dx: cint, dy: cint, param3: gen_qrect_types.QRect): void =
-  fcQWidget_scroll2(self.h, dx, dy, param3.h)
+  fcQWidget_scrollIntInt_QRect(self.h, dx, dy, param3.h)
 
 proc focusWidget*(self: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQWidget_focusWidget(self.h), owned: false)
@@ -1241,7 +1241,7 @@ proc setAcceptDrops*(self: gen_qwidget_types.QWidget, on: bool): void =
   fcQWidget_setAcceptDrops(self.h, on)
 
 proc addAction*(self: gen_qwidget_types.QWidget, action: gen_qaction_types.QAction): void =
-  fcQWidget_addAction(self.h, action.h)
+  fcQWidget_addActionAction(self.h, action.h)
 
 proc addActions*(self: gen_qwidget_types.QWidget, actions: openArray[gen_qaction_types.QAction]): void =
   var actions_CArray = newSeq[pointer](len(actions))
@@ -1273,16 +1273,16 @@ proc actions*(self: gen_qwidget_types.QWidget): seq[gen_qaction_types.QAction] =
   vx_ret
 
 proc addAction*(self: gen_qwidget_types.QWidget, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQWidget_addActionWithText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qaction_types.QAction(h: fcQWidget_addActionText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addAction*(self: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQWidget_addAction2(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qaction_types.QAction(h: fcQWidget_addActionIconText(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addAction*(self: gen_qwidget_types.QWidget, text: openArray[char], shortcut: gen_qkeysequence_types.QKeySequence): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQWidget_addAction3(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), shortcut.h), owned: false)
+  gen_qaction_types.QAction(h: fcQWidget_addActionTextShortcut(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), shortcut.h), owned: false)
 
 proc addAction*(self: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: openArray[char], shortcut: gen_qkeysequence_types.QKeySequence): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQWidget_addAction4(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), shortcut.h), owned: false)
+  gen_qaction_types.QAction(h: fcQWidget_addActionIconTextShortcut(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), shortcut.h), owned: false)
 
 proc parentWidget*(self: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQWidget_parentWidget(self.h), owned: false)
@@ -1294,7 +1294,7 @@ proc windowFlags*(self: gen_qwidget_types.QWidget): cint =
   cint(fcQWidget_windowFlags(self.h))
 
 proc setWindowFlag*(self: gen_qwidget_types.QWidget, param1: cint): void =
-  fcQWidget_setWindowFlag(self.h, cint(param1))
+  fcQWidget_setWindowFlag_Qt_WindowType(self.h, cint(param1))
 
 proc overrideWindowFlags*(self: gen_qwidget_types.QWidget, typeVal: cint): void =
   fcQWidget_overrideWindowFlags(self.h, cint(typeVal))
@@ -1306,13 +1306,13 @@ proc find*(_: type gen_qwidget_types.QWidget, param1: uint): gen_qwidget_types.Q
   gen_qwidget_types.QWidget(h: fcQWidget_find(param1), owned: false)
 
 proc childAt*(self: gen_qwidget_types.QWidget, x: cint, y: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidget_childAt(self.h, x, y), owned: false)
+  gen_qwidget_types.QWidget(h: fcQWidget_childAtXY(self.h, x, y), owned: false)
 
 proc childAt*(self: gen_qwidget_types.QWidget, p: gen_qpoint_types.QPoint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidget_childAtWithQPoint(self.h, p.h), owned: false)
+  gen_qwidget_types.QWidget(h: fcQWidget_childAtP(self.h, p.h), owned: false)
 
 proc setAttribute*(self: gen_qwidget_types.QWidget, param1: cint): void =
-  fcQWidget_setAttribute(self.h, cint(param1))
+  fcQWidget_setAttribute_Qt_WidgetAttribute(self.h, cint(param1))
 
 proc testAttribute*(self: gen_qwidget_types.QWidget, param1: cint): bool =
   fcQWidget_testAttribute(self.h, cint(param1))
@@ -1345,7 +1345,7 @@ proc setScreen*(self: gen_qwidget_types.QWidget, screen: gen_qscreen_types.QScre
   fcQWidget_setScreen(self.h, screen.h)
 
 proc createWindowContainer*(_: type gen_qwidget_types.QWidget, window: gen_qwindow_types.QWindow): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidget_createWindowContainer(window.h), owned: false)
+  gen_qwidget_types.QWidget(h: fcQWidget_createWindowContainerWindow(window.h), owned: false)
 
 proc windowTitleChanged*(self: gen_qwidget_types.QWidget, title: openArray[char]): void =
   fcQWidget_windowTitleChanged(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
@@ -1443,61 +1443,61 @@ proc setInputMethodHints*(self: gen_qwidget_types.QWidget, hints: cint): void =
   fcQWidget_setInputMethodHints(self.h, cint(hints))
 
 proc tr*(_: type gen_qwidget_types.QWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQWidget_tr2(s, c)
+  let v_ms = fcQWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwidget_types.QWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWidget_tr3(s, c, n)
+  let v_ms = fcQWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc render*(self: gen_qwidget_types.QWidget, target: gen_qpaintdevice_types.QPaintDevice, targetOffset: gen_qpoint_types.QPoint): void =
-  fcQWidget_render2(self.h, target.h, targetOffset.h)
+  fcQWidget_renderTargetTargetOffset(self.h, target.h, targetOffset.h)
 
 proc render*(self: gen_qwidget_types.QWidget, target: gen_qpaintdevice_types.QPaintDevice, targetOffset: gen_qpoint_types.QPoint, sourceRegion: gen_qregion_types.QRegion): void =
-  fcQWidget_render3(self.h, target.h, targetOffset.h, sourceRegion.h)
+  fcQWidget_renderTargetTargetOffsetSourceRegion(self.h, target.h, targetOffset.h, sourceRegion.h)
 
 proc render*(self: gen_qwidget_types.QWidget, target: gen_qpaintdevice_types.QPaintDevice, targetOffset: gen_qpoint_types.QPoint, sourceRegion: gen_qregion_types.QRegion, renderFlags: cint): void =
-  fcQWidget_render4(self.h, target.h, targetOffset.h, sourceRegion.h, cint(renderFlags))
+  fcQWidget_renderTargetTargetOffsetSourceRegionRenderFlags(self.h, target.h, targetOffset.h, sourceRegion.h, cint(renderFlags))
 
 proc render*(self: gen_qwidget_types.QWidget, painter: gen_qpainter_types.QPainter, targetOffset: gen_qpoint_types.QPoint): void =
-  fcQWidget_render5(self.h, painter.h, targetOffset.h)
+  fcQWidget_renderPainterTargetOffset(self.h, painter.h, targetOffset.h)
 
 proc render*(self: gen_qwidget_types.QWidget, painter: gen_qpainter_types.QPainter, targetOffset: gen_qpoint_types.QPoint, sourceRegion: gen_qregion_types.QRegion): void =
-  fcQWidget_render6(self.h, painter.h, targetOffset.h, sourceRegion.h)
+  fcQWidget_renderPainterTargetOffsetSourceRegion(self.h, painter.h, targetOffset.h, sourceRegion.h)
 
 proc render*(self: gen_qwidget_types.QWidget, painter: gen_qpainter_types.QPainter, targetOffset: gen_qpoint_types.QPoint, sourceRegion: gen_qregion_types.QRegion, renderFlags: cint): void =
-  fcQWidget_render7(self.h, painter.h, targetOffset.h, sourceRegion.h, cint(renderFlags))
+  fcQWidget_renderPainterTargetOffsetSourceRegionRenderFlags(self.h, painter.h, targetOffset.h, sourceRegion.h, cint(renderFlags))
 
 proc grab*(self: gen_qwidget_types.QWidget, rectangle: gen_qrect_types.QRect): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQWidget_grabWithRectangle(self.h, rectangle.h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQWidget_grabRectangle(self.h, rectangle.h), owned: true)
 
 proc grabGesture*(self: gen_qwidget_types.QWidget, typeVal: cint, flags: cint): void =
-  fcQWidget_grabGesture2(self.h, cint(typeVal), cint(flags))
+  fcQWidget_grabGestureTypeFlags(self.h, cint(typeVal), cint(flags))
 
 proc grabShortcut*(self: gen_qwidget_types.QWidget, key: gen_qkeysequence_types.QKeySequence, context: cint): cint =
-  fcQWidget_grabShortcut2(self.h, key.h, cint(context))
+  fcQWidget_grabShortcutKeyContext(self.h, key.h, cint(context))
 
 proc setShortcutEnabled*(self: gen_qwidget_types.QWidget, id: cint, enable: bool): void =
-  fcQWidget_setShortcutEnabled2(self.h, id, enable)
+  fcQWidget_setShortcutEnabledIdEnable(self.h, id, enable)
 
 proc setShortcutAutoRepeat*(self: gen_qwidget_types.QWidget, id: cint, enable: bool): void =
-  fcQWidget_setShortcutAutoRepeat2(self.h, id, enable)
+  fcQWidget_setShortcutAutoRepeatIdEnable(self.h, id, enable)
 
 proc setWindowFlag*(self: gen_qwidget_types.QWidget, param1: cint, on: bool): void =
-  fcQWidget_setWindowFlag2(self.h, cint(param1), on)
+  fcQWidget_setWindowFlag_Qt_WindowTypeBool(self.h, cint(param1), on)
 
 proc setAttribute*(self: gen_qwidget_types.QWidget, param1: cint, on: bool): void =
-  fcQWidget_setAttribute2(self.h, cint(param1), on)
+  fcQWidget_setAttribute_Qt_WidgetAttributeBool(self.h, cint(param1), on)
 
 proc createWindowContainer*(_: type gen_qwidget_types.QWidget, window: gen_qwindow_types.QWindow, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidget_createWindowContainer2(window.h, parent.h), owned: false)
+  gen_qwidget_types.QWidget(h: fcQWidget_createWindowContainerWindowParent(window.h, parent.h), owned: false)
 
 proc createWindowContainer*(_: type gen_qwidget_types.QWidget, window: gen_qwindow_types.QWindow, parent: gen_qwidget_types.QWidget, flags: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidget_createWindowContainer3(window.h, parent.h, cint(flags)), owned: false)
+  gen_qwidget_types.QWidget(h: fcQWidget_createWindowContainerWindowParentFlags(window.h, parent.h, cint(flags)), owned: false)
 
 type QWidgetmetaObjectProc* = proc(self: QWidget): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWidgetmetacastProc* = proc(self: QWidget, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -2503,22 +2503,22 @@ proc focusPreviousChild*(self: gen_qwidget_types.QWidget): bool =
   fcQWidget_protectedbase_focusPreviousChild(self.h)
 
 proc updateMicroFocus*(self: gen_qwidget_types.QWidget, query: cint): void =
-  fcQWidget_protectedbase_updateMicroFocusWithQuery(self.h, cint(query))
+  fcQWidget_protectedbase_updateMicroFocus_query(self.h, cint(query))
 
 proc createX*(self: gen_qwidget_types.QWidget, param1: uint): void =
-  fcQWidget_protectedbase_createWithWId(self.h, param1)
+  fcQWidget_protectedbase_create_WId(self.h, param1)
 
 proc createX*(self: gen_qwidget_types.QWidget, param1: uint, initializeWindow: bool): void =
-  fcQWidget_protectedbase_create2(self.h, param1, initializeWindow)
+  fcQWidget_protectedbase_create_WId_bool(self.h, param1, initializeWindow)
 
 proc createX*(self: gen_qwidget_types.QWidget, param1: uint, initializeWindow: bool, destroyOldWindow: bool): void =
-  fcQWidget_protectedbase_create3(self.h, param1, initializeWindow, destroyOldWindow)
+  fcQWidget_protectedbase_create_WId_bool_bool(self.h, param1, initializeWindow, destroyOldWindow)
 
 proc destroy*(self: gen_qwidget_types.QWidget, destroyWindow: bool): void =
-  fcQWidget_protectedbase_destroyWithDestroyWindow(self.h, destroyWindow)
+  fcQWidget_protectedbase_destroy_destroyWindow(self.h, destroyWindow)
 
 proc destroy*(self: gen_qwidget_types.QWidget, destroyWindow: bool, destroySubWindows: bool): void =
-  fcQWidget_protectedbase_destroy2(self.h, destroyWindow, destroySubWindows)
+  fcQWidget_protectedbase_destroy_destroyWindow_destroySubWindows(self.h, destroyWindow, destroySubWindows)
 
 proc sender*(self: gen_qwidget_types.QWidget): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWidget_protectedbase_sender(self.h), owned: false)

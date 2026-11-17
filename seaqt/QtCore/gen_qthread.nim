@@ -70,7 +70,7 @@ type cQThread*{.exportc: "QThread", incompleteStruct.} = object
 proc fcQThread_metaObject(self: pointer): pointer {.importc: "QThread_metaObject".}
 proc fcQThread_metacast(self: pointer, param1: cstring): pointer {.importc: "QThread_metacast".}
 proc fcQThread_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QThread_metacall".}
-proc fcQThread_tr(s: cstring): struct_seaqt_string {.importc: "QThread_tr".}
+proc fcQThread_trS(s: cstring): struct_seaqt_string {.importc: "QThread_tr_s".}
 proc fcQThread_currentThreadId(): pointer {.importc: "QThread_currentThreadId".}
 proc fcQThread_currentThread(): pointer {.importc: "QThread_currentThread".}
 proc fcQThread_idealThreadCount(): cint {.importc: "QThread_idealThreadCount".}
@@ -92,15 +92,15 @@ proc fcQThread_terminate(self: pointer): void {.importc: "QThread_terminate".}
 proc fcQThread_exit(self: pointer): void {.importc: "QThread_exit".}
 proc fcQThread_quit(self: pointer): void {.importc: "QThread_quit".}
 proc fcQThread_wait(self: pointer): bool {.importc: "QThread_wait".}
-proc fcQThread_waitWithTime(self: pointer, time: culong): bool {.importc: "QThread_waitWithTime".}
+proc fcQThread_waitTime(self: pointer, time: culong): bool {.importc: "QThread_wait_time".}
 proc fcQThread_sleep(param1: culong): void {.importc: "QThread_sleep".}
 proc fcQThread_msleep(param1: culong): void {.importc: "QThread_msleep".}
 proc fcQThread_usleep(param1: culong): void {.importc: "QThread_usleep".}
-proc fcQThread_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QThread_tr2".}
-proc fcQThread_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QThread_tr3".}
-proc fcQThread_startWithQThreadPriority(self: pointer, param1: cint): void {.importc: "QThread_startWithQThreadPriority".}
-proc fcQThread_exitWithRetcode(self: pointer, retcode: cint): void {.importc: "QThread_exitWithRetcode".}
-proc fcQThread_waitWithDeadline(self: pointer, deadline: pointer): bool {.importc: "QThread_waitWithDeadline".}
+proc fcQThread_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QThread_tr_s_c".}
+proc fcQThread_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QThread_tr_s_c_n".}
+proc fcQThread_start_QThread_Priority(self: pointer, param1: cint): void {.importc: "QThread_start_QThread_Priority".}
+proc fcQThread_exitRetcode(self: pointer, retcode: cint): void {.importc: "QThread_exit_retcode".}
+proc fcQThread_waitDeadline(self: pointer, deadline: pointer): bool {.importc: "QThread_wait_deadline".}
 proc fcQThread_vdata(self: pointer): ptr pointer {.importc: "QThread_vdata".}
 proc fvdata_cQThread(self: pointer): pointer {.importc: "vdata_QThread".}
 
@@ -134,7 +134,7 @@ proc fcQThread_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "
 proc fcQThread_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QThread_protectedbase_receivers".}
 proc fcQThread_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QThread_protectedbase_isSignalConnected".}
 proc fcQThread_new(vtbl: pointer, vdata: csize_t): ptr cQThread {.importc: "QThread_new".}
-proc fcQThread_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQThread {.importc: "QThread_new2".}
+proc fcQThread_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQThread {.importc: "QThread_new_parent".}
 proc fcQThread_staticMetaObject(): pointer {.importc: "QThread_staticMetaObject".}
 
 proc metaObject*(self: gen_qthread_types.QThread): gen_qobjectdefs_types.QMetaObject =
@@ -147,7 +147,7 @@ proc metacall*(self: gen_qthread_types.QThread, param1: cint, param2: cint, para
   fcQThread_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qthread_types.QThread, s: cstring): string =
-  let v_ms = fcQThread_tr(s)
+  let v_ms = fcQThread_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -216,7 +216,7 @@ proc wait*(self: gen_qthread_types.QThread): bool =
   fcQThread_wait(self.h)
 
 proc wait*(self: gen_qthread_types.QThread, time: culong): bool =
-  fcQThread_waitWithTime(self.h, time)
+  fcQThread_waitTime(self.h, time)
 
 proc sleep*(_: type gen_qthread_types.QThread, param1: culong): void =
   fcQThread_sleep(param1)
@@ -228,25 +228,25 @@ proc usleep*(_: type gen_qthread_types.QThread, param1: culong): void =
   fcQThread_usleep(param1)
 
 proc tr*(_: type gen_qthread_types.QThread, s: cstring, c: cstring): string =
-  let v_ms = fcQThread_tr2(s, c)
+  let v_ms = fcQThread_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qthread_types.QThread, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQThread_tr3(s, c, n)
+  let v_ms = fcQThread_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc start*(self: gen_qthread_types.QThread, param1: cint): void =
-  fcQThread_startWithQThreadPriority(self.h, cint(param1))
+  fcQThread_start_QThread_Priority(self.h, cint(param1))
 
 proc exit*(self: gen_qthread_types.QThread, retcode: cint): void =
-  fcQThread_exitWithRetcode(self.h, retcode)
+  fcQThread_exitRetcode(self.h, retcode)
 
 proc wait*(self: gen_qthread_types.QThread, deadline: gen_qdeadlinetimer_types.QDeadlineTimer): bool =
-  fcQThread_waitWithDeadline(self.h, deadline.h)
+  fcQThread_waitDeadline(self.h, deadline.h)
 
 type QThreadmetaObjectProc* = proc(self: QThread): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QThreadmetacastProc* = proc(self: QThread, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -186,19 +186,19 @@ VirtualQWebSocket* QWebSocket_new(const QWebSocket_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQWebSocket(vtbl) : nullptr;
 }
 
-VirtualQWebSocket* QWebSocket_new2(const QWebSocket_VTable* vtbl, size_t vdata, struct seaqt_string origin) {
+VirtualQWebSocket* QWebSocket_new_origin(const QWebSocket_VTable* vtbl, size_t vdata, struct seaqt_string origin) {
 	QString origin_QString = QString::fromUtf8(origin.data, origin.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebSocket>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebSocket(vtbl, origin_QString) : nullptr;
 }
 
-VirtualQWebSocket* QWebSocket_new3(const QWebSocket_VTable* vtbl, size_t vdata, struct seaqt_string origin, int version) {
+VirtualQWebSocket* QWebSocket_new_origin_version(const QWebSocket_VTable* vtbl, size_t vdata, struct seaqt_string origin, int version) {
 	QString origin_QString = QString::fromUtf8(origin.data, origin.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebSocket>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebSocket(vtbl, origin_QString, static_cast<QWebSocketProtocol::Version>(version)) : nullptr;
 }
 
-VirtualQWebSocket* QWebSocket_new4(const QWebSocket_VTable* vtbl, size_t vdata, struct seaqt_string origin, int version, QObject* parent) {
+VirtualQWebSocket* QWebSocket_new_origin_version_parent(const QWebSocket_VTable* vtbl, size_t vdata, struct seaqt_string origin, int version, QObject* parent) {
 	QString origin_QString = QString::fromUtf8(origin.data, origin.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebSocket>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebSocket(vtbl, origin_QString, static_cast<QWebSocketProtocol::Version>(version), parent) : nullptr;
@@ -220,7 +220,7 @@ int QWebSocket_metacall(QWebSocket* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebSocket_tr(const char* s) {
+struct seaqt_string QWebSocket_tr_s(const char* s) {
 	QString _ret = QWebSocket::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -409,7 +409,7 @@ long long QWebSocket_sendBinaryMessage(QWebSocket* self, struct seaqt_string dat
 	return static_cast<long long>(_ret);
 }
 
-void QWebSocket_ignoreSslErrors(QWebSocket* self, struct seaqt_array /* of QSslError* */  errors) {
+void QWebSocket_ignoreSslErrors_errors(QWebSocket* self, struct seaqt_array /* of QSslError* */  errors) {
 	QList<QSslError> errors_QList;
 	errors_QList.reserve(errors.len);
 	QSslError** errors_arr = static_cast<QSslError**>(errors.data);
@@ -482,19 +482,19 @@ void QWebSocket_close(QWebSocket* self) {
 	self->close();
 }
 
-void QWebSocket_open(QWebSocket* self, QUrl* url) {
+void QWebSocket_open_url(QWebSocket* self, QUrl* url) {
 	self->open(*url);
 }
 
-void QWebSocket_openWithRequest(QWebSocket* self, QNetworkRequest* request) {
+void QWebSocket_open_request(QWebSocket* self, QNetworkRequest* request) {
 	self->open(*request);
 }
 
-void QWebSocket_open2(QWebSocket* self, QUrl* url, QWebSocketHandshakeOptions* options) {
+void QWebSocket_open_url_options(QWebSocket* self, QUrl* url, QWebSocketHandshakeOptions* options) {
 	self->open(*url, *options);
 }
 
-void QWebSocket_open3(QWebSocket* self, QNetworkRequest* request, QWebSocketHandshakeOptions* options) {
+void QWebSocket_open_request_options(QWebSocket* self, QNetworkRequest* request, QWebSocketHandshakeOptions* options) {
 	self->open(*request, *options);
 }
 
@@ -502,7 +502,7 @@ void QWebSocket_ping(QWebSocket* self) {
 	self->ping();
 }
 
-void QWebSocket_ignoreSslErrors2(QWebSocket* self) {
+void QWebSocket_ignoreSslErrors(QWebSocket* self) {
 	self->ignoreSslErrors();
 }
 
@@ -696,11 +696,11 @@ void QWebSocket_connect_binaryMessageReceived(QWebSocket* self, intptr_t slot, v
 	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QByteArray&)>(&QWebSocket::binaryMessageReceived), self, local_caller{slot, callback, release});
 }
 
-void QWebSocket_errorWithError(QWebSocket* self, int error) {
+void QWebSocket_error_error(QWebSocket* self, int error) {
 	self->error(static_cast<QAbstractSocket::SocketError>(error));
 }
 
-void QWebSocket_connect_errorWithError(QWebSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QWebSocket_connect_error_error(QWebSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -893,7 +893,7 @@ void QWebSocket_connect_handshakeInterruptedOnError(QWebSocket* self, intptr_t s
 	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QSslError&)>(&QWebSocket::handshakeInterruptedOnError), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebSocket_tr2(const char* s, const char* c) {
+struct seaqt_string QWebSocket_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebSocket::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -904,7 +904,7 @@ struct seaqt_string QWebSocket_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebSocket_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebSocket_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebSocket::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -915,16 +915,16 @@ struct seaqt_string QWebSocket_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QWebSocket_closeWithCloseCode(QWebSocket* self, int closeCode) {
+void QWebSocket_close_closeCode(QWebSocket* self, int closeCode) {
 	self->close(static_cast<QWebSocketProtocol::CloseCode>(closeCode));
 }
 
-void QWebSocket_close2(QWebSocket* self, int closeCode, struct seaqt_string reason) {
+void QWebSocket_close_closeCode_reason(QWebSocket* self, int closeCode, struct seaqt_string reason) {
 	QString reason_QString = QString::fromUtf8(reason.data, reason.len);
 	self->close(static_cast<QWebSocketProtocol::CloseCode>(closeCode), reason_QString);
 }
 
-void QWebSocket_pingWithPayload(QWebSocket* self, struct seaqt_string payload) {
+void QWebSocket_ping_payload(QWebSocket* self, struct seaqt_string payload) {
 	QByteArray payload_QByteArray(payload.data, payload.len);
 	self->ping(payload_QByteArray);
 }

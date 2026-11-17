@@ -30,7 +30,7 @@ bool QBasicMutex_tryLock(QBasicMutex* self) {
 	return self->tryLock();
 }
 
-bool QBasicMutex_tryLock2(QBasicMutex* self) {
+bool QBasicMutex_try_lock(QBasicMutex* self) {
 	return self->try_lock();
 }
 
@@ -46,11 +46,11 @@ void QMutex_virtbase(QMutex* src, QBasicMutex** outptr_QBasicMutex) {
 	*outptr_QBasicMutex = static_cast<QBasicMutex*>(src);
 }
 
-bool QMutex_tryLock(QMutex* self) {
+bool QMutex_try_lock(QMutex* self) {
 	return self->try_lock();
 }
 
-bool QMutex_tryLockWithTimeout(QMutex* self, int timeout) {
+bool QMutex_tryLock(QMutex* self, int timeout) {
 	return self->tryLock(static_cast<int>(timeout));
 }
 
@@ -74,11 +74,11 @@ void QRecursiveMutex_unlock(QRecursiveMutex* self) {
 	self->unlock();
 }
 
-bool QRecursiveMutex_tryLock2(QRecursiveMutex* self) {
+bool QRecursiveMutex_try_lock(QRecursiveMutex* self) {
 	return self->try_lock();
 }
 
-bool QRecursiveMutex_tryLockWithTimeout(QRecursiveMutex* self, int timeout) {
+bool QRecursiveMutex_tryLock_timeout(QRecursiveMutex* self, int timeout) {
 	return self->tryLock(static_cast<int>(timeout));
 }
 

@@ -22,16 +22,16 @@ QPrinterInfo* QPrinterInfo_new() {
 	return new (std::nothrow) QPrinterInfo();
 }
 
-QPrinterInfo* QPrinterInfo_new2(QPrinterInfo* other) {
-	return new (std::nothrow) QPrinterInfo(*other);
+QPrinterInfo* QPrinterInfo_new_from(QPrinterInfo* from) {
+	return new (std::nothrow) QPrinterInfo(*from);
 }
 
-QPrinterInfo* QPrinterInfo_new3(QPrinter* printer) {
+QPrinterInfo* QPrinterInfo_new_printer(QPrinter* printer) {
 	return new (std::nothrow) QPrinterInfo(*printer);
 }
 
-void QPrinterInfo_operatorAssign(QPrinterInfo* self, QPrinterInfo* other) {
-	self->operator=(*other);
+void QPrinterInfo_operatorAssign(QPrinterInfo* self, QPrinterInfo* from) {
+	self->operator=(*from);
 }
 
 struct seaqt_string QPrinterInfo_printerName(const QPrinterInfo* self) {

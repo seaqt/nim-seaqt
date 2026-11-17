@@ -796,7 +796,7 @@ public:
 	friend struct seaqt_array /* of QModelIndex* */  QHeaderView_virtualbase_selectedIndexes(const VirtualQHeaderView* self);
 
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
-		if (vtbl->edit2 == 0) {
+		if (vtbl->edit_index_trigger_event == 0) {
 			return QHeaderView::edit(index, trigger, event);
 		}
 
@@ -806,11 +806,11 @@ public:
 		QAbstractItemView::EditTrigger trigger_ret = trigger;
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
-		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit_index_trigger_event(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QHeaderView_virtualbase_edit2(VirtualQHeaderView* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QHeaderView_virtualbase_edit_index_trigger_event(VirtualQHeaderView* self, QModelIndex* index, int trigger, QEvent* event);
 
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
@@ -1346,12 +1346,12 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QHeaderView_protectedbase_updateSection(VirtualQHeaderView* self, int logicalIndex);
-	friend void QHeaderView_protectedbase_resizeSections2(VirtualQHeaderView* self);
+	friend void QHeaderView_protectedbase_resizeSections(VirtualQHeaderView* self);
 	friend void QHeaderView_protectedbase_sectionsInserted(VirtualQHeaderView* self, QModelIndex* parent, int logicalFirst, int logicalLast);
 	friend void QHeaderView_protectedbase_sectionsAboutToBeRemoved(VirtualQHeaderView* self, QModelIndex* parent, int logicalFirst, int logicalLast);
 	friend void QHeaderView_protectedbase_initialize(VirtualQHeaderView* self);
 	friend void QHeaderView_protectedbase_initializeSections(VirtualQHeaderView* self);
-	friend void QHeaderView_protectedbase_initializeSections2(VirtualQHeaderView* self, int start, int end);
+	friend void QHeaderView_protectedbase_initializeSections_start_end(VirtualQHeaderView* self, int start, int end);
 	friend int QHeaderView_protectedbase_state(const VirtualQHeaderView* self);
 	friend void QHeaderView_protectedbase_setState(VirtualQHeaderView* self, int state);
 	friend void QHeaderView_protectedbase_scheduleDelayedItemsLayout(VirtualQHeaderView* self);
@@ -1363,7 +1363,7 @@ public:
 	friend void QHeaderView_protectedbase_stopAutoScroll(VirtualQHeaderView* self);
 	friend void QHeaderView_protectedbase_doAutoScroll(VirtualQHeaderView* self);
 	friend int QHeaderView_protectedbase_dropIndicatorPosition(const VirtualQHeaderView* self);
-	friend void QHeaderView_protectedbase_setViewportMargins(VirtualQHeaderView* self, int left, int top, int right, int bottom);
+	friend void QHeaderView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQHeaderView* self, int left, int top, int right, int bottom);
 	friend QMargins* QHeaderView_protectedbase_viewportMargins(const VirtualQHeaderView* self);
 	friend void QHeaderView_protectedbase_drawFrame(VirtualQHeaderView* self, QPainter* param1);
 	friend void QHeaderView_protectedbase_updateMicroFocus(VirtualQHeaderView* self);
@@ -1377,12 +1377,12 @@ public:
 	friend bool QHeaderView_protectedbase_isSignalConnected(const VirtualQHeaderView* self, QMetaMethod* signal);
 };
 
-VirtualQHeaderView* QHeaderView_new(const QHeaderView_VTable* vtbl, size_t vdata, int orientation) {
+VirtualQHeaderView* QHeaderView_new_orientation(const QHeaderView_VTable* vtbl, size_t vdata, int orientation) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHeaderView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHeaderView(vtbl, static_cast<Qt::Orientation>(orientation)) : nullptr;
 }
 
-VirtualQHeaderView* QHeaderView_new2(const QHeaderView_VTable* vtbl, size_t vdata, int orientation, QWidget* parent) {
+VirtualQHeaderView* QHeaderView_new_orientation_parent(const QHeaderView_VTable* vtbl, size_t vdata, int orientation, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHeaderView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHeaderView(vtbl, static_cast<Qt::Orientation>(orientation), parent) : nullptr;
 }
@@ -1403,7 +1403,7 @@ int QHeaderView_metacall(QHeaderView* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QHeaderView_tr(const char* s) {
+struct seaqt_string QHeaderView_tr_s(const char* s) {
 	QString _ret = QHeaderView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1447,15 +1447,15 @@ int QHeaderView_visualIndexAt(const QHeaderView* self, int position) {
 	return self->visualIndexAt(static_cast<int>(position));
 }
 
-int QHeaderView_logicalIndexAt(const QHeaderView* self, int position) {
+int QHeaderView_logicalIndexAt_position(const QHeaderView* self, int position) {
 	return self->logicalIndexAt(static_cast<int>(position));
 }
 
-int QHeaderView_logicalIndexAt2(const QHeaderView* self, int x, int y) {
+int QHeaderView_logicalIndexAt_x_y(const QHeaderView* self, int x, int y) {
 	return self->logicalIndexAt(static_cast<int>(x), static_cast<int>(y));
 }
 
-int QHeaderView_logicalIndexAtWithPos(const QHeaderView* self, QPoint* pos) {
+int QHeaderView_logicalIndexAt_pos(const QHeaderView* self, QPoint* pos) {
 	return self->logicalIndexAt(*pos);
 }
 
@@ -1483,7 +1483,7 @@ void QHeaderView_resizeSection(QHeaderView* self, int logicalIndex, int size) {
 	self->resizeSection(static_cast<int>(logicalIndex), static_cast<int>(size));
 }
 
-void QHeaderView_resizeSections(QHeaderView* self, int mode) {
+void QHeaderView_resizeSections_mode(QHeaderView* self, int mode) {
 	self->resizeSections(static_cast<QHeaderView::ResizeMode>(mode));
 }
 
@@ -1556,11 +1556,11 @@ int QHeaderView_sectionResizeMode(const QHeaderView* self, int logicalIndex) {
 	return static_cast<int>(_ret);
 }
 
-void QHeaderView_setSectionResizeMode(QHeaderView* self, int mode) {
+void QHeaderView_setSectionResizeMode_mode(QHeaderView* self, int mode) {
 	self->setSectionResizeMode(static_cast<QHeaderView::ResizeMode>(mode));
 }
 
-void QHeaderView_setSectionResizeMode2(QHeaderView* self, int logicalIndex, int mode) {
+void QHeaderView_setSectionResizeMode_logicalIndex_mode(QHeaderView* self, int logicalIndex, int mode) {
 	self->setSectionResizeMode(static_cast<int>(logicalIndex), static_cast<QHeaderView::ResizeMode>(mode));
 }
 
@@ -1886,7 +1886,7 @@ void QHeaderView_connect_sortIndicatorClearableChanged(QHeaderView* self, intptr
 	QHeaderView::connect(self, static_cast<void (QHeaderView::*)(bool)>(&QHeaderView::sortIndicatorClearableChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QHeaderView_tr2(const char* s, const char* c) {
+struct seaqt_string QHeaderView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QHeaderView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1897,7 +1897,7 @@ struct seaqt_string QHeaderView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QHeaderView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QHeaderView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QHeaderView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2193,7 +2193,7 @@ struct seaqt_array /* of QModelIndex* */  QHeaderView_virtualbase_selectedIndexe
 	return _out;
 }
 
-bool QHeaderView_virtualbase_edit2(VirtualQHeaderView* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QHeaderView_virtualbase_edit_index_trigger_event(VirtualQHeaderView* self, QModelIndex* index, int trigger, QEvent* event) {
 
 	return self->QHeaderView::edit(*index, static_cast<VirtualQHeaderView::EditTrigger>(trigger), event);
 }
@@ -2419,7 +2419,7 @@ void QHeaderView_protectedbase_updateSection(VirtualQHeaderView* self, int logic
 	self->updateSection(static_cast<int>(logicalIndex));
 }
 
-void QHeaderView_protectedbase_resizeSections2(VirtualQHeaderView* self) {
+void QHeaderView_protectedbase_resizeSections(VirtualQHeaderView* self) {
 	self->resizeSections();
 }
 
@@ -2439,7 +2439,7 @@ void QHeaderView_protectedbase_initializeSections(VirtualQHeaderView* self) {
 	self->initializeSections();
 }
 
-void QHeaderView_protectedbase_initializeSections2(VirtualQHeaderView* self, int start, int end) {
+void QHeaderView_protectedbase_initializeSections_start_end(VirtualQHeaderView* self, int start, int end) {
 	self->initializeSections(static_cast<int>(start), static_cast<int>(end));
 }
 
@@ -2489,7 +2489,7 @@ int QHeaderView_protectedbase_dropIndicatorPosition(const VirtualQHeaderView* se
 	return static_cast<int>(_ret);
 }
 
-void QHeaderView_protectedbase_setViewportMargins(VirtualQHeaderView* self, int left, int top, int right, int bottom) {
+void QHeaderView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQHeaderView* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

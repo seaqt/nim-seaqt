@@ -94,7 +94,7 @@ export
 type cQProcessEnvironment*{.exportc: "QProcessEnvironment", incompleteStruct.} = object
 type cQProcess*{.exportc: "QProcess", incompleteStruct.} = object
 
-proc fcQProcessEnvironment_operatorAssign(self: pointer, other: pointer): void {.importc: "QProcessEnvironment_operatorAssign".}
+proc fcQProcessEnvironment_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QProcessEnvironment_operatorAssign".}
 proc fcQProcessEnvironment_swap(self: pointer, other: pointer): void {.importc: "QProcessEnvironment_swap".}
 proc fcQProcessEnvironment_operatorEqual(self: pointer, other: pointer): bool {.importc: "QProcessEnvironment_operatorEqual".}
 proc fcQProcessEnvironment_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QProcessEnvironment_operatorNotEqual".}
@@ -102,24 +102,24 @@ proc fcQProcessEnvironment_isEmpty(self: pointer): bool {.importc: "QProcessEnvi
 proc fcQProcessEnvironment_inheritsFromParent(self: pointer): bool {.importc: "QProcessEnvironment_inheritsFromParent".}
 proc fcQProcessEnvironment_clear(self: pointer): void {.importc: "QProcessEnvironment_clear".}
 proc fcQProcessEnvironment_contains(self: pointer, name: struct_seaqt_string): bool {.importc: "QProcessEnvironment_contains".}
-proc fcQProcessEnvironment_insert(self: pointer, name: struct_seaqt_string, value: struct_seaqt_string): void {.importc: "QProcessEnvironment_insert".}
+proc fcQProcessEnvironment_insertNameValue(self: pointer, name: struct_seaqt_string, value: struct_seaqt_string): void {.importc: "QProcessEnvironment_insert_name_value".}
 proc fcQProcessEnvironment_remove(self: pointer, name: struct_seaqt_string): void {.importc: "QProcessEnvironment_remove".}
-proc fcQProcessEnvironment_value(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.importc: "QProcessEnvironment_value".}
+proc fcQProcessEnvironment_valueName(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.importc: "QProcessEnvironment_value_name".}
 proc fcQProcessEnvironment_toStringList(self: pointer): struct_seaqt_array {.importc: "QProcessEnvironment_toStringList".}
 proc fcQProcessEnvironment_keys(self: pointer): struct_seaqt_array {.importc: "QProcessEnvironment_keys".}
-proc fcQProcessEnvironment_insertWithQProcessEnvironment(self: pointer, e: pointer): void {.importc: "QProcessEnvironment_insertWithQProcessEnvironment".}
+proc fcQProcessEnvironment_insertE(self: pointer, e: pointer): void {.importc: "QProcessEnvironment_insert_e".}
 proc fcQProcessEnvironment_systemEnvironment(): pointer {.importc: "QProcessEnvironment_systemEnvironment".}
-proc fcQProcessEnvironment_value2(self: pointer, name: struct_seaqt_string, defaultValue: struct_seaqt_string): struct_seaqt_string {.importc: "QProcessEnvironment_value2".}
+proc fcQProcessEnvironment_valueNameDefaultValue(self: pointer, name: struct_seaqt_string, defaultValue: struct_seaqt_string): struct_seaqt_string {.importc: "QProcessEnvironment_value_name_defaultValue".}
 proc fcQProcessEnvironment_new(): ptr cQProcessEnvironment {.importc: "QProcessEnvironment_new".}
-proc fcQProcessEnvironment_new2(param1: cint): ptr cQProcessEnvironment {.importc: "QProcessEnvironment_new2".}
-proc fcQProcessEnvironment_new3(other: pointer): ptr cQProcessEnvironment {.importc: "QProcessEnvironment_new3".}
+proc fcQProcessEnvironment_new2(param1: cint): ptr cQProcessEnvironment {.importc: "QProcessEnvironment_new_QProcessEnvironment_Initialization".}
+proc fcQProcessEnvironment_new3(fromVal: pointer): ptr cQProcessEnvironment {.importc: "QProcessEnvironment_new_QProcessEnvironment".}
 proc fcQProcess_metaObject(self: pointer): pointer {.importc: "QProcess_metaObject".}
 proc fcQProcess_metacast(self: pointer, param1: cstring): pointer {.importc: "QProcess_metacast".}
 proc fcQProcess_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProcess_metacall".}
-proc fcQProcess_tr(s: cstring): struct_seaqt_string {.importc: "QProcess_tr".}
-proc fcQProcess_start(self: pointer, program: struct_seaqt_string): void {.importc: "QProcess_start".}
-proc fcQProcess_start2(self: pointer): void {.importc: "QProcess_start2".}
-proc fcQProcess_startCommand(self: pointer, command: struct_seaqt_string): void {.importc: "QProcess_startCommand".}
+proc fcQProcess_trS(s: cstring): struct_seaqt_string {.importc: "QProcess_tr_s".}
+proc fcQProcess_startProgram(self: pointer, program: struct_seaqt_string): void {.importc: "QProcess_start_program".}
+proc fcQProcess_start(self: pointer): void {.importc: "QProcess_start".}
+proc fcQProcess_startCommandCommand(self: pointer, command: struct_seaqt_string): void {.importc: "QProcess_startCommand_command".}
 proc fcQProcess_startDetached(self: pointer): bool {.importc: "QProcess_startDetached".}
 proc fcQProcess_open(self: pointer, mode: cint): bool {.importc: "QProcess_open".}
 proc fcQProcess_program(self: pointer): struct_seaqt_string {.importc: "QProcess_program".}
@@ -135,8 +135,8 @@ proc fcQProcess_setReadChannel(self: pointer, channel: cint): void {.importc: "Q
 proc fcQProcess_closeReadChannel(self: pointer, channel: cint): void {.importc: "QProcess_closeReadChannel".}
 proc fcQProcess_closeWriteChannel(self: pointer): void {.importc: "QProcess_closeWriteChannel".}
 proc fcQProcess_setStandardInputFile(self: pointer, fileName: struct_seaqt_string): void {.importc: "QProcess_setStandardInputFile".}
-proc fcQProcess_setStandardOutputFile(self: pointer, fileName: struct_seaqt_string): void {.importc: "QProcess_setStandardOutputFile".}
-proc fcQProcess_setStandardErrorFile(self: pointer, fileName: struct_seaqt_string): void {.importc: "QProcess_setStandardErrorFile".}
+proc fcQProcess_setStandardOutputFileFileName(self: pointer, fileName: struct_seaqt_string): void {.importc: "QProcess_setStandardOutputFile_fileName".}
+proc fcQProcess_setStandardErrorFileFileName(self: pointer, fileName: struct_seaqt_string): void {.importc: "QProcess_setStandardErrorFile_fileName".}
 proc fcQProcess_setStandardOutputProcess(self: pointer, destination: pointer): void {.importc: "QProcess_setStandardOutputProcess".}
 proc fcQProcess_workingDirectory(self: pointer): struct_seaqt_string {.importc: "QProcess_workingDirectory".}
 proc fcQProcess_setWorkingDirectory(self: pointer, dir: struct_seaqt_string): void {.importc: "QProcess_setWorkingDirectory".}
@@ -158,33 +158,33 @@ proc fcQProcess_exitStatus(self: pointer): cint {.importc: "QProcess_exitStatus"
 proc fcQProcess_bytesToWrite(self: pointer): clonglong {.importc: "QProcess_bytesToWrite".}
 proc fcQProcess_isSequential(self: pointer): bool {.importc: "QProcess_isSequential".}
 proc fcQProcess_close(self: pointer): void {.importc: "QProcess_close".}
-proc fcQProcess_execute(program: struct_seaqt_string): cint {.importc: "QProcess_execute".}
-proc fcQProcess_startDetachedWithProgram(program: struct_seaqt_string): bool {.importc: "QProcess_startDetachedWithProgram".}
+proc fcQProcess_executeProgram(program: struct_seaqt_string): cint {.importc: "QProcess_execute_program".}
+proc fcQProcess_startDetachedProgram(program: struct_seaqt_string): bool {.importc: "QProcess_startDetached_program".}
 proc fcQProcess_systemEnvironment(): struct_seaqt_array {.importc: "QProcess_systemEnvironment".}
 proc fcQProcess_nullDevice(): struct_seaqt_string {.importc: "QProcess_nullDevice".}
 proc fcQProcess_terminate(self: pointer): void {.importc: "QProcess_terminate".}
 proc fcQProcess_kill(self: pointer): void {.importc: "QProcess_kill".}
-proc fcQProcess_finished(self: pointer, exitCode: cint): void {.importc: "QProcess_finished".}
-proc fcQProcess_connect_finished(self: pointer, slot: int, callback: proc (slot: int, exitCode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_finished".}
+proc fcQProcess_finishedExitCode(self: pointer, exitCode: cint): void {.importc: "QProcess_finished_exitCode".}
+proc fcQProcess_connect_finishedExitCode(self: pointer, slot: int, callback: proc (slot: int, exitCode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_finished_exitCode".}
 proc fcQProcess_errorOccurred(self: pointer, error: cint): void {.importc: "QProcess_errorOccurred".}
 proc fcQProcess_connect_errorOccurred(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_errorOccurred".}
-proc fcQProcess_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProcess_tr2".}
-proc fcQProcess_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProcess_tr3".}
-proc fcQProcess_start3(self: pointer, program: struct_seaqt_string, arguments: struct_seaqt_array): void {.importc: "QProcess_start3".}
-proc fcQProcess_start4(self: pointer, program: struct_seaqt_string, arguments: struct_seaqt_array, mode: cint): void {.importc: "QProcess_start4".}
-proc fcQProcess_startWithMode(self: pointer, mode: cint): void {.importc: "QProcess_startWithMode".}
-proc fcQProcess_startCommand2(self: pointer, command: struct_seaqt_string, mode: cint): void {.importc: "QProcess_startCommand2".}
-proc fcQProcess_startDetachedWithPid(self: pointer, pid: ptr clonglong): bool {.importc: "QProcess_startDetachedWithPid".}
-proc fcQProcess_setStandardOutputFile2(self: pointer, fileName: struct_seaqt_string, mode: cint): void {.importc: "QProcess_setStandardOutputFile2".}
-proc fcQProcess_setStandardErrorFile2(self: pointer, fileName: struct_seaqt_string, mode: cint): void {.importc: "QProcess_setStandardErrorFile2".}
-proc fcQProcess_waitForStartedWithMsecs(self: pointer, msecs: cint): bool {.importc: "QProcess_waitForStartedWithMsecs".}
-proc fcQProcess_waitForFinishedWithMsecs(self: pointer, msecs: cint): bool {.importc: "QProcess_waitForFinishedWithMsecs".}
-proc fcQProcess_execute2(program: struct_seaqt_string, arguments: struct_seaqt_array): cint {.importc: "QProcess_execute2".}
-proc fcQProcess_startDetached2(program: struct_seaqt_string, arguments: struct_seaqt_array): bool {.importc: "QProcess_startDetached2".}
-proc fcQProcess_startDetached3(program: struct_seaqt_string, arguments: struct_seaqt_array, workingDirectory: struct_seaqt_string): bool {.importc: "QProcess_startDetached3".}
-proc fcQProcess_startDetached4(program: struct_seaqt_string, arguments: struct_seaqt_array, workingDirectory: struct_seaqt_string, pid: ptr clonglong): bool {.importc: "QProcess_startDetached4".}
-proc fcQProcess_finished2(self: pointer, exitCode: cint, exitStatus: cint): void {.importc: "QProcess_finished2".}
-proc fcQProcess_connect_finished2(self: pointer, slot: int, callback: proc (slot: int, exitCode: cint, exitStatus: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_finished2".}
+proc fcQProcess_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProcess_tr_s_c".}
+proc fcQProcess_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProcess_tr_s_c_n".}
+proc fcQProcess_startProgramArguments(self: pointer, program: struct_seaqt_string, arguments: struct_seaqt_array): void {.importc: "QProcess_start_program_arguments".}
+proc fcQProcess_startProgramArgumentsMode(self: pointer, program: struct_seaqt_string, arguments: struct_seaqt_array, mode: cint): void {.importc: "QProcess_start_program_arguments_mode".}
+proc fcQProcess_startMode(self: pointer, mode: cint): void {.importc: "QProcess_start_mode".}
+proc fcQProcess_startCommandCommandMode(self: pointer, command: struct_seaqt_string, mode: cint): void {.importc: "QProcess_startCommand_command_mode".}
+proc fcQProcess_startDetachedPid(self: pointer, pid: ptr clonglong): bool {.importc: "QProcess_startDetached_pid".}
+proc fcQProcess_setStandardOutputFileFileNameMode(self: pointer, fileName: struct_seaqt_string, mode: cint): void {.importc: "QProcess_setStandardOutputFile_fileName_mode".}
+proc fcQProcess_setStandardErrorFileFileNameMode(self: pointer, fileName: struct_seaqt_string, mode: cint): void {.importc: "QProcess_setStandardErrorFile_fileName_mode".}
+proc fcQProcess_waitForStartedMsecs(self: pointer, msecs: cint): bool {.importc: "QProcess_waitForStarted_msecs".}
+proc fcQProcess_waitForFinishedMsecs(self: pointer, msecs: cint): bool {.importc: "QProcess_waitForFinished_msecs".}
+proc fcQProcess_executeProgramArguments(program: struct_seaqt_string, arguments: struct_seaqt_array): cint {.importc: "QProcess_execute_program_arguments".}
+proc fcQProcess_startDetachedProgramArguments(program: struct_seaqt_string, arguments: struct_seaqt_array): bool {.importc: "QProcess_startDetached_program_arguments".}
+proc fcQProcess_startDetachedProgramArgumentsWorkingDirectory(program: struct_seaqt_string, arguments: struct_seaqt_array, workingDirectory: struct_seaqt_string): bool {.importc: "QProcess_startDetached_program_arguments_workingDirectory".}
+proc fcQProcess_startDetachedProgramArgumentsWorkingDirectoryPid(program: struct_seaqt_string, arguments: struct_seaqt_array, workingDirectory: struct_seaqt_string, pid: ptr clonglong): bool {.importc: "QProcess_startDetached_program_arguments_workingDirectory_pid".}
+proc fcQProcess_finishedExitCodeExitStatus(self: pointer, exitCode: cint, exitStatus: cint): void {.importc: "QProcess_finished_exitCode_exitStatus".}
+proc fcQProcess_connect_finishedExitCodeExitStatus(self: pointer, slot: int, callback: proc (slot: int, exitCode: cint, exitStatus: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_finished_exitCode_exitStatus".}
 proc fcQProcess_vdata(self: pointer): ptr pointer {.importc: "QProcess_vdata".}
 proc fvdata_cQProcess(self: pointer): pointer {.importc: "vdata_QProcess".}
 
@@ -252,11 +252,11 @@ proc fcQProcess_protectedbase_senderSignalIndex(self: pointer): cint {.importc: 
 proc fcQProcess_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QProcess_protectedbase_receivers".}
 proc fcQProcess_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QProcess_protectedbase_isSignalConnected".}
 proc fcQProcess_new(vtbl: pointer, vdata: csize_t): ptr cQProcess {.importc: "QProcess_new".}
-proc fcQProcess_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQProcess {.importc: "QProcess_new2".}
+proc fcQProcess_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQProcess {.importc: "QProcess_new_parent".}
 proc fcQProcess_staticMetaObject(): pointer {.importc: "QProcess_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qprocess_types.QProcessEnvironment, other: gen_qprocess_types.QProcessEnvironment): void =
-  fcQProcessEnvironment_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qprocess_types.QProcessEnvironment, fromVal: gen_qprocess_types.QProcessEnvironment): void =
+  fcQProcessEnvironment_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qprocess_types.QProcessEnvironment, other: gen_qprocess_types.QProcessEnvironment): void =
   fcQProcessEnvironment_swap(self.h, other.h)
@@ -280,13 +280,13 @@ proc contains*(self: gen_qprocess_types.QProcessEnvironment, name: openArray[cha
   fcQProcessEnvironment_contains(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc insert*(self: gen_qprocess_types.QProcessEnvironment, name: openArray[char], value: openArray[char]): void =
-  fcQProcessEnvironment_insert(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
+  fcQProcessEnvironment_insertNameValue(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
 proc remove*(self: gen_qprocess_types.QProcessEnvironment, name: openArray[char]): void =
   fcQProcessEnvironment_remove(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc value*(self: gen_qprocess_types.QProcessEnvironment, name: openArray[char]): string =
-  let v_ms = fcQProcessEnvironment_value(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  let v_ms = fcQProcessEnvironment_valueName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -316,13 +316,13 @@ proc keys*(self: gen_qprocess_types.QProcessEnvironment): seq[string] =
   vx_ret
 
 proc insert*(self: gen_qprocess_types.QProcessEnvironment, e: gen_qprocess_types.QProcessEnvironment): void =
-  fcQProcessEnvironment_insertWithQProcessEnvironment(self.h, e.h)
+  fcQProcessEnvironment_insertE(self.h, e.h)
 
 proc systemEnvironment*(_: type gen_qprocess_types.QProcessEnvironment): gen_qprocess_types.QProcessEnvironment =
   gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_systemEnvironment(), owned: true)
 
 proc value*(self: gen_qprocess_types.QProcessEnvironment, name: openArray[char], defaultValue: openArray[char]): string =
-  let v_ms = fcQProcessEnvironment_value2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
+  let v_ms = fcQProcessEnvironment_valueNameDefaultValue(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -335,8 +335,8 @@ proc create*(T: type gen_qprocess_types.QProcessEnvironment,
   let tmp = gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_new2(cint(param1)), owned: true)
   tmp
 proc create*(T: type gen_qprocess_types.QProcessEnvironment,
-    other: gen_qprocess_types.QProcessEnvironment): gen_qprocess_types.QProcessEnvironment =
-  let tmp = gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_new3(other.h), owned: true)
+    fromVal: gen_qprocess_types.QProcessEnvironment): gen_qprocess_types.QProcessEnvironment =
+  let tmp = gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_new3(fromVal.h), owned: true)
   tmp
 proc metaObject*(self: gen_qprocess_types.QProcess): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProcess_metaObject(self.h), owned: false)
@@ -348,19 +348,19 @@ proc metacall*(self: gen_qprocess_types.QProcess, param1: cint, param2: cint, pa
   fcQProcess_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qprocess_types.QProcess, s: cstring): string =
-  let v_ms = fcQProcess_tr(s)
+  let v_ms = fcQProcess_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc start*(self: gen_qprocess_types.QProcess, program: openArray[char]): void =
-  fcQProcess_start(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))))
+  fcQProcess_startProgram(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))))
 
 proc start*(self: gen_qprocess_types.QProcess): void =
-  fcQProcess_start2(self.h)
+  fcQProcess_start(self.h)
 
 proc startCommand*(self: gen_qprocess_types.QProcess, command: openArray[char]): void =
-  fcQProcess_startCommand(self.h, struct_seaqt_string(data: if len(command) > 0: addr command[0] else: nil, len: csize_t(len(command))))
+  fcQProcess_startCommandCommand(self.h, struct_seaqt_string(data: if len(command) > 0: addr command[0] else: nil, len: csize_t(len(command))))
 
 proc startDetached*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_startDetached(self.h)
@@ -424,10 +424,10 @@ proc setStandardInputFile*(self: gen_qprocess_types.QProcess, fileName: openArra
   fcQProcess_setStandardInputFile(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc setStandardOutputFile*(self: gen_qprocess_types.QProcess, fileName: openArray[char]): void =
-  fcQProcess_setStandardOutputFile(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQProcess_setStandardOutputFileFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc setStandardErrorFile*(self: gen_qprocess_types.QProcess, fileName: openArray[char]): void =
-  fcQProcess_setStandardErrorFile(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQProcess_setStandardErrorFileFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc setStandardOutputProcess*(self: gen_qprocess_types.QProcess, destination: gen_qprocess_types.QProcess): void =
   fcQProcess_setStandardOutputProcess(self.h, destination.h)
@@ -515,10 +515,10 @@ proc close*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_close(self.h)
 
 proc execute*(_: type gen_qprocess_types.QProcess, program: openArray[char]): cint =
-  fcQProcess_execute(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))))
+  fcQProcess_executeProgram(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))))
 
 proc startDetached*(_: type gen_qprocess_types.QProcess, program: openArray[char]): bool =
-  fcQProcess_startDetachedWithProgram(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))))
+  fcQProcess_startDetachedProgram(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))))
 
 proc systemEnvironment*(_: type gen_qprocess_types.QProcess): seq[string] =
   var v_ma = fcQProcess_systemEnvironment()
@@ -545,24 +545,24 @@ proc kill*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_kill(self.h)
 
 proc finished*(self: gen_qprocess_types.QProcess, exitCode: cint): void =
-  fcQProcess_finished(self.h, exitCode)
+  fcQProcess_finishedExitCode(self.h, exitCode)
 
-type QProcessfinishedSlot* = proc(exitCode: cint)
-proc fcQProcess_slot_callback_finished(slot: int, exitCode: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QProcessfinishedSlot](cast[pointer](slot))
+type QProcessfinishedExitCodeSlot* = proc(exitCode: cint)
+proc fcQProcess_slot_callback_finishedExitCode(slot: int, exitCode: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QProcessfinishedExitCodeSlot](cast[pointer](slot))
   let slotval1 = exitCode
 
   nimfunc[](slotval1)
 
-proc fcQProcess_slot_callback_finished_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QProcessfinishedSlot](cast[pointer](slot))
+proc fcQProcess_slot_callback_finishedExitCode_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProcessfinishedExitCodeSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onFinished*(self: gen_qprocess_types.QProcess, slot: QProcessfinishedSlot) =
-  var tmp = new QProcessfinishedSlot
+proc onFinished*(self: gen_qprocess_types.QProcess, slot: QProcessfinishedExitCodeSlot) =
+  var tmp = new QProcessfinishedExitCodeSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProcess_connect_finished(self.h, cast[int](addr tmp[]), fcQProcess_slot_callback_finished, fcQProcess_slot_callback_finished_release)
+  fcQProcess_connect_finishedExitCode(self.h, cast[int](addr tmp[]), fcQProcess_slot_callback_finishedExitCode, fcQProcess_slot_callback_finishedExitCode_release)
 
 proc errorOccurred*(self: gen_qprocess_types.QProcess, error: cint): void =
   fcQProcess_errorOccurred(self.h, cint(error))
@@ -585,13 +585,13 @@ proc onErrorOccurred*(self: gen_qprocess_types.QProcess, slot: QProcesserrorOccu
   fcQProcess_connect_errorOccurred(self.h, cast[int](addr tmp[]), fcQProcess_slot_callback_errorOccurred, fcQProcess_slot_callback_errorOccurred_release)
 
 proc tr*(_: type gen_qprocess_types.QProcess, s: cstring, c: cstring): string =
-  let v_ms = fcQProcess_tr2(s, c)
+  let v_ms = fcQProcess_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qprocess_types.QProcess, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQProcess_tr3(s, c, n)
+  let v_ms = fcQProcess_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -601,85 +601,85 @@ proc start*(self: gen_qprocess_types.QProcess, program: openArray[char], argumen
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_seaqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
 
-  fcQProcess_start3(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
+  fcQProcess_startProgramArguments(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
 
 proc start*(self: gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string], mode: cint): void =
   var arguments_CArray = newSeq[struct_seaqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_seaqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
 
-  fcQProcess_start4(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])), cint(mode))
+  fcQProcess_startProgramArgumentsMode(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])), cint(mode))
 
 proc start*(self: gen_qprocess_types.QProcess, mode: cint): void =
-  fcQProcess_startWithMode(self.h, cint(mode))
+  fcQProcess_startMode(self.h, cint(mode))
 
 proc startCommand*(self: gen_qprocess_types.QProcess, command: openArray[char], mode: cint): void =
-  fcQProcess_startCommand2(self.h, struct_seaqt_string(data: if len(command) > 0: addr command[0] else: nil, len: csize_t(len(command))), cint(mode))
+  fcQProcess_startCommandCommandMode(self.h, struct_seaqt_string(data: if len(command) > 0: addr command[0] else: nil, len: csize_t(len(command))), cint(mode))
 
 proc startDetached*(self: gen_qprocess_types.QProcess, pid: ptr clonglong): bool =
-  fcQProcess_startDetachedWithPid(self.h, pid)
+  fcQProcess_startDetachedPid(self.h, pid)
 
 proc setStandardOutputFile*(self: gen_qprocess_types.QProcess, fileName: openArray[char], mode: cint): void =
-  fcQProcess_setStandardOutputFile2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode))
+  fcQProcess_setStandardOutputFileFileNameMode(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode))
 
 proc setStandardErrorFile*(self: gen_qprocess_types.QProcess, fileName: openArray[char], mode: cint): void =
-  fcQProcess_setStandardErrorFile2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode))
+  fcQProcess_setStandardErrorFileFileNameMode(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode))
 
 proc waitForStarted*(self: gen_qprocess_types.QProcess, msecs: cint): bool =
-  fcQProcess_waitForStartedWithMsecs(self.h, msecs)
+  fcQProcess_waitForStartedMsecs(self.h, msecs)
 
 proc waitForFinished*(self: gen_qprocess_types.QProcess, msecs: cint): bool =
-  fcQProcess_waitForFinishedWithMsecs(self.h, msecs)
+  fcQProcess_waitForFinishedMsecs(self.h, msecs)
 
 proc execute*(_: type gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string]): cint =
   var arguments_CArray = newSeq[struct_seaqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_seaqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
 
-  fcQProcess_execute2(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
+  fcQProcess_executeProgramArguments(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
 
 proc startDetached*(_: type gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string]): bool =
   var arguments_CArray = newSeq[struct_seaqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_seaqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
 
-  fcQProcess_startDetached2(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
+  fcQProcess_startDetachedProgramArguments(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
 
 proc startDetached*(_: type gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string], workingDirectory: openArray[char]): bool =
   var arguments_CArray = newSeq[struct_seaqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_seaqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
 
-  fcQProcess_startDetached3(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])), struct_seaqt_string(data: if len(workingDirectory) > 0: addr workingDirectory[0] else: nil, len: csize_t(len(workingDirectory))))
+  fcQProcess_startDetachedProgramArgumentsWorkingDirectory(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])), struct_seaqt_string(data: if len(workingDirectory) > 0: addr workingDirectory[0] else: nil, len: csize_t(len(workingDirectory))))
 
 proc startDetached*(_: type gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string], workingDirectory: openArray[char], pid: ptr clonglong): bool =
   var arguments_CArray = newSeq[struct_seaqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_seaqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
 
-  fcQProcess_startDetached4(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])), struct_seaqt_string(data: if len(workingDirectory) > 0: addr workingDirectory[0] else: nil, len: csize_t(len(workingDirectory))), pid)
+  fcQProcess_startDetachedProgramArgumentsWorkingDirectoryPid(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])), struct_seaqt_string(data: if len(workingDirectory) > 0: addr workingDirectory[0] else: nil, len: csize_t(len(workingDirectory))), pid)
 
 proc finished*(self: gen_qprocess_types.QProcess, exitCode: cint, exitStatus: cint): void =
-  fcQProcess_finished2(self.h, exitCode, cint(exitStatus))
+  fcQProcess_finishedExitCodeExitStatus(self.h, exitCode, cint(exitStatus))
 
-type QProcessfinished2Slot* = proc(exitCode: cint, exitStatus: cint)
-proc fcQProcess_slot_callback_finished2(slot: int, exitCode: cint, exitStatus: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QProcessfinished2Slot](cast[pointer](slot))
+type QProcessfinishedExitCodeExitStatusSlot* = proc(exitCode: cint, exitStatus: cint)
+proc fcQProcess_slot_callback_finishedExitCodeExitStatus(slot: int, exitCode: cint, exitStatus: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QProcessfinishedExitCodeExitStatusSlot](cast[pointer](slot))
   let slotval1 = exitCode
 
   let slotval2 = cint(exitStatus)
 
   nimfunc[](slotval1, slotval2)
 
-proc fcQProcess_slot_callback_finished2_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QProcessfinished2Slot](cast[pointer](slot))
+proc fcQProcess_slot_callback_finishedExitCodeExitStatus_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProcessfinishedExitCodeExitStatusSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onFinished*(self: gen_qprocess_types.QProcess, slot: QProcessfinished2Slot) =
-  var tmp = new QProcessfinished2Slot
+proc onFinished*(self: gen_qprocess_types.QProcess, slot: QProcessfinishedExitCodeExitStatusSlot) =
+  var tmp = new QProcessfinishedExitCodeExitStatusSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProcess_connect_finished2(self.h, cast[int](addr tmp[]), fcQProcess_slot_callback_finished2, fcQProcess_slot_callback_finished2_release)
+  fcQProcess_connect_finishedExitCodeExitStatus(self.h, cast[int](addr tmp[]), fcQProcess_slot_callback_finishedExitCodeExitStatus, fcQProcess_slot_callback_finishedExitCodeExitStatus_release)
 
 type QProcessmetaObjectProc* = proc(self: QProcess): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QProcessmetacastProc* = proc(self: QProcess, param1: cstring): pointer {.raises: [], gcsafe.}

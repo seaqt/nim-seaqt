@@ -47,7 +47,7 @@ export
 
 type cQPen*{.exportc: "QPen", incompleteStruct.} = object
 
-proc fcQPen_operatorAssign(self: pointer, pen: pointer): void {.importc: "QPen_operatorAssign".}
+proc fcQPen_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QPen_operatorAssign".}
 proc fcQPen_swap(self: pointer, other: pointer): void {.importc: "QPen_swap".}
 proc fcQPen_style(self: pointer): cint {.importc: "QPen_style".}
 proc fcQPen_setStyle(self: pointer, style: cint): void {.importc: "QPen_setStyle".}
@@ -77,16 +77,16 @@ proc fcQPen_operatorNotEqual(self: pointer, p: pointer): bool {.importc: "QPen_o
 proc fcQPen_ToQVariant(self: pointer): pointer {.importc: "QPen_ToQVariant".}
 proc fcQPen_isDetached(self: pointer): bool {.importc: "QPen_isDetached".}
 proc fcQPen_new(): ptr cQPen {.importc: "QPen_new".}
-proc fcQPen_new2(param1: cint): ptr cQPen {.importc: "QPen_new2".}
-proc fcQPen_new3(color: pointer): ptr cQPen {.importc: "QPen_new3".}
-proc fcQPen_new4(brush: pointer, width: float64): ptr cQPen {.importc: "QPen_new4".}
-proc fcQPen_new5(pen: pointer): ptr cQPen {.importc: "QPen_new5".}
-proc fcQPen_new6(brush: pointer, width: float64, s: cint): ptr cQPen {.importc: "QPen_new6".}
-proc fcQPen_new7(brush: pointer, width: float64, s: cint, c: cint): ptr cQPen {.importc: "QPen_new7".}
-proc fcQPen_new8(brush: pointer, width: float64, s: cint, c: cint, j: cint): ptr cQPen {.importc: "QPen_new8".}
+proc fcQPen_new2(param1: cint): ptr cQPen {.importc: "QPen_new_Qt_PenStyle".}
+proc fcQPen_new3(color: pointer): ptr cQPen {.importc: "QPen_new_QColor".}
+proc fcQPen_new4(brush: pointer, width: float64): ptr cQPen {.importc: "QPen_new_QBrush_qreal".}
+proc fcQPen_new5(fromVal: pointer): ptr cQPen {.importc: "QPen_new_QPen".}
+proc fcQPen_new6(brush: pointer, width: float64, s: cint): ptr cQPen {.importc: "QPen_new_QBrush_qreal_Qt_PenStyle".}
+proc fcQPen_new7(brush: pointer, width: float64, s: cint, c: cint): ptr cQPen {.importc: "QPen_new_QBrush_qreal_Qt_PenStyle_Qt_PenCapStyle".}
+proc fcQPen_new8(brush: pointer, width: float64, s: cint, c: cint, j: cint): ptr cQPen {.importc: "QPen_new_QBrush_qreal_Qt_PenStyle_Qt_PenCapStyle_Qt_PenJoinStyle".}
 
-proc operatorAssign*(self: gen_qpen_types.QPen, pen: gen_qpen_types.QPen): void =
-  fcQPen_operatorAssign(self.h, pen.h)
+proc operatorAssign*(self: gen_qpen_types.QPen, fromVal: gen_qpen_types.QPen): void =
+  fcQPen_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qpen_types.QPen, other: gen_qpen_types.QPen): void =
   fcQPen_swap(self.h, other.h)
@@ -198,8 +198,8 @@ proc create*(T: type gen_qpen_types.QPen,
   let tmp = gen_qpen_types.QPen(h: fcQPen_new4(brush.h, width), owned: true)
   tmp
 proc create*(T: type gen_qpen_types.QPen,
-    pen: gen_qpen_types.QPen): gen_qpen_types.QPen =
-  let tmp = gen_qpen_types.QPen(h: fcQPen_new5(pen.h), owned: true)
+    fromVal: gen_qpen_types.QPen): gen_qpen_types.QPen =
+  let tmp = gen_qpen_types.QPen(h: fcQPen_new5(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qpen_types.QPen,
     brush: gen_qbrush_types.QBrush, width: float64, s: cint): gen_qpen_types.QPen =

@@ -721,7 +721,7 @@ VirtualQDesignerResourceBrowserInterface* QDesignerResourceBrowserInterface_new(
 	return _mem_ ? new (_mem_)VirtualQDesignerResourceBrowserInterface(vtbl) : nullptr;
 }
 
-VirtualQDesignerResourceBrowserInterface* QDesignerResourceBrowserInterface_new2(const QDesignerResourceBrowserInterface_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQDesignerResourceBrowserInterface* QDesignerResourceBrowserInterface_new_parent(const QDesignerResourceBrowserInterface_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDesignerResourceBrowserInterface>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDesignerResourceBrowserInterface(vtbl, parent) : nullptr;
 }
@@ -742,7 +742,7 @@ int QDesignerResourceBrowserInterface_metacall(QDesignerResourceBrowserInterface
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDesignerResourceBrowserInterface_tr(const char* s) {
+struct seaqt_string QDesignerResourceBrowserInterface_tr_s(const char* s) {
 	QString _ret = QDesignerResourceBrowserInterface::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -817,7 +817,7 @@ void QDesignerResourceBrowserInterface_connect_pathActivated(QDesignerResourceBr
 	QDesignerResourceBrowserInterface::connect(self, static_cast<void (QDesignerResourceBrowserInterface::*)(const QString&)>(&QDesignerResourceBrowserInterface::pathActivated), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDesignerResourceBrowserInterface_tr2(const char* s, const char* c) {
+struct seaqt_string QDesignerResourceBrowserInterface_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDesignerResourceBrowserInterface::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -828,7 +828,7 @@ struct seaqt_string QDesignerResourceBrowserInterface_tr2(const char* s, const c
 	return _ms;
 }
 
-struct seaqt_string QDesignerResourceBrowserInterface_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDesignerResourceBrowserInterface_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDesignerResourceBrowserInterface::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

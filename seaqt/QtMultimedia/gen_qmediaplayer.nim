@@ -97,7 +97,7 @@ type cQMediaPlayer*{.exportc: "QMediaPlayer", incompleteStruct.} = object
 proc fcQMediaPlayer_metaObject(self: pointer): pointer {.importc: "QMediaPlayer_metaObject".}
 proc fcQMediaPlayer_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaPlayer_metacast".}
 proc fcQMediaPlayer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaPlayer_metacall".}
-proc fcQMediaPlayer_tr(s: cstring): struct_seaqt_string {.importc: "QMediaPlayer_tr".}
+proc fcQMediaPlayer_trS(s: cstring): struct_seaqt_string {.importc: "QMediaPlayer_tr_s".}
 proc fcQMediaPlayer_audioTracks(self: pointer): struct_seaqt_array {.importc: "QMediaPlayer_audioTracks".}
 proc fcQMediaPlayer_videoTracks(self: pointer): struct_seaqt_array {.importc: "QMediaPlayer_videoTracks".}
 proc fcQMediaPlayer_subtitleTracks(self: pointer): struct_seaqt_array {.importc: "QMediaPlayer_subtitleTracks".}
@@ -137,7 +137,7 @@ proc fcQMediaPlayer_stop(self: pointer): void {.importc: "QMediaPlayer_stop".}
 proc fcQMediaPlayer_setPosition(self: pointer, position: clonglong): void {.importc: "QMediaPlayer_setPosition".}
 proc fcQMediaPlayer_setPlaybackRate(self: pointer, rate: float64): void {.importc: "QMediaPlayer_setPlaybackRate".}
 proc fcQMediaPlayer_setSource(self: pointer, source: pointer): void {.importc: "QMediaPlayer_setSource".}
-proc fcQMediaPlayer_setSourceDevice(self: pointer, device: pointer): void {.importc: "QMediaPlayer_setSourceDevice".}
+proc fcQMediaPlayer_setSourceDeviceDevice(self: pointer, device: pointer): void {.importc: "QMediaPlayer_setSourceDevice_device".}
 proc fcQMediaPlayer_sourceChanged(self: pointer, media: pointer): void {.importc: "QMediaPlayer_sourceChanged".}
 proc fcQMediaPlayer_connect_sourceChanged(self: pointer, slot: int, callback: proc (slot: int, media: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlayer_connect_sourceChanged".}
 proc fcQMediaPlayer_playbackStateChanged(self: pointer, newState: cint): void {.importc: "QMediaPlayer_playbackStateChanged".}
@@ -174,9 +174,9 @@ proc fcQMediaPlayer_errorChanged(self: pointer): void {.importc: "QMediaPlayer_e
 proc fcQMediaPlayer_connect_errorChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlayer_connect_errorChanged".}
 proc fcQMediaPlayer_errorOccurred(self: pointer, error: cint, errorString: struct_seaqt_string): void {.importc: "QMediaPlayer_errorOccurred".}
 proc fcQMediaPlayer_connect_errorOccurred(self: pointer, slot: int, callback: proc (slot: int, error: cint, errorString: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlayer_connect_errorOccurred".}
-proc fcQMediaPlayer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlayer_tr2".}
-proc fcQMediaPlayer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlayer_tr3".}
-proc fcQMediaPlayer_setSourceDevice2(self: pointer, device: pointer, sourceUrl: pointer): void {.importc: "QMediaPlayer_setSourceDevice2".}
+proc fcQMediaPlayer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlayer_tr_s_c".}
+proc fcQMediaPlayer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlayer_tr_s_c_n".}
+proc fcQMediaPlayer_setSourceDeviceDeviceSourceUrl(self: pointer, device: pointer, sourceUrl: pointer): void {.importc: "QMediaPlayer_setSourceDevice_device_sourceUrl".}
 proc fcQMediaPlayer_vdata(self: pointer): ptr pointer {.importc: "QMediaPlayer_vdata".}
 proc fvdata_cQMediaPlayer(self: pointer): pointer {.importc: "vdata_QMediaPlayer".}
 
@@ -207,7 +207,7 @@ proc fcQMediaPlayer_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQMediaPlayer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaPlayer_protectedbase_receivers".}
 proc fcQMediaPlayer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaPlayer_protectedbase_isSignalConnected".}
 proc fcQMediaPlayer_new(vtbl: pointer, vdata: csize_t): ptr cQMediaPlayer {.importc: "QMediaPlayer_new".}
-proc fcQMediaPlayer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaPlayer {.importc: "QMediaPlayer_new2".}
+proc fcQMediaPlayer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaPlayer {.importc: "QMediaPlayer_new_parent".}
 proc fcQMediaPlayer_staticMetaObject(): pointer {.importc: "QMediaPlayer_staticMetaObject".}
 
 proc metaObject*(self: gen_qmediaplayer_types.QMediaPlayer): gen_qobjectdefs_types.QMetaObject =
@@ -220,7 +220,7 @@ proc metacall*(self: gen_qmediaplayer_types.QMediaPlayer, param1: cint, param2: 
   fcQMediaPlayer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring): string =
-  let v_ms = fcQMediaPlayer_tr(s)
+  let v_ms = fcQMediaPlayer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -364,7 +364,7 @@ proc setSource*(self: gen_qmediaplayer_types.QMediaPlayer, source: gen_qurl_type
   fcQMediaPlayer_setSource(self.h, source.h)
 
 proc setSourceDevice*(self: gen_qmediaplayer_types.QMediaPlayer, device: gen_qiodevice_types.QIODevice): void =
-  fcQMediaPlayer_setSourceDevice(self.h, device.h)
+  fcQMediaPlayer_setSourceDeviceDevice(self.h, device.h)
 
 proc sourceChanged*(self: gen_qmediaplayer_types.QMediaPlayer, media: gen_qurl_types.QUrl): void =
   fcQMediaPlayer_sourceChanged(self.h, media.h)
@@ -718,19 +718,19 @@ proc onErrorOccurred*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPla
   fcQMediaPlayer_connect_errorOccurred(self.h, cast[int](addr tmp[]), fcQMediaPlayer_slot_callback_errorOccurred, fcQMediaPlayer_slot_callback_errorOccurred_release)
 
 proc tr*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaPlayer_tr2(s, c)
+  let v_ms = fcQMediaPlayer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaPlayer_tr3(s, c, n)
+  let v_ms = fcQMediaPlayer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setSourceDevice*(self: gen_qmediaplayer_types.QMediaPlayer, device: gen_qiodevice_types.QIODevice, sourceUrl: gen_qurl_types.QUrl): void =
-  fcQMediaPlayer_setSourceDevice2(self.h, device.h, sourceUrl.h)
+  fcQMediaPlayer_setSourceDeviceDeviceSourceUrl(self.h, device.h, sourceUrl.h)
 
 type QMediaPlayermetaObjectProc* = proc(self: QMediaPlayer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMediaPlayermetacastProc* = proc(self: QMediaPlayer, param1: cstring): pointer {.raises: [], gcsafe.}

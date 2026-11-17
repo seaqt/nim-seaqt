@@ -61,15 +61,15 @@ type cQDesignerFormWindowToolInterface*{.exportc: "QDesignerFormWindowToolInterf
 proc fcQDesignerFormWindowToolInterface_metaObject(self: pointer): pointer {.importc: "QDesignerFormWindowToolInterface_metaObject".}
 proc fcQDesignerFormWindowToolInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerFormWindowToolInterface_metacast".}
 proc fcQDesignerFormWindowToolInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerFormWindowToolInterface_metacall".}
-proc fcQDesignerFormWindowToolInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowToolInterface_tr".}
+proc fcQDesignerFormWindowToolInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowToolInterface_tr_s".}
 proc fcQDesignerFormWindowToolInterface_formWindow(self: pointer): pointer {.importc: "QDesignerFormWindowToolInterface_formWindow".}
 proc fcQDesignerFormWindowToolInterface_editor(self: pointer): pointer {.importc: "QDesignerFormWindowToolInterface_editor".}
 proc fcQDesignerFormWindowToolInterface_action(self: pointer): pointer {.importc: "QDesignerFormWindowToolInterface_action".}
 proc fcQDesignerFormWindowToolInterface_activated(self: pointer): void {.importc: "QDesignerFormWindowToolInterface_activated".}
 proc fcQDesignerFormWindowToolInterface_deactivated(self: pointer): void {.importc: "QDesignerFormWindowToolInterface_deactivated".}
 proc fcQDesignerFormWindowToolInterface_handleEvent(self: pointer, widget: pointer, managedWidget: pointer, event: pointer): bool {.importc: "QDesignerFormWindowToolInterface_handleEvent".}
-proc fcQDesignerFormWindowToolInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowToolInterface_tr2".}
-proc fcQDesignerFormWindowToolInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerFormWindowToolInterface_tr3".}
+proc fcQDesignerFormWindowToolInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowToolInterface_tr_s_c".}
+proc fcQDesignerFormWindowToolInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerFormWindowToolInterface_tr_s_c_n".}
 proc fcQDesignerFormWindowToolInterface_protectedbase_sender(self: pointer): pointer {.importc: "QDesignerFormWindowToolInterface_protectedbase_sender".}
 proc fcQDesignerFormWindowToolInterface_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDesignerFormWindowToolInterface_protectedbase_senderSignalIndex".}
 proc fcQDesignerFormWindowToolInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerFormWindowToolInterface_protectedbase_receivers".}
@@ -86,7 +86,7 @@ proc metacall*(self: gen_abstractformwindowtool_types.QDesignerFormWindowToolInt
   fcQDesignerFormWindowToolInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface, s: cstring): string =
-  let v_ms = fcQDesignerFormWindowToolInterface_tr(s)
+  let v_ms = fcQDesignerFormWindowToolInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -110,13 +110,13 @@ proc handleEvent*(self: gen_abstractformwindowtool_types.QDesignerFormWindowTool
   fcQDesignerFormWindowToolInterface_handleEvent(self.h, widget.h, managedWidget.h, event.h)
 
 proc tr*(_: type gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerFormWindowToolInterface_tr2(s, c)
+  let v_ms = fcQDesignerFormWindowToolInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerFormWindowToolInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerFormWindowToolInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

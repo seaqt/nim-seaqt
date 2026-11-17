@@ -22,7 +22,7 @@ QCommandLineParser* QCommandLineParser_new() {
 	return new (std::nothrow) QCommandLineParser();
 }
 
-struct seaqt_string QCommandLineParser_tr(const char* sourceText) {
+struct seaqt_string QCommandLineParser_tr_sourceText(const char* sourceText) {
 	QString _ret = QCommandLineParser::tr(sourceText);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -79,7 +79,7 @@ struct seaqt_string QCommandLineParser_applicationDescription(const QCommandLine
 	return _ms;
 }
 
-void QCommandLineParser_addPositionalArgument(QCommandLineParser* self, struct seaqt_string name, struct seaqt_string description) {
+void QCommandLineParser_addPositionalArgument_name_description(QCommandLineParser* self, struct seaqt_string name, struct seaqt_string description) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString description_QString = QString::fromUtf8(description.data, description.len);
 	self->addPositionalArgument(name_QString, description_QString);
@@ -89,7 +89,7 @@ void QCommandLineParser_clearPositionalArguments(QCommandLineParser* self) {
 	self->clearPositionalArguments();
 }
 
-void QCommandLineParser_process(QCommandLineParser* self, struct seaqt_array /* of struct seaqt_string */  arguments) {
+void QCommandLineParser_process_arguments(QCommandLineParser* self, struct seaqt_array /* of struct seaqt_string */  arguments) {
 	QStringList arguments_QList;
 	arguments_QList.reserve(arguments.len);
 	struct seaqt_string* arguments_arr = static_cast<struct seaqt_string*>(arguments.data);
@@ -100,7 +100,7 @@ void QCommandLineParser_process(QCommandLineParser* self, struct seaqt_array /* 
 	self->process(arguments_QList);
 }
 
-void QCommandLineParser_processWithApp(QCommandLineParser* self, QCoreApplication* app) {
+void QCommandLineParser_process_app(QCommandLineParser* self, QCoreApplication* app) {
 	self->process(*app);
 }
 
@@ -126,12 +126,12 @@ struct seaqt_string QCommandLineParser_errorText(const QCommandLineParser* self)
 	return _ms;
 }
 
-bool QCommandLineParser_isSet(const QCommandLineParser* self, struct seaqt_string name) {
+bool QCommandLineParser_isSet_name(const QCommandLineParser* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return self->isSet(name_QString);
 }
 
-struct seaqt_string QCommandLineParser_value(const QCommandLineParser* self, struct seaqt_string name) {
+struct seaqt_string QCommandLineParser_value_name(const QCommandLineParser* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString _ret = self->value(name_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -143,7 +143,7 @@ struct seaqt_string QCommandLineParser_value(const QCommandLineParser* self, str
 	return _ms;
 }
 
-struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_values(const QCommandLineParser* self, struct seaqt_string name) {
+struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_values_name(const QCommandLineParser* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QStringList _ret = self->values(name_QString);
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -164,11 +164,11 @@ struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_values(const
 	return _out;
 }
 
-bool QCommandLineParser_isSetWithOption(const QCommandLineParser* self, QCommandLineOption* option) {
+bool QCommandLineParser_isSet_option(const QCommandLineParser* self, QCommandLineOption* option) {
 	return self->isSet(*option);
 }
 
-struct seaqt_string QCommandLineParser_valueWithOption(const QCommandLineParser* self, QCommandLineOption* option) {
+struct seaqt_string QCommandLineParser_value_option(const QCommandLineParser* self, QCommandLineOption* option) {
 	QString _ret = self->value(*option);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -179,7 +179,7 @@ struct seaqt_string QCommandLineParser_valueWithOption(const QCommandLineParser*
 	return _ms;
 }
 
-struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_valuesWithOption(const QCommandLineParser* self, QCommandLineOption* option) {
+struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_values_option(const QCommandLineParser* self, QCommandLineOption* option) {
 	QStringList _ret = self->values(*option);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
@@ -278,7 +278,7 @@ struct seaqt_string QCommandLineParser_helpText(const QCommandLineParser* self) 
 	return _ms;
 }
 
-struct seaqt_string QCommandLineParser_tr2(const char* sourceText, const char* disambiguation) {
+struct seaqt_string QCommandLineParser_tr_sourceText_disambiguation(const char* sourceText, const char* disambiguation) {
 	QString _ret = QCommandLineParser::tr(sourceText, disambiguation);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -289,7 +289,7 @@ struct seaqt_string QCommandLineParser_tr2(const char* sourceText, const char* d
 	return _ms;
 }
 
-struct seaqt_string QCommandLineParser_tr3(const char* sourceText, const char* disambiguation, int n) {
+struct seaqt_string QCommandLineParser_tr_sourceText_disambiguation_n(const char* sourceText, const char* disambiguation, int n) {
 	QString _ret = QCommandLineParser::tr(sourceText, disambiguation, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -300,14 +300,14 @@ struct seaqt_string QCommandLineParser_tr3(const char* sourceText, const char* d
 	return _ms;
 }
 
-void QCommandLineParser_addPositionalArgument2(QCommandLineParser* self, struct seaqt_string name, struct seaqt_string description, struct seaqt_string syntax) {
+void QCommandLineParser_addPositionalArgument_name_description_syntax(QCommandLineParser* self, struct seaqt_string name, struct seaqt_string description, struct seaqt_string syntax) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString description_QString = QString::fromUtf8(description.data, description.len);
 	QString syntax_QString = QString::fromUtf8(syntax.data, syntax.len);
 	self->addPositionalArgument(name_QString, description_QString, syntax_QString);
 }
 
-void QCommandLineParser_showHelpWithExitCode(QCommandLineParser* self, int exitCode) {
+void QCommandLineParser_showHelp_exitCode(QCommandLineParser* self, int exitCode) {
 	self->showHelp(static_cast<int>(exitCode));
 }
 

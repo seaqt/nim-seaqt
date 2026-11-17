@@ -74,7 +74,7 @@ type cQSpatialSound*{.exportc: "QSpatialSound", incompleteStruct.} = object
 proc fcQSpatialSound_metaObject(self: pointer): pointer {.importc: "QSpatialSound_metaObject".}
 proc fcQSpatialSound_metacast(self: pointer, param1: cstring): pointer {.importc: "QSpatialSound_metacast".}
 proc fcQSpatialSound_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSpatialSound_metacall".}
-proc fcQSpatialSound_tr(s: cstring): struct_seaqt_string {.importc: "QSpatialSound_tr".}
+proc fcQSpatialSound_trS(s: cstring): struct_seaqt_string {.importc: "QSpatialSound_tr_s".}
 proc fcQSpatialSound_setSource(self: pointer, url: pointer): void {.importc: "QSpatialSound_setSource".}
 proc fcQSpatialSound_source(self: pointer): pointer {.importc: "QSpatialSound_source".}
 proc fcQSpatialSound_loops(self: pointer): cint {.importc: "QSpatialSound_loops".}
@@ -135,8 +135,8 @@ proc fcQSpatialSound_connect_nearFieldGainChanged(self: pointer, slot: int, call
 proc fcQSpatialSound_play(self: pointer): void {.importc: "QSpatialSound_play".}
 proc fcQSpatialSound_pause(self: pointer): void {.importc: "QSpatialSound_pause".}
 proc fcQSpatialSound_stop(self: pointer): void {.importc: "QSpatialSound_stop".}
-proc fcQSpatialSound_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSpatialSound_tr2".}
-proc fcQSpatialSound_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSpatialSound_tr3".}
+proc fcQSpatialSound_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSpatialSound_tr_s_c".}
+proc fcQSpatialSound_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSpatialSound_tr_s_c_n".}
 proc fcQSpatialSound_vdata(self: pointer): ptr pointer {.importc: "QSpatialSound_vdata".}
 proc fvdata_cQSpatialSound(self: pointer): pointer {.importc: "vdata_QSpatialSound".}
 
@@ -179,7 +179,7 @@ proc metacall*(self: gen_qspatialsound_types.QSpatialSound, param1: cint, param2
   fcQSpatialSound_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qspatialsound_types.QSpatialSound, s: cstring): string =
-  let v_ms = fcQSpatialSound_tr(s)
+  let v_ms = fcQSpatialSound_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -533,13 +533,13 @@ proc stop*(self: gen_qspatialsound_types.QSpatialSound): void =
   fcQSpatialSound_stop(self.h)
 
 proc tr*(_: type gen_qspatialsound_types.QSpatialSound, s: cstring, c: cstring): string =
-  let v_ms = fcQSpatialSound_tr2(s, c)
+  let v_ms = fcQSpatialSound_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qspatialsound_types.QSpatialSound, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSpatialSound_tr3(s, c, n)
+  let v_ms = fcQSpatialSound_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

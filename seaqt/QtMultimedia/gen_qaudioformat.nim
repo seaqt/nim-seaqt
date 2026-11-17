@@ -110,7 +110,7 @@ proc fcQAudioFormat_bytesPerSample(self: pointer): cint {.importc: "QAudioFormat
 proc fcQAudioFormat_normalizedSampleValue(self: pointer, sample: pointer): float32 {.importc: "QAudioFormat_normalizedSampleValue".}
 proc fcQAudioFormat_defaultChannelConfigForChannelCount(channelCount: cint): cint {.importc: "QAudioFormat_defaultChannelConfigForChannelCount".}
 proc fcQAudioFormat_new(): ptr cQAudioFormat {.importc: "QAudioFormat_new".}
-proc fcQAudioFormat_new2(param1: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new2".}
+proc fcQAudioFormat_new2(fromVal: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new_from".}
 
 proc isValid*(self: gen_qaudioformat_types.QAudioFormat): bool =
   fcQAudioFormat_isValid(self.h)
@@ -176,6 +176,6 @@ proc create*(T: type gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_type
   let tmp = gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new(), owned: true)
   tmp
 proc create*(T: type gen_qaudioformat_types.QAudioFormat,
-    param1: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  let tmp = gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(param1.h), owned: true)
+    fromVal: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
+  let tmp = gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(fromVal.h), owned: true)
   tmp

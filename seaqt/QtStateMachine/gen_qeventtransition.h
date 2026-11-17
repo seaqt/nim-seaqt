@@ -57,15 +57,15 @@ void* QEventTransition_vdata(VirtualQEventTransition* self);
 VirtualQEventTransition* vdata_QEventTransition(void* vdata);
 
 VirtualQEventTransition* QEventTransition_new(const QEventTransition_VTable* vtbl, size_t vdata);
-VirtualQEventTransition* QEventTransition_new2(const QEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type);
-VirtualQEventTransition* QEventTransition_new3(const QEventTransition_VTable* vtbl, size_t vdata, QState* sourceState);
-VirtualQEventTransition* QEventTransition_new4(const QEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, QState* sourceState);
+VirtualQEventTransition* QEventTransition_new_object_type(const QEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type);
+VirtualQEventTransition* QEventTransition_new_sourceState(const QEventTransition_VTable* vtbl, size_t vdata, QState* sourceState);
+VirtualQEventTransition* QEventTransition_new_object_type_sourceState(const QEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, QState* sourceState);
 
 void QEventTransition_virtbase(QEventTransition* src, QAbstractTransition** outptr_QAbstractTransition);
 QMetaObject* QEventTransition_metaObject(const QEventTransition* self);
 void* QEventTransition_metacast(QEventTransition* self, const char* param1);
 int QEventTransition_metacall(QEventTransition* self, int param1, int param2, void** param3);
-struct seaqt_string QEventTransition_tr(const char* s);
+struct seaqt_string QEventTransition_tr_s(const char* s);
 QObject* QEventTransition_eventSource(const QEventTransition* self);
 void QEventTransition_setEventSource(QEventTransition* self, QObject* object);
 int QEventTransition_eventType(const QEventTransition* self);
@@ -73,8 +73,8 @@ void QEventTransition_setEventType(QEventTransition* self, int type);
 bool QEventTransition_eventTest(QEventTransition* self, QEvent* event);
 void QEventTransition_onTransition(QEventTransition* self, QEvent* event);
 bool QEventTransition_event(QEventTransition* self, QEvent* e);
-struct seaqt_string QEventTransition_tr2(const char* s, const char* c);
-struct seaqt_string QEventTransition_tr3(const char* s, const char* c, int n);
+struct seaqt_string QEventTransition_tr_s_c(const char* s, const char* c);
+struct seaqt_string QEventTransition_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QEventTransition_virtualbase_metaObject(const VirtualQEventTransition* self);
 void* QEventTransition_virtualbase_metacast(VirtualQEventTransition* self, const char* param1);

@@ -18,11 +18,11 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QMediaMetaData* QMediaMetaData_new(QMediaMetaData* param1) {
-	return new (std::nothrow) QMediaMetaData(*param1);
+QMediaMetaData* QMediaMetaData_new_from(QMediaMetaData* from) {
+	return new (std::nothrow) QMediaMetaData(*from);
 }
 
-QMediaMetaData* QMediaMetaData_new2() {
+QMediaMetaData* QMediaMetaData_new() {
 	return new (std::nothrow) QMediaMetaData();
 }
 
@@ -88,8 +88,8 @@ struct seaqt_string QMediaMetaData_metaDataKeyToString(int k) {
 	return _ms;
 }
 
-void QMediaMetaData_operatorAssign(QMediaMetaData* self, QMediaMetaData* param1) {
-	self->operator=(*param1);
+void QMediaMetaData_operatorAssign(QMediaMetaData* self, QMediaMetaData* from) {
+	self->operator=(*from);
 }
 
 const QMetaObject* QMediaMetaData_staticMetaObject() { return &QMediaMetaData::staticMetaObject; }

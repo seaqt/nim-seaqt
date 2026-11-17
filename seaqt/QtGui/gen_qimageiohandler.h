@@ -69,8 +69,8 @@ VirtualQImageIOHandler* QImageIOHandler_new(const QImageIOHandler_VTable* vtbl, 
 
 void QImageIOHandler_setDevice(QImageIOHandler* self, QIODevice* device);
 QIODevice* QImageIOHandler_device(const QImageIOHandler* self);
-void QImageIOHandler_setFormat(QImageIOHandler* self, struct seaqt_string format);
-void QImageIOHandler_setFormatWithFormat(const QImageIOHandler* self, struct seaqt_string format);
+void QImageIOHandler_setFormat_cQByteArray(QImageIOHandler* self, struct seaqt_string format);
+void QImageIOHandler_setFormat_const_cQByteArray(const QImageIOHandler* self, struct seaqt_string format);
 struct seaqt_string QImageIOHandler_format(const QImageIOHandler* self);
 bool QImageIOHandler_canRead(const QImageIOHandler* self);
 bool QImageIOHandler_read(QImageIOHandler* self, QImage* image);
@@ -124,17 +124,17 @@ void* QImageIOPlugin_vdata(VirtualQImageIOPlugin* self);
 VirtualQImageIOPlugin* vdata_QImageIOPlugin(void* vdata);
 
 VirtualQImageIOPlugin* QImageIOPlugin_new(const QImageIOPlugin_VTable* vtbl, size_t vdata);
-VirtualQImageIOPlugin* QImageIOPlugin_new2(const QImageIOPlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQImageIOPlugin* QImageIOPlugin_new_parent(const QImageIOPlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QImageIOPlugin_virtbase(QImageIOPlugin* src, QObject** outptr_QObject);
 QMetaObject* QImageIOPlugin_metaObject(const QImageIOPlugin* self);
 void* QImageIOPlugin_metacast(QImageIOPlugin* self, const char* param1);
 int QImageIOPlugin_metacall(QImageIOPlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QImageIOPlugin_tr(const char* s);
+struct seaqt_string QImageIOPlugin_tr_s(const char* s);
 int QImageIOPlugin_capabilities(const QImageIOPlugin* self, QIODevice* device, struct seaqt_string format);
 QImageIOHandler* QImageIOPlugin_create(const QImageIOPlugin* self, QIODevice* device, struct seaqt_string format);
-struct seaqt_string QImageIOPlugin_tr2(const char* s, const char* c);
-struct seaqt_string QImageIOPlugin_tr3(const char* s, const char* c, int n);
+struct seaqt_string QImageIOPlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QImageIOPlugin_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QImageIOPlugin_virtualbase_metaObject(const VirtualQImageIOPlugin* self);
 void* QImageIOPlugin_virtualbase_metacast(VirtualQImageIOPlugin* self, const char* param1);

@@ -163,11 +163,11 @@ QRectF* QSvgGenerator_viewBoxF(const QSvgGenerator* self) {
 	return new QRectF(self->viewBoxF());
 }
 
-void QSvgGenerator_setViewBox(QSvgGenerator* self, QRect* viewBox) {
+void QSvgGenerator_setViewBox_QRect(QSvgGenerator* self, QRect* viewBox) {
 	self->setViewBox(*viewBox);
 }
 
-void QSvgGenerator_setViewBoxWithViewBox(QSvgGenerator* self, QRectF* viewBox) {
+void QSvgGenerator_setViewBox_QRectF(QSvgGenerator* self, QRectF* viewBox) {
 	self->setViewBox(*viewBox);
 }
 

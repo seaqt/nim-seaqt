@@ -57,10 +57,10 @@ type cQButtonGroup*{.exportc: "QButtonGroup", incompleteStruct.} = object
 proc fcQButtonGroup_metaObject(self: pointer): pointer {.importc: "QButtonGroup_metaObject".}
 proc fcQButtonGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QButtonGroup_metacast".}
 proc fcQButtonGroup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QButtonGroup_metacall".}
-proc fcQButtonGroup_tr(s: cstring): struct_seaqt_string {.importc: "QButtonGroup_tr".}
+proc fcQButtonGroup_trS(s: cstring): struct_seaqt_string {.importc: "QButtonGroup_tr_s".}
 proc fcQButtonGroup_setExclusive(self: pointer, exclusive: bool): void {.importc: "QButtonGroup_setExclusive".}
 proc fcQButtonGroup_exclusive(self: pointer): bool {.importc: "QButtonGroup_exclusive".}
-proc fcQButtonGroup_addButton(self: pointer, param1: pointer): void {.importc: "QButtonGroup_addButton".}
+proc fcQButtonGroup_addButton_QAbstractButton(self: pointer, param1: pointer): void {.importc: "QButtonGroup_addButton_QAbstractButton".}
 proc fcQButtonGroup_removeButton(self: pointer, param1: pointer): void {.importc: "QButtonGroup_removeButton".}
 proc fcQButtonGroup_buttons(self: pointer): struct_seaqt_array {.importc: "QButtonGroup_buttons".}
 proc fcQButtonGroup_checkedButton(self: pointer): pointer {.importc: "QButtonGroup_checkedButton".}
@@ -84,9 +84,9 @@ proc fcQButtonGroup_idReleased(self: pointer, param1: cint): void {.importc: "QB
 proc fcQButtonGroup_connect_idReleased(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QButtonGroup_connect_idReleased".}
 proc fcQButtonGroup_idToggled(self: pointer, param1: cint, param2: bool): void {.importc: "QButtonGroup_idToggled".}
 proc fcQButtonGroup_connect_idToggled(self: pointer, slot: int, callback: proc (slot: int, param1: cint, param2: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QButtonGroup_connect_idToggled".}
-proc fcQButtonGroup_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QButtonGroup_tr2".}
-proc fcQButtonGroup_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QButtonGroup_tr3".}
-proc fcQButtonGroup_addButton2(self: pointer, param1: pointer, id: cint): void {.importc: "QButtonGroup_addButton2".}
+proc fcQButtonGroup_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QButtonGroup_tr_s_c".}
+proc fcQButtonGroup_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QButtonGroup_tr_s_c_n".}
+proc fcQButtonGroup_addButton_QAbstractButtonInt(self: pointer, param1: pointer, id: cint): void {.importc: "QButtonGroup_addButton_QAbstractButton_int".}
 proc fcQButtonGroup_vdata(self: pointer): ptr pointer {.importc: "QButtonGroup_vdata".}
 proc fvdata_cQButtonGroup(self: pointer): pointer {.importc: "vdata_QButtonGroup".}
 
@@ -117,7 +117,7 @@ proc fcQButtonGroup_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQButtonGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QButtonGroup_protectedbase_receivers".}
 proc fcQButtonGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QButtonGroup_protectedbase_isSignalConnected".}
 proc fcQButtonGroup_new(vtbl: pointer, vdata: csize_t): ptr cQButtonGroup {.importc: "QButtonGroup_new".}
-proc fcQButtonGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQButtonGroup {.importc: "QButtonGroup_new2".}
+proc fcQButtonGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQButtonGroup {.importc: "QButtonGroup_new_parent".}
 proc fcQButtonGroup_staticMetaObject(): pointer {.importc: "QButtonGroup_staticMetaObject".}
 
 proc metaObject*(self: gen_qbuttongroup_types.QButtonGroup): gen_qobjectdefs_types.QMetaObject =
@@ -130,7 +130,7 @@ proc metacall*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint, param2: 
   fcQButtonGroup_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qbuttongroup_types.QButtonGroup, s: cstring): string =
-  let v_ms = fcQButtonGroup_tr(s)
+  let v_ms = fcQButtonGroup_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -142,7 +142,7 @@ proc exclusive*(self: gen_qbuttongroup_types.QButtonGroup): bool =
   fcQButtonGroup_exclusive(self.h)
 
 proc addButton*(self: gen_qbuttongroup_types.QButtonGroup, param1: gen_qabstractbutton_types.QAbstractButton): void =
-  fcQButtonGroup_addButton(self.h, param1.h)
+  fcQButtonGroup_addButton_QAbstractButton(self.h, param1.h)
 
 proc removeButton*(self: gen_qbuttongroup_types.QButtonGroup, param1: gen_qabstractbutton_types.QAbstractButton): void =
   fcQButtonGroup_removeButton(self.h, param1.h)
@@ -336,19 +336,19 @@ proc onIdToggled*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupi
   fcQButtonGroup_connect_idToggled(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_idToggled, fcQButtonGroup_slot_callback_idToggled_release)
 
 proc tr*(_: type gen_qbuttongroup_types.QButtonGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQButtonGroup_tr2(s, c)
+  let v_ms = fcQButtonGroup_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qbuttongroup_types.QButtonGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQButtonGroup_tr3(s, c, n)
+  let v_ms = fcQButtonGroup_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc addButton*(self: gen_qbuttongroup_types.QButtonGroup, param1: gen_qabstractbutton_types.QAbstractButton, id: cint): void =
-  fcQButtonGroup_addButton2(self.h, param1.h, id)
+  fcQButtonGroup_addButton_QAbstractButtonInt(self.h, param1.h, id)
 
 type QButtonGroupmetaObjectProc* = proc(self: QButtonGroup): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QButtonGroupmetacastProc* = proc(self: QButtonGroup, param1: cstring): pointer {.raises: [], gcsafe.}

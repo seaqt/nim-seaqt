@@ -63,7 +63,7 @@ type cQAudioEngine*{.exportc: "QAudioEngine", incompleteStruct.} = object
 proc fcQAudioEngine_metaObject(self: pointer): pointer {.importc: "QAudioEngine_metaObject".}
 proc fcQAudioEngine_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioEngine_metacast".}
 proc fcQAudioEngine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioEngine_metacall".}
-proc fcQAudioEngine_tr(s: cstring): struct_seaqt_string {.importc: "QAudioEngine_tr".}
+proc fcQAudioEngine_trS(s: cstring): struct_seaqt_string {.importc: "QAudioEngine_tr_s".}
 proc fcQAudioEngine_setOutputMode(self: pointer, mode: cint): void {.importc: "QAudioEngine_setOutputMode".}
 proc fcQAudioEngine_outputMode(self: pointer): cint {.importc: "QAudioEngine_outputMode".}
 proc fcQAudioEngine_sampleRate(self: pointer): cint {.importc: "QAudioEngine_sampleRate".}
@@ -91,8 +91,8 @@ proc fcQAudioEngine_start(self: pointer): void {.importc: "QAudioEngine_start".}
 proc fcQAudioEngine_stop(self: pointer): void {.importc: "QAudioEngine_stop".}
 proc fcQAudioEngine_pause(self: pointer): void {.importc: "QAudioEngine_pause".}
 proc fcQAudioEngine_resume(self: pointer): void {.importc: "QAudioEngine_resume".}
-proc fcQAudioEngine_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioEngine_tr2".}
-proc fcQAudioEngine_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioEngine_tr3".}
+proc fcQAudioEngine_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioEngine_tr_s_c".}
+proc fcQAudioEngine_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioEngine_tr_s_c_n".}
 proc fcQAudioEngine_vdata(self: pointer): ptr pointer {.importc: "QAudioEngine_vdata".}
 proc fvdata_cQAudioEngine(self: pointer): pointer {.importc: "vdata_QAudioEngine".}
 
@@ -123,9 +123,9 @@ proc fcQAudioEngine_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQAudioEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioEngine_protectedbase_receivers".}
 proc fcQAudioEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioEngine_protectedbase_isSignalConnected".}
 proc fcQAudioEngine_new(vtbl: pointer, vdata: csize_t): ptr cQAudioEngine {.importc: "QAudioEngine_new".}
-proc fcQAudioEngine_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioEngine {.importc: "QAudioEngine_new2".}
-proc fcQAudioEngine_new3(vtbl: pointer, vdata: csize_t, sampleRate: cint): ptr cQAudioEngine {.importc: "QAudioEngine_new3".}
-proc fcQAudioEngine_new4(vtbl: pointer, vdata: csize_t, sampleRate: cint, parent: pointer): ptr cQAudioEngine {.importc: "QAudioEngine_new4".}
+proc fcQAudioEngine_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioEngine {.importc: "QAudioEngine_new_parent".}
+proc fcQAudioEngine_new3(vtbl: pointer, vdata: csize_t, sampleRate: cint): ptr cQAudioEngine {.importc: "QAudioEngine_new_sampleRate".}
+proc fcQAudioEngine_new4(vtbl: pointer, vdata: csize_t, sampleRate: cint, parent: pointer): ptr cQAudioEngine {.importc: "QAudioEngine_new_sampleRate_parent".}
 proc fcQAudioEngine_staticMetaObject(): pointer {.importc: "QAudioEngine_staticMetaObject".}
 
 proc metaObject*(self: gen_qaudioengine_types.QAudioEngine): gen_qobjectdefs_types.QMetaObject =
@@ -138,7 +138,7 @@ proc metacall*(self: gen_qaudioengine_types.QAudioEngine, param1: cint, param2: 
   fcQAudioEngine_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudioengine_types.QAudioEngine, s: cstring): string =
-  let v_ms = fcQAudioEngine_tr(s)
+  let v_ms = fcQAudioEngine_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -285,13 +285,13 @@ proc resume*(self: gen_qaudioengine_types.QAudioEngine): void =
   fcQAudioEngine_resume(self.h)
 
 proc tr*(_: type gen_qaudioengine_types.QAudioEngine, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioEngine_tr2(s, c)
+  let v_ms = fcQAudioEngine_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudioengine_types.QAudioEngine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioEngine_tr3(s, c, n)
+  let v_ms = fcQAudioEngine_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

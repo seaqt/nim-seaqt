@@ -55,7 +55,7 @@ type cQFutureWatcherBase*{.exportc: "QFutureWatcherBase", incompleteStruct.} = o
 proc fcQFutureWatcherBase_metaObject(self: pointer): pointer {.importc: "QFutureWatcherBase_metaObject".}
 proc fcQFutureWatcherBase_metacast(self: pointer, param1: cstring): pointer {.importc: "QFutureWatcherBase_metacast".}
 proc fcQFutureWatcherBase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFutureWatcherBase_metacall".}
-proc fcQFutureWatcherBase_tr(s: cstring): struct_seaqt_string {.importc: "QFutureWatcherBase_tr".}
+proc fcQFutureWatcherBase_trS(s: cstring): struct_seaqt_string {.importc: "QFutureWatcherBase_tr_s".}
 proc fcQFutureWatcherBase_progressValue(self: pointer): cint {.importc: "QFutureWatcherBase_progressValue".}
 proc fcQFutureWatcherBase_progressMinimum(self: pointer): cint {.importc: "QFutureWatcherBase_progressMinimum".}
 proc fcQFutureWatcherBase_progressMaximum(self: pointer): cint {.importc: "QFutureWatcherBase_progressMaximum".}
@@ -102,11 +102,11 @@ proc fcQFutureWatcherBase_toggleSuspended(self: pointer): void {.importc: "QFutu
 proc fcQFutureWatcherBase_setPaused(self: pointer, paused: bool): void {.importc: "QFutureWatcherBase_setPaused".}
 proc fcQFutureWatcherBase_pause(self: pointer): void {.importc: "QFutureWatcherBase_pause".}
 proc fcQFutureWatcherBase_togglePaused(self: pointer): void {.importc: "QFutureWatcherBase_togglePaused".}
-proc fcQFutureWatcherBase_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFutureWatcherBase_tr2".}
-proc fcQFutureWatcherBase_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFutureWatcherBase_tr3".}
+proc fcQFutureWatcherBase_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFutureWatcherBase_tr_s_c".}
+proc fcQFutureWatcherBase_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFutureWatcherBase_tr_s_c_n".}
 proc fcQFutureWatcherBase_protectedbase_connectOutputInterface(self: pointer): void {.importc: "QFutureWatcherBase_protectedbase_connectOutputInterface".}
 proc fcQFutureWatcherBase_protectedbase_disconnectOutputInterface(self: pointer): void {.importc: "QFutureWatcherBase_protectedbase_disconnectOutputInterface".}
-proc fcQFutureWatcherBase_protectedbase_disconnectOutputInterfaceWithPendingAssignment(self: pointer, pendingAssignment: bool): void {.importc: "QFutureWatcherBase_protectedbase_disconnectOutputInterfaceWithPendingAssignment".}
+proc fcQFutureWatcherBase_protectedbase_disconnectOutputInterface_pendingAssignment(self: pointer, pendingAssignment: bool): void {.importc: "QFutureWatcherBase_protectedbase_disconnectOutputInterface_pendingAssignment".}
 proc fcQFutureWatcherBase_protectedbase_sender(self: pointer): pointer {.importc: "QFutureWatcherBase_protectedbase_sender".}
 proc fcQFutureWatcherBase_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QFutureWatcherBase_protectedbase_senderSignalIndex".}
 proc fcQFutureWatcherBase_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFutureWatcherBase_protectedbase_receivers".}
@@ -123,7 +123,7 @@ proc metacall*(self: gen_qfuturewatcher_types.QFutureWatcherBase, param1: cint, 
   fcQFutureWatcherBase_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfuturewatcher_types.QFutureWatcherBase, s: cstring): string =
-  let v_ms = fcQFutureWatcherBase_tr(s)
+  let v_ms = fcQFutureWatcherBase_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -431,13 +431,13 @@ proc togglePaused*(self: gen_qfuturewatcher_types.QFutureWatcherBase): void =
   fcQFutureWatcherBase_togglePaused(self.h)
 
 proc tr*(_: type gen_qfuturewatcher_types.QFutureWatcherBase, s: cstring, c: cstring): string =
-  let v_ms = fcQFutureWatcherBase_tr2(s, c)
+  let v_ms = fcQFutureWatcherBase_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfuturewatcher_types.QFutureWatcherBase, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFutureWatcherBase_tr3(s, c, n)
+  let v_ms = fcQFutureWatcherBase_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -449,7 +449,7 @@ proc disconnectOutputInterface*(self: gen_qfuturewatcher_types.QFutureWatcherBas
   fcQFutureWatcherBase_protectedbase_disconnectOutputInterface(self.h)
 
 proc disconnectOutputInterface*(self: gen_qfuturewatcher_types.QFutureWatcherBase, pendingAssignment: bool): void =
-  fcQFutureWatcherBase_protectedbase_disconnectOutputInterfaceWithPendingAssignment(self.h, pendingAssignment)
+  fcQFutureWatcherBase_protectedbase_disconnectOutputInterface_pendingAssignment(self.h, pendingAssignment)
 
 proc sender*(self: gen_qfuturewatcher_types.QFutureWatcherBase): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQFutureWatcherBase_protectedbase_sender(self.h), owned: false)

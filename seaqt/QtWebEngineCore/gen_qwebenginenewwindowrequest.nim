@@ -66,14 +66,14 @@ type cQWebEngineNewWindowRequest*{.exportc: "QWebEngineNewWindowRequest", incomp
 proc fcQWebEngineNewWindowRequest_metaObject(self: pointer): pointer {.importc: "QWebEngineNewWindowRequest_metaObject".}
 proc fcQWebEngineNewWindowRequest_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineNewWindowRequest_metacast".}
 proc fcQWebEngineNewWindowRequest_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineNewWindowRequest_metacall".}
-proc fcQWebEngineNewWindowRequest_tr(s: cstring): struct_seaqt_string {.importc: "QWebEngineNewWindowRequest_tr".}
+proc fcQWebEngineNewWindowRequest_trS(s: cstring): struct_seaqt_string {.importc: "QWebEngineNewWindowRequest_tr_s".}
 proc fcQWebEngineNewWindowRequest_destination(self: pointer): cint {.importc: "QWebEngineNewWindowRequest_destination".}
 proc fcQWebEngineNewWindowRequest_requestedUrl(self: pointer): pointer {.importc: "QWebEngineNewWindowRequest_requestedUrl".}
 proc fcQWebEngineNewWindowRequest_requestedGeometry(self: pointer): pointer {.importc: "QWebEngineNewWindowRequest_requestedGeometry".}
 proc fcQWebEngineNewWindowRequest_isUserInitiated(self: pointer): bool {.importc: "QWebEngineNewWindowRequest_isUserInitiated".}
 proc fcQWebEngineNewWindowRequest_openIn(self: pointer, param1: pointer): void {.importc: "QWebEngineNewWindowRequest_openIn".}
-proc fcQWebEngineNewWindowRequest_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineNewWindowRequest_tr2".}
-proc fcQWebEngineNewWindowRequest_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineNewWindowRequest_tr3".}
+proc fcQWebEngineNewWindowRequest_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineNewWindowRequest_tr_s_c".}
+proc fcQWebEngineNewWindowRequest_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineNewWindowRequest_tr_s_c_n".}
 proc fcQWebEngineNewWindowRequest_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineNewWindowRequest_protectedbase_sender".}
 proc fcQWebEngineNewWindowRequest_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineNewWindowRequest_protectedbase_senderSignalIndex".}
 proc fcQWebEngineNewWindowRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNewWindowRequest_protectedbase_receivers".}
@@ -90,7 +90,7 @@ proc metacall*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowReq
   fcQWebEngineNewWindowRequest_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, s: cstring): string =
-  let v_ms = fcQWebEngineNewWindowRequest_tr(s)
+  let v_ms = fcQWebEngineNewWindowRequest_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -111,13 +111,13 @@ proc openIn*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowReque
   fcQWebEngineNewWindowRequest_openIn(self.h, param1.h)
 
 proc tr*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineNewWindowRequest_tr2(s, c)
+  let v_ms = fcQWebEngineNewWindowRequest_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineNewWindowRequest_tr3(s, c, n)
+  let v_ms = fcQWebEngineNewWindowRequest_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

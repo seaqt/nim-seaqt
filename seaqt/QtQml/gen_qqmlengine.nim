@@ -82,11 +82,11 @@ type cQQmlEngine*{.exportc: "QQmlEngine", incompleteStruct.} = object
 proc fcQQmlImageProviderBase_metaObject(self: pointer): pointer {.importc: "QQmlImageProviderBase_metaObject".}
 proc fcQQmlImageProviderBase_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlImageProviderBase_metacast".}
 proc fcQQmlImageProviderBase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlImageProviderBase_metacall".}
-proc fcQQmlImageProviderBase_tr(s: cstring): struct_seaqt_string {.importc: "QQmlImageProviderBase_tr".}
+proc fcQQmlImageProviderBase_trS(s: cstring): struct_seaqt_string {.importc: "QQmlImageProviderBase_tr_s".}
 proc fcQQmlImageProviderBase_imageType(self: pointer): cint {.importc: "QQmlImageProviderBase_imageType".}
 proc fcQQmlImageProviderBase_flags(self: pointer): cint {.importc: "QQmlImageProviderBase_flags".}
-proc fcQQmlImageProviderBase_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlImageProviderBase_tr2".}
-proc fcQQmlImageProviderBase_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlImageProviderBase_tr3".}
+proc fcQQmlImageProviderBase_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlImageProviderBase_tr_s_c".}
+proc fcQQmlImageProviderBase_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlImageProviderBase_tr_s_c_n".}
 proc fcQQmlImageProviderBase_protectedbase_sender(self: pointer): pointer {.importc: "QQmlImageProviderBase_protectedbase_sender".}
 proc fcQQmlImageProviderBase_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QQmlImageProviderBase_protectedbase_senderSignalIndex".}
 proc fcQQmlImageProviderBase_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlImageProviderBase_protectedbase_receivers".}
@@ -95,7 +95,7 @@ proc fcQQmlImageProviderBase_staticMetaObject(): pointer {.importc: "QQmlImagePr
 proc fcQQmlEngine_metaObject(self: pointer): pointer {.importc: "QQmlEngine_metaObject".}
 proc fcQQmlEngine_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlEngine_metacast".}
 proc fcQQmlEngine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlEngine_metacall".}
-proc fcQQmlEngine_tr(s: cstring): struct_seaqt_string {.importc: "QQmlEngine_tr".}
+proc fcQQmlEngine_trS(s: cstring): struct_seaqt_string {.importc: "QQmlEngine_tr_s".}
 proc fcQQmlEngine_rootContext(self: pointer): pointer {.importc: "QQmlEngine_rootContext".}
 proc fcQQmlEngine_clearComponentCache(self: pointer): void {.importc: "QQmlEngine_clearComponentCache".}
 proc fcQQmlEngine_trimComponentCache(self: pointer): void {.importc: "QQmlEngine_trimComponentCache".}
@@ -138,8 +138,8 @@ proc fcQQmlEngine_exit(self: pointer, retCode: cint): void {.importc: "QQmlEngin
 proc fcQQmlEngine_connect_exit(self: pointer, slot: int, callback: proc (slot: int, retCode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlEngine_connect_exit".}
 proc fcQQmlEngine_warnings(self: pointer, warnings: struct_seaqt_array): void {.importc: "QQmlEngine_warnings".}
 proc fcQQmlEngine_connect_warnings(self: pointer, slot: int, callback: proc (slot: int, warnings: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlEngine_connect_warnings".}
-proc fcQQmlEngine_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlEngine_tr2".}
-proc fcQQmlEngine_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlEngine_tr3".}
+proc fcQQmlEngine_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlEngine_tr_s_c".}
+proc fcQQmlEngine_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlEngine_tr_s_c_n".}
 proc fcQQmlEngine_vdata(self: pointer): ptr pointer {.importc: "QQmlEngine_vdata".}
 proc fvdata_cQQmlEngine(self: pointer): pointer {.importc: "vdata_QQmlEngine".}
 
@@ -170,7 +170,7 @@ proc fcQQmlEngine_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQQmlEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlEngine_protectedbase_receivers".}
 proc fcQQmlEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlEngine_protectedbase_isSignalConnected".}
 proc fcQQmlEngine_new(vtbl: pointer, vdata: csize_t): ptr cQQmlEngine {.importc: "QQmlEngine_new".}
-proc fcQQmlEngine_new2(vtbl: pointer, vdata: csize_t, p: pointer): ptr cQQmlEngine {.importc: "QQmlEngine_new2".}
+proc fcQQmlEngine_new2(vtbl: pointer, vdata: csize_t, p: pointer): ptr cQQmlEngine {.importc: "QQmlEngine_new_p".}
 proc fcQQmlEngine_staticMetaObject(): pointer {.importc: "QQmlEngine_staticMetaObject".}
 
 proc metaObject*(self: gen_qqmlengine_types.QQmlImageProviderBase): gen_qobjectdefs_types.QMetaObject =
@@ -183,7 +183,7 @@ proc metacall*(self: gen_qqmlengine_types.QQmlImageProviderBase, param1: cint, p
   fcQQmlImageProviderBase_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlengine_types.QQmlImageProviderBase, s: cstring): string =
-  let v_ms = fcQQmlImageProviderBase_tr(s)
+  let v_ms = fcQQmlImageProviderBase_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -195,13 +195,13 @@ proc flags*(self: gen_qqmlengine_types.QQmlImageProviderBase): cint =
   cint(fcQQmlImageProviderBase_flags(self.h))
 
 proc tr*(_: type gen_qqmlengine_types.QQmlImageProviderBase, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlImageProviderBase_tr2(s, c)
+  let v_ms = fcQQmlImageProviderBase_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlengine_types.QQmlImageProviderBase, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlImageProviderBase_tr3(s, c, n)
+  let v_ms = fcQQmlImageProviderBase_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -230,7 +230,7 @@ proc metacall*(self: gen_qqmlengine_types.QQmlEngine, param1: cint, param2: cint
   fcQQmlEngine_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlengine_types.QQmlEngine, s: cstring): string =
-  let v_ms = fcQQmlEngine_tr(s)
+  let v_ms = fcQQmlEngine_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -454,13 +454,13 @@ proc onWarnings*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEnginewarnings
   fcQQmlEngine_connect_warnings(self.h, cast[int](addr tmp[]), fcQQmlEngine_slot_callback_warnings, fcQQmlEngine_slot_callback_warnings_release)
 
 proc tr*(_: type gen_qqmlengine_types.QQmlEngine, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlEngine_tr2(s, c)
+  let v_ms = fcQQmlEngine_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlengine_types.QQmlEngine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlEngine_tr3(s, c, n)
+  let v_ms = fcQQmlEngine_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

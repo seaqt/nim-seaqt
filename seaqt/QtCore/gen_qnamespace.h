@@ -21,12 +21,12 @@ typedef struct QKeyCombination QKeyCombination;
 #endif
 
 QKeyCombination* QKeyCombination_new();
-QKeyCombination* QKeyCombination_new2(int modifiers);
-QKeyCombination* QKeyCombination_new3(int modifiers);
-QKeyCombination* QKeyCombination_new4(QKeyCombination* param1);
-QKeyCombination* QKeyCombination_new5(int key);
-QKeyCombination* QKeyCombination_new6(int modifiers, int key);
-QKeyCombination* QKeyCombination_new7(int modifiers, int key);
+QKeyCombination* QKeyCombination_new_Qt_Modifiers(int modifiers);
+QKeyCombination* QKeyCombination_new_Qt_KeyboardModifiers(int modifiers);
+QKeyCombination* QKeyCombination_new_QKeyCombination(QKeyCombination* from);
+QKeyCombination* QKeyCombination_new_Qt_Key(int key);
+QKeyCombination* QKeyCombination_new_Qt_Modifiers_Qt_Key(int modifiers, int key);
+QKeyCombination* QKeyCombination_new_Qt_KeyboardModifiers_Qt_Key(int modifiers, int key);
 
 int QKeyCombination_keyboardModifiers(const QKeyCombination* self);
 int QKeyCombination_key(const QKeyCombination* self);

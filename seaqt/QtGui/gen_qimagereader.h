@@ -31,12 +31,12 @@ typedef struct QSize QSize;
 #endif
 
 QImageReader* QImageReader_new();
-QImageReader* QImageReader_new2(QIODevice* device);
-QImageReader* QImageReader_new3(struct seaqt_string fileName);
-QImageReader* QImageReader_new4(QIODevice* device, struct seaqt_string format);
-QImageReader* QImageReader_new5(struct seaqt_string fileName, struct seaqt_string format);
+QImageReader* QImageReader_new_device(QIODevice* device);
+QImageReader* QImageReader_new_fileName(struct seaqt_string fileName);
+QImageReader* QImageReader_new_device_format(QIODevice* device, struct seaqt_string format);
+QImageReader* QImageReader_new_fileName_format(struct seaqt_string fileName, struct seaqt_string format);
 
-struct seaqt_string QImageReader_tr(const char* sourceText);
+struct seaqt_string QImageReader_tr_sourceText(const char* sourceText);
 void QImageReader_setFormat(QImageReader* self, struct seaqt_string format);
 struct seaqt_string QImageReader_format(const QImageReader* self);
 void QImageReader_setAutoDetectImageFormat(QImageReader* self, bool enabled);
@@ -69,7 +69,7 @@ struct seaqt_string QImageReader_subType(const QImageReader* self);
 struct seaqt_array /* of struct seaqt_string */  QImageReader_supportedSubTypes(const QImageReader* self);
 bool QImageReader_canRead(const QImageReader* self);
 QImage* QImageReader_read(QImageReader* self);
-bool QImageReader_readWithImage(QImageReader* self, QImage* image);
+bool QImageReader_read_image(QImageReader* self, QImage* image);
 bool QImageReader_jumpToNextImage(QImageReader* self);
 bool QImageReader_jumpToImage(QImageReader* self, int imageNumber);
 int QImageReader_loopCount(const QImageReader* self);
@@ -80,15 +80,15 @@ QRect* QImageReader_currentImageRect(const QImageReader* self);
 int QImageReader_error(const QImageReader* self);
 struct seaqt_string QImageReader_errorString(const QImageReader* self);
 bool QImageReader_supportsOption(const QImageReader* self, int option);
-struct seaqt_string QImageReader_imageFormatWithFileName(struct seaqt_string fileName);
-struct seaqt_string QImageReader_imageFormatWithDevice(QIODevice* device);
+struct seaqt_string QImageReader_imageFormat_fileName(struct seaqt_string fileName);
+struct seaqt_string QImageReader_imageFormat_device(QIODevice* device);
 struct seaqt_array /* of struct seaqt_string */  QImageReader_supportedImageFormats();
 struct seaqt_array /* of struct seaqt_string */  QImageReader_supportedMimeTypes();
 struct seaqt_array /* of struct seaqt_string */  QImageReader_imageFormatsForMimeType(struct seaqt_string mimeType);
 int QImageReader_allocationLimit();
 void QImageReader_setAllocationLimit(int mbLimit);
-struct seaqt_string QImageReader_tr2(const char* sourceText, const char* disambiguation);
-struct seaqt_string QImageReader_tr3(const char* sourceText, const char* disambiguation, int n);
+struct seaqt_string QImageReader_tr_sourceText_disambiguation(const char* sourceText, const char* disambiguation);
+struct seaqt_string QImageReader_tr_sourceText_disambiguation_n(const char* sourceText, const char* disambiguation, int n);
 
 void QImageReader_delete(QImageReader* self);
 

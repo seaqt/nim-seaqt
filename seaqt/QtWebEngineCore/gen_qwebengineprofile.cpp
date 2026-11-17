@@ -184,18 +184,18 @@ VirtualQWebEngineProfile* QWebEngineProfile_new(const QWebEngineProfile_VTable* 
 	return _mem_ ? new (_mem_)VirtualQWebEngineProfile(vtbl) : nullptr;
 }
 
-VirtualQWebEngineProfile* QWebEngineProfile_new2(const QWebEngineProfile_VTable* vtbl, size_t vdata, struct seaqt_string name) {
+VirtualQWebEngineProfile* QWebEngineProfile_new_name(const QWebEngineProfile_VTable* vtbl, size_t vdata, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEngineProfile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEngineProfile(vtbl, name_QString) : nullptr;
 }
 
-VirtualQWebEngineProfile* QWebEngineProfile_new3(const QWebEngineProfile_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQWebEngineProfile* QWebEngineProfile_new_parent(const QWebEngineProfile_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEngineProfile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEngineProfile(vtbl, parent) : nullptr;
 }
 
-VirtualQWebEngineProfile* QWebEngineProfile_new4(const QWebEngineProfile_VTable* vtbl, size_t vdata, struct seaqt_string name, QObject* parent) {
+VirtualQWebEngineProfile* QWebEngineProfile_new_name_parent(const QWebEngineProfile_VTable* vtbl, size_t vdata, struct seaqt_string name, QObject* parent) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEngineProfile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEngineProfile(vtbl, name_QString, parent) : nullptr;
@@ -217,7 +217,7 @@ int QWebEngineProfile_metacall(QWebEngineProfile* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebEngineProfile_tr(const char* s) {
+struct seaqt_string QWebEngineProfile_tr_s(const char* s) {
 	QString _ret = QWebEngineProfile::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -473,7 +473,7 @@ void QWebEngineProfile_connect_downloadRequested(QWebEngineProfile* self, intptr
 	QWebEngineProfile::connect(self, static_cast<void (QWebEngineProfile::*)(QWebEngineDownloadRequest*)>(&QWebEngineProfile::downloadRequested), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebEngineProfile_tr2(const char* s, const char* c) {
+struct seaqt_string QWebEngineProfile_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebEngineProfile::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -484,7 +484,7 @@ struct seaqt_string QWebEngineProfile_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebEngineProfile_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebEngineProfile_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebEngineProfile::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

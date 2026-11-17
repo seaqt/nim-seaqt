@@ -191,7 +191,7 @@ VirtualQAccessiblePlugin* QAccessiblePlugin_new(const QAccessiblePlugin_VTable* 
 	return _mem_ ? new (_mem_)VirtualQAccessiblePlugin(vtbl) : nullptr;
 }
 
-VirtualQAccessiblePlugin* QAccessiblePlugin_new2(const QAccessiblePlugin_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAccessiblePlugin* QAccessiblePlugin_new_parent(const QAccessiblePlugin_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessiblePlugin>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessiblePlugin(vtbl, parent) : nullptr;
 }
@@ -212,7 +212,7 @@ int QAccessiblePlugin_metacall(QAccessiblePlugin* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAccessiblePlugin_tr(const char* s) {
+struct seaqt_string QAccessiblePlugin_tr_s(const char* s) {
 	QString _ret = QAccessiblePlugin::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -228,7 +228,7 @@ QAccessibleInterface* QAccessiblePlugin_create(QAccessiblePlugin* self, struct s
 	return self->create(key_QString, object);
 }
 
-struct seaqt_string QAccessiblePlugin_tr2(const char* s, const char* c) {
+struct seaqt_string QAccessiblePlugin_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAccessiblePlugin::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -239,7 +239,7 @@ struct seaqt_string QAccessiblePlugin_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAccessiblePlugin_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAccessiblePlugin_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAccessiblePlugin::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

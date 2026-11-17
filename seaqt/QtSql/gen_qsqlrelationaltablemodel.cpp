@@ -45,15 +45,15 @@ QSqlRelation* QSqlRelation_new() {
 	return new (std::nothrow) QSqlRelation();
 }
 
-QSqlRelation* QSqlRelation_new2(struct seaqt_string aTableName, struct seaqt_string indexCol, struct seaqt_string displayCol) {
+QSqlRelation* QSqlRelation_new_aTableName_indexCol_displayCol(struct seaqt_string aTableName, struct seaqt_string indexCol, struct seaqt_string displayCol) {
 	QString aTableName_QString = QString::fromUtf8(aTableName.data, aTableName.len);
 	QString indexCol_QString = QString::fromUtf8(indexCol.data, indexCol.len);
 	QString displayCol_QString = QString::fromUtf8(displayCol.data, displayCol.len);
 	return new (std::nothrow) QSqlRelation(aTableName_QString, indexCol_QString, displayCol_QString);
 }
 
-QSqlRelation* QSqlRelation_new3(QSqlRelation* param1) {
-	return new (std::nothrow) QSqlRelation(*param1);
+QSqlRelation* QSqlRelation_new_from(QSqlRelation* from) {
+	return new (std::nothrow) QSqlRelation(*from);
 }
 
 void QSqlRelation_swap(QSqlRelation* self, QSqlRelation* other) {
@@ -97,8 +97,8 @@ bool QSqlRelation_isValid(const QSqlRelation* self) {
 	return self->isValid();
 }
 
-void QSqlRelation_operatorAssign(QSqlRelation* self, QSqlRelation* param1) {
-	self->operator=(*param1);
+void QSqlRelation_operatorAssign(QSqlRelation* self, QSqlRelation* from) {
+	self->operator=(*from);
 }
 
 void QSqlRelation_delete(QSqlRelation* self) {
@@ -1082,7 +1082,7 @@ public:
 	friend void QSqlRelationalTableModel_protectedbase_beginResetModel(VirtualQSqlRelationalTableModel* self);
 	friend void QSqlRelationalTableModel_protectedbase_endResetModel(VirtualQSqlRelationalTableModel* self);
 	friend void QSqlRelationalTableModel_protectedbase_setLastError(VirtualQSqlRelationalTableModel* self, QSqlError* error);
-	friend QModelIndex* QSqlRelationalTableModel_protectedbase_createIndex(const VirtualQSqlRelationalTableModel* self, int row, int column);
+	friend QModelIndex* QSqlRelationalTableModel_protectedbase_createIndex_row_column(const VirtualQSqlRelationalTableModel* self, int row, int column);
 	friend void QSqlRelationalTableModel_protectedbase_encodeData(const VirtualQSqlRelationalTableModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QSqlRelationalTableModel_protectedbase_decodeData(VirtualQSqlRelationalTableModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend bool QSqlRelationalTableModel_protectedbase_beginMoveRows(VirtualQSqlRelationalTableModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
@@ -1103,12 +1103,12 @@ VirtualQSqlRelationalTableModel* QSqlRelationalTableModel_new(const QSqlRelation
 	return _mem_ ? new (_mem_)VirtualQSqlRelationalTableModel(vtbl) : nullptr;
 }
 
-VirtualQSqlRelationalTableModel* QSqlRelationalTableModel_new2(const QSqlRelationalTableModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSqlRelationalTableModel* QSqlRelationalTableModel_new_parent(const QSqlRelationalTableModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSqlRelationalTableModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSqlRelationalTableModel(vtbl, parent) : nullptr;
 }
 
-VirtualQSqlRelationalTableModel* QSqlRelationalTableModel_new3(const QSqlRelationalTableModel_VTable* vtbl, size_t vdata, QObject* parent, QSqlDatabase* db) {
+VirtualQSqlRelationalTableModel* QSqlRelationalTableModel_new_parent_db(const QSqlRelationalTableModel_VTable* vtbl, size_t vdata, QObject* parent, QSqlDatabase* db) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSqlRelationalTableModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSqlRelationalTableModel(vtbl, parent, *db) : nullptr;
 }
@@ -1129,7 +1129,7 @@ int QSqlRelationalTableModel_metacall(QSqlRelationalTableModel* self, int param1
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSqlRelationalTableModel_tr(const char* s) {
+struct seaqt_string QSqlRelationalTableModel_tr_s(const char* s) {
 	QString _ret = QSqlRelationalTableModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1185,7 +1185,7 @@ void QSqlRelationalTableModel_revertRow(QSqlRelationalTableModel* self, int row)
 	self->revertRow(static_cast<int>(row));
 }
 
-struct seaqt_string QSqlRelationalTableModel_tr2(const char* s, const char* c) {
+struct seaqt_string QSqlRelationalTableModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSqlRelationalTableModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1196,7 +1196,7 @@ struct seaqt_string QSqlRelationalTableModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSqlRelationalTableModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSqlRelationalTableModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSqlRelationalTableModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1666,7 +1666,7 @@ void QSqlRelationalTableModel_protectedbase_setLastError(VirtualQSqlRelationalTa
 	self->setLastError(*error);
 }
 
-QModelIndex* QSqlRelationalTableModel_protectedbase_createIndex(const VirtualQSqlRelationalTableModel* self, int row, int column) {
+QModelIndex* QSqlRelationalTableModel_protectedbase_createIndex_row_column(const VirtualQSqlRelationalTableModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

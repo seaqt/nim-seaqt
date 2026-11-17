@@ -51,23 +51,23 @@ void* QFileSystemWatcher_vdata(VirtualQFileSystemWatcher* self);
 VirtualQFileSystemWatcher* vdata_QFileSystemWatcher(void* vdata);
 
 VirtualQFileSystemWatcher* QFileSystemWatcher_new(const QFileSystemWatcher_VTable* vtbl, size_t vdata);
-VirtualQFileSystemWatcher* QFileSystemWatcher_new2(const QFileSystemWatcher_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  paths);
-VirtualQFileSystemWatcher* QFileSystemWatcher_new3(const QFileSystemWatcher_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQFileSystemWatcher* QFileSystemWatcher_new4(const QFileSystemWatcher_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  paths, QObject* parent);
+VirtualQFileSystemWatcher* QFileSystemWatcher_new_paths(const QFileSystemWatcher_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  paths);
+VirtualQFileSystemWatcher* QFileSystemWatcher_new_parent(const QFileSystemWatcher_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQFileSystemWatcher* QFileSystemWatcher_new_paths_parent(const QFileSystemWatcher_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  paths, QObject* parent);
 
 void QFileSystemWatcher_virtbase(QFileSystemWatcher* src, QObject** outptr_QObject);
 QMetaObject* QFileSystemWatcher_metaObject(const QFileSystemWatcher* self);
 void* QFileSystemWatcher_metacast(QFileSystemWatcher* self, const char* param1);
 int QFileSystemWatcher_metacall(QFileSystemWatcher* self, int param1, int param2, void** param3);
-struct seaqt_string QFileSystemWatcher_tr(const char* s);
+struct seaqt_string QFileSystemWatcher_tr_s(const char* s);
 bool QFileSystemWatcher_addPath(QFileSystemWatcher* self, struct seaqt_string file);
 struct seaqt_array /* of struct seaqt_string */  QFileSystemWatcher_addPaths(QFileSystemWatcher* self, struct seaqt_array /* of struct seaqt_string */  files);
 bool QFileSystemWatcher_removePath(QFileSystemWatcher* self, struct seaqt_string file);
 struct seaqt_array /* of struct seaqt_string */  QFileSystemWatcher_removePaths(QFileSystemWatcher* self, struct seaqt_array /* of struct seaqt_string */  files);
 struct seaqt_array /* of struct seaqt_string */  QFileSystemWatcher_files(const QFileSystemWatcher* self);
 struct seaqt_array /* of struct seaqt_string */  QFileSystemWatcher_directories(const QFileSystemWatcher* self);
-struct seaqt_string QFileSystemWatcher_tr2(const char* s, const char* c);
-struct seaqt_string QFileSystemWatcher_tr3(const char* s, const char* c, int n);
+struct seaqt_string QFileSystemWatcher_tr_s_c(const char* s, const char* c);
+struct seaqt_string QFileSystemWatcher_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QFileSystemWatcher_virtualbase_metaObject(const VirtualQFileSystemWatcher* self);
 void* QFileSystemWatcher_virtualbase_metacast(VirtualQFileSystemWatcher* self, const char* param1);

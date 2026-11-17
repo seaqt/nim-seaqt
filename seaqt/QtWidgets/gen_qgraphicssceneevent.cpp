@@ -147,7 +147,7 @@ VirtualQGraphicsSceneMouseEvent* QGraphicsSceneMouseEvent_new(const QGraphicsSce
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneMouseEvent(vtbl) : nullptr;
 }
 
-VirtualQGraphicsSceneMouseEvent* QGraphicsSceneMouseEvent_new2(const QGraphicsSceneMouseEvent_VTable* vtbl, size_t vdata, int type) {
+VirtualQGraphicsSceneMouseEvent* QGraphicsSceneMouseEvent_new_type(const QGraphicsSceneMouseEvent_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSceneMouseEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneMouseEvent(vtbl, static_cast<QEvent::Type>(type)) : nullptr;
 }
@@ -332,7 +332,7 @@ VirtualQGraphicsSceneWheelEvent* QGraphicsSceneWheelEvent_new(const QGraphicsSce
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneWheelEvent(vtbl) : nullptr;
 }
 
-VirtualQGraphicsSceneWheelEvent* QGraphicsSceneWheelEvent_new2(const QGraphicsSceneWheelEvent_VTable* vtbl, size_t vdata, int type) {
+VirtualQGraphicsSceneWheelEvent* QGraphicsSceneWheelEvent_new_type(const QGraphicsSceneWheelEvent_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSceneWheelEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneWheelEvent(vtbl, static_cast<QEvent::Type>(type)) : nullptr;
 }
@@ -484,7 +484,7 @@ VirtualQGraphicsSceneContextMenuEvent* QGraphicsSceneContextMenuEvent_new(const 
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneContextMenuEvent(vtbl) : nullptr;
 }
 
-VirtualQGraphicsSceneContextMenuEvent* QGraphicsSceneContextMenuEvent_new2(const QGraphicsSceneContextMenuEvent_VTable* vtbl, size_t vdata, int type) {
+VirtualQGraphicsSceneContextMenuEvent* QGraphicsSceneContextMenuEvent_new_type(const QGraphicsSceneContextMenuEvent_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSceneContextMenuEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneContextMenuEvent(vtbl, static_cast<QEvent::Type>(type)) : nullptr;
 }
@@ -594,7 +594,7 @@ VirtualQGraphicsSceneHoverEvent* QGraphicsSceneHoverEvent_new(const QGraphicsSce
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneHoverEvent(vtbl) : nullptr;
 }
 
-VirtualQGraphicsSceneHoverEvent* QGraphicsSceneHoverEvent_new2(const QGraphicsSceneHoverEvent_VTable* vtbl, size_t vdata, int type) {
+VirtualQGraphicsSceneHoverEvent* QGraphicsSceneHoverEvent_new_type(const QGraphicsSceneHoverEvent_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSceneHoverEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneHoverEvent(vtbl, static_cast<QEvent::Type>(type)) : nullptr;
 }
@@ -719,7 +719,7 @@ VirtualQGraphicsSceneHelpEvent* QGraphicsSceneHelpEvent_new(const QGraphicsScene
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneHelpEvent(vtbl) : nullptr;
 }
 
-VirtualQGraphicsSceneHelpEvent* QGraphicsSceneHelpEvent_new2(const QGraphicsSceneHelpEvent_VTable* vtbl, size_t vdata, int type) {
+VirtualQGraphicsSceneHelpEvent* QGraphicsSceneHelpEvent_new_type(const QGraphicsSceneHelpEvent_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSceneHelpEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneHelpEvent(vtbl, static_cast<QEvent::Type>(type)) : nullptr;
 }
@@ -803,7 +803,7 @@ VirtualQGraphicsSceneDragDropEvent* QGraphicsSceneDragDropEvent_new(const QGraph
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneDragDropEvent(vtbl) : nullptr;
 }
 
-VirtualQGraphicsSceneDragDropEvent* QGraphicsSceneDragDropEvent_new2(const QGraphicsSceneDragDropEvent_VTable* vtbl, size_t vdata, int type) {
+VirtualQGraphicsSceneDragDropEvent* QGraphicsSceneDragDropEvent_new_type(const QGraphicsSceneDragDropEvent_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSceneDragDropEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSceneDragDropEvent(vtbl, static_cast<QEvent::Type>(type)) : nullptr;
 }

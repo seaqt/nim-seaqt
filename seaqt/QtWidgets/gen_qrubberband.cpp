@@ -703,12 +703,12 @@ public:
 	friend bool QRubberBand_protectedbase_isSignalConnected(const VirtualQRubberBand* self, QMetaMethod* signal);
 };
 
-VirtualQRubberBand* QRubberBand_new(const QRubberBand_VTable* vtbl, size_t vdata, int param1) {
+VirtualQRubberBand* QRubberBand_new_QRubberBand_Shape(const QRubberBand_VTable* vtbl, size_t vdata, int param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRubberBand>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRubberBand(vtbl, static_cast<QRubberBand::Shape>(param1)) : nullptr;
 }
 
-VirtualQRubberBand* QRubberBand_new2(const QRubberBand_VTable* vtbl, size_t vdata, int param1, QWidget* param2) {
+VirtualQRubberBand* QRubberBand_new_QRubberBand_Shape_QWidget(const QRubberBand_VTable* vtbl, size_t vdata, int param1, QWidget* param2) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRubberBand>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRubberBand(vtbl, static_cast<QRubberBand::Shape>(param1), param2) : nullptr;
 }
@@ -729,7 +729,7 @@ int QRubberBand_metacall(QRubberBand* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QRubberBand_tr(const char* s) {
+struct seaqt_string QRubberBand_tr_s(const char* s) {
 	QString _ret = QRubberBand::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -745,31 +745,31 @@ int QRubberBand_shape(const QRubberBand* self) {
 	return static_cast<int>(_ret);
 }
 
-void QRubberBand_setGeometry(QRubberBand* self, QRect* r) {
+void QRubberBand_setGeometry_r(QRubberBand* self, QRect* r) {
 	self->setGeometry(*r);
 }
 
-void QRubberBand_setGeometry2(QRubberBand* self, int x, int y, int w, int h) {
+void QRubberBand_setGeometry_x_y_w_h(QRubberBand* self, int x, int y, int w, int h) {
 	self->setGeometry(static_cast<int>(x), static_cast<int>(y), static_cast<int>(w), static_cast<int>(h));
 }
 
-void QRubberBand_move(QRubberBand* self, int x, int y) {
+void QRubberBand_move_x_y(QRubberBand* self, int x, int y) {
 	self->move(static_cast<int>(x), static_cast<int>(y));
 }
 
-void QRubberBand_moveWithQPoint(QRubberBand* self, QPoint* p) {
+void QRubberBand_move_p(QRubberBand* self, QPoint* p) {
 	self->move(*p);
 }
 
-void QRubberBand_resize(QRubberBand* self, int w, int h) {
+void QRubberBand_resize_w_h(QRubberBand* self, int w, int h) {
 	self->resize(static_cast<int>(w), static_cast<int>(h));
 }
 
-void QRubberBand_resizeWithQSize(QRubberBand* self, QSize* s) {
+void QRubberBand_resize_s(QRubberBand* self, QSize* s) {
 	self->resize(*s);
 }
 
-struct seaqt_string QRubberBand_tr2(const char* s, const char* c) {
+struct seaqt_string QRubberBand_tr_s_c(const char* s, const char* c) {
 	QString _ret = QRubberBand::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -780,7 +780,7 @@ struct seaqt_string QRubberBand_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QRubberBand_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QRubberBand_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QRubberBand::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

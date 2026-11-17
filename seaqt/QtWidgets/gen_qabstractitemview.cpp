@@ -598,7 +598,7 @@ public:
 	friend struct seaqt_array /* of QModelIndex* */  QAbstractItemView_virtualbase_selectedIndexes(const VirtualQAbstractItemView* self);
 
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
-		if (vtbl->edit2 == 0) {
+		if (vtbl->edit_index_trigger_event == 0) {
 			return QAbstractItemView::edit(index, trigger, event);
 		}
 
@@ -608,11 +608,11 @@ public:
 		QAbstractItemView::EditTrigger trigger_ret = trigger;
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
-		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit_index_trigger_event(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemView_virtualbase_edit2(VirtualQAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QAbstractItemView_virtualbase_edit_index_trigger_event(VirtualQAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event);
 
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
@@ -1292,7 +1292,7 @@ public:
 	friend void QAbstractItemView_protectedbase_stopAutoScroll(VirtualQAbstractItemView* self);
 	friend void QAbstractItemView_protectedbase_doAutoScroll(VirtualQAbstractItemView* self);
 	friend int QAbstractItemView_protectedbase_dropIndicatorPosition(const VirtualQAbstractItemView* self);
-	friend void QAbstractItemView_protectedbase_setViewportMargins(VirtualQAbstractItemView* self, int left, int top, int right, int bottom);
+	friend void QAbstractItemView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQAbstractItemView* self, int left, int top, int right, int bottom);
 	friend QMargins* QAbstractItemView_protectedbase_viewportMargins(const VirtualQAbstractItemView* self);
 	friend void QAbstractItemView_protectedbase_drawFrame(VirtualQAbstractItemView* self, QPainter* param1);
 	friend void QAbstractItemView_protectedbase_updateMicroFocus(VirtualQAbstractItemView* self);
@@ -1311,7 +1311,7 @@ VirtualQAbstractItemView* QAbstractItemView_new(const QAbstractItemView_VTable* 
 	return _mem_ ? new (_mem_)VirtualQAbstractItemView(vtbl) : nullptr;
 }
 
-VirtualQAbstractItemView* QAbstractItemView_new2(const QAbstractItemView_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQAbstractItemView* QAbstractItemView_new_parent(const QAbstractItemView_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAbstractItemView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAbstractItemView(vtbl, parent) : nullptr;
 }
@@ -1332,7 +1332,7 @@ int QAbstractItemView_metacall(QAbstractItemView* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractItemView_tr(const char* s) {
+struct seaqt_string QAbstractItemView_tr_s(const char* s) {
 	QString _ret = QAbstractItemView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1584,7 +1584,7 @@ QAbstractItemDelegate* QAbstractItemView_itemDelegateForColumn(const QAbstractIt
 	return self->itemDelegateForColumn(static_cast<int>(column));
 }
 
-QAbstractItemDelegate* QAbstractItemView_itemDelegateWithIndex(const QAbstractItemView* self, QModelIndex* index) {
+QAbstractItemDelegate* QAbstractItemView_itemDelegate_index(const QAbstractItemView* self, QModelIndex* index) {
 	return self->itemDelegate(*index);
 }
 
@@ -1612,7 +1612,7 @@ void QAbstractItemView_selectAll(QAbstractItemView* self) {
 	self->selectAll();
 }
 
-void QAbstractItemView_edit(QAbstractItemView* self, QModelIndex* index) {
+void QAbstractItemView_edit_index(QAbstractItemView* self, QModelIndex* index) {
 	self->edit(*index);
 }
 
@@ -1759,7 +1759,7 @@ void QAbstractItemView_connect_iconSizeChanged(QAbstractItemView* self, intptr_t
 	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QSize&)>(&QAbstractItemView::iconSizeChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAbstractItemView_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractItemView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractItemView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1770,7 +1770,7 @@ struct seaqt_string QAbstractItemView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractItemView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractItemView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractItemView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1951,7 +1951,7 @@ struct seaqt_array /* of QModelIndex* */  QAbstractItemView_virtualbase_selected
 	return _out;
 }
 
-bool QAbstractItemView_virtualbase_edit2(VirtualQAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QAbstractItemView_virtualbase_edit_index_trigger_event(VirtualQAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event) {
 
 	return self->QAbstractItemView::edit(*index, static_cast<VirtualQAbstractItemView::EditTrigger>(trigger), event);
 }
@@ -2274,7 +2274,7 @@ int QAbstractItemView_protectedbase_dropIndicatorPosition(const VirtualQAbstract
 	return static_cast<int>(_ret);
 }
 
-void QAbstractItemView_protectedbase_setViewportMargins(VirtualQAbstractItemView* self, int left, int top, int right, int bottom) {
+void QAbstractItemView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQAbstractItemView* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

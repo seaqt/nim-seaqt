@@ -51,7 +51,7 @@ export
 
 type cQSqlField*{.exportc: "QSqlField", incompleteStruct.} = object
 
-proc fcQSqlField_operatorAssign(self: pointer, other: pointer): void {.importc: "QSqlField_operatorAssign".}
+proc fcQSqlField_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSqlField_operatorAssign".}
 proc fcQSqlField_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSqlField_operatorEqual".}
 proc fcQSqlField_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QSqlField_operatorNotEqual".}
 proc fcQSqlField_setValue(self: pointer, value: pointer): void {.importc: "QSqlField_setValue".}
@@ -85,15 +85,15 @@ proc fcQSqlField_typeID(self: pointer): cint {.importc: "QSqlField_typeID".}
 proc fcQSqlField_isGenerated(self: pointer): bool {.importc: "QSqlField_isGenerated".}
 proc fcQSqlField_isValid(self: pointer): bool {.importc: "QSqlField_isValid".}
 proc fcQSqlField_new(): ptr cQSqlField {.importc: "QSqlField_new".}
-proc fcQSqlField_new2(other: pointer): ptr cQSqlField {.importc: "QSqlField_new2".}
-proc fcQSqlField_new3(fieldName: struct_seaqt_string, typeVal: cint): ptr cQSqlField {.importc: "QSqlField_new3".}
-proc fcQSqlField_new4(fieldName: struct_seaqt_string): ptr cQSqlField {.importc: "QSqlField_new4".}
-proc fcQSqlField_new5(fieldName: struct_seaqt_string, typeVal: pointer): ptr cQSqlField {.importc: "QSqlField_new5".}
-proc fcQSqlField_new6(fieldName: struct_seaqt_string, typeVal: pointer, tableName: struct_seaqt_string): ptr cQSqlField {.importc: "QSqlField_new6".}
-proc fcQSqlField_new7(fieldName: struct_seaqt_string, typeVal: cint, tableName: struct_seaqt_string): ptr cQSqlField {.importc: "QSqlField_new7".}
+proc fcQSqlField_new2(fromVal: pointer): ptr cQSqlField {.importc: "QSqlField_new_QSqlField".}
+proc fcQSqlField_new3(fieldName: struct_seaqt_string, typeVal: cint): ptr cQSqlField {.importc: "QSqlField_new_QString_QVariant_Type".}
+proc fcQSqlField_new4(fieldName: struct_seaqt_string): ptr cQSqlField {.importc: "QSqlField_new_QString".}
+proc fcQSqlField_new5(fieldName: struct_seaqt_string, typeVal: pointer): ptr cQSqlField {.importc: "QSqlField_new_QString_QMetaType".}
+proc fcQSqlField_new6(fieldName: struct_seaqt_string, typeVal: pointer, tableName: struct_seaqt_string): ptr cQSqlField {.importc: "QSqlField_new_QString_QMetaType_QString".}
+proc fcQSqlField_new7(fieldName: struct_seaqt_string, typeVal: cint, tableName: struct_seaqt_string): ptr cQSqlField {.importc: "QSqlField_new_QString_QVariant_Type_QString".}
 
-proc operatorAssign*(self: gen_qsqlfield_types.QSqlField, other: gen_qsqlfield_types.QSqlField): void =
-  fcQSqlField_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qsqlfield_types.QSqlField, fromVal: gen_qsqlfield_types.QSqlField): void =
+  fcQSqlField_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qsqlfield_types.QSqlField, other: gen_qsqlfield_types.QSqlField): bool =
   fcQSqlField_operatorEqual(self.h, other.h)
@@ -201,8 +201,8 @@ proc create*(T: type gen_qsqlfield_types.QSqlField): gen_qsqlfield_types.QSqlFie
   let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new(), owned: true)
   tmp
 proc create*(T: type gen_qsqlfield_types.QSqlField,
-    other: gen_qsqlfield_types.QSqlField): gen_qsqlfield_types.QSqlField =
-  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new2(other.h), owned: true)
+    fromVal: gen_qsqlfield_types.QSqlField): gen_qsqlfield_types.QSqlField =
+  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qsqlfield_types.QSqlField,
     fieldName: openArray[char], typeVal: cint): gen_qsqlfield_types.QSqlField =

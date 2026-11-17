@@ -80,16 +80,16 @@ type cQRubberBand*{.exportc: "QRubberBand", incompleteStruct.} = object
 proc fcQRubberBand_metaObject(self: pointer): pointer {.importc: "QRubberBand_metaObject".}
 proc fcQRubberBand_metacast(self: pointer, param1: cstring): pointer {.importc: "QRubberBand_metacast".}
 proc fcQRubberBand_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRubberBand_metacall".}
-proc fcQRubberBand_tr(s: cstring): struct_seaqt_string {.importc: "QRubberBand_tr".}
+proc fcQRubberBand_trS(s: cstring): struct_seaqt_string {.importc: "QRubberBand_tr_s".}
 proc fcQRubberBand_shape(self: pointer): cint {.importc: "QRubberBand_shape".}
-proc fcQRubberBand_setGeometry(self: pointer, r: pointer): void {.importc: "QRubberBand_setGeometry".}
-proc fcQRubberBand_setGeometry2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QRubberBand_setGeometry2".}
-proc fcQRubberBand_move(self: pointer, x: cint, y: cint): void {.importc: "QRubberBand_move".}
-proc fcQRubberBand_moveWithQPoint(self: pointer, p: pointer): void {.importc: "QRubberBand_moveWithQPoint".}
-proc fcQRubberBand_resize(self: pointer, w: cint, h: cint): void {.importc: "QRubberBand_resize".}
-proc fcQRubberBand_resizeWithQSize(self: pointer, s: pointer): void {.importc: "QRubberBand_resizeWithQSize".}
-proc fcQRubberBand_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRubberBand_tr2".}
-proc fcQRubberBand_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRubberBand_tr3".}
+proc fcQRubberBand_setGeometryR(self: pointer, r: pointer): void {.importc: "QRubberBand_setGeometry_r".}
+proc fcQRubberBand_setGeometryXYWH(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QRubberBand_setGeometry_x_y_w_h".}
+proc fcQRubberBand_moveXY(self: pointer, x: cint, y: cint): void {.importc: "QRubberBand_move_x_y".}
+proc fcQRubberBand_moveP(self: pointer, p: pointer): void {.importc: "QRubberBand_move_p".}
+proc fcQRubberBand_resizeWH(self: pointer, w: cint, h: cint): void {.importc: "QRubberBand_resize_w_h".}
+proc fcQRubberBand_resizeS(self: pointer, s: pointer): void {.importc: "QRubberBand_resize_s".}
+proc fcQRubberBand_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRubberBand_tr_s_c".}
+proc fcQRubberBand_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRubberBand_tr_s_c_n".}
 proc fcQRubberBand_vdata(self: pointer): ptr pointer {.importc: "QRubberBand_vdata".}
 proc fvdata_cQRubberBand(self: pointer): pointer {.importc: "vdata_QRubberBand".}
 
@@ -206,8 +206,8 @@ proc fcQRubberBand_protectedbase_sender(self: pointer): pointer {.importc: "QRub
 proc fcQRubberBand_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QRubberBand_protectedbase_senderSignalIndex".}
 proc fcQRubberBand_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRubberBand_protectedbase_receivers".}
 proc fcQRubberBand_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRubberBand_protectedbase_isSignalConnected".}
-proc fcQRubberBand_new(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQRubberBand {.importc: "QRubberBand_new".}
-proc fcQRubberBand_new2(vtbl: pointer, vdata: csize_t, param1: cint, param2: pointer): ptr cQRubberBand {.importc: "QRubberBand_new2".}
+proc fcQRubberBand_new(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQRubberBand {.importc: "QRubberBand_new_QRubberBand_Shape".}
+proc fcQRubberBand_new2(vtbl: pointer, vdata: csize_t, param1: cint, param2: pointer): ptr cQRubberBand {.importc: "QRubberBand_new_QRubberBand_Shape_QWidget".}
 proc fcQRubberBand_staticMetaObject(): pointer {.importc: "QRubberBand_staticMetaObject".}
 
 proc metaObject*(self: gen_qrubberband_types.QRubberBand): gen_qobjectdefs_types.QMetaObject =
@@ -220,7 +220,7 @@ proc metacall*(self: gen_qrubberband_types.QRubberBand, param1: cint, param2: ci
   fcQRubberBand_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qrubberband_types.QRubberBand, s: cstring): string =
-  let v_ms = fcQRubberBand_tr(s)
+  let v_ms = fcQRubberBand_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -229,31 +229,31 @@ proc shape*(self: gen_qrubberband_types.QRubberBand): cint =
   cint(fcQRubberBand_shape(self.h))
 
 proc setGeometry*(self: gen_qrubberband_types.QRubberBand, r: gen_qrect_types.QRect): void =
-  fcQRubberBand_setGeometry(self.h, r.h)
+  fcQRubberBand_setGeometryR(self.h, r.h)
 
 proc setGeometry*(self: gen_qrubberband_types.QRubberBand, x: cint, y: cint, w: cint, h: cint): void =
-  fcQRubberBand_setGeometry2(self.h, x, y, w, h)
+  fcQRubberBand_setGeometryXYWH(self.h, x, y, w, h)
 
 proc move*(self: gen_qrubberband_types.QRubberBand, x: cint, y: cint): void =
-  fcQRubberBand_move(self.h, x, y)
+  fcQRubberBand_moveXY(self.h, x, y)
 
 proc move*(self: gen_qrubberband_types.QRubberBand, p: gen_qpoint_types.QPoint): void =
-  fcQRubberBand_moveWithQPoint(self.h, p.h)
+  fcQRubberBand_moveP(self.h, p.h)
 
 proc resize*(self: gen_qrubberband_types.QRubberBand, w: cint, h: cint): void =
-  fcQRubberBand_resize(self.h, w, h)
+  fcQRubberBand_resizeWH(self.h, w, h)
 
 proc resize*(self: gen_qrubberband_types.QRubberBand, s: gen_qsize_types.QSize): void =
-  fcQRubberBand_resizeWithQSize(self.h, s.h)
+  fcQRubberBand_resizeS(self.h, s.h)
 
 proc tr*(_: type gen_qrubberband_types.QRubberBand, s: cstring, c: cstring): string =
-  let v_ms = fcQRubberBand_tr2(s, c)
+  let v_ms = fcQRubberBand_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qrubberband_types.QRubberBand, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRubberBand_tr3(s, c, n)
+  let v_ms = fcQRubberBand_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

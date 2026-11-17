@@ -91,7 +91,7 @@ type cQWindow*{.exportc: "QWindow", incompleteStruct.} = object
 proc fcQWindow_metaObject(self: pointer): pointer {.importc: "QWindow_metaObject".}
 proc fcQWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QWindow_metacast".}
 proc fcQWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWindow_metacall".}
-proc fcQWindow_tr(s: cstring): struct_seaqt_string {.importc: "QWindow_tr".}
+proc fcQWindow_trS(s: cstring): struct_seaqt_string {.importc: "QWindow_tr_s".}
 proc fcQWindow_setSurfaceType(self: pointer, surfaceType: cint): void {.importc: "QWindow_setSurfaceType".}
 proc fcQWindow_surfaceType(self: pointer): cint {.importc: "QWindow_surfaceType".}
 proc fcQWindow_isVisible(self: pointer): bool {.importc: "QWindow_isVisible".}
@@ -110,7 +110,7 @@ proc fcQWindow_format(self: pointer): pointer {.importc: "QWindow_format".}
 proc fcQWindow_requestedFormat(self: pointer): pointer {.importc: "QWindow_requestedFormat".}
 proc fcQWindow_setFlags(self: pointer, flags: cint): void {.importc: "QWindow_setFlags".}
 proc fcQWindow_flags(self: pointer): cint {.importc: "QWindow_flags".}
-proc fcQWindow_setFlag(self: pointer, param1: cint): void {.importc: "QWindow_setFlag".}
+proc fcQWindow_setFlag_Qt_WindowType(self: pointer, param1: cint): void {.importc: "QWindow_setFlag_Qt_WindowType".}
 proc fcQWindow_typeX(self: pointer): cint {.importc: "QWindow_type".}
 proc fcQWindow_title(self: pointer): struct_seaqt_string {.importc: "QWindow_title".}
 proc fcQWindow_setOpacity(self: pointer, level: float64): void {.importc: "QWindow_setOpacity".}
@@ -127,7 +127,7 @@ proc fcQWindow_setWindowState(self: pointer, state: cint): void {.importc: "QWin
 proc fcQWindow_setWindowStates(self: pointer, states: cint): void {.importc: "QWindow_setWindowStates".}
 proc fcQWindow_setTransientParent(self: pointer, parent: pointer): void {.importc: "QWindow_setTransientParent".}
 proc fcQWindow_transientParent(self: pointer): pointer {.importc: "QWindow_transientParent".}
-proc fcQWindow_isAncestorOf(self: pointer, child: pointer): bool {.importc: "QWindow_isAncestorOf".}
+proc fcQWindow_isAncestorOfChild(self: pointer, child: pointer): bool {.importc: "QWindow_isAncestorOf_child".}
 proc fcQWindow_isExposed(self: pointer): bool {.importc: "QWindow_isExposed".}
 proc fcQWindow_minimumWidth(self: pointer): cint {.importc: "QWindow_minimumWidth".}
 proc fcQWindow_minimumHeight(self: pointer): cint {.importc: "QWindow_minimumHeight".}
@@ -152,10 +152,10 @@ proc fcQWindow_x(self: pointer): cint {.importc: "QWindow_x".}
 proc fcQWindow_y(self: pointer): cint {.importc: "QWindow_y".}
 proc fcQWindow_size(self: pointer): pointer {.importc: "QWindow_size".}
 proc fcQWindow_position(self: pointer): pointer {.importc: "QWindow_position".}
-proc fcQWindow_setPosition(self: pointer, pt: pointer): void {.importc: "QWindow_setPosition".}
-proc fcQWindow_setPosition2(self: pointer, posx: cint, posy: cint): void {.importc: "QWindow_setPosition2".}
-proc fcQWindow_resize(self: pointer, newSize: pointer): void {.importc: "QWindow_resize".}
-proc fcQWindow_resize2(self: pointer, w: cint, h: cint): void {.importc: "QWindow_resize2".}
+proc fcQWindow_setPositionPt(self: pointer, pt: pointer): void {.importc: "QWindow_setPosition_pt".}
+proc fcQWindow_setPositionPosxPosy(self: pointer, posx: cint, posy: cint): void {.importc: "QWindow_setPosition_posx_posy".}
+proc fcQWindow_resizeNewSize(self: pointer, newSize: pointer): void {.importc: "QWindow_resize_newSize".}
+proc fcQWindow_resizeWH(self: pointer, w: cint, h: cint): void {.importc: "QWindow_resize_w_h".}
 proc fcQWindow_setFilePath(self: pointer, filePath: struct_seaqt_string): void {.importc: "QWindow_setFilePath".}
 proc fcQWindow_filePath(self: pointer): struct_seaqt_string {.importc: "QWindow_filePath".}
 proc fcQWindow_setIcon(self: pointer, icon: pointer): void {.importc: "QWindow_setIcon".}
@@ -167,10 +167,10 @@ proc fcQWindow_screen(self: pointer): pointer {.importc: "QWindow_screen".}
 proc fcQWindow_setScreen(self: pointer, screen: pointer): void {.importc: "QWindow_setScreen".}
 proc fcQWindow_accessibleRoot(self: pointer): pointer {.importc: "QWindow_accessibleRoot".}
 proc fcQWindow_focusObject(self: pointer): pointer {.importc: "QWindow_focusObject".}
-proc fcQWindow_mapToGlobal(self: pointer, pos: pointer): pointer {.importc: "QWindow_mapToGlobal".}
-proc fcQWindow_mapFromGlobal(self: pointer, pos: pointer): pointer {.importc: "QWindow_mapFromGlobal".}
-proc fcQWindow_mapToGlobalWithPos(self: pointer, pos: pointer): pointer {.importc: "QWindow_mapToGlobalWithPos".}
-proc fcQWindow_mapFromGlobalWithPos(self: pointer, pos: pointer): pointer {.importc: "QWindow_mapFromGlobalWithPos".}
+proc fcQWindow_mapToGlobal_QPointF(self: pointer, pos: pointer): pointer {.importc: "QWindow_mapToGlobal_QPointF".}
+proc fcQWindow_mapFromGlobal_QPointF(self: pointer, pos: pointer): pointer {.importc: "QWindow_mapFromGlobal_QPointF".}
+proc fcQWindow_mapToGlobal_QPoint(self: pointer, pos: pointer): pointer {.importc: "QWindow_mapToGlobal_QPoint".}
+proc fcQWindow_mapFromGlobal_QPoint(self: pointer, pos: pointer): pointer {.importc: "QWindow_mapFromGlobal_QPoint".}
 proc fcQWindow_cursor(self: pointer): pointer {.importc: "QWindow_cursor".}
 proc fcQWindow_setCursor(self: pointer, cursor: pointer): void {.importc: "QWindow_setCursor".}
 proc fcQWindow_unsetCursor(self: pointer): void {.importc: "QWindow_unsetCursor".}
@@ -193,8 +193,8 @@ proc fcQWindow_setX(self: pointer, arg: cint): void {.importc: "QWindow_setX".}
 proc fcQWindow_setY(self: pointer, arg: cint): void {.importc: "QWindow_setY".}
 proc fcQWindow_setWidth(self: pointer, arg: cint): void {.importc: "QWindow_setWidth".}
 proc fcQWindow_setHeight(self: pointer, arg: cint): void {.importc: "QWindow_setHeight".}
-proc fcQWindow_setGeometry(self: pointer, posx: cint, posy: cint, w: cint, h: cint): void {.importc: "QWindow_setGeometry".}
-proc fcQWindow_setGeometryWithRect(self: pointer, rect: pointer): void {.importc: "QWindow_setGeometryWithRect".}
+proc fcQWindow_setGeometryPosxPosyWH(self: pointer, posx: cint, posy: cint, w: cint, h: cint): void {.importc: "QWindow_setGeometry_posx_posy_w_h".}
+proc fcQWindow_setGeometryRect(self: pointer, rect: pointer): void {.importc: "QWindow_setGeometry_rect".}
 proc fcQWindow_setMinimumWidth(self: pointer, w: cint): void {.importc: "QWindow_setMinimumWidth".}
 proc fcQWindow_setMinimumHeight(self: pointer, h: cint): void {.importc: "QWindow_setMinimumHeight".}
 proc fcQWindow_setMaximumWidth(self: pointer, w: cint): void {.importc: "QWindow_setMaximumWidth".}
@@ -239,11 +239,11 @@ proc fcQWindow_opacityChanged(self: pointer, opacity: float64): void {.importc: 
 proc fcQWindow_connect_opacityChanged(self: pointer, slot: int, callback: proc (slot: int, opacity: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_opacityChanged".}
 proc fcQWindow_transientParentChanged(self: pointer, transientParent: pointer): void {.importc: "QWindow_transientParentChanged".}
 proc fcQWindow_connect_transientParentChanged(self: pointer, slot: int, callback: proc (slot: int, transientParent: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_transientParentChanged".}
-proc fcQWindow_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWindow_tr2".}
-proc fcQWindow_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWindow_tr3".}
-proc fcQWindow_parentWithMode(self: pointer, mode: cint): pointer {.importc: "QWindow_parentWithMode".}
-proc fcQWindow_setFlag2(self: pointer, param1: cint, on: bool): void {.importc: "QWindow_setFlag2".}
-proc fcQWindow_isAncestorOf2(self: pointer, child: pointer, mode: cint): bool {.importc: "QWindow_isAncestorOf2".}
+proc fcQWindow_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWindow_tr_s_c".}
+proc fcQWindow_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWindow_tr_s_c_n".}
+proc fcQWindow_parentMode(self: pointer, mode: cint): pointer {.importc: "QWindow_parent_mode".}
+proc fcQWindow_setFlag_Qt_WindowTypeBool(self: pointer, param1: cint, on: bool): void {.importc: "QWindow_setFlag_Qt_WindowType_bool".}
+proc fcQWindow_isAncestorOfChildMode(self: pointer, child: pointer, mode: cint): bool {.importc: "QWindow_isAncestorOf_child_mode".}
 proc fcQWindow_vdata(self: pointer): ptr pointer {.importc: "QWindow_vdata".}
 proc fvdata_cQWindow(self: pointer): pointer {.importc: "vdata_QWindow".}
 
@@ -323,8 +323,8 @@ proc fcQWindow_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "
 proc fcQWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWindow_protectedbase_receivers".}
 proc fcQWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWindow_protectedbase_isSignalConnected".}
 proc fcQWindow_new(vtbl: pointer, vdata: csize_t): ptr cQWindow {.importc: "QWindow_new".}
-proc fcQWindow_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWindow {.importc: "QWindow_new2".}
-proc fcQWindow_new3(vtbl: pointer, vdata: csize_t, screen: pointer): ptr cQWindow {.importc: "QWindow_new3".}
+proc fcQWindow_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWindow {.importc: "QWindow_new_parent".}
+proc fcQWindow_new3(vtbl: pointer, vdata: csize_t, screen: pointer): ptr cQWindow {.importc: "QWindow_new_screen".}
 proc fcQWindow_staticMetaObject(): pointer {.importc: "QWindow_staticMetaObject".}
 
 proc metaObject*(self: gen_qwindow_types.QWindow): gen_qobjectdefs_types.QMetaObject =
@@ -337,7 +337,7 @@ proc metacall*(self: gen_qwindow_types.QWindow, param1: cint, param2: cint, para
   fcQWindow_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwindow_types.QWindow, s: cstring): string =
-  let v_ms = fcQWindow_tr(s)
+  let v_ms = fcQWindow_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -397,7 +397,7 @@ proc flags*(self: gen_qwindow_types.QWindow): cint =
   cint(fcQWindow_flags(self.h))
 
 proc setFlag*(self: gen_qwindow_types.QWindow, param1: cint): void =
-  fcQWindow_setFlag(self.h, cint(param1))
+  fcQWindow_setFlag_Qt_WindowType(self.h, cint(param1))
 
 proc typeX*(self: gen_qwindow_types.QWindow): cint =
   cint(fcQWindow_typeX(self.h))
@@ -451,7 +451,7 @@ proc transientParent*(self: gen_qwindow_types.QWindow): gen_qwindow_types.QWindo
   gen_qwindow_types.QWindow(h: fcQWindow_transientParent(self.h), owned: false)
 
 proc isAncestorOf*(self: gen_qwindow_types.QWindow, child: gen_qwindow_types.QWindow): bool =
-  fcQWindow_isAncestorOf(self.h, child.h)
+  fcQWindow_isAncestorOfChild(self.h, child.h)
 
 proc isExposed*(self: gen_qwindow_types.QWindow): bool =
   fcQWindow_isExposed(self.h)
@@ -526,16 +526,16 @@ proc position*(self: gen_qwindow_types.QWindow): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQWindow_position(self.h), owned: true)
 
 proc setPosition*(self: gen_qwindow_types.QWindow, pt: gen_qpoint_types.QPoint): void =
-  fcQWindow_setPosition(self.h, pt.h)
+  fcQWindow_setPositionPt(self.h, pt.h)
 
 proc setPosition*(self: gen_qwindow_types.QWindow, posx: cint, posy: cint): void =
-  fcQWindow_setPosition2(self.h, posx, posy)
+  fcQWindow_setPositionPosxPosy(self.h, posx, posy)
 
 proc resize*(self: gen_qwindow_types.QWindow, newSize: gen_qsize_types.QSize): void =
-  fcQWindow_resize(self.h, newSize.h)
+  fcQWindow_resizeNewSize(self.h, newSize.h)
 
 proc resize*(self: gen_qwindow_types.QWindow, w: cint, h: cint): void =
-  fcQWindow_resize2(self.h, w, h)
+  fcQWindow_resizeWH(self.h, w, h)
 
 proc setFilePath*(self: gen_qwindow_types.QWindow, filePath: openArray[char]): void =
   fcQWindow_setFilePath(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
@@ -574,16 +574,16 @@ proc focusObject*(self: gen_qwindow_types.QWindow): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWindow_focusObject(self.h), owned: false)
 
 proc mapToGlobal*(self: gen_qwindow_types.QWindow, pos: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQWindow_mapToGlobal(self.h, pos.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQWindow_mapToGlobal_QPointF(self.h, pos.h), owned: true)
 
 proc mapFromGlobal*(self: gen_qwindow_types.QWindow, pos: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQWindow_mapFromGlobal(self.h, pos.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQWindow_mapFromGlobal_QPointF(self.h, pos.h), owned: true)
 
 proc mapToGlobal*(self: gen_qwindow_types.QWindow, pos: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWindow_mapToGlobalWithPos(self.h, pos.h), owned: true)
+  gen_qpoint_types.QPoint(h: fcQWindow_mapToGlobal_QPoint(self.h, pos.h), owned: true)
 
 proc mapFromGlobal*(self: gen_qwindow_types.QWindow, pos: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWindow_mapFromGlobalWithPos(self.h, pos.h), owned: true)
+  gen_qpoint_types.QPoint(h: fcQWindow_mapFromGlobal_QPoint(self.h, pos.h), owned: true)
 
 proc cursor*(self: gen_qwindow_types.QWindow): gen_qcursor_types.QCursor =
   gen_qcursor_types.QCursor(h: fcQWindow_cursor(self.h), owned: true)
@@ -652,10 +652,10 @@ proc setHeight*(self: gen_qwindow_types.QWindow, arg: cint): void =
   fcQWindow_setHeight(self.h, arg)
 
 proc setGeometry*(self: gen_qwindow_types.QWindow, posx: cint, posy: cint, w: cint, h: cint): void =
-  fcQWindow_setGeometry(self.h, posx, posy, w, h)
+  fcQWindow_setGeometryPosxPosyWH(self.h, posx, posy, w, h)
 
 proc setGeometry*(self: gen_qwindow_types.QWindow, rect: gen_qrect_types.QRect): void =
-  fcQWindow_setGeometryWithRect(self.h, rect.h)
+  fcQWindow_setGeometryRect(self.h, rect.h)
 
 proc setMinimumWidth*(self: gen_qwindow_types.QWindow, w: cint): void =
   fcQWindow_setMinimumWidth(self.h, w)
@@ -1057,25 +1057,25 @@ proc onTransientParentChanged*(self: gen_qwindow_types.QWindow, slot: QWindowtra
   fcQWindow_connect_transientParentChanged(self.h, cast[int](addr tmp[]), fcQWindow_slot_callback_transientParentChanged, fcQWindow_slot_callback_transientParentChanged_release)
 
 proc tr*(_: type gen_qwindow_types.QWindow, s: cstring, c: cstring): string =
-  let v_ms = fcQWindow_tr2(s, c)
+  let v_ms = fcQWindow_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwindow_types.QWindow, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWindow_tr3(s, c, n)
+  let v_ms = fcQWindow_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc parent*(self: gen_qwindow_types.QWindow, mode: cint): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQWindow_parentWithMode(self.h, cint(mode)), owned: false)
+  gen_qwindow_types.QWindow(h: fcQWindow_parentMode(self.h, cint(mode)), owned: false)
 
 proc setFlag*(self: gen_qwindow_types.QWindow, param1: cint, on: bool): void =
-  fcQWindow_setFlag2(self.h, cint(param1), on)
+  fcQWindow_setFlag_Qt_WindowTypeBool(self.h, cint(param1), on)
 
 proc isAncestorOf*(self: gen_qwindow_types.QWindow, child: gen_qwindow_types.QWindow, mode: cint): bool =
-  fcQWindow_isAncestorOf2(self.h, child.h, cint(mode))
+  fcQWindow_isAncestorOfChildMode(self.h, child.h, cint(mode))
 
 type QWindowmetaObjectProc* = proc(self: QWindow): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWindowmetacastProc* = proc(self: QWindow, param1: cstring): pointer {.raises: [], gcsafe.}

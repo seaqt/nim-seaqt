@@ -63,7 +63,7 @@ proc fcQGestureRecognizer_recognize(self: pointer, state: pointer, watched: poin
 proc fcQGestureRecognizer_reset(self: pointer, state: pointer): void {.importc: "QGestureRecognizer_reset".}
 proc fcQGestureRecognizer_registerRecognizer(recognizer: pointer): cint {.importc: "QGestureRecognizer_registerRecognizer".}
 proc fcQGestureRecognizer_unregisterRecognizer(typeVal: cint): void {.importc: "QGestureRecognizer_unregisterRecognizer".}
-proc fcQGestureRecognizer_operatorAssign(self: pointer, param1: pointer): void {.importc: "QGestureRecognizer_operatorAssign".}
+proc fcQGestureRecognizer_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGestureRecognizer_operatorAssign".}
 proc fcQGestureRecognizer_vdata(self: pointer): ptr pointer {.importc: "QGestureRecognizer_vdata".}
 proc fvdata_cQGestureRecognizer(self: pointer): pointer {.importc: "vdata_QGestureRecognizer".}
 
@@ -91,8 +91,8 @@ proc registerRecognizer*(_: type gen_qgesturerecognizer_types.QGestureRecognizer
 proc unregisterRecognizer*(_: type gen_qgesturerecognizer_types.QGestureRecognizer, typeVal: cint): void =
   fcQGestureRecognizer_unregisterRecognizer(cint(typeVal))
 
-proc operatorAssign*(self: gen_qgesturerecognizer_types.QGestureRecognizer, param1: gen_qgesturerecognizer_types.QGestureRecognizer): void =
-  fcQGestureRecognizer_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qgesturerecognizer_types.QGestureRecognizer, fromVal: gen_qgesturerecognizer_types.QGestureRecognizer): void =
+  fcQGestureRecognizer_operatorAssign(self.h, fromVal.h)
 
 type QGestureRecognizercreateXProc* = proc(self: QGestureRecognizer, target: gen_qobject_types.QObject): gen_qgesture_types.QGesture {.raises: [], gcsafe.}
 type QGestureRecognizerrecognizeProc* = proc(self: QGestureRecognizer, state: gen_qgesture_types.QGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}

@@ -23,16 +23,16 @@ QAudioDevice* QAudioDevice_new() {
 	return new (std::nothrow) QAudioDevice();
 }
 
-QAudioDevice* QAudioDevice_new2(QAudioDevice* other) {
-	return new (std::nothrow) QAudioDevice(*other);
+QAudioDevice* QAudioDevice_new_from(QAudioDevice* from) {
+	return new (std::nothrow) QAudioDevice(*from);
 }
 
 void QAudioDevice_swap(QAudioDevice* self, QAudioDevice* other) {
 	self->swap(*other);
 }
 
-void QAudioDevice_operatorAssign(QAudioDevice* self, QAudioDevice* other) {
-	self->operator=(*other);
+void QAudioDevice_operatorAssign(QAudioDevice* self, QAudioDevice* from) {
+	self->operator=(*from);
 }
 
 bool QAudioDevice_operatorEqual(const QAudioDevice* self, QAudioDevice* other) {

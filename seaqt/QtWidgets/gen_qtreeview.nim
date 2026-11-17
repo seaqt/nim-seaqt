@@ -89,7 +89,7 @@ type cQTreeView*{.exportc: "QTreeView", incompleteStruct.} = object
 proc fcQTreeView_metaObject(self: pointer): pointer {.importc: "QTreeView_metaObject".}
 proc fcQTreeView_metacast(self: pointer, param1: cstring): pointer {.importc: "QTreeView_metacast".}
 proc fcQTreeView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTreeView_metacall".}
-proc fcQTreeView_tr(s: cstring): struct_seaqt_string {.importc: "QTreeView_tr".}
+proc fcQTreeView_trS(s: cstring): struct_seaqt_string {.importc: "QTreeView_tr_s".}
 proc fcQTreeView_setModel(self: pointer, model: pointer): void {.importc: "QTreeView_setModel".}
 proc fcQTreeView_setRootIndex(self: pointer, index: pointer): void {.importc: "QTreeView_setRootIndex".}
 proc fcQTreeView_setSelectionModel(self: pointer, selectionModel: pointer): void {.importc: "QTreeView_setSelectionModel".}
@@ -153,12 +153,12 @@ proc fcQTreeView_collapse(self: pointer, index: pointer): void {.importc: "QTree
 proc fcQTreeView_resizeColumnToContents(self: pointer, column: cint): void {.importc: "QTreeView_resizeColumnToContents".}
 proc fcQTreeView_sortByColumn(self: pointer, column: cint, order: cint): void {.importc: "QTreeView_sortByColumn".}
 proc fcQTreeView_expandAll(self: pointer): void {.importc: "QTreeView_expandAll".}
-proc fcQTreeView_expandRecursively(self: pointer, index: pointer): void {.importc: "QTreeView_expandRecursively".}
+proc fcQTreeView_expandRecursivelyIndex(self: pointer, index: pointer): void {.importc: "QTreeView_expandRecursively_index".}
 proc fcQTreeView_collapseAll(self: pointer): void {.importc: "QTreeView_collapseAll".}
 proc fcQTreeView_expandToDepth(self: pointer, depth: cint): void {.importc: "QTreeView_expandToDepth".}
-proc fcQTreeView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTreeView_tr2".}
-proc fcQTreeView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTreeView_tr3".}
-proc fcQTreeView_expandRecursively2(self: pointer, index: pointer, depth: cint): void {.importc: "QTreeView_expandRecursively2".}
+proc fcQTreeView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTreeView_tr_s_c".}
+proc fcQTreeView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTreeView_tr_s_c_n".}
+proc fcQTreeView_expandRecursivelyIndexDepth(self: pointer, index: pointer, depth: cint): void {.importc: "QTreeView_expandRecursively_index_depth".}
 proc fcQTreeView_vdata(self: pointer): ptr pointer {.importc: "QTreeView_vdata".}
 proc fvdata_cQTreeView(self: pointer): pointer {.importc: "vdata_QTreeView".}
 
@@ -217,7 +217,7 @@ type cQTreeViewVTable {.pure.} = object
   closeEditor*: proc(self: pointer, editor: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
   commitData*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   editorDestroyed*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  editIndexTriggerEvent*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
   startDrag*: proc(self: pointer, supportedActions: cint): void {.cdecl, raises: [], gcsafe.}
   initViewItemOption*: proc(self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -313,7 +313,7 @@ proc fcQTreeView_virtualbase_horizontalScrollbarValueChanged(self: pointer, valu
 proc fcQTreeView_virtualbase_closeEditor(self: pointer, editor: pointer, hint: cint): void {.importc: "QTreeView_virtualbase_closeEditor".}
 proc fcQTreeView_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QTreeView_virtualbase_commitData".}
 proc fcQTreeView_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QTreeView_virtualbase_editorDestroyed".}
-proc fcQTreeView_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QTreeView_virtualbase_edit2".}
+proc fcQTreeView_virtualbase_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QTreeView_virtualbase_edit_index_trigger_event".}
 proc fcQTreeView_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QTreeView_virtualbase_selectionCommand".}
 proc fcQTreeView_virtualbase_startDrag(self: pointer, supportedActions: cint): void {.importc: "QTreeView_virtualbase_startDrag".}
 proc fcQTreeView_virtualbase_initViewItemOption(self: pointer, option: pointer): void {.importc: "QTreeView_virtualbase_initViewItemOption".}
@@ -375,7 +375,7 @@ proc fcQTreeView_protectedbase_startAutoScroll(self: pointer): void {.importc: "
 proc fcQTreeView_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QTreeView_protectedbase_stopAutoScroll".}
 proc fcQTreeView_protectedbase_doAutoScroll(self: pointer): void {.importc: "QTreeView_protectedbase_doAutoScroll".}
 proc fcQTreeView_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QTreeView_protectedbase_dropIndicatorPosition".}
-proc fcQTreeView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTreeView_protectedbase_setViewportMargins".}
+proc fcQTreeView_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTreeView_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQTreeView_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QTreeView_protectedbase_viewportMargins".}
 proc fcQTreeView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QTreeView_protectedbase_drawFrame".}
 proc fcQTreeView_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QTreeView_protectedbase_updateMicroFocus".}
@@ -388,7 +388,7 @@ proc fcQTreeView_protectedbase_senderSignalIndex(self: pointer): cint {.importc:
 proc fcQTreeView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTreeView_protectedbase_receivers".}
 proc fcQTreeView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTreeView_protectedbase_isSignalConnected".}
 proc fcQTreeView_new(vtbl: pointer, vdata: csize_t): ptr cQTreeView {.importc: "QTreeView_new".}
-proc fcQTreeView_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTreeView {.importc: "QTreeView_new2".}
+proc fcQTreeView_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTreeView {.importc: "QTreeView_new_parent".}
 proc fcQTreeView_staticMetaObject(): pointer {.importc: "QTreeView_staticMetaObject".}
 
 proc metaObject*(self: gen_qtreeview_types.QTreeView): gen_qobjectdefs_types.QMetaObject =
@@ -401,7 +401,7 @@ proc metacall*(self: gen_qtreeview_types.QTreeView, param1: cint, param2: cint, 
   fcQTreeView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtreeview_types.QTreeView, s: cstring): string =
-  let v_ms = fcQTreeView_tr(s)
+  let v_ms = fcQTreeView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -628,7 +628,7 @@ proc expandAll*(self: gen_qtreeview_types.QTreeView): void =
   fcQTreeView_expandAll(self.h)
 
 proc expandRecursively*(self: gen_qtreeview_types.QTreeView, index: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQTreeView_expandRecursively(self.h, index.h)
+  fcQTreeView_expandRecursivelyIndex(self.h, index.h)
 
 proc collapseAll*(self: gen_qtreeview_types.QTreeView): void =
   fcQTreeView_collapseAll(self.h)
@@ -637,19 +637,19 @@ proc expandToDepth*(self: gen_qtreeview_types.QTreeView, depth: cint): void =
   fcQTreeView_expandToDepth(self.h, depth)
 
 proc tr*(_: type gen_qtreeview_types.QTreeView, s: cstring, c: cstring): string =
-  let v_ms = fcQTreeView_tr2(s, c)
+  let v_ms = fcQTreeView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtreeview_types.QTreeView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTreeView_tr3(s, c, n)
+  let v_ms = fcQTreeView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc expandRecursively*(self: gen_qtreeview_types.QTreeView, index: gen_qabstractitemmodel_types.QModelIndex, depth: cint): void =
-  fcQTreeView_expandRecursively2(self.h, index.h, depth)
+  fcQTreeView_expandRecursivelyIndexDepth(self.h, index.h, depth)
 
 type QTreeViewmetaObjectProc* = proc(self: QTreeView): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QTreeViewmetacastProc* = proc(self: QTreeView, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -704,7 +704,7 @@ type QTreeViewhorizontalScrollbarValueChangedProc* = proc(self: QTreeView, value
 type QTreeViewcloseEditorProc* = proc(self: QTreeView, editor: gen_qwidget_types.QWidget, hint: cint): void {.raises: [], gcsafe.}
 type QTreeViewcommitDataProc* = proc(self: QTreeView, editor: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QTreeVieweditorDestroyedProc* = proc(self: QTreeView, editor: gen_qobject_types.QObject): void {.raises: [], gcsafe.}
-type QTreeViewedit2Proc* = proc(self: QTreeView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTreeVieweditIndexTriggerEventProc* = proc(self: QTreeView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QTreeViewselectionCommandProc* = proc(self: QTreeView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
 type QTreeViewstartDragProc* = proc(self: QTreeView, supportedActions: cint): void {.raises: [], gcsafe.}
 type QTreeViewinitViewItemOptionProc* = proc(self: QTreeView, option: gen_qstyleoption_types.QStyleOptionViewItem): void {.raises: [], gcsafe.}
@@ -803,7 +803,7 @@ type QTreeViewVTable* {.inheritable, pure.} = object
   closeEditor*: QTreeViewcloseEditorProc
   commitData*: QTreeViewcommitDataProc
   editorDestroyed*: QTreeVieweditorDestroyedProc
-  edit2*: QTreeViewedit2Proc
+  editIndexTriggerEvent*: QTreeVieweditIndexTriggerEventProc
   selectionCommand*: QTreeViewselectionCommandProc
   startDrag*: QTreeViewstartDragProc
   initViewItemOption*: QTreeViewinitViewItemOptionProc
@@ -1017,7 +1017,7 @@ proc QTreeVieweditorDestroyed*(self: gen_qtreeview_types.QTreeView, editor: gen_
   fcQTreeView_virtualbase_editorDestroyed(self.h, editor.h)
 
 proc QTreeViewedit*(self: gen_qtreeview_types.QTreeView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTreeView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQTreeView_virtualbase_editIndexTriggerEvent(self.h, index.h, cint(trigger), event.h)
 
 proc QTreeViewselectionCommand*(self: gen_qtreeview_types.QTreeView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQTreeView_virtualbase_selectionCommand(self.h, index.h, event.h))
@@ -1529,13 +1529,13 @@ proc fcQTreeView_vtable_callback_editorDestroyed(self: pointer, editor: pointer)
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
-proc fcQTreeView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQTreeView_vtable_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeViewVTable](fcQTreeView_vdata(self)[])
   let self = QTreeView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].editIndexTriggerEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQTreeView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
@@ -2346,7 +2346,7 @@ proc fcQTreeView_method_callback_editorDestroyed(self: pointer, editor: pointer)
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
-proc fcQTreeView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQTreeView_method_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -2653,7 +2653,7 @@ proc dropIndicatorPosition*(self: gen_qtreeview_types.QTreeView): cint =
   cint(fcQTreeView_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qtreeview_types.QTreeView, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQTreeView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQTreeView_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qtreeview_types.QTreeView): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQTreeView_protectedbase_viewportMargins(self.h), owned: true)
@@ -2801,8 +2801,8 @@ proc create*(T: type gen_qtreeview_types.QTreeView,
     vtbl[].vtbl.commitData = fcQTreeView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQTreeView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQTreeView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQTreeView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQTreeView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -3004,8 +3004,8 @@ proc create*(T: type gen_qtreeview_types.QTreeView,
     vtbl[].vtbl.commitData = fcQTreeView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQTreeView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQTreeView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQTreeView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQTreeView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -3152,7 +3152,7 @@ const cQTreeView_mvtbl = cQTreeViewVTable(
   closeEditor: fcQTreeView_method_callback_closeEditor,
   commitData: fcQTreeView_method_callback_commitData,
   editorDestroyed: fcQTreeView_method_callback_editorDestroyed,
-  edit2: fcQTreeView_method_callback_edit2,
+  editIndexTriggerEvent: fcQTreeView_method_callback_editIndexTriggerEvent,
   selectionCommand: fcQTreeView_method_callback_selectionCommand,
   startDrag: fcQTreeView_method_callback_startDrag,
   initViewItemOption: fcQTreeView_method_callback_initViewItemOption,

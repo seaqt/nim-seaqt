@@ -56,13 +56,13 @@ void* QThread_vdata(VirtualQThread* self);
 VirtualQThread* vdata_QThread(void* vdata);
 
 VirtualQThread* QThread_new(const QThread_VTable* vtbl, size_t vdata);
-VirtualQThread* QThread_new2(const QThread_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQThread* QThread_new_parent(const QThread_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QThread_virtbase(QThread* src, QObject** outptr_QObject);
 QMetaObject* QThread_metaObject(const QThread* self);
 void* QThread_metacast(QThread* self, const char* param1);
 int QThread_metacall(QThread* self, int param1, int param2, void** param3);
-struct seaqt_string QThread_tr(const char* s);
+struct seaqt_string QThread_tr_s(const char* s);
 void* QThread_currentThreadId();
 QThread* QThread_currentThread();
 int QThread_idealThreadCount();
@@ -84,16 +84,16 @@ void QThread_terminate(QThread* self);
 void QThread_exit(QThread* self);
 void QThread_quit(QThread* self);
 bool QThread_wait(QThread* self);
-bool QThread_waitWithTime(QThread* self, unsigned long time);
+bool QThread_wait_time(QThread* self, unsigned long time);
 void QThread_sleep(unsigned long param1);
 void QThread_msleep(unsigned long param1);
 void QThread_usleep(unsigned long param1);
 void QThread_run(QThread* self);
-struct seaqt_string QThread_tr2(const char* s, const char* c);
-struct seaqt_string QThread_tr3(const char* s, const char* c, int n);
-void QThread_startWithQThreadPriority(QThread* self, int param1);
-void QThread_exitWithRetcode(QThread* self, int retcode);
-bool QThread_waitWithDeadline(QThread* self, QDeadlineTimer* deadline);
+struct seaqt_string QThread_tr_s_c(const char* s, const char* c);
+struct seaqt_string QThread_tr_s_c_n(const char* s, const char* c, int n);
+void QThread_start_QThread_Priority(QThread* self, int param1);
+void QThread_exit_retcode(QThread* self, int retcode);
+bool QThread_wait_deadline(QThread* self, QDeadlineTimer* deadline);
 
 QMetaObject* QThread_virtualbase_metaObject(const VirtualQThread* self);
 void* QThread_virtualbase_metacast(VirtualQThread* self, const char* param1);

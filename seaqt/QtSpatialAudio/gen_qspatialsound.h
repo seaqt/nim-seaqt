@@ -64,7 +64,7 @@ void QSpatialSound_virtbase(QSpatialSound* src, QObject** outptr_QObject);
 QMetaObject* QSpatialSound_metaObject(const QSpatialSound* self);
 void* QSpatialSound_metacast(QSpatialSound* self, const char* param1);
 int QSpatialSound_metacall(QSpatialSound* self, int param1, int param2, void** param3);
-struct seaqt_string QSpatialSound_tr(const char* s);
+struct seaqt_string QSpatialSound_tr_s(const char* s);
 void QSpatialSound_setSource(QSpatialSound* self, QUrl* url);
 QUrl* QSpatialSound_source(const QSpatialSound* self);
 int QSpatialSound_loops(const QSpatialSound* self);
@@ -125,8 +125,8 @@ void QSpatialSound_connect_nearFieldGainChanged(QSpatialSound* self, intptr_t sl
 void QSpatialSound_play(QSpatialSound* self);
 void QSpatialSound_pause(QSpatialSound* self);
 void QSpatialSound_stop(QSpatialSound* self);
-struct seaqt_string QSpatialSound_tr2(const char* s, const char* c);
-struct seaqt_string QSpatialSound_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSpatialSound_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSpatialSound_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSpatialSound_virtualbase_metaObject(const VirtualQSpatialSound* self);
 void* QSpatialSound_virtualbase_metacast(VirtualQSpatialSound* self, const char* param1);

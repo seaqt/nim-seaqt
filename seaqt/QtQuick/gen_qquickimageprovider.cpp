@@ -239,7 +239,7 @@ int QQuickTextureFactory_metacall(QQuickTextureFactory* self, int param1, int pa
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickTextureFactory_tr(const char* s) {
+struct seaqt_string QQuickTextureFactory_tr_s(const char* s) {
 	QString _ret = QQuickTextureFactory::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -270,7 +270,7 @@ QQuickTextureFactory* QQuickTextureFactory_textureFactoryForImage(QImage* image)
 	return QQuickTextureFactory::textureFactoryForImage(*image);
 }
 
-struct seaqt_string QQuickTextureFactory_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickTextureFactory_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickTextureFactory::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -281,7 +281,7 @@ struct seaqt_string QQuickTextureFactory_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickTextureFactory_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickTextureFactory_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickTextureFactory::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -570,7 +570,7 @@ int QQuickImageResponse_metacall(QQuickImageResponse* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickImageResponse_tr(const char* s) {
+struct seaqt_string QQuickImageResponse_tr_s(const char* s) {
 	QString _ret = QQuickImageResponse::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -615,7 +615,7 @@ void QQuickImageResponse_connect_finished(QQuickImageResponse* self, intptr_t sl
 	QQuickImageResponse::connect(self, static_cast<void (QQuickImageResponse::*)()>(&QQuickImageResponse::finished), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQuickImageResponse_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickImageResponse_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickImageResponse::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -626,7 +626,7 @@ struct seaqt_string QQuickImageResponse_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickImageResponse_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickImageResponse_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickImageResponse::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -969,12 +969,12 @@ public:
 	friend bool QQuickImageProvider_protectedbase_isSignalConnected(const VirtualQQuickImageProvider* self, QMetaMethod* signal);
 };
 
-VirtualQQuickImageProvider* QQuickImageProvider_new(const QQuickImageProvider_VTable* vtbl, size_t vdata, int type) {
+VirtualQQuickImageProvider* QQuickImageProvider_new_type(const QQuickImageProvider_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickImageProvider>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickImageProvider(vtbl, static_cast<QQmlImageProviderBase::ImageType>(type)) : nullptr;
 }
 
-VirtualQQuickImageProvider* QQuickImageProvider_new2(const QQuickImageProvider_VTable* vtbl, size_t vdata, int type, int flags) {
+VirtualQQuickImageProvider* QQuickImageProvider_new_type_flags(const QQuickImageProvider_VTable* vtbl, size_t vdata, int type, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickImageProvider>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickImageProvider(vtbl, static_cast<QQmlImageProviderBase::ImageType>(type), static_cast<QQmlImageProviderBase::Flags>(flags)) : nullptr;
 }
@@ -995,7 +995,7 @@ int QQuickImageProvider_metacall(QQuickImageProvider* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickImageProvider_tr(const char* s) {
+struct seaqt_string QQuickImageProvider_tr_s(const char* s) {
 	QString _ret = QQuickImageProvider::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1031,7 +1031,7 @@ QQuickTextureFactory* QQuickImageProvider_requestTexture(QQuickImageProvider* se
 	return self->requestTexture(id_QString, size, *requestedSize);
 }
 
-struct seaqt_string QQuickImageProvider_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickImageProvider_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickImageProvider::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1042,7 +1042,7 @@ struct seaqt_string QQuickImageProvider_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickImageProvider_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickImageProvider_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickImageProvider::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -23,12 +23,12 @@ QFont* QFont_new() {
 	return new (std::nothrow) QFont();
 }
 
-QFont* QFont_new2(struct seaqt_string family) {
+QFont* QFont_new_family(struct seaqt_string family) {
 	QString family_QString = QString::fromUtf8(family.data, family.len);
 	return new (std::nothrow) QFont(family_QString);
 }
 
-QFont* QFont_new3(struct seaqt_array /* of struct seaqt_string */  families) {
+QFont* QFont_new_families(struct seaqt_array /* of struct seaqt_string */  families) {
 	QStringList families_QList;
 	families_QList.reserve(families.len);
 	struct seaqt_string* families_arr = static_cast<struct seaqt_string*>(families.data);
@@ -39,30 +39,30 @@ QFont* QFont_new3(struct seaqt_array /* of struct seaqt_string */  families) {
 	return new (std::nothrow) QFont(families_QList);
 }
 
-QFont* QFont_new4(QFont* font, QPaintDevice* pd) {
+QFont* QFont_new_font_pd(QFont* font, QPaintDevice* pd) {
 	return new (std::nothrow) QFont(*font, pd);
 }
 
-QFont* QFont_new5(QFont* font) {
-	return new (std::nothrow) QFont(*font);
+QFont* QFont_new_from(QFont* from) {
+	return new (std::nothrow) QFont(*from);
 }
 
-QFont* QFont_new6(struct seaqt_string family, int pointSize) {
+QFont* QFont_new_family_pointSize(struct seaqt_string family, int pointSize) {
 	QString family_QString = QString::fromUtf8(family.data, family.len);
 	return new (std::nothrow) QFont(family_QString, static_cast<int>(pointSize));
 }
 
-QFont* QFont_new7(struct seaqt_string family, int pointSize, int weight) {
+QFont* QFont_new_family_pointSize_weight(struct seaqt_string family, int pointSize, int weight) {
 	QString family_QString = QString::fromUtf8(family.data, family.len);
 	return new (std::nothrow) QFont(family_QString, static_cast<int>(pointSize), static_cast<int>(weight));
 }
 
-QFont* QFont_new8(struct seaqt_string family, int pointSize, int weight, bool italic) {
+QFont* QFont_new_family_pointSize_weight_italic(struct seaqt_string family, int pointSize, int weight, bool italic) {
 	QString family_QString = QString::fromUtf8(family.data, family.len);
 	return new (std::nothrow) QFont(family_QString, static_cast<int>(pointSize), static_cast<int>(weight), italic);
 }
 
-QFont* QFont_new9(struct seaqt_array /* of struct seaqt_string */  families, int pointSize) {
+QFont* QFont_new_families_pointSize(struct seaqt_array /* of struct seaqt_string */  families, int pointSize) {
 	QStringList families_QList;
 	families_QList.reserve(families.len);
 	struct seaqt_string* families_arr = static_cast<struct seaqt_string*>(families.data);
@@ -73,7 +73,7 @@ QFont* QFont_new9(struct seaqt_array /* of struct seaqt_string */  families, int
 	return new (std::nothrow) QFont(families_QList, static_cast<int>(pointSize));
 }
 
-QFont* QFont_new10(struct seaqt_array /* of struct seaqt_string */  families, int pointSize, int weight) {
+QFont* QFont_new_families_pointSize_weight(struct seaqt_array /* of struct seaqt_string */  families, int pointSize, int weight) {
 	QStringList families_QList;
 	families_QList.reserve(families.len);
 	struct seaqt_string* families_arr = static_cast<struct seaqt_string*>(families.data);
@@ -84,7 +84,7 @@ QFont* QFont_new10(struct seaqt_array /* of struct seaqt_string */  families, in
 	return new (std::nothrow) QFont(families_QList, static_cast<int>(pointSize), static_cast<int>(weight));
 }
 
-QFont* QFont_new11(struct seaqt_array /* of struct seaqt_string */  families, int pointSize, int weight, bool italic) {
+QFont* QFont_new_families_pointSize_weight_italic(struct seaqt_array /* of struct seaqt_string */  families, int pointSize, int weight, bool italic) {
 	QStringList families_QList;
 	families_QList.reserve(families.len);
 	struct seaqt_string* families_arr = static_cast<struct seaqt_string*>(families.data);
@@ -271,7 +271,7 @@ int QFont_styleStrategy(const QFont* self) {
 	return static_cast<int>(_ret);
 }
 
-void QFont_setStyleHint(QFont* self, int param1) {
+void QFont_setStyleHint_QFont_StyleHint(QFont* self, int param1) {
 	self->setStyleHint(static_cast<QFont::StyleHint>(param1));
 }
 
@@ -332,8 +332,8 @@ bool QFont_exactMatch(const QFont* self) {
 	return self->exactMatch();
 }
 
-void QFont_operatorAssign(QFont* self, QFont* param1) {
-	self->operator=(*param1);
+void QFont_operatorAssign(QFont* self, QFont* from) {
+	self->operator=(*from);
 }
 
 bool QFont_operatorEqual(const QFont* self, QFont* param1) {
@@ -503,7 +503,7 @@ int QFont_legacyWeight(const QFont* self) {
 	return self->legacyWeight();
 }
 
-void QFont_setStyleHint2(QFont* self, int param1, int param2) {
+void QFont_setStyleHint_QFont_StyleHint_QFont_StyleStrategy(QFont* self, int param1, int param2) {
 	self->setStyleHint(static_cast<QFont::StyleHint>(param1), static_cast<QFont::StyleStrategy>(param2));
 }
 

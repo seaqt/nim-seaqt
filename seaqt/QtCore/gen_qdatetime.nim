@@ -62,48 +62,48 @@ proc fcQDate_dayOfYear(self: pointer): cint {.importc: "QDate_dayOfYear".}
 proc fcQDate_daysInMonth(self: pointer): cint {.importc: "QDate_daysInMonth".}
 proc fcQDate_daysInYear(self: pointer): cint {.importc: "QDate_daysInYear".}
 proc fcQDate_weekNumber(self: pointer): cint {.importc: "QDate_weekNumber".}
-proc fcQDate_yearWithCal(self: pointer, cal: pointer): cint {.importc: "QDate_yearWithCal".}
-proc fcQDate_monthWithCal(self: pointer, cal: pointer): cint {.importc: "QDate_monthWithCal".}
-proc fcQDate_dayWithCal(self: pointer, cal: pointer): cint {.importc: "QDate_dayWithCal".}
-proc fcQDate_dayOfWeekWithCal(self: pointer, cal: pointer): cint {.importc: "QDate_dayOfWeekWithCal".}
-proc fcQDate_dayOfYearWithCal(self: pointer, cal: pointer): cint {.importc: "QDate_dayOfYearWithCal".}
-proc fcQDate_daysInMonthWithCal(self: pointer, cal: pointer): cint {.importc: "QDate_daysInMonthWithCal".}
-proc fcQDate_daysInYearWithCal(self: pointer, cal: pointer): cint {.importc: "QDate_daysInYearWithCal".}
+proc fcQDate_yearCal(self: pointer, cal: pointer): cint {.importc: "QDate_year_cal".}
+proc fcQDate_monthCal(self: pointer, cal: pointer): cint {.importc: "QDate_month_cal".}
+proc fcQDate_dayCal(self: pointer, cal: pointer): cint {.importc: "QDate_day_cal".}
+proc fcQDate_dayOfWeekCal(self: pointer, cal: pointer): cint {.importc: "QDate_dayOfWeek_cal".}
+proc fcQDate_dayOfYearCal(self: pointer, cal: pointer): cint {.importc: "QDate_dayOfYear_cal".}
+proc fcQDate_daysInMonthCal(self: pointer, cal: pointer): cint {.importc: "QDate_daysInMonth_cal".}
+proc fcQDate_daysInYearCal(self: pointer, cal: pointer): cint {.importc: "QDate_daysInYear_cal".}
 proc fcQDate_startOfDay(self: pointer): pointer {.importc: "QDate_startOfDay".}
 proc fcQDate_endOfDay(self: pointer): pointer {.importc: "QDate_endOfDay".}
-proc fcQDate_startOfDayWithZone(self: pointer, zone: pointer): pointer {.importc: "QDate_startOfDayWithZone".}
-proc fcQDate_endOfDayWithZone(self: pointer, zone: pointer): pointer {.importc: "QDate_endOfDayWithZone".}
+proc fcQDate_startOfDayZone(self: pointer, zone: pointer): pointer {.importc: "QDate_startOfDay_zone".}
+proc fcQDate_endOfDayZone(self: pointer, zone: pointer): pointer {.importc: "QDate_endOfDay_zone".}
 proc fcQDate_toString(self: pointer): struct_seaqt_string {.importc: "QDate_toString".}
-proc fcQDate_toStringWithFormat(self: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QDate_toStringWithFormat".}
-proc fcQDate_setDate(self: pointer, year: cint, month: cint, day: cint): bool {.importc: "QDate_setDate".}
-proc fcQDate_setDate2(self: pointer, year: cint, month: cint, day: cint, cal: pointer): bool {.importc: "QDate_setDate2".}
+proc fcQDate_toString_QString(self: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QDate_toString_QString".}
+proc fcQDate_setDateYearMonthDay(self: pointer, year: cint, month: cint, day: cint): bool {.importc: "QDate_setDate_year_month_day".}
+proc fcQDate_setDateYearMonthDayCal(self: pointer, year: cint, month: cint, day: cint, cal: pointer): bool {.importc: "QDate_setDate_year_month_day_cal".}
 proc fcQDate_getDate(self: pointer, year: ptr cint, month: ptr cint, day: ptr cint): void {.importc: "QDate_getDate".}
 proc fcQDate_addDays(self: pointer, days: clonglong): pointer {.importc: "QDate_addDays".}
-proc fcQDate_addMonths(self: pointer, months: cint): pointer {.importc: "QDate_addMonths".}
-proc fcQDate_addYears(self: pointer, years: cint): pointer {.importc: "QDate_addYears".}
-proc fcQDate_addMonths2(self: pointer, months: cint, cal: pointer): pointer {.importc: "QDate_addMonths2".}
-proc fcQDate_addYears2(self: pointer, years: cint, cal: pointer): pointer {.importc: "QDate_addYears2".}
+proc fcQDate_addMonthsMonths(self: pointer, months: cint): pointer {.importc: "QDate_addMonths_months".}
+proc fcQDate_addYearsYears(self: pointer, years: cint): pointer {.importc: "QDate_addYears_years".}
+proc fcQDate_addMonthsMonthsCal(self: pointer, months: cint, cal: pointer): pointer {.importc: "QDate_addMonths_months_cal".}
+proc fcQDate_addYearsYearsCal(self: pointer, years: cint, cal: pointer): pointer {.importc: "QDate_addYears_years_cal".}
 proc fcQDate_daysTo(self: pointer, d: pointer): clonglong {.importc: "QDate_daysTo".}
 proc fcQDate_currentDate(): pointer {.importc: "QDate_currentDate".}
-proc fcQDate_fromStringWithString(stringVal: struct_seaqt_string): pointer {.importc: "QDate_fromStringWithString".}
-proc fcQDate_fromString4(stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QDate_fromString4".}
-proc fcQDate_isValid2(y: cint, m: cint, d: cint): bool {.importc: "QDate_isValid2".}
+proc fcQDate_fromString_QString(stringVal: struct_seaqt_string): pointer {.importc: "QDate_fromString_QString".}
+proc fcQDate_fromString_QString_QString(stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QDate_fromString_QString_QString".}
+proc fcQDate_isValidYMD(y: cint, m: cint, d: cint): bool {.importc: "QDate_isValid_y_m_d".}
 proc fcQDate_isLeapYear(year: cint): bool {.importc: "QDate_isLeapYear".}
 proc fcQDate_fromJulianDay(jd_x: clonglong): pointer {.importc: "QDate_fromJulianDay".}
 proc fcQDate_toJulianDay(self: pointer): clonglong {.importc: "QDate_toJulianDay".}
-proc fcQDate_weekNumberWithYearNum(self: pointer, yearNum: ptr cint): cint {.importc: "QDate_weekNumberWithYearNum".}
-proc fcQDate_startOfDayWithSpec(self: pointer, spec: cint): pointer {.importc: "QDate_startOfDayWithSpec".}
-proc fcQDate_startOfDay2(self: pointer, spec: cint, offsetSeconds: cint): pointer {.importc: "QDate_startOfDay2".}
-proc fcQDate_endOfDayWithSpec(self: pointer, spec: cint): pointer {.importc: "QDate_endOfDayWithSpec".}
-proc fcQDate_endOfDay2(self: pointer, spec: cint, offsetSeconds: cint): pointer {.importc: "QDate_endOfDay2".}
-proc fcQDate_toString3(self: pointer, format: cint): struct_seaqt_string {.importc: "QDate_toString3".}
-proc fcQDate_toString4(self: pointer, format: struct_seaqt_string, cal: pointer): struct_seaqt_string {.importc: "QDate_toString4".}
-proc fcQDate_fromString8(stringVal: struct_seaqt_string, format: cint): pointer {.importc: "QDate_fromString8".}
-proc fcQDate_fromString9(stringVal: struct_seaqt_string, format: struct_seaqt_string, cal: pointer): pointer {.importc: "QDate_fromString9".}
+proc fcQDate_weekNumberYearNum(self: pointer, yearNum: ptr cint): cint {.importc: "QDate_weekNumber_yearNum".}
+proc fcQDate_startOfDaySpec(self: pointer, spec: cint): pointer {.importc: "QDate_startOfDay_spec".}
+proc fcQDate_startOfDaySpecOffsetSeconds(self: pointer, spec: cint, offsetSeconds: cint): pointer {.importc: "QDate_startOfDay_spec_offsetSeconds".}
+proc fcQDate_endOfDaySpec(self: pointer, spec: cint): pointer {.importc: "QDate_endOfDay_spec".}
+proc fcQDate_endOfDaySpecOffsetSeconds(self: pointer, spec: cint, offsetSeconds: cint): pointer {.importc: "QDate_endOfDay_spec_offsetSeconds".}
+proc fcQDate_toString_Qt_DateFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QDate_toString_Qt_DateFormat".}
+proc fcQDate_toString_QString_QCalendar(self: pointer, format: struct_seaqt_string, cal: pointer): struct_seaqt_string {.importc: "QDate_toString_QString_QCalendar".}
+proc fcQDate_fromString_QString_Qt_DateFormat(stringVal: struct_seaqt_string, format: cint): pointer {.importc: "QDate_fromString_QString_Qt_DateFormat".}
+proc fcQDate_fromString_QString_QString_QCalendar(stringVal: struct_seaqt_string, format: struct_seaqt_string, cal: pointer): pointer {.importc: "QDate_fromString_QString_QString_QCalendar".}
 proc fcQDate_new(): ptr cQDate {.importc: "QDate_new".}
-proc fcQDate_new2(y: cint, m: cint, d: cint): ptr cQDate {.importc: "QDate_new2".}
-proc fcQDate_new3(y: cint, m: cint, d: cint, cal: pointer): ptr cQDate {.importc: "QDate_new3".}
-proc fcQDate_new4(param1: pointer): ptr cQDate {.importc: "QDate_new4".}
+proc fcQDate_new2(y: cint, m: cint, d: cint): ptr cQDate {.importc: "QDate_new_y_m_d".}
+proc fcQDate_new3(y: cint, m: cint, d: cint, cal: pointer): ptr cQDate {.importc: "QDate_new_y_m_d_cal".}
+proc fcQDate_new4(fromVal: pointer): ptr cQDate {.importc: "QDate_new_from".}
 proc fcQTime_isNull(self: pointer): bool {.importc: "QTime_isNull".}
 proc fcQTime_isValid(self: pointer): bool {.importc: "QTime_isValid".}
 proc fcQTime_hour(self: pointer): cint {.importc: "QTime_hour".}
@@ -111,8 +111,8 @@ proc fcQTime_minute(self: pointer): cint {.importc: "QTime_minute".}
 proc fcQTime_second(self: pointer): cint {.importc: "QTime_second".}
 proc fcQTime_msec(self: pointer): cint {.importc: "QTime_msec".}
 proc fcQTime_toString(self: pointer): struct_seaqt_string {.importc: "QTime_toString".}
-proc fcQTime_toStringWithFormat(self: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QTime_toStringWithFormat".}
-proc fcQTime_setHMS(self: pointer, h: cint, m: cint, s: cint): bool {.importc: "QTime_setHMS".}
+proc fcQTime_toString_QString(self: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QTime_toString_QString".}
+proc fcQTime_setHMSHMS(self: pointer, h: cint, m: cint, s: cint): bool {.importc: "QTime_setHMS_h_m_s".}
 proc fcQTime_addSecs(self: pointer, secs: cint): pointer {.importc: "QTime_addSecs".}
 proc fcQTime_secsTo(self: pointer, t: pointer): cint {.importc: "QTime_secsTo".}
 proc fcQTime_addMSecs(self: pointer, ms: cint): pointer {.importc: "QTime_addMSecs".}
@@ -120,19 +120,19 @@ proc fcQTime_msecsTo(self: pointer, t: pointer): cint {.importc: "QTime_msecsTo"
 proc fcQTime_fromMSecsSinceStartOfDay(msecs: cint): pointer {.importc: "QTime_fromMSecsSinceStartOfDay".}
 proc fcQTime_msecsSinceStartOfDay(self: pointer): cint {.importc: "QTime_msecsSinceStartOfDay".}
 proc fcQTime_currentTime(): pointer {.importc: "QTime_currentTime".}
-proc fcQTime_fromStringWithString(stringVal: struct_seaqt_string): pointer {.importc: "QTime_fromStringWithString".}
-proc fcQTime_fromString4(stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QTime_fromString4".}
-proc fcQTime_isValid2(h: cint, m: cint, s: cint): bool {.importc: "QTime_isValid2".}
-proc fcQTime_toStringWithQtDateFormat(self: pointer, f: cint): struct_seaqt_string {.importc: "QTime_toStringWithQtDateFormat".}
-proc fcQTime_setHMS2(self: pointer, h: cint, m: cint, s: cint, ms: cint): bool {.importc: "QTime_setHMS2".}
-proc fcQTime_fromString6(stringVal: struct_seaqt_string, format: cint): pointer {.importc: "QTime_fromString6".}
-proc fcQTime_isValid3(h: cint, m: cint, s: cint, ms: cint): bool {.importc: "QTime_isValid3".}
+proc fcQTime_fromString_QString(stringVal: struct_seaqt_string): pointer {.importc: "QTime_fromString_QString".}
+proc fcQTime_fromString_QString_QString(stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QTime_fromString_QString_QString".}
+proc fcQTime_isValidHMS(h: cint, m: cint, s: cint): bool {.importc: "QTime_isValid_h_m_s".}
+proc fcQTime_toString_Qt_DateFormat(self: pointer, f: cint): struct_seaqt_string {.importc: "QTime_toString_Qt_DateFormat".}
+proc fcQTime_setHMSHMSMs(self: pointer, h: cint, m: cint, s: cint, ms: cint): bool {.importc: "QTime_setHMS_h_m_s_ms".}
+proc fcQTime_fromString_QString_Qt_DateFormat(stringVal: struct_seaqt_string, format: cint): pointer {.importc: "QTime_fromString_QString_Qt_DateFormat".}
+proc fcQTime_isValidHMSMs(h: cint, m: cint, s: cint, ms: cint): bool {.importc: "QTime_isValid_h_m_s_ms".}
 proc fcQTime_new(): ptr cQTime {.importc: "QTime_new".}
-proc fcQTime_new2(h: cint, m: cint): ptr cQTime {.importc: "QTime_new2".}
-proc fcQTime_new3(param1: pointer): ptr cQTime {.importc: "QTime_new3".}
-proc fcQTime_new4(h: cint, m: cint, s: cint): ptr cQTime {.importc: "QTime_new4".}
-proc fcQTime_new5(h: cint, m: cint, s: cint, ms: cint): ptr cQTime {.importc: "QTime_new5".}
-proc fcQDateTime_operatorAssign(self: pointer, other: pointer): void {.importc: "QDateTime_operatorAssign".}
+proc fcQTime_new2(h: cint, m: cint): ptr cQTime {.importc: "QTime_new_h_m".}
+proc fcQTime_new3(fromVal: pointer): ptr cQTime {.importc: "QTime_new_from".}
+proc fcQTime_new4(h: cint, m: cint, s: cint): ptr cQTime {.importc: "QTime_new_h_m_s".}
+proc fcQTime_new5(h: cint, m: cint, s: cint, ms: cint): ptr cQTime {.importc: "QTime_new_h_m_s_ms".}
+proc fcQDateTime_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDateTime_operatorAssign".}
 proc fcQDateTime_swap(self: pointer, other: pointer): void {.importc: "QDateTime_swap".}
 proc fcQDateTime_isNull(self: pointer): bool {.importc: "QDateTime_isNull".}
 proc fcQDateTime_isValid(self: pointer): bool {.importc: "QDateTime_isValid".}
@@ -153,7 +153,7 @@ proc fcQDateTime_setTimeZone(self: pointer, toZone: pointer): void {.importc: "Q
 proc fcQDateTime_setMSecsSinceEpoch(self: pointer, msecs: clonglong): void {.importc: "QDateTime_setMSecsSinceEpoch".}
 proc fcQDateTime_setSecsSinceEpoch(self: pointer, secs: clonglong): void {.importc: "QDateTime_setSecsSinceEpoch".}
 proc fcQDateTime_toString(self: pointer): struct_seaqt_string {.importc: "QDateTime_toString".}
-proc fcQDateTime_toStringWithFormat(self: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QDateTime_toStringWithFormat".}
+proc fcQDateTime_toString_QString(self: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QDateTime_toString_QString".}
 proc fcQDateTime_addDays(self: pointer, days: clonglong): pointer {.importc: "QDateTime_addDays".}
 proc fcQDateTime_addMonths(self: pointer, months: cint): pointer {.importc: "QDateTime_addMonths".}
 proc fcQDateTime_addYears(self: pointer, years: cint): pointer {.importc: "QDateTime_addYears".}
@@ -169,28 +169,28 @@ proc fcQDateTime_secsTo(self: pointer, param1: pointer): clonglong {.importc: "Q
 proc fcQDateTime_msecsTo(self: pointer, param1: pointer): clonglong {.importc: "QDateTime_msecsTo".}
 proc fcQDateTime_currentDateTime(): pointer {.importc: "QDateTime_currentDateTime".}
 proc fcQDateTime_currentDateTimeUtc(): pointer {.importc: "QDateTime_currentDateTimeUtc".}
-proc fcQDateTime_fromStringWithString(stringVal: struct_seaqt_string): pointer {.importc: "QDateTime_fromStringWithString".}
-proc fcQDateTime_fromString4(stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QDateTime_fromString4".}
-proc fcQDateTime_fromMSecsSinceEpoch(msecs: clonglong): pointer {.importc: "QDateTime_fromMSecsSinceEpoch".}
-proc fcQDateTime_fromSecsSinceEpoch(secs: clonglong): pointer {.importc: "QDateTime_fromSecsSinceEpoch".}
-proc fcQDateTime_fromMSecsSinceEpoch2(msecs: clonglong, timeZone: pointer): pointer {.importc: "QDateTime_fromMSecsSinceEpoch2".}
-proc fcQDateTime_fromSecsSinceEpoch2(secs: clonglong, timeZone: pointer): pointer {.importc: "QDateTime_fromSecsSinceEpoch2".}
+proc fcQDateTime_fromString_QString(stringVal: struct_seaqt_string): pointer {.importc: "QDateTime_fromString_QString".}
+proc fcQDateTime_fromString_QString_QString(stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QDateTime_fromString_QString_QString".}
+proc fcQDateTime_fromMSecsSinceEpochMsecs(msecs: clonglong): pointer {.importc: "QDateTime_fromMSecsSinceEpoch_msecs".}
+proc fcQDateTime_fromSecsSinceEpochSecs(secs: clonglong): pointer {.importc: "QDateTime_fromSecsSinceEpoch_secs".}
+proc fcQDateTime_fromMSecsSinceEpochMsecsTimeZone(msecs: clonglong, timeZone: pointer): pointer {.importc: "QDateTime_fromMSecsSinceEpoch_msecs_timeZone".}
+proc fcQDateTime_fromSecsSinceEpochSecsTimeZone(secs: clonglong, timeZone: pointer): pointer {.importc: "QDateTime_fromSecsSinceEpoch_secs_timeZone".}
 proc fcQDateTime_currentMSecsSinceEpoch(): clonglong {.importc: "QDateTime_currentMSecsSinceEpoch".}
 proc fcQDateTime_currentSecsSinceEpoch(): clonglong {.importc: "QDateTime_currentSecsSinceEpoch".}
-proc fcQDateTime_toString3(self: pointer, format: cint): struct_seaqt_string {.importc: "QDateTime_toString3".}
-proc fcQDateTime_toString4(self: pointer, format: struct_seaqt_string, cal: pointer): struct_seaqt_string {.importc: "QDateTime_toString4".}
-proc fcQDateTime_fromString8(stringVal: struct_seaqt_string, format: cint): pointer {.importc: "QDateTime_fromString8".}
-proc fcQDateTime_fromString9(stringVal: struct_seaqt_string, format: struct_seaqt_string, cal: pointer): pointer {.importc: "QDateTime_fromString9".}
-proc fcQDateTime_fromMSecsSinceEpoch3(msecs: clonglong, spec: cint): pointer {.importc: "QDateTime_fromMSecsSinceEpoch3".}
-proc fcQDateTime_fromMSecsSinceEpoch4(msecs: clonglong, spec: cint, offsetFromUtc: cint): pointer {.importc: "QDateTime_fromMSecsSinceEpoch4".}
-proc fcQDateTime_fromSecsSinceEpoch3(secs: clonglong, spec: cint): pointer {.importc: "QDateTime_fromSecsSinceEpoch3".}
-proc fcQDateTime_fromSecsSinceEpoch4(secs: clonglong, spec: cint, offsetFromUtc: cint): pointer {.importc: "QDateTime_fromSecsSinceEpoch4".}
+proc fcQDateTime_toString_Qt_DateFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QDateTime_toString_Qt_DateFormat".}
+proc fcQDateTime_toString_QString_QCalendar(self: pointer, format: struct_seaqt_string, cal: pointer): struct_seaqt_string {.importc: "QDateTime_toString_QString_QCalendar".}
+proc fcQDateTime_fromString_QString_Qt_DateFormat(stringVal: struct_seaqt_string, format: cint): pointer {.importc: "QDateTime_fromString_QString_Qt_DateFormat".}
+proc fcQDateTime_fromString_QString_QString_QCalendar(stringVal: struct_seaqt_string, format: struct_seaqt_string, cal: pointer): pointer {.importc: "QDateTime_fromString_QString_QString_QCalendar".}
+proc fcQDateTime_fromMSecsSinceEpochMsecsSpec(msecs: clonglong, spec: cint): pointer {.importc: "QDateTime_fromMSecsSinceEpoch_msecs_spec".}
+proc fcQDateTime_fromMSecsSinceEpochMsecsSpecOffsetFromUtc(msecs: clonglong, spec: cint, offsetFromUtc: cint): pointer {.importc: "QDateTime_fromMSecsSinceEpoch_msecs_spec_offsetFromUtc".}
+proc fcQDateTime_fromSecsSinceEpochSecsSpec(secs: clonglong, spec: cint): pointer {.importc: "QDateTime_fromSecsSinceEpoch_secs_spec".}
+proc fcQDateTime_fromSecsSinceEpochSecsSpecOffsetFromUtc(secs: clonglong, spec: cint, offsetFromUtc: cint): pointer {.importc: "QDateTime_fromSecsSinceEpoch_secs_spec_offsetFromUtc".}
 proc fcQDateTime_new(): ptr cQDateTime {.importc: "QDateTime_new".}
-proc fcQDateTime_new2(date: pointer, time: pointer): ptr cQDateTime {.importc: "QDateTime_new2".}
-proc fcQDateTime_new3(date: pointer, time: pointer, timeZone: pointer): ptr cQDateTime {.importc: "QDateTime_new3".}
-proc fcQDateTime_new4(other: pointer): ptr cQDateTime {.importc: "QDateTime_new4".}
-proc fcQDateTime_new5(date: pointer, time: pointer, spec: cint): ptr cQDateTime {.importc: "QDateTime_new5".}
-proc fcQDateTime_new6(date: pointer, time: pointer, spec: cint, offsetSeconds: cint): ptr cQDateTime {.importc: "QDateTime_new6".}
+proc fcQDateTime_new2(date: pointer, time: pointer): ptr cQDateTime {.importc: "QDateTime_new_date_time".}
+proc fcQDateTime_new3(date: pointer, time: pointer, timeZone: pointer): ptr cQDateTime {.importc: "QDateTime_new_date_time_timeZone".}
+proc fcQDateTime_new4(fromVal: pointer): ptr cQDateTime {.importc: "QDateTime_new_from".}
+proc fcQDateTime_new5(date: pointer, time: pointer, spec: cint): ptr cQDateTime {.importc: "QDateTime_new_date_time_spec".}
+proc fcQDateTime_new6(date: pointer, time: pointer, spec: cint, offsetSeconds: cint): ptr cQDateTime {.importc: "QDateTime_new_date_time_spec_offsetSeconds".}
 
 proc isNull*(self: gen_qdatetime_types.QDate): bool =
   fcQDate_isNull(self.h)
@@ -223,25 +223,25 @@ proc weekNumber*(self: gen_qdatetime_types.QDate): cint =
   fcQDate_weekNumber(self.h)
 
 proc year*(self: gen_qdatetime_types.QDate, cal: gen_qcalendar_types.QCalendar): cint =
-  fcQDate_yearWithCal(self.h, cal.h)
+  fcQDate_yearCal(self.h, cal.h)
 
 proc month*(self: gen_qdatetime_types.QDate, cal: gen_qcalendar_types.QCalendar): cint =
-  fcQDate_monthWithCal(self.h, cal.h)
+  fcQDate_monthCal(self.h, cal.h)
 
 proc day*(self: gen_qdatetime_types.QDate, cal: gen_qcalendar_types.QCalendar): cint =
-  fcQDate_dayWithCal(self.h, cal.h)
+  fcQDate_dayCal(self.h, cal.h)
 
 proc dayOfWeek*(self: gen_qdatetime_types.QDate, cal: gen_qcalendar_types.QCalendar): cint =
-  fcQDate_dayOfWeekWithCal(self.h, cal.h)
+  fcQDate_dayOfWeekCal(self.h, cal.h)
 
 proc dayOfYear*(self: gen_qdatetime_types.QDate, cal: gen_qcalendar_types.QCalendar): cint =
-  fcQDate_dayOfYearWithCal(self.h, cal.h)
+  fcQDate_dayOfYearCal(self.h, cal.h)
 
 proc daysInMonth*(self: gen_qdatetime_types.QDate, cal: gen_qcalendar_types.QCalendar): cint =
-  fcQDate_daysInMonthWithCal(self.h, cal.h)
+  fcQDate_daysInMonthCal(self.h, cal.h)
 
 proc daysInYear*(self: gen_qdatetime_types.QDate, cal: gen_qcalendar_types.QCalendar): cint =
-  fcQDate_daysInYearWithCal(self.h, cal.h)
+  fcQDate_daysInYearCal(self.h, cal.h)
 
 proc startOfDay*(self: gen_qdatetime_types.QDate): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQDate_startOfDay(self.h), owned: true)
@@ -250,10 +250,10 @@ proc endOfDay*(self: gen_qdatetime_types.QDate): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQDate_endOfDay(self.h), owned: true)
 
 proc startOfDay*(self: gen_qdatetime_types.QDate, zone: gen_qtimezone_types.QTimeZone): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDate_startOfDayWithZone(self.h, zone.h), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDate_startOfDayZone(self.h, zone.h), owned: true)
 
 proc endOfDay*(self: gen_qdatetime_types.QDate, zone: gen_qtimezone_types.QTimeZone): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDate_endOfDayWithZone(self.h, zone.h), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDate_endOfDayZone(self.h, zone.h), owned: true)
 
 proc toString*(self: gen_qdatetime_types.QDate): string =
   let v_ms = fcQDate_toString(self.h)
@@ -262,16 +262,16 @@ proc toString*(self: gen_qdatetime_types.QDate): string =
   vx_ret
 
 proc toString*(self: gen_qdatetime_types.QDate, format: openArray[char]): string =
-  let v_ms = fcQDate_toStringWithFormat(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let v_ms = fcQDate_toString_QString(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setDate*(self: gen_qdatetime_types.QDate, year: cint, month: cint, day: cint): bool =
-  fcQDate_setDate(self.h, year, month, day)
+  fcQDate_setDateYearMonthDay(self.h, year, month, day)
 
 proc setDate*(self: gen_qdatetime_types.QDate, year: cint, month: cint, day: cint, cal: gen_qcalendar_types.QCalendar): bool =
-  fcQDate_setDate2(self.h, year, month, day, cal.h)
+  fcQDate_setDateYearMonthDayCal(self.h, year, month, day, cal.h)
 
 proc getDate*(self: gen_qdatetime_types.QDate, year: ptr cint, month: ptr cint, day: ptr cint): void =
   fcQDate_getDate(self.h, year, month, day)
@@ -280,16 +280,16 @@ proc addDays*(self: gen_qdatetime_types.QDate, days: clonglong): gen_qdatetime_t
   gen_qdatetime_types.QDate(h: fcQDate_addDays(self.h, days), owned: true)
 
 proc addMonths*(self: gen_qdatetime_types.QDate, months: cint): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_addMonths(self.h, months), owned: true)
+  gen_qdatetime_types.QDate(h: fcQDate_addMonthsMonths(self.h, months), owned: true)
 
 proc addYears*(self: gen_qdatetime_types.QDate, years: cint): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_addYears(self.h, years), owned: true)
+  gen_qdatetime_types.QDate(h: fcQDate_addYearsYears(self.h, years), owned: true)
 
 proc addMonths*(self: gen_qdatetime_types.QDate, months: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_addMonths2(self.h, months, cal.h), owned: true)
+  gen_qdatetime_types.QDate(h: fcQDate_addMonthsMonthsCal(self.h, months, cal.h), owned: true)
 
 proc addYears*(self: gen_qdatetime_types.QDate, years: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_addYears2(self.h, years, cal.h), owned: true)
+  gen_qdatetime_types.QDate(h: fcQDate_addYearsYearsCal(self.h, years, cal.h), owned: true)
 
 proc daysTo*(self: gen_qdatetime_types.QDate, d: gen_qdatetime_types.QDate): clonglong =
   fcQDate_daysTo(self.h, d.h)
@@ -298,13 +298,13 @@ proc currentDate*(_: type gen_qdatetime_types.QDate): gen_qdatetime_types.QDate 
   gen_qdatetime_types.QDate(h: fcQDate_currentDate(), owned: true)
 
 proc fromString*(_: type gen_qdatetime_types.QDate, stringVal: openArray[char]): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_fromStringWithString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
+  gen_qdatetime_types.QDate(h: fcQDate_fromString_QString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc fromString*(_: type gen_qdatetime_types.QDate, stringVal: openArray[char], format: openArray[char]): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_fromString4(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
+  gen_qdatetime_types.QDate(h: fcQDate_fromString_QString_QString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
 proc isValid*(_: type gen_qdatetime_types.QDate, y: cint, m: cint, d: cint): bool =
-  fcQDate_isValid2(y, m, d)
+  fcQDate_isValidYMD(y, m, d)
 
 proc isLeapYear*(_: type gen_qdatetime_types.QDate, year: cint): bool =
   fcQDate_isLeapYear(year)
@@ -316,37 +316,37 @@ proc toJulianDay*(self: gen_qdatetime_types.QDate): clonglong =
   fcQDate_toJulianDay(self.h)
 
 proc weekNumber*(self: gen_qdatetime_types.QDate, yearNum: ptr cint): cint =
-  fcQDate_weekNumberWithYearNum(self.h, yearNum)
+  fcQDate_weekNumberYearNum(self.h, yearNum)
 
 proc startOfDay*(self: gen_qdatetime_types.QDate, spec: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDate_startOfDayWithSpec(self.h, cint(spec)), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDate_startOfDaySpec(self.h, cint(spec)), owned: true)
 
 proc startOfDay*(self: gen_qdatetime_types.QDate, spec: cint, offsetSeconds: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDate_startOfDay2(self.h, cint(spec), offsetSeconds), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDate_startOfDaySpecOffsetSeconds(self.h, cint(spec), offsetSeconds), owned: true)
 
 proc endOfDay*(self: gen_qdatetime_types.QDate, spec: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDate_endOfDayWithSpec(self.h, cint(spec)), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDate_endOfDaySpec(self.h, cint(spec)), owned: true)
 
 proc endOfDay*(self: gen_qdatetime_types.QDate, spec: cint, offsetSeconds: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDate_endOfDay2(self.h, cint(spec), offsetSeconds), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDate_endOfDaySpecOffsetSeconds(self.h, cint(spec), offsetSeconds), owned: true)
 
 proc toString*(self: gen_qdatetime_types.QDate, format: cint): string =
-  let v_ms = fcQDate_toString3(self.h, cint(format))
+  let v_ms = fcQDate_toString_Qt_DateFormat(self.h, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qdatetime_types.QDate, format: openArray[char], cal: gen_qcalendar_types.QCalendar): string =
-  let v_ms = fcQDate_toString4(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h)
+  let v_ms = fcQDate_toString_QString_QCalendar(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc fromString*(_: type gen_qdatetime_types.QDate, stringVal: openArray[char], format: cint): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_fromString8(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format)), owned: true)
+  gen_qdatetime_types.QDate(h: fcQDate_fromString_QString_Qt_DateFormat(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format)), owned: true)
 
 proc fromString*(_: type gen_qdatetime_types.QDate, stringVal: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_fromString9(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
+  gen_qdatetime_types.QDate(h: fcQDate_fromString_QString_QString_QCalendar(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
 proc create*(T: type gen_qdatetime_types.QDate): gen_qdatetime_types.QDate =
   let tmp = gen_qdatetime_types.QDate(h: fcQDate_new(), owned: true)
@@ -360,8 +360,8 @@ proc create*(T: type gen_qdatetime_types.QDate,
   let tmp = gen_qdatetime_types.QDate(h: fcQDate_new3(y, m, d, cal.h), owned: true)
   tmp
 proc create*(T: type gen_qdatetime_types.QDate,
-    param1: gen_qdatetime_types.QDate): gen_qdatetime_types.QDate =
-  let tmp = gen_qdatetime_types.QDate(h: fcQDate_new4(param1.h), owned: true)
+    fromVal: gen_qdatetime_types.QDate): gen_qdatetime_types.QDate =
+  let tmp = gen_qdatetime_types.QDate(h: fcQDate_new4(fromVal.h), owned: true)
   tmp
 proc isNull*(self: gen_qdatetime_types.QTime): bool =
   fcQTime_isNull(self.h)
@@ -388,13 +388,13 @@ proc toString*(self: gen_qdatetime_types.QTime): string =
   vx_ret
 
 proc toString*(self: gen_qdatetime_types.QTime, format: openArray[char]): string =
-  let v_ms = fcQTime_toStringWithFormat(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let v_ms = fcQTime_toString_QString(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setHMS*(self: gen_qdatetime_types.QTime, h: cint, m: cint, s: cint): bool =
-  fcQTime_setHMS(self.h, h, m, s)
+  fcQTime_setHMSHMS(self.h, h, m, s)
 
 proc addSecs*(self: gen_qdatetime_types.QTime, secs: cint): gen_qdatetime_types.QTime =
   gen_qdatetime_types.QTime(h: fcQTime_addSecs(self.h, secs), owned: true)
@@ -418,28 +418,28 @@ proc currentTime*(_: type gen_qdatetime_types.QTime): gen_qdatetime_types.QTime 
   gen_qdatetime_types.QTime(h: fcQTime_currentTime(), owned: true)
 
 proc fromString*(_: type gen_qdatetime_types.QTime, stringVal: openArray[char]): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQTime_fromStringWithString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
+  gen_qdatetime_types.QTime(h: fcQTime_fromString_QString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc fromString*(_: type gen_qdatetime_types.QTime, stringVal: openArray[char], format: openArray[char]): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQTime_fromString4(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
+  gen_qdatetime_types.QTime(h: fcQTime_fromString_QString_QString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
 proc isValid*(_: type gen_qdatetime_types.QTime, h: cint, m: cint, s: cint): bool =
-  fcQTime_isValid2(h, m, s)
+  fcQTime_isValidHMS(h, m, s)
 
 proc toString*(self: gen_qdatetime_types.QTime, f: cint): string =
-  let v_ms = fcQTime_toStringWithQtDateFormat(self.h, cint(f))
+  let v_ms = fcQTime_toString_Qt_DateFormat(self.h, cint(f))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setHMS*(self: gen_qdatetime_types.QTime, h: cint, m: cint, s: cint, ms: cint): bool =
-  fcQTime_setHMS2(self.h, h, m, s, ms)
+  fcQTime_setHMSHMSMs(self.h, h, m, s, ms)
 
 proc fromString*(_: type gen_qdatetime_types.QTime, stringVal: openArray[char], format: cint): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQTime_fromString6(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format)), owned: true)
+  gen_qdatetime_types.QTime(h: fcQTime_fromString_QString_Qt_DateFormat(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format)), owned: true)
 
 proc isValid*(_: type gen_qdatetime_types.QTime, h: cint, m: cint, s: cint, ms: cint): bool =
-  fcQTime_isValid3(h, m, s, ms)
+  fcQTime_isValidHMSMs(h, m, s, ms)
 
 proc create*(T: type gen_qdatetime_types.QTime): gen_qdatetime_types.QTime =
   let tmp = gen_qdatetime_types.QTime(h: fcQTime_new(), owned: true)
@@ -449,8 +449,8 @@ proc create*(T: type gen_qdatetime_types.QTime,
   let tmp = gen_qdatetime_types.QTime(h: fcQTime_new2(h, m), owned: true)
   tmp
 proc create*(T: type gen_qdatetime_types.QTime,
-    param1: gen_qdatetime_types.QTime): gen_qdatetime_types.QTime =
-  let tmp = gen_qdatetime_types.QTime(h: fcQTime_new3(param1.h), owned: true)
+    fromVal: gen_qdatetime_types.QTime): gen_qdatetime_types.QTime =
+  let tmp = gen_qdatetime_types.QTime(h: fcQTime_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qdatetime_types.QTime,
     h: cint, m: cint, s: cint): gen_qdatetime_types.QTime =
@@ -460,8 +460,8 @@ proc create*(T: type gen_qdatetime_types.QTime,
     h: cint, m: cint, s: cint, ms: cint): gen_qdatetime_types.QTime =
   let tmp = gen_qdatetime_types.QTime(h: fcQTime_new5(h, m, s, ms), owned: true)
   tmp
-proc operatorAssign*(self: gen_qdatetime_types.QDateTime, other: gen_qdatetime_types.QDateTime): void =
-  fcQDateTime_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qdatetime_types.QDateTime, fromVal: gen_qdatetime_types.QDateTime): void =
+  fcQDateTime_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qdatetime_types.QDateTime, other: gen_qdatetime_types.QDateTime): void =
   fcQDateTime_swap(self.h, other.h)
@@ -530,7 +530,7 @@ proc toString*(self: gen_qdatetime_types.QDateTime): string =
   vx_ret
 
 proc toString*(self: gen_qdatetime_types.QDateTime, format: openArray[char]): string =
-  let v_ms = fcQDateTime_toStringWithFormat(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let v_ms = fcQDateTime_toString_QString(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -581,22 +581,22 @@ proc currentDateTimeUtc*(_: type gen_qdatetime_types.QDateTime): gen_qdatetime_t
   gen_qdatetime_types.QDateTime(h: fcQDateTime_currentDateTimeUtc(), owned: true)
 
 proc fromString*(_: type gen_qdatetime_types.QDateTime, stringVal: openArray[char]): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromStringWithString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString_QString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc fromString*(_: type gen_qdatetime_types.QDateTime, stringVal: openArray[char], format: openArray[char]): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString4(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString_QString_QString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
 proc fromMSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime, msecs: clonglong): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromMSecsSinceEpoch(msecs), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromMSecsSinceEpochMsecs(msecs), owned: true)
 
 proc fromSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime, secs: clonglong): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromSecsSinceEpoch(secs), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromSecsSinceEpochSecs(secs), owned: true)
 
 proc fromMSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime, msecs: clonglong, timeZone: gen_qtimezone_types.QTimeZone): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromMSecsSinceEpoch2(msecs, timeZone.h), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromMSecsSinceEpochMsecsTimeZone(msecs, timeZone.h), owned: true)
 
 proc fromSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime, secs: clonglong, timeZone: gen_qtimezone_types.QTimeZone): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromSecsSinceEpoch2(secs, timeZone.h), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromSecsSinceEpochSecsTimeZone(secs, timeZone.h), owned: true)
 
 proc currentMSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime): clonglong =
   fcQDateTime_currentMSecsSinceEpoch()
@@ -605,34 +605,34 @@ proc currentSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime): clonglong =
   fcQDateTime_currentSecsSinceEpoch()
 
 proc toString*(self: gen_qdatetime_types.QDateTime, format: cint): string =
-  let v_ms = fcQDateTime_toString3(self.h, cint(format))
+  let v_ms = fcQDateTime_toString_Qt_DateFormat(self.h, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qdatetime_types.QDateTime, format: openArray[char], cal: gen_qcalendar_types.QCalendar): string =
-  let v_ms = fcQDateTime_toString4(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h)
+  let v_ms = fcQDateTime_toString_QString_QCalendar(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc fromString*(_: type gen_qdatetime_types.QDateTime, stringVal: openArray[char], format: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString8(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format)), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString_QString_Qt_DateFormat(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format)), owned: true)
 
 proc fromString*(_: type gen_qdatetime_types.QDateTime, stringVal: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString9(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString_QString_QString_QCalendar(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
 proc fromMSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime, msecs: clonglong, spec: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromMSecsSinceEpoch3(msecs, cint(spec)), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromMSecsSinceEpochMsecsSpec(msecs, cint(spec)), owned: true)
 
 proc fromMSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime, msecs: clonglong, spec: cint, offsetFromUtc: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromMSecsSinceEpoch4(msecs, cint(spec), offsetFromUtc), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromMSecsSinceEpochMsecsSpecOffsetFromUtc(msecs, cint(spec), offsetFromUtc), owned: true)
 
 proc fromSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime, secs: clonglong, spec: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromSecsSinceEpoch3(secs, cint(spec)), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromSecsSinceEpochSecsSpec(secs, cint(spec)), owned: true)
 
 proc fromSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime, secs: clonglong, spec: cint, offsetFromUtc: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromSecsSinceEpoch4(secs, cint(spec), offsetFromUtc), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromSecsSinceEpochSecsSpecOffsetFromUtc(secs, cint(spec), offsetFromUtc), owned: true)
 
 proc create*(T: type gen_qdatetime_types.QDateTime): gen_qdatetime_types.QDateTime =
   let tmp = gen_qdatetime_types.QDateTime(h: fcQDateTime_new(), owned: true)
@@ -646,8 +646,8 @@ proc create*(T: type gen_qdatetime_types.QDateTime,
   let tmp = gen_qdatetime_types.QDateTime(h: fcQDateTime_new3(date.h, time.h, timeZone.h), owned: true)
   tmp
 proc create*(T: type gen_qdatetime_types.QDateTime,
-    other: gen_qdatetime_types.QDateTime): gen_qdatetime_types.QDateTime =
-  let tmp = gen_qdatetime_types.QDateTime(h: fcQDateTime_new4(other.h), owned: true)
+    fromVal: gen_qdatetime_types.QDateTime): gen_qdatetime_types.QDateTime =
+  let tmp = gen_qdatetime_types.QDateTime(h: fcQDateTime_new4(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qdatetime_types.QDateTime,
     date: gen_qdatetime_types.QDate, time: gen_qdatetime_types.QTime, spec: cint): gen_qdatetime_types.QDateTime =

@@ -12,8 +12,8 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-void QQmlNetworkAccessManagerFactory_operatorAssign(QQmlNetworkAccessManagerFactory* self, QQmlNetworkAccessManagerFactory* param1) {
-	self->operator=(*param1);
+void QQmlNetworkAccessManagerFactory_operatorAssign(QQmlNetworkAccessManagerFactory* self, QQmlNetworkAccessManagerFactory* from) {
+	self->operator=(*from);
 }
 
 void QQmlNetworkAccessManagerFactory_delete(QQmlNetworkAccessManagerFactory* self) {

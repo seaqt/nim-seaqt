@@ -57,21 +57,21 @@ void* QPauseAnimation_vdata(VirtualQPauseAnimation* self);
 VirtualQPauseAnimation* vdata_QPauseAnimation(void* vdata);
 
 VirtualQPauseAnimation* QPauseAnimation_new(const QPauseAnimation_VTable* vtbl, size_t vdata);
-VirtualQPauseAnimation* QPauseAnimation_new2(const QPauseAnimation_VTable* vtbl, size_t vdata, int msecs);
-VirtualQPauseAnimation* QPauseAnimation_new3(const QPauseAnimation_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQPauseAnimation* QPauseAnimation_new4(const QPauseAnimation_VTable* vtbl, size_t vdata, int msecs, QObject* parent);
+VirtualQPauseAnimation* QPauseAnimation_new_msecs(const QPauseAnimation_VTable* vtbl, size_t vdata, int msecs);
+VirtualQPauseAnimation* QPauseAnimation_new_parent(const QPauseAnimation_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPauseAnimation* QPauseAnimation_new_msecs_parent(const QPauseAnimation_VTable* vtbl, size_t vdata, int msecs, QObject* parent);
 
 void QPauseAnimation_virtbase(QPauseAnimation* src, QAbstractAnimation** outptr_QAbstractAnimation);
 QMetaObject* QPauseAnimation_metaObject(const QPauseAnimation* self);
 void* QPauseAnimation_metacast(QPauseAnimation* self, const char* param1);
 int QPauseAnimation_metacall(QPauseAnimation* self, int param1, int param2, void** param3);
-struct seaqt_string QPauseAnimation_tr(const char* s);
+struct seaqt_string QPauseAnimation_tr_s(const char* s);
 int QPauseAnimation_duration(const QPauseAnimation* self);
 void QPauseAnimation_setDuration(QPauseAnimation* self, int msecs);
 bool QPauseAnimation_event(QPauseAnimation* self, QEvent* e);
 void QPauseAnimation_updateCurrentTime(QPauseAnimation* self, int param1);
-struct seaqt_string QPauseAnimation_tr2(const char* s, const char* c);
-struct seaqt_string QPauseAnimation_tr3(const char* s, const char* c, int n);
+struct seaqt_string QPauseAnimation_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPauseAnimation_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPauseAnimation_virtualbase_metaObject(const VirtualQPauseAnimation* self);
 void* QPauseAnimation_virtualbase_metacast(VirtualQPauseAnimation* self, const char* param1);

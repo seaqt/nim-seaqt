@@ -21,24 +21,24 @@ QPageLayout* QPageLayout_new() {
 	return new (std::nothrow) QPageLayout();
 }
 
-QPageLayout* QPageLayout_new2(QPageSize* pageSize, int orientation, QMarginsF* margins) {
+QPageLayout* QPageLayout_new_pageSize_orientation_margins(QPageSize* pageSize, int orientation, QMarginsF* margins) {
 	return new (std::nothrow) QPageLayout(*pageSize, static_cast<QPageLayout::Orientation>(orientation), *margins);
 }
 
-QPageLayout* QPageLayout_new3(QPageLayout* other) {
-	return new (std::nothrow) QPageLayout(*other);
+QPageLayout* QPageLayout_new_from(QPageLayout* from) {
+	return new (std::nothrow) QPageLayout(*from);
 }
 
-QPageLayout* QPageLayout_new4(QPageSize* pageSize, int orientation, QMarginsF* margins, int units) {
+QPageLayout* QPageLayout_new_pageSize_orientation_margins_units(QPageSize* pageSize, int orientation, QMarginsF* margins, int units) {
 	return new (std::nothrow) QPageLayout(*pageSize, static_cast<QPageLayout::Orientation>(orientation), *margins, static_cast<QPageLayout::Unit>(units));
 }
 
-QPageLayout* QPageLayout_new5(QPageSize* pageSize, int orientation, QMarginsF* margins, int units, QMarginsF* minMargins) {
+QPageLayout* QPageLayout_new_pageSize_orientation_margins_units_minMargins(QPageSize* pageSize, int orientation, QMarginsF* margins, int units, QMarginsF* minMargins) {
 	return new (std::nothrow) QPageLayout(*pageSize, static_cast<QPageLayout::Orientation>(orientation), *margins, static_cast<QPageLayout::Unit>(units), *minMargins);
 }
 
-void QPageLayout_operatorAssign(QPageLayout* self, QPageLayout* other) {
-	self->operator=(*other);
+void QPageLayout_operatorAssign(QPageLayout* self, QPageLayout* from) {
+	self->operator=(*from);
 }
 
 void QPageLayout_swap(QPageLayout* self, QPageLayout* other) {
@@ -62,7 +62,7 @@ int QPageLayout_mode(const QPageLayout* self) {
 	return static_cast<int>(_ret);
 }
 
-void QPageLayout_setPageSize(QPageLayout* self, QPageSize* pageSize) {
+void QPageLayout_setPageSize_pageSize(QPageLayout* self, QPageSize* pageSize) {
 	self->setPageSize(*pageSize);
 }
 
@@ -112,7 +112,7 @@ QMarginsF* QPageLayout_margins(const QPageLayout* self) {
 	return new QMarginsF(self->margins());
 }
 
-QMarginsF* QPageLayout_marginsWithUnits(const QPageLayout* self, int units) {
+QMarginsF* QPageLayout_margins_units(const QPageLayout* self, int units) {
 	return new QMarginsF(self->margins(static_cast<QPageLayout::Unit>(units)));
 }
 
@@ -140,7 +140,7 @@ QRectF* QPageLayout_fullRect(const QPageLayout* self) {
 	return new QRectF(self->fullRect());
 }
 
-QRectF* QPageLayout_fullRectWithUnits(const QPageLayout* self, int units) {
+QRectF* QPageLayout_fullRect_units(const QPageLayout* self, int units) {
 	return new QRectF(self->fullRect(static_cast<QPageLayout::Unit>(units)));
 }
 
@@ -156,7 +156,7 @@ QRectF* QPageLayout_paintRect(const QPageLayout* self) {
 	return new QRectF(self->paintRect());
 }
 
-QRectF* QPageLayout_paintRectWithUnits(const QPageLayout* self, int units) {
+QRectF* QPageLayout_paintRect_units(const QPageLayout* self, int units) {
 	return new QRectF(self->paintRect(static_cast<QPageLayout::Unit>(units)));
 }
 
@@ -168,7 +168,7 @@ QRect* QPageLayout_paintRectPixels(const QPageLayout* self, int resolution) {
 	return new QRect(self->paintRectPixels(static_cast<int>(resolution)));
 }
 
-void QPageLayout_setPageSize2(QPageLayout* self, QPageSize* pageSize, QMarginsF* minMargins) {
+void QPageLayout_setPageSize_pageSize_minMargins(QPageLayout* self, QPageSize* pageSize, QMarginsF* minMargins) {
 	self->setPageSize(*pageSize, *minMargins);
 }
 

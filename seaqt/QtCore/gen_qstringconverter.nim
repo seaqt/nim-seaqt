@@ -51,18 +51,18 @@ type cQStringDecoder*{.exportc: "QStringDecoder", incompleteStruct.} = object
 
 proc fcQStringEncoder_requiredSpace(self: pointer, inputLength: int64): int64 {.importc: "QStringEncoder_requiredSpace".}
 proc fcQStringEncoder_new(): ptr cQStringEncoder {.importc: "QStringEncoder_new".}
-proc fcQStringEncoder_new2(encoding: cint): ptr cQStringEncoder {.importc: "QStringEncoder_new2".}
-proc fcQStringEncoder_new3(name: cstring): ptr cQStringEncoder {.importc: "QStringEncoder_new3".}
-proc fcQStringEncoder_new4(encoding: cint, flags: cint): ptr cQStringEncoder {.importc: "QStringEncoder_new4".}
-proc fcQStringEncoder_new5(name: cstring, flags: cint): ptr cQStringEncoder {.importc: "QStringEncoder_new5".}
+proc fcQStringEncoder_new2(encoding: cint): ptr cQStringEncoder {.importc: "QStringEncoder_new_encoding".}
+proc fcQStringEncoder_new3(name: cstring): ptr cQStringEncoder {.importc: "QStringEncoder_new_name".}
+proc fcQStringEncoder_new4(encoding: cint, flags: cint): ptr cQStringEncoder {.importc: "QStringEncoder_new_encoding_flags".}
+proc fcQStringEncoder_new5(name: cstring, flags: cint): ptr cQStringEncoder {.importc: "QStringEncoder_new_name_flags".}
 proc fcQStringDecoder_requiredSpace(self: pointer, inputLength: int64): int64 {.importc: "QStringDecoder_requiredSpace".}
 proc fcQStringDecoder_appendToBuffer(self: pointer, outVal: pointer, ba: struct_seaqt_string): pointer {.importc: "QStringDecoder_appendToBuffer".}
 proc fcQStringDecoder_decoderForHtml(data: struct_seaqt_string): pointer {.importc: "QStringDecoder_decoderForHtml".}
-proc fcQStringDecoder_new(encoding: cint): ptr cQStringDecoder {.importc: "QStringDecoder_new".}
-proc fcQStringDecoder_new2(): ptr cQStringDecoder {.importc: "QStringDecoder_new2".}
-proc fcQStringDecoder_new3(name: cstring): ptr cQStringDecoder {.importc: "QStringDecoder_new3".}
-proc fcQStringDecoder_new4(encoding: cint, flags: cint): ptr cQStringDecoder {.importc: "QStringDecoder_new4".}
-proc fcQStringDecoder_new5(name: cstring, f: cint): ptr cQStringDecoder {.importc: "QStringDecoder_new5".}
+proc fcQStringDecoder_new(encoding: cint): ptr cQStringDecoder {.importc: "QStringDecoder_new_encoding".}
+proc fcQStringDecoder_new2(): ptr cQStringDecoder {.importc: "QStringDecoder_new".}
+proc fcQStringDecoder_new3(name: cstring): ptr cQStringDecoder {.importc: "QStringDecoder_new_name".}
+proc fcQStringDecoder_new4(encoding: cint, flags: cint): ptr cQStringDecoder {.importc: "QStringDecoder_new_encoding_flags".}
+proc fcQStringDecoder_new5(name: cstring, f: cint): ptr cQStringDecoder {.importc: "QStringDecoder_new_name_f".}
 
 proc requiredSpace*(self: gen_qstringconverter_types.QStringEncoder, inputLength: int64): int64 =
   fcQStringEncoder_requiredSpace(self.h, inputLength)

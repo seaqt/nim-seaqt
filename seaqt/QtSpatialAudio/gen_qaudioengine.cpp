@@ -175,17 +175,17 @@ VirtualQAudioEngine* QAudioEngine_new(const QAudioEngine_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQAudioEngine(vtbl) : nullptr;
 }
 
-VirtualQAudioEngine* QAudioEngine_new2(const QAudioEngine_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAudioEngine* QAudioEngine_new_parent(const QAudioEngine_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioEngine(vtbl, parent) : nullptr;
 }
 
-VirtualQAudioEngine* QAudioEngine_new3(const QAudioEngine_VTable* vtbl, size_t vdata, int sampleRate) {
+VirtualQAudioEngine* QAudioEngine_new_sampleRate(const QAudioEngine_VTable* vtbl, size_t vdata, int sampleRate) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioEngine(vtbl, static_cast<int>(sampleRate)) : nullptr;
 }
 
-VirtualQAudioEngine* QAudioEngine_new4(const QAudioEngine_VTable* vtbl, size_t vdata, int sampleRate, QObject* parent) {
+VirtualQAudioEngine* QAudioEngine_new_sampleRate_parent(const QAudioEngine_VTable* vtbl, size_t vdata, int sampleRate, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioEngine(vtbl, static_cast<int>(sampleRate), parent) : nullptr;
 }
@@ -206,7 +206,7 @@ int QAudioEngine_metacall(QAudioEngine* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAudioEngine_tr(const char* s) {
+struct seaqt_string QAudioEngine_tr_s(const char* s) {
 	QString _ret = QAudioEngine::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -361,7 +361,7 @@ void QAudioEngine_resume(QAudioEngine* self) {
 	self->resume();
 }
 
-struct seaqt_string QAudioEngine_tr2(const char* s, const char* c) {
+struct seaqt_string QAudioEngine_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAudioEngine::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -372,7 +372,7 @@ struct seaqt_string QAudioEngine_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAudioEngine_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAudioEngine_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAudioEngine::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

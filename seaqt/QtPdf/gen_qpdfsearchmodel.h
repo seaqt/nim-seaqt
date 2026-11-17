@@ -105,13 +105,13 @@ void* QPdfSearchModel_vdata(VirtualQPdfSearchModel* self);
 VirtualQPdfSearchModel* vdata_QPdfSearchModel(void* vdata);
 
 VirtualQPdfSearchModel* QPdfSearchModel_new(const QPdfSearchModel_VTable* vtbl, size_t vdata);
-VirtualQPdfSearchModel* QPdfSearchModel_new2(const QPdfSearchModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPdfSearchModel* QPdfSearchModel_new_parent(const QPdfSearchModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QPdfSearchModel_virtbase(QPdfSearchModel* src, QAbstractListModel** outptr_QAbstractListModel);
 QMetaObject* QPdfSearchModel_metaObject(const QPdfSearchModel* self);
 void* QPdfSearchModel_metacast(QPdfSearchModel* self, const char* param1);
 int QPdfSearchModel_metacall(QPdfSearchModel* self, int param1, int param2, void** param3);
-struct seaqt_string QPdfSearchModel_tr(const char* s);
+struct seaqt_string QPdfSearchModel_tr_s(const char* s);
 struct seaqt_array /* of QPdfLink* */  QPdfSearchModel_resultsOnPage(const QPdfSearchModel* self, int page);
 QPdfLink* QPdfSearchModel_resultAtIndex(const QPdfSearchModel* self, int index);
 QPdfDocument* QPdfSearchModel_document(const QPdfSearchModel* self);
@@ -126,8 +126,8 @@ void QPdfSearchModel_connect_documentChanged(QPdfSearchModel* self, intptr_t slo
 void QPdfSearchModel_searchStringChanged(QPdfSearchModel* self);
 void QPdfSearchModel_connect_searchStringChanged(QPdfSearchModel* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QPdfSearchModel_timerEvent(QPdfSearchModel* self, QTimerEvent* event);
-struct seaqt_string QPdfSearchModel_tr2(const char* s, const char* c);
-struct seaqt_string QPdfSearchModel_tr3(const char* s, const char* c, int n);
+struct seaqt_string QPdfSearchModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPdfSearchModel_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPdfSearchModel_virtualbase_metaObject(const VirtualQPdfSearchModel* self);
 void* QPdfSearchModel_virtualbase_metacast(VirtualQPdfSearchModel* self, const char* param1);
@@ -175,7 +175,7 @@ void QPdfSearchModel_virtualbase_connectNotify(VirtualQPdfSearchModel* self, QMe
 void QPdfSearchModel_virtualbase_disconnectNotify(VirtualQPdfSearchModel* self, QMetaMethod* signal);
 
 void QPdfSearchModel_protectedbase_updatePage(VirtualQPdfSearchModel* self, int page);
-QModelIndex* QPdfSearchModel_protectedbase_createIndex(const VirtualQPdfSearchModel* self, int row, int column);
+QModelIndex* QPdfSearchModel_protectedbase_createIndex_row_column(const VirtualQPdfSearchModel* self, int row, int column);
 void QPdfSearchModel_protectedbase_encodeData(const VirtualQPdfSearchModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QPdfSearchModel_protectedbase_decodeData(VirtualQPdfSearchModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QPdfSearchModel_protectedbase_beginInsertRows(VirtualQPdfSearchModel* self, QModelIndex* parent, int first, int last);

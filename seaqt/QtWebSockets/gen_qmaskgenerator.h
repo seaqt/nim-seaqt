@@ -53,7 +53,7 @@ void* QMaskGenerator_vdata(VirtualQMaskGenerator* self);
 VirtualQMaskGenerator* vdata_QMaskGenerator(void* vdata);
 
 VirtualQMaskGenerator* QMaskGenerator_new(const QMaskGenerator_VTable* vtbl, size_t vdata);
-VirtualQMaskGenerator* QMaskGenerator_new2(const QMaskGenerator_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQMaskGenerator* QMaskGenerator_new_parent(const QMaskGenerator_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QMaskGenerator_virtbase(QMaskGenerator* src, QObject** outptr_QObject);
 bool QMaskGenerator_seed(QMaskGenerator* self);

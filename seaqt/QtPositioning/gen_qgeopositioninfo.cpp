@@ -18,16 +18,16 @@ QGeoPositionInfo* QGeoPositionInfo_new() {
 	return new (std::nothrow) QGeoPositionInfo();
 }
 
-QGeoPositionInfo* QGeoPositionInfo_new2(QGeoCoordinate* coordinate, QDateTime* updateTime) {
+QGeoPositionInfo* QGeoPositionInfo_new_coordinate_updateTime(QGeoCoordinate* coordinate, QDateTime* updateTime) {
 	return new (std::nothrow) QGeoPositionInfo(*coordinate, *updateTime);
 }
 
-QGeoPositionInfo* QGeoPositionInfo_new3(QGeoPositionInfo* other) {
-	return new (std::nothrow) QGeoPositionInfo(*other);
+QGeoPositionInfo* QGeoPositionInfo_new_from(QGeoPositionInfo* from) {
+	return new (std::nothrow) QGeoPositionInfo(*from);
 }
 
-void QGeoPositionInfo_operatorAssign(QGeoPositionInfo* self, QGeoPositionInfo* other) {
-	self->operator=(*other);
+void QGeoPositionInfo_operatorAssign(QGeoPositionInfo* self, QGeoPositionInfo* from) {
+	self->operator=(*from);
 }
 
 void QGeoPositionInfo_swap(QGeoPositionInfo* self, QGeoPositionInfo* other) {

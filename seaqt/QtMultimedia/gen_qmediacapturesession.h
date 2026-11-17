@@ -63,13 +63,13 @@ void* QMediaCaptureSession_vdata(VirtualQMediaCaptureSession* self);
 VirtualQMediaCaptureSession* vdata_QMediaCaptureSession(void* vdata);
 
 VirtualQMediaCaptureSession* QMediaCaptureSession_new(const QMediaCaptureSession_VTable* vtbl, size_t vdata);
-VirtualQMediaCaptureSession* QMediaCaptureSession_new2(const QMediaCaptureSession_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQMediaCaptureSession* QMediaCaptureSession_new_parent(const QMediaCaptureSession_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QMediaCaptureSession_virtbase(QMediaCaptureSession* src, QObject** outptr_QObject);
 QMetaObject* QMediaCaptureSession_metaObject(const QMediaCaptureSession* self);
 void* QMediaCaptureSession_metacast(QMediaCaptureSession* self, const char* param1);
 int QMediaCaptureSession_metacall(QMediaCaptureSession* self, int param1, int param2, void** param3);
-struct seaqt_string QMediaCaptureSession_tr(const char* s);
+struct seaqt_string QMediaCaptureSession_tr_s(const char* s);
 QAudioInput* QMediaCaptureSession_audioInput(const QMediaCaptureSession* self);
 void QMediaCaptureSession_setAudioInput(QMediaCaptureSession* self, QAudioInput* input);
 QCamera* QMediaCaptureSession_camera(const QMediaCaptureSession* self);
@@ -96,8 +96,8 @@ void QMediaCaptureSession_videoOutputChanged(QMediaCaptureSession* self);
 void QMediaCaptureSession_connect_videoOutputChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QMediaCaptureSession_audioOutputChanged(QMediaCaptureSession* self);
 void QMediaCaptureSession_connect_audioOutputChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QMediaCaptureSession_tr2(const char* s, const char* c);
-struct seaqt_string QMediaCaptureSession_tr3(const char* s, const char* c, int n);
+struct seaqt_string QMediaCaptureSession_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMediaCaptureSession_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QMediaCaptureSession_virtualbase_metaObject(const VirtualQMediaCaptureSession* self);
 void* QMediaCaptureSession_virtualbase_metacast(VirtualQMediaCaptureSession* self, const char* param1);

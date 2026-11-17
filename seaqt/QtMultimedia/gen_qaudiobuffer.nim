@@ -43,7 +43,7 @@ export
 
 type cQAudioBuffer*{.exportc: "QAudioBuffer", incompleteStruct.} = object
 
-proc fcQAudioBuffer_operatorAssign(self: pointer, other: pointer): void {.importc: "QAudioBuffer_operatorAssign".}
+proc fcQAudioBuffer_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAudioBuffer_operatorAssign".}
 proc fcQAudioBuffer_swap(self: pointer, other: pointer): void {.importc: "QAudioBuffer_swap".}
 proc fcQAudioBuffer_isValid(self: pointer): bool {.importc: "QAudioBuffer_isValid".}
 proc fcQAudioBuffer_detach(self: pointer): void {.importc: "QAudioBuffer_detach".}
@@ -54,14 +54,14 @@ proc fcQAudioBuffer_byteCount(self: pointer): int64 {.importc: "QAudioBuffer_byt
 proc fcQAudioBuffer_duration(self: pointer): clonglong {.importc: "QAudioBuffer_duration".}
 proc fcQAudioBuffer_startTime(self: pointer): clonglong {.importc: "QAudioBuffer_startTime".}
 proc fcQAudioBuffer_new(): ptr cQAudioBuffer {.importc: "QAudioBuffer_new".}
-proc fcQAudioBuffer_new2(other: pointer): ptr cQAudioBuffer {.importc: "QAudioBuffer_new2".}
-proc fcQAudioBuffer_new3(data: struct_seaqt_string, format: pointer): ptr cQAudioBuffer {.importc: "QAudioBuffer_new3".}
-proc fcQAudioBuffer_new4(numFrames: cint, format: pointer): ptr cQAudioBuffer {.importc: "QAudioBuffer_new4".}
-proc fcQAudioBuffer_new5(data: struct_seaqt_string, format: pointer, startTime: clonglong): ptr cQAudioBuffer {.importc: "QAudioBuffer_new5".}
-proc fcQAudioBuffer_new6(numFrames: cint, format: pointer, startTime: clonglong): ptr cQAudioBuffer {.importc: "QAudioBuffer_new6".}
+proc fcQAudioBuffer_new2(fromVal: pointer): ptr cQAudioBuffer {.importc: "QAudioBuffer_new_from".}
+proc fcQAudioBuffer_new3(data: struct_seaqt_string, format: pointer): ptr cQAudioBuffer {.importc: "QAudioBuffer_new_data_format".}
+proc fcQAudioBuffer_new4(numFrames: cint, format: pointer): ptr cQAudioBuffer {.importc: "QAudioBuffer_new_numFrames_format".}
+proc fcQAudioBuffer_new5(data: struct_seaqt_string, format: pointer, startTime: clonglong): ptr cQAudioBuffer {.importc: "QAudioBuffer_new_data_format_startTime".}
+proc fcQAudioBuffer_new6(numFrames: cint, format: pointer, startTime: clonglong): ptr cQAudioBuffer {.importc: "QAudioBuffer_new_numFrames_format_startTime".}
 
-proc operatorAssign*(self: gen_qaudiobuffer_types.QAudioBuffer, other: gen_qaudiobuffer_types.QAudioBuffer): void =
-  fcQAudioBuffer_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qaudiobuffer_types.QAudioBuffer, fromVal: gen_qaudiobuffer_types.QAudioBuffer): void =
+  fcQAudioBuffer_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qaudiobuffer_types.QAudioBuffer, other: gen_qaudiobuffer_types.QAudioBuffer): void =
   fcQAudioBuffer_swap(self.h, other.h)
@@ -94,8 +94,8 @@ proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer): gen_qaudiobuffer_type
   let tmp = gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new(), owned: true)
   tmp
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
-    other: gen_qaudiobuffer_types.QAudioBuffer): gen_qaudiobuffer_types.QAudioBuffer =
-  let tmp = gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new2(other.h), owned: true)
+    fromVal: gen_qaudiobuffer_types.QAudioBuffer): gen_qaudiobuffer_types.QAudioBuffer =
+  let tmp = gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
     data: openArray[byte], format: gen_qaudioformat_types.QAudioFormat): gen_qaudiobuffer_types.QAudioBuffer =

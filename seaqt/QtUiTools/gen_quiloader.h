@@ -67,17 +67,17 @@ void* QUiLoader_vdata(VirtualQUiLoader* self);
 VirtualQUiLoader* vdata_QUiLoader(void* vdata);
 
 VirtualQUiLoader* QUiLoader_new(const QUiLoader_VTable* vtbl, size_t vdata);
-VirtualQUiLoader* QUiLoader_new2(const QUiLoader_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQUiLoader* QUiLoader_new_parent(const QUiLoader_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QUiLoader_virtbase(QUiLoader* src, QObject** outptr_QObject);
 QMetaObject* QUiLoader_metaObject(const QUiLoader* self);
 void* QUiLoader_metacast(QUiLoader* self, const char* param1);
 int QUiLoader_metacall(QUiLoader* self, int param1, int param2, void** param3);
-struct seaqt_string QUiLoader_tr(const char* s);
+struct seaqt_string QUiLoader_tr_s(const char* s);
 struct seaqt_array /* of struct seaqt_string */  QUiLoader_pluginPaths(const QUiLoader* self);
 void QUiLoader_clearPluginPaths(QUiLoader* self);
 void QUiLoader_addPluginPath(QUiLoader* self, struct seaqt_string path);
-QWidget* QUiLoader_load(QUiLoader* self, QIODevice* device);
+QWidget* QUiLoader_load_device(QUiLoader* self, QIODevice* device);
 struct seaqt_array /* of struct seaqt_string */  QUiLoader_availableWidgets(const QUiLoader* self);
 struct seaqt_array /* of struct seaqt_string */  QUiLoader_availableLayouts(const QUiLoader* self);
 QWidget* QUiLoader_createWidget(QUiLoader* self, struct seaqt_string className, QWidget* parent, struct seaqt_string name);
@@ -91,9 +91,9 @@ bool QUiLoader_isLanguageChangeEnabled(const QUiLoader* self);
 void QUiLoader_setTranslationEnabled(QUiLoader* self, bool enabled);
 bool QUiLoader_isTranslationEnabled(const QUiLoader* self);
 struct seaqt_string QUiLoader_errorString(const QUiLoader* self);
-struct seaqt_string QUiLoader_tr2(const char* s, const char* c);
-struct seaqt_string QUiLoader_tr3(const char* s, const char* c, int n);
-QWidget* QUiLoader_load2(QUiLoader* self, QIODevice* device, QWidget* parentWidget);
+struct seaqt_string QUiLoader_tr_s_c(const char* s, const char* c);
+struct seaqt_string QUiLoader_tr_s_c_n(const char* s, const char* c, int n);
+QWidget* QUiLoader_load_device_parentWidget(QUiLoader* self, QIODevice* device, QWidget* parentWidget);
 
 QMetaObject* QUiLoader_virtualbase_metaObject(const VirtualQUiLoader* self);
 void* QUiLoader_virtualbase_metacast(VirtualQUiLoader* self, const char* param1);

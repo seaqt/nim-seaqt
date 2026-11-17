@@ -39,11 +39,11 @@ typedef struct QVideoFrameFormat QVideoFrameFormat;
 #endif
 
 QVideoFrame* QVideoFrame_new();
-QVideoFrame* QVideoFrame_new2(QVideoFrameFormat* format);
-QVideoFrame* QVideoFrame_new3(QVideoFrame* other);
+QVideoFrame* QVideoFrame_new_format(QVideoFrameFormat* format);
+QVideoFrame* QVideoFrame_new_from(QVideoFrame* from);
 
 void QVideoFrame_swap(QVideoFrame* self, QVideoFrame* other);
-void QVideoFrame_operatorAssign(QVideoFrame* self, QVideoFrame* other);
+void QVideoFrame_operatorAssign(QVideoFrame* self, QVideoFrame* from);
 bool QVideoFrame_operatorEqual(const QVideoFrame* self, QVideoFrame* other);
 bool QVideoFrame_operatorNotEqual(const QVideoFrame* self, QVideoFrame* other);
 bool QVideoFrame_isValid(const QVideoFrame* self);
@@ -60,8 +60,8 @@ int QVideoFrame_mapMode(const QVideoFrame* self);
 bool QVideoFrame_map(QVideoFrame* self, int mode);
 void QVideoFrame_unmap(QVideoFrame* self);
 int QVideoFrame_bytesPerLine(const QVideoFrame* self, int plane);
-unsigned char* QVideoFrame_bits(QVideoFrame* self, int plane);
-const unsigned char* QVideoFrame_bitsWithPlane(const QVideoFrame* self, int plane);
+unsigned char* QVideoFrame_bits_int(QVideoFrame* self, int plane);
+const unsigned char* QVideoFrame_bits_const_int(const QVideoFrame* self, int plane);
 int QVideoFrame_mappedBytes(const QVideoFrame* self, int plane);
 int QVideoFrame_planeCount(const QVideoFrame* self);
 long long QVideoFrame_startTime(const QVideoFrame* self);

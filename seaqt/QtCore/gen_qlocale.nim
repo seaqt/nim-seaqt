@@ -901,7 +901,7 @@ export
 
 type cQLocale*{.exportc: "QLocale", incompleteStruct.} = object
 
-proc fcQLocale_operatorAssign(self: pointer, other: pointer): void {.importc: "QLocale_operatorAssign".}
+proc fcQLocale_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QLocale_operatorAssign".}
 proc fcQLocale_swap(self: pointer, other: pointer): void {.importc: "QLocale_swap".}
 proc fcQLocale_language(self: pointer): cint {.importc: "QLocale_language".}
 proc fcQLocale_script(self: pointer): cint {.importc: "QLocale_script".}
@@ -912,47 +912,47 @@ proc fcQLocale_bcp47Name(self: pointer): struct_seaqt_string {.importc: "QLocale
 proc fcQLocale_nativeLanguageName(self: pointer): struct_seaqt_string {.importc: "QLocale_nativeLanguageName".}
 proc fcQLocale_nativeTerritoryName(self: pointer): struct_seaqt_string {.importc: "QLocale_nativeTerritoryName".}
 proc fcQLocale_nativeCountryName(self: pointer): struct_seaqt_string {.importc: "QLocale_nativeCountryName".}
-proc fcQLocale_toShort(self: pointer, s: struct_seaqt_string): cshort {.importc: "QLocale_toShort".}
-proc fcQLocale_toUShort(self: pointer, s: struct_seaqt_string): cushort {.importc: "QLocale_toUShort".}
-proc fcQLocale_toInt(self: pointer, s: struct_seaqt_string): cint {.importc: "QLocale_toInt".}
-proc fcQLocale_toUInt(self: pointer, s: struct_seaqt_string): cuint {.importc: "QLocale_toUInt".}
-proc fcQLocale_toLong(self: pointer, s: struct_seaqt_string): clong {.importc: "QLocale_toLong".}
-proc fcQLocale_toULong(self: pointer, s: struct_seaqt_string): culong {.importc: "QLocale_toULong".}
-proc fcQLocale_toLongLong(self: pointer, s: struct_seaqt_string): clonglong {.importc: "QLocale_toLongLong".}
-proc fcQLocale_toULongLong(self: pointer, s: struct_seaqt_string): culonglong {.importc: "QLocale_toULongLong".}
-proc fcQLocale_toFloat(self: pointer, s: struct_seaqt_string): float32 {.importc: "QLocale_toFloat".}
-proc fcQLocale_toDouble(self: pointer, s: struct_seaqt_string): float64 {.importc: "QLocale_toDouble".}
-proc fcQLocale_toString(self: pointer, i: clonglong): struct_seaqt_string {.importc: "QLocale_toString".}
-proc fcQLocale_toStringWithQulonglong(self: pointer, i: culonglong): struct_seaqt_string {.importc: "QLocale_toStringWithQulonglong".}
-proc fcQLocale_toStringWithLong(self: pointer, i: clong): struct_seaqt_string {.importc: "QLocale_toStringWithLong".}
-proc fcQLocale_toStringWithUlong(self: pointer, i: culong): struct_seaqt_string {.importc: "QLocale_toStringWithUlong".}
-proc fcQLocale_toStringWithShort(self: pointer, i: cshort): struct_seaqt_string {.importc: "QLocale_toStringWithShort".}
-proc fcQLocale_toStringWithUshort(self: pointer, i: cushort): struct_seaqt_string {.importc: "QLocale_toStringWithUshort".}
-proc fcQLocale_toStringWithInt(self: pointer, i: cint): struct_seaqt_string {.importc: "QLocale_toStringWithInt".}
-proc fcQLocale_toStringWithUint(self: pointer, i: cuint): struct_seaqt_string {.importc: "QLocale_toStringWithUint".}
-proc fcQLocale_toStringWithDouble(self: pointer, f: float64): struct_seaqt_string {.importc: "QLocale_toStringWithDouble".}
-proc fcQLocale_toStringWithFloat(self: pointer, f: float32): struct_seaqt_string {.importc: "QLocale_toStringWithFloat".}
-proc fcQLocale_toString2(self: pointer, date: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toString2".}
-proc fcQLocale_toString3(self: pointer, time: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toString3".}
-proc fcQLocale_toString4(self: pointer, dateTime: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toString4".}
-proc fcQLocale_toStringWithDate(self: pointer, date: pointer): struct_seaqt_string {.importc: "QLocale_toStringWithDate".}
-proc fcQLocale_toStringWithTime(self: pointer, time: pointer): struct_seaqt_string {.importc: "QLocale_toStringWithTime".}
-proc fcQLocale_toStringWithDateTime(self: pointer, dateTime: pointer): struct_seaqt_string {.importc: "QLocale_toStringWithDateTime".}
-proc fcQLocale_toString9(self: pointer, date: pointer, format: cint, cal: pointer): struct_seaqt_string {.importc: "QLocale_toString9".}
-proc fcQLocale_toString10(self: pointer, dateTime: pointer, format: cint, cal: pointer): struct_seaqt_string {.importc: "QLocale_toString10".}
+proc fcQLocale_toShort_QString(self: pointer, s: struct_seaqt_string): cshort {.importc: "QLocale_toShort_QString".}
+proc fcQLocale_toUShort_QString(self: pointer, s: struct_seaqt_string): cushort {.importc: "QLocale_toUShort_QString".}
+proc fcQLocale_toInt_QString(self: pointer, s: struct_seaqt_string): cint {.importc: "QLocale_toInt_QString".}
+proc fcQLocale_toUInt_QString(self: pointer, s: struct_seaqt_string): cuint {.importc: "QLocale_toUInt_QString".}
+proc fcQLocale_toLong_QString(self: pointer, s: struct_seaqt_string): clong {.importc: "QLocale_toLong_QString".}
+proc fcQLocale_toULong_QString(self: pointer, s: struct_seaqt_string): culong {.importc: "QLocale_toULong_QString".}
+proc fcQLocale_toLongLong_QString(self: pointer, s: struct_seaqt_string): clonglong {.importc: "QLocale_toLongLong_QString".}
+proc fcQLocale_toULongLong_QString(self: pointer, s: struct_seaqt_string): culonglong {.importc: "QLocale_toULongLong_QString".}
+proc fcQLocale_toFloat_QString(self: pointer, s: struct_seaqt_string): float32 {.importc: "QLocale_toFloat_QString".}
+proc fcQLocale_toDouble_QString(self: pointer, s: struct_seaqt_string): float64 {.importc: "QLocale_toDouble_QString".}
+proc fcQLocale_toStringQlonglong(self: pointer, i: clonglong): struct_seaqt_string {.importc: "QLocale_toString_qlonglong".}
+proc fcQLocale_toStringQulonglong(self: pointer, i: culonglong): struct_seaqt_string {.importc: "QLocale_toString_qulonglong".}
+proc fcQLocale_toStringLong(self: pointer, i: clong): struct_seaqt_string {.importc: "QLocale_toString_long".}
+proc fcQLocale_toStringUlong(self: pointer, i: culong): struct_seaqt_string {.importc: "QLocale_toString_ulong".}
+proc fcQLocale_toStringShort(self: pointer, i: cshort): struct_seaqt_string {.importc: "QLocale_toString_short".}
+proc fcQLocale_toStringUshort(self: pointer, i: cushort): struct_seaqt_string {.importc: "QLocale_toString_ushort".}
+proc fcQLocale_toStringInt(self: pointer, i: cint): struct_seaqt_string {.importc: "QLocale_toString_int".}
+proc fcQLocale_toStringUint(self: pointer, i: cuint): struct_seaqt_string {.importc: "QLocale_toString_uint".}
+proc fcQLocale_toStringDouble(self: pointer, f: float64): struct_seaqt_string {.importc: "QLocale_toString_double".}
+proc fcQLocale_toStringFloat(self: pointer, f: float32): struct_seaqt_string {.importc: "QLocale_toString_float".}
+proc fcQLocale_toString_QDate_QString(self: pointer, date: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toString_QDate_QString".}
+proc fcQLocale_toString_QTime_QString(self: pointer, time: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toString_QTime_QString".}
+proc fcQLocale_toString_QDateTime_QString(self: pointer, dateTime: pointer, format: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toString_QDateTime_QString".}
+proc fcQLocale_toString_QDate(self: pointer, date: pointer): struct_seaqt_string {.importc: "QLocale_toString_QDate".}
+proc fcQLocale_toString_QTime(self: pointer, time: pointer): struct_seaqt_string {.importc: "QLocale_toString_QTime".}
+proc fcQLocale_toString_QDateTime(self: pointer, dateTime: pointer): struct_seaqt_string {.importc: "QLocale_toString_QDateTime".}
+proc fcQLocale_toString_QDate_QLocale_FormatType_QCalendar(self: pointer, date: pointer, format: cint, cal: pointer): struct_seaqt_string {.importc: "QLocale_toString_QDate_QLocale_FormatType_QCalendar".}
+proc fcQLocale_toString_QDateTime_QLocale_FormatType_QCalendar(self: pointer, dateTime: pointer, format: cint, cal: pointer): struct_seaqt_string {.importc: "QLocale_toString_QDateTime_QLocale_FormatType_QCalendar".}
 proc fcQLocale_dateFormat(self: pointer): struct_seaqt_string {.importc: "QLocale_dateFormat".}
 proc fcQLocale_timeFormat(self: pointer): struct_seaqt_string {.importc: "QLocale_timeFormat".}
 proc fcQLocale_dateTimeFormat(self: pointer): struct_seaqt_string {.importc: "QLocale_dateTimeFormat".}
-proc fcQLocale_toDate(self: pointer, stringVal: struct_seaqt_string): pointer {.importc: "QLocale_toDate".}
-proc fcQLocale_toTime(self: pointer, stringVal: struct_seaqt_string): pointer {.importc: "QLocale_toTime".}
-proc fcQLocale_toDateTime(self: pointer, stringVal: struct_seaqt_string): pointer {.importc: "QLocale_toDateTime".}
-proc fcQLocale_toDate2(self: pointer, stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QLocale_toDate2".}
-proc fcQLocale_toTime2(self: pointer, stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QLocale_toTime2".}
-proc fcQLocale_toDateTime2(self: pointer, stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QLocale_toDateTime2".}
-proc fcQLocale_toDate3(self: pointer, stringVal: struct_seaqt_string, format: cint, cal: pointer): pointer {.importc: "QLocale_toDate3".}
-proc fcQLocale_toDateTime3(self: pointer, stringVal: struct_seaqt_string, format: cint, cal: pointer): pointer {.importc: "QLocale_toDateTime3".}
-proc fcQLocale_toDate4(self: pointer, stringVal: struct_seaqt_string, format: struct_seaqt_string, cal: pointer): pointer {.importc: "QLocale_toDate4".}
-proc fcQLocale_toDateTime4(self: pointer, stringVal: struct_seaqt_string, format: struct_seaqt_string, cal: pointer): pointer {.importc: "QLocale_toDateTime4".}
+proc fcQLocale_toDate_QString(self: pointer, stringVal: struct_seaqt_string): pointer {.importc: "QLocale_toDate_QString".}
+proc fcQLocale_toTime_QString(self: pointer, stringVal: struct_seaqt_string): pointer {.importc: "QLocale_toTime_QString".}
+proc fcQLocale_toDateTime_QString(self: pointer, stringVal: struct_seaqt_string): pointer {.importc: "QLocale_toDateTime_QString".}
+proc fcQLocale_toDate_QString_QString(self: pointer, stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QLocale_toDate_QString_QString".}
+proc fcQLocale_toTime_QString_QString(self: pointer, stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QLocale_toTime_QString_QString".}
+proc fcQLocale_toDateTime_QString_QString(self: pointer, stringVal: struct_seaqt_string, format: struct_seaqt_string): pointer {.importc: "QLocale_toDateTime_QString_QString".}
+proc fcQLocale_toDate_QString_QLocale_FormatType_QCalendar(self: pointer, stringVal: struct_seaqt_string, format: cint, cal: pointer): pointer {.importc: "QLocale_toDate_QString_QLocale_FormatType_QCalendar".}
+proc fcQLocale_toDateTime_QString_QLocale_FormatType_QCalendar(self: pointer, stringVal: struct_seaqt_string, format: cint, cal: pointer): pointer {.importc: "QLocale_toDateTime_QString_QLocale_FormatType_QCalendar".}
+proc fcQLocale_toDate_QString_QString_QCalendar(self: pointer, stringVal: struct_seaqt_string, format: struct_seaqt_string, cal: pointer): pointer {.importc: "QLocale_toDate_QString_QString_QCalendar".}
+proc fcQLocale_toDateTime_QString_QString_QCalendar(self: pointer, stringVal: struct_seaqt_string, format: struct_seaqt_string, cal: pointer): pointer {.importc: "QLocale_toDateTime_QString_QString_QCalendar".}
 proc fcQLocale_decimalPoint(self: pointer): struct_seaqt_string {.importc: "QLocale_decimalPoint".}
 proc fcQLocale_groupSeparator(self: pointer): struct_seaqt_string {.importc: "QLocale_groupSeparator".}
 proc fcQLocale_percent(self: pointer): struct_seaqt_string {.importc: "QLocale_percent".}
@@ -960,10 +960,10 @@ proc fcQLocale_zeroDigit(self: pointer): struct_seaqt_string {.importc: "QLocale
 proc fcQLocale_negativeSign(self: pointer): struct_seaqt_string {.importc: "QLocale_negativeSign".}
 proc fcQLocale_positiveSign(self: pointer): struct_seaqt_string {.importc: "QLocale_positiveSign".}
 proc fcQLocale_exponential(self: pointer): struct_seaqt_string {.importc: "QLocale_exponential".}
-proc fcQLocale_monthName(self: pointer, param1: cint): struct_seaqt_string {.importc: "QLocale_monthName".}
-proc fcQLocale_standaloneMonthName(self: pointer, param1: cint): struct_seaqt_string {.importc: "QLocale_standaloneMonthName".}
-proc fcQLocale_dayName(self: pointer, param1: cint): struct_seaqt_string {.importc: "QLocale_dayName".}
-proc fcQLocale_standaloneDayName(self: pointer, param1: cint): struct_seaqt_string {.importc: "QLocale_standaloneDayName".}
+proc fcQLocale_monthNameInt(self: pointer, param1: cint): struct_seaqt_string {.importc: "QLocale_monthName_int".}
+proc fcQLocale_standaloneMonthNameInt(self: pointer, param1: cint): struct_seaqt_string {.importc: "QLocale_standaloneMonthName_int".}
+proc fcQLocale_dayNameInt(self: pointer, param1: cint): struct_seaqt_string {.importc: "QLocale_dayName_int".}
+proc fcQLocale_standaloneDayNameInt(self: pointer, param1: cint): struct_seaqt_string {.importc: "QLocale_standaloneDayName_int".}
 proc fcQLocale_firstDayOfWeek(self: pointer): cint {.importc: "QLocale_firstDayOfWeek".}
 proc fcQLocale_weekdays(self: pointer): struct_seaqt_array {.importc: "QLocale_weekdays".}
 proc fcQLocale_amText(self: pointer): struct_seaqt_string {.importc: "QLocale_amText".}
@@ -974,17 +974,17 @@ proc fcQLocale_textDirection(self: pointer): cint {.importc: "QLocale_textDirect
 proc fcQLocale_toUpper(self: pointer, str: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toUpper".}
 proc fcQLocale_toLower(self: pointer, str: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toLower".}
 proc fcQLocale_currencySymbol(self: pointer): struct_seaqt_string {.importc: "QLocale_currencySymbol".}
-proc fcQLocale_toCurrencyString(self: pointer, param1: clonglong): struct_seaqt_string {.importc: "QLocale_toCurrencyString".}
-proc fcQLocale_toCurrencyStringWithQulonglong(self: pointer, param1: culonglong): struct_seaqt_string {.importc: "QLocale_toCurrencyStringWithQulonglong".}
-proc fcQLocale_toCurrencyStringWithShort(self: pointer, i: cshort): struct_seaqt_string {.importc: "QLocale_toCurrencyStringWithShort".}
-proc fcQLocale_toCurrencyStringWithUshort(self: pointer, i: cushort): struct_seaqt_string {.importc: "QLocale_toCurrencyStringWithUshort".}
-proc fcQLocale_toCurrencyStringWithInt(self: pointer, i: cint): struct_seaqt_string {.importc: "QLocale_toCurrencyStringWithInt".}
-proc fcQLocale_toCurrencyStringWithUint(self: pointer, i: cuint): struct_seaqt_string {.importc: "QLocale_toCurrencyStringWithUint".}
-proc fcQLocale_toCurrencyStringWithDouble(self: pointer, param1: float64): struct_seaqt_string {.importc: "QLocale_toCurrencyStringWithDouble".}
-proc fcQLocale_toCurrencyStringWithFloat(self: pointer, i: float32): struct_seaqt_string {.importc: "QLocale_toCurrencyStringWithFloat".}
-proc fcQLocale_formattedDataSize(self: pointer, bytes: clonglong): struct_seaqt_string {.importc: "QLocale_formattedDataSize".}
+proc fcQLocale_toCurrencyStringQlonglong(self: pointer, param1: clonglong): struct_seaqt_string {.importc: "QLocale_toCurrencyString_qlonglong".}
+proc fcQLocale_toCurrencyStringQulonglong(self: pointer, param1: culonglong): struct_seaqt_string {.importc: "QLocale_toCurrencyString_qulonglong".}
+proc fcQLocale_toCurrencyStringShort(self: pointer, i: cshort): struct_seaqt_string {.importc: "QLocale_toCurrencyString_short".}
+proc fcQLocale_toCurrencyStringUshort(self: pointer, i: cushort): struct_seaqt_string {.importc: "QLocale_toCurrencyString_ushort".}
+proc fcQLocale_toCurrencyStringInt(self: pointer, i: cint): struct_seaqt_string {.importc: "QLocale_toCurrencyString_int".}
+proc fcQLocale_toCurrencyStringUint(self: pointer, i: cuint): struct_seaqt_string {.importc: "QLocale_toCurrencyString_uint".}
+proc fcQLocale_toCurrencyStringDouble(self: pointer, param1: float64): struct_seaqt_string {.importc: "QLocale_toCurrencyString_double".}
+proc fcQLocale_toCurrencyStringFloat(self: pointer, i: float32): struct_seaqt_string {.importc: "QLocale_toCurrencyString_float".}
+proc fcQLocale_formattedDataSizeBytes(self: pointer, bytes: clonglong): struct_seaqt_string {.importc: "QLocale_formattedDataSize_bytes".}
 proc fcQLocale_uiLanguages(self: pointer): struct_seaqt_array {.importc: "QLocale_uiLanguages".}
-proc fcQLocale_languageToCode(language: cint): struct_seaqt_string {.importc: "QLocale_languageToCode".}
+proc fcQLocale_languageToCodeLanguage(language: cint): struct_seaqt_string {.importc: "QLocale_languageToCode_language".}
 proc fcQLocale_territoryToCode(territory: cint): struct_seaqt_string {.importc: "QLocale_territoryToCode".}
 proc fcQLocale_countryToCode(country: cint): struct_seaqt_string {.importc: "QLocale_countryToCode".}
 proc fcQLocale_scriptToCode(script: cint): struct_seaqt_string {.importc: "QLocale_scriptToCode".}
@@ -999,61 +999,61 @@ proc fcQLocale_matchingLocales(language: cint, script: cint, territory: cint): s
 proc fcQLocale_countriesForLanguage(lang: cint): struct_seaqt_array {.importc: "QLocale_countriesForLanguage".}
 proc fcQLocale_setNumberOptions(self: pointer, options: cint): void {.importc: "QLocale_setNumberOptions".}
 proc fcQLocale_numberOptions(self: pointer): cint {.importc: "QLocale_numberOptions".}
-proc fcQLocale_quoteString(self: pointer, str: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_quoteString".}
+proc fcQLocale_quoteString_QString(self: pointer, str: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_quoteString_QString".}
 proc fcQLocale_createSeparatedList(self: pointer, strl: struct_seaqt_array): struct_seaqt_string {.importc: "QLocale_createSeparatedList".}
-proc fcQLocale_toShort2(self: pointer, s: struct_seaqt_string, ok: ptr bool): cshort {.importc: "QLocale_toShort2".}
-proc fcQLocale_toUShort2(self: pointer, s: struct_seaqt_string, ok: ptr bool): cushort {.importc: "QLocale_toUShort2".}
-proc fcQLocale_toInt2(self: pointer, s: struct_seaqt_string, ok: ptr bool): cint {.importc: "QLocale_toInt2".}
-proc fcQLocale_toUInt2(self: pointer, s: struct_seaqt_string, ok: ptr bool): cuint {.importc: "QLocale_toUInt2".}
-proc fcQLocale_toLong2(self: pointer, s: struct_seaqt_string, ok: ptr bool): clong {.importc: "QLocale_toLong2".}
-proc fcQLocale_toULong2(self: pointer, s: struct_seaqt_string, ok: ptr bool): culong {.importc: "QLocale_toULong2".}
-proc fcQLocale_toLongLong2(self: pointer, s: struct_seaqt_string, ok: ptr bool): clonglong {.importc: "QLocale_toLongLong2".}
-proc fcQLocale_toULongLong2(self: pointer, s: struct_seaqt_string, ok: ptr bool): culonglong {.importc: "QLocale_toULongLong2".}
-proc fcQLocale_toFloat2(self: pointer, s: struct_seaqt_string, ok: ptr bool): float32 {.importc: "QLocale_toFloat2".}
-proc fcQLocale_toDouble2(self: pointer, s: struct_seaqt_string, ok: ptr bool): float64 {.importc: "QLocale_toDouble2".}
-proc fcQLocale_toString12(self: pointer, f: float64, format: cchar): struct_seaqt_string {.importc: "QLocale_toString12".}
-proc fcQLocale_toString13(self: pointer, f: float64, format: cchar, precision: cint): struct_seaqt_string {.importc: "QLocale_toString13".}
-proc fcQLocale_toString14(self: pointer, f: float32, format: cchar): struct_seaqt_string {.importc: "QLocale_toString14".}
-proc fcQLocale_toString15(self: pointer, f: float32, format: cchar, precision: cint): struct_seaqt_string {.importc: "QLocale_toString15".}
-proc fcQLocale_toString16(self: pointer, date: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_toString16".}
-proc fcQLocale_toString17(self: pointer, time: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_toString17".}
-proc fcQLocale_toString18(self: pointer, dateTime: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_toString18".}
-proc fcQLocale_dateFormatWithFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_dateFormatWithFormat".}
-proc fcQLocale_timeFormatWithFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_timeFormatWithFormat".}
-proc fcQLocale_dateTimeFormatWithFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_dateTimeFormatWithFormat".}
-proc fcQLocale_toDate5(self: pointer, stringVal: struct_seaqt_string, param2: cint): pointer {.importc: "QLocale_toDate5".}
-proc fcQLocale_toTime3(self: pointer, stringVal: struct_seaqt_string, param2: cint): pointer {.importc: "QLocale_toTime3".}
-proc fcQLocale_toDateTime5(self: pointer, stringVal: struct_seaqt_string, format: cint): pointer {.importc: "QLocale_toDateTime5".}
-proc fcQLocale_monthName2(self: pointer, param1: cint, format: cint): struct_seaqt_string {.importc: "QLocale_monthName2".}
-proc fcQLocale_standaloneMonthName2(self: pointer, param1: cint, format: cint): struct_seaqt_string {.importc: "QLocale_standaloneMonthName2".}
-proc fcQLocale_dayName2(self: pointer, param1: cint, format: cint): struct_seaqt_string {.importc: "QLocale_dayName2".}
-proc fcQLocale_standaloneDayName2(self: pointer, param1: cint, format: cint): struct_seaqt_string {.importc: "QLocale_standaloneDayName2".}
-proc fcQLocale_currencySymbolWithQLocaleCurrencySymbolFormat(self: pointer, param1: cint): struct_seaqt_string {.importc: "QLocale_currencySymbolWithQLocaleCurrencySymbolFormat".}
-proc fcQLocale_toCurrencyString2(self: pointer, param1: clonglong, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString2".}
-proc fcQLocale_toCurrencyString3(self: pointer, param1: culonglong, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString3".}
-proc fcQLocale_toCurrencyString4(self: pointer, i: cshort, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString4".}
-proc fcQLocale_toCurrencyString5(self: pointer, i: cushort, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString5".}
-proc fcQLocale_toCurrencyString6(self: pointer, i: cint, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString6".}
-proc fcQLocale_toCurrencyString7(self: pointer, i: cuint, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString7".}
-proc fcQLocale_toCurrencyString8(self: pointer, param1: float64, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString8".}
-proc fcQLocale_toCurrencyString9(self: pointer, param1: float64, symbol: struct_seaqt_string, precision: cint): struct_seaqt_string {.importc: "QLocale_toCurrencyString9".}
-proc fcQLocale_toCurrencyString10(self: pointer, i: float32, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString10".}
-proc fcQLocale_toCurrencyString11(self: pointer, i: float32, symbol: struct_seaqt_string, precision: cint): struct_seaqt_string {.importc: "QLocale_toCurrencyString11".}
-proc fcQLocale_formattedDataSize2(self: pointer, bytes: clonglong, precision: cint): struct_seaqt_string {.importc: "QLocale_formattedDataSize2".}
-proc fcQLocale_formattedDataSize3(self: pointer, bytes: clonglong, precision: cint, format: cint): struct_seaqt_string {.importc: "QLocale_formattedDataSize3".}
-proc fcQLocale_languageToCode2(language: cint, codeTypes: cint): struct_seaqt_string {.importc: "QLocale_languageToCode2".}
-proc fcQLocale_quoteString2(self: pointer, str: struct_seaqt_string, style: cint): struct_seaqt_string {.importc: "QLocale_quoteString2".}
+proc fcQLocale_toShort_QStringBool(self: pointer, s: struct_seaqt_string, ok: ptr bool): cshort {.importc: "QLocale_toShort_QString_bool".}
+proc fcQLocale_toUShort_QStringBool(self: pointer, s: struct_seaqt_string, ok: ptr bool): cushort {.importc: "QLocale_toUShort_QString_bool".}
+proc fcQLocale_toInt_QStringBool(self: pointer, s: struct_seaqt_string, ok: ptr bool): cint {.importc: "QLocale_toInt_QString_bool".}
+proc fcQLocale_toUInt_QStringBool(self: pointer, s: struct_seaqt_string, ok: ptr bool): cuint {.importc: "QLocale_toUInt_QString_bool".}
+proc fcQLocale_toLong_QStringBool(self: pointer, s: struct_seaqt_string, ok: ptr bool): clong {.importc: "QLocale_toLong_QString_bool".}
+proc fcQLocale_toULong_QStringBool(self: pointer, s: struct_seaqt_string, ok: ptr bool): culong {.importc: "QLocale_toULong_QString_bool".}
+proc fcQLocale_toLongLong_QStringBool(self: pointer, s: struct_seaqt_string, ok: ptr bool): clonglong {.importc: "QLocale_toLongLong_QString_bool".}
+proc fcQLocale_toULongLong_QStringBool(self: pointer, s: struct_seaqt_string, ok: ptr bool): culonglong {.importc: "QLocale_toULongLong_QString_bool".}
+proc fcQLocale_toFloat_QStringBool(self: pointer, s: struct_seaqt_string, ok: ptr bool): float32 {.importc: "QLocale_toFloat_QString_bool".}
+proc fcQLocale_toDouble_QStringBool(self: pointer, s: struct_seaqt_string, ok: ptr bool): float64 {.importc: "QLocale_toDouble_QString_bool".}
+proc fcQLocale_toStringDoubleChar(self: pointer, f: float64, format: cchar): struct_seaqt_string {.importc: "QLocale_toString_double_char".}
+proc fcQLocale_toStringDoubleCharInt(self: pointer, f: float64, format: cchar, precision: cint): struct_seaqt_string {.importc: "QLocale_toString_double_char_int".}
+proc fcQLocale_toStringFloatChar(self: pointer, f: float32, format: cchar): struct_seaqt_string {.importc: "QLocale_toString_float_char".}
+proc fcQLocale_toStringFloatCharInt(self: pointer, f: float32, format: cchar, precision: cint): struct_seaqt_string {.importc: "QLocale_toString_float_char_int".}
+proc fcQLocale_toString_QDate_QLocale_FormatType(self: pointer, date: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_toString_QDate_QLocale_FormatType".}
+proc fcQLocale_toString_QTime_QLocale_FormatType(self: pointer, time: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_toString_QTime_QLocale_FormatType".}
+proc fcQLocale_toString_QDateTime_QLocale_FormatType(self: pointer, dateTime: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_toString_QDateTime_QLocale_FormatType".}
+proc fcQLocale_dateFormatFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_dateFormat_format".}
+proc fcQLocale_timeFormatFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_timeFormat_format".}
+proc fcQLocale_dateTimeFormatFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QLocale_dateTimeFormat_format".}
+proc fcQLocale_toDate_QString_QLocale_FormatType(self: pointer, stringVal: struct_seaqt_string, param2: cint): pointer {.importc: "QLocale_toDate_QString_QLocale_FormatType".}
+proc fcQLocale_toTime_QString_QLocale_FormatType(self: pointer, stringVal: struct_seaqt_string, param2: cint): pointer {.importc: "QLocale_toTime_QString_QLocale_FormatType".}
+proc fcQLocale_toDateTime_QString_QLocale_FormatType(self: pointer, stringVal: struct_seaqt_string, format: cint): pointer {.importc: "QLocale_toDateTime_QString_QLocale_FormatType".}
+proc fcQLocale_monthNameInt_QLocale_FormatType(self: pointer, param1: cint, format: cint): struct_seaqt_string {.importc: "QLocale_monthName_int_QLocale_FormatType".}
+proc fcQLocale_standaloneMonthNameInt_QLocale_FormatType(self: pointer, param1: cint, format: cint): struct_seaqt_string {.importc: "QLocale_standaloneMonthName_int_QLocale_FormatType".}
+proc fcQLocale_dayNameInt_QLocale_FormatType(self: pointer, param1: cint, format: cint): struct_seaqt_string {.importc: "QLocale_dayName_int_QLocale_FormatType".}
+proc fcQLocale_standaloneDayNameInt_QLocale_FormatType(self: pointer, param1: cint, format: cint): struct_seaqt_string {.importc: "QLocale_standaloneDayName_int_QLocale_FormatType".}
+proc fcQLocale_currencySymbol_QLocale_CurrencySymbolFormat(self: pointer, param1: cint): struct_seaqt_string {.importc: "QLocale_currencySymbol_QLocale_CurrencySymbolFormat".}
+proc fcQLocale_toCurrencyStringQlonglong_QString(self: pointer, param1: clonglong, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString_qlonglong_QString".}
+proc fcQLocale_toCurrencyStringQulonglong_QString(self: pointer, param1: culonglong, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString_qulonglong_QString".}
+proc fcQLocale_toCurrencyStringShort_QString(self: pointer, i: cshort, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString_short_QString".}
+proc fcQLocale_toCurrencyStringUshort_QString(self: pointer, i: cushort, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString_ushort_QString".}
+proc fcQLocale_toCurrencyStringInt_QString(self: pointer, i: cint, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString_int_QString".}
+proc fcQLocale_toCurrencyStringUint_QString(self: pointer, i: cuint, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString_uint_QString".}
+proc fcQLocale_toCurrencyStringDouble_QString(self: pointer, param1: float64, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString_double_QString".}
+proc fcQLocale_toCurrencyStringDouble_QStringInt(self: pointer, param1: float64, symbol: struct_seaqt_string, precision: cint): struct_seaqt_string {.importc: "QLocale_toCurrencyString_double_QString_int".}
+proc fcQLocale_toCurrencyStringFloat_QString(self: pointer, i: float32, symbol: struct_seaqt_string): struct_seaqt_string {.importc: "QLocale_toCurrencyString_float_QString".}
+proc fcQLocale_toCurrencyStringFloat_QStringInt(self: pointer, i: float32, symbol: struct_seaqt_string, precision: cint): struct_seaqt_string {.importc: "QLocale_toCurrencyString_float_QString_int".}
+proc fcQLocale_formattedDataSizeBytesPrecision(self: pointer, bytes: clonglong, precision: cint): struct_seaqt_string {.importc: "QLocale_formattedDataSize_bytes_precision".}
+proc fcQLocale_formattedDataSizeBytesPrecisionFormat(self: pointer, bytes: clonglong, precision: cint, format: cint): struct_seaqt_string {.importc: "QLocale_formattedDataSize_bytes_precision_format".}
+proc fcQLocale_languageToCodeLanguageCodeTypes(language: cint, codeTypes: cint): struct_seaqt_string {.importc: "QLocale_languageToCode_language_codeTypes".}
+proc fcQLocale_quoteString_QString_QLocale_QuotationStyle(self: pointer, str: struct_seaqt_string, style: cint): struct_seaqt_string {.importc: "QLocale_quoteString_QString_QLocale_QuotationStyle".}
 proc fcQLocale_new(): ptr cQLocale {.importc: "QLocale_new".}
-proc fcQLocale_new2(name: struct_seaqt_string): ptr cQLocale {.importc: "QLocale_new2".}
-proc fcQLocale_new3(language: cint, territory: cint): ptr cQLocale {.importc: "QLocale_new3".}
-proc fcQLocale_new4(language: cint): ptr cQLocale {.importc: "QLocale_new4".}
-proc fcQLocale_new5(other: pointer): ptr cQLocale {.importc: "QLocale_new5".}
-proc fcQLocale_new6(language: cint, script: cint): ptr cQLocale {.importc: "QLocale_new6".}
-proc fcQLocale_new7(language: cint, script: cint, territory: cint): ptr cQLocale {.importc: "QLocale_new7".}
+proc fcQLocale_new2(name: struct_seaqt_string): ptr cQLocale {.importc: "QLocale_new_QString".}
+proc fcQLocale_new3(language: cint, territory: cint): ptr cQLocale {.importc: "QLocale_new_QLocale_Language_QLocale_Territory".}
+proc fcQLocale_new4(language: cint): ptr cQLocale {.importc: "QLocale_new_QLocale_Language".}
+proc fcQLocale_new5(fromVal: pointer): ptr cQLocale {.importc: "QLocale_new_QLocale".}
+proc fcQLocale_new6(language: cint, script: cint): ptr cQLocale {.importc: "QLocale_new_QLocale_Language_QLocale_Script".}
+proc fcQLocale_new7(language: cint, script: cint, territory: cint): ptr cQLocale {.importc: "QLocale_new_QLocale_Language_QLocale_Script_QLocale_Territory".}
 proc fcQLocale_staticMetaObject(): pointer {.importc: "QLocale_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qlocale_types.QLocale, other: gen_qlocale_types.QLocale): void =
-  fcQLocale_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qlocale_types.QLocale, fromVal: gen_qlocale_types.QLocale): void =
+  fcQLocale_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qlocale_types.QLocale, other: gen_qlocale_types.QLocale): void =
   fcQLocale_swap(self.h, other.h)
@@ -1101,139 +1101,139 @@ proc nativeCountryName*(self: gen_qlocale_types.QLocale): string =
   vx_ret
 
 proc toShort*(self: gen_qlocale_types.QLocale, s: openArray[char]): cshort =
-  fcQLocale_toShort(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQLocale_toShort_QString(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toUShort*(self: gen_qlocale_types.QLocale, s: openArray[char]): cushort =
-  fcQLocale_toUShort(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQLocale_toUShort_QString(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toInt*(self: gen_qlocale_types.QLocale, s: openArray[char]): cint =
-  fcQLocale_toInt(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQLocale_toInt_QString(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toUInt*(self: gen_qlocale_types.QLocale, s: openArray[char]): cuint =
-  fcQLocale_toUInt(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQLocale_toUInt_QString(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toLong*(self: gen_qlocale_types.QLocale, s: openArray[char]): clong =
-  fcQLocale_toLong(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQLocale_toLong_QString(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toULong*(self: gen_qlocale_types.QLocale, s: openArray[char]): culong =
-  fcQLocale_toULong(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQLocale_toULong_QString(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toLongLong*(self: gen_qlocale_types.QLocale, s: openArray[char]): clonglong =
-  fcQLocale_toLongLong(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQLocale_toLongLong_QString(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toULongLong*(self: gen_qlocale_types.QLocale, s: openArray[char]): culonglong =
-  fcQLocale_toULongLong(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQLocale_toULongLong_QString(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toFloat*(self: gen_qlocale_types.QLocale, s: openArray[char]): float32 =
-  fcQLocale_toFloat(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQLocale_toFloat_QString(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toDouble*(self: gen_qlocale_types.QLocale, s: openArray[char]): float64 =
-  fcQLocale_toDouble(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQLocale_toDouble_QString(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toString*(self: gen_qlocale_types.QLocale, i: clonglong): string =
-  let v_ms = fcQLocale_toString(self.h, i)
+  let v_ms = fcQLocale_toStringQlonglong(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: culonglong): string =
-  let v_ms = fcQLocale_toStringWithQulonglong(self.h, i)
+  let v_ms = fcQLocale_toStringQulonglong(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: clong): string =
-  let v_ms = fcQLocale_toStringWithLong(self.h, i)
+  let v_ms = fcQLocale_toStringLong(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: culong): string =
-  let v_ms = fcQLocale_toStringWithUlong(self.h, i)
+  let v_ms = fcQLocale_toStringUlong(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: cshort): string =
-  let v_ms = fcQLocale_toStringWithShort(self.h, i)
+  let v_ms = fcQLocale_toStringShort(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: cushort): string =
-  let v_ms = fcQLocale_toStringWithUshort(self.h, i)
+  let v_ms = fcQLocale_toStringUshort(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: cint): string =
-  let v_ms = fcQLocale_toStringWithInt(self.h, i)
+  let v_ms = fcQLocale_toStringInt(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: cuint): string =
-  let v_ms = fcQLocale_toStringWithUint(self.h, i)
+  let v_ms = fcQLocale_toStringUint(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, f: float64): string =
-  let v_ms = fcQLocale_toStringWithDouble(self.h, f)
+  let v_ms = fcQLocale_toStringDouble(self.h, f)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, f: float32): string =
-  let v_ms = fcQLocale_toStringWithFloat(self.h, f)
+  let v_ms = fcQLocale_toStringFloat(self.h, f)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, date: gen_qdatetime_types.QDate, format: openArray[char]): string =
-  let v_ms = fcQLocale_toString2(self.h, date.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let v_ms = fcQLocale_toString_QDate_QString(self.h, date.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, time: gen_qdatetime_types.QTime, format: openArray[char]): string =
-  let v_ms = fcQLocale_toString3(self.h, time.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let v_ms = fcQLocale_toString_QTime_QString(self.h, time.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, dateTime: gen_qdatetime_types.QDateTime, format: openArray[char]): string =
-  let v_ms = fcQLocale_toString4(self.h, dateTime.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let v_ms = fcQLocale_toString_QDateTime_QString(self.h, dateTime.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, date: gen_qdatetime_types.QDate): string =
-  let v_ms = fcQLocale_toStringWithDate(self.h, date.h)
+  let v_ms = fcQLocale_toString_QDate(self.h, date.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, time: gen_qdatetime_types.QTime): string =
-  let v_ms = fcQLocale_toStringWithTime(self.h, time.h)
+  let v_ms = fcQLocale_toString_QTime(self.h, time.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, dateTime: gen_qdatetime_types.QDateTime): string =
-  let v_ms = fcQLocale_toStringWithDateTime(self.h, dateTime.h)
+  let v_ms = fcQLocale_toString_QDateTime(self.h, dateTime.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, date: gen_qdatetime_types.QDate, format: cint, cal: gen_qcalendar_types.QCalendar): string =
-  let v_ms = fcQLocale_toString9(self.h, date.h, cint(format), cal.h)
+  let v_ms = fcQLocale_toString_QDate_QLocale_FormatType_QCalendar(self.h, date.h, cint(format), cal.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, dateTime: gen_qdatetime_types.QDateTime, format: cint, cal: gen_qcalendar_types.QCalendar): string =
-  let v_ms = fcQLocale_toString10(self.h, dateTime.h, cint(format), cal.h)
+  let v_ms = fcQLocale_toString_QDateTime_QLocale_FormatType_QCalendar(self.h, dateTime.h, cint(format), cal.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1257,34 +1257,34 @@ proc dateTimeFormat*(self: gen_qlocale_types.QLocale): string =
   vx_ret
 
 proc toDate*(self: gen_qlocale_types.QLocale, stringVal: openArray[char]): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate_QString(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc toTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char]): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime_QString(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc toDateTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char]): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime_QString(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc toDate*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: openArray[char]): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate2(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate_QString_QString(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
 proc toTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: openArray[char]): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime2(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime_QString_QString(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
 proc toDateTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: openArray[char]): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime2(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime_QString_QString(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
 proc toDate*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate3(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format), cal.h), owned: true)
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate_QString_QLocale_FormatType_QCalendar(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format), cal.h), owned: true)
 
 proc toDateTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime3(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format), cal.h), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime_QString_QLocale_FormatType_QCalendar(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format), cal.h), owned: true)
 
 proc toDate*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate4(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate_QString_QString_QCalendar(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
 proc toDateTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime4(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime_QString_QString_QCalendar(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
 proc decimalPoint*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_decimalPoint(self.h)
@@ -1329,25 +1329,25 @@ proc exponential*(self: gen_qlocale_types.QLocale): string =
   vx_ret
 
 proc monthName*(self: gen_qlocale_types.QLocale, param1: cint): string =
-  let v_ms = fcQLocale_monthName(self.h, param1)
+  let v_ms = fcQLocale_monthNameInt(self.h, param1)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneMonthName*(self: gen_qlocale_types.QLocale, param1: cint): string =
-  let v_ms = fcQLocale_standaloneMonthName(self.h, param1)
+  let v_ms = fcQLocale_standaloneMonthNameInt(self.h, param1)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc dayName*(self: gen_qlocale_types.QLocale, param1: cint): string =
-  let v_ms = fcQLocale_dayName(self.h, param1)
+  let v_ms = fcQLocale_dayNameInt(self.h, param1)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneDayName*(self: gen_qlocale_types.QLocale, param1: cint): string =
-  let v_ms = fcQLocale_standaloneDayName(self.h, param1)
+  let v_ms = fcQLocale_standaloneDayNameInt(self.h, param1)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1404,55 +1404,55 @@ proc currencySymbol*(self: gen_qlocale_types.QLocale): string =
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: clonglong): string =
-  let v_ms = fcQLocale_toCurrencyString(self.h, param1)
+  let v_ms = fcQLocale_toCurrencyStringQlonglong(self.h, param1)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: culonglong): string =
-  let v_ms = fcQLocale_toCurrencyStringWithQulonglong(self.h, param1)
+  let v_ms = fcQLocale_toCurrencyStringQulonglong(self.h, param1)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: cshort): string =
-  let v_ms = fcQLocale_toCurrencyStringWithShort(self.h, i)
+  let v_ms = fcQLocale_toCurrencyStringShort(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: cushort): string =
-  let v_ms = fcQLocale_toCurrencyStringWithUshort(self.h, i)
+  let v_ms = fcQLocale_toCurrencyStringUshort(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: cint): string =
-  let v_ms = fcQLocale_toCurrencyStringWithInt(self.h, i)
+  let v_ms = fcQLocale_toCurrencyStringInt(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: cuint): string =
-  let v_ms = fcQLocale_toCurrencyStringWithUint(self.h, i)
+  let v_ms = fcQLocale_toCurrencyStringUint(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: float64): string =
-  let v_ms = fcQLocale_toCurrencyStringWithDouble(self.h, param1)
+  let v_ms = fcQLocale_toCurrencyStringDouble(self.h, param1)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: float32): string =
-  let v_ms = fcQLocale_toCurrencyStringWithFloat(self.h, i)
+  let v_ms = fcQLocale_toCurrencyStringFloat(self.h, i)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc formattedDataSize*(self: gen_qlocale_types.QLocale, bytes: clonglong): string =
-  let v_ms = fcQLocale_formattedDataSize(self.h, bytes)
+  let v_ms = fcQLocale_formattedDataSizeBytes(self.h, bytes)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1470,7 +1470,7 @@ proc uiLanguages*(self: gen_qlocale_types.QLocale): seq[string] =
   vx_ret
 
 proc languageToCode*(_: type gen_qlocale_types.QLocale, language: cint): string =
-  let v_ms = fcQLocale_languageToCode(cint(language))
+  let v_ms = fcQLocale_languageToCodeLanguage(cint(language))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1551,7 +1551,7 @@ proc numberOptions*(self: gen_qlocale_types.QLocale): cint =
   cint(fcQLocale_numberOptions(self.h))
 
 proc quoteString*(self: gen_qlocale_types.QLocale, str: openArray[char]): string =
-  let v_ms = fcQLocale_quoteString(self.h, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
+  let v_ms = fcQLocale_quoteString_QString(self.h, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1567,214 +1567,214 @@ proc createSeparatedList*(self: gen_qlocale_types.QLocale, strl: openArray[strin
   vx_ret
 
 proc toShort*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): cshort =
-  fcQLocale_toShort2(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
+  fcQLocale_toShort_QStringBool(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toUShort*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): cushort =
-  fcQLocale_toUShort2(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
+  fcQLocale_toUShort_QStringBool(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toInt*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): cint =
-  fcQLocale_toInt2(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
+  fcQLocale_toInt_QStringBool(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toUInt*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): cuint =
-  fcQLocale_toUInt2(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
+  fcQLocale_toUInt_QStringBool(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toLong*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): clong =
-  fcQLocale_toLong2(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
+  fcQLocale_toLong_QStringBool(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toULong*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): culong =
-  fcQLocale_toULong2(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
+  fcQLocale_toULong_QStringBool(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toLongLong*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): clonglong =
-  fcQLocale_toLongLong2(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
+  fcQLocale_toLongLong_QStringBool(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toULongLong*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): culonglong =
-  fcQLocale_toULongLong2(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
+  fcQLocale_toULongLong_QStringBool(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toFloat*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): float32 =
-  fcQLocale_toFloat2(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
+  fcQLocale_toFloat_QStringBool(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toDouble*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): float64 =
-  fcQLocale_toDouble2(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
+  fcQLocale_toDouble_QStringBool(self.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toString*(self: gen_qlocale_types.QLocale, f: float64, format: cchar): string =
-  let v_ms = fcQLocale_toString12(self.h, f, format)
+  let v_ms = fcQLocale_toStringDoubleChar(self.h, f, format)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, f: float64, format: cchar, precision: cint): string =
-  let v_ms = fcQLocale_toString13(self.h, f, format, precision)
+  let v_ms = fcQLocale_toStringDoubleCharInt(self.h, f, format, precision)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, f: float32, format: cchar): string =
-  let v_ms = fcQLocale_toString14(self.h, f, format)
+  let v_ms = fcQLocale_toStringFloatChar(self.h, f, format)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, f: float32, format: cchar, precision: cint): string =
-  let v_ms = fcQLocale_toString15(self.h, f, format, precision)
+  let v_ms = fcQLocale_toStringFloatCharInt(self.h, f, format, precision)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, date: gen_qdatetime_types.QDate, format: cint): string =
-  let v_ms = fcQLocale_toString16(self.h, date.h, cint(format))
+  let v_ms = fcQLocale_toString_QDate_QLocale_FormatType(self.h, date.h, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, time: gen_qdatetime_types.QTime, format: cint): string =
-  let v_ms = fcQLocale_toString17(self.h, time.h, cint(format))
+  let v_ms = fcQLocale_toString_QTime_QLocale_FormatType(self.h, time.h, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, dateTime: gen_qdatetime_types.QDateTime, format: cint): string =
-  let v_ms = fcQLocale_toString18(self.h, dateTime.h, cint(format))
+  let v_ms = fcQLocale_toString_QDateTime_QLocale_FormatType(self.h, dateTime.h, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc dateFormat*(self: gen_qlocale_types.QLocale, format: cint): string =
-  let v_ms = fcQLocale_dateFormatWithFormat(self.h, cint(format))
+  let v_ms = fcQLocale_dateFormatFormat(self.h, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc timeFormat*(self: gen_qlocale_types.QLocale, format: cint): string =
-  let v_ms = fcQLocale_timeFormatWithFormat(self.h, cint(format))
+  let v_ms = fcQLocale_timeFormatFormat(self.h, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc dateTimeFormat*(self: gen_qlocale_types.QLocale, format: cint): string =
-  let v_ms = fcQLocale_dateTimeFormatWithFormat(self.h, cint(format))
+  let v_ms = fcQLocale_dateTimeFormatFormat(self.h, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toDate*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], param2: cint): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate5(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(param2)), owned: true)
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate_QString_QLocale_FormatType(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(param2)), owned: true)
 
 proc toTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], param2: cint): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime3(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(param2)), owned: true)
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime_QString_QLocale_FormatType(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(param2)), owned: true)
 
 proc toDateTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime5(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format)), owned: true)
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime_QString_QLocale_FormatType(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format)), owned: true)
 
 proc monthName*(self: gen_qlocale_types.QLocale, param1: cint, format: cint): string =
-  let v_ms = fcQLocale_monthName2(self.h, param1, cint(format))
+  let v_ms = fcQLocale_monthNameInt_QLocale_FormatType(self.h, param1, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneMonthName*(self: gen_qlocale_types.QLocale, param1: cint, format: cint): string =
-  let v_ms = fcQLocale_standaloneMonthName2(self.h, param1, cint(format))
+  let v_ms = fcQLocale_standaloneMonthNameInt_QLocale_FormatType(self.h, param1, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc dayName*(self: gen_qlocale_types.QLocale, param1: cint, format: cint): string =
-  let v_ms = fcQLocale_dayName2(self.h, param1, cint(format))
+  let v_ms = fcQLocale_dayNameInt_QLocale_FormatType(self.h, param1, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneDayName*(self: gen_qlocale_types.QLocale, param1: cint, format: cint): string =
-  let v_ms = fcQLocale_standaloneDayName2(self.h, param1, cint(format))
+  let v_ms = fcQLocale_standaloneDayNameInt_QLocale_FormatType(self.h, param1, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc currencySymbol*(self: gen_qlocale_types.QLocale, param1: cint): string =
-  let v_ms = fcQLocale_currencySymbolWithQLocaleCurrencySymbolFormat(self.h, cint(param1))
+  let v_ms = fcQLocale_currencySymbol_QLocale_CurrencySymbolFormat(self.h, cint(param1))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: clonglong, symbol: openArray[char]): string =
-  let v_ms = fcQLocale_toCurrencyString2(self.h, param1, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let v_ms = fcQLocale_toCurrencyStringQlonglong_QString(self.h, param1, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: culonglong, symbol: openArray[char]): string =
-  let v_ms = fcQLocale_toCurrencyString3(self.h, param1, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let v_ms = fcQLocale_toCurrencyStringQulonglong_QString(self.h, param1, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: cshort, symbol: openArray[char]): string =
-  let v_ms = fcQLocale_toCurrencyString4(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let v_ms = fcQLocale_toCurrencyStringShort_QString(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: cushort, symbol: openArray[char]): string =
-  let v_ms = fcQLocale_toCurrencyString5(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let v_ms = fcQLocale_toCurrencyStringUshort_QString(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: cint, symbol: openArray[char]): string =
-  let v_ms = fcQLocale_toCurrencyString6(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let v_ms = fcQLocale_toCurrencyStringInt_QString(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: cuint, symbol: openArray[char]): string =
-  let v_ms = fcQLocale_toCurrencyString7(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let v_ms = fcQLocale_toCurrencyStringUint_QString(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: float64, symbol: openArray[char]): string =
-  let v_ms = fcQLocale_toCurrencyString8(self.h, param1, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let v_ms = fcQLocale_toCurrencyStringDouble_QString(self.h, param1, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: float64, symbol: openArray[char], precision: cint): string =
-  let v_ms = fcQLocale_toCurrencyString9(self.h, param1, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))), precision)
+  let v_ms = fcQLocale_toCurrencyStringDouble_QStringInt(self.h, param1, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))), precision)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: float32, symbol: openArray[char]): string =
-  let v_ms = fcQLocale_toCurrencyString10(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let v_ms = fcQLocale_toCurrencyStringFloat_QString(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: float32, symbol: openArray[char], precision: cint): string =
-  let v_ms = fcQLocale_toCurrencyString11(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))), precision)
+  let v_ms = fcQLocale_toCurrencyStringFloat_QStringInt(self.h, i, struct_seaqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))), precision)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc formattedDataSize*(self: gen_qlocale_types.QLocale, bytes: clonglong, precision: cint): string =
-  let v_ms = fcQLocale_formattedDataSize2(self.h, bytes, precision)
+  let v_ms = fcQLocale_formattedDataSizeBytesPrecision(self.h, bytes, precision)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc formattedDataSize*(self: gen_qlocale_types.QLocale, bytes: clonglong, precision: cint, format: cint): string =
-  let v_ms = fcQLocale_formattedDataSize3(self.h, bytes, precision, cint(format))
+  let v_ms = fcQLocale_formattedDataSizeBytesPrecisionFormat(self.h, bytes, precision, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc languageToCode*(_: type gen_qlocale_types.QLocale, language: cint, codeTypes: cint): string =
-  let v_ms = fcQLocale_languageToCode2(cint(language), cint(codeTypes))
+  let v_ms = fcQLocale_languageToCodeLanguageCodeTypes(cint(language), cint(codeTypes))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc quoteString*(self: gen_qlocale_types.QLocale, str: openArray[char], style: cint): string =
-  let v_ms = fcQLocale_quoteString2(self.h, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(style))
+  let v_ms = fcQLocale_quoteString_QString_QLocale_QuotationStyle(self.h, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(style))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1795,8 +1795,8 @@ proc create*(T: type gen_qlocale_types.QLocale,
   let tmp = gen_qlocale_types.QLocale(h: fcQLocale_new4(cint(language)), owned: true)
   tmp
 proc create*(T: type gen_qlocale_types.QLocale,
-    other: gen_qlocale_types.QLocale): gen_qlocale_types.QLocale =
-  let tmp = gen_qlocale_types.QLocale(h: fcQLocale_new5(other.h), owned: true)
+    fromVal: gen_qlocale_types.QLocale): gen_qlocale_types.QLocale =
+  let tmp = gen_qlocale_types.QLocale(h: fcQLocale_new5(fromVal.h), owned: true)
   tmp
 proc create2*(T: type gen_qlocale_types.QLocale,
     language: cint, script: cint): gen_qlocale_types.QLocale =

@@ -49,7 +49,7 @@ export
 
 type cQPdfLink*{.exportc: "QPdfLink", incompleteStruct.} = object
 
-proc fcQPdfLink_operatorAssign(self: pointer, other: pointer): void {.importc: "QPdfLink_operatorAssign".}
+proc fcQPdfLink_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QPdfLink_operatorAssign".}
 proc fcQPdfLink_swap(self: pointer, other: pointer): void {.importc: "QPdfLink_swap".}
 proc fcQPdfLink_isValid(self: pointer): bool {.importc: "QPdfLink_isValid".}
 proc fcQPdfLink_page(self: pointer): cint {.importc: "QPdfLink_page".}
@@ -61,13 +61,13 @@ proc fcQPdfLink_contextAfter(self: pointer): struct_seaqt_string {.importc: "QPd
 proc fcQPdfLink_rectangles(self: pointer): struct_seaqt_array {.importc: "QPdfLink_rectangles".}
 proc fcQPdfLink_toString(self: pointer): struct_seaqt_string {.importc: "QPdfLink_toString".}
 proc fcQPdfLink_copyToClipboard(self: pointer): void {.importc: "QPdfLink_copyToClipboard".}
-proc fcQPdfLink_copyToClipboardWithMode(self: pointer, mode: cint): void {.importc: "QPdfLink_copyToClipboardWithMode".}
+proc fcQPdfLink_copyToClipboardMode(self: pointer, mode: cint): void {.importc: "QPdfLink_copyToClipboard_mode".}
 proc fcQPdfLink_new(): ptr cQPdfLink {.importc: "QPdfLink_new".}
-proc fcQPdfLink_new2(other: pointer): ptr cQPdfLink {.importc: "QPdfLink_new2".}
+proc fcQPdfLink_new2(fromVal: pointer): ptr cQPdfLink {.importc: "QPdfLink_new_from".}
 proc fcQPdfLink_staticMetaObject(): pointer {.importc: "QPdfLink_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qpdflink_types.QPdfLink, other: gen_qpdflink_types.QPdfLink): void =
-  fcQPdfLink_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qpdflink_types.QPdfLink, fromVal: gen_qpdflink_types.QPdfLink): void =
+  fcQPdfLink_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qpdflink_types.QPdfLink, other: gen_qpdflink_types.QPdfLink): void =
   fcQPdfLink_swap(self.h, other.h)
@@ -118,14 +118,14 @@ proc copyToClipboard*(self: gen_qpdflink_types.QPdfLink): void =
   fcQPdfLink_copyToClipboard(self.h)
 
 proc copyToClipboard*(self: gen_qpdflink_types.QPdfLink, mode: cint): void =
-  fcQPdfLink_copyToClipboardWithMode(self.h, cint(mode))
+  fcQPdfLink_copyToClipboardMode(self.h, cint(mode))
 
 proc create*(T: type gen_qpdflink_types.QPdfLink): gen_qpdflink_types.QPdfLink =
   let tmp = gen_qpdflink_types.QPdfLink(h: fcQPdfLink_new(), owned: true)
   tmp
 proc create*(T: type gen_qpdflink_types.QPdfLink,
-    other: gen_qpdflink_types.QPdfLink): gen_qpdflink_types.QPdfLink =
-  let tmp = gen_qpdflink_types.QPdfLink(h: fcQPdfLink_new2(other.h), owned: true)
+    fromVal: gen_qpdflink_types.QPdfLink): gen_qpdflink_types.QPdfLink =
+  let tmp = gen_qpdflink_types.QPdfLink(h: fcQPdfLink_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qpdflink_types.QPdfLink): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfLink_staticMetaObject())

@@ -94,7 +94,7 @@ type cQMediaRecorder*{.exportc: "QMediaRecorder", incompleteStruct.} = object
 proc fcQMediaRecorder_metaObject(self: pointer): pointer {.importc: "QMediaRecorder_metaObject".}
 proc fcQMediaRecorder_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaRecorder_metacast".}
 proc fcQMediaRecorder_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaRecorder_metacall".}
-proc fcQMediaRecorder_tr(s: cstring): struct_seaqt_string {.importc: "QMediaRecorder_tr".}
+proc fcQMediaRecorder_trS(s: cstring): struct_seaqt_string {.importc: "QMediaRecorder_tr_s".}
 proc fcQMediaRecorder_isAvailable(self: pointer): bool {.importc: "QMediaRecorder_isAvailable".}
 proc fcQMediaRecorder_outputLocation(self: pointer): pointer {.importc: "QMediaRecorder_outputLocation".}
 proc fcQMediaRecorder_setOutputLocation(self: pointer, location: pointer): void {.importc: "QMediaRecorder_setOutputLocation".}
@@ -110,8 +110,8 @@ proc fcQMediaRecorder_setEncodingMode(self: pointer, encodingMode: cint): void {
 proc fcQMediaRecorder_quality(self: pointer): cint {.importc: "QMediaRecorder_quality".}
 proc fcQMediaRecorder_setQuality(self: pointer, quality: cint): void {.importc: "QMediaRecorder_setQuality".}
 proc fcQMediaRecorder_videoResolution(self: pointer): pointer {.importc: "QMediaRecorder_videoResolution".}
-proc fcQMediaRecorder_setVideoResolution(self: pointer, videoResolution: pointer): void {.importc: "QMediaRecorder_setVideoResolution".}
-proc fcQMediaRecorder_setVideoResolution2(self: pointer, width: cint, height: cint): void {.importc: "QMediaRecorder_setVideoResolution2".}
+proc fcQMediaRecorder_setVideoResolutionVideoResolution(self: pointer, videoResolution: pointer): void {.importc: "QMediaRecorder_setVideoResolution_videoResolution".}
+proc fcQMediaRecorder_setVideoResolutionWidthHeight(self: pointer, width: cint, height: cint): void {.importc: "QMediaRecorder_setVideoResolution_width_height".}
 proc fcQMediaRecorder_videoFrameRate(self: pointer): float64 {.importc: "QMediaRecorder_videoFrameRate".}
 proc fcQMediaRecorder_setVideoFrameRate(self: pointer, frameRate: float64): void {.importc: "QMediaRecorder_setVideoFrameRate".}
 proc fcQMediaRecorder_videoBitRate(self: pointer): cint {.importc: "QMediaRecorder_videoBitRate".}
@@ -161,8 +161,8 @@ proc fcQMediaRecorder_audioChannelCountChanged(self: pointer): void {.importc: "
 proc fcQMediaRecorder_connect_audioChannelCountChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaRecorder_connect_audioChannelCountChanged".}
 proc fcQMediaRecorder_audioSampleRateChanged(self: pointer): void {.importc: "QMediaRecorder_audioSampleRateChanged".}
 proc fcQMediaRecorder_connect_audioSampleRateChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaRecorder_connect_audioSampleRateChanged".}
-proc fcQMediaRecorder_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaRecorder_tr2".}
-proc fcQMediaRecorder_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaRecorder_tr3".}
+proc fcQMediaRecorder_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaRecorder_tr_s_c".}
+proc fcQMediaRecorder_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaRecorder_tr_s_c_n".}
 proc fcQMediaRecorder_vdata(self: pointer): ptr pointer {.importc: "QMediaRecorder_vdata".}
 proc fvdata_cQMediaRecorder(self: pointer): pointer {.importc: "vdata_QMediaRecorder".}
 
@@ -193,7 +193,7 @@ proc fcQMediaRecorder_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQMediaRecorder_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaRecorder_protectedbase_receivers".}
 proc fcQMediaRecorder_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaRecorder_protectedbase_isSignalConnected".}
 proc fcQMediaRecorder_new(vtbl: pointer, vdata: csize_t): ptr cQMediaRecorder {.importc: "QMediaRecorder_new".}
-proc fcQMediaRecorder_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaRecorder {.importc: "QMediaRecorder_new2".}
+proc fcQMediaRecorder_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaRecorder {.importc: "QMediaRecorder_new_parent".}
 proc fcQMediaRecorder_staticMetaObject(): pointer {.importc: "QMediaRecorder_staticMetaObject".}
 
 proc metaObject*(self: gen_qmediarecorder_types.QMediaRecorder): gen_qobjectdefs_types.QMetaObject =
@@ -206,7 +206,7 @@ proc metacall*(self: gen_qmediarecorder_types.QMediaRecorder, param1: cint, para
   fcQMediaRecorder_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring): string =
-  let v_ms = fcQMediaRecorder_tr(s)
+  let v_ms = fcQMediaRecorder_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -260,10 +260,10 @@ proc videoResolution*(self: gen_qmediarecorder_types.QMediaRecorder): gen_qsize_
   gen_qsize_types.QSize(h: fcQMediaRecorder_videoResolution(self.h), owned: true)
 
 proc setVideoResolution*(self: gen_qmediarecorder_types.QMediaRecorder, videoResolution: gen_qsize_types.QSize): void =
-  fcQMediaRecorder_setVideoResolution(self.h, videoResolution.h)
+  fcQMediaRecorder_setVideoResolutionVideoResolution(self.h, videoResolution.h)
 
 proc setVideoResolution*(self: gen_qmediarecorder_types.QMediaRecorder, width: cint, height: cint): void =
-  fcQMediaRecorder_setVideoResolution2(self.h, width, height)
+  fcQMediaRecorder_setVideoResolutionWidthHeight(self.h, width, height)
 
 proc videoFrameRate*(self: gen_qmediarecorder_types.QMediaRecorder): float64 =
   fcQMediaRecorder_videoFrameRate(self.h)
@@ -618,13 +618,13 @@ proc onAudioSampleRateChanged*(self: gen_qmediarecorder_types.QMediaRecorder, sl
   fcQMediaRecorder_connect_audioSampleRateChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_audioSampleRateChanged, fcQMediaRecorder_slot_callback_audioSampleRateChanged_release)
 
 proc tr*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaRecorder_tr2(s, c)
+  let v_ms = fcQMediaRecorder_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaRecorder_tr3(s, c, n)
+  let v_ms = fcQMediaRecorder_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

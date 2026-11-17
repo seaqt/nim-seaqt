@@ -67,15 +67,15 @@ void* QWebEngineProfile_vdata(VirtualQWebEngineProfile* self);
 VirtualQWebEngineProfile* vdata_QWebEngineProfile(void* vdata);
 
 VirtualQWebEngineProfile* QWebEngineProfile_new(const QWebEngineProfile_VTable* vtbl, size_t vdata);
-VirtualQWebEngineProfile* QWebEngineProfile_new2(const QWebEngineProfile_VTable* vtbl, size_t vdata, struct seaqt_string name);
-VirtualQWebEngineProfile* QWebEngineProfile_new3(const QWebEngineProfile_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQWebEngineProfile* QWebEngineProfile_new4(const QWebEngineProfile_VTable* vtbl, size_t vdata, struct seaqt_string name, QObject* parent);
+VirtualQWebEngineProfile* QWebEngineProfile_new_name(const QWebEngineProfile_VTable* vtbl, size_t vdata, struct seaqt_string name);
+VirtualQWebEngineProfile* QWebEngineProfile_new_parent(const QWebEngineProfile_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQWebEngineProfile* QWebEngineProfile_new_name_parent(const QWebEngineProfile_VTable* vtbl, size_t vdata, struct seaqt_string name, QObject* parent);
 
 void QWebEngineProfile_virtbase(QWebEngineProfile* src, QObject** outptr_QObject);
 QMetaObject* QWebEngineProfile_metaObject(const QWebEngineProfile* self);
 void* QWebEngineProfile_metacast(QWebEngineProfile* self, const char* param1);
 int QWebEngineProfile_metacall(QWebEngineProfile* self, int param1, int param2, void** param3);
-struct seaqt_string QWebEngineProfile_tr(const char* s);
+struct seaqt_string QWebEngineProfile_tr_s(const char* s);
 struct seaqt_string QWebEngineProfile_storageName(const QWebEngineProfile* self);
 bool QWebEngineProfile_isOffTheRecord(const QWebEngineProfile* self);
 struct seaqt_string QWebEngineProfile_persistentStoragePath(const QWebEngineProfile* self);
@@ -115,8 +115,8 @@ QWebEngineClientCertificateStore* QWebEngineProfile_clientCertificateStore(QWebE
 QWebEngineProfile* QWebEngineProfile_defaultProfile();
 void QWebEngineProfile_downloadRequested(QWebEngineProfile* self, QWebEngineDownloadRequest* download);
 void QWebEngineProfile_connect_downloadRequested(QWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t));
-struct seaqt_string QWebEngineProfile_tr2(const char* s, const char* c);
-struct seaqt_string QWebEngineProfile_tr3(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineProfile_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineProfile_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QWebEngineProfile_virtualbase_metaObject(const VirtualQWebEngineProfile* self);
 void* QWebEngineProfile_virtualbase_metacast(VirtualQWebEngineProfile* self, const char* param1);

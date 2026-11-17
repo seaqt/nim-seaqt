@@ -99,7 +99,7 @@ type cQWebEngineDownloadRequest*{.exportc: "QWebEngineDownloadRequest", incomple
 proc fcQWebEngineDownloadRequest_metaObject(self: pointer): pointer {.importc: "QWebEngineDownloadRequest_metaObject".}
 proc fcQWebEngineDownloadRequest_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineDownloadRequest_metacast".}
 proc fcQWebEngineDownloadRequest_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineDownloadRequest_metacall".}
-proc fcQWebEngineDownloadRequest_tr(s: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadRequest_tr".}
+proc fcQWebEngineDownloadRequest_trS(s: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadRequest_tr_s".}
 proc fcQWebEngineDownloadRequest_id(self: pointer): cuint {.importc: "QWebEngineDownloadRequest_id".}
 proc fcQWebEngineDownloadRequest_state(self: pointer): cint {.importc: "QWebEngineDownloadRequest_state".}
 proc fcQWebEngineDownloadRequest_totalBytes(self: pointer): clonglong {.importc: "QWebEngineDownloadRequest_totalBytes".}
@@ -141,8 +141,8 @@ proc fcQWebEngineDownloadRequest_downloadDirectoryChanged(self: pointer): void {
 proc fcQWebEngineDownloadRequest_connect_downloadDirectoryChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineDownloadRequest_connect_downloadDirectoryChanged".}
 proc fcQWebEngineDownloadRequest_downloadFileNameChanged(self: pointer): void {.importc: "QWebEngineDownloadRequest_downloadFileNameChanged".}
 proc fcQWebEngineDownloadRequest_connect_downloadFileNameChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineDownloadRequest_connect_downloadFileNameChanged".}
-proc fcQWebEngineDownloadRequest_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadRequest_tr2".}
-proc fcQWebEngineDownloadRequest_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineDownloadRequest_tr3".}
+proc fcQWebEngineDownloadRequest_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadRequest_tr_s_c".}
+proc fcQWebEngineDownloadRequest_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineDownloadRequest_tr_s_c_n".}
 proc fcQWebEngineDownloadRequest_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineDownloadRequest_protectedbase_sender".}
 proc fcQWebEngineDownloadRequest_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineDownloadRequest_protectedbase_senderSignalIndex".}
 proc fcQWebEngineDownloadRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineDownloadRequest_protectedbase_receivers".}
@@ -159,7 +159,7 @@ proc metacall*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadReque
   fcQWebEngineDownloadRequest_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, s: cstring): string =
-  let v_ms = fcQWebEngineDownloadRequest_tr(s)
+  let v_ms = fcQWebEngineDownloadRequest_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -413,13 +413,13 @@ proc onDownloadFileNameChanged*(self: gen_qwebenginedownloadrequest_types.QWebEn
   fcQWebEngineDownloadRequest_connect_downloadFileNameChanged(self.h, cast[int](addr tmp[]), fcQWebEngineDownloadRequest_slot_callback_downloadFileNameChanged, fcQWebEngineDownloadRequest_slot_callback_downloadFileNameChanged_release)
 
 proc tr*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineDownloadRequest_tr2(s, c)
+  let v_ms = fcQWebEngineDownloadRequest_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineDownloadRequest_tr3(s, c, n)
+  let v_ms = fcQWebEngineDownloadRequest_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -15,11 +15,11 @@ qfloat16* qfloat16_new() {
 	return new (std::nothrow) qfloat16();
 }
 
-qfloat16* qfloat16_new2(int param1) {
+qfloat16* qfloat16_new_Qt_Initialization(int param1) {
 	return new (std::nothrow) qfloat16(static_cast<Qt::Initialization>(param1));
 }
 
-qfloat16* qfloat16_new3(float f) {
+qfloat16* qfloat16_new_float(float f) {
 	return new (std::nothrow) qfloat16(static_cast<float>(f));
 }
 

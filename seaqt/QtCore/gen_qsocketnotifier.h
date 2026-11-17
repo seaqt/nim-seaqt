@@ -52,16 +52,16 @@ typedef struct QSocketNotifier_VTable{
 void* QSocketNotifier_vdata(VirtualQSocketNotifier* self);
 VirtualQSocketNotifier* vdata_QSocketNotifier(void* vdata);
 
-VirtualQSocketNotifier* QSocketNotifier_new(const QSocketNotifier_VTable* vtbl, size_t vdata, int param1);
-VirtualQSocketNotifier* QSocketNotifier_new2(const QSocketNotifier_VTable* vtbl, size_t vdata, intptr_t socket, int param2);
-VirtualQSocketNotifier* QSocketNotifier_new3(const QSocketNotifier_VTable* vtbl, size_t vdata, int param1, QObject* parent);
-VirtualQSocketNotifier* QSocketNotifier_new4(const QSocketNotifier_VTable* vtbl, size_t vdata, intptr_t socket, int param2, QObject* parent);
+VirtualQSocketNotifier* QSocketNotifier_new_QSocketNotifier_Type(const QSocketNotifier_VTable* vtbl, size_t vdata, int param1);
+VirtualQSocketNotifier* QSocketNotifier_new_qintptr_QSocketNotifier_Type(const QSocketNotifier_VTable* vtbl, size_t vdata, intptr_t socket, int param2);
+VirtualQSocketNotifier* QSocketNotifier_new_QSocketNotifier_Type_QObject(const QSocketNotifier_VTable* vtbl, size_t vdata, int param1, QObject* parent);
+VirtualQSocketNotifier* QSocketNotifier_new_qintptr_QSocketNotifier_Type_QObject(const QSocketNotifier_VTable* vtbl, size_t vdata, intptr_t socket, int param2, QObject* parent);
 
 void QSocketNotifier_virtbase(QSocketNotifier* src, QObject** outptr_QObject);
 QMetaObject* QSocketNotifier_metaObject(const QSocketNotifier* self);
 void* QSocketNotifier_metacast(QSocketNotifier* self, const char* param1);
 int QSocketNotifier_metacall(QSocketNotifier* self, int param1, int param2, void** param3);
-struct seaqt_string QSocketNotifier_tr(const char* s);
+struct seaqt_string QSocketNotifier_tr_s(const char* s);
 void QSocketNotifier_setSocket(QSocketNotifier* self, intptr_t socket);
 intptr_t QSocketNotifier_socket(const QSocketNotifier* self);
 int QSocketNotifier_type(const QSocketNotifier* self);
@@ -69,8 +69,8 @@ bool QSocketNotifier_isValid(const QSocketNotifier* self);
 bool QSocketNotifier_isEnabled(const QSocketNotifier* self);
 void QSocketNotifier_setEnabled(QSocketNotifier* self, bool enabled);
 bool QSocketNotifier_event(QSocketNotifier* self, QEvent* param1);
-struct seaqt_string QSocketNotifier_tr2(const char* s, const char* c);
-struct seaqt_string QSocketNotifier_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSocketNotifier_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSocketNotifier_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSocketNotifier_virtualbase_metaObject(const VirtualQSocketNotifier* self);
 void* QSocketNotifier_virtualbase_metacast(VirtualQSocketNotifier* self, const char* param1);
@@ -92,8 +92,8 @@ const QMetaObject* QSocketNotifier_staticMetaObject();
 void QSocketNotifier_delete(QSocketNotifier* self);
 
 QSocketDescriptor* QSocketDescriptor_new();
-QSocketDescriptor* QSocketDescriptor_new2(QSocketDescriptor* param1);
-QSocketDescriptor* QSocketDescriptor_new3(int descriptor);
+QSocketDescriptor* QSocketDescriptor_new_from(QSocketDescriptor* from);
+QSocketDescriptor* QSocketDescriptor_new_descriptor(int descriptor);
 
 int QSocketDescriptor_ToInt(const QSocketDescriptor* self);
 bool QSocketDescriptor_isValid(const QSocketDescriptor* self);

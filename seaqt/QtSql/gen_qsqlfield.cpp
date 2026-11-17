@@ -21,39 +21,39 @@ QSqlField* QSqlField_new() {
 	return new (std::nothrow) QSqlField();
 }
 
-QSqlField* QSqlField_new2(QSqlField* other) {
-	return new (std::nothrow) QSqlField(*other);
+QSqlField* QSqlField_new_QSqlField(QSqlField* from) {
+	return new (std::nothrow) QSqlField(*from);
 }
 
-QSqlField* QSqlField_new3(struct seaqt_string fieldName, int type) {
+QSqlField* QSqlField_new_QString_QVariant_Type(struct seaqt_string fieldName, int type) {
 	QString fieldName_QString = QString::fromUtf8(fieldName.data, fieldName.len);
 	return new (std::nothrow) QSqlField(fieldName_QString, static_cast<QVariant::Type>(type));
 }
 
-QSqlField* QSqlField_new4(struct seaqt_string fieldName) {
+QSqlField* QSqlField_new_QString(struct seaqt_string fieldName) {
 	QString fieldName_QString = QString::fromUtf8(fieldName.data, fieldName.len);
 	return new (std::nothrow) QSqlField(fieldName_QString);
 }
 
-QSqlField* QSqlField_new5(struct seaqt_string fieldName, QMetaType* type) {
+QSqlField* QSqlField_new_QString_QMetaType(struct seaqt_string fieldName, QMetaType* type) {
 	QString fieldName_QString = QString::fromUtf8(fieldName.data, fieldName.len);
 	return new (std::nothrow) QSqlField(fieldName_QString, *type);
 }
 
-QSqlField* QSqlField_new6(struct seaqt_string fieldName, QMetaType* type, struct seaqt_string tableName) {
+QSqlField* QSqlField_new_QString_QMetaType_QString(struct seaqt_string fieldName, QMetaType* type, struct seaqt_string tableName) {
 	QString fieldName_QString = QString::fromUtf8(fieldName.data, fieldName.len);
 	QString tableName_QString = QString::fromUtf8(tableName.data, tableName.len);
 	return new (std::nothrow) QSqlField(fieldName_QString, *type, tableName_QString);
 }
 
-QSqlField* QSqlField_new7(struct seaqt_string fieldName, int type, struct seaqt_string tableName) {
+QSqlField* QSqlField_new_QString_QVariant_Type_QString(struct seaqt_string fieldName, int type, struct seaqt_string tableName) {
 	QString fieldName_QString = QString::fromUtf8(fieldName.data, fieldName.len);
 	QString tableName_QString = QString::fromUtf8(tableName.data, tableName.len);
 	return new (std::nothrow) QSqlField(fieldName_QString, static_cast<QVariant::Type>(type), tableName_QString);
 }
 
-void QSqlField_operatorAssign(QSqlField* self, QSqlField* other) {
-	self->operator=(*other);
+void QSqlField_operatorAssign(QSqlField* self, QSqlField* from) {
+	self->operator=(*from);
 }
 
 bool QSqlField_operatorEqual(const QSqlField* self, QSqlField* other) {

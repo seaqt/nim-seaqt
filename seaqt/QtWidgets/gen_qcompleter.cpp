@@ -226,12 +226,12 @@ VirtualQCompleter* QCompleter_new(const QCompleter_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQCompleter(vtbl) : nullptr;
 }
 
-VirtualQCompleter* QCompleter_new2(const QCompleter_VTable* vtbl, size_t vdata, QAbstractItemModel* model) {
+VirtualQCompleter* QCompleter_new_model(const QCompleter_VTable* vtbl, size_t vdata, QAbstractItemModel* model) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCompleter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCompleter(vtbl, model) : nullptr;
 }
 
-VirtualQCompleter* QCompleter_new3(const QCompleter_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  completions) {
+VirtualQCompleter* QCompleter_new_completions(const QCompleter_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  completions) {
 	QStringList completions_QList;
 	completions_QList.reserve(completions.len);
 	struct seaqt_string* completions_arr = static_cast<struct seaqt_string*>(completions.data);
@@ -243,17 +243,17 @@ VirtualQCompleter* QCompleter_new3(const QCompleter_VTable* vtbl, size_t vdata, 
 	return _mem_ ? new (_mem_)VirtualQCompleter(vtbl, completions_QList) : nullptr;
 }
 
-VirtualQCompleter* QCompleter_new4(const QCompleter_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQCompleter* QCompleter_new_parent(const QCompleter_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCompleter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCompleter(vtbl, parent) : nullptr;
 }
 
-VirtualQCompleter* QCompleter_new5(const QCompleter_VTable* vtbl, size_t vdata, QAbstractItemModel* model, QObject* parent) {
+VirtualQCompleter* QCompleter_new_model_parent(const QCompleter_VTable* vtbl, size_t vdata, QAbstractItemModel* model, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCompleter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCompleter(vtbl, model, parent) : nullptr;
 }
 
-VirtualQCompleter* QCompleter_new6(const QCompleter_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  completions, QObject* parent) {
+VirtualQCompleter* QCompleter_new_completions_parent(const QCompleter_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  completions, QObject* parent) {
 	QStringList completions_QList;
 	completions_QList.reserve(completions.len);
 	struct seaqt_string* completions_arr = static_cast<struct seaqt_string*>(completions.data);
@@ -281,7 +281,7 @@ int QCompleter_metacall(QCompleter* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCompleter_tr(const char* s) {
+struct seaqt_string QCompleter_tr_s(const char* s) {
 	QString _ret = QCompleter::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -467,12 +467,12 @@ struct seaqt_array /* of struct seaqt_string */  QCompleter_splitPath(const QCom
 	return _out;
 }
 
-void QCompleter_activated(QCompleter* self, struct seaqt_string text) {
+void QCompleter_activated_text(QCompleter* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->activated(text_QString);
 }
 
-void QCompleter_connect_activated(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+void QCompleter_connect_activated_text(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_string);
@@ -491,11 +491,11 @@ void QCompleter_connect_activated(QCompleter* self, intptr_t slot, void (*callba
 	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::activated), self, local_caller{slot, callback, release});
 }
 
-void QCompleter_activatedWithIndex(QCompleter* self, QModelIndex* index) {
+void QCompleter_activated_index(QCompleter* self, QModelIndex* index) {
 	self->activated(*index);
 }
 
-void QCompleter_connect_activatedWithIndex(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+void QCompleter_connect_activated_index(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*);
@@ -509,12 +509,12 @@ void QCompleter_connect_activatedWithIndex(QCompleter* self, intptr_t slot, void
 	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QModelIndex&)>(&QCompleter::activated), self, local_caller{slot, callback, release});
 }
 
-void QCompleter_highlighted(QCompleter* self, struct seaqt_string text) {
+void QCompleter_highlighted_text(QCompleter* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->highlighted(text_QString);
 }
 
-void QCompleter_connect_highlighted(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+void QCompleter_connect_highlighted_text(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_string);
@@ -533,11 +533,11 @@ void QCompleter_connect_highlighted(QCompleter* self, intptr_t slot, void (*call
 	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::highlighted), self, local_caller{slot, callback, release});
 }
 
-void QCompleter_highlightedWithIndex(QCompleter* self, QModelIndex* index) {
+void QCompleter_highlighted_index(QCompleter* self, QModelIndex* index) {
 	self->highlighted(*index);
 }
 
-void QCompleter_connect_highlightedWithIndex(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+void QCompleter_connect_highlighted_index(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*);
@@ -551,7 +551,7 @@ void QCompleter_connect_highlightedWithIndex(QCompleter* self, intptr_t slot, vo
 	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QModelIndex&)>(&QCompleter::highlighted), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QCompleter_tr2(const char* s, const char* c) {
+struct seaqt_string QCompleter_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCompleter::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -562,7 +562,7 @@ struct seaqt_string QCompleter_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCompleter_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCompleter_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCompleter::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -573,7 +573,7 @@ struct seaqt_string QCompleter_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QCompleter_completeWithRect(QCompleter* self, QRect* rect) {
+void QCompleter_complete_rect(QCompleter* self, QRect* rect) {
 	self->complete(*rect);
 }
 

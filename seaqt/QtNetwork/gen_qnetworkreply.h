@@ -48,7 +48,7 @@ void QNetworkReply_virtbase(QNetworkReply* src, QIODevice** outptr_QIODevice);
 QMetaObject* QNetworkReply_metaObject(const QNetworkReply* self);
 void* QNetworkReply_metacast(QNetworkReply* self, const char* param1);
 int QNetworkReply_metacall(QNetworkReply* self, int param1, int param2, void** param3);
-struct seaqt_string QNetworkReply_tr(const char* s);
+struct seaqt_string QNetworkReply_tr_s(const char* s);
 void QNetworkReply_close(QNetworkReply* self);
 bool QNetworkReply_isSequential(const QNetworkReply* self);
 long long QNetworkReply_readBufferSize(const QNetworkReply* self);
@@ -68,9 +68,9 @@ struct seaqt_array /* of struct seaqt_map  tuple of struct seaqt_string and stru
 QVariant* QNetworkReply_attribute(const QNetworkReply* self, int code);
 QSslConfiguration* QNetworkReply_sslConfiguration(const QNetworkReply* self);
 void QNetworkReply_setSslConfiguration(QNetworkReply* self, QSslConfiguration* configuration);
-void QNetworkReply_ignoreSslErrors(QNetworkReply* self, struct seaqt_array /* of QSslError* */  errors);
+void QNetworkReply_ignoreSslErrors_errors(QNetworkReply* self, struct seaqt_array /* of QSslError* */  errors);
 void QNetworkReply_abort(QNetworkReply* self);
-void QNetworkReply_ignoreSslErrors2(QNetworkReply* self);
+void QNetworkReply_ignoreSslErrors(QNetworkReply* self);
 void QNetworkReply_socketStartedConnecting(QNetworkReply* self);
 void QNetworkReply_connect_socketStartedConnecting(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QNetworkReply_requestSent(QNetworkReply* self);
@@ -99,8 +99,8 @@ long long QNetworkReply_writeData(QNetworkReply* self, const char* data, long lo
 void QNetworkReply_sslConfigurationImplementation(const QNetworkReply* self, QSslConfiguration* param1);
 void QNetworkReply_setSslConfigurationImplementation(QNetworkReply* self, QSslConfiguration* sslConfigurationImplementation);
 void QNetworkReply_ignoreSslErrorsImplementation(QNetworkReply* self, struct seaqt_array /* of QSslError* */  param1);
-struct seaqt_string QNetworkReply_tr2(const char* s, const char* c);
-struct seaqt_string QNetworkReply_tr3(const char* s, const char* c, int n);
+struct seaqt_string QNetworkReply_tr_s_c(const char* s, const char* c);
+struct seaqt_string QNetworkReply_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QNetworkReply_staticMetaObject();
 void QNetworkReply_delete(QNetworkReply* self);

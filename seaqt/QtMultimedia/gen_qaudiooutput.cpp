@@ -175,17 +175,17 @@ VirtualQAudioOutput* QAudioOutput_new(const QAudioOutput_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQAudioOutput(vtbl) : nullptr;
 }
 
-VirtualQAudioOutput* QAudioOutput_new2(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDevice* device) {
+VirtualQAudioOutput* QAudioOutput_new_device(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioOutput>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioOutput(vtbl, *device) : nullptr;
 }
 
-VirtualQAudioOutput* QAudioOutput_new3(const QAudioOutput_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAudioOutput* QAudioOutput_new_parent(const QAudioOutput_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioOutput>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioOutput(vtbl, parent) : nullptr;
 }
 
-VirtualQAudioOutput* QAudioOutput_new4(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDevice* device, QObject* parent) {
+VirtualQAudioOutput* QAudioOutput_new_device_parent(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDevice* device, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioOutput>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioOutput(vtbl, *device, parent) : nullptr;
 }
@@ -206,7 +206,7 @@ int QAudioOutput_metacall(QAudioOutput* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAudioOutput_tr(const char* s) {
+struct seaqt_string QAudioOutput_tr_s(const char* s) {
 	QString _ret = QAudioOutput::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -288,7 +288,7 @@ void QAudioOutput_connect_mutedChanged(QAudioOutput* self, intptr_t slot, void (
 	QAudioOutput::connect(self, static_cast<void (QAudioOutput::*)(bool)>(&QAudioOutput::mutedChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAudioOutput_tr2(const char* s, const char* c) {
+struct seaqt_string QAudioOutput_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAudioOutput::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -299,7 +299,7 @@ struct seaqt_string QAudioOutput_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAudioOutput_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAudioOutput_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAudioOutput::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

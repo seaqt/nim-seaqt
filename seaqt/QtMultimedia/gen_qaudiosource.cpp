@@ -179,27 +179,27 @@ VirtualQAudioSource* QAudioSource_new(const QAudioSource_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQAudioSource(vtbl) : nullptr;
 }
 
-VirtualQAudioSource* QAudioSource_new2(const QAudioSource_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo) {
+VirtualQAudioSource* QAudioSource_new_audioDeviceInfo(const QAudioSource_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioSource>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioSource(vtbl, *audioDeviceInfo) : nullptr;
 }
 
-VirtualQAudioSource* QAudioSource_new3(const QAudioSource_VTable* vtbl, size_t vdata, QAudioFormat* format) {
+VirtualQAudioSource* QAudioSource_new_format(const QAudioSource_VTable* vtbl, size_t vdata, QAudioFormat* format) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioSource>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioSource(vtbl, *format) : nullptr;
 }
 
-VirtualQAudioSource* QAudioSource_new4(const QAudioSource_VTable* vtbl, size_t vdata, QAudioFormat* format, QObject* parent) {
+VirtualQAudioSource* QAudioSource_new_format_parent(const QAudioSource_VTable* vtbl, size_t vdata, QAudioFormat* format, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioSource>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioSource(vtbl, *format, parent) : nullptr;
 }
 
-VirtualQAudioSource* QAudioSource_new5(const QAudioSource_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo, QAudioFormat* format) {
+VirtualQAudioSource* QAudioSource_new_audioDeviceInfo_format(const QAudioSource_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo, QAudioFormat* format) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioSource>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioSource(vtbl, *audioDeviceInfo, *format) : nullptr;
 }
 
-VirtualQAudioSource* QAudioSource_new6(const QAudioSource_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo, QAudioFormat* format, QObject* parent) {
+VirtualQAudioSource* QAudioSource_new_audioDeviceInfo_format_parent(const QAudioSource_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo, QAudioFormat* format, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioSource>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioSource(vtbl, *audioDeviceInfo, *format, parent) : nullptr;
 }
@@ -220,7 +220,7 @@ int QAudioSource_metacall(QAudioSource* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAudioSource_tr(const char* s) {
+struct seaqt_string QAudioSource_tr_s(const char* s) {
 	QString _ret = QAudioSource::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -239,11 +239,11 @@ QAudioFormat* QAudioSource_format(const QAudioSource* self) {
 	return new QAudioFormat(self->format());
 }
 
-void QAudioSource_start(QAudioSource* self, QIODevice* device) {
+void QAudioSource_start_device(QAudioSource* self, QIODevice* device) {
 	self->start(device);
 }
 
-QIODevice* QAudioSource_start2(QAudioSource* self) {
+QIODevice* QAudioSource_start(QAudioSource* self) {
 	return self->start();
 }
 
@@ -323,7 +323,7 @@ void QAudioSource_connect_stateChanged(QAudioSource* self, intptr_t slot, void (
 	QAudioSource::connect(self, static_cast<void (QAudioSource::*)(QAudio::State)>(&QAudioSource::stateChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAudioSource_tr2(const char* s, const char* c) {
+struct seaqt_string QAudioSource_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAudioSource::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -334,7 +334,7 @@ struct seaqt_string QAudioSource_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAudioSource_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAudioSource_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAudioSource::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

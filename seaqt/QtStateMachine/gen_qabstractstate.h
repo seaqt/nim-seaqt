@@ -36,7 +36,7 @@ void QAbstractState_virtbase(QAbstractState* src, QObject** outptr_QObject);
 QMetaObject* QAbstractState_metaObject(const QAbstractState* self);
 void* QAbstractState_metacast(QAbstractState* self, const char* param1);
 int QAbstractState_metacall(QAbstractState* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractState_tr(const char* s);
+struct seaqt_string QAbstractState_tr_s(const char* s);
 QState* QAbstractState_parentState(const QAbstractState* self);
 QStateMachine* QAbstractState_machine(const QAbstractState* self);
 bool QAbstractState_active(const QAbstractState* self);
@@ -45,8 +45,8 @@ void QAbstractState_connect_activeChanged(QAbstractState* self, intptr_t slot, v
 void QAbstractState_onEntry(QAbstractState* self, QEvent* event);
 void QAbstractState_onExit(QAbstractState* self, QEvent* event);
 bool QAbstractState_event(QAbstractState* self, QEvent* e);
-struct seaqt_string QAbstractState_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractState_tr3(const char* s, const char* c, int n);
+struct seaqt_string QAbstractState_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractState_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QAbstractState_staticMetaObject();
 void QAbstractState_delete(QAbstractState* self);

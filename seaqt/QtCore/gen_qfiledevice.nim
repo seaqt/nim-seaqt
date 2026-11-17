@@ -107,7 +107,7 @@ type cQFileDevice*{.exportc: "QFileDevice", incompleteStruct.} = object
 proc fcQFileDevice_metaObject(self: pointer): pointer {.importc: "QFileDevice_metaObject".}
 proc fcQFileDevice_metacast(self: pointer, param1: cstring): pointer {.importc: "QFileDevice_metacast".}
 proc fcQFileDevice_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFileDevice_metacall".}
-proc fcQFileDevice_tr(s: cstring): struct_seaqt_string {.importc: "QFileDevice_tr".}
+proc fcQFileDevice_trS(s: cstring): struct_seaqt_string {.importc: "QFileDevice_tr_s".}
 proc fcQFileDevice_error(self: pointer): cint {.importc: "QFileDevice_error".}
 proc fcQFileDevice_unsetError(self: pointer): void {.importc: "QFileDevice_unsetError".}
 proc fcQFileDevice_close(self: pointer): void {.importc: "QFileDevice_close".}
@@ -122,13 +122,13 @@ proc fcQFileDevice_size(self: pointer): clonglong {.importc: "QFileDevice_size".
 proc fcQFileDevice_resize(self: pointer, sz: clonglong): bool {.importc: "QFileDevice_resize".}
 proc fcQFileDevice_permissions(self: pointer): cint {.importc: "QFileDevice_permissions".}
 proc fcQFileDevice_setPermissions(self: pointer, permissionSpec: cint): bool {.importc: "QFileDevice_setPermissions".}
-proc fcQFileDevice_map(self: pointer, offset: clonglong, size: clonglong): ptr uint8 {.importc: "QFileDevice_map".}
+proc fcQFileDevice_mapOffsetSize(self: pointer, offset: clonglong, size: clonglong): ptr uint8 {.importc: "QFileDevice_map_offset_size".}
 proc fcQFileDevice_unmap(self: pointer, address: ptr uint8): bool {.importc: "QFileDevice_unmap".}
 proc fcQFileDevice_fileTime(self: pointer, time: cint): pointer {.importc: "QFileDevice_fileTime".}
 proc fcQFileDevice_setFileTime(self: pointer, newDate: pointer, fileTime: cint): bool {.importc: "QFileDevice_setFileTime".}
-proc fcQFileDevice_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileDevice_tr2".}
-proc fcQFileDevice_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileDevice_tr3".}
-proc fcQFileDevice_map2(self: pointer, offset: clonglong, size: clonglong, flags: cint): ptr uint8 {.importc: "QFileDevice_map2".}
+proc fcQFileDevice_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileDevice_tr_s_c".}
+proc fcQFileDevice_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileDevice_tr_s_c_n".}
+proc fcQFileDevice_mapOffsetSizeFlags(self: pointer, offset: clonglong, size: clonglong, flags: cint): ptr uint8 {.importc: "QFileDevice_map_offset_size_flags".}
 proc fcQFileDevice_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QFileDevice_protectedbase_setOpenMode".}
 proc fcQFileDevice_protectedbase_setErrorString(self: pointer, errorString: struct_seaqt_string): void {.importc: "QFileDevice_protectedbase_setErrorString".}
 proc fcQFileDevice_protectedbase_sender(self: pointer): pointer {.importc: "QFileDevice_protectedbase_sender".}
@@ -147,7 +147,7 @@ proc metacall*(self: gen_qfiledevice_types.QFileDevice, param1: cint, param2: ci
   fcQFileDevice_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfiledevice_types.QFileDevice, s: cstring): string =
-  let v_ms = fcQFileDevice_tr(s)
+  let v_ms = fcQFileDevice_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -198,7 +198,7 @@ proc setPermissions*(self: gen_qfiledevice_types.QFileDevice, permissionSpec: ci
   fcQFileDevice_setPermissions(self.h, cint(permissionSpec))
 
 proc map*(self: gen_qfiledevice_types.QFileDevice, offset: clonglong, size: clonglong): ptr uint8 =
-  fcQFileDevice_map(self.h, offset, size)
+  fcQFileDevice_mapOffsetSize(self.h, offset, size)
 
 proc unmap*(self: gen_qfiledevice_types.QFileDevice, address: ptr uint8): bool =
   fcQFileDevice_unmap(self.h, address)
@@ -210,19 +210,19 @@ proc setFileTime*(self: gen_qfiledevice_types.QFileDevice, newDate: gen_qdatetim
   fcQFileDevice_setFileTime(self.h, newDate.h, cint(fileTime))
 
 proc tr*(_: type gen_qfiledevice_types.QFileDevice, s: cstring, c: cstring): string =
-  let v_ms = fcQFileDevice_tr2(s, c)
+  let v_ms = fcQFileDevice_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfiledevice_types.QFileDevice, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFileDevice_tr3(s, c, n)
+  let v_ms = fcQFileDevice_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc map*(self: gen_qfiledevice_types.QFileDevice, offset: clonglong, size: clonglong, flags: cint): ptr uint8 =
-  fcQFileDevice_map2(self.h, offset, size, cint(flags))
+  fcQFileDevice_mapOffsetSizeFlags(self.h, offset, size, cint(flags))
 
 proc setOpenMode*(self: gen_qfiledevice_types.QFileDevice, openMode: cint): void =
   fcQFileDevice_protectedbase_setOpenMode(self.h, cint(openMode))

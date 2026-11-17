@@ -27,14 +27,14 @@ typedef struct QMetaObject QMetaObject;
 #endif
 
 QGeoRectangle* QGeoRectangle_new();
-QGeoRectangle* QGeoRectangle_new2(QGeoCoordinate* center, double degreesWidth, double degreesHeight);
-QGeoRectangle* QGeoRectangle_new3(QGeoCoordinate* topLeft, QGeoCoordinate* bottomRight);
-QGeoRectangle* QGeoRectangle_new4(struct seaqt_array /* of QGeoCoordinate* */  coordinates);
-QGeoRectangle* QGeoRectangle_new5(QGeoRectangle* other);
-QGeoRectangle* QGeoRectangle_new6(QGeoShape* other);
+QGeoRectangle* QGeoRectangle_new_center_degreesWidth_degreesHeight(QGeoCoordinate* center, double degreesWidth, double degreesHeight);
+QGeoRectangle* QGeoRectangle_new_topLeft_bottomRight(QGeoCoordinate* topLeft, QGeoCoordinate* bottomRight);
+QGeoRectangle* QGeoRectangle_new_coordinates(struct seaqt_array /* of QGeoCoordinate* */  coordinates);
+QGeoRectangle* QGeoRectangle_new_from(QGeoRectangle* from);
+QGeoRectangle* QGeoRectangle_new_other(QGeoShape* other);
 
 void QGeoRectangle_virtbase(QGeoRectangle* src, QGeoShape** outptr_QGeoShape);
-void QGeoRectangle_operatorAssign(QGeoRectangle* self, QGeoRectangle* other);
+void QGeoRectangle_operatorAssign(QGeoRectangle* self, QGeoRectangle* from);
 void QGeoRectangle_setTopLeft(QGeoRectangle* self, QGeoCoordinate* topLeft);
 QGeoCoordinate* QGeoRectangle_topLeft(const QGeoRectangle* self);
 void QGeoRectangle_setTopRight(QGeoRectangle* self, QGeoCoordinate* topRight);

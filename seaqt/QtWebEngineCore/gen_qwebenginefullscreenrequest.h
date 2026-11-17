@@ -24,9 +24,9 @@ typedef struct QUrl QUrl;
 typedef struct QWebEngineFullScreenRequest QWebEngineFullScreenRequest;
 #endif
 
-QWebEngineFullScreenRequest* QWebEngineFullScreenRequest_new(QWebEngineFullScreenRequest* other);
+QWebEngineFullScreenRequest* QWebEngineFullScreenRequest_new(QWebEngineFullScreenRequest* from);
 
-void QWebEngineFullScreenRequest_operatorAssign(QWebEngineFullScreenRequest* self, QWebEngineFullScreenRequest* other);
+void QWebEngineFullScreenRequest_operatorAssign(QWebEngineFullScreenRequest* self, QWebEngineFullScreenRequest* from);
 void QWebEngineFullScreenRequest_reject(QWebEngineFullScreenRequest* self);
 void QWebEngineFullScreenRequest_accept(QWebEngineFullScreenRequest* self);
 bool QWebEngineFullScreenRequest_toggleOn(const QWebEngineFullScreenRequest* self);

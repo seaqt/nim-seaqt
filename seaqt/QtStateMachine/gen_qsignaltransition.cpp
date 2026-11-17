@@ -201,17 +201,17 @@ VirtualQSignalTransition* QSignalTransition_new(const QSignalTransition_VTable* 
 	return _mem_ ? new (_mem_)VirtualQSignalTransition(vtbl) : nullptr;
 }
 
-VirtualQSignalTransition* QSignalTransition_new2(const QSignalTransition_VTable* vtbl, size_t vdata, QObject* sender, const char* signal) {
+VirtualQSignalTransition* QSignalTransition_new_sender_signal(const QSignalTransition_VTable* vtbl, size_t vdata, QObject* sender, const char* signal) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSignalTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSignalTransition(vtbl, sender, signal) : nullptr;
 }
 
-VirtualQSignalTransition* QSignalTransition_new3(const QSignalTransition_VTable* vtbl, size_t vdata, QState* sourceState) {
+VirtualQSignalTransition* QSignalTransition_new_sourceState(const QSignalTransition_VTable* vtbl, size_t vdata, QState* sourceState) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSignalTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSignalTransition(vtbl, sourceState) : nullptr;
 }
 
-VirtualQSignalTransition* QSignalTransition_new4(const QSignalTransition_VTable* vtbl, size_t vdata, QObject* sender, const char* signal, QState* sourceState) {
+VirtualQSignalTransition* QSignalTransition_new_sender_signal_sourceState(const QSignalTransition_VTable* vtbl, size_t vdata, QObject* sender, const char* signal, QState* sourceState) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSignalTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSignalTransition(vtbl, sender, signal, sourceState) : nullptr;
 }
@@ -232,7 +232,7 @@ int QSignalTransition_metacall(QSignalTransition* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSignalTransition_tr(const char* s) {
+struct seaqt_string QSignalTransition_tr_s(const char* s) {
 	QString _ret = QSignalTransition::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -265,7 +265,7 @@ void QSignalTransition_setSignal(QSignalTransition* self, struct seaqt_string si
 	self->setSignal(signal_QByteArray);
 }
 
-struct seaqt_string QSignalTransition_tr2(const char* s, const char* c) {
+struct seaqt_string QSignalTransition_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSignalTransition::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -276,7 +276,7 @@ struct seaqt_string QSignalTransition_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSignalTransition_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSignalTransition_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSignalTransition::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

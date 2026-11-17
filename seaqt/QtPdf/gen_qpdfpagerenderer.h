@@ -59,27 +59,27 @@ void* QPdfPageRenderer_vdata(VirtualQPdfPageRenderer* self);
 VirtualQPdfPageRenderer* vdata_QPdfPageRenderer(void* vdata);
 
 VirtualQPdfPageRenderer* QPdfPageRenderer_new(const QPdfPageRenderer_VTable* vtbl, size_t vdata);
-VirtualQPdfPageRenderer* QPdfPageRenderer_new2(const QPdfPageRenderer_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPdfPageRenderer* QPdfPageRenderer_new_parent(const QPdfPageRenderer_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QPdfPageRenderer_virtbase(QPdfPageRenderer* src, QObject** outptr_QObject);
 QMetaObject* QPdfPageRenderer_metaObject(const QPdfPageRenderer* self);
 void* QPdfPageRenderer_metacast(QPdfPageRenderer* self, const char* param1);
 int QPdfPageRenderer_metacall(QPdfPageRenderer* self, int param1, int param2, void** param3);
-struct seaqt_string QPdfPageRenderer_tr(const char* s);
+struct seaqt_string QPdfPageRenderer_tr_s(const char* s);
 int QPdfPageRenderer_renderMode(const QPdfPageRenderer* self);
 void QPdfPageRenderer_setRenderMode(QPdfPageRenderer* self, int mode);
 QPdfDocument* QPdfPageRenderer_document(const QPdfPageRenderer* self);
 void QPdfPageRenderer_setDocument(QPdfPageRenderer* self, QPdfDocument* document);
-unsigned long long QPdfPageRenderer_requestPage(QPdfPageRenderer* self, int pageNumber, QSize* imageSize);
+unsigned long long QPdfPageRenderer_requestPage_pageNumber_imageSize(QPdfPageRenderer* self, int pageNumber, QSize* imageSize);
 void QPdfPageRenderer_documentChanged(QPdfPageRenderer* self, QPdfDocument* document);
 void QPdfPageRenderer_connect_documentChanged(QPdfPageRenderer* self, intptr_t slot, void (*callback)(intptr_t, QPdfDocument*), void (*release)(intptr_t));
 void QPdfPageRenderer_renderModeChanged(QPdfPageRenderer* self, int renderMode);
 void QPdfPageRenderer_connect_renderModeChanged(QPdfPageRenderer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QPdfPageRenderer_pageRendered(QPdfPageRenderer* self, int pageNumber, QSize* imageSize, QImage* image, QPdfDocumentRenderOptions* options, unsigned long long requestId);
 void QPdfPageRenderer_connect_pageRendered(QPdfPageRenderer* self, intptr_t slot, void (*callback)(intptr_t, int, QSize*, QImage*, QPdfDocumentRenderOptions*, unsigned long long), void (*release)(intptr_t));
-struct seaqt_string QPdfPageRenderer_tr2(const char* s, const char* c);
-struct seaqt_string QPdfPageRenderer_tr3(const char* s, const char* c, int n);
-unsigned long long QPdfPageRenderer_requestPage2(QPdfPageRenderer* self, int pageNumber, QSize* imageSize, QPdfDocumentRenderOptions* options);
+struct seaqt_string QPdfPageRenderer_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPdfPageRenderer_tr_s_c_n(const char* s, const char* c, int n);
+unsigned long long QPdfPageRenderer_requestPage_pageNumber_imageSize_options(QPdfPageRenderer* self, int pageNumber, QSize* imageSize, QPdfDocumentRenderOptions* options);
 
 QMetaObject* QPdfPageRenderer_virtualbase_metaObject(const VirtualQPdfPageRenderer* self);
 void* QPdfPageRenderer_virtualbase_metacast(VirtualQPdfPageRenderer* self, const char* param1);

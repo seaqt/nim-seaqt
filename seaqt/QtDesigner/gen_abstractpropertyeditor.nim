@@ -71,7 +71,7 @@ type cQDesignerPropertyEditorInterface*{.exportc: "QDesignerPropertyEditorInterf
 proc fcQDesignerPropertyEditorInterface_metaObject(self: pointer): pointer {.importc: "QDesignerPropertyEditorInterface_metaObject".}
 proc fcQDesignerPropertyEditorInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerPropertyEditorInterface_metacast".}
 proc fcQDesignerPropertyEditorInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerPropertyEditorInterface_metacall".}
-proc fcQDesignerPropertyEditorInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerPropertyEditorInterface_tr".}
+proc fcQDesignerPropertyEditorInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerPropertyEditorInterface_tr_s".}
 proc fcQDesignerPropertyEditorInterface_isReadOnly(self: pointer): bool {.importc: "QDesignerPropertyEditorInterface_isReadOnly".}
 proc fcQDesignerPropertyEditorInterface_objectX(self: pointer): pointer {.importc: "QDesignerPropertyEditorInterface_object".}
 proc fcQDesignerPropertyEditorInterface_currentPropertyName(self: pointer): struct_seaqt_string {.importc: "QDesignerPropertyEditorInterface_currentPropertyName".}
@@ -80,8 +80,8 @@ proc fcQDesignerPropertyEditorInterface_connect_propertyChanged(self: pointer, s
 proc fcQDesignerPropertyEditorInterface_setObject(self: pointer, objectVal: pointer): void {.importc: "QDesignerPropertyEditorInterface_setObject".}
 proc fcQDesignerPropertyEditorInterface_setPropertyValue(self: pointer, name: struct_seaqt_string, value: pointer, changed: bool): void {.importc: "QDesignerPropertyEditorInterface_setPropertyValue".}
 proc fcQDesignerPropertyEditorInterface_setReadOnly(self: pointer, readOnly: bool): void {.importc: "QDesignerPropertyEditorInterface_setReadOnly".}
-proc fcQDesignerPropertyEditorInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerPropertyEditorInterface_tr2".}
-proc fcQDesignerPropertyEditorInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerPropertyEditorInterface_tr3".}
+proc fcQDesignerPropertyEditorInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerPropertyEditorInterface_tr_s_c".}
+proc fcQDesignerPropertyEditorInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerPropertyEditorInterface_tr_s_c_n".}
 proc fcQDesignerPropertyEditorInterface_vdata(self: pointer): ptr pointer {.importc: "QDesignerPropertyEditorInterface_vdata".}
 proc fvdata_cQDesignerPropertyEditorInterface(self: pointer): pointer {.importc: "vdata_QDesignerPropertyEditorInterface".}
 
@@ -202,8 +202,8 @@ proc fcQDesignerPropertyEditorInterface_protectedbase_sender(self: pointer): poi
 proc fcQDesignerPropertyEditorInterface_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDesignerPropertyEditorInterface_protectedbase_senderSignalIndex".}
 proc fcQDesignerPropertyEditorInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerPropertyEditorInterface_protectedbase_receivers".}
 proc fcQDesignerPropertyEditorInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerPropertyEditorInterface_protectedbase_isSignalConnected".}
-proc fcQDesignerPropertyEditorInterface_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerPropertyEditorInterface {.importc: "QDesignerPropertyEditorInterface_new".}
-proc fcQDesignerPropertyEditorInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDesignerPropertyEditorInterface {.importc: "QDesignerPropertyEditorInterface_new2".}
+proc fcQDesignerPropertyEditorInterface_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerPropertyEditorInterface {.importc: "QDesignerPropertyEditorInterface_new_parent".}
+proc fcQDesignerPropertyEditorInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDesignerPropertyEditorInterface {.importc: "QDesignerPropertyEditorInterface_new_parent_flags".}
 proc fcQDesignerPropertyEditorInterface_staticMetaObject(): pointer {.importc: "QDesignerPropertyEditorInterface_staticMetaObject".}
 
 proc metaObject*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): gen_qobjectdefs_types.QMetaObject =
@@ -216,7 +216,7 @@ proc metacall*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInt
   fcQDesignerPropertyEditorInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, s: cstring): string =
-  let v_ms = fcQDesignerPropertyEditorInterface_tr(s)
+  let v_ms = fcQDesignerPropertyEditorInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -268,13 +268,13 @@ proc setReadOnly*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditor
   fcQDesignerPropertyEditorInterface_setReadOnly(self.h, readOnly)
 
 proc tr*(_: type gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerPropertyEditorInterface_tr2(s, c)
+  let v_ms = fcQDesignerPropertyEditorInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerPropertyEditorInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerPropertyEditorInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

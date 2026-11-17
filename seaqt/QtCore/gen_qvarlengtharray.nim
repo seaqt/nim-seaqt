@@ -46,8 +46,8 @@ proc fcQVLABaseBase_capacity(self: pointer): int64 {.importc: "QVLABaseBase_capa
 proc fcQVLABaseBase_size(self: pointer): int64 {.importc: "QVLABaseBase_size".}
 proc fcQVLABaseBase_empty(self: pointer): bool {.importc: "QVLABaseBase_empty".}
 proc fcQVLABaseBase_protectedbase_verify(self: pointer): void {.importc: "QVLABaseBase_protectedbase_verify".}
-proc fcQVLABaseBase_protectedbase_verifyWithPos(self: pointer, pos: int64): void {.importc: "QVLABaseBase_protectedbase_verifyWithPos".}
-proc fcQVLABaseBase_protectedbase_verify2(self: pointer, pos: int64, n: int64): void {.importc: "QVLABaseBase_protectedbase_verify2".}
+proc fcQVLABaseBase_protectedbase_verify_pos(self: pointer, pos: int64): void {.importc: "QVLABaseBase_protectedbase_verify_pos".}
+proc fcQVLABaseBase_protectedbase_verify_pos_n(self: pointer, pos: int64, n: int64): void {.importc: "QVLABaseBase_protectedbase_verify_pos_n".}
 
 proc capacity*(self: gen_qvarlengtharray_types.QVLABaseBase): int64 =
   fcQVLABaseBase_capacity(self.h)
@@ -62,8 +62,8 @@ proc verify*(self: gen_qvarlengtharray_types.QVLABaseBase): void =
   fcQVLABaseBase_protectedbase_verify(self.h)
 
 proc verify*(self: gen_qvarlengtharray_types.QVLABaseBase, pos: int64): void =
-  fcQVLABaseBase_protectedbase_verifyWithPos(self.h, pos)
+  fcQVLABaseBase_protectedbase_verify_pos(self.h, pos)
 
 proc verify*(self: gen_qvarlengtharray_types.QVLABaseBase, pos: int64, n: int64): void =
-  fcQVLABaseBase_protectedbase_verify2(self.h, pos, n)
+  fcQVLABaseBase_protectedbase_verify_pos_n(self.h, pos, n)
 

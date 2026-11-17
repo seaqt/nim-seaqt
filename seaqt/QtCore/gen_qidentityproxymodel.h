@@ -111,13 +111,13 @@ void* QIdentityProxyModel_vdata(VirtualQIdentityProxyModel* self);
 VirtualQIdentityProxyModel* vdata_QIdentityProxyModel(void* vdata);
 
 VirtualQIdentityProxyModel* QIdentityProxyModel_new(const QIdentityProxyModel_VTable* vtbl, size_t vdata);
-VirtualQIdentityProxyModel* QIdentityProxyModel_new2(const QIdentityProxyModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQIdentityProxyModel* QIdentityProxyModel_new_parent(const QIdentityProxyModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QIdentityProxyModel_virtbase(QIdentityProxyModel* src, QAbstractProxyModel** outptr_QAbstractProxyModel);
 QMetaObject* QIdentityProxyModel_metaObject(const QIdentityProxyModel* self);
 void* QIdentityProxyModel_metacast(QIdentityProxyModel* self, const char* param1);
 int QIdentityProxyModel_metacall(QIdentityProxyModel* self, int param1, int param2, void** param3);
-struct seaqt_string QIdentityProxyModel_tr(const char* s);
+struct seaqt_string QIdentityProxyModel_tr_s(const char* s);
 int QIdentityProxyModel_columnCount(const QIdentityProxyModel* self, QModelIndex* parent);
 QModelIndex* QIdentityProxyModel_index(const QIdentityProxyModel* self, int row, int column, QModelIndex* parent);
 QModelIndex* QIdentityProxyModel_mapFromSource(const QIdentityProxyModel* self, QModelIndex* sourceIndex);
@@ -137,8 +137,8 @@ bool QIdentityProxyModel_removeColumns(QIdentityProxyModel* self, int column, in
 bool QIdentityProxyModel_removeRows(QIdentityProxyModel* self, int row, int count, QModelIndex* parent);
 bool QIdentityProxyModel_moveRows(QIdentityProxyModel* self, QModelIndex* sourceParent, int sourceRow, int count, QModelIndex* destinationParent, int destinationChild);
 bool QIdentityProxyModel_moveColumns(QIdentityProxyModel* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild);
-struct seaqt_string QIdentityProxyModel_tr2(const char* s, const char* c);
-struct seaqt_string QIdentityProxyModel_tr3(const char* s, const char* c, int n);
+struct seaqt_string QIdentityProxyModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QIdentityProxyModel_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QIdentityProxyModel_virtualbase_metaObject(const VirtualQIdentityProxyModel* self);
 void* QIdentityProxyModel_virtualbase_metacast(VirtualQIdentityProxyModel* self, const char* param1);
@@ -194,7 +194,7 @@ void QIdentityProxyModel_virtualbase_connectNotify(VirtualQIdentityProxyModel* s
 void QIdentityProxyModel_virtualbase_disconnectNotify(VirtualQIdentityProxyModel* self, QMetaMethod* signal);
 
 QModelIndex* QIdentityProxyModel_protectedbase_createSourceIndex(const VirtualQIdentityProxyModel* self, int row, int col, void* internalPtr);
-QModelIndex* QIdentityProxyModel_protectedbase_createIndex(const VirtualQIdentityProxyModel* self, int row, int column);
+QModelIndex* QIdentityProxyModel_protectedbase_createIndex_row_column(const VirtualQIdentityProxyModel* self, int row, int column);
 void QIdentityProxyModel_protectedbase_encodeData(const VirtualQIdentityProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QIdentityProxyModel_protectedbase_decodeData(VirtualQIdentityProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QIdentityProxyModel_protectedbase_beginInsertRows(VirtualQIdentityProxyModel* self, QModelIndex* parent, int first, int last);

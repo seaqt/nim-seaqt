@@ -57,13 +57,13 @@ type cQAbstractEventDispatcherTimerInfo*{.exportc: "QAbstractEventDispatcher__Ti
 proc fcQAbstractEventDispatcher_metaObject(self: pointer): pointer {.importc: "QAbstractEventDispatcher_metaObject".}
 proc fcQAbstractEventDispatcher_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractEventDispatcher_metacast".}
 proc fcQAbstractEventDispatcher_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractEventDispatcher_metacall".}
-proc fcQAbstractEventDispatcher_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractEventDispatcher_tr".}
+proc fcQAbstractEventDispatcher_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractEventDispatcher_tr_s".}
 proc fcQAbstractEventDispatcher_instance(): pointer {.importc: "QAbstractEventDispatcher_instance".}
 proc fcQAbstractEventDispatcher_processEvents(self: pointer, flags: cint): bool {.importc: "QAbstractEventDispatcher_processEvents".}
 proc fcQAbstractEventDispatcher_registerSocketNotifier(self: pointer, notifier: pointer): void {.importc: "QAbstractEventDispatcher_registerSocketNotifier".}
 proc fcQAbstractEventDispatcher_unregisterSocketNotifier(self: pointer, notifier: pointer): void {.importc: "QAbstractEventDispatcher_unregisterSocketNotifier".}
-proc fcQAbstractEventDispatcher_registerTimer(self: pointer, interval: clonglong, timerType: cint, objectVal: pointer): cint {.importc: "QAbstractEventDispatcher_registerTimer".}
-proc fcQAbstractEventDispatcher_registerTimer2(self: pointer, timerId: cint, interval: clonglong, timerType: cint, objectVal: pointer): void {.importc: "QAbstractEventDispatcher_registerTimer2".}
+proc fcQAbstractEventDispatcher_registerTimerIntervalTimerTypeObject(self: pointer, interval: clonglong, timerType: cint, objectVal: pointer): cint {.importc: "QAbstractEventDispatcher_registerTimer_interval_timerType_object".}
+proc fcQAbstractEventDispatcher_registerTimerTimerIdIntervalTimerTypeObject(self: pointer, timerId: cint, interval: clonglong, timerType: cint, objectVal: pointer): void {.importc: "QAbstractEventDispatcher_registerTimer_timerId_interval_timerType_object".}
 proc fcQAbstractEventDispatcher_unregisterTimer(self: pointer, timerId: cint): bool {.importc: "QAbstractEventDispatcher_unregisterTimer".}
 proc fcQAbstractEventDispatcher_unregisterTimers(self: pointer, objectVal: pointer): bool {.importc: "QAbstractEventDispatcher_unregisterTimers".}
 proc fcQAbstractEventDispatcher_registeredTimers(self: pointer, objectVal: pointer): struct_seaqt_array {.importc: "QAbstractEventDispatcher_registeredTimers".}
@@ -79,9 +79,9 @@ proc fcQAbstractEventDispatcher_aboutToBlock(self: pointer): void {.importc: "QA
 proc fcQAbstractEventDispatcher_connect_aboutToBlock(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractEventDispatcher_connect_aboutToBlock".}
 proc fcQAbstractEventDispatcher_awake(self: pointer): void {.importc: "QAbstractEventDispatcher_awake".}
 proc fcQAbstractEventDispatcher_connect_awake(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractEventDispatcher_connect_awake".}
-proc fcQAbstractEventDispatcher_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractEventDispatcher_tr2".}
-proc fcQAbstractEventDispatcher_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractEventDispatcher_tr3".}
-proc fcQAbstractEventDispatcher_instanceWithThread(thread: pointer): pointer {.importc: "QAbstractEventDispatcher_instanceWithThread".}
+proc fcQAbstractEventDispatcher_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractEventDispatcher_tr_s_c".}
+proc fcQAbstractEventDispatcher_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractEventDispatcher_tr_s_c_n".}
+proc fcQAbstractEventDispatcher_instanceThread(thread: pointer): pointer {.importc: "QAbstractEventDispatcher_instance_thread".}
 proc fcQAbstractEventDispatcher_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractEventDispatcher_protectedbase_sender".}
 proc fcQAbstractEventDispatcher_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractEventDispatcher_protectedbase_senderSignalIndex".}
 proc fcQAbstractEventDispatcher_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractEventDispatcher_protectedbase_receivers".}
@@ -105,7 +105,7 @@ proc metacall*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher
   fcQAbstractEventDispatcher_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, s: cstring): string =
-  let v_ms = fcQAbstractEventDispatcher_tr(s)
+  let v_ms = fcQAbstractEventDispatcher_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -123,10 +123,10 @@ proc unregisterSocketNotifier*(self: gen_qabstracteventdispatcher_types.QAbstrac
   fcQAbstractEventDispatcher_unregisterSocketNotifier(self.h, notifier.h)
 
 proc registerTimer*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, interval: clonglong, timerType: cint, objectVal: gen_qobject_types.QObject): cint =
-  fcQAbstractEventDispatcher_registerTimer(self.h, interval, cint(timerType), objectVal.h)
+  fcQAbstractEventDispatcher_registerTimerIntervalTimerTypeObject(self.h, interval, cint(timerType), objectVal.h)
 
 proc registerTimer*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, timerId: cint, interval: clonglong, timerType: cint, objectVal: gen_qobject_types.QObject): void =
-  fcQAbstractEventDispatcher_registerTimer2(self.h, timerId, interval, cint(timerType), objectVal.h)
+  fcQAbstractEventDispatcher_registerTimerTimerIdIntervalTimerTypeObject(self.h, timerId, interval, cint(timerType), objectVal.h)
 
 proc unregisterTimer*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, timerId: cint): bool =
   fcQAbstractEventDispatcher_unregisterTimer(self.h, timerId)
@@ -204,19 +204,19 @@ proc onAwake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher,
   fcQAbstractEventDispatcher_connect_awake(self.h, cast[int](addr tmp[]), fcQAbstractEventDispatcher_slot_callback_awake, fcQAbstractEventDispatcher_slot_callback_awake_release)
 
 proc tr*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractEventDispatcher_tr2(s, c)
+  let v_ms = fcQAbstractEventDispatcher_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractEventDispatcher_tr3(s, c, n)
+  let v_ms = fcQAbstractEventDispatcher_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc instance*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, thread: gen_qthread_types.QThread): gen_qabstracteventdispatcher_types.QAbstractEventDispatcher =
-  gen_qabstracteventdispatcher_types.QAbstractEventDispatcher(h: fcQAbstractEventDispatcher_instanceWithThread(thread.h), owned: false)
+  gen_qabstracteventdispatcher_types.QAbstractEventDispatcher(h: fcQAbstractEventDispatcher_instanceThread(thread.h), owned: false)
 
 proc sender*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractEventDispatcher_protectedbase_sender(self.h), owned: false)

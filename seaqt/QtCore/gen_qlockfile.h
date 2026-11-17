@@ -26,12 +26,12 @@ struct seaqt_string QLockFile_fileName(const QLockFile* self);
 bool QLockFile_lock(QLockFile* self);
 bool QLockFile_tryLock(QLockFile* self);
 void QLockFile_unlock(QLockFile* self);
-void QLockFile_setStaleLockTime(QLockFile* self, int staleLockTime);
+void QLockFile_setStaleLockTime_staleLockTime(QLockFile* self, int staleLockTime);
 int QLockFile_staleLockTime(const QLockFile* self);
 bool QLockFile_isLocked(const QLockFile* self);
 bool QLockFile_removeStaleLockFile(QLockFile* self);
 int QLockFile_error(const QLockFile* self);
-bool QLockFile_tryLock2(QLockFile* self, int timeout);
+bool QLockFile_tryLock_int(QLockFile* self, int timeout);
 
 void QLockFile_delete(QLockFile* self);
 

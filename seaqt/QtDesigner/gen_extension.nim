@@ -45,17 +45,17 @@ type cQAbstractExtensionFactory*{.exportc: "QAbstractExtensionFactory", incomple
 type cQAbstractExtensionManager*{.exportc: "QAbstractExtensionManager", incompleteStruct.} = object
 
 proc fcQAbstractExtensionFactory_extension(self: pointer, objectVal: pointer, iid: struct_seaqt_string): pointer {.importc: "QAbstractExtensionFactory_extension".}
-proc fcQAbstractExtensionFactory_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAbstractExtensionFactory_operatorAssign".}
+proc fcQAbstractExtensionFactory_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAbstractExtensionFactory_operatorAssign".}
 proc fcQAbstractExtensionManager_registerExtensions(self: pointer, factory: pointer, iid: struct_seaqt_string): void {.importc: "QAbstractExtensionManager_registerExtensions".}
 proc fcQAbstractExtensionManager_unregisterExtensions(self: pointer, factory: pointer, iid: struct_seaqt_string): void {.importc: "QAbstractExtensionManager_unregisterExtensions".}
 proc fcQAbstractExtensionManager_extension(self: pointer, objectVal: pointer, iid: struct_seaqt_string): pointer {.importc: "QAbstractExtensionManager_extension".}
-proc fcQAbstractExtensionManager_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAbstractExtensionManager_operatorAssign".}
+proc fcQAbstractExtensionManager_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAbstractExtensionManager_operatorAssign".}
 
 proc extension*(self: gen_extension_types.QAbstractExtensionFactory, objectVal: gen_qobject_types.QObject, iid: openArray[char]): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractExtensionFactory_extension(self.h, objectVal.h, struct_seaqt_string(data: if len(iid) > 0: addr iid[0] else: nil, len: csize_t(len(iid)))), owned: false)
 
-proc operatorAssign*(self: gen_extension_types.QAbstractExtensionFactory, param1: gen_extension_types.QAbstractExtensionFactory): void =
-  fcQAbstractExtensionFactory_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_extension_types.QAbstractExtensionFactory, fromVal: gen_extension_types.QAbstractExtensionFactory): void =
+  fcQAbstractExtensionFactory_operatorAssign(self.h, fromVal.h)
 
 proc registerExtensions*(self: gen_extension_types.QAbstractExtensionManager, factory: gen_extension_types.QAbstractExtensionFactory, iid: openArray[char]): void =
   fcQAbstractExtensionManager_registerExtensions(self.h, factory.h, struct_seaqt_string(data: if len(iid) > 0: addr iid[0] else: nil, len: csize_t(len(iid))))
@@ -66,6 +66,6 @@ proc unregisterExtensions*(self: gen_extension_types.QAbstractExtensionManager, 
 proc extension*(self: gen_extension_types.QAbstractExtensionManager, objectVal: gen_qobject_types.QObject, iid: openArray[char]): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractExtensionManager_extension(self.h, objectVal.h, struct_seaqt_string(data: if len(iid) > 0: addr iid[0] else: nil, len: csize_t(len(iid)))), owned: false)
 
-proc operatorAssign*(self: gen_extension_types.QAbstractExtensionManager, param1: gen_extension_types.QAbstractExtensionManager): void =
-  fcQAbstractExtensionManager_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_extension_types.QAbstractExtensionManager, fromVal: gen_extension_types.QAbstractExtensionManager): void =
+  fcQAbstractExtensionManager_operatorAssign(self.h, fromVal.h)
 

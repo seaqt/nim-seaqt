@@ -25,14 +25,14 @@ typedef struct QObject QObject;
 #endif
 
 QObject* QAbstractExtensionFactory_extension(const QAbstractExtensionFactory* self, QObject* object, struct seaqt_string iid);
-void QAbstractExtensionFactory_operatorAssign(QAbstractExtensionFactory* self, QAbstractExtensionFactory* param1);
+void QAbstractExtensionFactory_operatorAssign(QAbstractExtensionFactory* self, QAbstractExtensionFactory* from);
 
 void QAbstractExtensionFactory_delete(QAbstractExtensionFactory* self);
 
 void QAbstractExtensionManager_registerExtensions(QAbstractExtensionManager* self, QAbstractExtensionFactory* factory, struct seaqt_string iid);
 void QAbstractExtensionManager_unregisterExtensions(QAbstractExtensionManager* self, QAbstractExtensionFactory* factory, struct seaqt_string iid);
 QObject* QAbstractExtensionManager_extension(const QAbstractExtensionManager* self, QObject* object, struct seaqt_string iid);
-void QAbstractExtensionManager_operatorAssign(QAbstractExtensionManager* self, QAbstractExtensionManager* param1);
+void QAbstractExtensionManager_operatorAssign(QAbstractExtensionManager* self, QAbstractExtensionManager* from);
 
 void QAbstractExtensionManager_delete(QAbstractExtensionManager* self);
 

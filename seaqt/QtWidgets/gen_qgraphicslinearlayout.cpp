@@ -174,17 +174,17 @@ VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new(const QGraphicsLinearLay
 	return _mem_ ? new (_mem_)VirtualQGraphicsLinearLayout(vtbl) : nullptr;
 }
 
-VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new2(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, int orientation) {
+VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new_orientation(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, int orientation) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsLinearLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsLinearLayout(vtbl, static_cast<Qt::Orientation>(orientation)) : nullptr;
 }
 
-VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new3(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent) {
+VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new_parent(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsLinearLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsLinearLayout(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new4(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, int orientation, QGraphicsLayoutItem* parent) {
+VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new_orientation_parent(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, int orientation, QGraphicsLayoutItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsLinearLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsLinearLayout(vtbl, static_cast<Qt::Orientation>(orientation), parent) : nullptr;
 }
@@ -214,7 +214,7 @@ void QGraphicsLinearLayout_insertItem(QGraphicsLinearLayout* self, int index, QG
 	self->insertItem(static_cast<int>(index), item);
 }
 
-void QGraphicsLinearLayout_insertStretch(QGraphicsLinearLayout* self, int index) {
+void QGraphicsLinearLayout_insertStretch_index(QGraphicsLinearLayout* self, int index) {
 	self->insertStretch(static_cast<int>(index));
 }
 
@@ -285,15 +285,15 @@ void QGraphicsLinearLayout_dump(const QGraphicsLinearLayout* self) {
 	self->dump();
 }
 
-void QGraphicsLinearLayout_addStretchWithStretch(QGraphicsLinearLayout* self, int stretch) {
+void QGraphicsLinearLayout_addStretch_stretch(QGraphicsLinearLayout* self, int stretch) {
 	self->addStretch(static_cast<int>(stretch));
 }
 
-void QGraphicsLinearLayout_insertStretch2(QGraphicsLinearLayout* self, int index, int stretch) {
+void QGraphicsLinearLayout_insertStretch_index_stretch(QGraphicsLinearLayout* self, int index, int stretch) {
 	self->insertStretch(static_cast<int>(index), static_cast<int>(stretch));
 }
 
-void QGraphicsLinearLayout_dumpWithIndent(const QGraphicsLinearLayout* self, int indent) {
+void QGraphicsLinearLayout_dump_indent(const QGraphicsLinearLayout* self, int indent) {
 	self->dump(static_cast<int>(indent));
 }
 

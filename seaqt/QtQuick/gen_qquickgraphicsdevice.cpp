@@ -16,12 +16,12 @@ QQuickGraphicsDevice* QQuickGraphicsDevice_new() {
 	return new (std::nothrow) QQuickGraphicsDevice();
 }
 
-QQuickGraphicsDevice* QQuickGraphicsDevice_new2(QQuickGraphicsDevice* other) {
-	return new (std::nothrow) QQuickGraphicsDevice(*other);
+QQuickGraphicsDevice* QQuickGraphicsDevice_new_from(QQuickGraphicsDevice* from) {
+	return new (std::nothrow) QQuickGraphicsDevice(*from);
 }
 
-void QQuickGraphicsDevice_operatorAssign(QQuickGraphicsDevice* self, QQuickGraphicsDevice* other) {
-	self->operator=(*other);
+void QQuickGraphicsDevice_operatorAssign(QQuickGraphicsDevice* self, QQuickGraphicsDevice* from) {
+	self->operator=(*from);
 }
 
 bool QQuickGraphicsDevice_isNull(const QQuickGraphicsDevice* self) {

@@ -96,19 +96,19 @@ type cQMdiArea*{.exportc: "QMdiArea", incompleteStruct.} = object
 proc fcQMdiArea_metaObject(self: pointer): pointer {.importc: "QMdiArea_metaObject".}
 proc fcQMdiArea_metacast(self: pointer, param1: cstring): pointer {.importc: "QMdiArea_metacast".}
 proc fcQMdiArea_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMdiArea_metacall".}
-proc fcQMdiArea_tr(s: cstring): struct_seaqt_string {.importc: "QMdiArea_tr".}
+proc fcQMdiArea_trS(s: cstring): struct_seaqt_string {.importc: "QMdiArea_tr_s".}
 proc fcQMdiArea_sizeHint(self: pointer): pointer {.importc: "QMdiArea_sizeHint".}
 proc fcQMdiArea_minimumSizeHint(self: pointer): pointer {.importc: "QMdiArea_minimumSizeHint".}
 proc fcQMdiArea_currentSubWindow(self: pointer): pointer {.importc: "QMdiArea_currentSubWindow".}
 proc fcQMdiArea_activeSubWindow(self: pointer): pointer {.importc: "QMdiArea_activeSubWindow".}
 proc fcQMdiArea_subWindowList(self: pointer): struct_seaqt_array {.importc: "QMdiArea_subWindowList".}
-proc fcQMdiArea_addSubWindow(self: pointer, widget: pointer): pointer {.importc: "QMdiArea_addSubWindow".}
+proc fcQMdiArea_addSubWindowWidget(self: pointer, widget: pointer): pointer {.importc: "QMdiArea_addSubWindow_widget".}
 proc fcQMdiArea_removeSubWindow(self: pointer, widget: pointer): void {.importc: "QMdiArea_removeSubWindow".}
 proc fcQMdiArea_background(self: pointer): pointer {.importc: "QMdiArea_background".}
 proc fcQMdiArea_setBackground(self: pointer, background: pointer): void {.importc: "QMdiArea_setBackground".}
 proc fcQMdiArea_activationOrder(self: pointer): cint {.importc: "QMdiArea_activationOrder".}
 proc fcQMdiArea_setActivationOrder(self: pointer, order: cint): void {.importc: "QMdiArea_setActivationOrder".}
-proc fcQMdiArea_setOption(self: pointer, option: cint): void {.importc: "QMdiArea_setOption".}
+proc fcQMdiArea_setOptionOption(self: pointer, option: cint): void {.importc: "QMdiArea_setOption_option".}
 proc fcQMdiArea_testOption(self: pointer, opton: cint): bool {.importc: "QMdiArea_testOption".}
 proc fcQMdiArea_setViewMode(self: pointer, mode: cint): void {.importc: "QMdiArea_setViewMode".}
 proc fcQMdiArea_viewMode(self: pointer): cint {.importc: "QMdiArea_viewMode".}
@@ -131,11 +131,11 @@ proc fcQMdiArea_closeActiveSubWindow(self: pointer): void {.importc: "QMdiArea_c
 proc fcQMdiArea_closeAllSubWindows(self: pointer): void {.importc: "QMdiArea_closeAllSubWindows".}
 proc fcQMdiArea_activateNextSubWindow(self: pointer): void {.importc: "QMdiArea_activateNextSubWindow".}
 proc fcQMdiArea_activatePreviousSubWindow(self: pointer): void {.importc: "QMdiArea_activatePreviousSubWindow".}
-proc fcQMdiArea_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMdiArea_tr2".}
-proc fcQMdiArea_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMdiArea_tr3".}
-proc fcQMdiArea_subWindowListWithOrder(self: pointer, order: cint): struct_seaqt_array {.importc: "QMdiArea_subWindowListWithOrder".}
-proc fcQMdiArea_addSubWindow2(self: pointer, widget: pointer, flags: cint): pointer {.importc: "QMdiArea_addSubWindow2".}
-proc fcQMdiArea_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QMdiArea_setOption2".}
+proc fcQMdiArea_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMdiArea_tr_s_c".}
+proc fcQMdiArea_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMdiArea_tr_s_c_n".}
+proc fcQMdiArea_subWindowListOrder(self: pointer, order: cint): struct_seaqt_array {.importc: "QMdiArea_subWindowList_order".}
+proc fcQMdiArea_addSubWindowWidgetFlags(self: pointer, widget: pointer, flags: cint): pointer {.importc: "QMdiArea_addSubWindow_widget_flags".}
+proc fcQMdiArea_setOptionOptionOn(self: pointer, option: cint, on: bool): void {.importc: "QMdiArea_setOption_option_on".}
 proc fcQMdiArea_vdata(self: pointer): ptr pointer {.importc: "QMdiArea_vdata".}
 proc fvdata_cQMdiArea(self: pointer): pointer {.importc: "vdata_QMdiArea".}
 
@@ -251,7 +251,7 @@ proc fcQMdiArea_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool 
 proc fcQMdiArea_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMdiArea_virtualbase_customEvent".}
 proc fcQMdiArea_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMdiArea_virtualbase_connectNotify".}
 proc fcQMdiArea_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMdiArea_virtualbase_disconnectNotify".}
-proc fcQMdiArea_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QMdiArea_protectedbase_setViewportMargins".}
+proc fcQMdiArea_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QMdiArea_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQMdiArea_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QMdiArea_protectedbase_viewportMargins".}
 proc fcQMdiArea_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QMdiArea_protectedbase_drawFrame".}
 proc fcQMdiArea_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QMdiArea_protectedbase_updateMicroFocus".}
@@ -264,7 +264,7 @@ proc fcQMdiArea_protectedbase_senderSignalIndex(self: pointer): cint {.importc: 
 proc fcQMdiArea_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMdiArea_protectedbase_receivers".}
 proc fcQMdiArea_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMdiArea_protectedbase_isSignalConnected".}
 proc fcQMdiArea_new(vtbl: pointer, vdata: csize_t): ptr cQMdiArea {.importc: "QMdiArea_new".}
-proc fcQMdiArea_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMdiArea {.importc: "QMdiArea_new2".}
+proc fcQMdiArea_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMdiArea {.importc: "QMdiArea_new_parent".}
 proc fcQMdiArea_staticMetaObject(): pointer {.importc: "QMdiArea_staticMetaObject".}
 
 proc metaObject*(self: gen_qmdiarea_types.QMdiArea): gen_qobjectdefs_types.QMetaObject =
@@ -277,7 +277,7 @@ proc metacall*(self: gen_qmdiarea_types.QMdiArea, param1: cint, param2: cint, pa
   fcQMdiArea_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmdiarea_types.QMdiArea, s: cstring): string =
-  let v_ms = fcQMdiArea_tr(s)
+  let v_ms = fcQMdiArea_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -304,7 +304,7 @@ proc subWindowList*(self: gen_qmdiarea_types.QMdiArea): seq[gen_qmdisubwindow_ty
   vx_ret
 
 proc addSubWindow*(self: gen_qmdiarea_types.QMdiArea, widget: gen_qwidget_types.QWidget): gen_qmdisubwindow_types.QMdiSubWindow =
-  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_addSubWindow(self.h, widget.h), owned: false)
+  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_addSubWindowWidget(self.h, widget.h), owned: false)
 
 proc removeSubWindow*(self: gen_qmdiarea_types.QMdiArea, widget: gen_qwidget_types.QWidget): void =
   fcQMdiArea_removeSubWindow(self.h, widget.h)
@@ -322,7 +322,7 @@ proc setActivationOrder*(self: gen_qmdiarea_types.QMdiArea, order: cint): void =
   fcQMdiArea_setActivationOrder(self.h, cint(order))
 
 proc setOption*(self: gen_qmdiarea_types.QMdiArea, option: cint): void =
-  fcQMdiArea_setOption(self.h, cint(option))
+  fcQMdiArea_setOptionOption(self.h, cint(option))
 
 proc testOption*(self: gen_qmdiarea_types.QMdiArea, opton: cint): bool =
   fcQMdiArea_testOption(self.h, cint(opton))
@@ -405,19 +405,19 @@ proc activatePreviousSubWindow*(self: gen_qmdiarea_types.QMdiArea): void =
   fcQMdiArea_activatePreviousSubWindow(self.h)
 
 proc tr*(_: type gen_qmdiarea_types.QMdiArea, s: cstring, c: cstring): string =
-  let v_ms = fcQMdiArea_tr2(s, c)
+  let v_ms = fcQMdiArea_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmdiarea_types.QMdiArea, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMdiArea_tr3(s, c, n)
+  let v_ms = fcQMdiArea_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc subWindowList*(self: gen_qmdiarea_types.QMdiArea, order: cint): seq[gen_qmdisubwindow_types.QMdiSubWindow] =
-  var v_ma = fcQMdiArea_subWindowListWithOrder(self.h, cint(order))
+  var v_ma = fcQMdiArea_subWindowListOrder(self.h, cint(order))
   var vx_ret = newSeq[gen_qmdisubwindow_types.QMdiSubWindow](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -426,10 +426,10 @@ proc subWindowList*(self: gen_qmdiarea_types.QMdiArea, order: cint): seq[gen_qmd
   vx_ret
 
 proc addSubWindow*(self: gen_qmdiarea_types.QMdiArea, widget: gen_qwidget_types.QWidget, flags: cint): gen_qmdisubwindow_types.QMdiSubWindow =
-  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_addSubWindow2(self.h, widget.h, cint(flags)), owned: false)
+  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_addSubWindowWidgetFlags(self.h, widget.h, cint(flags)), owned: false)
 
 proc setOption*(self: gen_qmdiarea_types.QMdiArea, option: cint, on: bool): void =
-  fcQMdiArea_setOption2(self.h, cint(option), on)
+  fcQMdiArea_setOptionOptionOn(self.h, cint(option), on)
 
 type QMdiAreametaObjectProc* = proc(self: QMdiArea): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMdiAreametacastProc* = proc(self: QMdiArea, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1520,7 +1520,7 @@ proc fcQMdiArea_method_callback_disconnectNotify(self: pointer, signal: pointer)
 
 
 proc setViewportMargins*(self: gen_qmdiarea_types.QMdiArea, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQMdiArea_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQMdiArea_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qmdiarea_types.QMdiArea): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQMdiArea_protectedbase_viewportMargins(self.h), owned: true)

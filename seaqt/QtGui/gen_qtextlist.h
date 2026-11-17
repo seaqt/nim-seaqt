@@ -69,7 +69,7 @@ void QTextList_virtbase(QTextList* src, QTextBlockGroup** outptr_QTextBlockGroup
 QMetaObject* QTextList_metaObject(const QTextList* self);
 void* QTextList_metacast(QTextList* self, const char* param1);
 int QTextList_metacall(QTextList* self, int param1, int param2, void** param3);
-struct seaqt_string QTextList_tr(const char* s);
+struct seaqt_string QTextList_tr_s(const char* s);
 int QTextList_count(const QTextList* self);
 QTextBlock* QTextList_item(const QTextList* self, int i);
 int QTextList_itemNumber(const QTextList* self, QTextBlock* param1);
@@ -79,8 +79,8 @@ void QTextList_remove(QTextList* self, QTextBlock* param1);
 void QTextList_add(QTextList* self, QTextBlock* block);
 void QTextList_setFormat(QTextList* self, QTextListFormat* format);
 QTextListFormat* QTextList_format(const QTextList* self);
-struct seaqt_string QTextList_tr2(const char* s, const char* c);
-struct seaqt_string QTextList_tr3(const char* s, const char* c, int n);
+struct seaqt_string QTextList_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTextList_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QTextList_virtualbase_metaObject(const VirtualQTextList* self);
 void* QTextList_virtualbase_metacast(VirtualQTextList* self, const char* param1);

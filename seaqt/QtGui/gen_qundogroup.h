@@ -55,19 +55,19 @@ void* QUndoGroup_vdata(VirtualQUndoGroup* self);
 VirtualQUndoGroup* vdata_QUndoGroup(void* vdata);
 
 VirtualQUndoGroup* QUndoGroup_new(const QUndoGroup_VTable* vtbl, size_t vdata);
-VirtualQUndoGroup* QUndoGroup_new2(const QUndoGroup_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQUndoGroup* QUndoGroup_new_parent(const QUndoGroup_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QUndoGroup_virtbase(QUndoGroup* src, QObject** outptr_QObject);
 QMetaObject* QUndoGroup_metaObject(const QUndoGroup* self);
 void* QUndoGroup_metacast(QUndoGroup* self, const char* param1);
 int QUndoGroup_metacall(QUndoGroup* self, int param1, int param2, void** param3);
-struct seaqt_string QUndoGroup_tr(const char* s);
+struct seaqt_string QUndoGroup_tr_s(const char* s);
 void QUndoGroup_addStack(QUndoGroup* self, QUndoStack* stack);
 void QUndoGroup_removeStack(QUndoGroup* self, QUndoStack* stack);
 struct seaqt_array /* of QUndoStack* */  QUndoGroup_stacks(const QUndoGroup* self);
 QUndoStack* QUndoGroup_activeStack(const QUndoGroup* self);
-QAction* QUndoGroup_createUndoAction(const QUndoGroup* self, QObject* parent);
-QAction* QUndoGroup_createRedoAction(const QUndoGroup* self, QObject* parent);
+QAction* QUndoGroup_createUndoAction_parent(const QUndoGroup* self, QObject* parent);
+QAction* QUndoGroup_createRedoAction_parent(const QUndoGroup* self, QObject* parent);
 bool QUndoGroup_canUndo(const QUndoGroup* self);
 bool QUndoGroup_canRedo(const QUndoGroup* self);
 struct seaqt_string QUndoGroup_undoText(const QUndoGroup* self);
@@ -90,10 +90,10 @@ void QUndoGroup_undoTextChanged(QUndoGroup* self, struct seaqt_string undoText);
 void QUndoGroup_connect_undoTextChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
 void QUndoGroup_redoTextChanged(QUndoGroup* self, struct seaqt_string redoText);
 void QUndoGroup_connect_redoTextChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
-struct seaqt_string QUndoGroup_tr2(const char* s, const char* c);
-struct seaqt_string QUndoGroup_tr3(const char* s, const char* c, int n);
-QAction* QUndoGroup_createUndoAction2(const QUndoGroup* self, QObject* parent, struct seaqt_string prefix);
-QAction* QUndoGroup_createRedoAction2(const QUndoGroup* self, QObject* parent, struct seaqt_string prefix);
+struct seaqt_string QUndoGroup_tr_s_c(const char* s, const char* c);
+struct seaqt_string QUndoGroup_tr_s_c_n(const char* s, const char* c, int n);
+QAction* QUndoGroup_createUndoAction_parent_prefix(const QUndoGroup* self, QObject* parent, struct seaqt_string prefix);
+QAction* QUndoGroup_createRedoAction_parent_prefix(const QUndoGroup* self, QObject* parent, struct seaqt_string prefix);
 
 QMetaObject* QUndoGroup_virtualbase_metaObject(const VirtualQUndoGroup* self);
 void* QUndoGroup_virtualbase_metacast(VirtualQUndoGroup* self, const char* param1);

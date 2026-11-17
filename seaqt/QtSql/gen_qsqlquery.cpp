@@ -22,28 +22,28 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QSqlQuery* QSqlQuery_new(QSqlResult* r) {
+QSqlQuery* QSqlQuery_new_r(QSqlResult* r) {
 	return new (std::nothrow) QSqlQuery(r);
 }
 
-QSqlQuery* QSqlQuery_new2() {
+QSqlQuery* QSqlQuery_new() {
 	return new (std::nothrow) QSqlQuery();
 }
 
-QSqlQuery* QSqlQuery_new3(QSqlDatabase* db) {
+QSqlQuery* QSqlQuery_new_db(QSqlDatabase* db) {
 	return new (std::nothrow) QSqlQuery(*db);
 }
 
-QSqlQuery* QSqlQuery_new4(QSqlQuery* other) {
+QSqlQuery* QSqlQuery_new_other(QSqlQuery* other) {
 	return new (std::nothrow) QSqlQuery(*other);
 }
 
-QSqlQuery* QSqlQuery_new5(struct seaqt_string query) {
+QSqlQuery* QSqlQuery_new_query(struct seaqt_string query) {
 	QString query_QString = QString::fromUtf8(query.data, query.len);
 	return new (std::nothrow) QSqlQuery(query_QString);
 }
 
-QSqlQuery* QSqlQuery_new6(struct seaqt_string query, QSqlDatabase* db) {
+QSqlQuery* QSqlQuery_new_query_db(struct seaqt_string query, QSqlDatabase* db) {
 	QString query_QString = QString::fromUtf8(query.data, query.len);
 	return new (std::nothrow) QSqlQuery(query_QString, *db);
 }
@@ -64,11 +64,11 @@ bool QSqlQuery_isActive(const QSqlQuery* self) {
 	return self->isActive();
 }
 
-bool QSqlQuery_isNull(const QSqlQuery* self, int field) {
+bool QSqlQuery_isNull_field(const QSqlQuery* self, int field) {
 	return self->isNull(static_cast<int>(field));
 }
 
-bool QSqlQuery_isNullWithName(const QSqlQuery* self, struct seaqt_string name) {
+bool QSqlQuery_isNull_name(const QSqlQuery* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return self->isNull(name_QString);
 }
@@ -124,16 +124,16 @@ void QSqlQuery_setForwardOnly(QSqlQuery* self, bool forward) {
 	self->setForwardOnly(forward);
 }
 
-bool QSqlQuery_exec(QSqlQuery* self, struct seaqt_string query) {
+bool QSqlQuery_exec_query(QSqlQuery* self, struct seaqt_string query) {
 	QString query_QString = QString::fromUtf8(query.data, query.len);
 	return self->exec(query_QString);
 }
 
-QVariant* QSqlQuery_value(const QSqlQuery* self, int i) {
+QVariant* QSqlQuery_value_i(const QSqlQuery* self, int i) {
 	return new QVariant(self->value(static_cast<int>(i)));
 }
 
-QVariant* QSqlQuery_valueWithName(const QSqlQuery* self, struct seaqt_string name) {
+QVariant* QSqlQuery_value_name(const QSqlQuery* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return new QVariant(self->value(name_QString));
 }
@@ -147,7 +147,7 @@ int QSqlQuery_numericalPrecisionPolicy(const QSqlQuery* self) {
 	return static_cast<int>(_ret);
 }
 
-bool QSqlQuery_seek(QSqlQuery* self, int i) {
+bool QSqlQuery_seek_i(QSqlQuery* self, int i) {
 	return self->seek(static_cast<int>(i));
 }
 
@@ -171,7 +171,7 @@ void QSqlQuery_clear(QSqlQuery* self) {
 	self->clear();
 }
 
-bool QSqlQuery_exec2(QSqlQuery* self) {
+bool QSqlQuery_exec(QSqlQuery* self) {
 	return self->exec();
 }
 
@@ -184,25 +184,25 @@ bool QSqlQuery_prepare(QSqlQuery* self, struct seaqt_string query) {
 	return self->prepare(query_QString);
 }
 
-void QSqlQuery_bindValue(QSqlQuery* self, struct seaqt_string placeholder, QVariant* val) {
+void QSqlQuery_bindValue_placeholder_val(QSqlQuery* self, struct seaqt_string placeholder, QVariant* val) {
 	QString placeholder_QString = QString::fromUtf8(placeholder.data, placeholder.len);
 	self->bindValue(placeholder_QString, *val);
 }
 
-void QSqlQuery_bindValue2(QSqlQuery* self, int pos, QVariant* val) {
+void QSqlQuery_bindValue_pos_val(QSqlQuery* self, int pos, QVariant* val) {
 	self->bindValue(static_cast<int>(pos), *val);
 }
 
-void QSqlQuery_addBindValue(QSqlQuery* self, QVariant* val) {
+void QSqlQuery_addBindValue_val(QSqlQuery* self, QVariant* val) {
 	self->addBindValue(*val);
 }
 
-QVariant* QSqlQuery_boundValue(const QSqlQuery* self, struct seaqt_string placeholder) {
+QVariant* QSqlQuery_boundValue_placeholder(const QSqlQuery* self, struct seaqt_string placeholder) {
 	QString placeholder_QString = QString::fromUtf8(placeholder.data, placeholder.len);
 	return new QVariant(self->boundValue(placeholder_QString));
 }
 
-QVariant* QSqlQuery_boundValueWithPos(const QSqlQuery* self, int pos) {
+QVariant* QSqlQuery_boundValue_pos(const QSqlQuery* self, int pos) {
 	return new QVariant(self->boundValue(static_cast<int>(pos)));
 }
 
@@ -242,24 +242,24 @@ bool QSqlQuery_nextResult(QSqlQuery* self) {
 	return self->nextResult();
 }
 
-bool QSqlQuery_seek2(QSqlQuery* self, int i, bool relative) {
+bool QSqlQuery_seek_i_relative(QSqlQuery* self, int i, bool relative) {
 	return self->seek(static_cast<int>(i), relative);
 }
 
-bool QSqlQuery_execBatchWithMode(QSqlQuery* self, int mode) {
+bool QSqlQuery_execBatch_mode(QSqlQuery* self, int mode) {
 	return self->execBatch(static_cast<QSqlQuery::BatchExecutionMode>(mode));
 }
 
-void QSqlQuery_bindValue3(QSqlQuery* self, struct seaqt_string placeholder, QVariant* val, int type) {
+void QSqlQuery_bindValue_placeholder_val_type(QSqlQuery* self, struct seaqt_string placeholder, QVariant* val, int type) {
 	QString placeholder_QString = QString::fromUtf8(placeholder.data, placeholder.len);
 	self->bindValue(placeholder_QString, *val, static_cast<QSql::ParamType>(type));
 }
 
-void QSqlQuery_bindValue4(QSqlQuery* self, int pos, QVariant* val, int type) {
+void QSqlQuery_bindValue_pos_val_type(QSqlQuery* self, int pos, QVariant* val, int type) {
 	self->bindValue(static_cast<int>(pos), *val, static_cast<QSql::ParamType>(type));
 }
 
-void QSqlQuery_addBindValue2(QSqlQuery* self, QVariant* val, int type) {
+void QSqlQuery_addBindValue_val_type(QSqlQuery* self, QVariant* val, int type) {
 	self->addBindValue(*val, static_cast<QSql::ParamType>(type));
 }
 

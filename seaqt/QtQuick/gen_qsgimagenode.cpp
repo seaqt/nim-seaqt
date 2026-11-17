@@ -22,11 +22,11 @@ void QSGImageNode_virtbase(QSGImageNode* src, QSGGeometryNode** outptr_QSGGeomet
 	*outptr_QSGGeometryNode = static_cast<QSGGeometryNode*>(src);
 }
 
-void QSGImageNode_setRect(QSGImageNode* self, QRectF* rect) {
+void QSGImageNode_setRect_rect(QSGImageNode* self, QRectF* rect) {
 	self->setRect(*rect);
 }
 
-void QSGImageNode_setRect2(QSGImageNode* self, double x, double y, double w, double h) {
+void QSGImageNode_setRect_x_y_w_h(QSGImageNode* self, double x, double y, double w, double h) {
 	self->setRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
@@ -34,11 +34,11 @@ QRectF* QSGImageNode_rect(const QSGImageNode* self) {
 	return new QRectF(self->rect());
 }
 
-void QSGImageNode_setSourceRect(QSGImageNode* self, QRectF* r) {
+void QSGImageNode_setSourceRect_r(QSGImageNode* self, QRectF* r) {
 	self->setSourceRect(*r);
 }
 
-void QSGImageNode_setSourceRect2(QSGImageNode* self, double x, double y, double w, double h) {
+void QSGImageNode_setSourceRect_x_y_w_h(QSGImageNode* self, double x, double y, double w, double h) {
 	self->setSourceRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 

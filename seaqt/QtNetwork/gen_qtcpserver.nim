@@ -61,7 +61,7 @@ type cQTcpServer*{.exportc: "QTcpServer", incompleteStruct.} = object
 proc fcQTcpServer_metaObject(self: pointer): pointer {.importc: "QTcpServer_metaObject".}
 proc fcQTcpServer_metacast(self: pointer, param1: cstring): pointer {.importc: "QTcpServer_metacast".}
 proc fcQTcpServer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTcpServer_metacall".}
-proc fcQTcpServer_tr(s: cstring): struct_seaqt_string {.importc: "QTcpServer_tr".}
+proc fcQTcpServer_trS(s: cstring): struct_seaqt_string {.importc: "QTcpServer_tr_s".}
 proc fcQTcpServer_listen(self: pointer): bool {.importc: "QTcpServer_listen".}
 proc fcQTcpServer_close(self: pointer): void {.importc: "QTcpServer_close".}
 proc fcQTcpServer_isListening(self: pointer): bool {.importc: "QTcpServer_isListening".}
@@ -86,12 +86,12 @@ proc fcQTcpServer_newConnection(self: pointer): void {.importc: "QTcpServer_newC
 proc fcQTcpServer_connect_newConnection(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTcpServer_connect_newConnection".}
 proc fcQTcpServer_acceptError(self: pointer, socketError: cint): void {.importc: "QTcpServer_acceptError".}
 proc fcQTcpServer_connect_acceptError(self: pointer, slot: int, callback: proc (slot: int, socketError: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTcpServer_connect_acceptError".}
-proc fcQTcpServer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTcpServer_tr2".}
-proc fcQTcpServer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTcpServer_tr3".}
-proc fcQTcpServer_listenWithAddress(self: pointer, address: pointer): bool {.importc: "QTcpServer_listenWithAddress".}
-proc fcQTcpServer_listen2(self: pointer, address: pointer, port: cushort): bool {.importc: "QTcpServer_listen2".}
-proc fcQTcpServer_waitForNewConnectionWithMsec(self: pointer, msec: cint): bool {.importc: "QTcpServer_waitForNewConnectionWithMsec".}
-proc fcQTcpServer_waitForNewConnection2(self: pointer, msec: cint, timedOut: ptr bool): bool {.importc: "QTcpServer_waitForNewConnection2".}
+proc fcQTcpServer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTcpServer_tr_s_c".}
+proc fcQTcpServer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTcpServer_tr_s_c_n".}
+proc fcQTcpServer_listenAddress(self: pointer, address: pointer): bool {.importc: "QTcpServer_listen_address".}
+proc fcQTcpServer_listenAddressPort(self: pointer, address: pointer, port: cushort): bool {.importc: "QTcpServer_listen_address_port".}
+proc fcQTcpServer_waitForNewConnectionMsec(self: pointer, msec: cint): bool {.importc: "QTcpServer_waitForNewConnection_msec".}
+proc fcQTcpServer_waitForNewConnectionMsecTimedOut(self: pointer, msec: cint, timedOut: ptr bool): bool {.importc: "QTcpServer_waitForNewConnection_msec_timedOut".}
 proc fcQTcpServer_vdata(self: pointer): ptr pointer {.importc: "QTcpServer_vdata".}
 proc fvdata_cQTcpServer(self: pointer): pointer {.importc: "vdata_QTcpServer".}
 
@@ -129,7 +129,7 @@ proc fcQTcpServer_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQTcpServer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTcpServer_protectedbase_receivers".}
 proc fcQTcpServer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTcpServer_protectedbase_isSignalConnected".}
 proc fcQTcpServer_new(vtbl: pointer, vdata: csize_t): ptr cQTcpServer {.importc: "QTcpServer_new".}
-proc fcQTcpServer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTcpServer {.importc: "QTcpServer_new2".}
+proc fcQTcpServer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTcpServer {.importc: "QTcpServer_new_parent".}
 proc fcQTcpServer_staticMetaObject(): pointer {.importc: "QTcpServer_staticMetaObject".}
 
 proc metaObject*(self: gen_qtcpserver_types.QTcpServer): gen_qobjectdefs_types.QMetaObject =
@@ -142,7 +142,7 @@ proc metacall*(self: gen_qtcpserver_types.QTcpServer, param1: cint, param2: cint
   fcQTcpServer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtcpserver_types.QTcpServer, s: cstring): string =
-  let v_ms = fcQTcpServer_tr(s)
+  let v_ms = fcQTcpServer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -249,28 +249,28 @@ proc onAcceptError*(self: gen_qtcpserver_types.QTcpServer, slot: QTcpServeraccep
   fcQTcpServer_connect_acceptError(self.h, cast[int](addr tmp[]), fcQTcpServer_slot_callback_acceptError, fcQTcpServer_slot_callback_acceptError_release)
 
 proc tr*(_: type gen_qtcpserver_types.QTcpServer, s: cstring, c: cstring): string =
-  let v_ms = fcQTcpServer_tr2(s, c)
+  let v_ms = fcQTcpServer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtcpserver_types.QTcpServer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTcpServer_tr3(s, c, n)
+  let v_ms = fcQTcpServer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc listen*(self: gen_qtcpserver_types.QTcpServer, address: gen_qhostaddress_types.QHostAddress): bool =
-  fcQTcpServer_listenWithAddress(self.h, address.h)
+  fcQTcpServer_listenAddress(self.h, address.h)
 
 proc listen*(self: gen_qtcpserver_types.QTcpServer, address: gen_qhostaddress_types.QHostAddress, port: cushort): bool =
-  fcQTcpServer_listen2(self.h, address.h, port)
+  fcQTcpServer_listenAddressPort(self.h, address.h, port)
 
 proc waitForNewConnection*(self: gen_qtcpserver_types.QTcpServer, msec: cint): bool =
-  fcQTcpServer_waitForNewConnectionWithMsec(self.h, msec)
+  fcQTcpServer_waitForNewConnectionMsec(self.h, msec)
 
 proc waitForNewConnection*(self: gen_qtcpserver_types.QTcpServer, msec: cint, timedOut: ptr bool): bool =
-  fcQTcpServer_waitForNewConnection2(self.h, msec, timedOut)
+  fcQTcpServer_waitForNewConnectionMsecTimedOut(self.h, msec, timedOut)
 
 type QTcpServermetaObjectProc* = proc(self: QTcpServer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QTcpServermetacastProc* = proc(self: QTcpServer, param1: cstring): pointer {.raises: [], gcsafe.}

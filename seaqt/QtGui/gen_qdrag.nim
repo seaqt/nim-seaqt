@@ -61,7 +61,7 @@ type cQDrag*{.exportc: "QDrag", incompleteStruct.} = object
 proc fcQDrag_metaObject(self: pointer): pointer {.importc: "QDrag_metaObject".}
 proc fcQDrag_metacast(self: pointer, param1: cstring): pointer {.importc: "QDrag_metacast".}
 proc fcQDrag_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDrag_metacall".}
-proc fcQDrag_tr(s: cstring): struct_seaqt_string {.importc: "QDrag_tr".}
+proc fcQDrag_trS(s: cstring): struct_seaqt_string {.importc: "QDrag_tr_s".}
 proc fcQDrag_setMimeData(self: pointer, data: pointer): void {.importc: "QDrag_setMimeData".}
 proc fcQDrag_mimeData(self: pointer): pointer {.importc: "QDrag_mimeData".}
 proc fcQDrag_setPixmap(self: pointer, pixmap: pointer): void {.importc: "QDrag_setPixmap".}
@@ -71,7 +71,7 @@ proc fcQDrag_hotSpot(self: pointer): pointer {.importc: "QDrag_hotSpot".}
 proc fcQDrag_source(self: pointer): pointer {.importc: "QDrag_source".}
 proc fcQDrag_target(self: pointer): pointer {.importc: "QDrag_target".}
 proc fcQDrag_exec(self: pointer): cint {.importc: "QDrag_exec".}
-proc fcQDrag_exec2(self: pointer, supportedActions: cint, defaultAction: cint): cint {.importc: "QDrag_exec2".}
+proc fcQDrag_execSupportedActionsDefaultAction(self: pointer, supportedActions: cint, defaultAction: cint): cint {.importc: "QDrag_exec_supportedActions_defaultAction".}
 proc fcQDrag_setDragCursor(self: pointer, cursor: pointer, action: cint): void {.importc: "QDrag_setDragCursor".}
 proc fcQDrag_dragCursor(self: pointer, action: cint): pointer {.importc: "QDrag_dragCursor".}
 proc fcQDrag_supportedActions(self: pointer): cint {.importc: "QDrag_supportedActions".}
@@ -81,9 +81,9 @@ proc fcQDrag_actionChanged(self: pointer, action: cint): void {.importc: "QDrag_
 proc fcQDrag_connect_actionChanged(self: pointer, slot: int, callback: proc (slot: int, action: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDrag_connect_actionChanged".}
 proc fcQDrag_targetChanged(self: pointer, newTarget: pointer): void {.importc: "QDrag_targetChanged".}
 proc fcQDrag_connect_targetChanged(self: pointer, slot: int, callback: proc (slot: int, newTarget: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDrag_connect_targetChanged".}
-proc fcQDrag_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDrag_tr2".}
-proc fcQDrag_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDrag_tr3".}
-proc fcQDrag_execWithSupportedActions(self: pointer, supportedActions: cint): cint {.importc: "QDrag_execWithSupportedActions".}
+proc fcQDrag_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDrag_tr_s_c".}
+proc fcQDrag_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDrag_tr_s_c_n".}
+proc fcQDrag_execSupportedActions(self: pointer, supportedActions: cint): cint {.importc: "QDrag_exec_supportedActions".}
 proc fcQDrag_vdata(self: pointer): ptr pointer {.importc: "QDrag_vdata".}
 proc fvdata_cQDrag(self: pointer): pointer {.importc: "vdata_QDrag".}
 
@@ -126,7 +126,7 @@ proc metacall*(self: gen_qdrag_types.QDrag, param1: cint, param2: cint, param3: 
   fcQDrag_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdrag_types.QDrag, s: cstring): string =
-  let v_ms = fcQDrag_tr(s)
+  let v_ms = fcQDrag_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -159,7 +159,7 @@ proc exec*(self: gen_qdrag_types.QDrag): cint =
   cint(fcQDrag_exec(self.h))
 
 proc exec*(self: gen_qdrag_types.QDrag, supportedActions: cint, defaultAction: cint): cint =
-  cint(fcQDrag_exec2(self.h, cint(supportedActions), cint(defaultAction)))
+  cint(fcQDrag_execSupportedActionsDefaultAction(self.h, cint(supportedActions), cint(defaultAction)))
 
 proc setDragCursor*(self: gen_qdrag_types.QDrag, cursor: gen_qpixmap_types.QPixmap, action: cint): void =
   fcQDrag_setDragCursor(self.h, cursor.h, cint(action))
@@ -217,19 +217,19 @@ proc onTargetChanged*(self: gen_qdrag_types.QDrag, slot: QDragtargetChangedSlot)
   fcQDrag_connect_targetChanged(self.h, cast[int](addr tmp[]), fcQDrag_slot_callback_targetChanged, fcQDrag_slot_callback_targetChanged_release)
 
 proc tr*(_: type gen_qdrag_types.QDrag, s: cstring, c: cstring): string =
-  let v_ms = fcQDrag_tr2(s, c)
+  let v_ms = fcQDrag_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdrag_types.QDrag, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDrag_tr3(s, c, n)
+  let v_ms = fcQDrag_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc exec*(self: gen_qdrag_types.QDrag, supportedActions: cint): cint =
-  cint(fcQDrag_execWithSupportedActions(self.h, cint(supportedActions)))
+  cint(fcQDrag_execSupportedActions(self.h, cint(supportedActions)))
 
 type QDragmetaObjectProc* = proc(self: QDrag): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QDragmetacastProc* = proc(self: QDrag, param1: cstring): pointer {.raises: [], gcsafe.}

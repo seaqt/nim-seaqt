@@ -81,12 +81,12 @@ type cQLabel*{.exportc: "QLabel", incompleteStruct.} = object
 proc fcQLabel_metaObject(self: pointer): pointer {.importc: "QLabel_metaObject".}
 proc fcQLabel_metacast(self: pointer, param1: cstring): pointer {.importc: "QLabel_metacast".}
 proc fcQLabel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLabel_metacall".}
-proc fcQLabel_tr(s: cstring): struct_seaqt_string {.importc: "QLabel_tr".}
+proc fcQLabel_trS(s: cstring): struct_seaqt_string {.importc: "QLabel_tr_s".}
 proc fcQLabel_text(self: pointer): struct_seaqt_string {.importc: "QLabel_text".}
-proc fcQLabel_pixmap(self: pointer, param1: cint): pointer {.importc: "QLabel_pixmap".}
-proc fcQLabel_pixmap2(self: pointer): pointer {.importc: "QLabel_pixmap2".}
-proc fcQLabel_picture(self: pointer, param1: cint): pointer {.importc: "QLabel_picture".}
-proc fcQLabel_picture2(self: pointer): pointer {.importc: "QLabel_picture2".}
+proc fcQLabel_pixmap_Qt_ReturnByValueConstant(self: pointer, param1: cint): pointer {.importc: "QLabel_pixmap_Qt_ReturnByValueConstant".}
+proc fcQLabel_pixmap(self: pointer): pointer {.importc: "QLabel_pixmap".}
+proc fcQLabel_picture_Qt_ReturnByValueConstant(self: pointer, param1: cint): pointer {.importc: "QLabel_picture_Qt_ReturnByValueConstant".}
+proc fcQLabel_picture(self: pointer): pointer {.importc: "QLabel_picture".}
 proc fcQLabel_movie(self: pointer): pointer {.importc: "QLabel_movie".}
 proc fcQLabel_textFormat(self: pointer): cint {.importc: "QLabel_textFormat".}
 proc fcQLabel_setTextFormat(self: pointer, textFormat: cint): void {.importc: "QLabel_setTextFormat".}
@@ -117,15 +117,15 @@ proc fcQLabel_setText(self: pointer, text: struct_seaqt_string): void {.importc:
 proc fcQLabel_setPixmap(self: pointer, pixmap: pointer): void {.importc: "QLabel_setPixmap".}
 proc fcQLabel_setPicture(self: pointer, picture: pointer): void {.importc: "QLabel_setPicture".}
 proc fcQLabel_setMovie(self: pointer, movie: pointer): void {.importc: "QLabel_setMovie".}
-proc fcQLabel_setNum(self: pointer, num: cint): void {.importc: "QLabel_setNum".}
-proc fcQLabel_setNumWithNum(self: pointer, num: float64): void {.importc: "QLabel_setNumWithNum".}
+proc fcQLabel_setNumInt(self: pointer, num: cint): void {.importc: "QLabel_setNum_int".}
+proc fcQLabel_setNumDouble(self: pointer, num: float64): void {.importc: "QLabel_setNum_double".}
 proc fcQLabel_clear(self: pointer): void {.importc: "QLabel_clear".}
 proc fcQLabel_linkActivated(self: pointer, link: struct_seaqt_string): void {.importc: "QLabel_linkActivated".}
 proc fcQLabel_connect_linkActivated(self: pointer, slot: int, callback: proc (slot: int, link: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLabel_connect_linkActivated".}
 proc fcQLabel_linkHovered(self: pointer, link: struct_seaqt_string): void {.importc: "QLabel_linkHovered".}
 proc fcQLabel_connect_linkHovered(self: pointer, slot: int, callback: proc (slot: int, link: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLabel_connect_linkHovered".}
-proc fcQLabel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLabel_tr2".}
-proc fcQLabel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLabel_tr3".}
+proc fcQLabel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLabel_tr_s_c".}
+proc fcQLabel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLabel_tr_s_c_n".}
 proc fcQLabel_vdata(self: pointer): ptr pointer {.importc: "QLabel_vdata".}
 proc fvdata_cQLabel(self: pointer): pointer {.importc: "vdata_QLabel".}
 
@@ -244,11 +244,11 @@ proc fcQLabel_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "Q
 proc fcQLabel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLabel_protectedbase_receivers".}
 proc fcQLabel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLabel_protectedbase_isSignalConnected".}
 proc fcQLabel_new(vtbl: pointer, vdata: csize_t): ptr cQLabel {.importc: "QLabel_new".}
-proc fcQLabel_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQLabel {.importc: "QLabel_new2".}
-proc fcQLabel_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLabel {.importc: "QLabel_new3".}
-proc fcQLabel_new4(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQLabel {.importc: "QLabel_new4".}
-proc fcQLabel_new5(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQLabel {.importc: "QLabel_new5".}
-proc fcQLabel_new6(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer, f: cint): ptr cQLabel {.importc: "QLabel_new6".}
+proc fcQLabel_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQLabel {.importc: "QLabel_new_text".}
+proc fcQLabel_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLabel {.importc: "QLabel_new_parent".}
+proc fcQLabel_new4(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQLabel {.importc: "QLabel_new_parent_f".}
+proc fcQLabel_new5(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQLabel {.importc: "QLabel_new_text_parent".}
+proc fcQLabel_new6(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer, f: cint): ptr cQLabel {.importc: "QLabel_new_text_parent_f".}
 proc fcQLabel_staticMetaObject(): pointer {.importc: "QLabel_staticMetaObject".}
 
 proc metaObject*(self: gen_qlabel_types.QLabel): gen_qobjectdefs_types.QMetaObject =
@@ -261,7 +261,7 @@ proc metacall*(self: gen_qlabel_types.QLabel, param1: cint, param2: cint, param3
   fcQLabel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlabel_types.QLabel, s: cstring): string =
-  let v_ms = fcQLabel_tr(s)
+  let v_ms = fcQLabel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -273,16 +273,16 @@ proc text*(self: gen_qlabel_types.QLabel): string =
   vx_ret
 
 proc pixmap*(self: gen_qlabel_types.QLabel, param1: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQLabel_pixmap(self.h, cint(param1)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQLabel_pixmap_Qt_ReturnByValueConstant(self.h, cint(param1)), owned: true)
 
 proc pixmap*(self: gen_qlabel_types.QLabel): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQLabel_pixmap2(self.h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQLabel_pixmap(self.h), owned: true)
 
 proc picture*(self: gen_qlabel_types.QLabel, param1: cint): gen_qpicture_types.QPicture =
-  gen_qpicture_types.QPicture(h: fcQLabel_picture(self.h, cint(param1)), owned: true)
+  gen_qpicture_types.QPicture(h: fcQLabel_picture_Qt_ReturnByValueConstant(self.h, cint(param1)), owned: true)
 
 proc picture*(self: gen_qlabel_types.QLabel): gen_qpicture_types.QPicture =
-  gen_qpicture_types.QPicture(h: fcQLabel_picture2(self.h), owned: true)
+  gen_qpicture_types.QPicture(h: fcQLabel_picture(self.h), owned: true)
 
 proc movie*(self: gen_qlabel_types.QLabel): gen_qmovie_types.QMovie =
   gen_qmovie_types.QMovie(h: fcQLabel_movie(self.h), owned: false)
@@ -378,10 +378,10 @@ proc setMovie*(self: gen_qlabel_types.QLabel, movie: gen_qmovie_types.QMovie): v
   fcQLabel_setMovie(self.h, movie.h)
 
 proc setNum*(self: gen_qlabel_types.QLabel, num: cint): void =
-  fcQLabel_setNum(self.h, num)
+  fcQLabel_setNumInt(self.h, num)
 
 proc setNum*(self: gen_qlabel_types.QLabel, num: float64): void =
-  fcQLabel_setNumWithNum(self.h, num)
+  fcQLabel_setNumDouble(self.h, num)
 
 proc clear*(self: gen_qlabel_types.QLabel): void =
   fcQLabel_clear(self.h)
@@ -433,13 +433,13 @@ proc onLinkHovered*(self: gen_qlabel_types.QLabel, slot: QLabellinkHoveredSlot) 
   fcQLabel_connect_linkHovered(self.h, cast[int](addr tmp[]), fcQLabel_slot_callback_linkHovered, fcQLabel_slot_callback_linkHovered_release)
 
 proc tr*(_: type gen_qlabel_types.QLabel, s: cstring, c: cstring): string =
-  let v_ms = fcQLabel_tr2(s, c)
+  let v_ms = fcQLabel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qlabel_types.QLabel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQLabel_tr3(s, c, n)
+  let v_ms = fcQLabel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

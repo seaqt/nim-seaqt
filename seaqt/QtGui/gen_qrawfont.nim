@@ -66,7 +66,7 @@ export
 
 type cQRawFont*{.exportc: "QRawFont", incompleteStruct.} = object
 
-proc fcQRawFont_operatorAssign(self: pointer, other: pointer): void {.importc: "QRawFont_operatorAssign".}
+proc fcQRawFont_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QRawFont_operatorAssign".}
 proc fcQRawFont_swap(self: pointer, other: pointer): void {.importc: "QRawFont_swap".}
 proc fcQRawFont_isValid(self: pointer): bool {.importc: "QRawFont_isValid".}
 proc fcQRawFont_operatorEqual(self: pointer, other: pointer): bool {.importc: "QRawFont_operatorEqual".}
@@ -76,12 +76,12 @@ proc fcQRawFont_styleName(self: pointer): struct_seaqt_string {.importc: "QRawFo
 proc fcQRawFont_style(self: pointer): cint {.importc: "QRawFont_style".}
 proc fcQRawFont_weight(self: pointer): cint {.importc: "QRawFont_weight".}
 proc fcQRawFont_glyphIndexesForString(self: pointer, text: struct_seaqt_string): struct_seaqt_array {.importc: "QRawFont_glyphIndexesForString".}
-proc fcQRawFont_advancesForGlyphIndexes(self: pointer, glyphIndexes: struct_seaqt_array): struct_seaqt_array {.importc: "QRawFont_advancesForGlyphIndexes".}
-proc fcQRawFont_advancesForGlyphIndexes2(self: pointer, glyphIndexes: struct_seaqt_array, layoutFlags: cint): struct_seaqt_array {.importc: "QRawFont_advancesForGlyphIndexes2".}
+proc fcQRawFont_advancesForGlyphIndexesGlyphIndexes(self: pointer, glyphIndexes: struct_seaqt_array): struct_seaqt_array {.importc: "QRawFont_advancesForGlyphIndexes_glyphIndexes".}
+proc fcQRawFont_advancesForGlyphIndexesGlyphIndexesLayoutFlags(self: pointer, glyphIndexes: struct_seaqt_array, layoutFlags: cint): struct_seaqt_array {.importc: "QRawFont_advancesForGlyphIndexes_glyphIndexes_layoutFlags".}
 proc fcQRawFont_glyphIndexesForChars(self: pointer, chars: pointer, numChars: cint, glyphIndexes: ptr cuint, numGlyphs: ptr cint): bool {.importc: "QRawFont_glyphIndexesForChars".}
-proc fcQRawFont_advancesForGlyphIndexes3(self: pointer, glyphIndexes: ptr cuint, advances: pointer, numGlyphs: cint): bool {.importc: "QRawFont_advancesForGlyphIndexes3".}
-proc fcQRawFont_advancesForGlyphIndexes4(self: pointer, glyphIndexes: ptr cuint, advances: pointer, numGlyphs: cint, layoutFlags: cint): bool {.importc: "QRawFont_advancesForGlyphIndexes4".}
-proc fcQRawFont_alphaMapForGlyph(self: pointer, glyphIndex: cuint): pointer {.importc: "QRawFont_alphaMapForGlyph".}
+proc fcQRawFont_advancesForGlyphIndexesGlyphIndexesAdvancesNumGlyphs(self: pointer, glyphIndexes: ptr cuint, advances: pointer, numGlyphs: cint): bool {.importc: "QRawFont_advancesForGlyphIndexes_glyphIndexes_advances_numGlyphs".}
+proc fcQRawFont_advancesForGlyphIndexesGlyphIndexesAdvancesNumGlyphsLayoutFlags(self: pointer, glyphIndexes: ptr cuint, advances: pointer, numGlyphs: cint, layoutFlags: cint): bool {.importc: "QRawFont_advancesForGlyphIndexes_glyphIndexes_advances_numGlyphs_layoutFlags".}
+proc fcQRawFont_alphaMapForGlyphGlyphIndex(self: pointer, glyphIndex: cuint): pointer {.importc: "QRawFont_alphaMapForGlyph_glyphIndex".}
 proc fcQRawFont_pathForGlyph(self: pointer, glyphIndex: cuint): pointer {.importc: "QRawFont_pathForGlyph".}
 proc fcQRawFont_boundingRect(self: pointer, glyphIndex: cuint): pointer {.importc: "QRawFont_boundingRect".}
 proc fcQRawFont_setPixelSize(self: pointer, pixelSize: float64): void {.importc: "QRawFont_setPixelSize".}
@@ -99,23 +99,23 @@ proc fcQRawFont_underlinePosition(self: pointer): float64 {.importc: "QRawFont_u
 proc fcQRawFont_unitsPerEm(self: pointer): float64 {.importc: "QRawFont_unitsPerEm".}
 proc fcQRawFont_loadFromFile(self: pointer, fileName: struct_seaqt_string, pixelSize: float64, hintingPreference: cint): void {.importc: "QRawFont_loadFromFile".}
 proc fcQRawFont_loadFromData(self: pointer, fontData: struct_seaqt_string, pixelSize: float64, hintingPreference: cint): void {.importc: "QRawFont_loadFromData".}
-proc fcQRawFont_supportsCharacter(self: pointer, ucs4: cuint): bool {.importc: "QRawFont_supportsCharacter".}
-proc fcQRawFont_supportsCharacterWithCharacter(self: pointer, character: pointer): bool {.importc: "QRawFont_supportsCharacterWithCharacter".}
+proc fcQRawFont_supportsCharacterUcs4(self: pointer, ucs4: cuint): bool {.importc: "QRawFont_supportsCharacter_ucs4".}
+proc fcQRawFont_supportsCharacterCharacter(self: pointer, character: pointer): bool {.importc: "QRawFont_supportsCharacter_character".}
 proc fcQRawFont_supportedWritingSystems(self: pointer): struct_seaqt_array {.importc: "QRawFont_supportedWritingSystems".}
 proc fcQRawFont_fontTable(self: pointer, tagName: cstring): struct_seaqt_string {.importc: "QRawFont_fontTable".}
-proc fcQRawFont_fromFont(font: pointer): pointer {.importc: "QRawFont_fromFont".}
-proc fcQRawFont_alphaMapForGlyph2(self: pointer, glyphIndex: cuint, antialiasingType: cint): pointer {.importc: "QRawFont_alphaMapForGlyph2".}
-proc fcQRawFont_alphaMapForGlyph3(self: pointer, glyphIndex: cuint, antialiasingType: cint, transform: pointer): pointer {.importc: "QRawFont_alphaMapForGlyph3".}
-proc fcQRawFont_fromFont2(font: pointer, writingSystem: cint): pointer {.importc: "QRawFont_fromFont2".}
+proc fcQRawFont_fromFontFont(font: pointer): pointer {.importc: "QRawFont_fromFont_font".}
+proc fcQRawFont_alphaMapForGlyphGlyphIndexAntialiasingType(self: pointer, glyphIndex: cuint, antialiasingType: cint): pointer {.importc: "QRawFont_alphaMapForGlyph_glyphIndex_antialiasingType".}
+proc fcQRawFont_alphaMapForGlyphGlyphIndexAntialiasingTypeTransform(self: pointer, glyphIndex: cuint, antialiasingType: cint, transform: pointer): pointer {.importc: "QRawFont_alphaMapForGlyph_glyphIndex_antialiasingType_transform".}
+proc fcQRawFont_fromFontFontWritingSystem(font: pointer, writingSystem: cint): pointer {.importc: "QRawFont_fromFont_font_writingSystem".}
 proc fcQRawFont_new(): ptr cQRawFont {.importc: "QRawFont_new".}
-proc fcQRawFont_new2(fileName: struct_seaqt_string, pixelSize: float64): ptr cQRawFont {.importc: "QRawFont_new2".}
-proc fcQRawFont_new3(fontData: struct_seaqt_string, pixelSize: float64): ptr cQRawFont {.importc: "QRawFont_new3".}
-proc fcQRawFont_new4(other: pointer): ptr cQRawFont {.importc: "QRawFont_new4".}
-proc fcQRawFont_new5(fileName: struct_seaqt_string, pixelSize: float64, hintingPreference: cint): ptr cQRawFont {.importc: "QRawFont_new5".}
-proc fcQRawFont_new6(fontData: struct_seaqt_string, pixelSize: float64, hintingPreference: cint): ptr cQRawFont {.importc: "QRawFont_new6".}
+proc fcQRawFont_new2(fileName: struct_seaqt_string, pixelSize: float64): ptr cQRawFont {.importc: "QRawFont_new_fileName_pixelSize".}
+proc fcQRawFont_new3(fontData: struct_seaqt_string, pixelSize: float64): ptr cQRawFont {.importc: "QRawFont_new_fontData_pixelSize".}
+proc fcQRawFont_new4(fromVal: pointer): ptr cQRawFont {.importc: "QRawFont_new_from".}
+proc fcQRawFont_new5(fileName: struct_seaqt_string, pixelSize: float64, hintingPreference: cint): ptr cQRawFont {.importc: "QRawFont_new_fileName_pixelSize_hintingPreference".}
+proc fcQRawFont_new6(fontData: struct_seaqt_string, pixelSize: float64, hintingPreference: cint): ptr cQRawFont {.importc: "QRawFont_new_fontData_pixelSize_hintingPreference".}
 
-proc operatorAssign*(self: gen_qrawfont_types.QRawFont, other: gen_qrawfont_types.QRawFont): void =
-  fcQRawFont_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qrawfont_types.QRawFont, fromVal: gen_qrawfont_types.QRawFont): void =
+  fcQRawFont_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qrawfont_types.QRawFont, other: gen_qrawfont_types.QRawFont): void =
   fcQRawFont_swap(self.h, other.h)
@@ -161,7 +161,7 @@ proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: o
   for i in 0..<len(glyphIndexes):
     glyphIndexes_CArray[i] = glyphIndexes[i]
 
-  var v_ma = fcQRawFont_advancesForGlyphIndexes(self.h, struct_seaqt_array(len: csize_t(len(glyphIndexes)), data: if len(glyphIndexes) == 0: nil else: addr(glyphIndexes_CArray[0])))
+  var v_ma = fcQRawFont_advancesForGlyphIndexesGlyphIndexes(self.h, struct_seaqt_array(len: csize_t(len(glyphIndexes)), data: if len(glyphIndexes) == 0: nil else: addr(glyphIndexes_CArray[0])))
   var vx_ret = newSeq[gen_qpoint_types.QPointF](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -174,7 +174,7 @@ proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: o
   for i in 0..<len(glyphIndexes):
     glyphIndexes_CArray[i] = glyphIndexes[i]
 
-  var v_ma = fcQRawFont_advancesForGlyphIndexes2(self.h, struct_seaqt_array(len: csize_t(len(glyphIndexes)), data: if len(glyphIndexes) == 0: nil else: addr(glyphIndexes_CArray[0])), cint(layoutFlags))
+  var v_ma = fcQRawFont_advancesForGlyphIndexesGlyphIndexesLayoutFlags(self.h, struct_seaqt_array(len: csize_t(len(glyphIndexes)), data: if len(glyphIndexes) == 0: nil else: addr(glyphIndexes_CArray[0])), cint(layoutFlags))
   var vx_ret = newSeq[gen_qpoint_types.QPointF](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -186,13 +186,13 @@ proc glyphIndexesForChars*(self: gen_qrawfont_types.QRawFont, chars: gen_qchar_t
   fcQRawFont_glyphIndexesForChars(self.h, chars.h, numChars, glyphIndexes, numGlyphs)
 
 proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: ptr cuint, advances: gen_qpoint_types.QPointF, numGlyphs: cint): bool =
-  fcQRawFont_advancesForGlyphIndexes3(self.h, glyphIndexes, advances.h, numGlyphs)
+  fcQRawFont_advancesForGlyphIndexesGlyphIndexesAdvancesNumGlyphs(self.h, glyphIndexes, advances.h, numGlyphs)
 
 proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: ptr cuint, advances: gen_qpoint_types.QPointF, numGlyphs: cint, layoutFlags: cint): bool =
-  fcQRawFont_advancesForGlyphIndexes4(self.h, glyphIndexes, advances.h, numGlyphs, cint(layoutFlags))
+  fcQRawFont_advancesForGlyphIndexesGlyphIndexesAdvancesNumGlyphsLayoutFlags(self.h, glyphIndexes, advances.h, numGlyphs, cint(layoutFlags))
 
 proc alphaMapForGlyph*(self: gen_qrawfont_types.QRawFont, glyphIndex: cuint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyph(self.h, glyphIndex), owned: true)
+  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyphGlyphIndex(self.h, glyphIndex), owned: true)
 
 proc pathForGlyph*(self: gen_qrawfont_types.QRawFont, glyphIndex: cuint): gen_qpainterpath_types.QPainterPath =
   gen_qpainterpath_types.QPainterPath(h: fcQRawFont_pathForGlyph(self.h, glyphIndex), owned: true)
@@ -246,10 +246,10 @@ proc loadFromData*(self: gen_qrawfont_types.QRawFont, fontData: openArray[byte],
   fcQRawFont_loadFromData(self.h, struct_seaqt_string(data: if len(fontData) > 0: addr fontData[0] else: nil, len: csize_t(len(fontData))), pixelSize, cint(hintingPreference))
 
 proc supportsCharacter*(self: gen_qrawfont_types.QRawFont, ucs4: cuint): bool =
-  fcQRawFont_supportsCharacter(self.h, ucs4)
+  fcQRawFont_supportsCharacterUcs4(self.h, ucs4)
 
 proc supportsCharacter*(self: gen_qrawfont_types.QRawFont, character: gen_qchar_types.QChar): bool =
-  fcQRawFont_supportsCharacterWithCharacter(self.h, character.h)
+  fcQRawFont_supportsCharacterCharacter(self.h, character.h)
 
 proc supportedWritingSystems*(self: gen_qrawfont_types.QRawFont): seq[cint] =
   var v_ma = fcQRawFont_supportedWritingSystems(self.h)
@@ -267,16 +267,16 @@ proc fontTable*(self: gen_qrawfont_types.QRawFont, tagName: cstring): seq[byte] 
   vx_ret
 
 proc fromFont*(_: type gen_qrawfont_types.QRawFont, font: gen_qfont_types.QFont): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQRawFont_fromFont(font.h), owned: true)
+  gen_qrawfont_types.QRawFont(h: fcQRawFont_fromFontFont(font.h), owned: true)
 
 proc alphaMapForGlyph*(self: gen_qrawfont_types.QRawFont, glyphIndex: cuint, antialiasingType: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyph2(self.h, glyphIndex, cint(antialiasingType)), owned: true)
+  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyphGlyphIndexAntialiasingType(self.h, glyphIndex, cint(antialiasingType)), owned: true)
 
 proc alphaMapForGlyph*(self: gen_qrawfont_types.QRawFont, glyphIndex: cuint, antialiasingType: cint, transform: gen_qtransform_types.QTransform): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyph3(self.h, glyphIndex, cint(antialiasingType), transform.h), owned: true)
+  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyphGlyphIndexAntialiasingTypeTransform(self.h, glyphIndex, cint(antialiasingType), transform.h), owned: true)
 
 proc fromFont*(_: type gen_qrawfont_types.QRawFont, font: gen_qfont_types.QFont, writingSystem: cint): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQRawFont_fromFont2(font.h, cint(writingSystem)), owned: true)
+  gen_qrawfont_types.QRawFont(h: fcQRawFont_fromFontFontWritingSystem(font.h, cint(writingSystem)), owned: true)
 
 proc create*(T: type gen_qrawfont_types.QRawFont): gen_qrawfont_types.QRawFont =
   let tmp = gen_qrawfont_types.QRawFont(h: fcQRawFont_new(), owned: true)
@@ -290,8 +290,8 @@ proc create*(T: type gen_qrawfont_types.QRawFont,
   let tmp = gen_qrawfont_types.QRawFont(h: fcQRawFont_new3(struct_seaqt_string(data: if len(fontData) > 0: addr fontData[0] else: nil, len: csize_t(len(fontData))), pixelSize), owned: true)
   tmp
 proc create*(T: type gen_qrawfont_types.QRawFont,
-    other: gen_qrawfont_types.QRawFont): gen_qrawfont_types.QRawFont =
-  let tmp = gen_qrawfont_types.QRawFont(h: fcQRawFont_new4(other.h), owned: true)
+    fromVal: gen_qrawfont_types.QRawFont): gen_qrawfont_types.QRawFont =
+  let tmp = gen_qrawfont_types.QRawFont(h: fcQRawFont_new4(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qrawfont_types.QRawFont,
     fileName: openArray[char], pixelSize: float64, hintingPreference: cint): gen_qrawfont_types.QRawFont =

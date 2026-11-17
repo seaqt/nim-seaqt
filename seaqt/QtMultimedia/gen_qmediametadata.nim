@@ -85,9 +85,9 @@ proc fcQMediaMetaData_clear(self: pointer): void {.importc: "QMediaMetaData_clea
 proc fcQMediaMetaData_isEmpty(self: pointer): bool {.importc: "QMediaMetaData_isEmpty".}
 proc fcQMediaMetaData_stringValue(self: pointer, k: cint): struct_seaqt_string {.importc: "QMediaMetaData_stringValue".}
 proc fcQMediaMetaData_metaDataKeyToString(k: cint): struct_seaqt_string {.importc: "QMediaMetaData_metaDataKeyToString".}
-proc fcQMediaMetaData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaMetaData_operatorAssign".}
-proc fcQMediaMetaData_new(param1: pointer): ptr cQMediaMetaData {.importc: "QMediaMetaData_new".}
-proc fcQMediaMetaData_new2(): ptr cQMediaMetaData {.importc: "QMediaMetaData_new2".}
+proc fcQMediaMetaData_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QMediaMetaData_operatorAssign".}
+proc fcQMediaMetaData_new(fromVal: pointer): ptr cQMediaMetaData {.importc: "QMediaMetaData_new_from".}
+proc fcQMediaMetaData_new2(): ptr cQMediaMetaData {.importc: "QMediaMetaData_new".}
 proc fcQMediaMetaData_staticMetaObject(): pointer {.importc: "QMediaMetaData_staticMetaObject".}
 
 proc value*(self: gen_qmediametadata_types.QMediaMetaData, k: cint): gen_qvariant_types.QVariant =
@@ -129,12 +129,12 @@ proc metaDataKeyToString*(_: type gen_qmediametadata_types.QMediaMetaData, k: ci
   c_free(v_ms.data)
   vx_ret
 
-proc operatorAssign*(self: gen_qmediametadata_types.QMediaMetaData, param1: gen_qmediametadata_types.QMediaMetaData): void =
-  fcQMediaMetaData_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qmediametadata_types.QMediaMetaData, fromVal: gen_qmediametadata_types.QMediaMetaData): void =
+  fcQMediaMetaData_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qmediametadata_types.QMediaMetaData,
-    param1: gen_qmediametadata_types.QMediaMetaData): gen_qmediametadata_types.QMediaMetaData =
-  let tmp = gen_qmediametadata_types.QMediaMetaData(h: fcQMediaMetaData_new(param1.h), owned: true)
+    fromVal: gen_qmediametadata_types.QMediaMetaData): gen_qmediametadata_types.QMediaMetaData =
+  let tmp = gen_qmediametadata_types.QMediaMetaData(h: fcQMediaMetaData_new(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qmediametadata_types.QMediaMetaData): gen_qmediametadata_types.QMediaMetaData =
   let tmp = gen_qmediametadata_types.QMediaMetaData(h: fcQMediaMetaData_new2(), owned: true)

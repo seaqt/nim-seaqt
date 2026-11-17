@@ -19,8 +19,8 @@ QSslEllipticCurve* QSslEllipticCurve_new() {
 	return new (std::nothrow) QSslEllipticCurve();
 }
 
-QSslEllipticCurve* QSslEllipticCurve_new2(QSslEllipticCurve* param1) {
-	return new (std::nothrow) QSslEllipticCurve(*param1);
+QSslEllipticCurve* QSslEllipticCurve_new_from(QSslEllipticCurve* from) {
+	return new (std::nothrow) QSslEllipticCurve(*from);
 }
 
 QSslEllipticCurve* QSslEllipticCurve_fromShortName(struct seaqt_string name) {

@@ -21,11 +21,11 @@ typedef struct QSslCipher QSslCipher;
 #endif
 
 QSslCipher* QSslCipher_new();
-QSslCipher* QSslCipher_new2(struct seaqt_string name);
-QSslCipher* QSslCipher_new3(struct seaqt_string name, int protocol);
-QSslCipher* QSslCipher_new4(QSslCipher* other);
+QSslCipher* QSslCipher_new_name(struct seaqt_string name);
+QSslCipher* QSslCipher_new_name_protocol(struct seaqt_string name, int protocol);
+QSslCipher* QSslCipher_new_from(QSslCipher* from);
 
-void QSslCipher_operatorAssign(QSslCipher* self, QSslCipher* other);
+void QSslCipher_operatorAssign(QSslCipher* self, QSslCipher* from);
 void QSslCipher_swap(QSslCipher* self, QSslCipher* other);
 bool QSslCipher_operatorEqual(const QSslCipher* self, QSslCipher* other);
 bool QSslCipher_operatorNotEqual(const QSslCipher* self, QSslCipher* other);

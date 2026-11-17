@@ -122,14 +122,14 @@ type cQVideoFrameFormat*{.exportc: "QVideoFrameFormat", incompleteStruct.} = obj
 
 proc fcQVideoFrameFormat_swap(self: pointer, other: pointer): void {.importc: "QVideoFrameFormat_swap".}
 proc fcQVideoFrameFormat_detach(self: pointer): void {.importc: "QVideoFrameFormat_detach".}
-proc fcQVideoFrameFormat_operatorAssign(self: pointer, format: pointer): void {.importc: "QVideoFrameFormat_operatorAssign".}
+proc fcQVideoFrameFormat_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QVideoFrameFormat_operatorAssign".}
 proc fcQVideoFrameFormat_operatorEqual(self: pointer, format: pointer): bool {.importc: "QVideoFrameFormat_operatorEqual".}
 proc fcQVideoFrameFormat_operatorNotEqual(self: pointer, format: pointer): bool {.importc: "QVideoFrameFormat_operatorNotEqual".}
 proc fcQVideoFrameFormat_isValid(self: pointer): bool {.importc: "QVideoFrameFormat_isValid".}
 proc fcQVideoFrameFormat_pixelFormat(self: pointer): cint {.importc: "QVideoFrameFormat_pixelFormat".}
 proc fcQVideoFrameFormat_frameSize(self: pointer): pointer {.importc: "QVideoFrameFormat_frameSize".}
-proc fcQVideoFrameFormat_setFrameSize(self: pointer, size: pointer): void {.importc: "QVideoFrameFormat_setFrameSize".}
-proc fcQVideoFrameFormat_setFrameSize2(self: pointer, width: cint, height: cint): void {.importc: "QVideoFrameFormat_setFrameSize2".}
+proc fcQVideoFrameFormat_setFrameSizeSize(self: pointer, size: pointer): void {.importc: "QVideoFrameFormat_setFrameSize_size".}
+proc fcQVideoFrameFormat_setFrameSizeWidthHeight(self: pointer, width: cint, height: cint): void {.importc: "QVideoFrameFormat_setFrameSize_width_height".}
 proc fcQVideoFrameFormat_frameWidth(self: pointer): cint {.importc: "QVideoFrameFormat_frameWidth".}
 proc fcQVideoFrameFormat_frameHeight(self: pointer): cint {.importc: "QVideoFrameFormat_frameHeight".}
 proc fcQVideoFrameFormat_planeCount(self: pointer): cint {.importc: "QVideoFrameFormat_planeCount".}
@@ -157,8 +157,8 @@ proc fcQVideoFrameFormat_pixelFormatFromImageFormat(format: cint): cint {.import
 proc fcQVideoFrameFormat_imageFormatFromPixelFormat(format: cint): cint {.importc: "QVideoFrameFormat_imageFormatFromPixelFormat".}
 proc fcQVideoFrameFormat_pixelFormatToString(pixelFormat: cint): struct_seaqt_string {.importc: "QVideoFrameFormat_pixelFormatToString".}
 proc fcQVideoFrameFormat_new(): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new".}
-proc fcQVideoFrameFormat_new2(size: pointer, pixelFormat: cint): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new2".}
-proc fcQVideoFrameFormat_new3(format: pointer): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new3".}
+proc fcQVideoFrameFormat_new2(size: pointer, pixelFormat: cint): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new_size_pixelFormat".}
+proc fcQVideoFrameFormat_new3(fromVal: pointer): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new_from".}
 
 proc swap*(self: gen_qvideoframeformat_types.QVideoFrameFormat, other: gen_qvideoframeformat_types.QVideoFrameFormat): void =
   fcQVideoFrameFormat_swap(self.h, other.h)
@@ -166,8 +166,8 @@ proc swap*(self: gen_qvideoframeformat_types.QVideoFrameFormat, other: gen_qvide
 proc detach*(self: gen_qvideoframeformat_types.QVideoFrameFormat): void =
   fcQVideoFrameFormat_detach(self.h)
 
-proc operatorAssign*(self: gen_qvideoframeformat_types.QVideoFrameFormat, format: gen_qvideoframeformat_types.QVideoFrameFormat): void =
-  fcQVideoFrameFormat_operatorAssign(self.h, format.h)
+proc operatorAssign*(self: gen_qvideoframeformat_types.QVideoFrameFormat, fromVal: gen_qvideoframeformat_types.QVideoFrameFormat): void =
+  fcQVideoFrameFormat_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qvideoframeformat_types.QVideoFrameFormat, format: gen_qvideoframeformat_types.QVideoFrameFormat): bool =
   fcQVideoFrameFormat_operatorEqual(self.h, format.h)
@@ -185,10 +185,10 @@ proc frameSize*(self: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qsize_
   gen_qsize_types.QSize(h: fcQVideoFrameFormat_frameSize(self.h), owned: true)
 
 proc setFrameSize*(self: gen_qvideoframeformat_types.QVideoFrameFormat, size: gen_qsize_types.QSize): void =
-  fcQVideoFrameFormat_setFrameSize(self.h, size.h)
+  fcQVideoFrameFormat_setFrameSizeSize(self.h, size.h)
 
 proc setFrameSize*(self: gen_qvideoframeformat_types.QVideoFrameFormat, width: cint, height: cint): void =
-  fcQVideoFrameFormat_setFrameSize2(self.h, width, height)
+  fcQVideoFrameFormat_setFrameSizeWidthHeight(self.h, width, height)
 
 proc frameWidth*(self: gen_qvideoframeformat_types.QVideoFrameFormat): cint =
   fcQVideoFrameFormat_frameWidth(self.h)
@@ -285,6 +285,6 @@ proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat,
   let tmp = gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new2(size.h, cint(pixelFormat)), owned: true)
   tmp
 proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat,
-    format: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qvideoframeformat_types.QVideoFrameFormat =
-  let tmp = gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new3(format.h), owned: true)
+    fromVal: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qvideoframeformat_types.QVideoFrameFormat =
+  let tmp = gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new3(fromVal.h), owned: true)
   tmp

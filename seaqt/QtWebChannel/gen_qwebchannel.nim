@@ -58,7 +58,7 @@ type cQWebChannel*{.exportc: "QWebChannel", incompleteStruct.} = object
 proc fcQWebChannel_metaObject(self: pointer): pointer {.importc: "QWebChannel_metaObject".}
 proc fcQWebChannel_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebChannel_metacast".}
 proc fcQWebChannel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebChannel_metacall".}
-proc fcQWebChannel_tr(s: cstring): struct_seaqt_string {.importc: "QWebChannel_tr".}
+proc fcQWebChannel_trS(s: cstring): struct_seaqt_string {.importc: "QWebChannel_tr_s".}
 proc fcQWebChannel_registerObjects(self: pointer, objects: struct_seaqt_map): void {.importc: "QWebChannel_registerObjects".}
 proc fcQWebChannel_registeredObjects(self: pointer): struct_seaqt_map {.importc: "QWebChannel_registeredObjects".}
 proc fcQWebChannel_registerObject(self: pointer, id: struct_seaqt_string, objectVal: pointer): void {.importc: "QWebChannel_registerObject".}
@@ -71,8 +71,8 @@ proc fcQWebChannel_blockUpdatesChanged(self: pointer, blockVal: bool): void {.im
 proc fcQWebChannel_connect_blockUpdatesChanged(self: pointer, slot: int, callback: proc (slot: int, blockVal: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebChannel_connect_blockUpdatesChanged".}
 proc fcQWebChannel_connectTo(self: pointer, transport: pointer): void {.importc: "QWebChannel_connectTo".}
 proc fcQWebChannel_disconnectFrom(self: pointer, transport: pointer): void {.importc: "QWebChannel_disconnectFrom".}
-proc fcQWebChannel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebChannel_tr2".}
-proc fcQWebChannel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebChannel_tr3".}
+proc fcQWebChannel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebChannel_tr_s_c".}
+proc fcQWebChannel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebChannel_tr_s_c_n".}
 proc fcQWebChannel_vdata(self: pointer): ptr pointer {.importc: "QWebChannel_vdata".}
 proc fvdata_cQWebChannel(self: pointer): pointer {.importc: "vdata_QWebChannel".}
 
@@ -103,7 +103,7 @@ proc fcQWebChannel_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQWebChannel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebChannel_protectedbase_receivers".}
 proc fcQWebChannel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebChannel_protectedbase_isSignalConnected".}
 proc fcQWebChannel_new(vtbl: pointer, vdata: csize_t): ptr cQWebChannel {.importc: "QWebChannel_new".}
-proc fcQWebChannel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebChannel {.importc: "QWebChannel_new2".}
+proc fcQWebChannel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebChannel {.importc: "QWebChannel_new_parent".}
 proc fcQWebChannel_staticMetaObject(): pointer {.importc: "QWebChannel_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebchannel_types.QWebChannel): gen_qobjectdefs_types.QMetaObject =
@@ -116,7 +116,7 @@ proc metacall*(self: gen_qwebchannel_types.QWebChannel, param1: cint, param2: ci
   fcQWebChannel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebchannel_types.QWebChannel, s: cstring): string =
-  let v_ms = fcQWebChannel_tr(s)
+  let v_ms = fcQWebChannel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -198,13 +198,13 @@ proc disconnectFrom*(self: gen_qwebchannel_types.QWebChannel, transport: gen_qwe
   fcQWebChannel_disconnectFrom(self.h, transport.h)
 
 proc tr*(_: type gen_qwebchannel_types.QWebChannel, s: cstring, c: cstring): string =
-  let v_ms = fcQWebChannel_tr2(s, c)
+  let v_ms = fcQWebChannel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebchannel_types.QWebChannel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebChannel_tr3(s, c, n)
+  let v_ms = fcQWebChannel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

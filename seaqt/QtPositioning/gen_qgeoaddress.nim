@@ -39,7 +39,7 @@ export gen_qgeoaddress_types
 
 type cQGeoAddress*{.exportc: "QGeoAddress", incompleteStruct.} = object
 
-proc fcQGeoAddress_operatorAssign(self: pointer, other: pointer): void {.importc: "QGeoAddress_operatorAssign".}
+proc fcQGeoAddress_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGeoAddress_operatorAssign".}
 proc fcQGeoAddress_swap(self: pointer, other: pointer): void {.importc: "QGeoAddress_swap".}
 proc fcQGeoAddress_text(self: pointer): struct_seaqt_string {.importc: "QGeoAddress_text".}
 proc fcQGeoAddress_setText(self: pointer, text: struct_seaqt_string): void {.importc: "QGeoAddress_setText".}
@@ -65,10 +65,10 @@ proc fcQGeoAddress_isEmpty(self: pointer): bool {.importc: "QGeoAddress_isEmpty"
 proc fcQGeoAddress_clear(self: pointer): void {.importc: "QGeoAddress_clear".}
 proc fcQGeoAddress_isTextGenerated(self: pointer): bool {.importc: "QGeoAddress_isTextGenerated".}
 proc fcQGeoAddress_new(): ptr cQGeoAddress {.importc: "QGeoAddress_new".}
-proc fcQGeoAddress_new2(other: pointer): ptr cQGeoAddress {.importc: "QGeoAddress_new2".}
+proc fcQGeoAddress_new2(fromVal: pointer): ptr cQGeoAddress {.importc: "QGeoAddress_new_from".}
 
-proc operatorAssign*(self: gen_qgeoaddress_types.QGeoAddress, other: gen_qgeoaddress_types.QGeoAddress): void =
-  fcQGeoAddress_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qgeoaddress_types.QGeoAddress, fromVal: gen_qgeoaddress_types.QGeoAddress): void =
+  fcQGeoAddress_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qgeoaddress_types.QGeoAddress, other: gen_qgeoaddress_types.QGeoAddress): void =
   fcQGeoAddress_swap(self.h, other.h)
@@ -176,6 +176,6 @@ proc create*(T: type gen_qgeoaddress_types.QGeoAddress): gen_qgeoaddress_types.Q
   let tmp = gen_qgeoaddress_types.QGeoAddress(h: fcQGeoAddress_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeoaddress_types.QGeoAddress,
-    other: gen_qgeoaddress_types.QGeoAddress): gen_qgeoaddress_types.QGeoAddress =
-  let tmp = gen_qgeoaddress_types.QGeoAddress(h: fcQGeoAddress_new2(other.h), owned: true)
+    fromVal: gen_qgeoaddress_types.QGeoAddress): gen_qgeoaddress_types.QGeoAddress =
+  let tmp = gen_qgeoaddress_types.QGeoAddress(h: fcQGeoAddress_new2(fromVal.h), owned: true)
   tmp

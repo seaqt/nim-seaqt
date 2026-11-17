@@ -139,7 +139,7 @@ void QAccessible__State_setSearchEdit(QAccessible__State* self, unsigned long lo
 void QAccessible__State_delete(QAccessible__State* self);
 
 void QAccessible__ActivationObserver_accessibilityActiveChanged(QAccessible__ActivationObserver* self, bool active);
-void QAccessible__ActivationObserver_operatorAssign(QAccessible__ActivationObserver* self, QAccessible__ActivationObserver* param1);
+void QAccessible__ActivationObserver_operatorAssign(QAccessible__ActivationObserver* self, QAccessible__ActivationObserver* from);
 
 void QAccessible__ActivationObserver_delete(QAccessible__ActivationObserver* self);
 

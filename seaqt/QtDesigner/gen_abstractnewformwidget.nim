@@ -55,14 +55,14 @@ type cQDesignerNewFormWidgetInterface*{.exportc: "QDesignerNewFormWidgetInterfac
 proc fcQDesignerNewFormWidgetInterface_metaObject(self: pointer): pointer {.importc: "QDesignerNewFormWidgetInterface_metaObject".}
 proc fcQDesignerNewFormWidgetInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerNewFormWidgetInterface_metacast".}
 proc fcQDesignerNewFormWidgetInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerNewFormWidgetInterface_metacall".}
-proc fcQDesignerNewFormWidgetInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerNewFormWidgetInterface_tr".}
+proc fcQDesignerNewFormWidgetInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerNewFormWidgetInterface_tr_s".}
 proc fcQDesignerNewFormWidgetInterface_hasCurrentTemplate(self: pointer): bool {.importc: "QDesignerNewFormWidgetInterface_hasCurrentTemplate".}
 proc fcQDesignerNewFormWidgetInterface_templateActivated(self: pointer): void {.importc: "QDesignerNewFormWidgetInterface_templateActivated".}
 proc fcQDesignerNewFormWidgetInterface_connect_templateActivated(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerNewFormWidgetInterface_connect_templateActivated".}
 proc fcQDesignerNewFormWidgetInterface_currentTemplateChanged(self: pointer, templateSelected: bool): void {.importc: "QDesignerNewFormWidgetInterface_currentTemplateChanged".}
 proc fcQDesignerNewFormWidgetInterface_connect_currentTemplateChanged(self: pointer, slot: int, callback: proc (slot: int, templateSelected: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerNewFormWidgetInterface_connect_currentTemplateChanged".}
-proc fcQDesignerNewFormWidgetInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerNewFormWidgetInterface_tr2".}
-proc fcQDesignerNewFormWidgetInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerNewFormWidgetInterface_tr3".}
+proc fcQDesignerNewFormWidgetInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerNewFormWidgetInterface_tr_s_c".}
+proc fcQDesignerNewFormWidgetInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerNewFormWidgetInterface_tr_s_c_n".}
 proc fcQDesignerNewFormWidgetInterface_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QDesignerNewFormWidgetInterface_protectedbase_updateMicroFocus".}
 proc fcQDesignerNewFormWidgetInterface_protectedbase_create(self: pointer): void {.importc: "QDesignerNewFormWidgetInterface_protectedbase_create".}
 proc fcQDesignerNewFormWidgetInterface_protectedbase_destroy(self: pointer): void {.importc: "QDesignerNewFormWidgetInterface_protectedbase_destroy".}
@@ -84,7 +84,7 @@ proc metacall*(self: gen_abstractnewformwidget_types.QDesignerNewFormWidgetInter
   fcQDesignerNewFormWidgetInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractnewformwidget_types.QDesignerNewFormWidgetInterface, s: cstring): string =
-  let v_ms = fcQDesignerNewFormWidgetInterface_tr(s)
+  let v_ms = fcQDesignerNewFormWidgetInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -131,13 +131,13 @@ proc onCurrentTemplateChanged*(self: gen_abstractnewformwidget_types.QDesignerNe
   fcQDesignerNewFormWidgetInterface_connect_currentTemplateChanged(self.h, cast[int](addr tmp[]), fcQDesignerNewFormWidgetInterface_slot_callback_currentTemplateChanged, fcQDesignerNewFormWidgetInterface_slot_callback_currentTemplateChanged_release)
 
 proc tr*(_: type gen_abstractnewformwidget_types.QDesignerNewFormWidgetInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerNewFormWidgetInterface_tr2(s, c)
+  let v_ms = fcQDesignerNewFormWidgetInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractnewformwidget_types.QDesignerNewFormWidgetInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerNewFormWidgetInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerNewFormWidgetInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

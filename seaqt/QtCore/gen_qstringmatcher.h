@@ -23,21 +23,21 @@ typedef struct QStringMatcher QStringMatcher;
 #endif
 
 QStringMatcher* QStringMatcher_new();
-QStringMatcher* QStringMatcher_new2(struct seaqt_string pattern);
-QStringMatcher* QStringMatcher_new3(QChar* uc, ptrdiff_t len);
-QStringMatcher* QStringMatcher_new4(QStringMatcher* other);
-QStringMatcher* QStringMatcher_new5(struct seaqt_string pattern, int cs);
-QStringMatcher* QStringMatcher_new6(QChar* uc, ptrdiff_t len, int cs);
+QStringMatcher* QStringMatcher_new_QString(struct seaqt_string pattern);
+QStringMatcher* QStringMatcher_new_QChar_qsizetype(QChar* uc, ptrdiff_t len);
+QStringMatcher* QStringMatcher_new_QStringMatcher(QStringMatcher* from);
+QStringMatcher* QStringMatcher_new_QString_Qt_CaseSensitivity(struct seaqt_string pattern, int cs);
+QStringMatcher* QStringMatcher_new_QChar_qsizetype_Qt_CaseSensitivity(QChar* uc, ptrdiff_t len, int cs);
 
-void QStringMatcher_operatorAssign(QStringMatcher* self, QStringMatcher* other);
+void QStringMatcher_operatorAssign(QStringMatcher* self, QStringMatcher* from);
 void QStringMatcher_setPattern(QStringMatcher* self, struct seaqt_string pattern);
 void QStringMatcher_setCaseSensitivity(QStringMatcher* self, int cs);
-ptrdiff_t QStringMatcher_indexIn(const QStringMatcher* self, struct seaqt_string str);
-ptrdiff_t QStringMatcher_indexIn2(const QStringMatcher* self, QChar* str, ptrdiff_t length);
+ptrdiff_t QStringMatcher_indexIn_QString(const QStringMatcher* self, struct seaqt_string str);
+ptrdiff_t QStringMatcher_indexIn_QChar_qsizetype(const QStringMatcher* self, QChar* str, ptrdiff_t length);
 struct seaqt_string QStringMatcher_pattern(const QStringMatcher* self);
 int QStringMatcher_caseSensitivity(const QStringMatcher* self);
-ptrdiff_t QStringMatcher_indexIn3(const QStringMatcher* self, struct seaqt_string str, ptrdiff_t from);
-ptrdiff_t QStringMatcher_indexIn4(const QStringMatcher* self, QChar* str, ptrdiff_t length, ptrdiff_t from);
+ptrdiff_t QStringMatcher_indexIn_QString_qsizetype(const QStringMatcher* self, struct seaqt_string str, ptrdiff_t from);
+ptrdiff_t QStringMatcher_indexIn_QChar_qsizetype_qsizetype(const QStringMatcher* self, QChar* str, ptrdiff_t length, ptrdiff_t from);
 
 void QStringMatcher_delete(QStringMatcher* self);
 

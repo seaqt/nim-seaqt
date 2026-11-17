@@ -92,7 +92,7 @@ type cQDesignerFormWindowManagerInterface*{.exportc: "QDesignerFormWindowManager
 proc fcQDesignerFormWindowManagerInterface_metaObject(self: pointer): pointer {.importc: "QDesignerFormWindowManagerInterface_metaObject".}
 proc fcQDesignerFormWindowManagerInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerFormWindowManagerInterface_metacast".}
 proc fcQDesignerFormWindowManagerInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerFormWindowManagerInterface_metacall".}
-proc fcQDesignerFormWindowManagerInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowManagerInterface_tr".}
+proc fcQDesignerFormWindowManagerInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowManagerInterface_tr_s".}
 proc fcQDesignerFormWindowManagerInterface_action(self: pointer, action: cint): pointer {.importc: "QDesignerFormWindowManagerInterface_action".}
 proc fcQDesignerFormWindowManagerInterface_actionGroup(self: pointer, actionGroup: cint): pointer {.importc: "QDesignerFormWindowManagerInterface_actionGroup".}
 proc fcQDesignerFormWindowManagerInterface_actionCut(self: pointer): pointer {.importc: "QDesignerFormWindowManagerInterface_actionCut".}
@@ -133,8 +133,8 @@ proc fcQDesignerFormWindowManagerInterface_setActiveFormWindow(self: pointer, fo
 proc fcQDesignerFormWindowManagerInterface_showPreview(self: pointer): void {.importc: "QDesignerFormWindowManagerInterface_showPreview".}
 proc fcQDesignerFormWindowManagerInterface_closeAllPreviews(self: pointer): void {.importc: "QDesignerFormWindowManagerInterface_closeAllPreviews".}
 proc fcQDesignerFormWindowManagerInterface_showPluginDialog(self: pointer): void {.importc: "QDesignerFormWindowManagerInterface_showPluginDialog".}
-proc fcQDesignerFormWindowManagerInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowManagerInterface_tr2".}
-proc fcQDesignerFormWindowManagerInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerFormWindowManagerInterface_tr3".}
+proc fcQDesignerFormWindowManagerInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowManagerInterface_tr_s_c".}
+proc fcQDesignerFormWindowManagerInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerFormWindowManagerInterface_tr_s_c_n".}
 proc fcQDesignerFormWindowManagerInterface_protectedbase_sender(self: pointer): pointer {.importc: "QDesignerFormWindowManagerInterface_protectedbase_sender".}
 proc fcQDesignerFormWindowManagerInterface_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDesignerFormWindowManagerInterface_protectedbase_senderSignalIndex".}
 proc fcQDesignerFormWindowManagerInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerFormWindowManagerInterface_protectedbase_receivers".}
@@ -151,7 +151,7 @@ proc metacall*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowMana
   fcQDesignerFormWindowManagerInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface, s: cstring): string =
-  let v_ms = fcQDesignerFormWindowManagerInterface_tr(s)
+  let v_ms = fcQDesignerFormWindowManagerInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -337,13 +337,13 @@ proc showPluginDialog*(self: gen_abstractformwindowmanager_types.QDesignerFormWi
   fcQDesignerFormWindowManagerInterface_showPluginDialog(self.h)
 
 proc tr*(_: type gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerFormWindowManagerInterface_tr2(s, c)
+  let v_ms = fcQDesignerFormWindowManagerInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerFormWindowManagerInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerFormWindowManagerInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

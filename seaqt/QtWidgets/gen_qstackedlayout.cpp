@@ -260,16 +260,16 @@ public:
 	friend QSize* QStackedLayout_virtualbase_maximumSize(const VirtualQStackedLayout* self);
 
 	virtual int indexOf(const QWidget* param1) const override {
-		if (vtbl->indexOf == 0) {
+		if (vtbl->indexOf_QWidget == 0) {
 			return QStackedLayout::indexOf(param1);
 		}
 
 		QWidget* sigval1 = (QWidget*) param1;
-		int callback_return_value = vtbl->indexOf(this, sigval1);
+		int callback_return_value = vtbl->indexOf_QWidget(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QStackedLayout_virtualbase_indexOf(const VirtualQStackedLayout* self, QWidget* param1);
+	friend int QStackedLayout_virtualbase_indexOf_QWidget(const VirtualQStackedLayout* self, QWidget* param1);
 
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
@@ -459,12 +459,12 @@ VirtualQStackedLayout* QStackedLayout_new(const QStackedLayout_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQStackedLayout(vtbl) : nullptr;
 }
 
-VirtualQStackedLayout* QStackedLayout_new2(const QStackedLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQStackedLayout* QStackedLayout_new_parent(const QStackedLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQStackedLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQStackedLayout(vtbl, parent) : nullptr;
 }
 
-VirtualQStackedLayout* QStackedLayout_new3(const QStackedLayout_VTable* vtbl, size_t vdata, QLayout* parentLayout) {
+VirtualQStackedLayout* QStackedLayout_new_parentLayout(const QStackedLayout_VTable* vtbl, size_t vdata, QLayout* parentLayout) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQStackedLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQStackedLayout(vtbl, parentLayout) : nullptr;
 }
@@ -485,7 +485,7 @@ int QStackedLayout_metacall(QStackedLayout* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QStackedLayout_tr(const char* s) {
+struct seaqt_string QStackedLayout_tr_s(const char* s) {
 	QString _ret = QStackedLayout::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -601,7 +601,7 @@ void QStackedLayout_setCurrentWidget(QStackedLayout* self, QWidget* w) {
 	self->setCurrentWidget(w);
 }
 
-struct seaqt_string QStackedLayout_tr2(const char* s, const char* c) {
+struct seaqt_string QStackedLayout_tr_s_c(const char* s, const char* c) {
 	QString _ret = QStackedLayout::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -612,7 +612,7 @@ struct seaqt_string QStackedLayout_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QStackedLayout_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QStackedLayout_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QStackedLayout::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -718,7 +718,7 @@ QSize* QStackedLayout_virtualbase_maximumSize(const VirtualQStackedLayout* self)
 	return new QSize(self->QStackedLayout::maximumSize());
 }
 
-int QStackedLayout_virtualbase_indexOf(const VirtualQStackedLayout* self, QWidget* param1) {
+int QStackedLayout_virtualbase_indexOf_QWidget(const VirtualQStackedLayout* self, QWidget* param1) {
 
 	return self->QStackedLayout::indexOf(param1);
 }

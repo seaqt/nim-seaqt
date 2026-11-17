@@ -65,28 +65,28 @@ type cQUdpSocket*{.exportc: "QUdpSocket", incompleteStruct.} = object
 proc fcQUdpSocket_metaObject(self: pointer): pointer {.importc: "QUdpSocket_metaObject".}
 proc fcQUdpSocket_metacast(self: pointer, param1: cstring): pointer {.importc: "QUdpSocket_metacast".}
 proc fcQUdpSocket_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QUdpSocket_metacall".}
-proc fcQUdpSocket_tr(s: cstring): struct_seaqt_string {.importc: "QUdpSocket_tr".}
-proc fcQUdpSocket_bindX(self: pointer, addrVal: cint): bool {.importc: "QUdpSocket_bind".}
-proc fcQUdpSocket_joinMulticastGroup(self: pointer, groupAddress: pointer): bool {.importc: "QUdpSocket_joinMulticastGroup".}
-proc fcQUdpSocket_joinMulticastGroup2(self: pointer, groupAddress: pointer, iface: pointer): bool {.importc: "QUdpSocket_joinMulticastGroup2".}
-proc fcQUdpSocket_leaveMulticastGroup(self: pointer, groupAddress: pointer): bool {.importc: "QUdpSocket_leaveMulticastGroup".}
-proc fcQUdpSocket_leaveMulticastGroup2(self: pointer, groupAddress: pointer, iface: pointer): bool {.importc: "QUdpSocket_leaveMulticastGroup2".}
+proc fcQUdpSocket_trS(s: cstring): struct_seaqt_string {.importc: "QUdpSocket_tr_s".}
+proc fcQUdpSocket_bindAddr(self: pointer, addrVal: cint): bool {.importc: "QUdpSocket_bind_addr".}
+proc fcQUdpSocket_joinMulticastGroupGroupAddress(self: pointer, groupAddress: pointer): bool {.importc: "QUdpSocket_joinMulticastGroup_groupAddress".}
+proc fcQUdpSocket_joinMulticastGroupGroupAddressIface(self: pointer, groupAddress: pointer, iface: pointer): bool {.importc: "QUdpSocket_joinMulticastGroup_groupAddress_iface".}
+proc fcQUdpSocket_leaveMulticastGroupGroupAddress(self: pointer, groupAddress: pointer): bool {.importc: "QUdpSocket_leaveMulticastGroup_groupAddress".}
+proc fcQUdpSocket_leaveMulticastGroupGroupAddressIface(self: pointer, groupAddress: pointer, iface: pointer): bool {.importc: "QUdpSocket_leaveMulticastGroup_groupAddress_iface".}
 proc fcQUdpSocket_multicastInterface(self: pointer): pointer {.importc: "QUdpSocket_multicastInterface".}
 proc fcQUdpSocket_setMulticastInterface(self: pointer, iface: pointer): void {.importc: "QUdpSocket_setMulticastInterface".}
 proc fcQUdpSocket_hasPendingDatagrams(self: pointer): bool {.importc: "QUdpSocket_hasPendingDatagrams".}
 proc fcQUdpSocket_pendingDatagramSize(self: pointer): clonglong {.importc: "QUdpSocket_pendingDatagramSize".}
 proc fcQUdpSocket_receiveDatagram(self: pointer): pointer {.importc: "QUdpSocket_receiveDatagram".}
-proc fcQUdpSocket_readDatagram(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QUdpSocket_readDatagram".}
-proc fcQUdpSocket_writeDatagram(self: pointer, datagram: pointer): clonglong {.importc: "QUdpSocket_writeDatagram".}
-proc fcQUdpSocket_writeDatagram2(self: pointer, data: cstring, len: clonglong, host: pointer, port: cushort): clonglong {.importc: "QUdpSocket_writeDatagram2".}
-proc fcQUdpSocket_writeDatagram3(self: pointer, datagram: struct_seaqt_string, host: pointer, port: cushort): clonglong {.importc: "QUdpSocket_writeDatagram3".}
-proc fcQUdpSocket_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUdpSocket_tr2".}
-proc fcQUdpSocket_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUdpSocket_tr3".}
-proc fcQUdpSocket_bind2(self: pointer, addrVal: cint, port: cushort): bool {.importc: "QUdpSocket_bind2".}
-proc fcQUdpSocket_bind3(self: pointer, addrVal: cint, port: cushort, mode: cint): bool {.importc: "QUdpSocket_bind3".}
-proc fcQUdpSocket_receiveDatagramWithMaxSize(self: pointer, maxSize: clonglong): pointer {.importc: "QUdpSocket_receiveDatagramWithMaxSize".}
-proc fcQUdpSocket_readDatagram2(self: pointer, data: cstring, maxlen: clonglong, host: pointer): clonglong {.importc: "QUdpSocket_readDatagram2".}
-proc fcQUdpSocket_readDatagram3(self: pointer, data: cstring, maxlen: clonglong, host: pointer, port: ptr cushort): clonglong {.importc: "QUdpSocket_readDatagram3".}
+proc fcQUdpSocket_readDatagramDataMaxlen(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QUdpSocket_readDatagram_data_maxlen".}
+proc fcQUdpSocket_writeDatagramDatagram(self: pointer, datagram: pointer): clonglong {.importc: "QUdpSocket_writeDatagram_datagram".}
+proc fcQUdpSocket_writeDatagramDataLenHostPort(self: pointer, data: cstring, len: clonglong, host: pointer, port: cushort): clonglong {.importc: "QUdpSocket_writeDatagram_data_len_host_port".}
+proc fcQUdpSocket_writeDatagramDatagramHostPort(self: pointer, datagram: struct_seaqt_string, host: pointer, port: cushort): clonglong {.importc: "QUdpSocket_writeDatagram_datagram_host_port".}
+proc fcQUdpSocket_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUdpSocket_tr_s_c".}
+proc fcQUdpSocket_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUdpSocket_tr_s_c_n".}
+proc fcQUdpSocket_bindAddrPort(self: pointer, addrVal: cint, port: cushort): bool {.importc: "QUdpSocket_bind_addr_port".}
+proc fcQUdpSocket_bindAddrPortMode(self: pointer, addrVal: cint, port: cushort, mode: cint): bool {.importc: "QUdpSocket_bind_addr_port_mode".}
+proc fcQUdpSocket_receiveDatagramMaxSize(self: pointer, maxSize: clonglong): pointer {.importc: "QUdpSocket_receiveDatagram_maxSize".}
+proc fcQUdpSocket_readDatagramDataMaxlenHost(self: pointer, data: cstring, maxlen: clonglong, host: pointer): clonglong {.importc: "QUdpSocket_readDatagram_data_maxlen_host".}
+proc fcQUdpSocket_readDatagramDataMaxlenHostPort(self: pointer, data: cstring, maxlen: clonglong, host: pointer, port: ptr cushort): clonglong {.importc: "QUdpSocket_readDatagram_data_maxlen_host_port".}
 proc fcQUdpSocket_vdata(self: pointer): ptr pointer {.importc: "QUdpSocket_vdata".}
 proc fvdata_cQUdpSocket(self: pointer): pointer {.importc: "vdata_QUdpSocket".}
 
@@ -96,8 +96,8 @@ type cQUdpSocketVTable {.pure.} = object
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
   resume*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
-  bindX*: proc(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl, raises: [], gcsafe.}
-  connectToHost*: proc(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl, raises: [], gcsafe.}
+  bindAddressPortMode*: proc(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl, raises: [], gcsafe.}
+  connectToHostHostNamePortModeProtocol*: proc(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl, raises: [], gcsafe.}
   disconnectFromHost*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   bytesAvailable*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
   bytesToWrite*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
@@ -134,8 +134,8 @@ proc fcQUdpSocket_virtualbase_metaObject(self: pointer): pointer {.importc: "QUd
 proc fcQUdpSocket_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QUdpSocket_virtualbase_metacast".}
 proc fcQUdpSocket_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QUdpSocket_virtualbase_metacall".}
 proc fcQUdpSocket_virtualbase_resume(self: pointer): void {.importc: "QUdpSocket_virtualbase_resume".}
-proc fcQUdpSocket_virtualbase_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.importc: "QUdpSocket_virtualbase_bind".}
-proc fcQUdpSocket_virtualbase_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QUdpSocket_virtualbase_connectToHost".}
+proc fcQUdpSocket_virtualbase_bindAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): bool {.importc: "QUdpSocket_virtualbase_bind_address_port_mode".}
+proc fcQUdpSocket_virtualbase_connectToHostHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QUdpSocket_virtualbase_connectToHost_hostName_port_mode_protocol".}
 proc fcQUdpSocket_virtualbase_disconnectFromHost(self: pointer): void {.importc: "QUdpSocket_virtualbase_disconnectFromHost".}
 proc fcQUdpSocket_virtualbase_bytesAvailable(self: pointer): clonglong {.importc: "QUdpSocket_virtualbase_bytesAvailable".}
 proc fcQUdpSocket_virtualbase_bytesToWrite(self: pointer): clonglong {.importc: "QUdpSocket_virtualbase_bytesToWrite".}
@@ -182,7 +182,7 @@ proc fcQUdpSocket_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQUdpSocket_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QUdpSocket_protectedbase_receivers".}
 proc fcQUdpSocket_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QUdpSocket_protectedbase_isSignalConnected".}
 proc fcQUdpSocket_new(vtbl: pointer, vdata: csize_t): ptr cQUdpSocket {.importc: "QUdpSocket_new".}
-proc fcQUdpSocket_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUdpSocket {.importc: "QUdpSocket_new2".}
+proc fcQUdpSocket_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUdpSocket {.importc: "QUdpSocket_new_parent".}
 proc fcQUdpSocket_staticMetaObject(): pointer {.importc: "QUdpSocket_staticMetaObject".}
 
 proc metaObject*(self: gen_qudpsocket_types.QUdpSocket): gen_qobjectdefs_types.QMetaObject =
@@ -195,25 +195,25 @@ proc metacall*(self: gen_qudpsocket_types.QUdpSocket, param1: cint, param2: cint
   fcQUdpSocket_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qudpsocket_types.QUdpSocket, s: cstring): string =
-  let v_ms = fcQUdpSocket_tr(s)
+  let v_ms = fcQUdpSocket_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc bindX*(self: gen_qudpsocket_types.QUdpSocket, addrVal: cint): bool =
-  fcQUdpSocket_bindX(self.h, cint(addrVal))
+  fcQUdpSocket_bindAddr(self.h, cint(addrVal))
 
 proc joinMulticastGroup*(self: gen_qudpsocket_types.QUdpSocket, groupAddress: gen_qhostaddress_types.QHostAddress): bool =
-  fcQUdpSocket_joinMulticastGroup(self.h, groupAddress.h)
+  fcQUdpSocket_joinMulticastGroupGroupAddress(self.h, groupAddress.h)
 
 proc joinMulticastGroup*(self: gen_qudpsocket_types.QUdpSocket, groupAddress: gen_qhostaddress_types.QHostAddress, iface: gen_qnetworkinterface_types.QNetworkInterface): bool =
-  fcQUdpSocket_joinMulticastGroup2(self.h, groupAddress.h, iface.h)
+  fcQUdpSocket_joinMulticastGroupGroupAddressIface(self.h, groupAddress.h, iface.h)
 
 proc leaveMulticastGroup*(self: gen_qudpsocket_types.QUdpSocket, groupAddress: gen_qhostaddress_types.QHostAddress): bool =
-  fcQUdpSocket_leaveMulticastGroup(self.h, groupAddress.h)
+  fcQUdpSocket_leaveMulticastGroupGroupAddress(self.h, groupAddress.h)
 
 proc leaveMulticastGroup*(self: gen_qudpsocket_types.QUdpSocket, groupAddress: gen_qhostaddress_types.QHostAddress, iface: gen_qnetworkinterface_types.QNetworkInterface): bool =
-  fcQUdpSocket_leaveMulticastGroup2(self.h, groupAddress.h, iface.h)
+  fcQUdpSocket_leaveMulticastGroupGroupAddressIface(self.h, groupAddress.h, iface.h)
 
 proc multicastInterface*(self: gen_qudpsocket_types.QUdpSocket): gen_qnetworkinterface_types.QNetworkInterface =
   gen_qnetworkinterface_types.QNetworkInterface(h: fcQUdpSocket_multicastInterface(self.h), owned: true)
@@ -231,50 +231,50 @@ proc receiveDatagram*(self: gen_qudpsocket_types.QUdpSocket): gen_qnetworkdatagr
   gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQUdpSocket_receiveDatagram(self.h), owned: true)
 
 proc readDatagram*(self: gen_qudpsocket_types.QUdpSocket, data: cstring, maxlen: clonglong): clonglong =
-  fcQUdpSocket_readDatagram(self.h, data, maxlen)
+  fcQUdpSocket_readDatagramDataMaxlen(self.h, data, maxlen)
 
 proc writeDatagram*(self: gen_qudpsocket_types.QUdpSocket, datagram: gen_qnetworkdatagram_types.QNetworkDatagram): clonglong =
-  fcQUdpSocket_writeDatagram(self.h, datagram.h)
+  fcQUdpSocket_writeDatagramDatagram(self.h, datagram.h)
 
 proc writeDatagram*(self: gen_qudpsocket_types.QUdpSocket, data: cstring, len: clonglong, host: gen_qhostaddress_types.QHostAddress, port: cushort): clonglong =
-  fcQUdpSocket_writeDatagram2(self.h, data, len, host.h, port)
+  fcQUdpSocket_writeDatagramDataLenHostPort(self.h, data, len, host.h, port)
 
 proc writeDatagram*(self: gen_qudpsocket_types.QUdpSocket, datagram: openArray[byte], host: gen_qhostaddress_types.QHostAddress, port: cushort): clonglong =
-  fcQUdpSocket_writeDatagram3(self.h, struct_seaqt_string(data: if len(datagram) > 0: addr datagram[0] else: nil, len: csize_t(len(datagram))), host.h, port)
+  fcQUdpSocket_writeDatagramDatagramHostPort(self.h, struct_seaqt_string(data: if len(datagram) > 0: addr datagram[0] else: nil, len: csize_t(len(datagram))), host.h, port)
 
 proc tr*(_: type gen_qudpsocket_types.QUdpSocket, s: cstring, c: cstring): string =
-  let v_ms = fcQUdpSocket_tr2(s, c)
+  let v_ms = fcQUdpSocket_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qudpsocket_types.QUdpSocket, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQUdpSocket_tr3(s, c, n)
+  let v_ms = fcQUdpSocket_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc bindX*(self: gen_qudpsocket_types.QUdpSocket, addrVal: cint, port: cushort): bool =
-  fcQUdpSocket_bind2(self.h, cint(addrVal), port)
+  fcQUdpSocket_bindAddrPort(self.h, cint(addrVal), port)
 
 proc bindX*(self: gen_qudpsocket_types.QUdpSocket, addrVal: cint, port: cushort, mode: cint): bool =
-  fcQUdpSocket_bind3(self.h, cint(addrVal), port, cint(mode))
+  fcQUdpSocket_bindAddrPortMode(self.h, cint(addrVal), port, cint(mode))
 
 proc receiveDatagram*(self: gen_qudpsocket_types.QUdpSocket, maxSize: clonglong): gen_qnetworkdatagram_types.QNetworkDatagram =
-  gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQUdpSocket_receiveDatagramWithMaxSize(self.h, maxSize), owned: true)
+  gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQUdpSocket_receiveDatagramMaxSize(self.h, maxSize), owned: true)
 
 proc readDatagram*(self: gen_qudpsocket_types.QUdpSocket, data: cstring, maxlen: clonglong, host: gen_qhostaddress_types.QHostAddress): clonglong =
-  fcQUdpSocket_readDatagram2(self.h, data, maxlen, host.h)
+  fcQUdpSocket_readDatagramDataMaxlenHost(self.h, data, maxlen, host.h)
 
 proc readDatagram*(self: gen_qudpsocket_types.QUdpSocket, data: cstring, maxlen: clonglong, host: gen_qhostaddress_types.QHostAddress, port: ptr cushort): clonglong =
-  fcQUdpSocket_readDatagram3(self.h, data, maxlen, host.h, port)
+  fcQUdpSocket_readDatagramDataMaxlenHostPort(self.h, data, maxlen, host.h, port)
 
 type QUdpSocketmetaObjectProc* = proc(self: QUdpSocket): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QUdpSocketmetacastProc* = proc(self: QUdpSocket, param1: cstring): pointer {.raises: [], gcsafe.}
 type QUdpSocketmetacallProc* = proc(self: QUdpSocket, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QUdpSocketresumeProc* = proc(self: QUdpSocket): void {.raises: [], gcsafe.}
-type QUdpSocketbindXProc* = proc(self: QUdpSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
-type QUdpSocketconnectToHostProc* = proc(self: QUdpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
+type QUdpSocketbindAddressPortModeProc* = proc(self: QUdpSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
+type QUdpSocketconnectToHostHostNamePortModeProtocolProc* = proc(self: QUdpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
 type QUdpSocketdisconnectFromHostProc* = proc(self: QUdpSocket): void {.raises: [], gcsafe.}
 type QUdpSocketbytesAvailableProc* = proc(self: QUdpSocket): clonglong {.raises: [], gcsafe.}
 type QUdpSocketbytesToWriteProc* = proc(self: QUdpSocket): clonglong {.raises: [], gcsafe.}
@@ -314,8 +314,8 @@ type QUdpSocketVTable* {.inheritable, pure.} = object
   metacast*: QUdpSocketmetacastProc
   metacall*: QUdpSocketmetacallProc
   resume*: QUdpSocketresumeProc
-  bindX*: QUdpSocketbindXProc
-  connectToHost*: QUdpSocketconnectToHostProc
+  bindAddressPortMode*: QUdpSocketbindAddressPortModeProc
+  connectToHostHostNamePortModeProtocol*: QUdpSocketconnectToHostHostNamePortModeProtocolProc
   disconnectFromHost*: QUdpSocketdisconnectFromHostProc
   bytesAvailable*: QUdpSocketbytesAvailableProc
   bytesToWrite*: QUdpSocketbytesToWriteProc
@@ -362,10 +362,10 @@ proc QUdpSocketresume*(self: gen_qudpsocket_types.QUdpSocket): void =
   fcQUdpSocket_virtualbase_resume(self.h)
 
 proc QUdpSocketbindX*(self: gen_qudpsocket_types.QUdpSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool =
-  fcQUdpSocket_virtualbase_bindX(self.h, address.h, port, cint(mode))
+  fcQUdpSocket_virtualbase_bindAddressPortMode(self.h, address.h, port, cint(mode))
 
 proc QUdpSocketconnectToHost*(self: gen_qudpsocket_types.QUdpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
-  fcQUdpSocket_virtualbase_connectToHost(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
+  fcQUdpSocket_virtualbase_connectToHostHostNamePortModeProtocol(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc QUdpSocketdisconnectFromHost*(self: gen_qudpsocket_types.QUdpSocket): void =
   fcQUdpSocket_virtualbase_disconnectFromHost(self.h)
@@ -494,16 +494,16 @@ proc fcQUdpSocket_vtable_callback_resume(self: pointer): void {.cdecl.} =
   let self = QUdpSocket(h: self)
   vtbl[].resume(self)
 
-proc fcQUdpSocket_vtable_callback_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
+proc fcQUdpSocket_vtable_callback_bindAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: address, owned: false)
   let slotval2 = port
   let slotval3 = cint(mode)
-  var virtualReturn = vtbl[].bindX(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].bindAddressPortMode(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc fcQUdpSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
+proc fcQUdpSocket_vtable_callback_connectToHostHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
   let vhostName_ms = hostName
@@ -513,7 +513,7 @@ proc fcQUdpSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_
   let slotval2 = port
   let slotval3 = cint(mode)
   let slotval4 = cint(protocol)
-  vtbl[].connectToHost(self, slotval1, slotval2, slotval3, slotval4)
+  vtbl[].connectToHostHostNamePortModeProtocol(self, slotval1, slotval2, slotval3, slotval4)
 
 proc fcQUdpSocket_vtable_callback_disconnectFromHost(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
@@ -835,7 +835,7 @@ proc fcQUdpSocket_method_callback_resume(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
   inst.resume()
 
-proc fcQUdpSocket_method_callback_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
+proc fcQUdpSocket_method_callback_bindAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: address, owned: false)
   let slotval2 = port
@@ -843,7 +843,7 @@ proc fcQUdpSocket_method_callback_bindX(self: pointer, address: pointer, port: c
   var virtualReturn = inst.bindX(slotval1, slotval2, slotval3)
   virtualReturn
 
-proc fcQUdpSocket_method_callback_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
+proc fcQUdpSocket_method_callback_connectToHostHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
   let vhostName_ms = hostName
   let vhostNamex_ret = string.fromBytes(vhostName_ms)
@@ -1091,10 +1091,10 @@ proc create*(T: type gen_qudpsocket_types.QUdpSocket,
     vtbl[].vtbl.metacall = fcQUdpSocket_vtable_callback_metacall
   if not isNil(vtbl[].resume):
     vtbl[].vtbl.resume = fcQUdpSocket_vtable_callback_resume
-  if not isNil(vtbl[].bindX):
-    vtbl[].vtbl.bindX = fcQUdpSocket_vtable_callback_bindX
-  if not isNil(vtbl[].connectToHost):
-    vtbl[].vtbl.connectToHost = fcQUdpSocket_vtable_callback_connectToHost
+  if not isNil(vtbl[].bindAddressPortMode):
+    vtbl[].vtbl.bindAddressPortMode = fcQUdpSocket_vtable_callback_bindAddressPortMode
+  if not isNil(vtbl[].connectToHostHostNamePortModeProtocol):
+    vtbl[].vtbl.connectToHostHostNamePortModeProtocol = fcQUdpSocket_vtable_callback_connectToHostHostNamePortModeProtocol
   if not isNil(vtbl[].disconnectFromHost):
     vtbl[].vtbl.disconnectFromHost = fcQUdpSocket_vtable_callback_disconnectFromHost
   if not isNil(vtbl[].bytesAvailable):
@@ -1178,10 +1178,10 @@ proc create*(T: type gen_qudpsocket_types.QUdpSocket,
     vtbl[].vtbl.metacall = fcQUdpSocket_vtable_callback_metacall
   if not isNil(vtbl[].resume):
     vtbl[].vtbl.resume = fcQUdpSocket_vtable_callback_resume
-  if not isNil(vtbl[].bindX):
-    vtbl[].vtbl.bindX = fcQUdpSocket_vtable_callback_bindX
-  if not isNil(vtbl[].connectToHost):
-    vtbl[].vtbl.connectToHost = fcQUdpSocket_vtable_callback_connectToHost
+  if not isNil(vtbl[].bindAddressPortMode):
+    vtbl[].vtbl.bindAddressPortMode = fcQUdpSocket_vtable_callback_bindAddressPortMode
+  if not isNil(vtbl[].connectToHostHostNamePortModeProtocol):
+    vtbl[].vtbl.connectToHostHostNamePortModeProtocol = fcQUdpSocket_vtable_callback_connectToHostHostNamePortModeProtocol
   if not isNil(vtbl[].disconnectFromHost):
     vtbl[].vtbl.disconnectFromHost = fcQUdpSocket_vtable_callback_disconnectFromHost
   if not isNil(vtbl[].bytesAvailable):
@@ -1259,8 +1259,8 @@ const cQUdpSocket_mvtbl = cQUdpSocketVTable(
   metacast: fcQUdpSocket_method_callback_metacast,
   metacall: fcQUdpSocket_method_callback_metacall,
   resume: fcQUdpSocket_method_callback_resume,
-  bindX: fcQUdpSocket_method_callback_bindX,
-  connectToHost: fcQUdpSocket_method_callback_connectToHost,
+  bindAddressPortMode: fcQUdpSocket_method_callback_bindAddressPortMode,
+  connectToHostHostNamePortModeProtocol: fcQUdpSocket_method_callback_connectToHostHostNamePortModeProtocol,
   disconnectFromHost: fcQUdpSocket_method_callback_disconnectFromHost,
   bytesAvailable: fcQUdpSocket_method_callback_bytesAvailable,
   bytesToWrite: fcQUdpSocket_method_callback_bytesToWrite,

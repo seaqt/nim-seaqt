@@ -59,20 +59,20 @@ void* QParallelAnimationGroup_vdata(VirtualQParallelAnimationGroup* self);
 VirtualQParallelAnimationGroup* vdata_QParallelAnimationGroup(void* vdata);
 
 VirtualQParallelAnimationGroup* QParallelAnimationGroup_new(const QParallelAnimationGroup_VTable* vtbl, size_t vdata);
-VirtualQParallelAnimationGroup* QParallelAnimationGroup_new2(const QParallelAnimationGroup_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQParallelAnimationGroup* QParallelAnimationGroup_new_parent(const QParallelAnimationGroup_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QParallelAnimationGroup_virtbase(QParallelAnimationGroup* src, QAnimationGroup** outptr_QAnimationGroup);
 QMetaObject* QParallelAnimationGroup_metaObject(const QParallelAnimationGroup* self);
 void* QParallelAnimationGroup_metacast(QParallelAnimationGroup* self, const char* param1);
 int QParallelAnimationGroup_metacall(QParallelAnimationGroup* self, int param1, int param2, void** param3);
-struct seaqt_string QParallelAnimationGroup_tr(const char* s);
+struct seaqt_string QParallelAnimationGroup_tr_s(const char* s);
 int QParallelAnimationGroup_duration(const QParallelAnimationGroup* self);
 bool QParallelAnimationGroup_event(QParallelAnimationGroup* self, QEvent* event);
 void QParallelAnimationGroup_updateCurrentTime(QParallelAnimationGroup* self, int currentTime);
 void QParallelAnimationGroup_updateState(QParallelAnimationGroup* self, int newState, int oldState);
 void QParallelAnimationGroup_updateDirection(QParallelAnimationGroup* self, int direction);
-struct seaqt_string QParallelAnimationGroup_tr2(const char* s, const char* c);
-struct seaqt_string QParallelAnimationGroup_tr3(const char* s, const char* c, int n);
+struct seaqt_string QParallelAnimationGroup_tr_s_c(const char* s, const char* c);
+struct seaqt_string QParallelAnimationGroup_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QParallelAnimationGroup_virtualbase_metaObject(const VirtualQParallelAnimationGroup* self);
 void* QParallelAnimationGroup_virtualbase_metacast(VirtualQParallelAnimationGroup* self, const char* param1);

@@ -203,17 +203,17 @@ VirtualQPrinter* QPrinter_new(const QPrinter_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQPrinter(vtbl) : nullptr;
 }
 
-VirtualQPrinter* QPrinter_new2(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer) {
+VirtualQPrinter* QPrinter_new_printer(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrinter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrinter(vtbl, *printer) : nullptr;
 }
 
-VirtualQPrinter* QPrinter_new3(const QPrinter_VTable* vtbl, size_t vdata, int mode) {
+VirtualQPrinter* QPrinter_new_mode(const QPrinter_VTable* vtbl, size_t vdata, int mode) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrinter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrinter(vtbl, static_cast<QPrinter::PrinterMode>(mode)) : nullptr;
 }
 
-VirtualQPrinter* QPrinter_new4(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer, int mode) {
+VirtualQPrinter* QPrinter_new_printer_mode(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer, int mode) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrinter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrinter(vtbl, *printer, static_cast<QPrinter::PrinterMode>(mode)) : nullptr;
 }

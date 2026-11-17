@@ -199,7 +199,7 @@ VirtualQQmlPropertyMap* QQmlPropertyMap_new(const QQmlPropertyMap_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQQmlPropertyMap(vtbl) : nullptr;
 }
 
-VirtualQQmlPropertyMap* QQmlPropertyMap_new2(const QQmlPropertyMap_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQQmlPropertyMap* QQmlPropertyMap_new_parent(const QQmlPropertyMap_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlPropertyMap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlPropertyMap(vtbl, parent) : nullptr;
 }
@@ -220,7 +220,7 @@ int QQmlPropertyMap_metacall(QQmlPropertyMap* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQmlPropertyMap_tr(const char* s) {
+struct seaqt_string QQmlPropertyMap_tr_s(const char* s) {
 	QString _ret = QQmlPropertyMap::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -236,12 +236,12 @@ QVariant* QQmlPropertyMap_value(const QQmlPropertyMap* self, struct seaqt_string
 	return new QVariant(self->value(key_QString));
 }
 
-void QQmlPropertyMap_insert(QQmlPropertyMap* self, struct seaqt_string key, QVariant* value) {
+void QQmlPropertyMap_insert_key_value(QQmlPropertyMap* self, struct seaqt_string key, QVariant* value) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	self->insert(key_QString, *value);
 }
 
-void QQmlPropertyMap_insertWithValues(QQmlPropertyMap* self, struct seaqt_map /* of struct seaqt_string to QVariant* */  values) {
+void QQmlPropertyMap_insert_values(QQmlPropertyMap* self, struct seaqt_map /* of struct seaqt_string to QVariant* */  values) {
 	QVariantHash values_QMap;
 	values_QMap.reserve(values.len);
 	struct seaqt_string* values_karr = static_cast<struct seaqt_string*>(values.keys);
@@ -299,14 +299,14 @@ bool QQmlPropertyMap_contains(const QQmlPropertyMap* self, struct seaqt_string k
 	return self->contains(key_QString);
 }
 
-QVariant* QQmlPropertyMap_operatorSubscript(QQmlPropertyMap* self, struct seaqt_string key) {
+QVariant* QQmlPropertyMap_operatorSubscript_cQString(QQmlPropertyMap* self, struct seaqt_string key) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	QVariant& _ret = self->operator[](key_QString);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QVariant* QQmlPropertyMap_operatorSubscriptWithKey(const QQmlPropertyMap* self, struct seaqt_string key) {
+QVariant* QQmlPropertyMap_operatorSubscript_const_cQString(const QQmlPropertyMap* self, struct seaqt_string key) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	return new QVariant(self->operator[](key_QString));
 }
@@ -338,7 +338,7 @@ void QQmlPropertyMap_connect_valueChanged(QQmlPropertyMap* self, intptr_t slot, 
 	QQmlPropertyMap::connect(self, static_cast<void (QQmlPropertyMap::*)(const QString&, const QVariant&)>(&QQmlPropertyMap::valueChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQmlPropertyMap_tr2(const char* s, const char* c) {
+struct seaqt_string QQmlPropertyMap_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQmlPropertyMap::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -349,7 +349,7 @@ struct seaqt_string QQmlPropertyMap_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQmlPropertyMap_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQmlPropertyMap_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQmlPropertyMap::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

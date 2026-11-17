@@ -73,12 +73,12 @@ type cQState*{.exportc: "QState", incompleteStruct.} = object
 proc fcQState_metaObject(self: pointer): pointer {.importc: "QState_metaObject".}
 proc fcQState_metacast(self: pointer, param1: cstring): pointer {.importc: "QState_metacast".}
 proc fcQState_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QState_metacall".}
-proc fcQState_tr(s: cstring): struct_seaqt_string {.importc: "QState_tr".}
+proc fcQState_trS(s: cstring): struct_seaqt_string {.importc: "QState_tr_s".}
 proc fcQState_errorState(self: pointer): pointer {.importc: "QState_errorState".}
 proc fcQState_setErrorState(self: pointer, state: pointer): void {.importc: "QState_setErrorState".}
-proc fcQState_addTransition(self: pointer, transition: pointer): void {.importc: "QState_addTransition".}
-proc fcQState_addTransition2(self: pointer, sender: pointer, signal: cstring, target: pointer): pointer {.importc: "QState_addTransition2".}
-proc fcQState_addTransitionWithTarget(self: pointer, target: pointer): pointer {.importc: "QState_addTransitionWithTarget".}
+proc fcQState_addTransitionTransition(self: pointer, transition: pointer): void {.importc: "QState_addTransition_transition".}
+proc fcQState_addTransitionSenderSignalTarget(self: pointer, sender: pointer, signal: cstring, target: pointer): pointer {.importc: "QState_addTransition_sender_signal_target".}
+proc fcQState_addTransitionTarget(self: pointer, target: pointer): pointer {.importc: "QState_addTransition_target".}
 proc fcQState_removeTransition(self: pointer, transition: pointer): void {.importc: "QState_removeTransition".}
 proc fcQState_transitions(self: pointer): struct_seaqt_array {.importc: "QState_transitions".}
 proc fcQState_initialState(self: pointer): pointer {.importc: "QState_initialState".}
@@ -86,8 +86,8 @@ proc fcQState_setInitialState(self: pointer, state: pointer): void {.importc: "Q
 proc fcQState_childMode(self: pointer): cint {.importc: "QState_childMode".}
 proc fcQState_setChildMode(self: pointer, mode: cint): void {.importc: "QState_setChildMode".}
 proc fcQState_assignProperty(self: pointer, objectVal: pointer, name: cstring, value: pointer): void {.importc: "QState_assignProperty".}
-proc fcQState_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QState_tr2".}
-proc fcQState_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QState_tr3".}
+proc fcQState_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QState_tr_s_c".}
+proc fcQState_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QState_tr_s_c_n".}
 proc fcQState_vdata(self: pointer): ptr pointer {.importc: "QState_vdata".}
 proc fvdata_cQState(self: pointer): pointer {.importc: "vdata_QState".}
 
@@ -122,9 +122,9 @@ proc fcQState_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "Q
 proc fcQState_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QState_protectedbase_receivers".}
 proc fcQState_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QState_protectedbase_isSignalConnected".}
 proc fcQState_new(vtbl: pointer, vdata: csize_t): ptr cQState {.importc: "QState_new".}
-proc fcQState_new2(vtbl: pointer, vdata: csize_t, childMode: cint): ptr cQState {.importc: "QState_new2".}
-proc fcQState_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQState {.importc: "QState_new3".}
-proc fcQState_new4(vtbl: pointer, vdata: csize_t, childMode: cint, parent: pointer): ptr cQState {.importc: "QState_new4".}
+proc fcQState_new2(vtbl: pointer, vdata: csize_t, childMode: cint): ptr cQState {.importc: "QState_new_childMode".}
+proc fcQState_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQState {.importc: "QState_new_parent".}
+proc fcQState_new4(vtbl: pointer, vdata: csize_t, childMode: cint, parent: pointer): ptr cQState {.importc: "QState_new_childMode_parent".}
 proc fcQState_staticMetaObject(): pointer {.importc: "QState_staticMetaObject".}
 
 proc metaObject*(self: gen_qstate_types.QState): gen_qobjectdefs_types.QMetaObject =
@@ -137,7 +137,7 @@ proc metacall*(self: gen_qstate_types.QState, param1: cint, param2: cint, param3
   fcQState_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstate_types.QState, s: cstring): string =
-  let v_ms = fcQState_tr(s)
+  let v_ms = fcQState_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -149,13 +149,13 @@ proc setErrorState*(self: gen_qstate_types.QState, state: gen_qabstractstate_typ
   fcQState_setErrorState(self.h, state.h)
 
 proc addTransition*(self: gen_qstate_types.QState, transition: gen_qabstracttransition_types.QAbstractTransition): void =
-  fcQState_addTransition(self.h, transition.h)
+  fcQState_addTransitionTransition(self.h, transition.h)
 
 proc addTransition*(self: gen_qstate_types.QState, sender: gen_qobject_types.QObject, signal: cstring, target: gen_qabstractstate_types.QAbstractState): gen_qsignaltransition_types.QSignalTransition =
-  gen_qsignaltransition_types.QSignalTransition(h: fcQState_addTransition2(self.h, sender.h, signal, target.h), owned: false)
+  gen_qsignaltransition_types.QSignalTransition(h: fcQState_addTransitionSenderSignalTarget(self.h, sender.h, signal, target.h), owned: false)
 
 proc addTransition*(self: gen_qstate_types.QState, target: gen_qabstractstate_types.QAbstractState): gen_qabstracttransition_types.QAbstractTransition =
-  gen_qabstracttransition_types.QAbstractTransition(h: fcQState_addTransitionWithTarget(self.h, target.h), owned: false)
+  gen_qabstracttransition_types.QAbstractTransition(h: fcQState_addTransitionTarget(self.h, target.h), owned: false)
 
 proc removeTransition*(self: gen_qstate_types.QState, transition: gen_qabstracttransition_types.QAbstractTransition): void =
   fcQState_removeTransition(self.h, transition.h)
@@ -185,13 +185,13 @@ proc assignProperty*(self: gen_qstate_types.QState, objectVal: gen_qobject_types
   fcQState_assignProperty(self.h, objectVal.h, name, value.h)
 
 proc tr*(_: type gen_qstate_types.QState, s: cstring, c: cstring): string =
-  let v_ms = fcQState_tr2(s, c)
+  let v_ms = fcQState_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qstate_types.QState, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQState_tr3(s, c, n)
+  let v_ms = fcQState_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

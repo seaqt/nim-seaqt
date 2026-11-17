@@ -15,21 +15,21 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QWebSocketCorsAuthenticator* QWebSocketCorsAuthenticator_new(struct seaqt_string origin) {
+QWebSocketCorsAuthenticator* QWebSocketCorsAuthenticator_new_origin(struct seaqt_string origin) {
 	QString origin_QString = QString::fromUtf8(origin.data, origin.len);
 	return new (std::nothrow) QWebSocketCorsAuthenticator(origin_QString);
 }
 
-QWebSocketCorsAuthenticator* QWebSocketCorsAuthenticator_new2(QWebSocketCorsAuthenticator* other) {
-	return new (std::nothrow) QWebSocketCorsAuthenticator(*other);
+QWebSocketCorsAuthenticator* QWebSocketCorsAuthenticator_new_from(QWebSocketCorsAuthenticator* from) {
+	return new (std::nothrow) QWebSocketCorsAuthenticator(*from);
 }
 
 void QWebSocketCorsAuthenticator_swap(QWebSocketCorsAuthenticator* self, QWebSocketCorsAuthenticator* other) {
 	self->swap(*other);
 }
 
-void QWebSocketCorsAuthenticator_operatorAssign(QWebSocketCorsAuthenticator* self, QWebSocketCorsAuthenticator* other) {
-	self->operator=(*other);
+void QWebSocketCorsAuthenticator_operatorAssign(QWebSocketCorsAuthenticator* self, QWebSocketCorsAuthenticator* from) {
+	self->operator=(*from);
 }
 
 struct seaqt_string QWebSocketCorsAuthenticator_origin(const QWebSocketCorsAuthenticator* self) {

@@ -21,9 +21,9 @@ typedef struct QGeoAddress QGeoAddress;
 #endif
 
 QGeoAddress* QGeoAddress_new();
-QGeoAddress* QGeoAddress_new2(QGeoAddress* other);
+QGeoAddress* QGeoAddress_new_from(QGeoAddress* from);
 
-void QGeoAddress_operatorAssign(QGeoAddress* self, QGeoAddress* other);
+void QGeoAddress_operatorAssign(QGeoAddress* self, QGeoAddress* from);
 void QGeoAddress_swap(QGeoAddress* self, QGeoAddress* other);
 struct seaqt_string QGeoAddress_text(const QGeoAddress* self);
 void QGeoAddress_setText(QGeoAddress* self, struct seaqt_string text);

@@ -65,9 +65,9 @@ void* QPrinter_vdata(VirtualQPrinter* self);
 VirtualQPrinter* vdata_QPrinter(void* vdata);
 
 VirtualQPrinter* QPrinter_new(const QPrinter_VTable* vtbl, size_t vdata);
-VirtualQPrinter* QPrinter_new2(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer);
-VirtualQPrinter* QPrinter_new3(const QPrinter_VTable* vtbl, size_t vdata, int mode);
-VirtualQPrinter* QPrinter_new4(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer, int mode);
+VirtualQPrinter* QPrinter_new_printer(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer);
+VirtualQPrinter* QPrinter_new_mode(const QPrinter_VTable* vtbl, size_t vdata, int mode);
+VirtualQPrinter* QPrinter_new_printer_mode(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer, int mode);
 
 void QPrinter_virtbase(QPrinter* src, QPagedPaintDevice** outptr_QPagedPaintDevice);
 int QPrinter_devType(const QPrinter* self);

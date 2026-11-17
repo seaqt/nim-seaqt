@@ -31,8 +31,8 @@ typedef struct QSGRectangleNode QSGRectangleNode;
 #endif
 
 void QSGRectangleNode_virtbase(QSGRectangleNode* src, QSGGeometryNode** outptr_QSGGeometryNode);
-void QSGRectangleNode_setRect(QSGRectangleNode* self, QRectF* rect);
-void QSGRectangleNode_setRect2(QSGRectangleNode* self, double x, double y, double w, double h);
+void QSGRectangleNode_setRect_rect(QSGRectangleNode* self, QRectF* rect);
+void QSGRectangleNode_setRect_x_y_w_h(QSGRectangleNode* self, double x, double y, double w, double h);
 QRectF* QSGRectangleNode_rect(const QSGRectangleNode* self);
 void QSGRectangleNode_setColor(QSGRectangleNode* self, QColor* color);
 QColor* QSGRectangleNode_color(const QSGRectangleNode* self);

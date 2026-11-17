@@ -104,7 +104,7 @@ QEvent* QEvent_clone(const QEvent* self) {
 	return self->clone();
 }
 
-int QEvent_registerEventTypeWithHint(int hint) {
+int QEvent_registerEventType_hint(int hint) {
 	return QEvent::registerEventType(static_cast<int>(hint));
 }
 

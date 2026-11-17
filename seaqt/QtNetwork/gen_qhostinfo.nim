@@ -49,7 +49,7 @@ export
 
 type cQHostInfo*{.exportc: "QHostInfo", incompleteStruct.} = object
 
-proc fcQHostInfo_operatorAssign(self: pointer, d: pointer): void {.importc: "QHostInfo_operatorAssign".}
+proc fcQHostInfo_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QHostInfo_operatorAssign".}
 proc fcQHostInfo_swap(self: pointer, other: pointer): void {.importc: "QHostInfo_swap".}
 proc fcQHostInfo_hostName(self: pointer): struct_seaqt_string {.importc: "QHostInfo_hostName".}
 proc fcQHostInfo_setHostName(self: pointer, name: struct_seaqt_string): void {.importc: "QHostInfo_setHostName".}
@@ -66,11 +66,11 @@ proc fcQHostInfo_fromName(name: struct_seaqt_string): pointer {.importc: "QHostI
 proc fcQHostInfo_localHostName(): struct_seaqt_string {.importc: "QHostInfo_localHostName".}
 proc fcQHostInfo_localDomainName(): struct_seaqt_string {.importc: "QHostInfo_localDomainName".}
 proc fcQHostInfo_new(): ptr cQHostInfo {.importc: "QHostInfo_new".}
-proc fcQHostInfo_new2(d: pointer): ptr cQHostInfo {.importc: "QHostInfo_new2".}
-proc fcQHostInfo_new3(lookupId: cint): ptr cQHostInfo {.importc: "QHostInfo_new3".}
+proc fcQHostInfo_new2(fromVal: pointer): ptr cQHostInfo {.importc: "QHostInfo_new_from".}
+proc fcQHostInfo_new3(lookupId: cint): ptr cQHostInfo {.importc: "QHostInfo_new_lookupId".}
 
-proc operatorAssign*(self: gen_qhostinfo_types.QHostInfo, d: gen_qhostinfo_types.QHostInfo): void =
-  fcQHostInfo_operatorAssign(self.h, d.h)
+proc operatorAssign*(self: gen_qhostinfo_types.QHostInfo, fromVal: gen_qhostinfo_types.QHostInfo): void =
+  fcQHostInfo_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qhostinfo_types.QHostInfo, other: gen_qhostinfo_types.QHostInfo): void =
   fcQHostInfo_swap(self.h, other.h)
@@ -143,8 +143,8 @@ proc create*(T: type gen_qhostinfo_types.QHostInfo): gen_qhostinfo_types.QHostIn
   let tmp = gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qhostinfo_types.QHostInfo,
-    d: gen_qhostinfo_types.QHostInfo): gen_qhostinfo_types.QHostInfo =
-  let tmp = gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_new2(d.h), owned: true)
+    fromVal: gen_qhostinfo_types.QHostInfo): gen_qhostinfo_types.QHostInfo =
+  let tmp = gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qhostinfo_types.QHostInfo,
     lookupId: cint): gen_qhostinfo_types.QHostInfo =

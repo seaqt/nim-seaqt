@@ -749,31 +749,31 @@ VirtualQCommandLinkButton* QCommandLinkButton_new(const QCommandLinkButton_VTabl
 	return _mem_ ? new (_mem_)VirtualQCommandLinkButton(vtbl) : nullptr;
 }
 
-VirtualQCommandLinkButton* QCommandLinkButton_new2(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQCommandLinkButton* QCommandLinkButton_new_text(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCommandLinkButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCommandLinkButton(vtbl, text_QString) : nullptr;
 }
 
-VirtualQCommandLinkButton* QCommandLinkButton_new3(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, struct seaqt_string description) {
+VirtualQCommandLinkButton* QCommandLinkButton_new_text_description(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, struct seaqt_string description) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	QString description_QString = QString::fromUtf8(description.data, description.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCommandLinkButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCommandLinkButton(vtbl, text_QString, description_QString) : nullptr;
 }
 
-VirtualQCommandLinkButton* QCommandLinkButton_new4(const QCommandLinkButton_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQCommandLinkButton* QCommandLinkButton_new_parent(const QCommandLinkButton_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCommandLinkButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCommandLinkButton(vtbl, parent) : nullptr;
 }
 
-VirtualQCommandLinkButton* QCommandLinkButton_new5(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent) {
+VirtualQCommandLinkButton* QCommandLinkButton_new_text_parent(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCommandLinkButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCommandLinkButton(vtbl, text_QString, parent) : nullptr;
 }
 
-VirtualQCommandLinkButton* QCommandLinkButton_new6(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, struct seaqt_string description, QWidget* parent) {
+VirtualQCommandLinkButton* QCommandLinkButton_new_text_description_parent(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, struct seaqt_string description, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	QString description_QString = QString::fromUtf8(description.data, description.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCommandLinkButton>() + vdata, std::nothrow);
@@ -796,7 +796,7 @@ int QCommandLinkButton_metacall(QCommandLinkButton* self, int param1, int param2
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCommandLinkButton_tr(const char* s) {
+struct seaqt_string QCommandLinkButton_tr_s(const char* s) {
 	QString _ret = QCommandLinkButton::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -839,7 +839,7 @@ void QCommandLinkButton_initStyleOption(const QCommandLinkButton* self, QStyleOp
 	self->initStyleOption(option);
 }
 
-struct seaqt_string QCommandLinkButton_tr2(const char* s, const char* c) {
+struct seaqt_string QCommandLinkButton_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCommandLinkButton::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -850,7 +850,7 @@ struct seaqt_string QCommandLinkButton_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCommandLinkButton_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCommandLinkButton_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCommandLinkButton::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

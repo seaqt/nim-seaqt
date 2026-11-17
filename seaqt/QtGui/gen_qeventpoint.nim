@@ -59,7 +59,7 @@ export
 
 type cQEventPoint*{.exportc: "QEventPoint", incompleteStruct.} = object
 
-proc fcQEventPoint_operatorAssign(self: pointer, other: pointer): void {.importc: "QEventPoint_operatorAssign".}
+proc fcQEventPoint_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QEventPoint_operatorAssign".}
 proc fcQEventPoint_operatorEqual(self: pointer, other: pointer): bool {.importc: "QEventPoint_operatorEqual".}
 proc fcQEventPoint_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QEventPoint_operatorNotEqual".}
 proc fcQEventPoint_swap(self: pointer, other: pointer): void {.importc: "QEventPoint_swap".}
@@ -102,16 +102,16 @@ proc fcQEventPoint_rotation(self: pointer): float64 {.importc: "QEventPoint_rota
 proc fcQEventPoint_ellipseDiameters(self: pointer): pointer {.importc: "QEventPoint_ellipseDiameters".}
 proc fcQEventPoint_isAccepted(self: pointer): bool {.importc: "QEventPoint_isAccepted".}
 proc fcQEventPoint_setAccepted(self: pointer): void {.importc: "QEventPoint_setAccepted".}
-proc fcQEventPoint_setAcceptedWithAccepted(self: pointer, accepted: bool): void {.importc: "QEventPoint_setAcceptedWithAccepted".}
+proc fcQEventPoint_setAcceptedAccepted(self: pointer, accepted: bool): void {.importc: "QEventPoint_setAccepted_accepted".}
 proc fcQEventPoint_new(): ptr cQEventPoint {.importc: "QEventPoint_new".}
-proc fcQEventPoint_new2(pointId: cint, state: cint, scenePosition: pointer, globalPosition: pointer): ptr cQEventPoint {.importc: "QEventPoint_new2".}
-proc fcQEventPoint_new3(other: pointer): ptr cQEventPoint {.importc: "QEventPoint_new3".}
-proc fcQEventPoint_new4(id: cint): ptr cQEventPoint {.importc: "QEventPoint_new4".}
-proc fcQEventPoint_new5(id: cint, device: pointer): ptr cQEventPoint {.importc: "QEventPoint_new5".}
+proc fcQEventPoint_new2(pointId: cint, state: cint, scenePosition: pointer, globalPosition: pointer): ptr cQEventPoint {.importc: "QEventPoint_new_pointId_state_scenePosition_globalPosition".}
+proc fcQEventPoint_new3(fromVal: pointer): ptr cQEventPoint {.importc: "QEventPoint_new_from".}
+proc fcQEventPoint_new4(id: cint): ptr cQEventPoint {.importc: "QEventPoint_new_id".}
+proc fcQEventPoint_new5(id: cint, device: pointer): ptr cQEventPoint {.importc: "QEventPoint_new_id_device".}
 proc fcQEventPoint_staticMetaObject(): pointer {.importc: "QEventPoint_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qeventpoint_types.QEventPoint, other: gen_qeventpoint_types.QEventPoint): void =
-  fcQEventPoint_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qeventpoint_types.QEventPoint, fromVal: gen_qeventpoint_types.QEventPoint): void =
+  fcQEventPoint_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qeventpoint_types.QEventPoint, other: gen_qeventpoint_types.QEventPoint): bool =
   fcQEventPoint_operatorEqual(self.h, other.h)
@@ -240,7 +240,7 @@ proc setAccepted*(self: gen_qeventpoint_types.QEventPoint): void =
   fcQEventPoint_setAccepted(self.h)
 
 proc setAccepted*(self: gen_qeventpoint_types.QEventPoint, accepted: bool): void =
-  fcQEventPoint_setAcceptedWithAccepted(self.h, accepted)
+  fcQEventPoint_setAcceptedAccepted(self.h, accepted)
 
 proc create*(T: type gen_qeventpoint_types.QEventPoint): gen_qeventpoint_types.QEventPoint =
   let tmp = gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new(), owned: true)
@@ -250,8 +250,8 @@ proc create*(T: type gen_qeventpoint_types.QEventPoint,
   let tmp = gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new2(pointId, cint(state), scenePosition.h, globalPosition.h), owned: true)
   tmp
 proc create*(T: type gen_qeventpoint_types.QEventPoint,
-    other: gen_qeventpoint_types.QEventPoint): gen_qeventpoint_types.QEventPoint =
-  let tmp = gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new3(other.h), owned: true)
+    fromVal: gen_qeventpoint_types.QEventPoint): gen_qeventpoint_types.QEventPoint =
+  let tmp = gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qeventpoint_types.QEventPoint,
     id: cint): gen_qeventpoint_types.QEventPoint =

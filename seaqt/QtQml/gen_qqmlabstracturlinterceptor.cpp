@@ -51,8 +51,8 @@ QUrl* QQmlAbstractUrlInterceptor_intercept(QQmlAbstractUrlInterceptor* self, QUr
 	return new QUrl(self->intercept(*path, static_cast<QQmlAbstractUrlInterceptor::DataType>(type)));
 }
 
-void QQmlAbstractUrlInterceptor_operatorAssign(QQmlAbstractUrlInterceptor* self, QQmlAbstractUrlInterceptor* param1) {
-	self->operator=(*param1);
+void QQmlAbstractUrlInterceptor_operatorAssign(QQmlAbstractUrlInterceptor* self, QQmlAbstractUrlInterceptor* from) {
+	self->operator=(*from);
 }
 
 void* QQmlAbstractUrlInterceptor_vdata(VirtualQQmlAbstractUrlInterceptor* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQQmlAbstractUrlInterceptor>()); }

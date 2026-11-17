@@ -87,23 +87,23 @@ export
 type cQSslError*{.exportc: "QSslError", incompleteStruct.} = object
 
 proc fcQSslError_swap(self: pointer, other: pointer): void {.importc: "QSslError_swap".}
-proc fcQSslError_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslError_operatorAssign".}
+proc fcQSslError_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSslError_operatorAssign".}
 proc fcQSslError_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSslError_operatorEqual".}
 proc fcQSslError_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QSslError_operatorNotEqual".}
 proc fcQSslError_error(self: pointer): cint {.importc: "QSslError_error".}
 proc fcQSslError_errorString(self: pointer): struct_seaqt_string {.importc: "QSslError_errorString".}
 proc fcQSslError_certificate(self: pointer): pointer {.importc: "QSslError_certificate".}
 proc fcQSslError_new(): ptr cQSslError {.importc: "QSslError_new".}
-proc fcQSslError_new2(error: cint): ptr cQSslError {.importc: "QSslError_new2".}
-proc fcQSslError_new3(error: cint, certificate: pointer): ptr cQSslError {.importc: "QSslError_new3".}
-proc fcQSslError_new4(other: pointer): ptr cQSslError {.importc: "QSslError_new4".}
+proc fcQSslError_new2(error: cint): ptr cQSslError {.importc: "QSslError_new_error".}
+proc fcQSslError_new3(error: cint, certificate: pointer): ptr cQSslError {.importc: "QSslError_new_error_certificate".}
+proc fcQSslError_new4(fromVal: pointer): ptr cQSslError {.importc: "QSslError_new_from".}
 proc fcQSslError_staticMetaObject(): pointer {.importc: "QSslError_staticMetaObject".}
 
 proc swap*(self: gen_qsslerror_types.QSslError, other: gen_qsslerror_types.QSslError): void =
   fcQSslError_swap(self.h, other.h)
 
-proc operatorAssign*(self: gen_qsslerror_types.QSslError, other: gen_qsslerror_types.QSslError): void =
-  fcQSslError_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qsslerror_types.QSslError, fromVal: gen_qsslerror_types.QSslError): void =
+  fcQSslError_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qsslerror_types.QSslError, other: gen_qsslerror_types.QSslError): bool =
   fcQSslError_operatorEqual(self.h, other.h)
@@ -135,8 +135,8 @@ proc create*(T: type gen_qsslerror_types.QSslError,
   let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new3(cint(error), certificate.h), owned: true)
   tmp
 proc create*(T: type gen_qsslerror_types.QSslError,
-    other: gen_qsslerror_types.QSslError): gen_qsslerror_types.QSslError =
-  let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new4(other.h), owned: true)
+    fromVal: gen_qsslerror_types.QSslError): gen_qsslerror_types.QSslError =
+  let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new4(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qsslerror_types.QSslError): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSslError_staticMetaObject())

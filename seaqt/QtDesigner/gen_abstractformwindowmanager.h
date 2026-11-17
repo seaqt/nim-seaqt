@@ -42,7 +42,7 @@ void QDesignerFormWindowManagerInterface_virtbase(QDesignerFormWindowManagerInte
 QMetaObject* QDesignerFormWindowManagerInterface_metaObject(const QDesignerFormWindowManagerInterface* self);
 void* QDesignerFormWindowManagerInterface_metacast(QDesignerFormWindowManagerInterface* self, const char* param1);
 int QDesignerFormWindowManagerInterface_metacall(QDesignerFormWindowManagerInterface* self, int param1, int param2, void** param3);
-struct seaqt_string QDesignerFormWindowManagerInterface_tr(const char* s);
+struct seaqt_string QDesignerFormWindowManagerInterface_tr_s(const char* s);
 QAction* QDesignerFormWindowManagerInterface_action(const QDesignerFormWindowManagerInterface* self, int action);
 QActionGroup* QDesignerFormWindowManagerInterface_actionGroup(const QDesignerFormWindowManagerInterface* self, int actionGroup);
 QAction* QDesignerFormWindowManagerInterface_actionCut(const QDesignerFormWindowManagerInterface* self);
@@ -83,8 +83,8 @@ void QDesignerFormWindowManagerInterface_setActiveFormWindow(QDesignerFormWindow
 void QDesignerFormWindowManagerInterface_showPreview(QDesignerFormWindowManagerInterface* self);
 void QDesignerFormWindowManagerInterface_closeAllPreviews(QDesignerFormWindowManagerInterface* self);
 void QDesignerFormWindowManagerInterface_showPluginDialog(QDesignerFormWindowManagerInterface* self);
-struct seaqt_string QDesignerFormWindowManagerInterface_tr2(const char* s, const char* c);
-struct seaqt_string QDesignerFormWindowManagerInterface_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDesignerFormWindowManagerInterface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDesignerFormWindowManagerInterface_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QDesignerFormWindowManagerInterface_staticMetaObject();
 void QDesignerFormWindowManagerInterface_delete(QDesignerFormWindowManagerInterface* self);

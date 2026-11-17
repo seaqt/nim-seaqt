@@ -176,47 +176,47 @@ public:
 	friend bool QShortcut_protectedbase_isSignalConnected(const VirtualQShortcut* self, QMetaMethod* signal);
 };
 
-VirtualQShortcut* QShortcut_new(const QShortcut_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQShortcut* QShortcut_new_QObject(const QShortcut_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcut>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcut(vtbl, parent) : nullptr;
 }
 
-VirtualQShortcut* QShortcut_new2(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent) {
+VirtualQShortcut* QShortcut_new_QKeySequence_QObject(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcut>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcut(vtbl, *key, parent) : nullptr;
 }
 
-VirtualQShortcut* QShortcut_new3(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent) {
+VirtualQShortcut* QShortcut_new_QKeySequence_StandardKey_QObject(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcut>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcut(vtbl, static_cast<QKeySequence::StandardKey>(key), parent) : nullptr;
 }
 
-VirtualQShortcut* QShortcut_new4(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member) {
+VirtualQShortcut* QShortcut_new_QKeySequence_QObject_char(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcut>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcut(vtbl, *key, parent, member) : nullptr;
 }
 
-VirtualQShortcut* QShortcut_new5(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member, const char* ambiguousMember) {
+VirtualQShortcut* QShortcut_new_QKeySequence_QObject_char_char(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member, const char* ambiguousMember) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcut>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcut(vtbl, *key, parent, member, ambiguousMember) : nullptr;
 }
 
-VirtualQShortcut* QShortcut_new6(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member, const char* ambiguousMember, int context) {
+VirtualQShortcut* QShortcut_new_QKeySequence_QObject_char_char_Qt_ShortcutContext(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member, const char* ambiguousMember, int context) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcut>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcut(vtbl, *key, parent, member, ambiguousMember, static_cast<Qt::ShortcutContext>(context)) : nullptr;
 }
 
-VirtualQShortcut* QShortcut_new7(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member) {
+VirtualQShortcut* QShortcut_new_QKeySequence_StandardKey_QObject_char(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcut>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcut(vtbl, static_cast<QKeySequence::StandardKey>(key), parent, member) : nullptr;
 }
 
-VirtualQShortcut* QShortcut_new8(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member, const char* ambiguousMember) {
+VirtualQShortcut* QShortcut_new_QKeySequence_StandardKey_QObject_char_char(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member, const char* ambiguousMember) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcut>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcut(vtbl, static_cast<QKeySequence::StandardKey>(key), parent, member, ambiguousMember) : nullptr;
 }
 
-VirtualQShortcut* QShortcut_new9(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member, const char* ambiguousMember, int context) {
+VirtualQShortcut* QShortcut_new_QKeySequence_StandardKey_QObject_char_char_Qt_ShortcutContext(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member, const char* ambiguousMember, int context) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcut>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcut(vtbl, static_cast<QKeySequence::StandardKey>(key), parent, member, ambiguousMember, static_cast<Qt::ShortcutContext>(context)) : nullptr;
 }
@@ -237,7 +237,7 @@ int QShortcut_metacall(QShortcut* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QShortcut_tr(const char* s) {
+struct seaqt_string QShortcut_tr_s(const char* s) {
 	QString _ret = QShortcut::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -256,11 +256,11 @@ QKeySequence* QShortcut_key(const QShortcut* self) {
 	return new QKeySequence(self->key());
 }
 
-void QShortcut_setKeys(QShortcut* self, int key) {
+void QShortcut_setKeys_key(QShortcut* self, int key) {
 	self->setKeys(static_cast<QKeySequence::StandardKey>(key));
 }
 
-void QShortcut_setKeysWithKeys(QShortcut* self, struct seaqt_array /* of QKeySequence* */  keys) {
+void QShortcut_setKeys_keys(QShortcut* self, struct seaqt_array /* of QKeySequence* */  keys) {
 	QList<QKeySequence> keys_QList;
 	keys_QList.reserve(keys.len);
 	QKeySequence** keys_arr = static_cast<QKeySequence**>(keys.data);
@@ -358,7 +358,7 @@ void QShortcut_connect_activatedAmbiguously(QShortcut* self, intptr_t slot, void
 	QShortcut::connect(self, static_cast<void (QShortcut::*)()>(&QShortcut::activatedAmbiguously), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QShortcut_tr2(const char* s, const char* c) {
+struct seaqt_string QShortcut_tr_s_c(const char* s, const char* c) {
 	QString _ret = QShortcut::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -369,7 +369,7 @@ struct seaqt_string QShortcut_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QShortcut_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QShortcut_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QShortcut::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

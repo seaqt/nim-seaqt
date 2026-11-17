@@ -72,7 +72,7 @@ export
 
 type cQPixmap*{.exportc: "QPixmap", incompleteStruct.} = object
 
-proc fcQPixmap_operatorAssign(self: pointer, param1: pointer): void {.importc: "QPixmap_operatorAssign".}
+proc fcQPixmap_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QPixmap_operatorAssign".}
 proc fcQPixmap_swap(self: pointer, other: pointer): void {.importc: "QPixmap_swap".}
 proc fcQPixmap_ToQVariant(self: pointer): pointer {.importc: "QPixmap_ToQVariant".}
 proc fcQPixmap_isNull(self: pointer): bool {.importc: "QPixmap_isNull".}
@@ -92,58 +92,58 @@ proc fcQPixmap_deviceIndependentSize(self: pointer): pointer {.importc: "QPixmap
 proc fcQPixmap_hasAlpha(self: pointer): bool {.importc: "QPixmap_hasAlpha".}
 proc fcQPixmap_hasAlphaChannel(self: pointer): bool {.importc: "QPixmap_hasAlphaChannel".}
 proc fcQPixmap_createHeuristicMask(self: pointer): pointer {.importc: "QPixmap_createHeuristicMask".}
-proc fcQPixmap_createMaskFromColor(self: pointer, maskColor: pointer): pointer {.importc: "QPixmap_createMaskFromColor".}
-proc fcQPixmap_scaled(self: pointer, w: cint, h: cint): pointer {.importc: "QPixmap_scaled".}
-proc fcQPixmap_scaledWithQSize(self: pointer, s: pointer): pointer {.importc: "QPixmap_scaledWithQSize".}
-proc fcQPixmap_scaledToWidth(self: pointer, w: cint): pointer {.importc: "QPixmap_scaledToWidth".}
-proc fcQPixmap_scaledToHeight(self: pointer, h: cint): pointer {.importc: "QPixmap_scaledToHeight".}
-proc fcQPixmap_transformed(self: pointer, param1: pointer): pointer {.importc: "QPixmap_transformed".}
+proc fcQPixmap_createMaskFromColorMaskColor(self: pointer, maskColor: pointer): pointer {.importc: "QPixmap_createMaskFromColor_maskColor".}
+proc fcQPixmap_scaledWH(self: pointer, w: cint, h: cint): pointer {.importc: "QPixmap_scaled_w_h".}
+proc fcQPixmap_scaledS(self: pointer, s: pointer): pointer {.importc: "QPixmap_scaled_s".}
+proc fcQPixmap_scaledToWidthW(self: pointer, w: cint): pointer {.importc: "QPixmap_scaledToWidth_w".}
+proc fcQPixmap_scaledToHeightH(self: pointer, h: cint): pointer {.importc: "QPixmap_scaledToHeight_h".}
+proc fcQPixmap_transformed_QTransform(self: pointer, param1: pointer): pointer {.importc: "QPixmap_transformed_QTransform".}
 proc fcQPixmap_trueMatrix(m: pointer, w: cint, h: cint): pointer {.importc: "QPixmap_trueMatrix".}
 proc fcQPixmap_toImage(self: pointer): pointer {.importc: "QPixmap_toImage".}
-proc fcQPixmap_fromImage(image: pointer): pointer {.importc: "QPixmap_fromImage".}
-proc fcQPixmap_fromImageReader(imageReader: pointer): pointer {.importc: "QPixmap_fromImageReader".}
-proc fcQPixmap_load(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QPixmap_load".}
-proc fcQPixmap_loadFromData(self: pointer, buf: ptr uint8, len: cuint): bool {.importc: "QPixmap_loadFromData".}
-proc fcQPixmap_loadFromDataWithData(self: pointer, data: struct_seaqt_string): bool {.importc: "QPixmap_loadFromDataWithData".}
-proc fcQPixmap_save(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QPixmap_save".}
-proc fcQPixmap_saveWithDevice(self: pointer, device: pointer): bool {.importc: "QPixmap_saveWithDevice".}
-proc fcQPixmap_convertFromImage(self: pointer, img: pointer): bool {.importc: "QPixmap_convertFromImage".}
-proc fcQPixmap_copy(self: pointer, x: cint, y: cint, width: cint, height: cint): pointer {.importc: "QPixmap_copy".}
-proc fcQPixmap_copy2(self: pointer): pointer {.importc: "QPixmap_copy2".}
-proc fcQPixmap_scroll(self: pointer, dx: cint, dy: cint, x: cint, y: cint, width: cint, height: cint): void {.importc: "QPixmap_scroll".}
-proc fcQPixmap_scroll2(self: pointer, dx: cint, dy: cint, rect: pointer): void {.importc: "QPixmap_scroll2".}
+proc fcQPixmap_fromImageImage(image: pointer): pointer {.importc: "QPixmap_fromImage_image".}
+proc fcQPixmap_fromImageReaderImageReader(imageReader: pointer): pointer {.importc: "QPixmap_fromImageReader_imageReader".}
+proc fcQPixmap_loadFileName(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QPixmap_load_fileName".}
+proc fcQPixmap_loadFromDataBufLen(self: pointer, buf: ptr uint8, len: cuint): bool {.importc: "QPixmap_loadFromData_buf_len".}
+proc fcQPixmap_loadFromDataData(self: pointer, data: struct_seaqt_string): bool {.importc: "QPixmap_loadFromData_data".}
+proc fcQPixmap_saveFileName(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QPixmap_save_fileName".}
+proc fcQPixmap_saveDevice(self: pointer, device: pointer): bool {.importc: "QPixmap_save_device".}
+proc fcQPixmap_convertFromImageImg(self: pointer, img: pointer): bool {.importc: "QPixmap_convertFromImage_img".}
+proc fcQPixmap_copyXYWidthHeight(self: pointer, x: cint, y: cint, width: cint, height: cint): pointer {.importc: "QPixmap_copy_x_y_width_height".}
+proc fcQPixmap_copy(self: pointer): pointer {.importc: "QPixmap_copy".}
+proc fcQPixmap_scrollDxDyXYWidthHeight(self: pointer, dx: cint, dy: cint, x: cint, y: cint, width: cint, height: cint): void {.importc: "QPixmap_scroll_dx_dy_x_y_width_height".}
+proc fcQPixmap_scrollDxDyRect(self: pointer, dx: cint, dy: cint, rect: pointer): void {.importc: "QPixmap_scroll_dx_dy_rect".}
 proc fcQPixmap_cacheKey(self: pointer): clonglong {.importc: "QPixmap_cacheKey".}
 proc fcQPixmap_isDetached(self: pointer): bool {.importc: "QPixmap_isDetached".}
 proc fcQPixmap_detach(self: pointer): void {.importc: "QPixmap_detach".}
 proc fcQPixmap_isQBitmap(self: pointer): bool {.importc: "QPixmap_isQBitmap".}
 proc fcQPixmap_paintEngine(self: pointer): pointer {.importc: "QPixmap_paintEngine".}
 proc fcQPixmap_operatorNot(self: pointer): bool {.importc: "QPixmap_operatorNot".}
-proc fcQPixmap_fillWithFillColor(self: pointer, fillColor: pointer): void {.importc: "QPixmap_fillWithFillColor".}
-proc fcQPixmap_createHeuristicMaskWithClipTight(self: pointer, clipTight: bool): pointer {.importc: "QPixmap_createHeuristicMaskWithClipTight".}
-proc fcQPixmap_createMaskFromColor2(self: pointer, maskColor: pointer, mode: cint): pointer {.importc: "QPixmap_createMaskFromColor2".}
-proc fcQPixmap_scaled2(self: pointer, w: cint, h: cint, aspectMode: cint): pointer {.importc: "QPixmap_scaled2".}
-proc fcQPixmap_scaled3(self: pointer, w: cint, h: cint, aspectMode: cint, mode: cint): pointer {.importc: "QPixmap_scaled3".}
-proc fcQPixmap_scaled4(self: pointer, s: pointer, aspectMode: cint): pointer {.importc: "QPixmap_scaled4".}
-proc fcQPixmap_scaled5(self: pointer, s: pointer, aspectMode: cint, mode: cint): pointer {.importc: "QPixmap_scaled5".}
-proc fcQPixmap_scaledToWidth2(self: pointer, w: cint, mode: cint): pointer {.importc: "QPixmap_scaledToWidth2".}
-proc fcQPixmap_scaledToHeight2(self: pointer, h: cint, mode: cint): pointer {.importc: "QPixmap_scaledToHeight2".}
-proc fcQPixmap_transformed2(self: pointer, param1: pointer, mode: cint): pointer {.importc: "QPixmap_transformed2".}
-proc fcQPixmap_fromImage2(image: pointer, flags: cint): pointer {.importc: "QPixmap_fromImage2".}
-proc fcQPixmap_fromImageReader2(imageReader: pointer, flags: cint): pointer {.importc: "QPixmap_fromImageReader2".}
-proc fcQPixmap_load2(self: pointer, fileName: struct_seaqt_string, format: cstring): bool {.importc: "QPixmap_load2".}
-proc fcQPixmap_load3(self: pointer, fileName: struct_seaqt_string, format: cstring, flags: cint): bool {.importc: "QPixmap_load3".}
-proc fcQPixmap_loadFromData2(self: pointer, buf: ptr uint8, len: cuint, format: cstring): bool {.importc: "QPixmap_loadFromData2".}
-proc fcQPixmap_loadFromData3(self: pointer, buf: ptr uint8, len: cuint, format: cstring, flags: cint): bool {.importc: "QPixmap_loadFromData3".}
-proc fcQPixmap_loadFromData4(self: pointer, data: struct_seaqt_string, format: cstring): bool {.importc: "QPixmap_loadFromData4".}
-proc fcQPixmap_loadFromData5(self: pointer, data: struct_seaqt_string, format: cstring, flags: cint): bool {.importc: "QPixmap_loadFromData5".}
-proc fcQPixmap_save2(self: pointer, fileName: struct_seaqt_string, format: cstring): bool {.importc: "QPixmap_save2".}
-proc fcQPixmap_save3(self: pointer, fileName: struct_seaqt_string, format: cstring, quality: cint): bool {.importc: "QPixmap_save3".}
-proc fcQPixmap_save4(self: pointer, device: pointer, format: cstring): bool {.importc: "QPixmap_save4".}
-proc fcQPixmap_save5(self: pointer, device: pointer, format: cstring, quality: cint): bool {.importc: "QPixmap_save5".}
-proc fcQPixmap_convertFromImage2(self: pointer, img: pointer, flags: cint): bool {.importc: "QPixmap_convertFromImage2".}
-proc fcQPixmap_copyWithRect(self: pointer, rect: pointer): pointer {.importc: "QPixmap_copyWithRect".}
-proc fcQPixmap_scroll3(self: pointer, dx: cint, dy: cint, x: cint, y: cint, width: cint, height: cint, exposed: pointer): void {.importc: "QPixmap_scroll3".}
-proc fcQPixmap_scroll4(self: pointer, dx: cint, dy: cint, rect: pointer, exposed: pointer): void {.importc: "QPixmap_scroll4".}
+proc fcQPixmap_fillFillColor(self: pointer, fillColor: pointer): void {.importc: "QPixmap_fill_fillColor".}
+proc fcQPixmap_createHeuristicMaskClipTight(self: pointer, clipTight: bool): pointer {.importc: "QPixmap_createHeuristicMask_clipTight".}
+proc fcQPixmap_createMaskFromColorMaskColorMode(self: pointer, maskColor: pointer, mode: cint): pointer {.importc: "QPixmap_createMaskFromColor_maskColor_mode".}
+proc fcQPixmap_scaledWHAspectMode(self: pointer, w: cint, h: cint, aspectMode: cint): pointer {.importc: "QPixmap_scaled_w_h_aspectMode".}
+proc fcQPixmap_scaledWHAspectModeMode(self: pointer, w: cint, h: cint, aspectMode: cint, mode: cint): pointer {.importc: "QPixmap_scaled_w_h_aspectMode_mode".}
+proc fcQPixmap_scaledSAspectMode(self: pointer, s: pointer, aspectMode: cint): pointer {.importc: "QPixmap_scaled_s_aspectMode".}
+proc fcQPixmap_scaledSAspectModeMode(self: pointer, s: pointer, aspectMode: cint, mode: cint): pointer {.importc: "QPixmap_scaled_s_aspectMode_mode".}
+proc fcQPixmap_scaledToWidthWMode(self: pointer, w: cint, mode: cint): pointer {.importc: "QPixmap_scaledToWidth_w_mode".}
+proc fcQPixmap_scaledToHeightHMode(self: pointer, h: cint, mode: cint): pointer {.importc: "QPixmap_scaledToHeight_h_mode".}
+proc fcQPixmap_transformed_QTransform_Qt_TransformationMode(self: pointer, param1: pointer, mode: cint): pointer {.importc: "QPixmap_transformed_QTransform_Qt_TransformationMode".}
+proc fcQPixmap_fromImageImageFlags(image: pointer, flags: cint): pointer {.importc: "QPixmap_fromImage_image_flags".}
+proc fcQPixmap_fromImageReaderImageReaderFlags(imageReader: pointer, flags: cint): pointer {.importc: "QPixmap_fromImageReader_imageReader_flags".}
+proc fcQPixmap_loadFileNameFormat(self: pointer, fileName: struct_seaqt_string, format: cstring): bool {.importc: "QPixmap_load_fileName_format".}
+proc fcQPixmap_loadFileNameFormatFlags(self: pointer, fileName: struct_seaqt_string, format: cstring, flags: cint): bool {.importc: "QPixmap_load_fileName_format_flags".}
+proc fcQPixmap_loadFromDataBufLenFormat(self: pointer, buf: ptr uint8, len: cuint, format: cstring): bool {.importc: "QPixmap_loadFromData_buf_len_format".}
+proc fcQPixmap_loadFromDataBufLenFormatFlags(self: pointer, buf: ptr uint8, len: cuint, format: cstring, flags: cint): bool {.importc: "QPixmap_loadFromData_buf_len_format_flags".}
+proc fcQPixmap_loadFromDataDataFormat(self: pointer, data: struct_seaqt_string, format: cstring): bool {.importc: "QPixmap_loadFromData_data_format".}
+proc fcQPixmap_loadFromDataDataFormatFlags(self: pointer, data: struct_seaqt_string, format: cstring, flags: cint): bool {.importc: "QPixmap_loadFromData_data_format_flags".}
+proc fcQPixmap_saveFileNameFormat(self: pointer, fileName: struct_seaqt_string, format: cstring): bool {.importc: "QPixmap_save_fileName_format".}
+proc fcQPixmap_saveFileNameFormatQuality(self: pointer, fileName: struct_seaqt_string, format: cstring, quality: cint): bool {.importc: "QPixmap_save_fileName_format_quality".}
+proc fcQPixmap_saveDeviceFormat(self: pointer, device: pointer, format: cstring): bool {.importc: "QPixmap_save_device_format".}
+proc fcQPixmap_saveDeviceFormatQuality(self: pointer, device: pointer, format: cstring, quality: cint): bool {.importc: "QPixmap_save_device_format_quality".}
+proc fcQPixmap_convertFromImageImgFlags(self: pointer, img: pointer, flags: cint): bool {.importc: "QPixmap_convertFromImage_img_flags".}
+proc fcQPixmap_copyRect(self: pointer, rect: pointer): pointer {.importc: "QPixmap_copy_rect".}
+proc fcQPixmap_scrollDxDyXYWidthHeightExposed(self: pointer, dx: cint, dy: cint, x: cint, y: cint, width: cint, height: cint, exposed: pointer): void {.importc: "QPixmap_scroll_dx_dy_x_y_width_height_exposed".}
+proc fcQPixmap_scrollDxDyRectExposed(self: pointer, dx: cint, dy: cint, rect: pointer, exposed: pointer): void {.importc: "QPixmap_scroll_dx_dy_rect_exposed".}
 proc fcQPixmap_vdata(self: pointer): ptr pointer {.importc: "QPixmap_vdata".}
 proc fvdata_cQPixmap(self: pointer): pointer {.importc: "vdata_QPixmap".}
 
@@ -162,15 +162,15 @@ proc fcQPixmap_virtualbase_initPainter(self: pointer, painter: pointer): void {.
 proc fcQPixmap_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QPixmap_virtualbase_redirected".}
 proc fcQPixmap_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QPixmap_virtualbase_sharedPainter".}
 proc fcQPixmap_new(vtbl: pointer, vdata: csize_t): ptr cQPixmap {.importc: "QPixmap_new".}
-proc fcQPixmap_new2(vtbl: pointer, vdata: csize_t, w: cint, h: cint): ptr cQPixmap {.importc: "QPixmap_new2".}
-proc fcQPixmap_new3(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQPixmap {.importc: "QPixmap_new3".}
-proc fcQPixmap_new4(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQPixmap {.importc: "QPixmap_new4".}
-proc fcQPixmap_new5(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQPixmap {.importc: "QPixmap_new5".}
-proc fcQPixmap_new6(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: cstring): ptr cQPixmap {.importc: "QPixmap_new6".}
-proc fcQPixmap_new7(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: cstring, flags: cint): ptr cQPixmap {.importc: "QPixmap_new7".}
+proc fcQPixmap_new2(vtbl: pointer, vdata: csize_t, w: cint, h: cint): ptr cQPixmap {.importc: "QPixmap_new_int_int".}
+proc fcQPixmap_new3(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQPixmap {.importc: "QPixmap_new_QSize".}
+proc fcQPixmap_new4(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQPixmap {.importc: "QPixmap_new_QString".}
+proc fcQPixmap_new5(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQPixmap {.importc: "QPixmap_new_QPixmap".}
+proc fcQPixmap_new6(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: cstring): ptr cQPixmap {.importc: "QPixmap_new_QString_char".}
+proc fcQPixmap_new7(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: cstring, flags: cint): ptr cQPixmap {.importc: "QPixmap_new_QString_char_Qt_ImageConversionFlags".}
 
-proc operatorAssign*(self: gen_qpixmap_types.QPixmap, param1: gen_qpixmap_types.QPixmap): void =
-  fcQPixmap_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qpixmap_types.QPixmap, fromVal: gen_qpixmap_types.QPixmap): void =
+  fcQPixmap_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qpixmap_types.QPixmap, other: gen_qpixmap_types.QPixmap): void =
   fcQPixmap_swap(self.h, other.h)
@@ -230,22 +230,22 @@ proc createHeuristicMask*(self: gen_qpixmap_types.QPixmap): gen_qbitmap_types.QB
   gen_qbitmap_types.QBitmap(h: fcQPixmap_createHeuristicMask(self.h), owned: true)
 
 proc createMaskFromColor*(self: gen_qpixmap_types.QPixmap, maskColor: gen_qcolor_types.QColor): gen_qbitmap_types.QBitmap =
-  gen_qbitmap_types.QBitmap(h: fcQPixmap_createMaskFromColor(self.h, maskColor.h), owned: true)
+  gen_qbitmap_types.QBitmap(h: fcQPixmap_createMaskFromColorMaskColor(self.h, maskColor.h), owned: true)
 
 proc scaled*(self: gen_qpixmap_types.QPixmap, w: cint, h: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaled(self.h, w, h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledWH(self.h, w, h), owned: true)
 
 proc scaled*(self: gen_qpixmap_types.QPixmap, s: gen_qsize_types.QSize): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledWithQSize(self.h, s.h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledS(self.h, s.h), owned: true)
 
 proc scaledToWidth*(self: gen_qpixmap_types.QPixmap, w: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledToWidth(self.h, w), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledToWidthW(self.h, w), owned: true)
 
 proc scaledToHeight*(self: gen_qpixmap_types.QPixmap, h: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledToHeight(self.h, h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledToHeightH(self.h, h), owned: true)
 
 proc transformed*(self: gen_qpixmap_types.QPixmap, param1: gen_qtransform_types.QTransform): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_transformed(self.h, param1.h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_transformed_QTransform(self.h, param1.h), owned: true)
 
 proc trueMatrix*(_: type gen_qpixmap_types.QPixmap, m: gen_qtransform_types.QTransform, w: cint, h: cint): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQPixmap_trueMatrix(m.h, w, h), owned: true)
@@ -254,40 +254,40 @@ proc toImage*(self: gen_qpixmap_types.QPixmap): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQPixmap_toImage(self.h), owned: true)
 
 proc fromImage*(_: type gen_qpixmap_types.QPixmap, image: gen_qimage_types.QImage): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_fromImage(image.h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_fromImageImage(image.h), owned: true)
 
 proc fromImageReader*(_: type gen_qpixmap_types.QPixmap, imageReader: gen_qimagereader_types.QImageReader): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_fromImageReader(imageReader.h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_fromImageReaderImageReader(imageReader.h), owned: true)
 
 proc load*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char]): bool =
-  fcQPixmap_load(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQPixmap_loadFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc loadFromData*(self: gen_qpixmap_types.QPixmap, buf: ptr uint8, len: cuint): bool =
-  fcQPixmap_loadFromData(self.h, buf, len)
+  fcQPixmap_loadFromDataBufLen(self.h, buf, len)
 
 proc loadFromData*(self: gen_qpixmap_types.QPixmap, data: openArray[byte]): bool =
-  fcQPixmap_loadFromDataWithData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQPixmap_loadFromDataData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc save*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char]): bool =
-  fcQPixmap_save(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQPixmap_saveFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc save*(self: gen_qpixmap_types.QPixmap, device: gen_qiodevice_types.QIODevice): bool =
-  fcQPixmap_saveWithDevice(self.h, device.h)
+  fcQPixmap_saveDevice(self.h, device.h)
 
 proc convertFromImage*(self: gen_qpixmap_types.QPixmap, img: gen_qimage_types.QImage): bool =
-  fcQPixmap_convertFromImage(self.h, img.h)
+  fcQPixmap_convertFromImageImg(self.h, img.h)
 
 proc copy*(self: gen_qpixmap_types.QPixmap, x: cint, y: cint, width: cint, height: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_copy(self.h, x, y, width, height), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_copyXYWidthHeight(self.h, x, y, width, height), owned: true)
 
 proc copy*(self: gen_qpixmap_types.QPixmap): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_copy2(self.h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_copy(self.h), owned: true)
 
 proc scroll*(self: gen_qpixmap_types.QPixmap, dx: cint, dy: cint, x: cint, y: cint, width: cint, height: cint): void =
-  fcQPixmap_scroll(self.h, dx, dy, x, y, width, height)
+  fcQPixmap_scrollDxDyXYWidthHeight(self.h, dx, dy, x, y, width, height)
 
 proc scroll*(self: gen_qpixmap_types.QPixmap, dx: cint, dy: cint, rect: gen_qrect_types.QRect): void =
-  fcQPixmap_scroll2(self.h, dx, dy, rect.h)
+  fcQPixmap_scrollDxDyRect(self.h, dx, dy, rect.h)
 
 proc cacheKey*(self: gen_qpixmap_types.QPixmap): clonglong =
   fcQPixmap_cacheKey(self.h)
@@ -308,82 +308,82 @@ proc operatorNot*(self: gen_qpixmap_types.QPixmap): bool =
   fcQPixmap_operatorNot(self.h)
 
 proc fill*(self: gen_qpixmap_types.QPixmap, fillColor: gen_qcolor_types.QColor): void =
-  fcQPixmap_fillWithFillColor(self.h, fillColor.h)
+  fcQPixmap_fillFillColor(self.h, fillColor.h)
 
 proc createHeuristicMask*(self: gen_qpixmap_types.QPixmap, clipTight: bool): gen_qbitmap_types.QBitmap =
-  gen_qbitmap_types.QBitmap(h: fcQPixmap_createHeuristicMaskWithClipTight(self.h, clipTight), owned: true)
+  gen_qbitmap_types.QBitmap(h: fcQPixmap_createHeuristicMaskClipTight(self.h, clipTight), owned: true)
 
 proc createMaskFromColor*(self: gen_qpixmap_types.QPixmap, maskColor: gen_qcolor_types.QColor, mode: cint): gen_qbitmap_types.QBitmap =
-  gen_qbitmap_types.QBitmap(h: fcQPixmap_createMaskFromColor2(self.h, maskColor.h, cint(mode)), owned: true)
+  gen_qbitmap_types.QBitmap(h: fcQPixmap_createMaskFromColorMaskColorMode(self.h, maskColor.h, cint(mode)), owned: true)
 
 proc scaled*(self: gen_qpixmap_types.QPixmap, w: cint, h: cint, aspectMode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaled2(self.h, w, h, cint(aspectMode)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledWHAspectMode(self.h, w, h, cint(aspectMode)), owned: true)
 
 proc scaled*(self: gen_qpixmap_types.QPixmap, w: cint, h: cint, aspectMode: cint, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaled3(self.h, w, h, cint(aspectMode), cint(mode)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledWHAspectModeMode(self.h, w, h, cint(aspectMode), cint(mode)), owned: true)
 
 proc scaled*(self: gen_qpixmap_types.QPixmap, s: gen_qsize_types.QSize, aspectMode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaled4(self.h, s.h, cint(aspectMode)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledSAspectMode(self.h, s.h, cint(aspectMode)), owned: true)
 
 proc scaled*(self: gen_qpixmap_types.QPixmap, s: gen_qsize_types.QSize, aspectMode: cint, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaled5(self.h, s.h, cint(aspectMode), cint(mode)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledSAspectModeMode(self.h, s.h, cint(aspectMode), cint(mode)), owned: true)
 
 proc scaledToWidth*(self: gen_qpixmap_types.QPixmap, w: cint, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledToWidth2(self.h, w, cint(mode)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledToWidthWMode(self.h, w, cint(mode)), owned: true)
 
 proc scaledToHeight*(self: gen_qpixmap_types.QPixmap, h: cint, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledToHeight2(self.h, h, cint(mode)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_scaledToHeightHMode(self.h, h, cint(mode)), owned: true)
 
 proc transformed*(self: gen_qpixmap_types.QPixmap, param1: gen_qtransform_types.QTransform, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_transformed2(self.h, param1.h, cint(mode)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_transformed_QTransform_Qt_TransformationMode(self.h, param1.h, cint(mode)), owned: true)
 
 proc fromImage*(_: type gen_qpixmap_types.QPixmap, image: gen_qimage_types.QImage, flags: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_fromImage2(image.h, cint(flags)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_fromImageImageFlags(image.h, cint(flags)), owned: true)
 
 proc fromImageReader*(_: type gen_qpixmap_types.QPixmap, imageReader: gen_qimagereader_types.QImageReader, flags: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_fromImageReader2(imageReader.h, cint(flags)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_fromImageReaderImageReaderFlags(imageReader.h, cint(flags)), owned: true)
 
 proc load*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char], format: cstring): bool =
-  fcQPixmap_load2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
+  fcQPixmap_loadFileNameFormat(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
 
 proc load*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char], format: cstring, flags: cint): bool =
-  fcQPixmap_load3(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format, cint(flags))
+  fcQPixmap_loadFileNameFormatFlags(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format, cint(flags))
 
 proc loadFromData*(self: gen_qpixmap_types.QPixmap, buf: ptr uint8, len: cuint, format: cstring): bool =
-  fcQPixmap_loadFromData2(self.h, buf, len, format)
+  fcQPixmap_loadFromDataBufLenFormat(self.h, buf, len, format)
 
 proc loadFromData*(self: gen_qpixmap_types.QPixmap, buf: ptr uint8, len: cuint, format: cstring, flags: cint): bool =
-  fcQPixmap_loadFromData3(self.h, buf, len, format, cint(flags))
+  fcQPixmap_loadFromDataBufLenFormatFlags(self.h, buf, len, format, cint(flags))
 
 proc loadFromData*(self: gen_qpixmap_types.QPixmap, data: openArray[byte], format: cstring): bool =
-  fcQPixmap_loadFromData4(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), format)
+  fcQPixmap_loadFromDataDataFormat(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), format)
 
 proc loadFromData*(self: gen_qpixmap_types.QPixmap, data: openArray[byte], format: cstring, flags: cint): bool =
-  fcQPixmap_loadFromData5(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), format, cint(flags))
+  fcQPixmap_loadFromDataDataFormatFlags(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), format, cint(flags))
 
 proc save*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char], format: cstring): bool =
-  fcQPixmap_save2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
+  fcQPixmap_saveFileNameFormat(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
 
 proc save*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char], format: cstring, quality: cint): bool =
-  fcQPixmap_save3(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format, quality)
+  fcQPixmap_saveFileNameFormatQuality(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format, quality)
 
 proc save*(self: gen_qpixmap_types.QPixmap, device: gen_qiodevice_types.QIODevice, format: cstring): bool =
-  fcQPixmap_save4(self.h, device.h, format)
+  fcQPixmap_saveDeviceFormat(self.h, device.h, format)
 
 proc save*(self: gen_qpixmap_types.QPixmap, device: gen_qiodevice_types.QIODevice, format: cstring, quality: cint): bool =
-  fcQPixmap_save5(self.h, device.h, format, quality)
+  fcQPixmap_saveDeviceFormatQuality(self.h, device.h, format, quality)
 
 proc convertFromImage*(self: gen_qpixmap_types.QPixmap, img: gen_qimage_types.QImage, flags: cint): bool =
-  fcQPixmap_convertFromImage2(self.h, img.h, cint(flags))
+  fcQPixmap_convertFromImageImgFlags(self.h, img.h, cint(flags))
 
 proc copy*(self: gen_qpixmap_types.QPixmap, rect: gen_qrect_types.QRect): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmap_copyWithRect(self.h, rect.h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQPixmap_copyRect(self.h, rect.h), owned: true)
 
 proc scroll*(self: gen_qpixmap_types.QPixmap, dx: cint, dy: cint, x: cint, y: cint, width: cint, height: cint, exposed: gen_qregion_types.QRegion): void =
-  fcQPixmap_scroll3(self.h, dx, dy, x, y, width, height, exposed.h)
+  fcQPixmap_scrollDxDyXYWidthHeightExposed(self.h, dx, dy, x, y, width, height, exposed.h)
 
 proc scroll*(self: gen_qpixmap_types.QPixmap, dx: cint, dy: cint, rect: gen_qrect_types.QRect, exposed: gen_qregion_types.QRegion): void =
-  fcQPixmap_scroll4(self.h, dx, dy, rect.h, exposed.h)
+  fcQPixmap_scrollDxDyRectExposed(self.h, dx, dy, rect.h, exposed.h)
 
 type QPixmapdevTypeProc* = proc(self: QPixmap): cint {.raises: [], gcsafe.}
 type QPixmappaintEngineProc* = proc(self: QPixmap): gen_qpaintengine_types.QPaintEngine {.raises: [], gcsafe.}
@@ -617,7 +617,7 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
   fcQPixmap_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpixmap_types.QPixmap,
-    param1: gen_qpixmap_types.QPixmap,
+    fromVal: gen_qpixmap_types.QPixmap,
     vtbl: ref QPixmapVTable = nil): gen_qpixmap_types.QPixmap =
   let vtbl = if vtbl == nil: new QPixmapVTable else: vtbl
   GC_ref(vtbl)
@@ -636,7 +636,7 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
     vtbl[].vtbl.redirected = fcQPixmap_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = fcQPixmap_vtable_callback_sharedPainter
-  let tmp = gen_qpixmap_types.QPixmap(h: fcQPixmap_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qpixmap_types.QPixmap(h: fcQPixmap_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQPixmap_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpixmap_types.QPixmap,
@@ -730,10 +730,10 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
   inst[].owned = true
 
 proc create*(T: type gen_qpixmap_types.QPixmap,
-    param1: gen_qpixmap_types.QPixmap,
+    fromVal: gen_qpixmap_types.QPixmap,
     inst: VirtualQPixmap) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQPixmap_new5(addr(cQPixmap_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQPixmap_new5(addr(cQPixmap_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQPixmap_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 

@@ -35,7 +35,7 @@ int QSessionManager_metacall(QSessionManager* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSessionManager_tr(const char* s) {
+struct seaqt_string QSessionManager_tr_s(const char* s) {
 	QString _ret = QSessionManager::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -155,13 +155,13 @@ struct seaqt_array /* of struct seaqt_string */  QSessionManager_discardCommand(
 	return _out;
 }
 
-void QSessionManager_setManagerProperty(QSessionManager* self, struct seaqt_string name, struct seaqt_string value) {
+void QSessionManager_setManagerProperty_QString_QString(QSessionManager* self, struct seaqt_string name, struct seaqt_string value) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString value_QString = QString::fromUtf8(value.data, value.len);
 	self->setManagerProperty(name_QString, value_QString);
 }
 
-void QSessionManager_setManagerProperty2(QSessionManager* self, struct seaqt_string name, struct seaqt_array /* of struct seaqt_string */  value) {
+void QSessionManager_setManagerProperty_QString_QStringList(QSessionManager* self, struct seaqt_string name, struct seaqt_array /* of struct seaqt_string */  value) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QStringList value_QList;
 	value_QList.reserve(value.len);
@@ -181,7 +181,7 @@ void QSessionManager_requestPhase2(QSessionManager* self) {
 	self->requestPhase2();
 }
 
-struct seaqt_string QSessionManager_tr2(const char* s, const char* c) {
+struct seaqt_string QSessionManager_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSessionManager::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -192,7 +192,7 @@ struct seaqt_string QSessionManager_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSessionManager_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSessionManager_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSessionManager::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

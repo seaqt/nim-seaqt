@@ -118,32 +118,32 @@ proc fcQDataStream_byteOrder(self: pointer): cint {.importc: "QDataStream_byteOr
 proc fcQDataStream_setByteOrder(self: pointer, byteOrder: cint): void {.importc: "QDataStream_setByteOrder".}
 proc fcQDataStream_version(self: pointer): cint {.importc: "QDataStream_version".}
 proc fcQDataStream_setVersion(self: pointer, version: cint): void {.importc: "QDataStream_setVersion".}
-proc fcQDataStream_operatorShiftRight(self: pointer, i: ptr cchar): void {.importc: "QDataStream_operatorShiftRight".}
-proc fcQDataStream_operatorShiftRightWithQint8(self: pointer, i: ptr cschar): void {.importc: "QDataStream_operatorShiftRightWithQint8".}
-proc fcQDataStream_operatorShiftRightWithQuint8(self: pointer, i: ptr uint8): void {.importc: "QDataStream_operatorShiftRightWithQuint8".}
-proc fcQDataStream_operatorShiftRightWithQint16(self: pointer, i: ptr cshort): void {.importc: "QDataStream_operatorShiftRightWithQint16".}
-proc fcQDataStream_operatorShiftRightWithQuint16(self: pointer, i: ptr cushort): void {.importc: "QDataStream_operatorShiftRightWithQuint16".}
-proc fcQDataStream_operatorShiftRightWithQint32(self: pointer, i: ptr cint): void {.importc: "QDataStream_operatorShiftRightWithQint32".}
-proc fcQDataStream_operatorShiftRightWithQuint32(self: pointer, i: ptr cuint): void {.importc: "QDataStream_operatorShiftRightWithQuint32".}
-proc fcQDataStream_operatorShiftRightWithQint64(self: pointer, i: ptr clonglong): void {.importc: "QDataStream_operatorShiftRightWithQint64".}
-proc fcQDataStream_operatorShiftRightWithQuint64(self: pointer, i: ptr culonglong): void {.importc: "QDataStream_operatorShiftRightWithQuint64".}
-proc fcQDataStream_operatorShiftRightWithBool(self: pointer, i: ptr bool): void {.importc: "QDataStream_operatorShiftRightWithBool".}
-proc fcQDataStream_operatorShiftRightWithFloat(self: pointer, f: ptr float32): void {.importc: "QDataStream_operatorShiftRightWithFloat".}
-proc fcQDataStream_operatorShiftRightWithDouble(self: pointer, f: ptr float64): void {.importc: "QDataStream_operatorShiftRightWithDouble".}
-proc fcQDataStream_operatorShiftRightWithStr(self: pointer, str: cstring): void {.importc: "QDataStream_operatorShiftRightWithStr".}
-proc fcQDataStream_operatorShiftLeft(self: pointer, i: cchar): void {.importc: "QDataStream_operatorShiftLeft".}
-proc fcQDataStream_operatorShiftLeftWithQint8(self: pointer, i: cschar): void {.importc: "QDataStream_operatorShiftLeftWithQint8".}
-proc fcQDataStream_operatorShiftLeftWithQuint8(self: pointer, i: uint8): void {.importc: "QDataStream_operatorShiftLeftWithQuint8".}
-proc fcQDataStream_operatorShiftLeftWithQint16(self: pointer, i: cshort): void {.importc: "QDataStream_operatorShiftLeftWithQint16".}
-proc fcQDataStream_operatorShiftLeftWithQuint16(self: pointer, i: cushort): void {.importc: "QDataStream_operatorShiftLeftWithQuint16".}
-proc fcQDataStream_operatorShiftLeftWithQint32(self: pointer, i: cint): void {.importc: "QDataStream_operatorShiftLeftWithQint32".}
-proc fcQDataStream_operatorShiftLeftWithQuint32(self: pointer, i: cuint): void {.importc: "QDataStream_operatorShiftLeftWithQuint32".}
-proc fcQDataStream_operatorShiftLeftWithQint64(self: pointer, i: clonglong): void {.importc: "QDataStream_operatorShiftLeftWithQint64".}
-proc fcQDataStream_operatorShiftLeftWithQuint64(self: pointer, i: culonglong): void {.importc: "QDataStream_operatorShiftLeftWithQuint64".}
-proc fcQDataStream_operatorShiftLeftWithBool(self: pointer, i: bool): void {.importc: "QDataStream_operatorShiftLeftWithBool".}
-proc fcQDataStream_operatorShiftLeftWithFloat(self: pointer, f: float32): void {.importc: "QDataStream_operatorShiftLeftWithFloat".}
-proc fcQDataStream_operatorShiftLeftWithDouble(self: pointer, f: float64): void {.importc: "QDataStream_operatorShiftLeftWithDouble".}
-proc fcQDataStream_operatorShiftLeftWithStr(self: pointer, str: cstring): void {.importc: "QDataStream_operatorShiftLeftWithStr".}
+proc fcQDataStream_operatorShiftRightChar(self: pointer, i: ptr cchar): void {.importc: "QDataStream_operatorShiftRight_char".}
+proc fcQDataStream_operatorShiftRightQint8(self: pointer, i: ptr cschar): void {.importc: "QDataStream_operatorShiftRight_qint8".}
+proc fcQDataStream_operatorShiftRightQuint8(self: pointer, i: ptr uint8): void {.importc: "QDataStream_operatorShiftRight_quint8".}
+proc fcQDataStream_operatorShiftRightQint16(self: pointer, i: ptr cshort): void {.importc: "QDataStream_operatorShiftRight_qint16".}
+proc fcQDataStream_operatorShiftRightQuint16(self: pointer, i: ptr cushort): void {.importc: "QDataStream_operatorShiftRight_quint16".}
+proc fcQDataStream_operatorShiftRightQint32(self: pointer, i: ptr cint): void {.importc: "QDataStream_operatorShiftRight_qint32".}
+proc fcQDataStream_operatorShiftRightQuint32(self: pointer, i: ptr cuint): void {.importc: "QDataStream_operatorShiftRight_quint32".}
+proc fcQDataStream_operatorShiftRightQint64(self: pointer, i: ptr clonglong): void {.importc: "QDataStream_operatorShiftRight_qint64".}
+proc fcQDataStream_operatorShiftRightQuint64(self: pointer, i: ptr culonglong): void {.importc: "QDataStream_operatorShiftRight_quint64".}
+proc fcQDataStream_operatorShiftRightBool(self: pointer, i: ptr bool): void {.importc: "QDataStream_operatorShiftRight_bool".}
+proc fcQDataStream_operatorShiftRightFloat(self: pointer, f: ptr float32): void {.importc: "QDataStream_operatorShiftRight_float".}
+proc fcQDataStream_operatorShiftRightDouble(self: pointer, f: ptr float64): void {.importc: "QDataStream_operatorShiftRight_double".}
+proc fcQDataStream_operatorShiftRightPchar(self: pointer, str: cstring): void {.importc: "QDataStream_operatorShiftRight_pchar".}
+proc fcQDataStream_operatorShiftLeftChar(self: pointer, i: cchar): void {.importc: "QDataStream_operatorShiftLeft_char".}
+proc fcQDataStream_operatorShiftLeftQint8(self: pointer, i: cschar): void {.importc: "QDataStream_operatorShiftLeft_qint8".}
+proc fcQDataStream_operatorShiftLeftQuint8(self: pointer, i: uint8): void {.importc: "QDataStream_operatorShiftLeft_quint8".}
+proc fcQDataStream_operatorShiftLeftQint16(self: pointer, i: cshort): void {.importc: "QDataStream_operatorShiftLeft_qint16".}
+proc fcQDataStream_operatorShiftLeftQuint16(self: pointer, i: cushort): void {.importc: "QDataStream_operatorShiftLeft_quint16".}
+proc fcQDataStream_operatorShiftLeftQint32(self: pointer, i: cint): void {.importc: "QDataStream_operatorShiftLeft_qint32".}
+proc fcQDataStream_operatorShiftLeftQuint32(self: pointer, i: cuint): void {.importc: "QDataStream_operatorShiftLeft_quint32".}
+proc fcQDataStream_operatorShiftLeftQint64(self: pointer, i: clonglong): void {.importc: "QDataStream_operatorShiftLeft_qint64".}
+proc fcQDataStream_operatorShiftLeftQuint64(self: pointer, i: culonglong): void {.importc: "QDataStream_operatorShiftLeft_quint64".}
+proc fcQDataStream_operatorShiftLeftBool(self: pointer, i: bool): void {.importc: "QDataStream_operatorShiftLeft_bool".}
+proc fcQDataStream_operatorShiftLeftFloat(self: pointer, f: float32): void {.importc: "QDataStream_operatorShiftLeft_float".}
+proc fcQDataStream_operatorShiftLeftDouble(self: pointer, f: float64): void {.importc: "QDataStream_operatorShiftLeft_double".}
+proc fcQDataStream_operatorShiftLeftPcchar(self: pointer, str: cstring): void {.importc: "QDataStream_operatorShiftLeft_pcchar".}
 proc fcQDataStream_readBytes(self: pointer, param1: cstring, len: ptr cuint): pointer {.importc: "QDataStream_readBytes".}
 proc fcQDataStream_readRawData(self: pointer, param1: cstring, len: cint): cint {.importc: "QDataStream_readRawData".}
 proc fcQDataStream_writeBytes(self: pointer, param1: cstring, len: cuint): void {.importc: "QDataStream_writeBytes".}
@@ -155,8 +155,8 @@ proc fcQDataStream_rollbackTransaction(self: pointer): void {.importc: "QDataStr
 proc fcQDataStream_abortTransaction(self: pointer): void {.importc: "QDataStream_abortTransaction".}
 proc fcQDataStream_isDeviceTransactionStarted(self: pointer): bool {.importc: "QDataStream_isDeviceTransactionStarted".}
 proc fcQDataStream_new(): ptr cQDataStream {.importc: "QDataStream_new".}
-proc fcQDataStream_new2(param1: pointer): ptr cQDataStream {.importc: "QDataStream_new2".}
-proc fcQDataStream_new3(param1: struct_seaqt_string): ptr cQDataStream {.importc: "QDataStream_new3".}
+proc fcQDataStream_new2(param1: pointer): ptr cQDataStream {.importc: "QDataStream_new_QIODevice".}
+proc fcQDataStream_new3(param1: struct_seaqt_string): ptr cQDataStream {.importc: "QDataStream_new_QByteArray".}
 
 proc device*(self: gen_qdatastream_types.QDataStream): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQDataStream_device(self.h), owned: false)
@@ -195,82 +195,82 @@ proc setVersion*(self: gen_qdatastream_types.QDataStream, version: cint): void =
   fcQDataStream_setVersion(self.h, version)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, i: ptr cchar): void =
-  fcQDataStream_operatorShiftRight(self.h, i)
+  fcQDataStream_operatorShiftRightChar(self.h, i)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, i: ptr cschar): void =
-  fcQDataStream_operatorShiftRightWithQint8(self.h, i)
+  fcQDataStream_operatorShiftRightQint8(self.h, i)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, i: ptr uint8): void =
-  fcQDataStream_operatorShiftRightWithQuint8(self.h, i)
+  fcQDataStream_operatorShiftRightQuint8(self.h, i)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, i: ptr cshort): void =
-  fcQDataStream_operatorShiftRightWithQint16(self.h, i)
+  fcQDataStream_operatorShiftRightQint16(self.h, i)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, i: ptr cushort): void =
-  fcQDataStream_operatorShiftRightWithQuint16(self.h, i)
+  fcQDataStream_operatorShiftRightQuint16(self.h, i)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, i: ptr cint): void =
-  fcQDataStream_operatorShiftRightWithQint32(self.h, i)
+  fcQDataStream_operatorShiftRightQint32(self.h, i)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, i: ptr cuint): void =
-  fcQDataStream_operatorShiftRightWithQuint32(self.h, i)
+  fcQDataStream_operatorShiftRightQuint32(self.h, i)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, i: ptr clonglong): void =
-  fcQDataStream_operatorShiftRightWithQint64(self.h, i)
+  fcQDataStream_operatorShiftRightQint64(self.h, i)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, i: ptr culonglong): void =
-  fcQDataStream_operatorShiftRightWithQuint64(self.h, i)
+  fcQDataStream_operatorShiftRightQuint64(self.h, i)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, i: ptr bool): void =
-  fcQDataStream_operatorShiftRightWithBool(self.h, i)
+  fcQDataStream_operatorShiftRightBool(self.h, i)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, f: ptr float32): void =
-  fcQDataStream_operatorShiftRightWithFloat(self.h, f)
+  fcQDataStream_operatorShiftRightFloat(self.h, f)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, f: ptr float64): void =
-  fcQDataStream_operatorShiftRightWithDouble(self.h, f)
+  fcQDataStream_operatorShiftRightDouble(self.h, f)
 
 proc operatorShiftRight*(self: gen_qdatastream_types.QDataStream, str: cstring): void =
-  fcQDataStream_operatorShiftRightWithStr(self.h, str)
+  fcQDataStream_operatorShiftRightPchar(self.h, str)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, i: cchar): void =
-  fcQDataStream_operatorShiftLeft(self.h, i)
+  fcQDataStream_operatorShiftLeftChar(self.h, i)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, i: cschar): void =
-  fcQDataStream_operatorShiftLeftWithQint8(self.h, i)
+  fcQDataStream_operatorShiftLeftQint8(self.h, i)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, i: uint8): void =
-  fcQDataStream_operatorShiftLeftWithQuint8(self.h, i)
+  fcQDataStream_operatorShiftLeftQuint8(self.h, i)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, i: cshort): void =
-  fcQDataStream_operatorShiftLeftWithQint16(self.h, i)
+  fcQDataStream_operatorShiftLeftQint16(self.h, i)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, i: cushort): void =
-  fcQDataStream_operatorShiftLeftWithQuint16(self.h, i)
+  fcQDataStream_operatorShiftLeftQuint16(self.h, i)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, i: cint): void =
-  fcQDataStream_operatorShiftLeftWithQint32(self.h, i)
+  fcQDataStream_operatorShiftLeftQint32(self.h, i)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, i: cuint): void =
-  fcQDataStream_operatorShiftLeftWithQuint32(self.h, i)
+  fcQDataStream_operatorShiftLeftQuint32(self.h, i)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, i: clonglong): void =
-  fcQDataStream_operatorShiftLeftWithQint64(self.h, i)
+  fcQDataStream_operatorShiftLeftQint64(self.h, i)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, i: culonglong): void =
-  fcQDataStream_operatorShiftLeftWithQuint64(self.h, i)
+  fcQDataStream_operatorShiftLeftQuint64(self.h, i)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, i: bool): void =
-  fcQDataStream_operatorShiftLeftWithBool(self.h, i)
+  fcQDataStream_operatorShiftLeftBool(self.h, i)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, f: float32): void =
-  fcQDataStream_operatorShiftLeftWithFloat(self.h, f)
+  fcQDataStream_operatorShiftLeftFloat(self.h, f)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, f: float64): void =
-  fcQDataStream_operatorShiftLeftWithDouble(self.h, f)
+  fcQDataStream_operatorShiftLeftDouble(self.h, f)
 
 proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, str: cstring): void =
-  fcQDataStream_operatorShiftLeftWithStr(self.h, str)
+  fcQDataStream_operatorShiftLeftPcchar(self.h, str)
 
 proc readBytes*(self: gen_qdatastream_types.QDataStream, param1: cstring, len: ptr cuint): gen_qdatastream_types.QDataStream =
   gen_qdatastream_types.QDataStream(h: fcQDataStream_readBytes(self.h, param1, len), owned: false)

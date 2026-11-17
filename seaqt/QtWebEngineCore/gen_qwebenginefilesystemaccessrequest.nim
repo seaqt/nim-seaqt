@@ -55,7 +55,7 @@ export
 
 type cQWebEngineFileSystemAccessRequest*{.exportc: "QWebEngineFileSystemAccessRequest", incompleteStruct.} = object
 
-proc fcQWebEngineFileSystemAccessRequest_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineFileSystemAccessRequest_operatorAssign".}
+proc fcQWebEngineFileSystemAccessRequest_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineFileSystemAccessRequest_operatorAssign".}
 proc fcQWebEngineFileSystemAccessRequest_swap(self: pointer, other: pointer): void {.importc: "QWebEngineFileSystemAccessRequest_swap".}
 proc fcQWebEngineFileSystemAccessRequest_accept(self: pointer): void {.importc: "QWebEngineFileSystemAccessRequest_accept".}
 proc fcQWebEngineFileSystemAccessRequest_reject(self: pointer): void {.importc: "QWebEngineFileSystemAccessRequest_reject".}
@@ -63,11 +63,11 @@ proc fcQWebEngineFileSystemAccessRequest_origin(self: pointer): pointer {.import
 proc fcQWebEngineFileSystemAccessRequest_filePath(self: pointer): pointer {.importc: "QWebEngineFileSystemAccessRequest_filePath".}
 proc fcQWebEngineFileSystemAccessRequest_handleType(self: pointer): cint {.importc: "QWebEngineFileSystemAccessRequest_handleType".}
 proc fcQWebEngineFileSystemAccessRequest_accessFlags(self: pointer): cint {.importc: "QWebEngineFileSystemAccessRequest_accessFlags".}
-proc fcQWebEngineFileSystemAccessRequest_new(other: pointer): ptr cQWebEngineFileSystemAccessRequest {.importc: "QWebEngineFileSystemAccessRequest_new".}
+proc fcQWebEngineFileSystemAccessRequest_new(fromVal: pointer): ptr cQWebEngineFileSystemAccessRequest {.importc: "QWebEngineFileSystemAccessRequest_new".}
 proc fcQWebEngineFileSystemAccessRequest_staticMetaObject(): pointer {.importc: "QWebEngineFileSystemAccessRequest_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest, other: gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest): void =
-  fcQWebEngineFileSystemAccessRequest_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest, fromVal: gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest): void =
+  fcQWebEngineFileSystemAccessRequest_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest, other: gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest): void =
   fcQWebEngineFileSystemAccessRequest_swap(self.h, other.h)
@@ -91,8 +91,8 @@ proc accessFlags*(self: gen_qwebenginefilesystemaccessrequest_types.QWebEngineFi
   cint(fcQWebEngineFileSystemAccessRequest_accessFlags(self.h))
 
 proc create*(T: type gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest,
-    other: gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest): gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest =
-  let tmp = gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest(h: fcQWebEngineFileSystemAccessRequest_new(other.h), owned: true)
+    fromVal: gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest): gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest =
+  let tmp = gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest(h: fcQWebEngineFileSystemAccessRequest_new(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebenginefilesystemaccessrequest_types.QWebEngineFileSystemAccessRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineFileSystemAccessRequest_staticMetaObject())

@@ -156,7 +156,7 @@ typedef struct QColumnView_VTable{
 	void (*commitData)(VirtualQColumnView* self, QWidget* editor);
 	void (*editorDestroyed)(VirtualQColumnView* self, QObject* editor);
 	struct seaqt_array /* of QModelIndex* */  (*selectedIndexes)(const VirtualQColumnView* self);
-	bool (*edit2)(VirtualQColumnView* self, QModelIndex* index, int trigger, QEvent* event);
+	bool (*edit_index_trigger_event)(VirtualQColumnView* self, QModelIndex* index, int trigger, QEvent* event);
 	int (*selectionCommand)(const VirtualQColumnView* self, QModelIndex* index, QEvent* event);
 	void (*startDrag)(VirtualQColumnView* self, int supportedActions);
 	void (*initViewItemOption)(const VirtualQColumnView* self, QStyleOptionViewItem* option);
@@ -214,13 +214,13 @@ void* QColumnView_vdata(VirtualQColumnView* self);
 VirtualQColumnView* vdata_QColumnView(void* vdata);
 
 VirtualQColumnView* QColumnView_new(const QColumnView_VTable* vtbl, size_t vdata);
-VirtualQColumnView* QColumnView_new2(const QColumnView_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQColumnView* QColumnView_new_parent(const QColumnView_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QColumnView_virtbase(QColumnView* src, QAbstractItemView** outptr_QAbstractItemView);
 QMetaObject* QColumnView_metaObject(const QColumnView* self);
 void* QColumnView_metacast(QColumnView* self, const char* param1);
 int QColumnView_metacall(QColumnView* self, int param1, int param2, void** param3);
-struct seaqt_string QColumnView_tr(const char* s);
+struct seaqt_string QColumnView_tr_s(const char* s);
 void QColumnView_updatePreviewWidget(QColumnView* self, QModelIndex* index);
 void QColumnView_connect_updatePreviewWidget(QColumnView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t));
 QModelIndex* QColumnView_indexAt(const QColumnView* self, QPoint* point);
@@ -248,8 +248,8 @@ void QColumnView_rowsInserted(QColumnView* self, QModelIndex* parent, int start,
 void QColumnView_currentChanged(QColumnView* self, QModelIndex* current, QModelIndex* previous);
 void QColumnView_scrollContentsBy(QColumnView* self, int dx, int dy);
 QAbstractItemView* QColumnView_createColumn(QColumnView* self, QModelIndex* rootIndex);
-struct seaqt_string QColumnView_tr2(const char* s, const char* c);
-struct seaqt_string QColumnView_tr3(const char* s, const char* c, int n);
+struct seaqt_string QColumnView_tr_s_c(const char* s, const char* c);
+struct seaqt_string QColumnView_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QColumnView_virtualbase_metaObject(const VirtualQColumnView* self);
 void* QColumnView_virtualbase_metacast(VirtualQColumnView* self, const char* param1);
@@ -294,7 +294,7 @@ void QColumnView_virtualbase_closeEditor(VirtualQColumnView* self, QWidget* edit
 void QColumnView_virtualbase_commitData(VirtualQColumnView* self, QWidget* editor);
 void QColumnView_virtualbase_editorDestroyed(VirtualQColumnView* self, QObject* editor);
 struct seaqt_array /* of QModelIndex* */  QColumnView_virtualbase_selectedIndexes(const VirtualQColumnView* self);
-bool QColumnView_virtualbase_edit2(VirtualQColumnView* self, QModelIndex* index, int trigger, QEvent* event);
+bool QColumnView_virtualbase_edit_index_trigger_event(VirtualQColumnView* self, QModelIndex* index, int trigger, QEvent* event);
 int QColumnView_virtualbase_selectionCommand(const VirtualQColumnView* self, QModelIndex* index, QEvent* event);
 void QColumnView_virtualbase_startDrag(VirtualQColumnView* self, int supportedActions);
 void QColumnView_virtualbase_initViewItemOption(const VirtualQColumnView* self, QStyleOptionViewItem* option);
@@ -359,7 +359,7 @@ void QColumnView_protectedbase_startAutoScroll(VirtualQColumnView* self);
 void QColumnView_protectedbase_stopAutoScroll(VirtualQColumnView* self);
 void QColumnView_protectedbase_doAutoScroll(VirtualQColumnView* self);
 int QColumnView_protectedbase_dropIndicatorPosition(const VirtualQColumnView* self);
-void QColumnView_protectedbase_setViewportMargins(VirtualQColumnView* self, int left, int top, int right, int bottom);
+void QColumnView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQColumnView* self, int left, int top, int right, int bottom);
 QMargins* QColumnView_protectedbase_viewportMargins(const VirtualQColumnView* self);
 void QColumnView_protectedbase_drawFrame(VirtualQColumnView* self, QPainter* param1);
 void QColumnView_protectedbase_updateMicroFocus(VirtualQColumnView* self);

@@ -59,13 +59,13 @@ type cQQmlFileSelector*{.exportc: "QQmlFileSelector", incompleteStruct.} = objec
 proc fcQQmlFileSelector_metaObject(self: pointer): pointer {.importc: "QQmlFileSelector_metaObject".}
 proc fcQQmlFileSelector_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlFileSelector_metacast".}
 proc fcQQmlFileSelector_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlFileSelector_metacall".}
-proc fcQQmlFileSelector_tr(s: cstring): struct_seaqt_string {.importc: "QQmlFileSelector_tr".}
+proc fcQQmlFileSelector_trS(s: cstring): struct_seaqt_string {.importc: "QQmlFileSelector_tr_s".}
 proc fcQQmlFileSelector_selector(self: pointer): pointer {.importc: "QQmlFileSelector_selector".}
 proc fcQQmlFileSelector_setSelector(self: pointer, selector: pointer): void {.importc: "QQmlFileSelector_setSelector".}
 proc fcQQmlFileSelector_setExtraSelectors(self: pointer, strings: struct_seaqt_array): void {.importc: "QQmlFileSelector_setExtraSelectors".}
 proc fcQQmlFileSelector_get(param1: pointer): pointer {.importc: "QQmlFileSelector_get".}
-proc fcQQmlFileSelector_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlFileSelector_tr2".}
-proc fcQQmlFileSelector_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlFileSelector_tr3".}
+proc fcQQmlFileSelector_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlFileSelector_tr_s_c".}
+proc fcQQmlFileSelector_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlFileSelector_tr_s_c_n".}
 proc fcQQmlFileSelector_vdata(self: pointer): ptr pointer {.importc: "QQmlFileSelector_vdata".}
 proc fvdata_cQQmlFileSelector(self: pointer): pointer {.importc: "vdata_QQmlFileSelector".}
 
@@ -95,8 +95,8 @@ proc fcQQmlFileSelector_protectedbase_sender(self: pointer): pointer {.importc: 
 proc fcQQmlFileSelector_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QQmlFileSelector_protectedbase_senderSignalIndex".}
 proc fcQQmlFileSelector_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlFileSelector_protectedbase_receivers".}
 proc fcQQmlFileSelector_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlFileSelector_protectedbase_isSignalConnected".}
-proc fcQQmlFileSelector_new(vtbl: pointer, vdata: csize_t, engine: pointer): ptr cQQmlFileSelector {.importc: "QQmlFileSelector_new".}
-proc fcQQmlFileSelector_new2(vtbl: pointer, vdata: csize_t, engine: pointer, parent: pointer): ptr cQQmlFileSelector {.importc: "QQmlFileSelector_new2".}
+proc fcQQmlFileSelector_new(vtbl: pointer, vdata: csize_t, engine: pointer): ptr cQQmlFileSelector {.importc: "QQmlFileSelector_new_engine".}
+proc fcQQmlFileSelector_new2(vtbl: pointer, vdata: csize_t, engine: pointer, parent: pointer): ptr cQQmlFileSelector {.importc: "QQmlFileSelector_new_engine_parent".}
 proc fcQQmlFileSelector_staticMetaObject(): pointer {.importc: "QQmlFileSelector_staticMetaObject".}
 
 proc metaObject*(self: gen_qqmlfileselector_types.QQmlFileSelector): gen_qobjectdefs_types.QMetaObject =
@@ -109,7 +109,7 @@ proc metacall*(self: gen_qqmlfileselector_types.QQmlFileSelector, param1: cint, 
   fcQQmlFileSelector_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlfileselector_types.QQmlFileSelector, s: cstring): string =
-  let v_ms = fcQQmlFileSelector_tr(s)
+  let v_ms = fcQQmlFileSelector_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -131,13 +131,13 @@ proc get*(_: type gen_qqmlfileselector_types.QQmlFileSelector, param1: gen_qqmle
   gen_qqmlfileselector_types.QQmlFileSelector(h: fcQQmlFileSelector_get(param1.h), owned: false)
 
 proc tr*(_: type gen_qqmlfileselector_types.QQmlFileSelector, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlFileSelector_tr2(s, c)
+  let v_ms = fcQQmlFileSelector_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlfileselector_types.QQmlFileSelector, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlFileSelector_tr3(s, c, n)
+  let v_ms = fcQQmlFileSelector_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

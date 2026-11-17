@@ -61,13 +61,13 @@ void* QGraphicsItemAnimation_vdata(VirtualQGraphicsItemAnimation* self);
 VirtualQGraphicsItemAnimation* vdata_QGraphicsItemAnimation(void* vdata);
 
 VirtualQGraphicsItemAnimation* QGraphicsItemAnimation_new(const QGraphicsItemAnimation_VTable* vtbl, size_t vdata);
-VirtualQGraphicsItemAnimation* QGraphicsItemAnimation_new2(const QGraphicsItemAnimation_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQGraphicsItemAnimation* QGraphicsItemAnimation_new_parent(const QGraphicsItemAnimation_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QGraphicsItemAnimation_virtbase(QGraphicsItemAnimation* src, QObject** outptr_QObject);
 QMetaObject* QGraphicsItemAnimation_metaObject(const QGraphicsItemAnimation* self);
 void* QGraphicsItemAnimation_metacast(QGraphicsItemAnimation* self, const char* param1);
 int QGraphicsItemAnimation_metacall(QGraphicsItemAnimation* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsItemAnimation_tr(const char* s);
+struct seaqt_string QGraphicsItemAnimation_tr_s(const char* s);
 QGraphicsItem* QGraphicsItemAnimation_item(const QGraphicsItemAnimation* self);
 void QGraphicsItemAnimation_setItem(QGraphicsItemAnimation* self, QGraphicsItem* item);
 QTimeLine* QGraphicsItemAnimation_timeLine(const QGraphicsItemAnimation* self);
@@ -95,8 +95,8 @@ void QGraphicsItemAnimation_clear(QGraphicsItemAnimation* self);
 void QGraphicsItemAnimation_setStep(QGraphicsItemAnimation* self, double x);
 void QGraphicsItemAnimation_beforeAnimationStep(QGraphicsItemAnimation* self, double step);
 void QGraphicsItemAnimation_afterAnimationStep(QGraphicsItemAnimation* self, double step);
-struct seaqt_string QGraphicsItemAnimation_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsItemAnimation_tr3(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsItemAnimation_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsItemAnimation_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGraphicsItemAnimation_virtualbase_metaObject(const VirtualQGraphicsItemAnimation* self);
 void* QGraphicsItemAnimation_virtualbase_metacast(VirtualQGraphicsItemAnimation* self, const char* param1);

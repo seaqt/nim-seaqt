@@ -74,7 +74,7 @@ type cQNmeaSatelliteInfoSource*{.exportc: "QNmeaSatelliteInfoSource", incomplete
 proc fcQNmeaSatelliteInfoSource_metaObject(self: pointer): pointer {.importc: "QNmeaSatelliteInfoSource_metaObject".}
 proc fcQNmeaSatelliteInfoSource_metacast(self: pointer, param1: cstring): pointer {.importc: "QNmeaSatelliteInfoSource_metacast".}
 proc fcQNmeaSatelliteInfoSource_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNmeaSatelliteInfoSource_metacall".}
-proc fcQNmeaSatelliteInfoSource_tr(s: cstring): struct_seaqt_string {.importc: "QNmeaSatelliteInfoSource_tr".}
+proc fcQNmeaSatelliteInfoSource_trS(s: cstring): struct_seaqt_string {.importc: "QNmeaSatelliteInfoSource_tr_s".}
 proc fcQNmeaSatelliteInfoSource_updateMode(self: pointer): cint {.importc: "QNmeaSatelliteInfoSource_updateMode".}
 proc fcQNmeaSatelliteInfoSource_setDevice(self: pointer, source: pointer): void {.importc: "QNmeaSatelliteInfoSource_setDevice".}
 proc fcQNmeaSatelliteInfoSource_device(self: pointer): pointer {.importc: "QNmeaSatelliteInfoSource_device".}
@@ -86,8 +86,8 @@ proc fcQNmeaSatelliteInfoSource_backendProperty(self: pointer, name: struct_seaq
 proc fcQNmeaSatelliteInfoSource_startUpdates(self: pointer): void {.importc: "QNmeaSatelliteInfoSource_startUpdates".}
 proc fcQNmeaSatelliteInfoSource_stopUpdates(self: pointer): void {.importc: "QNmeaSatelliteInfoSource_stopUpdates".}
 proc fcQNmeaSatelliteInfoSource_requestUpdate(self: pointer, timeout: cint): void {.importc: "QNmeaSatelliteInfoSource_requestUpdate".}
-proc fcQNmeaSatelliteInfoSource_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNmeaSatelliteInfoSource_tr2".}
-proc fcQNmeaSatelliteInfoSource_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNmeaSatelliteInfoSource_tr3".}
+proc fcQNmeaSatelliteInfoSource_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNmeaSatelliteInfoSource_tr_s_c".}
+proc fcQNmeaSatelliteInfoSource_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNmeaSatelliteInfoSource_tr_s_c_n".}
 proc fcQNmeaSatelliteInfoSource_vdata(self: pointer): ptr pointer {.importc: "QNmeaSatelliteInfoSource_vdata".}
 proc fvdata_cQNmeaSatelliteInfoSource(self: pointer): pointer {.importc: "vdata_QNmeaSatelliteInfoSource".}
 
@@ -138,8 +138,8 @@ proc fcQNmeaSatelliteInfoSource_protectedbase_sender(self: pointer): pointer {.i
 proc fcQNmeaSatelliteInfoSource_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QNmeaSatelliteInfoSource_protectedbase_senderSignalIndex".}
 proc fcQNmeaSatelliteInfoSource_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNmeaSatelliteInfoSource_protectedbase_receivers".}
 proc fcQNmeaSatelliteInfoSource_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNmeaSatelliteInfoSource_protectedbase_isSignalConnected".}
-proc fcQNmeaSatelliteInfoSource_new(vtbl: pointer, vdata: csize_t, mode: cint): ptr cQNmeaSatelliteInfoSource {.importc: "QNmeaSatelliteInfoSource_new".}
-proc fcQNmeaSatelliteInfoSource_new2(vtbl: pointer, vdata: csize_t, mode: cint, parent: pointer): ptr cQNmeaSatelliteInfoSource {.importc: "QNmeaSatelliteInfoSource_new2".}
+proc fcQNmeaSatelliteInfoSource_new(vtbl: pointer, vdata: csize_t, mode: cint): ptr cQNmeaSatelliteInfoSource {.importc: "QNmeaSatelliteInfoSource_new_mode".}
+proc fcQNmeaSatelliteInfoSource_new2(vtbl: pointer, vdata: csize_t, mode: cint, parent: pointer): ptr cQNmeaSatelliteInfoSource {.importc: "QNmeaSatelliteInfoSource_new_mode_parent".}
 proc fcQNmeaSatelliteInfoSource_staticMetaObject(): pointer {.importc: "QNmeaSatelliteInfoSource_staticMetaObject".}
 
 proc metaObject*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource): gen_qobjectdefs_types.QMetaObject =
@@ -152,7 +152,7 @@ proc metacall*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource
   fcQNmeaSatelliteInfoSource_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource, s: cstring): string =
-  let v_ms = fcQNmeaSatelliteInfoSource_tr(s)
+  let v_ms = fcQNmeaSatelliteInfoSource_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -191,13 +191,13 @@ proc requestUpdate*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoS
   fcQNmeaSatelliteInfoSource_requestUpdate(self.h, timeout)
 
 proc tr*(_: type gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource, s: cstring, c: cstring): string =
-  let v_ms = fcQNmeaSatelliteInfoSource_tr2(s, c)
+  let v_ms = fcQNmeaSatelliteInfoSource_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQNmeaSatelliteInfoSource_tr3(s, c, n)
+  let v_ms = fcQNmeaSatelliteInfoSource_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

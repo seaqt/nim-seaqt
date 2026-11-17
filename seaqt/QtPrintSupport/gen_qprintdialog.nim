@@ -75,20 +75,20 @@ type cQPrintDialog*{.exportc: "QPrintDialog", incompleteStruct.} = object
 proc fcQPrintDialog_metaObject(self: pointer): pointer {.importc: "QPrintDialog_metaObject".}
 proc fcQPrintDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QPrintDialog_metacast".}
 proc fcQPrintDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPrintDialog_metacall".}
-proc fcQPrintDialog_tr(s: cstring): struct_seaqt_string {.importc: "QPrintDialog_tr".}
+proc fcQPrintDialog_trS(s: cstring): struct_seaqt_string {.importc: "QPrintDialog_tr_s".}
 proc fcQPrintDialog_exec(self: pointer): cint {.importc: "QPrintDialog_exec".}
 proc fcQPrintDialog_accept(self: pointer): void {.importc: "QPrintDialog_accept".}
 proc fcQPrintDialog_done(self: pointer, resultVal: cint): void {.importc: "QPrintDialog_done".}
-proc fcQPrintDialog_setOption(self: pointer, option: cint): void {.importc: "QPrintDialog_setOption".}
+proc fcQPrintDialog_setOptionOption(self: pointer, option: cint): void {.importc: "QPrintDialog_setOption_option".}
 proc fcQPrintDialog_testOption(self: pointer, option: cint): bool {.importc: "QPrintDialog_testOption".}
 proc fcQPrintDialog_setOptions(self: pointer, options: cint): void {.importc: "QPrintDialog_setOptions".}
 proc fcQPrintDialog_options(self: pointer): cint {.importc: "QPrintDialog_options".}
 proc fcQPrintDialog_setVisible(self: pointer, visible: bool): void {.importc: "QPrintDialog_setVisible".}
 proc fcQPrintDialog_accepted(self: pointer, printer: pointer): void {.importc: "QPrintDialog_accepted".}
 proc fcQPrintDialog_connect_accepted(self: pointer, slot: int, callback: proc (slot: int, printer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPrintDialog_connect_accepted".}
-proc fcQPrintDialog_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPrintDialog_tr2".}
-proc fcQPrintDialog_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPrintDialog_tr3".}
-proc fcQPrintDialog_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QPrintDialog_setOption2".}
+proc fcQPrintDialog_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPrintDialog_tr_s_c".}
+proc fcQPrintDialog_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPrintDialog_tr_s_c_n".}
+proc fcQPrintDialog_setOptionOptionOn(self: pointer, option: cint, on: bool): void {.importc: "QPrintDialog_setOption_option_on".}
 proc fcQPrintDialog_vdata(self: pointer): ptr pointer {.importc: "QPrintDialog_vdata".}
 proc fvdata_cQPrintDialog(self: pointer): pointer {.importc: "vdata_QPrintDialog".}
 
@@ -214,10 +214,10 @@ proc fcQPrintDialog_protectedbase_sender(self: pointer): pointer {.importc: "QPr
 proc fcQPrintDialog_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QPrintDialog_protectedbase_senderSignalIndex".}
 proc fcQPrintDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPrintDialog_protectedbase_receivers".}
 proc fcQPrintDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPrintDialog_protectedbase_isSignalConnected".}
-proc fcQPrintDialog_new(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new".}
-proc fcQPrintDialog_new2(vtbl: pointer, vdata: csize_t): ptr cQPrintDialog {.importc: "QPrintDialog_new2".}
-proc fcQPrintDialog_new3(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new3".}
-proc fcQPrintDialog_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new4".}
+proc fcQPrintDialog_new(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new_printer".}
+proc fcQPrintDialog_new2(vtbl: pointer, vdata: csize_t): ptr cQPrintDialog {.importc: "QPrintDialog_new".}
+proc fcQPrintDialog_new3(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new_printer_parent".}
+proc fcQPrintDialog_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new_parent".}
 proc fcQPrintDialog_staticMetaObject(): pointer {.importc: "QPrintDialog_staticMetaObject".}
 
 proc metaObject*(self: gen_qprintdialog_types.QPrintDialog): gen_qobjectdefs_types.QMetaObject =
@@ -230,7 +230,7 @@ proc metacall*(self: gen_qprintdialog_types.QPrintDialog, param1: cint, param2: 
   fcQPrintDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring): string =
-  let v_ms = fcQPrintDialog_tr(s)
+  let v_ms = fcQPrintDialog_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -245,7 +245,7 @@ proc done*(self: gen_qprintdialog_types.QPrintDialog, resultVal: cint): void =
   fcQPrintDialog_done(self.h, resultVal)
 
 proc setOption*(self: gen_qprintdialog_types.QPrintDialog, option: cint): void =
-  fcQPrintDialog_setOption(self.h, cint(option))
+  fcQPrintDialog_setOptionOption(self.h, cint(option))
 
 proc testOption*(self: gen_qprintdialog_types.QPrintDialog, option: cint): bool =
   fcQPrintDialog_testOption(self.h, cint(option))
@@ -280,19 +280,19 @@ proc onAccepted*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogac
   fcQPrintDialog_connect_accepted(self.h, cast[int](addr tmp[]), fcQPrintDialog_slot_callback_accepted, fcQPrintDialog_slot_callback_accepted_release)
 
 proc tr*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQPrintDialog_tr2(s, c)
+  let v_ms = fcQPrintDialog_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPrintDialog_tr3(s, c, n)
+  let v_ms = fcQPrintDialog_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setOption*(self: gen_qprintdialog_types.QPrintDialog, option: cint, on: bool): void =
-  fcQPrintDialog_setOption2(self.h, cint(option), on)
+  fcQPrintDialog_setOptionOptionOn(self.h, cint(option), on)
 
 type QPrintDialogmetaObjectProc* = proc(self: QPrintDialog): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPrintDialogmetacastProc* = proc(self: QPrintDialog, param1: cstring): pointer {.raises: [], gcsafe.}

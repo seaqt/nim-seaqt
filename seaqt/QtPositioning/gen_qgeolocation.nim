@@ -50,7 +50,7 @@ export
 
 type cQGeoLocation*{.exportc: "QGeoLocation", incompleteStruct.} = object
 
-proc fcQGeoLocation_operatorAssign(self: pointer, other: pointer): void {.importc: "QGeoLocation_operatorAssign".}
+proc fcQGeoLocation_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGeoLocation_operatorAssign".}
 proc fcQGeoLocation_swap(self: pointer, other: pointer): void {.importc: "QGeoLocation_swap".}
 proc fcQGeoLocation_address(self: pointer): pointer {.importc: "QGeoLocation_address".}
 proc fcQGeoLocation_setAddress(self: pointer, address: pointer): void {.importc: "QGeoLocation_setAddress".}
@@ -62,10 +62,10 @@ proc fcQGeoLocation_extendedAttributes(self: pointer): struct_seaqt_map {.import
 proc fcQGeoLocation_setExtendedAttributes(self: pointer, data: struct_seaqt_map): void {.importc: "QGeoLocation_setExtendedAttributes".}
 proc fcQGeoLocation_isEmpty(self: pointer): bool {.importc: "QGeoLocation_isEmpty".}
 proc fcQGeoLocation_new(): ptr cQGeoLocation {.importc: "QGeoLocation_new".}
-proc fcQGeoLocation_new2(other: pointer): ptr cQGeoLocation {.importc: "QGeoLocation_new2".}
+proc fcQGeoLocation_new2(fromVal: pointer): ptr cQGeoLocation {.importc: "QGeoLocation_new_from".}
 
-proc operatorAssign*(self: gen_qgeolocation_types.QGeoLocation, other: gen_qgeolocation_types.QGeoLocation): void =
-  fcQGeoLocation_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qgeolocation_types.QGeoLocation, fromVal: gen_qgeolocation_types.QGeoLocation): void =
+  fcQGeoLocation_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qgeolocation_types.QGeoLocation, other: gen_qgeolocation_types.QGeoLocation): void =
   fcQGeoLocation_swap(self.h, other.h)
@@ -127,6 +127,6 @@ proc create*(T: type gen_qgeolocation_types.QGeoLocation): gen_qgeolocation_type
   let tmp = gen_qgeolocation_types.QGeoLocation(h: fcQGeoLocation_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeolocation_types.QGeoLocation,
-    other: gen_qgeolocation_types.QGeoLocation): gen_qgeolocation_types.QGeoLocation =
-  let tmp = gen_qgeolocation_types.QGeoLocation(h: fcQGeoLocation_new2(other.h), owned: true)
+    fromVal: gen_qgeolocation_types.QGeoLocation): gen_qgeolocation_types.QGeoLocation =
+  let tmp = gen_qgeolocation_types.QGeoLocation(h: fcQGeoLocation_new2(fromVal.h), owned: true)
   tmp

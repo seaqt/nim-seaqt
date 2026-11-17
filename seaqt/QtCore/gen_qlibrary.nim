@@ -63,20 +63,20 @@ type cQLibrary*{.exportc: "QLibrary", incompleteStruct.} = object
 proc fcQLibrary_metaObject(self: pointer): pointer {.importc: "QLibrary_metaObject".}
 proc fcQLibrary_metacast(self: pointer, param1: cstring): pointer {.importc: "QLibrary_metacast".}
 proc fcQLibrary_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLibrary_metacall".}
-proc fcQLibrary_tr(s: cstring): struct_seaqt_string {.importc: "QLibrary_tr".}
+proc fcQLibrary_trS(s: cstring): struct_seaqt_string {.importc: "QLibrary_tr_s".}
 proc fcQLibrary_load(self: pointer): bool {.importc: "QLibrary_load".}
 proc fcQLibrary_unload(self: pointer): bool {.importc: "QLibrary_unload".}
 proc fcQLibrary_isLoaded(self: pointer): bool {.importc: "QLibrary_isLoaded".}
 proc fcQLibrary_isLibrary(fileName: struct_seaqt_string): bool {.importc: "QLibrary_isLibrary".}
 proc fcQLibrary_setFileName(self: pointer, fileName: struct_seaqt_string): void {.importc: "QLibrary_setFileName".}
 proc fcQLibrary_fileName(self: pointer): struct_seaqt_string {.importc: "QLibrary_fileName".}
-proc fcQLibrary_setFileNameAndVersion(self: pointer, fileName: struct_seaqt_string, verNum: cint): void {.importc: "QLibrary_setFileNameAndVersion".}
-proc fcQLibrary_setFileNameAndVersion2(self: pointer, fileName: struct_seaqt_string, version: struct_seaqt_string): void {.importc: "QLibrary_setFileNameAndVersion2".}
+proc fcQLibrary_setFileNameAndVersionFileNameVerNum(self: pointer, fileName: struct_seaqt_string, verNum: cint): void {.importc: "QLibrary_setFileNameAndVersion_fileName_verNum".}
+proc fcQLibrary_setFileNameAndVersionFileNameVersion(self: pointer, fileName: struct_seaqt_string, version: struct_seaqt_string): void {.importc: "QLibrary_setFileNameAndVersion_fileName_version".}
 proc fcQLibrary_errorString(self: pointer): struct_seaqt_string {.importc: "QLibrary_errorString".}
 proc fcQLibrary_setLoadHints(self: pointer, hints: cint): void {.importc: "QLibrary_setLoadHints".}
 proc fcQLibrary_loadHints(self: pointer): cint {.importc: "QLibrary_loadHints".}
-proc fcQLibrary_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLibrary_tr2".}
-proc fcQLibrary_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLibrary_tr3".}
+proc fcQLibrary_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLibrary_tr_s_c".}
+proc fcQLibrary_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLibrary_tr_s_c_n".}
 proc fcQLibrary_vdata(self: pointer): ptr pointer {.importc: "QLibrary_vdata".}
 proc fvdata_cQLibrary(self: pointer): pointer {.importc: "vdata_QLibrary".}
 
@@ -107,13 +107,13 @@ proc fcQLibrary_protectedbase_senderSignalIndex(self: pointer): cint {.importc: 
 proc fcQLibrary_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLibrary_protectedbase_receivers".}
 proc fcQLibrary_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLibrary_protectedbase_isSignalConnected".}
 proc fcQLibrary_new(vtbl: pointer, vdata: csize_t): ptr cQLibrary {.importc: "QLibrary_new".}
-proc fcQLibrary_new2(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQLibrary {.importc: "QLibrary_new2".}
-proc fcQLibrary_new3(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, verNum: cint): ptr cQLibrary {.importc: "QLibrary_new3".}
-proc fcQLibrary_new4(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, version: struct_seaqt_string): ptr cQLibrary {.importc: "QLibrary_new4".}
-proc fcQLibrary_new5(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new5".}
-proc fcQLibrary_new6(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new6".}
-proc fcQLibrary_new7(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, verNum: cint, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new7".}
-proc fcQLibrary_new8(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, version: struct_seaqt_string, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new8".}
+proc fcQLibrary_new2(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQLibrary {.importc: "QLibrary_new_fileName".}
+proc fcQLibrary_new3(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, verNum: cint): ptr cQLibrary {.importc: "QLibrary_new_fileName_verNum".}
+proc fcQLibrary_new4(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, version: struct_seaqt_string): ptr cQLibrary {.importc: "QLibrary_new_fileName_version".}
+proc fcQLibrary_new5(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new_parent".}
+proc fcQLibrary_new6(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new_fileName_parent".}
+proc fcQLibrary_new7(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, verNum: cint, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new_fileName_verNum_parent".}
+proc fcQLibrary_new8(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, version: struct_seaqt_string, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new_fileName_version_parent".}
 proc fcQLibrary_staticMetaObject(): pointer {.importc: "QLibrary_staticMetaObject".}
 
 proc metaObject*(self: gen_qlibrary_types.QLibrary): gen_qobjectdefs_types.QMetaObject =
@@ -126,7 +126,7 @@ proc metacall*(self: gen_qlibrary_types.QLibrary, param1: cint, param2: cint, pa
   fcQLibrary_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlibrary_types.QLibrary, s: cstring): string =
-  let v_ms = fcQLibrary_tr(s)
+  let v_ms = fcQLibrary_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -153,10 +153,10 @@ proc fileName*(self: gen_qlibrary_types.QLibrary): string =
   vx_ret
 
 proc setFileNameAndVersion*(self: gen_qlibrary_types.QLibrary, fileName: openArray[char], verNum: cint): void =
-  fcQLibrary_setFileNameAndVersion(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), verNum)
+  fcQLibrary_setFileNameAndVersionFileNameVerNum(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), verNum)
 
 proc setFileNameAndVersion*(self: gen_qlibrary_types.QLibrary, fileName: openArray[char], version: openArray[char]): void =
-  fcQLibrary_setFileNameAndVersion2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_seaqt_string(data: if len(version) > 0: addr version[0] else: nil, len: csize_t(len(version))))
+  fcQLibrary_setFileNameAndVersionFileNameVersion(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_seaqt_string(data: if len(version) > 0: addr version[0] else: nil, len: csize_t(len(version))))
 
 proc errorString*(self: gen_qlibrary_types.QLibrary): string =
   let v_ms = fcQLibrary_errorString(self.h)
@@ -171,13 +171,13 @@ proc loadHints*(self: gen_qlibrary_types.QLibrary): cint =
   cint(fcQLibrary_loadHints(self.h))
 
 proc tr*(_: type gen_qlibrary_types.QLibrary, s: cstring, c: cstring): string =
-  let v_ms = fcQLibrary_tr2(s, c)
+  let v_ms = fcQLibrary_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qlibrary_types.QLibrary, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQLibrary_tr3(s, c, n)
+  let v_ms = fcQLibrary_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

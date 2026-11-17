@@ -27,8 +27,8 @@ QPropertyBindingSourceLocation* QPropertyBindingSourceLocation_new() {
 	return new (std::nothrow) QPropertyBindingSourceLocation();
 }
 
-QPropertyBindingSourceLocation* QPropertyBindingSourceLocation_new2(QPropertyBindingSourceLocation* param1) {
-	return new (std::nothrow) QPropertyBindingSourceLocation(*param1);
+QPropertyBindingSourceLocation* QPropertyBindingSourceLocation_new_from(QPropertyBindingSourceLocation* from) {
+	return new (std::nothrow) QPropertyBindingSourceLocation(*from);
 }
 
 const char* QPropertyBindingSourceLocation_fileName(const QPropertyBindingSourceLocation* self) {
@@ -73,21 +73,21 @@ QPropertyBindingError* QPropertyBindingError_new() {
 	return new (std::nothrow) QPropertyBindingError();
 }
 
-QPropertyBindingError* QPropertyBindingError_new2(int type) {
+QPropertyBindingError* QPropertyBindingError_new_type(int type) {
 	return new (std::nothrow) QPropertyBindingError(static_cast<QPropertyBindingError::Type>(type));
 }
 
-QPropertyBindingError* QPropertyBindingError_new3(QPropertyBindingError* other) {
-	return new (std::nothrow) QPropertyBindingError(*other);
+QPropertyBindingError* QPropertyBindingError_new_from(QPropertyBindingError* from) {
+	return new (std::nothrow) QPropertyBindingError(*from);
 }
 
-QPropertyBindingError* QPropertyBindingError_new4(int type, struct seaqt_string description) {
+QPropertyBindingError* QPropertyBindingError_new_type_description(int type, struct seaqt_string description) {
 	QString description_QString = QString::fromUtf8(description.data, description.len);
 	return new (std::nothrow) QPropertyBindingError(static_cast<QPropertyBindingError::Type>(type), description_QString);
 }
 
-void QPropertyBindingError_operatorAssign(QPropertyBindingError* self, QPropertyBindingError* other) {
-	self->operator=(*other);
+void QPropertyBindingError_operatorAssign(QPropertyBindingError* self, QPropertyBindingError* from) {
+	self->operator=(*from);
 }
 
 bool QPropertyBindingError_hasError(const QPropertyBindingError* self) {
@@ -118,16 +118,16 @@ QUntypedPropertyBinding* QUntypedPropertyBinding_new() {
 	return new (std::nothrow) QUntypedPropertyBinding();
 }
 
-QUntypedPropertyBinding* QUntypedPropertyBinding_new2(QMetaType* metaType, const void* vtable, void* function, QPropertyBindingSourceLocation* location) {
+QUntypedPropertyBinding* QUntypedPropertyBinding_new_metaType_vtable_function_location(QMetaType* metaType, const void* vtable, void* function, QPropertyBindingSourceLocation* location) {
 	return new (std::nothrow) QUntypedPropertyBinding(*metaType, static_cast<const QUntypedPropertyBinding::BindingFunctionVTable*>(vtable), function, *location);
 }
 
-QUntypedPropertyBinding* QUntypedPropertyBinding_new3(QUntypedPropertyBinding* other) {
-	return new (std::nothrow) QUntypedPropertyBinding(*other);
+QUntypedPropertyBinding* QUntypedPropertyBinding_new_from(QUntypedPropertyBinding* from) {
+	return new (std::nothrow) QUntypedPropertyBinding(*from);
 }
 
-void QUntypedPropertyBinding_operatorAssign(QUntypedPropertyBinding* self, QUntypedPropertyBinding* other) {
-	self->operator=(*other);
+void QUntypedPropertyBinding_operatorAssign(QUntypedPropertyBinding* self, QUntypedPropertyBinding* from) {
+	self->operator=(*from);
 }
 
 bool QUntypedPropertyBinding_isNull(const QUntypedPropertyBinding* self) {
@@ -150,12 +150,12 @@ QPropertyObserverBase* QPropertyObserverBase_new() {
 	return new (std::nothrow) QPropertyObserverBase();
 }
 
-QPropertyObserverBase* QPropertyObserverBase_new2(QPropertyObserverBase* param1) {
-	return new (std::nothrow) QPropertyObserverBase(*param1);
+QPropertyObserverBase* QPropertyObserverBase_new_from(QPropertyObserverBase* from) {
+	return new (std::nothrow) QPropertyObserverBase(*from);
 }
 
-void QPropertyObserverBase_operatorAssign(QPropertyObserverBase* self, QPropertyObserverBase* param1) {
-	self->operator=(*param1);
+void QPropertyObserverBase_operatorAssign(QPropertyObserverBase* self, QPropertyObserverBase* from) {
+	self->operator=(*from);
 }
 
 void QPropertyObserverBase_delete(QPropertyObserverBase* self) {
@@ -190,8 +190,8 @@ QUntypedBindable* QUntypedBindable_new() {
 	return new (std::nothrow) QUntypedBindable();
 }
 
-QUntypedBindable* QUntypedBindable_new2(QUntypedBindable* param1) {
-	return new (std::nothrow) QUntypedBindable(*param1);
+QUntypedBindable* QUntypedBindable_new_from(QUntypedBindable* from) {
+	return new (std::nothrow) QUntypedBindable(*from);
 }
 
 bool QUntypedBindable_isValid(const QUntypedBindable* self) {
@@ -234,7 +234,7 @@ QMetaType* QUntypedBindable_metaType(const QUntypedBindable* self) {
 	return new QMetaType(self->metaType());
 }
 
-QUntypedPropertyBinding* QUntypedBindable_makeBindingWithLocation(const QUntypedBindable* self, QPropertyBindingSourceLocation* location) {
+QUntypedPropertyBinding* QUntypedBindable_makeBinding_location(const QUntypedBindable* self, QPropertyBindingSourceLocation* location) {
 	return new QUntypedPropertyBinding(self->makeBinding(*location));
 }
 

@@ -197,7 +197,7 @@ VirtualQGenericPlugin* QGenericPlugin_new(const QGenericPlugin_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQGenericPlugin(vtbl) : nullptr;
 }
 
-VirtualQGenericPlugin* QGenericPlugin_new2(const QGenericPlugin_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQGenericPlugin* QGenericPlugin_new_parent(const QGenericPlugin_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGenericPlugin>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGenericPlugin(vtbl, parent) : nullptr;
 }
@@ -218,7 +218,7 @@ int QGenericPlugin_metacall(QGenericPlugin* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGenericPlugin_tr(const char* s) {
+struct seaqt_string QGenericPlugin_tr_s(const char* s) {
 	QString _ret = QGenericPlugin::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -235,7 +235,7 @@ QObject* QGenericPlugin_create(QGenericPlugin* self, struct seaqt_string name, s
 	return self->create(name_QString, spec_QString);
 }
 
-struct seaqt_string QGenericPlugin_tr2(const char* s, const char* c) {
+struct seaqt_string QGenericPlugin_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGenericPlugin::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -246,7 +246,7 @@ struct seaqt_string QGenericPlugin_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGenericPlugin_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGenericPlugin_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGenericPlugin::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

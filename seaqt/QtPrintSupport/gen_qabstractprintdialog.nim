@@ -91,7 +91,7 @@ type cQAbstractPrintDialog*{.exportc: "QAbstractPrintDialog", incompleteStruct.}
 proc fcQAbstractPrintDialog_metaObject(self: pointer): pointer {.importc: "QAbstractPrintDialog_metaObject".}
 proc fcQAbstractPrintDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractPrintDialog_metacast".}
 proc fcQAbstractPrintDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractPrintDialog_metacall".}
-proc fcQAbstractPrintDialog_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractPrintDialog_tr".}
+proc fcQAbstractPrintDialog_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractPrintDialog_tr_s".}
 proc fcQAbstractPrintDialog_setOptionTabs(self: pointer, tabs: struct_seaqt_array): void {.importc: "QAbstractPrintDialog_setOptionTabs".}
 proc fcQAbstractPrintDialog_setPrintRange(self: pointer, range: cint): void {.importc: "QAbstractPrintDialog_setPrintRange".}
 proc fcQAbstractPrintDialog_printRange(self: pointer): cint {.importc: "QAbstractPrintDialog_printRange".}
@@ -102,8 +102,8 @@ proc fcQAbstractPrintDialog_setFromTo(self: pointer, fromPage: cint, toPage: cin
 proc fcQAbstractPrintDialog_fromPage(self: pointer): cint {.importc: "QAbstractPrintDialog_fromPage".}
 proc fcQAbstractPrintDialog_toPage(self: pointer): cint {.importc: "QAbstractPrintDialog_toPage".}
 proc fcQAbstractPrintDialog_printer(self: pointer): pointer {.importc: "QAbstractPrintDialog_printer".}
-proc fcQAbstractPrintDialog_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractPrintDialog_tr2".}
-proc fcQAbstractPrintDialog_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractPrintDialog_tr3".}
+proc fcQAbstractPrintDialog_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractPrintDialog_tr_s_c".}
+proc fcQAbstractPrintDialog_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractPrintDialog_tr_s_c_n".}
 proc fcQAbstractPrintDialog_vdata(self: pointer): ptr pointer {.importc: "QAbstractPrintDialog_vdata".}
 proc fvdata_cQAbstractPrintDialog(self: pointer): pointer {.importc: "vdata_QAbstractPrintDialog".}
 
@@ -229,8 +229,8 @@ proc fcQAbstractPrintDialog_protectedbase_sender(self: pointer): pointer {.impor
 proc fcQAbstractPrintDialog_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractPrintDialog_protectedbase_senderSignalIndex".}
 proc fcQAbstractPrintDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractPrintDialog_protectedbase_receivers".}
 proc fcQAbstractPrintDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractPrintDialog_protectedbase_isSignalConnected".}
-proc fcQAbstractPrintDialog_new(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQAbstractPrintDialog {.importc: "QAbstractPrintDialog_new".}
-proc fcQAbstractPrintDialog_new2(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQAbstractPrintDialog {.importc: "QAbstractPrintDialog_new2".}
+proc fcQAbstractPrintDialog_new(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQAbstractPrintDialog {.importc: "QAbstractPrintDialog_new_printer".}
+proc fcQAbstractPrintDialog_new2(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQAbstractPrintDialog {.importc: "QAbstractPrintDialog_new_printer_parent".}
 proc fcQAbstractPrintDialog_staticMetaObject(): pointer {.importc: "QAbstractPrintDialog_staticMetaObject".}
 
 proc metaObject*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog): gen_qobjectdefs_types.QMetaObject =
@@ -243,7 +243,7 @@ proc metacall*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, param1
   fcQAbstractPrintDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractprintdialog_types.QAbstractPrintDialog, s: cstring): string =
-  let v_ms = fcQAbstractPrintDialog_tr(s)
+  let v_ms = fcQAbstractPrintDialog_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -283,13 +283,13 @@ proc printer*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog): gen_qp
   gen_qprinter_types.QPrinter(h: fcQAbstractPrintDialog_printer(self.h), owned: false)
 
 proc tr*(_: type gen_qabstractprintdialog_types.QAbstractPrintDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractPrintDialog_tr2(s, c)
+  let v_ms = fcQAbstractPrintDialog_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractprintdialog_types.QAbstractPrintDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractPrintDialog_tr3(s, c, n)
+  let v_ms = fcQAbstractPrintDialog_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

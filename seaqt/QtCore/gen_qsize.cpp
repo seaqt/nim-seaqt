@@ -19,12 +19,12 @@ QSize* QSize_new() {
 	return new (std::nothrow) QSize();
 }
 
-QSize* QSize_new2(int w, int h) {
+QSize* QSize_new_w_h(int w, int h) {
 	return new (std::nothrow) QSize(static_cast<int>(w), static_cast<int>(h));
 }
 
-QSize* QSize_new3(QSize* param1) {
-	return new (std::nothrow) QSize(*param1);
+QSize* QSize_new_from(QSize* from) {
+	return new (std::nothrow) QSize(*from);
 }
 
 bool QSize_isNull(const QSize* self) {
@@ -63,19 +63,19 @@ QSize* QSize_transposed(const QSize* self) {
 	return new QSize(self->transposed());
 }
 
-void QSize_scale(QSize* self, int w, int h, int mode) {
+void QSize_scale_w_h_mode(QSize* self, int w, int h, int mode) {
 	self->scale(static_cast<int>(w), static_cast<int>(h), static_cast<Qt::AspectRatioMode>(mode));
 }
 
-void QSize_scale2(QSize* self, QSize* s, int mode) {
+void QSize_scale_s_mode(QSize* self, QSize* s, int mode) {
 	self->scale(*s, static_cast<Qt::AspectRatioMode>(mode));
 }
 
-QSize* QSize_scaled(const QSize* self, int w, int h, int mode) {
+QSize* QSize_scaled_w_h_mode(const QSize* self, int w, int h, int mode) {
 	return new QSize(self->scaled(static_cast<int>(w), static_cast<int>(h), static_cast<Qt::AspectRatioMode>(mode)));
 }
 
-QSize* QSize_scaled2(const QSize* self, QSize* s, int mode) {
+QSize* QSize_scaled_s_mode(const QSize* self, QSize* s, int mode) {
 	return new QSize(self->scaled(*s, static_cast<Qt::AspectRatioMode>(mode)));
 }
 
@@ -123,8 +123,8 @@ QSizeF* QSize_toSizeF(const QSize* self) {
 	return new QSizeF(self->toSizeF());
 }
 
-void QSize_operatorAssign(QSize* self, QSize* param1) {
-	self->operator=(*param1);
+void QSize_operatorAssign(QSize* self, QSize* from) {
+	self->operator=(*from);
 }
 
 void QSize_delete(QSize* self) {
@@ -135,16 +135,16 @@ QSizeF* QSizeF_new() {
 	return new (std::nothrow) QSizeF();
 }
 
-QSizeF* QSizeF_new2(QSize* sz) {
+QSizeF* QSizeF_new_sz(QSize* sz) {
 	return new (std::nothrow) QSizeF(*sz);
 }
 
-QSizeF* QSizeF_new3(double w, double h) {
+QSizeF* QSizeF_new_w_h(double w, double h) {
 	return new (std::nothrow) QSizeF(static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
-QSizeF* QSizeF_new4(QSizeF* param1) {
-	return new (std::nothrow) QSizeF(*param1);
+QSizeF* QSizeF_new_from(QSizeF* from) {
+	return new (std::nothrow) QSizeF(*from);
 }
 
 bool QSizeF_isNull(const QSizeF* self) {
@@ -185,19 +185,19 @@ QSizeF* QSizeF_transposed(const QSizeF* self) {
 	return new QSizeF(self->transposed());
 }
 
-void QSizeF_scale(QSizeF* self, double w, double h, int mode) {
+void QSizeF_scale_w_h_mode(QSizeF* self, double w, double h, int mode) {
 	self->scale(static_cast<qreal>(w), static_cast<qreal>(h), static_cast<Qt::AspectRatioMode>(mode));
 }
 
-void QSizeF_scale2(QSizeF* self, QSizeF* s, int mode) {
+void QSizeF_scale_s_mode(QSizeF* self, QSizeF* s, int mode) {
 	self->scale(*s, static_cast<Qt::AspectRatioMode>(mode));
 }
 
-QSizeF* QSizeF_scaled(const QSizeF* self, double w, double h, int mode) {
+QSizeF* QSizeF_scaled_w_h_mode(const QSizeF* self, double w, double h, int mode) {
 	return new QSizeF(self->scaled(static_cast<qreal>(w), static_cast<qreal>(h), static_cast<Qt::AspectRatioMode>(mode)));
 }
 
-QSizeF* QSizeF_scaled2(const QSizeF* self, QSizeF* s, int mode) {
+QSizeF* QSizeF_scaled_s_mode(const QSizeF* self, QSizeF* s, int mode) {
 	return new QSizeF(self->scaled(*s, static_cast<Qt::AspectRatioMode>(mode)));
 }
 
@@ -245,8 +245,8 @@ QSize* QSizeF_toSize(const QSizeF* self) {
 	return new QSize(self->toSize());
 }
 
-void QSizeF_operatorAssign(QSizeF* self, QSizeF* param1) {
-	self->operator=(*param1);
+void QSizeF_operatorAssign(QSizeF* self, QSizeF* from) {
+	self->operator=(*from);
 }
 
 void QSizeF_delete(QSizeF* self) {

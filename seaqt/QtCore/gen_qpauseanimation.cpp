@@ -226,17 +226,17 @@ VirtualQPauseAnimation* QPauseAnimation_new(const QPauseAnimation_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQPauseAnimation(vtbl) : nullptr;
 }
 
-VirtualQPauseAnimation* QPauseAnimation_new2(const QPauseAnimation_VTable* vtbl, size_t vdata, int msecs) {
+VirtualQPauseAnimation* QPauseAnimation_new_msecs(const QPauseAnimation_VTable* vtbl, size_t vdata, int msecs) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPauseAnimation>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPauseAnimation(vtbl, static_cast<int>(msecs)) : nullptr;
 }
 
-VirtualQPauseAnimation* QPauseAnimation_new3(const QPauseAnimation_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQPauseAnimation* QPauseAnimation_new_parent(const QPauseAnimation_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPauseAnimation>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPauseAnimation(vtbl, parent) : nullptr;
 }
 
-VirtualQPauseAnimation* QPauseAnimation_new4(const QPauseAnimation_VTable* vtbl, size_t vdata, int msecs, QObject* parent) {
+VirtualQPauseAnimation* QPauseAnimation_new_msecs_parent(const QPauseAnimation_VTable* vtbl, size_t vdata, int msecs, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPauseAnimation>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPauseAnimation(vtbl, static_cast<int>(msecs), parent) : nullptr;
 }
@@ -257,7 +257,7 @@ int QPauseAnimation_metacall(QPauseAnimation* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPauseAnimation_tr(const char* s) {
+struct seaqt_string QPauseAnimation_tr_s(const char* s) {
 	QString _ret = QPauseAnimation::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -276,7 +276,7 @@ void QPauseAnimation_setDuration(QPauseAnimation* self, int msecs) {
 	self->setDuration(static_cast<int>(msecs));
 }
 
-struct seaqt_string QPauseAnimation_tr2(const char* s, const char* c) {
+struct seaqt_string QPauseAnimation_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPauseAnimation::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -287,7 +287,7 @@ struct seaqt_string QPauseAnimation_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPauseAnimation_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPauseAnimation_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPauseAnimation::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -57,8 +57,8 @@ typedef struct QSctpSocket_VTable{
 	long long (*readData)(VirtualQSctpSocket* self, char* data, long long maxlen);
 	long long (*readLineData)(VirtualQSctpSocket* self, char* data, long long maxlen);
 	void (*resume)(VirtualQSctpSocket* self);
-	bool (*bind)(VirtualQSctpSocket* self, QHostAddress* address, unsigned short port, int mode);
-	void (*connectToHost)(VirtualQSctpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
+	bool (*bind_address_port_mode)(VirtualQSctpSocket* self, QHostAddress* address, unsigned short port, int mode);
+	void (*connectToHost_hostName_port_mode_protocol)(VirtualQSctpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
 	long long (*bytesAvailable)(const VirtualQSctpSocket* self);
 	long long (*bytesToWrite)(const VirtualQSctpSocket* self);
 	void (*setReadBufferSize)(VirtualQSctpSocket* self, long long size);
@@ -93,13 +93,13 @@ void* QSctpSocket_vdata(VirtualQSctpSocket* self);
 VirtualQSctpSocket* vdata_QSctpSocket(void* vdata);
 
 VirtualQSctpSocket* QSctpSocket_new(const QSctpSocket_VTable* vtbl, size_t vdata);
-VirtualQSctpSocket* QSctpSocket_new2(const QSctpSocket_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSctpSocket* QSctpSocket_new_parent(const QSctpSocket_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QSctpSocket_virtbase(QSctpSocket* src, QTcpSocket** outptr_QTcpSocket);
 QMetaObject* QSctpSocket_metaObject(const QSctpSocket* self);
 void* QSctpSocket_metacast(QSctpSocket* self, const char* param1);
 int QSctpSocket_metacall(QSctpSocket* self, int param1, int param2, void** param3);
-struct seaqt_string QSctpSocket_tr(const char* s);
+struct seaqt_string QSctpSocket_tr_s(const char* s);
 void QSctpSocket_close(QSctpSocket* self);
 void QSctpSocket_disconnectFromHost(QSctpSocket* self);
 void QSctpSocket_setMaximumChannelCount(QSctpSocket* self, int count);
@@ -109,8 +109,8 @@ QNetworkDatagram* QSctpSocket_readDatagram(QSctpSocket* self);
 bool QSctpSocket_writeDatagram(QSctpSocket* self, QNetworkDatagram* datagram);
 long long QSctpSocket_readData(QSctpSocket* self, char* data, long long maxlen);
 long long QSctpSocket_readLineData(QSctpSocket* self, char* data, long long maxlen);
-struct seaqt_string QSctpSocket_tr2(const char* s, const char* c);
-struct seaqt_string QSctpSocket_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSctpSocket_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSctpSocket_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSctpSocket_virtualbase_metaObject(const VirtualQSctpSocket* self);
 void* QSctpSocket_virtualbase_metacast(VirtualQSctpSocket* self, const char* param1);
@@ -120,8 +120,8 @@ void QSctpSocket_virtualbase_disconnectFromHost(VirtualQSctpSocket* self);
 long long QSctpSocket_virtualbase_readData(VirtualQSctpSocket* self, char* data, long long maxlen);
 long long QSctpSocket_virtualbase_readLineData(VirtualQSctpSocket* self, char* data, long long maxlen);
 void QSctpSocket_virtualbase_resume(VirtualQSctpSocket* self);
-bool QSctpSocket_virtualbase_bind(VirtualQSctpSocket* self, QHostAddress* address, unsigned short port, int mode);
-void QSctpSocket_virtualbase_connectToHost(VirtualQSctpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
+bool QSctpSocket_virtualbase_bind_address_port_mode(VirtualQSctpSocket* self, QHostAddress* address, unsigned short port, int mode);
+void QSctpSocket_virtualbase_connectToHost_hostName_port_mode_protocol(VirtualQSctpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
 long long QSctpSocket_virtualbase_bytesAvailable(const VirtualQSctpSocket* self);
 long long QSctpSocket_virtualbase_bytesToWrite(const VirtualQSctpSocket* self);
 void QSctpSocket_virtualbase_setReadBufferSize(VirtualQSctpSocket* self, long long size);

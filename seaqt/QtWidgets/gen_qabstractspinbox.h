@@ -153,13 +153,13 @@ void* QAbstractSpinBox_vdata(VirtualQAbstractSpinBox* self);
 VirtualQAbstractSpinBox* vdata_QAbstractSpinBox(void* vdata);
 
 VirtualQAbstractSpinBox* QAbstractSpinBox_new(const QAbstractSpinBox_VTable* vtbl, size_t vdata);
-VirtualQAbstractSpinBox* QAbstractSpinBox_new2(const QAbstractSpinBox_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQAbstractSpinBox* QAbstractSpinBox_new_parent(const QAbstractSpinBox_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QAbstractSpinBox_virtbase(QAbstractSpinBox* src, QWidget** outptr_QWidget);
 QMetaObject* QAbstractSpinBox_metaObject(const QAbstractSpinBox* self);
 void* QAbstractSpinBox_metacast(QAbstractSpinBox* self, const char* param1);
 int QAbstractSpinBox_metacall(QAbstractSpinBox* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractSpinBox_tr(const char* s);
+struct seaqt_string QAbstractSpinBox_tr_s(const char* s);
 int QAbstractSpinBox_buttonSymbols(const QAbstractSpinBox* self);
 void QAbstractSpinBox_setButtonSymbols(QAbstractSpinBox* self, int bs);
 void QAbstractSpinBox_setCorrectionMode(QAbstractSpinBox* self, int cm);
@@ -214,8 +214,8 @@ void QAbstractSpinBox_initStyleOption(const QAbstractSpinBox* self, QStyleOption
 int QAbstractSpinBox_stepEnabled(const QAbstractSpinBox* self);
 void QAbstractSpinBox_editingFinished(QAbstractSpinBox* self);
 void QAbstractSpinBox_connect_editingFinished(QAbstractSpinBox* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QAbstractSpinBox_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractSpinBox_tr3(const char* s, const char* c, int n);
+struct seaqt_string QAbstractSpinBox_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractSpinBox_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractSpinBox_virtualbase_metaObject(const VirtualQAbstractSpinBox* self);
 void* QAbstractSpinBox_virtualbase_metacast(VirtualQAbstractSpinBox* self, const char* param1);

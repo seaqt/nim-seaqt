@@ -15,12 +15,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QWebEngineClientCertificateSelection* QWebEngineClientCertificateSelection_new(QWebEngineClientCertificateSelection* param1) {
-	return new (std::nothrow) QWebEngineClientCertificateSelection(*param1);
+QWebEngineClientCertificateSelection* QWebEngineClientCertificateSelection_new(QWebEngineClientCertificateSelection* from) {
+	return new (std::nothrow) QWebEngineClientCertificateSelection(*from);
 }
 
-void QWebEngineClientCertificateSelection_operatorAssign(QWebEngineClientCertificateSelection* self, QWebEngineClientCertificateSelection* param1) {
-	self->operator=(*param1);
+void QWebEngineClientCertificateSelection_operatorAssign(QWebEngineClientCertificateSelection* self, QWebEngineClientCertificateSelection* from) {
+	self->operator=(*from);
 }
 
 QUrl* QWebEngineClientCertificateSelection_host(const QWebEngineClientCertificateSelection* self) {

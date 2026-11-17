@@ -108,9 +108,9 @@ proc fcQAccessibleInterface_imageInterface(self: pointer): pointer {.importc: "Q
 proc fcQAccessibleInterface_tableInterface(self: pointer): pointer {.importc: "QAccessibleInterface_tableInterface".}
 proc fcQAccessibleInterface_tableCellInterface(self: pointer): pointer {.importc: "QAccessibleInterface_tableCellInterface".}
 proc fcQAccessibleInterface_hyperlinkInterface(self: pointer): pointer {.importc: "QAccessibleInterface_hyperlinkInterface".}
-proc fcQAccessibleInterface_virtualHook(self: pointer, id: cint, data: pointer): void {.importc: "QAccessibleInterface_virtualHook".}
-proc fcQAccessibleInterface_interfaceCast(self: pointer, param1: cint): pointer {.importc: "QAccessibleInterface_interfaceCast".}
-proc fcQAccessibleInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleInterface_operatorAssign".}
+proc fcQAccessibleInterface_virtualHook(self: pointer, id: cint, data: pointer): void {.importc: "QAccessibleInterface_virtual_hook".}
+proc fcQAccessibleInterface_interfaceCast(self: pointer, param1: cint): pointer {.importc: "QAccessibleInterface_interface_cast".}
+proc fcQAccessibleInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessibleInterface_operatorAssign".}
 proc fcQAccessibleTextInterface_selection(self: pointer, selectionIndex: cint, startOffset: ptr cint, endOffset: ptr cint): void {.importc: "QAccessibleTextInterface_selection".}
 proc fcQAccessibleTextInterface_selectionCount(self: pointer): cint {.importc: "QAccessibleTextInterface_selectionCount".}
 proc fcQAccessibleTextInterface_addSelection(self: pointer, startOffset: cint, endOffset: cint): void {.importc: "QAccessibleTextInterface_addSelection".}
@@ -127,17 +127,17 @@ proc fcQAccessibleTextInterface_characterRect(self: pointer, offset: cint): poin
 proc fcQAccessibleTextInterface_offsetAtPoint(self: pointer, point: pointer): cint {.importc: "QAccessibleTextInterface_offsetAtPoint".}
 proc fcQAccessibleTextInterface_scrollToSubstring(self: pointer, startIndex: cint, endIndex: cint): void {.importc: "QAccessibleTextInterface_scrollToSubstring".}
 proc fcQAccessibleTextInterface_attributes(self: pointer, offset: cint, startOffset: ptr cint, endOffset: ptr cint): struct_seaqt_string {.importc: "QAccessibleTextInterface_attributes".}
-proc fcQAccessibleTextInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleTextInterface_operatorAssign".}
+proc fcQAccessibleTextInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessibleTextInterface_operatorAssign".}
 proc fcQAccessibleEditableTextInterface_deleteText(self: pointer, startOffset: cint, endOffset: cint): void {.importc: "QAccessibleEditableTextInterface_deleteText".}
 proc fcQAccessibleEditableTextInterface_insertText(self: pointer, offset: cint, text: struct_seaqt_string): void {.importc: "QAccessibleEditableTextInterface_insertText".}
 proc fcQAccessibleEditableTextInterface_replaceText(self: pointer, startOffset: cint, endOffset: cint, text: struct_seaqt_string): void {.importc: "QAccessibleEditableTextInterface_replaceText".}
-proc fcQAccessibleEditableTextInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleEditableTextInterface_operatorAssign".}
+proc fcQAccessibleEditableTextInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessibleEditableTextInterface_operatorAssign".}
 proc fcQAccessibleValueInterface_currentValue(self: pointer): pointer {.importc: "QAccessibleValueInterface_currentValue".}
 proc fcQAccessibleValueInterface_setCurrentValue(self: pointer, value: pointer): void {.importc: "QAccessibleValueInterface_setCurrentValue".}
 proc fcQAccessibleValueInterface_maximumValue(self: pointer): pointer {.importc: "QAccessibleValueInterface_maximumValue".}
 proc fcQAccessibleValueInterface_minimumValue(self: pointer): pointer {.importc: "QAccessibleValueInterface_minimumValue".}
 proc fcQAccessibleValueInterface_minimumStepSize(self: pointer): pointer {.importc: "QAccessibleValueInterface_minimumStepSize".}
-proc fcQAccessibleValueInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleValueInterface_operatorAssign".}
+proc fcQAccessibleValueInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessibleValueInterface_operatorAssign".}
 proc fcQAccessibleTableCellInterface_isSelected(self: pointer): bool {.importc: "QAccessibleTableCellInterface_isSelected".}
 proc fcQAccessibleTableCellInterface_columnHeaderCells(self: pointer): struct_seaqt_array {.importc: "QAccessibleTableCellInterface_columnHeaderCells".}
 proc fcQAccessibleTableCellInterface_rowHeaderCells(self: pointer): struct_seaqt_array {.importc: "QAccessibleTableCellInterface_rowHeaderCells".}
@@ -146,7 +146,7 @@ proc fcQAccessibleTableCellInterface_rowIndex(self: pointer): cint {.importc: "Q
 proc fcQAccessibleTableCellInterface_columnExtent(self: pointer): cint {.importc: "QAccessibleTableCellInterface_columnExtent".}
 proc fcQAccessibleTableCellInterface_rowExtent(self: pointer): cint {.importc: "QAccessibleTableCellInterface_rowExtent".}
 proc fcQAccessibleTableCellInterface_table(self: pointer): pointer {.importc: "QAccessibleTableCellInterface_table".}
-proc fcQAccessibleTableCellInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleTableCellInterface_operatorAssign".}
+proc fcQAccessibleTableCellInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessibleTableCellInterface_operatorAssign".}
 proc fcQAccessibleTableInterface_caption(self: pointer): pointer {.importc: "QAccessibleTableInterface_caption".}
 proc fcQAccessibleTableInterface_summary(self: pointer): pointer {.importc: "QAccessibleTableInterface_summary".}
 proc fcQAccessibleTableInterface_cellAt(self: pointer, row: cint, column: cint): pointer {.importc: "QAccessibleTableInterface_cellAt".}
@@ -167,8 +167,8 @@ proc fcQAccessibleTableInterface_selectColumn(self: pointer, column: cint): bool
 proc fcQAccessibleTableInterface_unselectRow(self: pointer, row: cint): bool {.importc: "QAccessibleTableInterface_unselectRow".}
 proc fcQAccessibleTableInterface_unselectColumn(self: pointer, column: cint): bool {.importc: "QAccessibleTableInterface_unselectColumn".}
 proc fcQAccessibleTableInterface_modelChange(self: pointer, event: pointer): void {.importc: "QAccessibleTableInterface_modelChange".}
-proc fcQAccessibleTableInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleTableInterface_operatorAssign".}
-proc fcQAccessibleActionInterface_tr(sourceText: cstring): struct_seaqt_string {.importc: "QAccessibleActionInterface_tr".}
+proc fcQAccessibleTableInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessibleTableInterface_operatorAssign".}
+proc fcQAccessibleActionInterface_trSourceText(sourceText: cstring): struct_seaqt_string {.importc: "QAccessibleActionInterface_tr_sourceText".}
 proc fcQAccessibleActionInterface_actionNames(self: pointer): struct_seaqt_array {.importc: "QAccessibleActionInterface_actionNames".}
 proc fcQAccessibleActionInterface_localizedActionName(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.importc: "QAccessibleActionInterface_localizedActionName".}
 proc fcQAccessibleActionInterface_localizedActionDescription(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.importc: "QAccessibleActionInterface_localizedActionDescription".}
@@ -186,19 +186,19 @@ proc fcQAccessibleActionInterface_scrollUpAction(): struct_seaqt_string {.import
 proc fcQAccessibleActionInterface_scrollDownAction(): struct_seaqt_string {.importc: "QAccessibleActionInterface_scrollDownAction".}
 proc fcQAccessibleActionInterface_nextPageAction(): struct_seaqt_string {.importc: "QAccessibleActionInterface_nextPageAction".}
 proc fcQAccessibleActionInterface_previousPageAction(): struct_seaqt_string {.importc: "QAccessibleActionInterface_previousPageAction".}
-proc fcQAccessibleActionInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleActionInterface_operatorAssign".}
-proc fcQAccessibleActionInterface_tr2(sourceText: cstring, disambiguation: cstring): struct_seaqt_string {.importc: "QAccessibleActionInterface_tr2".}
-proc fcQAccessibleActionInterface_tr3(sourceText: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QAccessibleActionInterface_tr3".}
+proc fcQAccessibleActionInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessibleActionInterface_operatorAssign".}
+proc fcQAccessibleActionInterface_trSourceTextDisambiguation(sourceText: cstring, disambiguation: cstring): struct_seaqt_string {.importc: "QAccessibleActionInterface_tr_sourceText_disambiguation".}
+proc fcQAccessibleActionInterface_trSourceTextDisambiguationN(sourceText: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QAccessibleActionInterface_tr_sourceText_disambiguation_n".}
 proc fcQAccessibleImageInterface_imageDescription(self: pointer): struct_seaqt_string {.importc: "QAccessibleImageInterface_imageDescription".}
 proc fcQAccessibleImageInterface_imageSize(self: pointer): pointer {.importc: "QAccessibleImageInterface_imageSize".}
 proc fcQAccessibleImageInterface_imagePosition(self: pointer): pointer {.importc: "QAccessibleImageInterface_imagePosition".}
-proc fcQAccessibleImageInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleImageInterface_operatorAssign".}
+proc fcQAccessibleImageInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessibleImageInterface_operatorAssign".}
 proc fcQAccessibleHyperlinkInterface_anchor(self: pointer): struct_seaqt_string {.importc: "QAccessibleHyperlinkInterface_anchor".}
 proc fcQAccessibleHyperlinkInterface_anchorTarget(self: pointer): struct_seaqt_string {.importc: "QAccessibleHyperlinkInterface_anchorTarget".}
 proc fcQAccessibleHyperlinkInterface_startIndex(self: pointer): cint {.importc: "QAccessibleHyperlinkInterface_startIndex".}
 proc fcQAccessibleHyperlinkInterface_endIndex(self: pointer): cint {.importc: "QAccessibleHyperlinkInterface_endIndex".}
 proc fcQAccessibleHyperlinkInterface_isValid(self: pointer): bool {.importc: "QAccessibleHyperlinkInterface_isValid".}
-proc fcQAccessibleHyperlinkInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleHyperlinkInterface_operatorAssign".}
+proc fcQAccessibleHyperlinkInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessibleHyperlinkInterface_operatorAssign".}
 proc fcQAccessibleEvent_typeX(self: pointer): cint {.importc: "QAccessibleEvent_type".}
 proc fcQAccessibleEvent_objectX(self: pointer): pointer {.importc: "QAccessibleEvent_object".}
 proc fcQAccessibleEvent_uniqueId(self: pointer): cuint {.importc: "QAccessibleEvent_uniqueId".}
@@ -212,8 +212,8 @@ type cQAccessibleEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQAccessibleEvent_virtualbase_accessibleInterface(self: pointer): pointer {.importc: "QAccessibleEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, typ: cint): ptr cQAccessibleEvent {.importc: "QAccessibleEvent_new".}
-proc fcQAccessibleEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, typ: cint): ptr cQAccessibleEvent {.importc: "QAccessibleEvent_new2".}
+proc fcQAccessibleEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, typ: cint): ptr cQAccessibleEvent {.importc: "QAccessibleEvent_new_obj_typ".}
+proc fcQAccessibleEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, typ: cint): ptr cQAccessibleEvent {.importc: "QAccessibleEvent_new_iface_typ".}
 proc fcQAccessibleStateChangeEvent_changedStates(self: pointer): pointer {.importc: "QAccessibleStateChangeEvent_changedStates".}
 proc fcQAccessibleStateChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleStateChangeEvent_vdata".}
 proc fvdata_cQAccessibleStateChangeEvent(self: pointer): pointer {.importc: "vdata_QAccessibleStateChangeEvent".}
@@ -222,8 +222,8 @@ type cQAccessibleStateChangeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQAccessibleStateChangeEvent_virtualbase_accessibleInterface(self: pointer): pointer {.importc: "QAccessibleStateChangeEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleStateChangeEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, state: pointer): ptr cQAccessibleStateChangeEvent {.importc: "QAccessibleStateChangeEvent_new".}
-proc fcQAccessibleStateChangeEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, state: pointer): ptr cQAccessibleStateChangeEvent {.importc: "QAccessibleStateChangeEvent_new2".}
+proc fcQAccessibleStateChangeEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, state: pointer): ptr cQAccessibleStateChangeEvent {.importc: "QAccessibleStateChangeEvent_new_obj_state".}
+proc fcQAccessibleStateChangeEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, state: pointer): ptr cQAccessibleStateChangeEvent {.importc: "QAccessibleStateChangeEvent_new_iface_state".}
 proc fcQAccessibleTextCursorEvent_setCursorPosition(self: pointer, position: cint): void {.importc: "QAccessibleTextCursorEvent_setCursorPosition".}
 proc fcQAccessibleTextCursorEvent_cursorPosition(self: pointer): cint {.importc: "QAccessibleTextCursorEvent_cursorPosition".}
 proc fcQAccessibleTextCursorEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleTextCursorEvent_vdata".}
@@ -233,8 +233,8 @@ type cQAccessibleTextCursorEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQAccessibleTextCursorEvent_virtualbase_accessibleInterface(self: pointer): pointer {.importc: "QAccessibleTextCursorEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTextCursorEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, cursorPos: cint): ptr cQAccessibleTextCursorEvent {.importc: "QAccessibleTextCursorEvent_new".}
-proc fcQAccessibleTextCursorEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, cursorPos: cint): ptr cQAccessibleTextCursorEvent {.importc: "QAccessibleTextCursorEvent_new2".}
+proc fcQAccessibleTextCursorEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, cursorPos: cint): ptr cQAccessibleTextCursorEvent {.importc: "QAccessibleTextCursorEvent_new_obj_cursorPos".}
+proc fcQAccessibleTextCursorEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, cursorPos: cint): ptr cQAccessibleTextCursorEvent {.importc: "QAccessibleTextCursorEvent_new_iface_cursorPos".}
 proc fcQAccessibleTextSelectionEvent_setSelection(self: pointer, start: cint, endVal: cint): void {.importc: "QAccessibleTextSelectionEvent_setSelection".}
 proc fcQAccessibleTextSelectionEvent_selectionStart(self: pointer): cint {.importc: "QAccessibleTextSelectionEvent_selectionStart".}
 proc fcQAccessibleTextSelectionEvent_selectionEnd(self: pointer): cint {.importc: "QAccessibleTextSelectionEvent_selectionEnd".}
@@ -245,8 +245,8 @@ type cQAccessibleTextSelectionEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQAccessibleTextSelectionEvent_virtualbase_accessibleInterface(self: pointer): pointer {.importc: "QAccessibleTextSelectionEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTextSelectionEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, start: cint, endVal: cint): ptr cQAccessibleTextSelectionEvent {.importc: "QAccessibleTextSelectionEvent_new".}
-proc fcQAccessibleTextSelectionEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, start: cint, endVal: cint): ptr cQAccessibleTextSelectionEvent {.importc: "QAccessibleTextSelectionEvent_new2".}
+proc fcQAccessibleTextSelectionEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, start: cint, endVal: cint): ptr cQAccessibleTextSelectionEvent {.importc: "QAccessibleTextSelectionEvent_new_obj_start_end".}
+proc fcQAccessibleTextSelectionEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, start: cint, endVal: cint): ptr cQAccessibleTextSelectionEvent {.importc: "QAccessibleTextSelectionEvent_new_iface_start_end".}
 proc fcQAccessibleTextInsertEvent_textInserted(self: pointer): struct_seaqt_string {.importc: "QAccessibleTextInsertEvent_textInserted".}
 proc fcQAccessibleTextInsertEvent_changePosition(self: pointer): cint {.importc: "QAccessibleTextInsertEvent_changePosition".}
 proc fcQAccessibleTextInsertEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleTextInsertEvent_vdata".}
@@ -256,8 +256,8 @@ type cQAccessibleTextInsertEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQAccessibleTextInsertEvent_virtualbase_accessibleInterface(self: pointer): pointer {.importc: "QAccessibleTextInsertEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTextInsertEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, position: cint, text: struct_seaqt_string): ptr cQAccessibleTextInsertEvent {.importc: "QAccessibleTextInsertEvent_new".}
-proc fcQAccessibleTextInsertEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, position: cint, text: struct_seaqt_string): ptr cQAccessibleTextInsertEvent {.importc: "QAccessibleTextInsertEvent_new2".}
+proc fcQAccessibleTextInsertEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, position: cint, text: struct_seaqt_string): ptr cQAccessibleTextInsertEvent {.importc: "QAccessibleTextInsertEvent_new_obj_position_text".}
+proc fcQAccessibleTextInsertEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, position: cint, text: struct_seaqt_string): ptr cQAccessibleTextInsertEvent {.importc: "QAccessibleTextInsertEvent_new_iface_position_text".}
 proc fcQAccessibleTextRemoveEvent_textRemoved(self: pointer): struct_seaqt_string {.importc: "QAccessibleTextRemoveEvent_textRemoved".}
 proc fcQAccessibleTextRemoveEvent_changePosition(self: pointer): cint {.importc: "QAccessibleTextRemoveEvent_changePosition".}
 proc fcQAccessibleTextRemoveEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleTextRemoveEvent_vdata".}
@@ -267,8 +267,8 @@ type cQAccessibleTextRemoveEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQAccessibleTextRemoveEvent_virtualbase_accessibleInterface(self: pointer): pointer {.importc: "QAccessibleTextRemoveEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTextRemoveEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, position: cint, text: struct_seaqt_string): ptr cQAccessibleTextRemoveEvent {.importc: "QAccessibleTextRemoveEvent_new".}
-proc fcQAccessibleTextRemoveEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, position: cint, text: struct_seaqt_string): ptr cQAccessibleTextRemoveEvent {.importc: "QAccessibleTextRemoveEvent_new2".}
+proc fcQAccessibleTextRemoveEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, position: cint, text: struct_seaqt_string): ptr cQAccessibleTextRemoveEvent {.importc: "QAccessibleTextRemoveEvent_new_obj_position_text".}
+proc fcQAccessibleTextRemoveEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, position: cint, text: struct_seaqt_string): ptr cQAccessibleTextRemoveEvent {.importc: "QAccessibleTextRemoveEvent_new_iface_position_text".}
 proc fcQAccessibleTextUpdateEvent_textRemoved(self: pointer): struct_seaqt_string {.importc: "QAccessibleTextUpdateEvent_textRemoved".}
 proc fcQAccessibleTextUpdateEvent_textInserted(self: pointer): struct_seaqt_string {.importc: "QAccessibleTextUpdateEvent_textInserted".}
 proc fcQAccessibleTextUpdateEvent_changePosition(self: pointer): cint {.importc: "QAccessibleTextUpdateEvent_changePosition".}
@@ -279,8 +279,8 @@ type cQAccessibleTextUpdateEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQAccessibleTextUpdateEvent_virtualbase_accessibleInterface(self: pointer): pointer {.importc: "QAccessibleTextUpdateEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTextUpdateEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, position: cint, oldText: struct_seaqt_string, text: struct_seaqt_string): ptr cQAccessibleTextUpdateEvent {.importc: "QAccessibleTextUpdateEvent_new".}
-proc fcQAccessibleTextUpdateEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, position: cint, oldText: struct_seaqt_string, text: struct_seaqt_string): ptr cQAccessibleTextUpdateEvent {.importc: "QAccessibleTextUpdateEvent_new2".}
+proc fcQAccessibleTextUpdateEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, position: cint, oldText: struct_seaqt_string, text: struct_seaqt_string): ptr cQAccessibleTextUpdateEvent {.importc: "QAccessibleTextUpdateEvent_new_obj_position_oldText_text".}
+proc fcQAccessibleTextUpdateEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, position: cint, oldText: struct_seaqt_string, text: struct_seaqt_string): ptr cQAccessibleTextUpdateEvent {.importc: "QAccessibleTextUpdateEvent_new_iface_position_oldText_text".}
 proc fcQAccessibleValueChangeEvent_setValue(self: pointer, val: pointer): void {.importc: "QAccessibleValueChangeEvent_setValue".}
 proc fcQAccessibleValueChangeEvent_value(self: pointer): pointer {.importc: "QAccessibleValueChangeEvent_value".}
 proc fcQAccessibleValueChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleValueChangeEvent_vdata".}
@@ -290,8 +290,8 @@ type cQAccessibleValueChangeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQAccessibleValueChangeEvent_virtualbase_accessibleInterface(self: pointer): pointer {.importc: "QAccessibleValueChangeEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleValueChangeEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, val: pointer): ptr cQAccessibleValueChangeEvent {.importc: "QAccessibleValueChangeEvent_new".}
-proc fcQAccessibleValueChangeEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, val: pointer): ptr cQAccessibleValueChangeEvent {.importc: "QAccessibleValueChangeEvent_new2".}
+proc fcQAccessibleValueChangeEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, val: pointer): ptr cQAccessibleValueChangeEvent {.importc: "QAccessibleValueChangeEvent_new_obj_val".}
+proc fcQAccessibleValueChangeEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, val: pointer): ptr cQAccessibleValueChangeEvent {.importc: "QAccessibleValueChangeEvent_new_iface_val".}
 proc fcQAccessibleTableModelChangeEvent_setModelChangeType(self: pointer, changeType: cint): void {.importc: "QAccessibleTableModelChangeEvent_setModelChangeType".}
 proc fcQAccessibleTableModelChangeEvent_modelChangeType(self: pointer): cint {.importc: "QAccessibleTableModelChangeEvent_modelChangeType".}
 proc fcQAccessibleTableModelChangeEvent_setFirstRow(self: pointer, row: cint): void {.importc: "QAccessibleTableModelChangeEvent_setFirstRow".}
@@ -309,8 +309,8 @@ type cQAccessibleTableModelChangeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQAccessibleTableModelChangeEvent_virtualbase_accessibleInterface(self: pointer): pointer {.importc: "QAccessibleTableModelChangeEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTableModelChangeEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, changeType: cint): ptr cQAccessibleTableModelChangeEvent {.importc: "QAccessibleTableModelChangeEvent_new".}
-proc fcQAccessibleTableModelChangeEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, changeType: cint): ptr cQAccessibleTableModelChangeEvent {.importc: "QAccessibleTableModelChangeEvent_new2".}
+proc fcQAccessibleTableModelChangeEvent_new(vtbl: pointer, vdata: csize_t, obj: pointer, changeType: cint): ptr cQAccessibleTableModelChangeEvent {.importc: "QAccessibleTableModelChangeEvent_new_obj_changeType".}
+proc fcQAccessibleTableModelChangeEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, changeType: cint): ptr cQAccessibleTableModelChangeEvent {.importc: "QAccessibleTableModelChangeEvent_new_iface_changeType".}
 
 proc isValid*(self: gen_qaccessible_types.QAccessibleInterface): bool =
   fcQAccessibleInterface_isValid(self.h)
@@ -411,8 +411,8 @@ proc virtualHook*(self: gen_qaccessible_types.QAccessibleInterface, id: cint, da
 proc interfaceCast*(self: gen_qaccessible_types.QAccessibleInterface, param1: cint): pointer =
   fcQAccessibleInterface_interfaceCast(self.h, cint(param1))
 
-proc operatorAssign*(self: gen_qaccessible_types.QAccessibleInterface, param1: gen_qaccessible_types.QAccessibleInterface): void =
-  fcQAccessibleInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessible_types.QAccessibleInterface, fromVal: gen_qaccessible_types.QAccessibleInterface): void =
+  fcQAccessibleInterface_operatorAssign(self.h, fromVal.h)
 
 proc selection*(self: gen_qaccessible_types.QAccessibleTextInterface, selectionIndex: cint, startOffset: ptr cint, endOffset: ptr cint): void =
   fcQAccessibleTextInterface_selection(self.h, selectionIndex, startOffset, endOffset)
@@ -477,8 +477,8 @@ proc attributes*(self: gen_qaccessible_types.QAccessibleTextInterface, offset: c
   c_free(v_ms.data)
   vx_ret
 
-proc operatorAssign*(self: gen_qaccessible_types.QAccessibleTextInterface, param1: gen_qaccessible_types.QAccessibleTextInterface): void =
-  fcQAccessibleTextInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessible_types.QAccessibleTextInterface, fromVal: gen_qaccessible_types.QAccessibleTextInterface): void =
+  fcQAccessibleTextInterface_operatorAssign(self.h, fromVal.h)
 
 proc deleteText*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, startOffset: cint, endOffset: cint): void =
   fcQAccessibleEditableTextInterface_deleteText(self.h, startOffset, endOffset)
@@ -489,8 +489,8 @@ proc insertText*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, o
 proc replaceText*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, startOffset: cint, endOffset: cint, text: openArray[char]): void =
   fcQAccessibleEditableTextInterface_replaceText(self.h, startOffset, endOffset, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc operatorAssign*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, param1: gen_qaccessible_types.QAccessibleEditableTextInterface): void =
-  fcQAccessibleEditableTextInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, fromVal: gen_qaccessible_types.QAccessibleEditableTextInterface): void =
+  fcQAccessibleEditableTextInterface_operatorAssign(self.h, fromVal.h)
 
 proc currentValue*(self: gen_qaccessible_types.QAccessibleValueInterface): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAccessibleValueInterface_currentValue(self.h), owned: true)
@@ -507,8 +507,8 @@ proc minimumValue*(self: gen_qaccessible_types.QAccessibleValueInterface): gen_q
 proc minimumStepSize*(self: gen_qaccessible_types.QAccessibleValueInterface): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAccessibleValueInterface_minimumStepSize(self.h), owned: true)
 
-proc operatorAssign*(self: gen_qaccessible_types.QAccessibleValueInterface, param1: gen_qaccessible_types.QAccessibleValueInterface): void =
-  fcQAccessibleValueInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessible_types.QAccessibleValueInterface, fromVal: gen_qaccessible_types.QAccessibleValueInterface): void =
+  fcQAccessibleValueInterface_operatorAssign(self.h, fromVal.h)
 
 proc isSelected*(self: gen_qaccessible_types.QAccessibleTableCellInterface): bool =
   fcQAccessibleTableCellInterface_isSelected(self.h)
@@ -546,8 +546,8 @@ proc rowExtent*(self: gen_qaccessible_types.QAccessibleTableCellInterface): cint
 proc table*(self: gen_qaccessible_types.QAccessibleTableCellInterface): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTableCellInterface_table(self.h), owned: false)
 
-proc operatorAssign*(self: gen_qaccessible_types.QAccessibleTableCellInterface, param1: gen_qaccessible_types.QAccessibleTableCellInterface): void =
-  fcQAccessibleTableCellInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessible_types.QAccessibleTableCellInterface, fromVal: gen_qaccessible_types.QAccessibleTableCellInterface): void =
+  fcQAccessibleTableCellInterface_operatorAssign(self.h, fromVal.h)
 
 proc caption*(self: gen_qaccessible_types.QAccessibleTableInterface): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTableInterface_caption(self.h), owned: false)
@@ -633,11 +633,11 @@ proc unselectColumn*(self: gen_qaccessible_types.QAccessibleTableInterface, colu
 proc modelChange*(self: gen_qaccessible_types.QAccessibleTableInterface, event: gen_qaccessible_types.QAccessibleTableModelChangeEvent): void =
   fcQAccessibleTableInterface_modelChange(self.h, event.h)
 
-proc operatorAssign*(self: gen_qaccessible_types.QAccessibleTableInterface, param1: gen_qaccessible_types.QAccessibleTableInterface): void =
-  fcQAccessibleTableInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessible_types.QAccessibleTableInterface, fromVal: gen_qaccessible_types.QAccessibleTableInterface): void =
+  fcQAccessibleTableInterface_operatorAssign(self.h, fromVal.h)
 
 proc tr*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: cstring): string =
-  let v_ms = fcQAccessibleActionInterface_tr(sourceText)
+  let v_ms = fcQAccessibleActionInterface_trSourceText(sourceText)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -753,17 +753,17 @@ proc previousPageAction*(_: type gen_qaccessible_types.QAccessibleActionInterfac
   c_free(v_ms.data)
   vx_ret
 
-proc operatorAssign*(self: gen_qaccessible_types.QAccessibleActionInterface, param1: gen_qaccessible_types.QAccessibleActionInterface): void =
-  fcQAccessibleActionInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessible_types.QAccessibleActionInterface, fromVal: gen_qaccessible_types.QAccessibleActionInterface): void =
+  fcQAccessibleActionInterface_operatorAssign(self.h, fromVal.h)
 
 proc tr*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: cstring, disambiguation: cstring): string =
-  let v_ms = fcQAccessibleActionInterface_tr2(sourceText, disambiguation)
+  let v_ms = fcQAccessibleActionInterface_trSourceTextDisambiguation(sourceText, disambiguation)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: cstring, disambiguation: cstring, n: cint): string =
-  let v_ms = fcQAccessibleActionInterface_tr3(sourceText, disambiguation, n)
+  let v_ms = fcQAccessibleActionInterface_trSourceTextDisambiguationN(sourceText, disambiguation, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -780,8 +780,8 @@ proc imageSize*(self: gen_qaccessible_types.QAccessibleImageInterface): gen_qsiz
 proc imagePosition*(self: gen_qaccessible_types.QAccessibleImageInterface): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQAccessibleImageInterface_imagePosition(self.h), owned: true)
 
-proc operatorAssign*(self: gen_qaccessible_types.QAccessibleImageInterface, param1: gen_qaccessible_types.QAccessibleImageInterface): void =
-  fcQAccessibleImageInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessible_types.QAccessibleImageInterface, fromVal: gen_qaccessible_types.QAccessibleImageInterface): void =
+  fcQAccessibleImageInterface_operatorAssign(self.h, fromVal.h)
 
 proc anchor*(self: gen_qaccessible_types.QAccessibleHyperlinkInterface): string =
   let v_ms = fcQAccessibleHyperlinkInterface_anchor(self.h)
@@ -804,8 +804,8 @@ proc endIndex*(self: gen_qaccessible_types.QAccessibleHyperlinkInterface): cint 
 proc isValid*(self: gen_qaccessible_types.QAccessibleHyperlinkInterface): bool =
   fcQAccessibleHyperlinkInterface_isValid(self.h)
 
-proc operatorAssign*(self: gen_qaccessible_types.QAccessibleHyperlinkInterface, param1: gen_qaccessible_types.QAccessibleHyperlinkInterface): void =
-  fcQAccessibleHyperlinkInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessible_types.QAccessibleHyperlinkInterface, fromVal: gen_qaccessible_types.QAccessibleHyperlinkInterface): void =
+  fcQAccessibleHyperlinkInterface_operatorAssign(self.h, fromVal.h)
 
 proc typeX*(self: gen_qaccessible_types.QAccessibleEvent): cint =
   cint(fcQAccessibleEvent_typeX(self.h))

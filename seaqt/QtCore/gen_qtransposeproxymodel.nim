@@ -70,7 +70,7 @@ type cQTransposeProxyModel*{.exportc: "QTransposeProxyModel", incompleteStruct.}
 proc fcQTransposeProxyModel_metaObject(self: pointer): pointer {.importc: "QTransposeProxyModel_metaObject".}
 proc fcQTransposeProxyModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QTransposeProxyModel_metacast".}
 proc fcQTransposeProxyModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTransposeProxyModel_metacall".}
-proc fcQTransposeProxyModel_tr(s: cstring): struct_seaqt_string {.importc: "QTransposeProxyModel_tr".}
+proc fcQTransposeProxyModel_trS(s: cstring): struct_seaqt_string {.importc: "QTransposeProxyModel_tr_s".}
 proc fcQTransposeProxyModel_setSourceModel(self: pointer, newSourceModel: pointer): void {.importc: "QTransposeProxyModel_setSourceModel".}
 proc fcQTransposeProxyModel_rowCount(self: pointer, parent: pointer): cint {.importc: "QTransposeProxyModel_rowCount".}
 proc fcQTransposeProxyModel_columnCount(self: pointer, parent: pointer): cint {.importc: "QTransposeProxyModel_columnCount".}
@@ -90,8 +90,8 @@ proc fcQTransposeProxyModel_insertColumns(self: pointer, column: cint, count: ci
 proc fcQTransposeProxyModel_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QTransposeProxyModel_removeColumns".}
 proc fcQTransposeProxyModel_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QTransposeProxyModel_moveColumns".}
 proc fcQTransposeProxyModel_sort(self: pointer, column: cint, order: cint): void {.importc: "QTransposeProxyModel_sort".}
-proc fcQTransposeProxyModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTransposeProxyModel_tr2".}
-proc fcQTransposeProxyModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTransposeProxyModel_tr3".}
+proc fcQTransposeProxyModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTransposeProxyModel_tr_s_c".}
+proc fcQTransposeProxyModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTransposeProxyModel_tr_s_c_n".}
 proc fcQTransposeProxyModel_vdata(self: pointer): ptr pointer {.importc: "QTransposeProxyModel_vdata".}
 proc fvdata_cQTransposeProxyModel(self: pointer): pointer {.importc: "vdata_QTransposeProxyModel".}
 
@@ -202,7 +202,7 @@ proc fcQTransposeProxyModel_virtualbase_customEvent(self: pointer, event: pointe
 proc fcQTransposeProxyModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTransposeProxyModel_virtualbase_connectNotify".}
 proc fcQTransposeProxyModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTransposeProxyModel_virtualbase_disconnectNotify".}
 proc fcQTransposeProxyModel_protectedbase_createSourceIndex(self: pointer, row: cint, col: cint, internalPtr: pointer): pointer {.importc: "QTransposeProxyModel_protectedbase_createSourceIndex".}
-proc fcQTransposeProxyModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QTransposeProxyModel_protectedbase_createIndex".}
+proc fcQTransposeProxyModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QTransposeProxyModel_protectedbase_createIndex_row_column".}
 proc fcQTransposeProxyModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QTransposeProxyModel_protectedbase_encodeData".}
 proc fcQTransposeProxyModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QTransposeProxyModel_protectedbase_decodeData".}
 proc fcQTransposeProxyModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QTransposeProxyModel_protectedbase_beginInsertRows".}
@@ -227,7 +227,7 @@ proc fcQTransposeProxyModel_protectedbase_senderSignalIndex(self: pointer): cint
 proc fcQTransposeProxyModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTransposeProxyModel_protectedbase_receivers".}
 proc fcQTransposeProxyModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTransposeProxyModel_protectedbase_isSignalConnected".}
 proc fcQTransposeProxyModel_new(vtbl: pointer, vdata: csize_t): ptr cQTransposeProxyModel {.importc: "QTransposeProxyModel_new".}
-proc fcQTransposeProxyModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTransposeProxyModel {.importc: "QTransposeProxyModel_new2".}
+proc fcQTransposeProxyModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTransposeProxyModel {.importc: "QTransposeProxyModel_new_parent".}
 proc fcQTransposeProxyModel_staticMetaObject(): pointer {.importc: "QTransposeProxyModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): gen_qobjectdefs_types.QMetaObject =
@@ -240,7 +240,7 @@ proc metacall*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, param1
   fcQTransposeProxyModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtransposeproxymodel_types.QTransposeProxyModel, s: cstring): string =
-  let v_ms = fcQTransposeProxyModel_tr(s)
+  let v_ms = fcQTransposeProxyModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -326,13 +326,13 @@ proc sort*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, column: ci
   fcQTransposeProxyModel_sort(self.h, column, cint(order))
 
 proc tr*(_: type gen_qtransposeproxymodel_types.QTransposeProxyModel, s: cstring, c: cstring): string =
-  let v_ms = fcQTransposeProxyModel_tr2(s, c)
+  let v_ms = fcQTransposeProxyModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtransposeproxymodel_types.QTransposeProxyModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTransposeProxyModel_tr3(s, c, n)
+  let v_ms = fcQTransposeProxyModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1696,7 +1696,7 @@ proc createSourceIndex*(self: gen_qtransposeproxymodel_types.QTransposeProxyMode
   gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_protectedbase_createSourceIndex(self.h, row, col, internalPtr), owned: true)
 
 proc createIndex*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

@@ -21,7 +21,7 @@ typedef struct QAudioFormat QAudioFormat;
 #endif
 
 QAudioFormat* QAudioFormat_new();
-QAudioFormat* QAudioFormat_new2(QAudioFormat* param1);
+QAudioFormat* QAudioFormat_new_from(QAudioFormat* from);
 
 bool QAudioFormat_isValid(const QAudioFormat* self);
 void QAudioFormat_setSampleRate(QAudioFormat* self, int sampleRate);

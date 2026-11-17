@@ -331,7 +331,7 @@ proc fcQAccessibleState_searchEdit(self: pointer): culonglong {.importc: "QAcces
 proc fcQAccessibleState_setSearchEdit(self: pointer, searchEdit: culonglong): void {.importc: "QAccessible__State_setSearchEdit".}
 proc fcQAccessibleState_new(): ptr cQAccessibleState {.importc: "QAccessible__State_new".}
 proc fcQAccessibleActivationObserver_accessibilityActiveChanged(self: pointer, active: bool): void {.importc: "QAccessible__ActivationObserver_accessibilityActiveChanged".}
-proc fcQAccessibleActivationObserver_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessible__ActivationObserver_operatorAssign".}
+proc fcQAccessibleActivationObserver_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessible__ActivationObserver_operatorAssign".}
 
 proc installActivationObserver*(_: type gen_qaccessible_base_types.QAccessible, param1: gen_qaccessible_base_types.QAccessibleActivationObserver): void =
   fcQAccessible_installActivationObserver(param1.h)
@@ -611,6 +611,6 @@ proc create*(T: type gen_qaccessible_base_types.QAccessibleState): gen_qaccessib
 proc accessibilityActiveChanged*(self: gen_qaccessible_base_types.QAccessibleActivationObserver, active: bool): void =
   fcQAccessibleActivationObserver_accessibilityActiveChanged(self.h, active)
 
-proc operatorAssign*(self: gen_qaccessible_base_types.QAccessibleActivationObserver, param1: gen_qaccessible_base_types.QAccessibleActivationObserver): void =
-  fcQAccessibleActivationObserver_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessible_base_types.QAccessibleActivationObserver, fromVal: gen_qaccessible_base_types.QAccessibleActivationObserver): void =
+  fcQAccessibleActivationObserver_operatorAssign(self.h, fromVal.h)
 

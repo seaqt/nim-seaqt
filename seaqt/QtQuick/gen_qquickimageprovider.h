@@ -78,14 +78,14 @@ void QQuickTextureFactory_virtbase(QQuickTextureFactory* src, QObject** outptr_Q
 QMetaObject* QQuickTextureFactory_metaObject(const QQuickTextureFactory* self);
 void* QQuickTextureFactory_metacast(QQuickTextureFactory* self, const char* param1);
 int QQuickTextureFactory_metacall(QQuickTextureFactory* self, int param1, int param2, void** param3);
-struct seaqt_string QQuickTextureFactory_tr(const char* s);
+struct seaqt_string QQuickTextureFactory_tr_s(const char* s);
 QSGTexture* QQuickTextureFactory_createTexture(const QQuickTextureFactory* self, QQuickWindow* window);
 QSize* QQuickTextureFactory_textureSize(const QQuickTextureFactory* self);
 int QQuickTextureFactory_textureByteCount(const QQuickTextureFactory* self);
 QImage* QQuickTextureFactory_image(const QQuickTextureFactory* self);
 QQuickTextureFactory* QQuickTextureFactory_textureFactoryForImage(QImage* image);
-struct seaqt_string QQuickTextureFactory_tr2(const char* s, const char* c);
-struct seaqt_string QQuickTextureFactory_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQuickTextureFactory_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQuickTextureFactory_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQuickTextureFactory_virtualbase_metaObject(const VirtualQQuickTextureFactory* self);
 void* QQuickTextureFactory_virtualbase_metacast(VirtualQQuickTextureFactory* self, const char* param1);
@@ -137,14 +137,14 @@ void QQuickImageResponse_virtbase(QQuickImageResponse* src, QObject** outptr_QOb
 QMetaObject* QQuickImageResponse_metaObject(const QQuickImageResponse* self);
 void* QQuickImageResponse_metacast(QQuickImageResponse* self, const char* param1);
 int QQuickImageResponse_metacall(QQuickImageResponse* self, int param1, int param2, void** param3);
-struct seaqt_string QQuickImageResponse_tr(const char* s);
+struct seaqt_string QQuickImageResponse_tr_s(const char* s);
 QQuickTextureFactory* QQuickImageResponse_textureFactory(const QQuickImageResponse* self);
 struct seaqt_string QQuickImageResponse_errorString(const QQuickImageResponse* self);
 void QQuickImageResponse_cancel(QQuickImageResponse* self);
 void QQuickImageResponse_finished(QQuickImageResponse* self);
 void QQuickImageResponse_connect_finished(QQuickImageResponse* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QQuickImageResponse_tr2(const char* s, const char* c);
-struct seaqt_string QQuickImageResponse_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQuickImageResponse_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQuickImageResponse_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQuickImageResponse_virtualbase_metaObject(const VirtualQQuickImageResponse* self);
 void* QQuickImageResponse_virtualbase_metacast(VirtualQQuickImageResponse* self, const char* param1);
@@ -191,21 +191,21 @@ typedef struct QQuickImageProvider_VTable{
 void* QQuickImageProvider_vdata(VirtualQQuickImageProvider* self);
 VirtualQQuickImageProvider* vdata_QQuickImageProvider(void* vdata);
 
-VirtualQQuickImageProvider* QQuickImageProvider_new(const QQuickImageProvider_VTable* vtbl, size_t vdata, int type);
-VirtualQQuickImageProvider* QQuickImageProvider_new2(const QQuickImageProvider_VTable* vtbl, size_t vdata, int type, int flags);
+VirtualQQuickImageProvider* QQuickImageProvider_new_type(const QQuickImageProvider_VTable* vtbl, size_t vdata, int type);
+VirtualQQuickImageProvider* QQuickImageProvider_new_type_flags(const QQuickImageProvider_VTable* vtbl, size_t vdata, int type, int flags);
 
 void QQuickImageProvider_virtbase(QQuickImageProvider* src, QQmlImageProviderBase** outptr_QQmlImageProviderBase);
 QMetaObject* QQuickImageProvider_metaObject(const QQuickImageProvider* self);
 void* QQuickImageProvider_metacast(QQuickImageProvider* self, const char* param1);
 int QQuickImageProvider_metacall(QQuickImageProvider* self, int param1, int param2, void** param3);
-struct seaqt_string QQuickImageProvider_tr(const char* s);
+struct seaqt_string QQuickImageProvider_tr_s(const char* s);
 int QQuickImageProvider_imageType(const QQuickImageProvider* self);
 int QQuickImageProvider_flags(const QQuickImageProvider* self);
 QImage* QQuickImageProvider_requestImage(QQuickImageProvider* self, struct seaqt_string id, QSize* size, QSize* requestedSize);
 QPixmap* QQuickImageProvider_requestPixmap(QQuickImageProvider* self, struct seaqt_string id, QSize* size, QSize* requestedSize);
 QQuickTextureFactory* QQuickImageProvider_requestTexture(QQuickImageProvider* self, struct seaqt_string id, QSize* size, QSize* requestedSize);
-struct seaqt_string QQuickImageProvider_tr2(const char* s, const char* c);
-struct seaqt_string QQuickImageProvider_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQuickImageProvider_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQuickImageProvider_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQuickImageProvider_virtualbase_metaObject(const VirtualQQuickImageProvider* self);
 void* QQuickImageProvider_virtualbase_metacast(VirtualQQuickImageProvider* self, const char* param1);

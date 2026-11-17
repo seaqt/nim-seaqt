@@ -146,15 +146,15 @@ void* QGroupBox_vdata(VirtualQGroupBox* self);
 VirtualQGroupBox* vdata_QGroupBox(void* vdata);
 
 VirtualQGroupBox* QGroupBox_new(const QGroupBox_VTable* vtbl, size_t vdata);
-VirtualQGroupBox* QGroupBox_new2(const QGroupBox_VTable* vtbl, size_t vdata, struct seaqt_string title);
-VirtualQGroupBox* QGroupBox_new3(const QGroupBox_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQGroupBox* QGroupBox_new4(const QGroupBox_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent);
+VirtualQGroupBox* QGroupBox_new_title(const QGroupBox_VTable* vtbl, size_t vdata, struct seaqt_string title);
+VirtualQGroupBox* QGroupBox_new_parent(const QGroupBox_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQGroupBox* QGroupBox_new_title_parent(const QGroupBox_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent);
 
 void QGroupBox_virtbase(QGroupBox* src, QWidget** outptr_QWidget);
 QMetaObject* QGroupBox_metaObject(const QGroupBox* self);
 void* QGroupBox_metacast(QGroupBox* self, const char* param1);
 int QGroupBox_metacall(QGroupBox* self, int param1, int param2, void** param3);
-struct seaqt_string QGroupBox_tr(const char* s);
+struct seaqt_string QGroupBox_tr_s(const char* s);
 struct seaqt_string QGroupBox_title(const QGroupBox* self);
 void QGroupBox_setTitle(QGroupBox* self, struct seaqt_string title);
 int QGroupBox_alignment(const QGroupBox* self);
@@ -180,10 +180,10 @@ void QGroupBox_mousePressEvent(QGroupBox* self, QMouseEvent* event);
 void QGroupBox_mouseMoveEvent(QGroupBox* self, QMouseEvent* event);
 void QGroupBox_mouseReleaseEvent(QGroupBox* self, QMouseEvent* event);
 void QGroupBox_initStyleOption(const QGroupBox* self, QStyleOptionGroupBox* option);
-struct seaqt_string QGroupBox_tr2(const char* s, const char* c);
-struct seaqt_string QGroupBox_tr3(const char* s, const char* c, int n);
-void QGroupBox_clickedWithChecked(QGroupBox* self, bool checked);
-void QGroupBox_connect_clickedWithChecked(QGroupBox* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+struct seaqt_string QGroupBox_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGroupBox_tr_s_c_n(const char* s, const char* c, int n);
+void QGroupBox_clicked_checked(QGroupBox* self, bool checked);
+void QGroupBox_connect_clicked_checked(QGroupBox* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 
 QMetaObject* QGroupBox_virtualbase_metaObject(const VirtualQGroupBox* self);
 void* QGroupBox_virtualbase_metacast(VirtualQGroupBox* self, const char* param1);

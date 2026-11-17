@@ -57,23 +57,23 @@ type cQTranslator*{.exportc: "QTranslator", incompleteStruct.} = object
 proc fcQTranslator_metaObject(self: pointer): pointer {.importc: "QTranslator_metaObject".}
 proc fcQTranslator_metacast(self: pointer, param1: cstring): pointer {.importc: "QTranslator_metacast".}
 proc fcQTranslator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTranslator_metacall".}
-proc fcQTranslator_tr(s: cstring): struct_seaqt_string {.importc: "QTranslator_tr".}
+proc fcQTranslator_trS(s: cstring): struct_seaqt_string {.importc: "QTranslator_tr_s".}
 proc fcQTranslator_translate(self: pointer, context: cstring, sourceText: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QTranslator_translate".}
 proc fcQTranslator_isEmpty(self: pointer): bool {.importc: "QTranslator_isEmpty".}
 proc fcQTranslator_language(self: pointer): struct_seaqt_string {.importc: "QTranslator_language".}
 proc fcQTranslator_filePath(self: pointer): struct_seaqt_string {.importc: "QTranslator_filePath".}
-proc fcQTranslator_load(self: pointer, filename: struct_seaqt_string): bool {.importc: "QTranslator_load".}
-proc fcQTranslator_load2(self: pointer, locale: pointer, filename: struct_seaqt_string): bool {.importc: "QTranslator_load2".}
-proc fcQTranslator_load3(self: pointer, data: ptr uint8, len: cint): bool {.importc: "QTranslator_load3".}
-proc fcQTranslator_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTranslator_tr2".}
-proc fcQTranslator_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTranslator_tr3".}
-proc fcQTranslator_load4(self: pointer, filename: struct_seaqt_string, directory: struct_seaqt_string): bool {.importc: "QTranslator_load4".}
-proc fcQTranslator_load5(self: pointer, filename: struct_seaqt_string, directory: struct_seaqt_string, search_delimiters: struct_seaqt_string): bool {.importc: "QTranslator_load5".}
-proc fcQTranslator_load6(self: pointer, filename: struct_seaqt_string, directory: struct_seaqt_string, search_delimiters: struct_seaqt_string, suffix: struct_seaqt_string): bool {.importc: "QTranslator_load6".}
-proc fcQTranslator_load7(self: pointer, locale: pointer, filename: struct_seaqt_string, prefix: struct_seaqt_string): bool {.importc: "QTranslator_load7".}
-proc fcQTranslator_load8(self: pointer, locale: pointer, filename: struct_seaqt_string, prefix: struct_seaqt_string, directory: struct_seaqt_string): bool {.importc: "QTranslator_load8".}
-proc fcQTranslator_load9(self: pointer, locale: pointer, filename: struct_seaqt_string, prefix: struct_seaqt_string, directory: struct_seaqt_string, suffix: struct_seaqt_string): bool {.importc: "QTranslator_load9".}
-proc fcQTranslator_load10(self: pointer, data: ptr uint8, len: cint, directory: struct_seaqt_string): bool {.importc: "QTranslator_load10".}
+proc fcQTranslator_loadFilename(self: pointer, filename: struct_seaqt_string): bool {.importc: "QTranslator_load_filename".}
+proc fcQTranslator_loadLocaleFilename(self: pointer, locale: pointer, filename: struct_seaqt_string): bool {.importc: "QTranslator_load_locale_filename".}
+proc fcQTranslator_loadDataLen(self: pointer, data: ptr uint8, len: cint): bool {.importc: "QTranslator_load_data_len".}
+proc fcQTranslator_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTranslator_tr_s_c".}
+proc fcQTranslator_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTranslator_tr_s_c_n".}
+proc fcQTranslator_loadFilenameDirectory(self: pointer, filename: struct_seaqt_string, directory: struct_seaqt_string): bool {.importc: "QTranslator_load_filename_directory".}
+proc fcQTranslator_loadFilenameDirectorySearchDelimiters(self: pointer, filename: struct_seaqt_string, directory: struct_seaqt_string, search_delimiters: struct_seaqt_string): bool {.importc: "QTranslator_load_filename_directory_search_delimiters".}
+proc fcQTranslator_loadFilenameDirectorySearchDelimitersSuffix(self: pointer, filename: struct_seaqt_string, directory: struct_seaqt_string, search_delimiters: struct_seaqt_string, suffix: struct_seaqt_string): bool {.importc: "QTranslator_load_filename_directory_search_delimiters_suffix".}
+proc fcQTranslator_loadLocaleFilenamePrefix(self: pointer, locale: pointer, filename: struct_seaqt_string, prefix: struct_seaqt_string): bool {.importc: "QTranslator_load_locale_filename_prefix".}
+proc fcQTranslator_loadLocaleFilenamePrefixDirectory(self: pointer, locale: pointer, filename: struct_seaqt_string, prefix: struct_seaqt_string, directory: struct_seaqt_string): bool {.importc: "QTranslator_load_locale_filename_prefix_directory".}
+proc fcQTranslator_loadLocaleFilenamePrefixDirectorySuffix(self: pointer, locale: pointer, filename: struct_seaqt_string, prefix: struct_seaqt_string, directory: struct_seaqt_string, suffix: struct_seaqt_string): bool {.importc: "QTranslator_load_locale_filename_prefix_directory_suffix".}
+proc fcQTranslator_loadDataLenDirectory(self: pointer, data: ptr uint8, len: cint, directory: struct_seaqt_string): bool {.importc: "QTranslator_load_data_len_directory".}
 proc fcQTranslator_vdata(self: pointer): ptr pointer {.importc: "QTranslator_vdata".}
 proc fvdata_cQTranslator(self: pointer): pointer {.importc: "vdata_QTranslator".}
 
@@ -108,7 +108,7 @@ proc fcQTranslator_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQTranslator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTranslator_protectedbase_receivers".}
 proc fcQTranslator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTranslator_protectedbase_isSignalConnected".}
 proc fcQTranslator_new(vtbl: pointer, vdata: csize_t): ptr cQTranslator {.importc: "QTranslator_new".}
-proc fcQTranslator_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTranslator {.importc: "QTranslator_new2".}
+proc fcQTranslator_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTranslator {.importc: "QTranslator_new_parent".}
 proc fcQTranslator_staticMetaObject(): pointer {.importc: "QTranslator_staticMetaObject".}
 
 proc metaObject*(self: gen_qtranslator_types.QTranslator): gen_qobjectdefs_types.QMetaObject =
@@ -121,7 +121,7 @@ proc metacall*(self: gen_qtranslator_types.QTranslator, param1: cint, param2: ci
   fcQTranslator_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtranslator_types.QTranslator, s: cstring): string =
-  let v_ms = fcQTranslator_tr(s)
+  let v_ms = fcQTranslator_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -148,46 +148,46 @@ proc filePath*(self: gen_qtranslator_types.QTranslator): string =
   vx_ret
 
 proc load*(self: gen_qtranslator_types.QTranslator, filename: openArray[char]): bool =
-  fcQTranslator_load(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
+  fcQTranslator_loadFilename(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
 proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: openArray[char]): bool =
-  fcQTranslator_load2(self.h, locale.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
+  fcQTranslator_loadLocaleFilename(self.h, locale.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
 proc load*(self: gen_qtranslator_types.QTranslator, data: ptr uint8, len: cint): bool =
-  fcQTranslator_load3(self.h, data, len)
+  fcQTranslator_loadDataLen(self.h, data, len)
 
 proc tr*(_: type gen_qtranslator_types.QTranslator, s: cstring, c: cstring): string =
-  let v_ms = fcQTranslator_tr2(s, c)
+  let v_ms = fcQTranslator_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtranslator_types.QTranslator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTranslator_tr3(s, c, n)
+  let v_ms = fcQTranslator_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc load*(self: gen_qtranslator_types.QTranslator, filename: openArray[char], directory: openArray[char]): bool =
-  fcQTranslator_load4(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
+  fcQTranslator_loadFilenameDirectory(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
 proc load*(self: gen_qtranslator_types.QTranslator, filename: openArray[char], directory: openArray[char], search_delimiters: openArray[char]): bool =
-  fcQTranslator_load5(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_seaqt_string(data: if len(search_delimiters) > 0: addr search_delimiters[0] else: nil, len: csize_t(len(search_delimiters))))
+  fcQTranslator_loadFilenameDirectorySearchDelimiters(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_seaqt_string(data: if len(search_delimiters) > 0: addr search_delimiters[0] else: nil, len: csize_t(len(search_delimiters))))
 
 proc load*(self: gen_qtranslator_types.QTranslator, filename: openArray[char], directory: openArray[char], search_delimiters: openArray[char], suffix: openArray[char]): bool =
-  fcQTranslator_load6(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_seaqt_string(data: if len(search_delimiters) > 0: addr search_delimiters[0] else: nil, len: csize_t(len(search_delimiters))), struct_seaqt_string(data: if len(suffix) > 0: addr suffix[0] else: nil, len: csize_t(len(suffix))))
+  fcQTranslator_loadFilenameDirectorySearchDelimitersSuffix(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_seaqt_string(data: if len(search_delimiters) > 0: addr search_delimiters[0] else: nil, len: csize_t(len(search_delimiters))), struct_seaqt_string(data: if len(suffix) > 0: addr suffix[0] else: nil, len: csize_t(len(suffix))))
 
 proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: openArray[char], prefix: openArray[char]): bool =
-  fcQTranslator_load7(self.h, locale.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
+  fcQTranslator_loadLocaleFilenamePrefix(self.h, locale.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
 
 proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: openArray[char], prefix: openArray[char], directory: openArray[char]): bool =
-  fcQTranslator_load8(self.h, locale.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
+  fcQTranslator_loadLocaleFilenamePrefixDirectory(self.h, locale.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
 proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: openArray[char], prefix: openArray[char], directory: openArray[char], suffix: openArray[char]): bool =
-  fcQTranslator_load9(self.h, locale.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_seaqt_string(data: if len(suffix) > 0: addr suffix[0] else: nil, len: csize_t(len(suffix))))
+  fcQTranslator_loadLocaleFilenamePrefixDirectorySuffix(self.h, locale.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_seaqt_string(data: if len(suffix) > 0: addr suffix[0] else: nil, len: csize_t(len(suffix))))
 
 proc load*(self: gen_qtranslator_types.QTranslator, data: ptr uint8, len: cint, directory: openArray[char]): bool =
-  fcQTranslator_load10(self.h, data, len, struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
+  fcQTranslator_loadDataLenDirectory(self.h, data, len, struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
 type QTranslatormetaObjectProc* = proc(self: QTranslator): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QTranslatormetacastProc* = proc(self: QTranslator, param1: cstring): pointer {.raises: [], gcsafe.}

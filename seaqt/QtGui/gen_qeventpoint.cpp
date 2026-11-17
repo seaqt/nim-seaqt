@@ -22,24 +22,24 @@ QEventPoint* QEventPoint_new() {
 	return new (std::nothrow) QEventPoint();
 }
 
-QEventPoint* QEventPoint_new2(int pointId, uint8_t state, QPointF* scenePosition, QPointF* globalPosition) {
+QEventPoint* QEventPoint_new_pointId_state_scenePosition_globalPosition(int pointId, uint8_t state, QPointF* scenePosition, QPointF* globalPosition) {
 	return new (std::nothrow) QEventPoint(static_cast<int>(pointId), static_cast<QEventPoint::State>(state), *scenePosition, *globalPosition);
 }
 
-QEventPoint* QEventPoint_new3(QEventPoint* other) {
-	return new (std::nothrow) QEventPoint(*other);
+QEventPoint* QEventPoint_new_from(QEventPoint* from) {
+	return new (std::nothrow) QEventPoint(*from);
 }
 
-QEventPoint* QEventPoint_new4(int id) {
+QEventPoint* QEventPoint_new_id(int id) {
 	return new (std::nothrow) QEventPoint(static_cast<int>(id));
 }
 
-QEventPoint* QEventPoint_new5(int id, QPointingDevice* device) {
+QEventPoint* QEventPoint_new_id_device(int id, QPointingDevice* device) {
 	return new (std::nothrow) QEventPoint(static_cast<int>(id), device);
 }
 
-void QEventPoint_operatorAssign(QEventPoint* self, QEventPoint* other) {
-	self->operator=(*other);
+void QEventPoint_operatorAssign(QEventPoint* self, QEventPoint* from) {
+	self->operator=(*from);
 }
 
 bool QEventPoint_operatorEqual(const QEventPoint* self, QEventPoint* other) {
@@ -217,7 +217,7 @@ void QEventPoint_setAccepted(QEventPoint* self) {
 	self->setAccepted();
 }
 
-void QEventPoint_setAcceptedWithAccepted(QEventPoint* self, bool accepted) {
+void QEventPoint_setAccepted_accepted(QEventPoint* self, bool accepted) {
 	self->setAccepted(accepted);
 }
 

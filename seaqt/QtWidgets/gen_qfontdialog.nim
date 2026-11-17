@@ -84,28 +84,28 @@ type cQFontDialog*{.exportc: "QFontDialog", incompleteStruct.} = object
 proc fcQFontDialog_metaObject(self: pointer): pointer {.importc: "QFontDialog_metaObject".}
 proc fcQFontDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QFontDialog_metacast".}
 proc fcQFontDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFontDialog_metacall".}
-proc fcQFontDialog_tr(s: cstring): struct_seaqt_string {.importc: "QFontDialog_tr".}
+proc fcQFontDialog_trS(s: cstring): struct_seaqt_string {.importc: "QFontDialog_tr_s".}
 proc fcQFontDialog_setCurrentFont(self: pointer, font: pointer): void {.importc: "QFontDialog_setCurrentFont".}
 proc fcQFontDialog_currentFont(self: pointer): pointer {.importc: "QFontDialog_currentFont".}
 proc fcQFontDialog_selectedFont(self: pointer): pointer {.importc: "QFontDialog_selectedFont".}
-proc fcQFontDialog_setOption(self: pointer, option: cint): void {.importc: "QFontDialog_setOption".}
+proc fcQFontDialog_setOptionOption(self: pointer, option: cint): void {.importc: "QFontDialog_setOption_option".}
 proc fcQFontDialog_testOption(self: pointer, option: cint): bool {.importc: "QFontDialog_testOption".}
 proc fcQFontDialog_setOptions(self: pointer, options: cint): void {.importc: "QFontDialog_setOptions".}
 proc fcQFontDialog_options(self: pointer): cint {.importc: "QFontDialog_options".}
 proc fcQFontDialog_setVisible(self: pointer, visible: bool): void {.importc: "QFontDialog_setVisible".}
-proc fcQFontDialog_getFont(ok: ptr bool): pointer {.importc: "QFontDialog_getFont".}
-proc fcQFontDialog_getFont2(ok: ptr bool, initial: pointer): pointer {.importc: "QFontDialog_getFont2".}
+proc fcQFontDialog_getFontOk(ok: ptr bool): pointer {.importc: "QFontDialog_getFont_ok".}
+proc fcQFontDialog_getFontOkInitial(ok: ptr bool, initial: pointer): pointer {.importc: "QFontDialog_getFont_ok_initial".}
 proc fcQFontDialog_currentFontChanged(self: pointer, font: pointer): void {.importc: "QFontDialog_currentFontChanged".}
 proc fcQFontDialog_connect_currentFontChanged(self: pointer, slot: int, callback: proc (slot: int, font: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFontDialog_connect_currentFontChanged".}
 proc fcQFontDialog_fontSelected(self: pointer, font: pointer): void {.importc: "QFontDialog_fontSelected".}
 proc fcQFontDialog_connect_fontSelected(self: pointer, slot: int, callback: proc (slot: int, font: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFontDialog_connect_fontSelected".}
-proc fcQFontDialog_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFontDialog_tr2".}
-proc fcQFontDialog_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFontDialog_tr3".}
-proc fcQFontDialog_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QFontDialog_setOption2".}
-proc fcQFontDialog_getFont3(ok: ptr bool, parent: pointer): pointer {.importc: "QFontDialog_getFont3".}
-proc fcQFontDialog_getFont4(ok: ptr bool, initial: pointer, parent: pointer): pointer {.importc: "QFontDialog_getFont4".}
-proc fcQFontDialog_getFont5(ok: ptr bool, initial: pointer, parent: pointer, title: struct_seaqt_string): pointer {.importc: "QFontDialog_getFont5".}
-proc fcQFontDialog_getFont6(ok: ptr bool, initial: pointer, parent: pointer, title: struct_seaqt_string, options: cint): pointer {.importc: "QFontDialog_getFont6".}
+proc fcQFontDialog_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFontDialog_tr_s_c".}
+proc fcQFontDialog_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFontDialog_tr_s_c_n".}
+proc fcQFontDialog_setOptionOptionOn(self: pointer, option: cint, on: bool): void {.importc: "QFontDialog_setOption_option_on".}
+proc fcQFontDialog_getFontOkParent(ok: ptr bool, parent: pointer): pointer {.importc: "QFontDialog_getFont_ok_parent".}
+proc fcQFontDialog_getFontOkInitialParent(ok: ptr bool, initial: pointer, parent: pointer): pointer {.importc: "QFontDialog_getFont_ok_initial_parent".}
+proc fcQFontDialog_getFontOkInitialParentTitle(ok: ptr bool, initial: pointer, parent: pointer, title: struct_seaqt_string): pointer {.importc: "QFontDialog_getFont_ok_initial_parent_title".}
+proc fcQFontDialog_getFontOkInitialParentTitleOptions(ok: ptr bool, initial: pointer, parent: pointer, title: struct_seaqt_string, options: cint): pointer {.importc: "QFontDialog_getFont_ok_initial_parent_title_options".}
 proc fcQFontDialog_vdata(self: pointer): ptr pointer {.importc: "QFontDialog_vdata".}
 proc fvdata_cQFontDialog(self: pointer): pointer {.importc: "vdata_QFontDialog".}
 
@@ -232,9 +232,9 @@ proc fcQFontDialog_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQFontDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFontDialog_protectedbase_receivers".}
 proc fcQFontDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFontDialog_protectedbase_isSignalConnected".}
 proc fcQFontDialog_new(vtbl: pointer, vdata: csize_t): ptr cQFontDialog {.importc: "QFontDialog_new".}
-proc fcQFontDialog_new2(vtbl: pointer, vdata: csize_t, initial: pointer): ptr cQFontDialog {.importc: "QFontDialog_new2".}
-proc fcQFontDialog_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFontDialog {.importc: "QFontDialog_new3".}
-proc fcQFontDialog_new4(vtbl: pointer, vdata: csize_t, initial: pointer, parent: pointer): ptr cQFontDialog {.importc: "QFontDialog_new4".}
+proc fcQFontDialog_new2(vtbl: pointer, vdata: csize_t, initial: pointer): ptr cQFontDialog {.importc: "QFontDialog_new_initial".}
+proc fcQFontDialog_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFontDialog {.importc: "QFontDialog_new_parent".}
+proc fcQFontDialog_new4(vtbl: pointer, vdata: csize_t, initial: pointer, parent: pointer): ptr cQFontDialog {.importc: "QFontDialog_new_initial_parent".}
 proc fcQFontDialog_staticMetaObject(): pointer {.importc: "QFontDialog_staticMetaObject".}
 
 proc metaObject*(self: gen_qfontdialog_types.QFontDialog): gen_qobjectdefs_types.QMetaObject =
@@ -247,7 +247,7 @@ proc metacall*(self: gen_qfontdialog_types.QFontDialog, param1: cint, param2: ci
   fcQFontDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfontdialog_types.QFontDialog, s: cstring): string =
-  let v_ms = fcQFontDialog_tr(s)
+  let v_ms = fcQFontDialog_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -262,7 +262,7 @@ proc selectedFont*(self: gen_qfontdialog_types.QFontDialog): gen_qfont_types.QFo
   gen_qfont_types.QFont(h: fcQFontDialog_selectedFont(self.h), owned: true)
 
 proc setOption*(self: gen_qfontdialog_types.QFontDialog, option: cint): void =
-  fcQFontDialog_setOption(self.h, cint(option))
+  fcQFontDialog_setOptionOption(self.h, cint(option))
 
 proc testOption*(self: gen_qfontdialog_types.QFontDialog, option: cint): bool =
   fcQFontDialog_testOption(self.h, cint(option))
@@ -277,10 +277,10 @@ proc setVisible*(self: gen_qfontdialog_types.QFontDialog, visible: bool): void =
   fcQFontDialog_setVisible(self.h, visible)
 
 proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQFontDialog_getFont(ok), owned: true)
+  gen_qfont_types.QFont(h: fcQFontDialog_getFontOk(ok), owned: true)
 
 proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, initial: gen_qfont_types.QFont): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQFontDialog_getFont2(ok, initial.h), owned: true)
+  gen_qfont_types.QFont(h: fcQFontDialog_getFontOkInitial(ok, initial.h), owned: true)
 
 proc currentFontChanged*(self: gen_qfontdialog_types.QFontDialog, font: gen_qfont_types.QFont): void =
   fcQFontDialog_currentFontChanged(self.h, font.h)
@@ -323,31 +323,31 @@ proc onFontSelected*(self: gen_qfontdialog_types.QFontDialog, slot: QFontDialogf
   fcQFontDialog_connect_fontSelected(self.h, cast[int](addr tmp[]), fcQFontDialog_slot_callback_fontSelected, fcQFontDialog_slot_callback_fontSelected_release)
 
 proc tr*(_: type gen_qfontdialog_types.QFontDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQFontDialog_tr2(s, c)
+  let v_ms = fcQFontDialog_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfontdialog_types.QFontDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFontDialog_tr3(s, c, n)
+  let v_ms = fcQFontDialog_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setOption*(self: gen_qfontdialog_types.QFontDialog, option: cint, on: bool): void =
-  fcQFontDialog_setOption2(self.h, cint(option), on)
+  fcQFontDialog_setOptionOptionOn(self.h, cint(option), on)
 
 proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, parent: gen_qwidget_types.QWidget): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQFontDialog_getFont3(ok, parent.h), owned: true)
+  gen_qfont_types.QFont(h: fcQFontDialog_getFontOkParent(ok, parent.h), owned: true)
 
 proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, initial: gen_qfont_types.QFont, parent: gen_qwidget_types.QWidget): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQFontDialog_getFont4(ok, initial.h, parent.h), owned: true)
+  gen_qfont_types.QFont(h: fcQFontDialog_getFontOkInitialParent(ok, initial.h, parent.h), owned: true)
 
 proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, initial: gen_qfont_types.QFont, parent: gen_qwidget_types.QWidget, title: openArray[char]): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQFontDialog_getFont5(ok, initial.h, parent.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
+  gen_qfont_types.QFont(h: fcQFontDialog_getFontOkInitialParentTitle(ok, initial.h, parent.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
 
 proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, initial: gen_qfont_types.QFont, parent: gen_qwidget_types.QWidget, title: openArray[char], options: cint): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQFontDialog_getFont6(ok, initial.h, parent.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), cint(options)), owned: true)
+  gen_qfont_types.QFont(h: fcQFontDialog_getFontOkInitialParentTitleOptions(ok, initial.h, parent.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), cint(options)), owned: true)
 
 type QFontDialogmetaObjectProc* = proc(self: QFontDialog): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QFontDialogmetacastProc* = proc(self: QFontDialog, param1: cstring): pointer {.raises: [], gcsafe.}

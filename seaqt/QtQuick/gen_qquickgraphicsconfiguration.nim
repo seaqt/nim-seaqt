@@ -39,17 +39,17 @@ export gen_qquickgraphicsconfiguration_types
 
 type cQQuickGraphicsConfiguration*{.exportc: "QQuickGraphicsConfiguration", incompleteStruct.} = object
 
-proc fcQQuickGraphicsConfiguration_operatorAssign(self: pointer, other: pointer): void {.importc: "QQuickGraphicsConfiguration_operatorAssign".}
+proc fcQQuickGraphicsConfiguration_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQuickGraphicsConfiguration_operatorAssign".}
 proc fcQQuickGraphicsConfiguration_preferredInstanceExtensions(): struct_seaqt_array {.importc: "QQuickGraphicsConfiguration_preferredInstanceExtensions".}
 proc fcQQuickGraphicsConfiguration_setDeviceExtensions(self: pointer, extensions: struct_seaqt_array): void {.importc: "QQuickGraphicsConfiguration_setDeviceExtensions".}
 proc fcQQuickGraphicsConfiguration_deviceExtensions(self: pointer): struct_seaqt_array {.importc: "QQuickGraphicsConfiguration_deviceExtensions".}
 proc fcQQuickGraphicsConfiguration_setDepthBufferFor2D(self: pointer, enable: bool): void {.importc: "QQuickGraphicsConfiguration_setDepthBufferFor2D".}
 proc fcQQuickGraphicsConfiguration_isDepthBufferEnabledFor2D(self: pointer): bool {.importc: "QQuickGraphicsConfiguration_isDepthBufferEnabledFor2D".}
 proc fcQQuickGraphicsConfiguration_new(): ptr cQQuickGraphicsConfiguration {.importc: "QQuickGraphicsConfiguration_new".}
-proc fcQQuickGraphicsConfiguration_new2(other: pointer): ptr cQQuickGraphicsConfiguration {.importc: "QQuickGraphicsConfiguration_new2".}
+proc fcQQuickGraphicsConfiguration_new2(fromVal: pointer): ptr cQQuickGraphicsConfiguration {.importc: "QQuickGraphicsConfiguration_new_from".}
 
-proc operatorAssign*(self: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration, other: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration): void =
-  fcQQuickGraphicsConfiguration_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration, fromVal: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration): void =
+  fcQQuickGraphicsConfiguration_operatorAssign(self.h, fromVal.h)
 
 proc preferredInstanceExtensions*(_: type gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration): seq[seq[byte]] =
   var v_ma = fcQQuickGraphicsConfiguration_preferredInstanceExtensions()
@@ -92,6 +92,6 @@ proc create*(T: type gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfigu
   let tmp = gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration(h: fcQQuickGraphicsConfiguration_new(), owned: true)
   tmp
 proc create*(T: type gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration,
-    other: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration): gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration =
-  let tmp = gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration(h: fcQQuickGraphicsConfiguration_new2(other.h), owned: true)
+    fromVal: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration): gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration =
+  let tmp = gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration(h: fcQQuickGraphicsConfiguration_new2(fromVal.h), owned: true)
   tmp

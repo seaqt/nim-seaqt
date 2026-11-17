@@ -42,7 +42,7 @@ type cQJSNumberCoercion*{.exportc: "QJSNumberCoercion", incompleteStruct.} = obj
 proc fcQJSNumberCoercion_isInteger(d: float64): bool {.importc: "QJSNumberCoercion_isInteger".}
 proc fcQJSNumberCoercion_toInteger(d: float64): cint {.importc: "QJSNumberCoercion_toInteger".}
 proc fcQJSNumberCoercion_equals(lhs: float64, rhs: float64): bool {.importc: "QJSNumberCoercion_equals".}
-proc fcQJSNumberCoercion_new(param1: pointer): ptr cQJSNumberCoercion {.importc: "QJSNumberCoercion_new".}
+proc fcQJSNumberCoercion_new(fromVal: pointer): ptr cQJSNumberCoercion {.importc: "QJSNumberCoercion_new".}
 
 proc isInteger*(_: type gen_qjsnumbercoercion_types.QJSNumberCoercion, d: float64): bool =
   fcQJSNumberCoercion_isInteger(d)
@@ -54,6 +54,6 @@ proc equals*(_: type gen_qjsnumbercoercion_types.QJSNumberCoercion, lhs: float64
   fcQJSNumberCoercion_equals(lhs, rhs)
 
 proc create*(T: type gen_qjsnumbercoercion_types.QJSNumberCoercion,
-    param1: gen_qjsnumbercoercion_types.QJSNumberCoercion): gen_qjsnumbercoercion_types.QJSNumberCoercion =
-  let tmp = gen_qjsnumbercoercion_types.QJSNumberCoercion(h: fcQJSNumberCoercion_new(param1.h), owned: true)
+    fromVal: gen_qjsnumbercoercion_types.QJSNumberCoercion): gen_qjsnumbercoercion_types.QJSNumberCoercion =
+  let tmp = gen_qjsnumbercoercion_types.QJSNumberCoercion(h: fcQJSNumberCoercion_new(fromVal.h), owned: true)
   tmp

@@ -40,7 +40,7 @@ export gen_qpageranges_types
 type cQPageRanges*{.exportc: "QPageRanges", incompleteStruct.} = object
 type cQPageRangesRange*{.exportc: "QPageRanges__Range", incompleteStruct.} = object
 
-proc fcQPageRanges_operatorAssign(self: pointer, other: pointer): void {.importc: "QPageRanges_operatorAssign".}
+proc fcQPageRanges_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QPageRanges_operatorAssign".}
 proc fcQPageRanges_swap(self: pointer, other: pointer): void {.importc: "QPageRanges_swap".}
 proc fcQPageRanges_addPage(self: pointer, pageNumber: cint): void {.importc: "QPageRanges_addPage".}
 proc fcQPageRanges_addRange(self: pointer, fromVal: cint, to: cint): void {.importc: "QPageRanges_addRange".}
@@ -54,17 +54,17 @@ proc fcQPageRanges_firstPage(self: pointer): cint {.importc: "QPageRanges_firstP
 proc fcQPageRanges_lastPage(self: pointer): cint {.importc: "QPageRanges_lastPage".}
 proc fcQPageRanges_detach(self: pointer): void {.importc: "QPageRanges_detach".}
 proc fcQPageRanges_new(): ptr cQPageRanges {.importc: "QPageRanges_new".}
-proc fcQPageRanges_new2(other: pointer): ptr cQPageRanges {.importc: "QPageRanges_new2".}
+proc fcQPageRanges_new2(fromVal: pointer): ptr cQPageRanges {.importc: "QPageRanges_new_from".}
 proc fcQPageRangesRange_fromX(self: pointer): cint {.importc: "QPageRanges__Range_from".}
 proc fcQPageRangesRange_setFrom(self: pointer, fromVal: cint): void {.importc: "QPageRanges__Range_setFrom".}
 proc fcQPageRangesRange_to(self: pointer): cint {.importc: "QPageRanges__Range_to".}
 proc fcQPageRangesRange_setTo(self: pointer, to: cint): void {.importc: "QPageRanges__Range_setTo".}
 proc fcQPageRangesRange_contains(self: pointer, pageNumber: cint): bool {.importc: "QPageRanges__Range_contains".}
 proc fcQPageRangesRange_new(): ptr cQPageRangesRange {.importc: "QPageRanges__Range_new".}
-proc fcQPageRangesRange_new2(param1: pointer): ptr cQPageRangesRange {.importc: "QPageRanges__Range_new2".}
+proc fcQPageRangesRange_new2(fromVal: pointer): ptr cQPageRangesRange {.importc: "QPageRanges__Range_new_from".}
 
-proc operatorAssign*(self: gen_qpageranges_types.QPageRanges, other: gen_qpageranges_types.QPageRanges): void =
-  fcQPageRanges_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qpageranges_types.QPageRanges, fromVal: gen_qpageranges_types.QPageRanges): void =
+  fcQPageRanges_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qpageranges_types.QPageRanges, other: gen_qpageranges_types.QPageRanges): void =
   fcQPageRanges_swap(self.h, other.h)
@@ -115,8 +115,8 @@ proc create*(T: type gen_qpageranges_types.QPageRanges): gen_qpageranges_types.Q
   let tmp = gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new(), owned: true)
   tmp
 proc create*(T: type gen_qpageranges_types.QPageRanges,
-    other: gen_qpageranges_types.QPageRanges): gen_qpageranges_types.QPageRanges =
-  let tmp = gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new2(other.h), owned: true)
+    fromVal: gen_qpageranges_types.QPageRanges): gen_qpageranges_types.QPageRanges =
+  let tmp = gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new2(fromVal.h), owned: true)
   tmp
 proc fromX*(self: gen_qpageranges_types.QPageRangesRange): cint =
   fcQPageRangesRange_fromX(self.h)
@@ -137,6 +137,6 @@ proc create*(T: type gen_qpageranges_types.QPageRangesRange): gen_qpageranges_ty
   let tmp = gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new(), owned: true)
   tmp
 proc create*(T: type gen_qpageranges_types.QPageRangesRange,
-    param1: gen_qpageranges_types.QPageRangesRange): gen_qpageranges_types.QPageRangesRange =
-  let tmp = gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new2(param1.h), owned: true)
+    fromVal: gen_qpageranges_types.QPageRangesRange): gen_qpageranges_types.QPageRangesRange =
+  let tmp = gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new2(fromVal.h), owned: true)
   tmp

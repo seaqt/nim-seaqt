@@ -12,7 +12,7 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QStringTokenizerBaseBase* QStringTokenizerBaseBase_new(QStringTokenizerBaseBase* param1) {
-	return new (std::nothrow) QStringTokenizerBaseBase(*param1);
+QStringTokenizerBaseBase* QStringTokenizerBaseBase_new(QStringTokenizerBaseBase* from) {
+	return new (std::nothrow) QStringTokenizerBaseBase(*from);
 }
 

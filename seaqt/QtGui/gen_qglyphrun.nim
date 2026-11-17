@@ -55,7 +55,7 @@ export
 
 type cQGlyphRun*{.exportc: "QGlyphRun", incompleteStruct.} = object
 
-proc fcQGlyphRun_operatorAssign(self: pointer, other: pointer): void {.importc: "QGlyphRun_operatorAssign".}
+proc fcQGlyphRun_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGlyphRun_operatorAssign".}
 proc fcQGlyphRun_swap(self: pointer, other: pointer): void {.importc: "QGlyphRun_swap".}
 proc fcQGlyphRun_rawFont(self: pointer): pointer {.importc: "QGlyphRun_rawFont".}
 proc fcQGlyphRun_setRawFont(self: pointer, rawFont: pointer): void {.importc: "QGlyphRun_setRawFont".}
@@ -75,18 +75,18 @@ proc fcQGlyphRun_setStrikeOut(self: pointer, strikeOut: bool): void {.importc: "
 proc fcQGlyphRun_strikeOut(self: pointer): bool {.importc: "QGlyphRun_strikeOut".}
 proc fcQGlyphRun_setRightToLeft(self: pointer, on: bool): void {.importc: "QGlyphRun_setRightToLeft".}
 proc fcQGlyphRun_isRightToLeft(self: pointer): bool {.importc: "QGlyphRun_isRightToLeft".}
-proc fcQGlyphRun_setFlag(self: pointer, flag: cint): void {.importc: "QGlyphRun_setFlag".}
+proc fcQGlyphRun_setFlagFlag(self: pointer, flag: cint): void {.importc: "QGlyphRun_setFlag_flag".}
 proc fcQGlyphRun_setFlags(self: pointer, flags: cint): void {.importc: "QGlyphRun_setFlags".}
 proc fcQGlyphRun_flags(self: pointer): cint {.importc: "QGlyphRun_flags".}
 proc fcQGlyphRun_setBoundingRect(self: pointer, boundingRect: pointer): void {.importc: "QGlyphRun_setBoundingRect".}
 proc fcQGlyphRun_boundingRect(self: pointer): pointer {.importc: "QGlyphRun_boundingRect".}
 proc fcQGlyphRun_isEmpty(self: pointer): bool {.importc: "QGlyphRun_isEmpty".}
-proc fcQGlyphRun_setFlag2(self: pointer, flag: cint, enabled: bool): void {.importc: "QGlyphRun_setFlag2".}
+proc fcQGlyphRun_setFlagFlagEnabled(self: pointer, flag: cint, enabled: bool): void {.importc: "QGlyphRun_setFlag_flag_enabled".}
 proc fcQGlyphRun_new(): ptr cQGlyphRun {.importc: "QGlyphRun_new".}
-proc fcQGlyphRun_new2(other: pointer): ptr cQGlyphRun {.importc: "QGlyphRun_new2".}
+proc fcQGlyphRun_new2(fromVal: pointer): ptr cQGlyphRun {.importc: "QGlyphRun_new_from".}
 
-proc operatorAssign*(self: gen_qglyphrun_types.QGlyphRun, other: gen_qglyphrun_types.QGlyphRun): void =
-  fcQGlyphRun_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qglyphrun_types.QGlyphRun, fromVal: gen_qglyphrun_types.QGlyphRun): void =
+  fcQGlyphRun_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qglyphrun_types.QGlyphRun, other: gen_qglyphrun_types.QGlyphRun): void =
   fcQGlyphRun_swap(self.h, other.h)
@@ -166,7 +166,7 @@ proc isRightToLeft*(self: gen_qglyphrun_types.QGlyphRun): bool =
   fcQGlyphRun_isRightToLeft(self.h)
 
 proc setFlag*(self: gen_qglyphrun_types.QGlyphRun, flag: cint): void =
-  fcQGlyphRun_setFlag(self.h, cint(flag))
+  fcQGlyphRun_setFlagFlag(self.h, cint(flag))
 
 proc setFlags*(self: gen_qglyphrun_types.QGlyphRun, flags: cint): void =
   fcQGlyphRun_setFlags(self.h, cint(flags))
@@ -184,12 +184,12 @@ proc isEmpty*(self: gen_qglyphrun_types.QGlyphRun): bool =
   fcQGlyphRun_isEmpty(self.h)
 
 proc setFlag*(self: gen_qglyphrun_types.QGlyphRun, flag: cint, enabled: bool): void =
-  fcQGlyphRun_setFlag2(self.h, cint(flag), enabled)
+  fcQGlyphRun_setFlagFlagEnabled(self.h, cint(flag), enabled)
 
 proc create*(T: type gen_qglyphrun_types.QGlyphRun): gen_qglyphrun_types.QGlyphRun =
   let tmp = gen_qglyphrun_types.QGlyphRun(h: fcQGlyphRun_new(), owned: true)
   tmp
 proc create*(T: type gen_qglyphrun_types.QGlyphRun,
-    other: gen_qglyphrun_types.QGlyphRun): gen_qglyphrun_types.QGlyphRun =
-  let tmp = gen_qglyphrun_types.QGlyphRun(h: fcQGlyphRun_new2(other.h), owned: true)
+    fromVal: gen_qglyphrun_types.QGlyphRun): gen_qglyphrun_types.QGlyphRun =
+  let tmp = gen_qglyphrun_types.QGlyphRun(h: fcQGlyphRun_new2(fromVal.h), owned: true)
   tmp

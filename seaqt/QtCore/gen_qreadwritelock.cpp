@@ -18,7 +18,7 @@ QReadWriteLock* QReadWriteLock_new() {
 	return new (std::nothrow) QReadWriteLock();
 }
 
-QReadWriteLock* QReadWriteLock_new2(int recursionMode) {
+QReadWriteLock* QReadWriteLock_new_recursionMode(int recursionMode) {
 	return new (std::nothrow) QReadWriteLock(static_cast<QReadWriteLock::RecursionMode>(recursionMode));
 }
 
@@ -30,7 +30,7 @@ bool QReadWriteLock_tryLockForRead(QReadWriteLock* self) {
 	return self->tryLockForRead();
 }
 
-bool QReadWriteLock_tryLockForReadWithTimeout(QReadWriteLock* self, int timeout) {
+bool QReadWriteLock_tryLockForRead_timeout(QReadWriteLock* self, int timeout) {
 	return self->tryLockForRead(static_cast<int>(timeout));
 }
 
@@ -42,7 +42,7 @@ bool QReadWriteLock_tryLockForWrite(QReadWriteLock* self) {
 	return self->tryLockForWrite();
 }
 
-bool QReadWriteLock_tryLockForWriteWithTimeout(QReadWriteLock* self, int timeout) {
+bool QReadWriteLock_tryLockForWrite_timeout(QReadWriteLock* self, int timeout) {
 	return self->tryLockForWrite(static_cast<int>(timeout));
 }
 

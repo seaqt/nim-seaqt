@@ -756,12 +756,12 @@ public:
 	friend bool QDesignerPropertyEditorInterface_protectedbase_isSignalConnected(const VirtualQDesignerPropertyEditorInterface* self, QMetaMethod* signal);
 };
 
-VirtualQDesignerPropertyEditorInterface* QDesignerPropertyEditorInterface_new(const QDesignerPropertyEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQDesignerPropertyEditorInterface* QDesignerPropertyEditorInterface_new_parent(const QDesignerPropertyEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDesignerPropertyEditorInterface>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDesignerPropertyEditorInterface(vtbl, parent) : nullptr;
 }
 
-VirtualQDesignerPropertyEditorInterface* QDesignerPropertyEditorInterface_new2(const QDesignerPropertyEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
+VirtualQDesignerPropertyEditorInterface* QDesignerPropertyEditorInterface_new_parent_flags(const QDesignerPropertyEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDesignerPropertyEditorInterface>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDesignerPropertyEditorInterface(vtbl, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
@@ -782,7 +782,7 @@ int QDesignerPropertyEditorInterface_metacall(QDesignerPropertyEditorInterface* 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDesignerPropertyEditorInterface_tr(const char* s) {
+struct seaqt_string QDesignerPropertyEditorInterface_tr_s(const char* s) {
 	QString _ret = QDesignerPropertyEditorInterface::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -852,7 +852,7 @@ void QDesignerPropertyEditorInterface_setReadOnly(QDesignerPropertyEditorInterfa
 	self->setReadOnly(readOnly);
 }
 
-struct seaqt_string QDesignerPropertyEditorInterface_tr2(const char* s, const char* c) {
+struct seaqt_string QDesignerPropertyEditorInterface_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDesignerPropertyEditorInterface::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -863,7 +863,7 @@ struct seaqt_string QDesignerPropertyEditorInterface_tr2(const char* s, const ch
 	return _ms;
 }
 
-struct seaqt_string QDesignerPropertyEditorInterface_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDesignerPropertyEditorInterface_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDesignerPropertyEditorInterface::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

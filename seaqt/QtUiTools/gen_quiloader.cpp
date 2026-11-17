@@ -275,7 +275,7 @@ VirtualQUiLoader* QUiLoader_new(const QUiLoader_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQUiLoader(vtbl) : nullptr;
 }
 
-VirtualQUiLoader* QUiLoader_new2(const QUiLoader_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQUiLoader* QUiLoader_new_parent(const QUiLoader_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQUiLoader>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQUiLoader(vtbl, parent) : nullptr;
 }
@@ -296,7 +296,7 @@ int QUiLoader_metacall(QUiLoader* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QUiLoader_tr(const char* s) {
+struct seaqt_string QUiLoader_tr_s(const char* s) {
 	QString _ret = QUiLoader::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -336,7 +336,7 @@ void QUiLoader_addPluginPath(QUiLoader* self, struct seaqt_string path) {
 	self->addPluginPath(path_QString);
 }
 
-QWidget* QUiLoader_load(QUiLoader* self, QIODevice* device) {
+QWidget* QUiLoader_load_device(QUiLoader* self, QIODevice* device) {
 	return self->load(device);
 }
 
@@ -437,7 +437,7 @@ struct seaqt_string QUiLoader_errorString(const QUiLoader* self) {
 	return _ms;
 }
 
-struct seaqt_string QUiLoader_tr2(const char* s, const char* c) {
+struct seaqt_string QUiLoader_tr_s_c(const char* s, const char* c) {
 	QString _ret = QUiLoader::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -448,7 +448,7 @@ struct seaqt_string QUiLoader_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QUiLoader_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QUiLoader_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QUiLoader::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -459,7 +459,7 @@ struct seaqt_string QUiLoader_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QWidget* QUiLoader_load2(QUiLoader* self, QIODevice* device, QWidget* parentWidget) {
+QWidget* QUiLoader_load_device_parentWidget(QUiLoader* self, QIODevice* device, QWidget* parentWidget) {
 	return self->load(device, parentWidget);
 }
 

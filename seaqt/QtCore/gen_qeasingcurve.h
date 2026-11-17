@@ -25,10 +25,10 @@ typedef struct QPointF QPointF;
 #endif
 
 QEasingCurve* QEasingCurve_new();
-QEasingCurve* QEasingCurve_new2(QEasingCurve* other);
-QEasingCurve* QEasingCurve_new3(int type);
+QEasingCurve* QEasingCurve_new_from(QEasingCurve* from);
+QEasingCurve* QEasingCurve_new_type(int type);
 
-void QEasingCurve_operatorAssign(QEasingCurve* self, QEasingCurve* other);
+void QEasingCurve_operatorAssign(QEasingCurve* self, QEasingCurve* from);
 void QEasingCurve_swap(QEasingCurve* self, QEasingCurve* other);
 bool QEasingCurve_operatorEqual(const QEasingCurve* self, QEasingCurve* other);
 bool QEasingCurve_operatorNotEqual(const QEasingCurve* self, QEasingCurve* other);

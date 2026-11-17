@@ -67,11 +67,11 @@ type cQUiLoader*{.exportc: "QUiLoader", incompleteStruct.} = object
 proc fcQUiLoader_metaObject(self: pointer): pointer {.importc: "QUiLoader_metaObject".}
 proc fcQUiLoader_metacast(self: pointer, param1: cstring): pointer {.importc: "QUiLoader_metacast".}
 proc fcQUiLoader_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QUiLoader_metacall".}
-proc fcQUiLoader_tr(s: cstring): struct_seaqt_string {.importc: "QUiLoader_tr".}
+proc fcQUiLoader_trS(s: cstring): struct_seaqt_string {.importc: "QUiLoader_tr_s".}
 proc fcQUiLoader_pluginPaths(self: pointer): struct_seaqt_array {.importc: "QUiLoader_pluginPaths".}
 proc fcQUiLoader_clearPluginPaths(self: pointer): void {.importc: "QUiLoader_clearPluginPaths".}
 proc fcQUiLoader_addPluginPath(self: pointer, path: struct_seaqt_string): void {.importc: "QUiLoader_addPluginPath".}
-proc fcQUiLoader_load(self: pointer, device: pointer): pointer {.importc: "QUiLoader_load".}
+proc fcQUiLoader_loadDevice(self: pointer, device: pointer): pointer {.importc: "QUiLoader_load_device".}
 proc fcQUiLoader_availableWidgets(self: pointer): struct_seaqt_array {.importc: "QUiLoader_availableWidgets".}
 proc fcQUiLoader_availableLayouts(self: pointer): struct_seaqt_array {.importc: "QUiLoader_availableLayouts".}
 proc fcQUiLoader_createWidget(self: pointer, className: struct_seaqt_string, parent: pointer, name: struct_seaqt_string): pointer {.importc: "QUiLoader_createWidget".}
@@ -85,9 +85,9 @@ proc fcQUiLoader_isLanguageChangeEnabled(self: pointer): bool {.importc: "QUiLoa
 proc fcQUiLoader_setTranslationEnabled(self: pointer, enabled: bool): void {.importc: "QUiLoader_setTranslationEnabled".}
 proc fcQUiLoader_isTranslationEnabled(self: pointer): bool {.importc: "QUiLoader_isTranslationEnabled".}
 proc fcQUiLoader_errorString(self: pointer): struct_seaqt_string {.importc: "QUiLoader_errorString".}
-proc fcQUiLoader_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUiLoader_tr2".}
-proc fcQUiLoader_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUiLoader_tr3".}
-proc fcQUiLoader_load2(self: pointer, device: pointer, parentWidget: pointer): pointer {.importc: "QUiLoader_load2".}
+proc fcQUiLoader_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUiLoader_tr_s_c".}
+proc fcQUiLoader_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUiLoader_tr_s_c_n".}
+proc fcQUiLoader_loadDeviceParentWidget(self: pointer, device: pointer, parentWidget: pointer): pointer {.importc: "QUiLoader_load_device_parentWidget".}
 proc fcQUiLoader_vdata(self: pointer): ptr pointer {.importc: "QUiLoader_vdata".}
 proc fvdata_cQUiLoader(self: pointer): pointer {.importc: "vdata_QUiLoader".}
 
@@ -126,7 +126,7 @@ proc fcQUiLoader_protectedbase_senderSignalIndex(self: pointer): cint {.importc:
 proc fcQUiLoader_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QUiLoader_protectedbase_receivers".}
 proc fcQUiLoader_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QUiLoader_protectedbase_isSignalConnected".}
 proc fcQUiLoader_new(vtbl: pointer, vdata: csize_t): ptr cQUiLoader {.importc: "QUiLoader_new".}
-proc fcQUiLoader_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUiLoader {.importc: "QUiLoader_new2".}
+proc fcQUiLoader_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUiLoader {.importc: "QUiLoader_new_parent".}
 proc fcQUiLoader_staticMetaObject(): pointer {.importc: "QUiLoader_staticMetaObject".}
 
 proc metaObject*(self: gen_quiloader_types.QUiLoader): gen_qobjectdefs_types.QMetaObject =
@@ -139,7 +139,7 @@ proc metacall*(self: gen_quiloader_types.QUiLoader, param1: cint, param2: cint, 
   fcQUiLoader_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_quiloader_types.QUiLoader, s: cstring): string =
-  let v_ms = fcQUiLoader_tr(s)
+  let v_ms = fcQUiLoader_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -163,7 +163,7 @@ proc addPluginPath*(self: gen_quiloader_types.QUiLoader, path: openArray[char]):
   fcQUiLoader_addPluginPath(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc load*(self: gen_quiloader_types.QUiLoader, device: gen_qiodevice_types.QIODevice): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQUiLoader_load(self.h, device.h), owned: false)
+  gen_qwidget_types.QWidget(h: fcQUiLoader_loadDevice(self.h, device.h), owned: false)
 
 proc availableWidgets*(self: gen_quiloader_types.QUiLoader): seq[string] =
   var v_ma = fcQUiLoader_availableWidgets(self.h)
@@ -226,19 +226,19 @@ proc errorString*(self: gen_quiloader_types.QUiLoader): string =
   vx_ret
 
 proc tr*(_: type gen_quiloader_types.QUiLoader, s: cstring, c: cstring): string =
-  let v_ms = fcQUiLoader_tr2(s, c)
+  let v_ms = fcQUiLoader_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_quiloader_types.QUiLoader, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQUiLoader_tr3(s, c, n)
+  let v_ms = fcQUiLoader_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc load*(self: gen_quiloader_types.QUiLoader, device: gen_qiodevice_types.QIODevice, parentWidget: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQUiLoader_load2(self.h, device.h, parentWidget.h), owned: false)
+  gen_qwidget_types.QWidget(h: fcQUiLoader_loadDeviceParentWidget(self.h, device.h, parentWidget.h), owned: false)
 
 type QUiLoadermetaObjectProc* = proc(self: QUiLoader): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QUiLoadermetacastProc* = proc(self: QUiLoader, param1: cstring): pointer {.raises: [], gcsafe.}

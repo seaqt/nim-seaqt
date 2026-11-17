@@ -107,47 +107,47 @@ type cQGraphicsScene*{.exportc: "QGraphicsScene", incompleteStruct.} = object
 proc fcQGraphicsScene_metaObject(self: pointer): pointer {.importc: "QGraphicsScene_metaObject".}
 proc fcQGraphicsScene_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsScene_metacast".}
 proc fcQGraphicsScene_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsScene_metacall".}
-proc fcQGraphicsScene_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsScene_tr".}
+proc fcQGraphicsScene_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsScene_tr_s".}
 proc fcQGraphicsScene_sceneRect(self: pointer): pointer {.importc: "QGraphicsScene_sceneRect".}
 proc fcQGraphicsScene_width(self: pointer): float64 {.importc: "QGraphicsScene_width".}
 proc fcQGraphicsScene_height(self: pointer): float64 {.importc: "QGraphicsScene_height".}
-proc fcQGraphicsScene_setSceneRect(self: pointer, rect: pointer): void {.importc: "QGraphicsScene_setSceneRect".}
-proc fcQGraphicsScene_setSceneRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsScene_setSceneRect2".}
-proc fcQGraphicsScene_render(self: pointer, painter: pointer): void {.importc: "QGraphicsScene_render".}
+proc fcQGraphicsScene_setSceneRectRect(self: pointer, rect: pointer): void {.importc: "QGraphicsScene_setSceneRect_rect".}
+proc fcQGraphicsScene_setSceneRectXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsScene_setSceneRect_x_y_w_h".}
+proc fcQGraphicsScene_renderPainter(self: pointer, painter: pointer): void {.importc: "QGraphicsScene_render_painter".}
 proc fcQGraphicsScene_itemIndexMethod(self: pointer): cint {.importc: "QGraphicsScene_itemIndexMethod".}
 proc fcQGraphicsScene_setItemIndexMethod(self: pointer, methodVal: cint): void {.importc: "QGraphicsScene_setItemIndexMethod".}
 proc fcQGraphicsScene_bspTreeDepth(self: pointer): cint {.importc: "QGraphicsScene_bspTreeDepth".}
 proc fcQGraphicsScene_setBspTreeDepth(self: pointer, depth: cint): void {.importc: "QGraphicsScene_setBspTreeDepth".}
 proc fcQGraphicsScene_itemsBoundingRect(self: pointer): pointer {.importc: "QGraphicsScene_itemsBoundingRect".}
 proc fcQGraphicsScene_items(self: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items".}
-proc fcQGraphicsScene_itemsWithPos(self: pointer, pos: pointer): struct_seaqt_array {.importc: "QGraphicsScene_itemsWithPos".}
-proc fcQGraphicsScene_itemsWithRect(self: pointer, rect: pointer): struct_seaqt_array {.importc: "QGraphicsScene_itemsWithRect".}
-proc fcQGraphicsScene_itemsWithPath(self: pointer, path: pointer): struct_seaqt_array {.importc: "QGraphicsScene_itemsWithPath".}
-proc fcQGraphicsScene_items2(self: pointer, x: float64, y: float64, w: float64, h: float64, mode: cint, order: cint): struct_seaqt_array {.importc: "QGraphicsScene_items2".}
-proc fcQGraphicsScene_collidingItems(self: pointer, item: pointer): struct_seaqt_array {.importc: "QGraphicsScene_collidingItems".}
-proc fcQGraphicsScene_itemAt(self: pointer, pos: pointer, deviceTransform: pointer): pointer {.importc: "QGraphicsScene_itemAt".}
-proc fcQGraphicsScene_itemAt2(self: pointer, x: float64, y: float64, deviceTransform: pointer): pointer {.importc: "QGraphicsScene_itemAt2".}
+proc fcQGraphicsScene_itemsPos(self: pointer, pos: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items_pos".}
+proc fcQGraphicsScene_itemsRect(self: pointer, rect: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items_rect".}
+proc fcQGraphicsScene_itemsPath(self: pointer, path: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items_path".}
+proc fcQGraphicsScene_itemsXYWHModeOrder(self: pointer, x: float64, y: float64, w: float64, h: float64, mode: cint, order: cint): struct_seaqt_array {.importc: "QGraphicsScene_items_x_y_w_h_mode_order".}
+proc fcQGraphicsScene_collidingItemsItem(self: pointer, item: pointer): struct_seaqt_array {.importc: "QGraphicsScene_collidingItems_item".}
+proc fcQGraphicsScene_itemAtPosDeviceTransform(self: pointer, pos: pointer, deviceTransform: pointer): pointer {.importc: "QGraphicsScene_itemAt_pos_deviceTransform".}
+proc fcQGraphicsScene_itemAtXYDeviceTransform(self: pointer, x: float64, y: float64, deviceTransform: pointer): pointer {.importc: "QGraphicsScene_itemAt_x_y_deviceTransform".}
 proc fcQGraphicsScene_selectedItems(self: pointer): struct_seaqt_array {.importc: "QGraphicsScene_selectedItems".}
 proc fcQGraphicsScene_selectionArea(self: pointer): pointer {.importc: "QGraphicsScene_selectionArea".}
-proc fcQGraphicsScene_setSelectionArea(self: pointer, path: pointer, deviceTransform: pointer): void {.importc: "QGraphicsScene_setSelectionArea".}
-proc fcQGraphicsScene_setSelectionAreaWithPath(self: pointer, path: pointer): void {.importc: "QGraphicsScene_setSelectionAreaWithPath".}
+proc fcQGraphicsScene_setSelectionAreaPathDeviceTransform(self: pointer, path: pointer, deviceTransform: pointer): void {.importc: "QGraphicsScene_setSelectionArea_path_deviceTransform".}
+proc fcQGraphicsScene_setSelectionAreaPath(self: pointer, path: pointer): void {.importc: "QGraphicsScene_setSelectionArea_path".}
 proc fcQGraphicsScene_createItemGroup(self: pointer, items: struct_seaqt_array): pointer {.importc: "QGraphicsScene_createItemGroup".}
 proc fcQGraphicsScene_destroyItemGroup(self: pointer, group: pointer): void {.importc: "QGraphicsScene_destroyItemGroup".}
 proc fcQGraphicsScene_addItem(self: pointer, item: pointer): void {.importc: "QGraphicsScene_addItem".}
-proc fcQGraphicsScene_addEllipse(self: pointer, rect: pointer): pointer {.importc: "QGraphicsScene_addEllipse".}
-proc fcQGraphicsScene_addLine(self: pointer, line: pointer): pointer {.importc: "QGraphicsScene_addLine".}
-proc fcQGraphicsScene_addPath(self: pointer, path: pointer): pointer {.importc: "QGraphicsScene_addPath".}
+proc fcQGraphicsScene_addEllipseRect(self: pointer, rect: pointer): pointer {.importc: "QGraphicsScene_addEllipse_rect".}
+proc fcQGraphicsScene_addLineLine(self: pointer, line: pointer): pointer {.importc: "QGraphicsScene_addLine_line".}
+proc fcQGraphicsScene_addPathPath(self: pointer, path: pointer): pointer {.importc: "QGraphicsScene_addPath_path".}
 proc fcQGraphicsScene_addPixmap(self: pointer, pixmap: pointer): pointer {.importc: "QGraphicsScene_addPixmap".}
-proc fcQGraphicsScene_addRect(self: pointer, rect: pointer): pointer {.importc: "QGraphicsScene_addRect".}
-proc fcQGraphicsScene_addText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QGraphicsScene_addText".}
-proc fcQGraphicsScene_addSimpleText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QGraphicsScene_addSimpleText".}
-proc fcQGraphicsScene_addWidget(self: pointer, widget: pointer): pointer {.importc: "QGraphicsScene_addWidget".}
-proc fcQGraphicsScene_addEllipse2(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsScene_addEllipse2".}
-proc fcQGraphicsScene_addLine2(self: pointer, x1: float64, y1: float64, x2: float64, y2: float64): pointer {.importc: "QGraphicsScene_addLine2".}
-proc fcQGraphicsScene_addRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsScene_addRect2".}
+proc fcQGraphicsScene_addRectRect(self: pointer, rect: pointer): pointer {.importc: "QGraphicsScene_addRect_rect".}
+proc fcQGraphicsScene_addTextText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QGraphicsScene_addText_text".}
+proc fcQGraphicsScene_addSimpleTextText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QGraphicsScene_addSimpleText_text".}
+proc fcQGraphicsScene_addWidgetWidget(self: pointer, widget: pointer): pointer {.importc: "QGraphicsScene_addWidget_widget".}
+proc fcQGraphicsScene_addEllipseXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsScene_addEllipse_x_y_w_h".}
+proc fcQGraphicsScene_addLineX1Y1X2Y2(self: pointer, x1: float64, y1: float64, x2: float64, y2: float64): pointer {.importc: "QGraphicsScene_addLine_x1_y1_x2_y2".}
+proc fcQGraphicsScene_addRectXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsScene_addRect_x_y_w_h".}
 proc fcQGraphicsScene_removeItem(self: pointer, item: pointer): void {.importc: "QGraphicsScene_removeItem".}
 proc fcQGraphicsScene_focusItem(self: pointer): pointer {.importc: "QGraphicsScene_focusItem".}
-proc fcQGraphicsScene_setFocusItem(self: pointer, item: pointer): void {.importc: "QGraphicsScene_setFocusItem".}
+proc fcQGraphicsScene_setFocusItemItem(self: pointer, item: pointer): void {.importc: "QGraphicsScene_setFocusItem_item".}
 proc fcQGraphicsScene_hasFocus(self: pointer): bool {.importc: "QGraphicsScene_hasFocus".}
 proc fcQGraphicsScene_setFocus(self: pointer): void {.importc: "QGraphicsScene_setFocus".}
 proc fcQGraphicsScene_clearFocus(self: pointer): void {.importc: "QGraphicsScene_clearFocus".}
@@ -160,8 +160,8 @@ proc fcQGraphicsScene_foregroundBrush(self: pointer): pointer {.importc: "QGraph
 proc fcQGraphicsScene_setForegroundBrush(self: pointer, brush: pointer): void {.importc: "QGraphicsScene_setForegroundBrush".}
 proc fcQGraphicsScene_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsScene_inputMethodQuery".}
 proc fcQGraphicsScene_views(self: pointer): struct_seaqt_array {.importc: "QGraphicsScene_views".}
-proc fcQGraphicsScene_update(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsScene_update".}
-proc fcQGraphicsScene_invalidate(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsScene_invalidate".}
+proc fcQGraphicsScene_updateXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsScene_update_x_y_w_h".}
+proc fcQGraphicsScene_invalidateXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsScene_invalidate_x_y_w_h".}
 proc fcQGraphicsScene_style(self: pointer): pointer {.importc: "QGraphicsScene_style".}
 proc fcQGraphicsScene_setStyle(self: pointer, style: pointer): void {.importc: "QGraphicsScene_setStyle".}
 proc fcQGraphicsScene_font(self: pointer): pointer {.importc: "QGraphicsScene_font".}
@@ -178,8 +178,8 @@ proc fcQGraphicsScene_minimumRenderSize(self: pointer): float64 {.importc: "QGra
 proc fcQGraphicsScene_setMinimumRenderSize(self: pointer, minSize: float64): void {.importc: "QGraphicsScene_setMinimumRenderSize".}
 proc fcQGraphicsScene_focusOnTouch(self: pointer): bool {.importc: "QGraphicsScene_focusOnTouch".}
 proc fcQGraphicsScene_setFocusOnTouch(self: pointer, enabled: bool): void {.importc: "QGraphicsScene_setFocusOnTouch".}
-proc fcQGraphicsScene_update2(self: pointer): void {.importc: "QGraphicsScene_update2".}
-proc fcQGraphicsScene_invalidate2(self: pointer): void {.importc: "QGraphicsScene_invalidate2".}
+proc fcQGraphicsScene_update(self: pointer): void {.importc: "QGraphicsScene_update".}
+proc fcQGraphicsScene_invalidate(self: pointer): void {.importc: "QGraphicsScene_invalidate".}
 proc fcQGraphicsScene_advance(self: pointer): void {.importc: "QGraphicsScene_advance".}
 proc fcQGraphicsScene_clearSelection(self: pointer): void {.importc: "QGraphicsScene_clearSelection".}
 proc fcQGraphicsScene_clear(self: pointer): void {.importc: "QGraphicsScene_clear".}
@@ -191,47 +191,47 @@ proc fcQGraphicsScene_selectionChanged(self: pointer): void {.importc: "QGraphic
 proc fcQGraphicsScene_connect_selectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScene_connect_selectionChanged".}
 proc fcQGraphicsScene_focusItemChanged(self: pointer, newFocus: pointer, oldFocus: pointer, reason: cint): void {.importc: "QGraphicsScene_focusItemChanged".}
 proc fcQGraphicsScene_connect_focusItemChanged(self: pointer, slot: int, callback: proc (slot: int, newFocus: pointer, oldFocus: pointer, reason: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScene_connect_focusItemChanged".}
-proc fcQGraphicsScene_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsScene_tr2".}
-proc fcQGraphicsScene_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsScene_tr3".}
-proc fcQGraphicsScene_render2(self: pointer, painter: pointer, target: pointer): void {.importc: "QGraphicsScene_render2".}
-proc fcQGraphicsScene_render3(self: pointer, painter: pointer, target: pointer, source: pointer): void {.importc: "QGraphicsScene_render3".}
-proc fcQGraphicsScene_render4(self: pointer, painter: pointer, target: pointer, source: pointer, aspectRatioMode: cint): void {.importc: "QGraphicsScene_render4".}
-proc fcQGraphicsScene_itemsWithOrder(self: pointer, order: cint): struct_seaqt_array {.importc: "QGraphicsScene_itemsWithOrder".}
-proc fcQGraphicsScene_items3(self: pointer, pos: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsScene_items3".}
-proc fcQGraphicsScene_items4(self: pointer, pos: pointer, mode: cint, order: cint): struct_seaqt_array {.importc: "QGraphicsScene_items4".}
-proc fcQGraphicsScene_items5(self: pointer, pos: pointer, mode: cint, order: cint, deviceTransform: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items5".}
-proc fcQGraphicsScene_items6(self: pointer, rect: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsScene_items6".}
-proc fcQGraphicsScene_items7(self: pointer, rect: pointer, mode: cint, order: cint): struct_seaqt_array {.importc: "QGraphicsScene_items7".}
-proc fcQGraphicsScene_items8(self: pointer, rect: pointer, mode: cint, order: cint, deviceTransform: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items8".}
-proc fcQGraphicsScene_items12(self: pointer, path: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsScene_items12".}
-proc fcQGraphicsScene_items13(self: pointer, path: pointer, mode: cint, order: cint): struct_seaqt_array {.importc: "QGraphicsScene_items13".}
-proc fcQGraphicsScene_items14(self: pointer, path: pointer, mode: cint, order: cint, deviceTransform: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items14".}
-proc fcQGraphicsScene_items15(self: pointer, x: float64, y: float64, w: float64, h: float64, mode: cint, order: cint, deviceTransform: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items15".}
-proc fcQGraphicsScene_collidingItems2(self: pointer, item: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsScene_collidingItems2".}
-proc fcQGraphicsScene_setSelectionArea2(self: pointer, path: pointer, selectionOperation: cint): void {.importc: "QGraphicsScene_setSelectionArea2".}
-proc fcQGraphicsScene_setSelectionArea3(self: pointer, path: pointer, selectionOperation: cint, mode: cint): void {.importc: "QGraphicsScene_setSelectionArea3".}
-proc fcQGraphicsScene_setSelectionArea4(self: pointer, path: pointer, selectionOperation: cint, mode: cint, deviceTransform: pointer): void {.importc: "QGraphicsScene_setSelectionArea4".}
-proc fcQGraphicsScene_addEllipse3(self: pointer, rect: pointer, pen: pointer): pointer {.importc: "QGraphicsScene_addEllipse3".}
-proc fcQGraphicsScene_addEllipse4(self: pointer, rect: pointer, pen: pointer, brush: pointer): pointer {.importc: "QGraphicsScene_addEllipse4".}
-proc fcQGraphicsScene_addLine3(self: pointer, line: pointer, pen: pointer): pointer {.importc: "QGraphicsScene_addLine3".}
-proc fcQGraphicsScene_addPath2(self: pointer, path: pointer, pen: pointer): pointer {.importc: "QGraphicsScene_addPath2".}
-proc fcQGraphicsScene_addPath3(self: pointer, path: pointer, pen: pointer, brush: pointer): pointer {.importc: "QGraphicsScene_addPath3".}
-proc fcQGraphicsScene_addRect3(self: pointer, rect: pointer, pen: pointer): pointer {.importc: "QGraphicsScene_addRect3".}
-proc fcQGraphicsScene_addRect4(self: pointer, rect: pointer, pen: pointer, brush: pointer): pointer {.importc: "QGraphicsScene_addRect4".}
-proc fcQGraphicsScene_addText2(self: pointer, text: struct_seaqt_string, font: pointer): pointer {.importc: "QGraphicsScene_addText2".}
-proc fcQGraphicsScene_addSimpleText2(self: pointer, text: struct_seaqt_string, font: pointer): pointer {.importc: "QGraphicsScene_addSimpleText2".}
-proc fcQGraphicsScene_addWidget2(self: pointer, widget: pointer, wFlags: cint): pointer {.importc: "QGraphicsScene_addWidget2".}
-proc fcQGraphicsScene_addEllipse5(self: pointer, x: float64, y: float64, w: float64, h: float64, pen: pointer): pointer {.importc: "QGraphicsScene_addEllipse5".}
-proc fcQGraphicsScene_addEllipse6(self: pointer, x: float64, y: float64, w: float64, h: float64, pen: pointer, brush: pointer): pointer {.importc: "QGraphicsScene_addEllipse6".}
-proc fcQGraphicsScene_addLine4(self: pointer, x1: float64, y1: float64, x2: float64, y2: float64, pen: pointer): pointer {.importc: "QGraphicsScene_addLine4".}
-proc fcQGraphicsScene_addRect5(self: pointer, x: float64, y: float64, w: float64, h: float64, pen: pointer): pointer {.importc: "QGraphicsScene_addRect5".}
-proc fcQGraphicsScene_addRect6(self: pointer, x: float64, y: float64, w: float64, h: float64, pen: pointer, brush: pointer): pointer {.importc: "QGraphicsScene_addRect6".}
-proc fcQGraphicsScene_setFocusItem2(self: pointer, item: pointer, focusReason: cint): void {.importc: "QGraphicsScene_setFocusItem2".}
-proc fcQGraphicsScene_setFocusWithFocusReason(self: pointer, focusReason: cint): void {.importc: "QGraphicsScene_setFocusWithFocusReason".}
-proc fcQGraphicsScene_invalidate3(self: pointer, x: float64, y: float64, w: float64, h: float64, layers: cint): void {.importc: "QGraphicsScene_invalidate3".}
-proc fcQGraphicsScene_updateWithRect(self: pointer, rect: pointer): void {.importc: "QGraphicsScene_updateWithRect".}
-proc fcQGraphicsScene_invalidateWithRect(self: pointer, rect: pointer): void {.importc: "QGraphicsScene_invalidateWithRect".}
-proc fcQGraphicsScene_invalidate4(self: pointer, rect: pointer, layers: cint): void {.importc: "QGraphicsScene_invalidate4".}
+proc fcQGraphicsScene_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsScene_tr_s_c".}
+proc fcQGraphicsScene_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsScene_tr_s_c_n".}
+proc fcQGraphicsScene_renderPainterTarget(self: pointer, painter: pointer, target: pointer): void {.importc: "QGraphicsScene_render_painter_target".}
+proc fcQGraphicsScene_renderPainterTargetSource(self: pointer, painter: pointer, target: pointer, source: pointer): void {.importc: "QGraphicsScene_render_painter_target_source".}
+proc fcQGraphicsScene_renderPainterTargetSourceAspectRatioMode(self: pointer, painter: pointer, target: pointer, source: pointer, aspectRatioMode: cint): void {.importc: "QGraphicsScene_render_painter_target_source_aspectRatioMode".}
+proc fcQGraphicsScene_itemsOrder(self: pointer, order: cint): struct_seaqt_array {.importc: "QGraphicsScene_items_order".}
+proc fcQGraphicsScene_itemsPosMode(self: pointer, pos: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsScene_items_pos_mode".}
+proc fcQGraphicsScene_itemsPosModeOrder(self: pointer, pos: pointer, mode: cint, order: cint): struct_seaqt_array {.importc: "QGraphicsScene_items_pos_mode_order".}
+proc fcQGraphicsScene_itemsPosModeOrderDeviceTransform(self: pointer, pos: pointer, mode: cint, order: cint, deviceTransform: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items_pos_mode_order_deviceTransform".}
+proc fcQGraphicsScene_itemsRectMode(self: pointer, rect: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsScene_items_rect_mode".}
+proc fcQGraphicsScene_itemsRectModeOrder(self: pointer, rect: pointer, mode: cint, order: cint): struct_seaqt_array {.importc: "QGraphicsScene_items_rect_mode_order".}
+proc fcQGraphicsScene_itemsRectModeOrderDeviceTransform(self: pointer, rect: pointer, mode: cint, order: cint, deviceTransform: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items_rect_mode_order_deviceTransform".}
+proc fcQGraphicsScene_itemsPathMode(self: pointer, path: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsScene_items_path_mode".}
+proc fcQGraphicsScene_itemsPathModeOrder(self: pointer, path: pointer, mode: cint, order: cint): struct_seaqt_array {.importc: "QGraphicsScene_items_path_mode_order".}
+proc fcQGraphicsScene_itemsPathModeOrderDeviceTransform(self: pointer, path: pointer, mode: cint, order: cint, deviceTransform: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items_path_mode_order_deviceTransform".}
+proc fcQGraphicsScene_itemsXYWHModeOrderDeviceTransform(self: pointer, x: float64, y: float64, w: float64, h: float64, mode: cint, order: cint, deviceTransform: pointer): struct_seaqt_array {.importc: "QGraphicsScene_items_x_y_w_h_mode_order_deviceTransform".}
+proc fcQGraphicsScene_collidingItemsItemMode(self: pointer, item: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsScene_collidingItems_item_mode".}
+proc fcQGraphicsScene_setSelectionAreaPathSelectionOperation(self: pointer, path: pointer, selectionOperation: cint): void {.importc: "QGraphicsScene_setSelectionArea_path_selectionOperation".}
+proc fcQGraphicsScene_setSelectionAreaPathSelectionOperationMode(self: pointer, path: pointer, selectionOperation: cint, mode: cint): void {.importc: "QGraphicsScene_setSelectionArea_path_selectionOperation_mode".}
+proc fcQGraphicsScene_setSelectionAreaPathSelectionOperationModeDeviceTransform(self: pointer, path: pointer, selectionOperation: cint, mode: cint, deviceTransform: pointer): void {.importc: "QGraphicsScene_setSelectionArea_path_selectionOperation_mode_deviceTransform".}
+proc fcQGraphicsScene_addEllipseRectPen(self: pointer, rect: pointer, pen: pointer): pointer {.importc: "QGraphicsScene_addEllipse_rect_pen".}
+proc fcQGraphicsScene_addEllipseRectPenBrush(self: pointer, rect: pointer, pen: pointer, brush: pointer): pointer {.importc: "QGraphicsScene_addEllipse_rect_pen_brush".}
+proc fcQGraphicsScene_addLineLinePen(self: pointer, line: pointer, pen: pointer): pointer {.importc: "QGraphicsScene_addLine_line_pen".}
+proc fcQGraphicsScene_addPathPathPen(self: pointer, path: pointer, pen: pointer): pointer {.importc: "QGraphicsScene_addPath_path_pen".}
+proc fcQGraphicsScene_addPathPathPenBrush(self: pointer, path: pointer, pen: pointer, brush: pointer): pointer {.importc: "QGraphicsScene_addPath_path_pen_brush".}
+proc fcQGraphicsScene_addRectRectPen(self: pointer, rect: pointer, pen: pointer): pointer {.importc: "QGraphicsScene_addRect_rect_pen".}
+proc fcQGraphicsScene_addRectRectPenBrush(self: pointer, rect: pointer, pen: pointer, brush: pointer): pointer {.importc: "QGraphicsScene_addRect_rect_pen_brush".}
+proc fcQGraphicsScene_addTextTextFont(self: pointer, text: struct_seaqt_string, font: pointer): pointer {.importc: "QGraphicsScene_addText_text_font".}
+proc fcQGraphicsScene_addSimpleTextTextFont(self: pointer, text: struct_seaqt_string, font: pointer): pointer {.importc: "QGraphicsScene_addSimpleText_text_font".}
+proc fcQGraphicsScene_addWidgetWidgetWFlags(self: pointer, widget: pointer, wFlags: cint): pointer {.importc: "QGraphicsScene_addWidget_widget_wFlags".}
+proc fcQGraphicsScene_addEllipseXYWHPen(self: pointer, x: float64, y: float64, w: float64, h: float64, pen: pointer): pointer {.importc: "QGraphicsScene_addEllipse_x_y_w_h_pen".}
+proc fcQGraphicsScene_addEllipseXYWHPenBrush(self: pointer, x: float64, y: float64, w: float64, h: float64, pen: pointer, brush: pointer): pointer {.importc: "QGraphicsScene_addEllipse_x_y_w_h_pen_brush".}
+proc fcQGraphicsScene_addLineX1Y1X2Y2Pen(self: pointer, x1: float64, y1: float64, x2: float64, y2: float64, pen: pointer): pointer {.importc: "QGraphicsScene_addLine_x1_y1_x2_y2_pen".}
+proc fcQGraphicsScene_addRectXYWHPen(self: pointer, x: float64, y: float64, w: float64, h: float64, pen: pointer): pointer {.importc: "QGraphicsScene_addRect_x_y_w_h_pen".}
+proc fcQGraphicsScene_addRectXYWHPenBrush(self: pointer, x: float64, y: float64, w: float64, h: float64, pen: pointer, brush: pointer): pointer {.importc: "QGraphicsScene_addRect_x_y_w_h_pen_brush".}
+proc fcQGraphicsScene_setFocusItemItemFocusReason(self: pointer, item: pointer, focusReason: cint): void {.importc: "QGraphicsScene_setFocusItem_item_focusReason".}
+proc fcQGraphicsScene_setFocusFocusReason(self: pointer, focusReason: cint): void {.importc: "QGraphicsScene_setFocus_focusReason".}
+proc fcQGraphicsScene_invalidateXYWHLayers(self: pointer, x: float64, y: float64, w: float64, h: float64, layers: cint): void {.importc: "QGraphicsScene_invalidate_x_y_w_h_layers".}
+proc fcQGraphicsScene_updateRect(self: pointer, rect: pointer): void {.importc: "QGraphicsScene_update_rect".}
+proc fcQGraphicsScene_invalidateRect(self: pointer, rect: pointer): void {.importc: "QGraphicsScene_invalidate_rect".}
+proc fcQGraphicsScene_invalidateRectLayers(self: pointer, rect: pointer, layers: cint): void {.importc: "QGraphicsScene_invalidate_rect_layers".}
 proc fcQGraphicsScene_vdata(self: pointer): ptr pointer {.importc: "QGraphicsScene_vdata".}
 proc fvdata_cQGraphicsScene(self: pointer): pointer {.importc: "vdata_QGraphicsScene".}
 
@@ -302,11 +302,11 @@ proc fcQGraphicsScene_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQGraphicsScene_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsScene_protectedbase_receivers".}
 proc fcQGraphicsScene_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsScene_protectedbase_isSignalConnected".}
 proc fcQGraphicsScene_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsScene {.importc: "QGraphicsScene_new".}
-proc fcQGraphicsScene_new2(vtbl: pointer, vdata: csize_t, sceneRect: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new2".}
-proc fcQGraphicsScene_new3(vtbl: pointer, vdata: csize_t, x: float64, y: float64, width: float64, height: float64): ptr cQGraphicsScene {.importc: "QGraphicsScene_new3".}
-proc fcQGraphicsScene_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new4".}
-proc fcQGraphicsScene_new5(vtbl: pointer, vdata: csize_t, sceneRect: pointer, parent: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new5".}
-proc fcQGraphicsScene_new6(vtbl: pointer, vdata: csize_t, x: float64, y: float64, width: float64, height: float64, parent: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new6".}
+proc fcQGraphicsScene_new2(vtbl: pointer, vdata: csize_t, sceneRect: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new_sceneRect".}
+proc fcQGraphicsScene_new3(vtbl: pointer, vdata: csize_t, x: float64, y: float64, width: float64, height: float64): ptr cQGraphicsScene {.importc: "QGraphicsScene_new_x_y_width_height".}
+proc fcQGraphicsScene_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new_parent".}
+proc fcQGraphicsScene_new5(vtbl: pointer, vdata: csize_t, sceneRect: pointer, parent: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new_sceneRect_parent".}
+proc fcQGraphicsScene_new6(vtbl: pointer, vdata: csize_t, x: float64, y: float64, width: float64, height: float64, parent: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new_x_y_width_height_parent".}
 proc fcQGraphicsScene_staticMetaObject(): pointer {.importc: "QGraphicsScene_staticMetaObject".}
 
 proc metaObject*(self: gen_qgraphicsscene_types.QGraphicsScene): gen_qobjectdefs_types.QMetaObject =
@@ -319,7 +319,7 @@ proc metacall*(self: gen_qgraphicsscene_types.QGraphicsScene, param1: cint, para
   fcQGraphicsScene_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicsscene_types.QGraphicsScene, s: cstring): string =
-  let v_ms = fcQGraphicsScene_tr(s)
+  let v_ms = fcQGraphicsScene_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -334,13 +334,13 @@ proc height*(self: gen_qgraphicsscene_types.QGraphicsScene): float64 =
   fcQGraphicsScene_height(self.h)
 
 proc setSceneRect*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsScene_setSceneRect(self.h, rect.h)
+  fcQGraphicsScene_setSceneRectRect(self.h, rect.h)
 
 proc setSceneRect*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64): void =
-  fcQGraphicsScene_setSceneRect2(self.h, x, y, w, h)
+  fcQGraphicsScene_setSceneRectXYWH(self.h, x, y, w, h)
 
 proc render*(self: gen_qgraphicsscene_types.QGraphicsScene, painter: gen_qpainter_types.QPainter): void =
-  fcQGraphicsScene_render(self.h, painter.h)
+  fcQGraphicsScene_renderPainter(self.h, painter.h)
 
 proc itemIndexMethod*(self: gen_qgraphicsscene_types.QGraphicsScene): cint =
   cint(fcQGraphicsScene_itemIndexMethod(self.h))
@@ -367,7 +367,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene): seq[gen_qgraphicsite
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_itemsWithPos(self.h, pos.h)
+  var v_ma = fcQGraphicsScene_itemsPos(self.h, pos.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -376,7 +376,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_itemsWithRect(self.h, rect.h)
+  var v_ma = fcQGraphicsScene_itemsRect(self.h, rect.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -385,7 +385,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_itemsWithPath(self.h, path.h)
+  var v_ma = fcQGraphicsScene_itemsPath(self.h, path.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -394,7 +394,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, mode: cint, order: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items2(self.h, x, y, w, h, cint(mode), cint(order))
+  var v_ma = fcQGraphicsScene_itemsXYWHModeOrder(self.h, x, y, w, h, cint(mode), cint(order))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -403,7 +403,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float6
   vx_ret
 
 proc collidingItems*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_collidingItems(self.h, item.h)
+  var v_ma = fcQGraphicsScene_collidingItemsItem(self.h, item.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -412,10 +412,10 @@ proc collidingItems*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qg
   vx_ret
 
 proc itemAt*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF, deviceTransform: gen_qtransform_types.QTransform): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_itemAt(self.h, pos.h, deviceTransform.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_itemAtPosDeviceTransform(self.h, pos.h, deviceTransform.h), owned: false)
 
 proc itemAt*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, deviceTransform: gen_qtransform_types.QTransform): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_itemAt2(self.h, x, y, deviceTransform.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_itemAtXYDeviceTransform(self.h, x, y, deviceTransform.h), owned: false)
 
 proc selectedItems*(self: gen_qgraphicsscene_types.QGraphicsScene): seq[gen_qgraphicsitem_types.QGraphicsItem] =
   var v_ma = fcQGraphicsScene_selectedItems(self.h)
@@ -430,10 +430,10 @@ proc selectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene): gen_qpainter
   gen_qpainterpath_types.QPainterPath(h: fcQGraphicsScene_selectionArea(self.h), owned: true)
 
 proc setSelectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, deviceTransform: gen_qtransform_types.QTransform): void =
-  fcQGraphicsScene_setSelectionArea(self.h, path.h, deviceTransform.h)
+  fcQGraphicsScene_setSelectionAreaPathDeviceTransform(self.h, path.h, deviceTransform.h)
 
 proc setSelectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath): void =
-  fcQGraphicsScene_setSelectionAreaWithPath(self.h, path.h)
+  fcQGraphicsScene_setSelectionAreaPath(self.h, path.h)
 
 proc createItemGroup*(self: gen_qgraphicsscene_types.QGraphicsScene, items: openArray[gen_qgraphicsitem_types.QGraphicsItem]): gen_qgraphicsitem_types.QGraphicsItemGroup =
   var items_CArray = newSeq[pointer](len(items))
@@ -449,37 +449,37 @@ proc addItem*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphics
   fcQGraphicsScene_addItem(self.h, item.h)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse(self.h, rect.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipseRect(self.h, rect.h), owned: false)
 
 proc addLine*(self: gen_qgraphicsscene_types.QGraphicsScene, line: gen_qline_types.QLineF): gen_qgraphicsitem_types.QGraphicsLineItem =
-  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine(self.h, line.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLineLine(self.h, line.h), owned: false)
 
 proc addPath*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath): gen_qgraphicsitem_types.QGraphicsPathItem =
-  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPath(self.h, path.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPathPath(self.h, path.h), owned: false)
 
 proc addPixmap*(self: gen_qgraphicsscene_types.QGraphicsScene, pixmap: gen_qpixmap_types.QPixmap): gen_qgraphicsitem_types.QGraphicsPixmapItem =
   gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsScene_addPixmap(self.h, pixmap.h), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect(self.h, rect.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRectRect(self.h, rect.h), owned: false)
 
 proc addText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: openArray[char]): gen_qgraphicsitem_types.QGraphicsTextItem =
-  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsScene_addText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsScene_addTextText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addSimpleText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: openArray[char]): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
-  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsScene_addSimpleText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsScene_addSimpleTextText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addWidget*(self: gen_qgraphicsscene_types.QGraphicsScene, widget: gen_qwidget_types.QWidget): gen_qgraphicsproxywidget_types.QGraphicsProxyWidget =
-  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsScene_addWidget(self.h, widget.h), owned: false)
+  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsScene_addWidgetWidget(self.h, widget.h), owned: false)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse2(self.h, x, y, w, h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipseXYWH(self.h, x, y, w, h), owned: false)
 
 proc addLine*(self: gen_qgraphicsscene_types.QGraphicsScene, x1: float64, y1: float64, x2: float64, y2: float64): gen_qgraphicsitem_types.QGraphicsLineItem =
-  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine2(self.h, x1, y1, x2, y2), owned: false)
+  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLineX1Y1X2Y2(self.h, x1, y1, x2, y2), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect2(self.h, x, y, w, h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRectXYWH(self.h, x, y, w, h), owned: false)
 
 proc removeItem*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsScene_removeItem(self.h, item.h)
@@ -488,7 +488,7 @@ proc focusItem*(self: gen_qgraphicsscene_types.QGraphicsScene): gen_qgraphicsite
   gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_focusItem(self.h), owned: false)
 
 proc setFocusItem*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem): void =
-  fcQGraphicsScene_setFocusItem(self.h, item.h)
+  fcQGraphicsScene_setFocusItemItem(self.h, item.h)
 
 proc hasFocus*(self: gen_qgraphicsscene_types.QGraphicsScene): bool =
   fcQGraphicsScene_hasFocus(self.h)
@@ -533,10 +533,10 @@ proc views*(self: gen_qgraphicsscene_types.QGraphicsScene): seq[gen_qgraphicsvie
   vx_ret
 
 proc update*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64): void =
-  fcQGraphicsScene_update(self.h, x, y, w, h)
+  fcQGraphicsScene_updateXYWH(self.h, x, y, w, h)
 
 proc invalidate*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64): void =
-  fcQGraphicsScene_invalidate(self.h, x, y, w, h)
+  fcQGraphicsScene_invalidateXYWH(self.h, x, y, w, h)
 
 proc style*(self: gen_qgraphicsscene_types.QGraphicsScene): gen_qstyle_types.QStyle =
   gen_qstyle_types.QStyle(h: fcQGraphicsScene_style(self.h), owned: false)
@@ -587,10 +587,10 @@ proc setFocusOnTouch*(self: gen_qgraphicsscene_types.QGraphicsScene, enabled: bo
   fcQGraphicsScene_setFocusOnTouch(self.h, enabled)
 
 proc update*(self: gen_qgraphicsscene_types.QGraphicsScene): void =
-  fcQGraphicsScene_update2(self.h)
+  fcQGraphicsScene_update(self.h)
 
 proc invalidate*(self: gen_qgraphicsscene_types.QGraphicsScene): void =
-  fcQGraphicsScene_invalidate2(self.h)
+  fcQGraphicsScene_invalidate(self.h)
 
 proc advance*(self: gen_qgraphicsscene_types.QGraphicsScene): void =
   fcQGraphicsScene_advance(self.h)
@@ -694,28 +694,28 @@ proc onFocusItemChanged*(self: gen_qgraphicsscene_types.QGraphicsScene, slot: QG
   fcQGraphicsScene_connect_focusItemChanged(self.h, cast[int](addr tmp[]), fcQGraphicsScene_slot_callback_focusItemChanged, fcQGraphicsScene_slot_callback_focusItemChanged_release)
 
 proc tr*(_: type gen_qgraphicsscene_types.QGraphicsScene, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsScene_tr2(s, c)
+  let v_ms = fcQGraphicsScene_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsscene_types.QGraphicsScene, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsScene_tr3(s, c, n)
+  let v_ms = fcQGraphicsScene_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc render*(self: gen_qgraphicsscene_types.QGraphicsScene, painter: gen_qpainter_types.QPainter, target: gen_qrect_types.QRectF): void =
-  fcQGraphicsScene_render2(self.h, painter.h, target.h)
+  fcQGraphicsScene_renderPainterTarget(self.h, painter.h, target.h)
 
 proc render*(self: gen_qgraphicsscene_types.QGraphicsScene, painter: gen_qpainter_types.QPainter, target: gen_qrect_types.QRectF, source: gen_qrect_types.QRectF): void =
-  fcQGraphicsScene_render3(self.h, painter.h, target.h, source.h)
+  fcQGraphicsScene_renderPainterTargetSource(self.h, painter.h, target.h, source.h)
 
 proc render*(self: gen_qgraphicsscene_types.QGraphicsScene, painter: gen_qpainter_types.QPainter, target: gen_qrect_types.QRectF, source: gen_qrect_types.QRectF, aspectRatioMode: cint): void =
-  fcQGraphicsScene_render4(self.h, painter.h, target.h, source.h, cint(aspectRatioMode))
+  fcQGraphicsScene_renderPainterTargetSourceAspectRatioMode(self.h, painter.h, target.h, source.h, cint(aspectRatioMode))
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, order: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_itemsWithOrder(self.h, cint(order))
+  var v_ma = fcQGraphicsScene_itemsOrder(self.h, cint(order))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -724,7 +724,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, order: cint): seq[gen
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items3(self.h, pos.h, cint(mode))
+  var v_ma = fcQGraphicsScene_itemsPosMode(self.h, pos.h, cint(mode))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -733,7 +733,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF, mode: cint, order: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items4(self.h, pos.h, cint(mode), cint(order))
+  var v_ma = fcQGraphicsScene_itemsPosModeOrder(self.h, pos.h, cint(mode), cint(order))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -742,7 +742,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF, mode: cint, order: cint, deviceTransform: gen_qtransform_types.QTransform): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items5(self.h, pos.h, cint(mode), cint(order), deviceTransform.h)
+  var v_ma = fcQGraphicsScene_itemsPosModeOrderDeviceTransform(self.h, pos.h, cint(mode), cint(order), deviceTransform.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -751,7 +751,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items6(self.h, rect.h, cint(mode))
+  var v_ma = fcQGraphicsScene_itemsRectMode(self.h, rect.h, cint(mode))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -760,7 +760,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, mode: cint, order: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items7(self.h, rect.h, cint(mode), cint(order))
+  var v_ma = fcQGraphicsScene_itemsRectModeOrder(self.h, rect.h, cint(mode), cint(order))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -769,7 +769,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, mode: cint, order: cint, deviceTransform: gen_qtransform_types.QTransform): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items8(self.h, rect.h, cint(mode), cint(order), deviceTransform.h)
+  var v_ma = fcQGraphicsScene_itemsRectModeOrderDeviceTransform(self.h, rect.h, cint(mode), cint(order), deviceTransform.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -778,7 +778,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items12(self.h, path.h, cint(mode))
+  var v_ma = fcQGraphicsScene_itemsPathMode(self.h, path.h, cint(mode))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -787,7 +787,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, mode: cint, order: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items13(self.h, path.h, cint(mode), cint(order))
+  var v_ma = fcQGraphicsScene_itemsPathModeOrder(self.h, path.h, cint(mode), cint(order))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -796,7 +796,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, mode: cint, order: cint, deviceTransform: gen_qtransform_types.QTransform): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items14(self.h, path.h, cint(mode), cint(order), deviceTransform.h)
+  var v_ma = fcQGraphicsScene_itemsPathModeOrderDeviceTransform(self.h, path.h, cint(mode), cint(order), deviceTransform.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -805,7 +805,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, mode: cint, order: cint, deviceTransform: gen_qtransform_types.QTransform): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_items15(self.h, x, y, w, h, cint(mode), cint(order), deviceTransform.h)
+  var v_ma = fcQGraphicsScene_itemsXYWHModeOrderDeviceTransform(self.h, x, y, w, h, cint(mode), cint(order), deviceTransform.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -814,7 +814,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float6
   vx_ret
 
 proc collidingItems*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsScene_collidingItems2(self.h, item.h, cint(mode))
+  var v_ma = fcQGraphicsScene_collidingItemsItemMode(self.h, item.h, cint(mode))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -823,76 +823,76 @@ proc collidingItems*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qg
   vx_ret
 
 proc setSelectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, selectionOperation: cint): void =
-  fcQGraphicsScene_setSelectionArea2(self.h, path.h, cint(selectionOperation))
+  fcQGraphicsScene_setSelectionAreaPathSelectionOperation(self.h, path.h, cint(selectionOperation))
 
 proc setSelectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, selectionOperation: cint, mode: cint): void =
-  fcQGraphicsScene_setSelectionArea3(self.h, path.h, cint(selectionOperation), cint(mode))
+  fcQGraphicsScene_setSelectionAreaPathSelectionOperationMode(self.h, path.h, cint(selectionOperation), cint(mode))
 
 proc setSelectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, selectionOperation: cint, mode: cint, deviceTransform: gen_qtransform_types.QTransform): void =
-  fcQGraphicsScene_setSelectionArea4(self.h, path.h, cint(selectionOperation), cint(mode), deviceTransform.h)
+  fcQGraphicsScene_setSelectionAreaPathSelectionOperationModeDeviceTransform(self.h, path.h, cint(selectionOperation), cint(mode), deviceTransform.h)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse3(self.h, rect.h, pen.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipseRectPen(self.h, rect.h, pen.h), owned: false)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse4(self.h, rect.h, pen.h, brush.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipseRectPenBrush(self.h, rect.h, pen.h, brush.h), owned: false)
 
 proc addLine*(self: gen_qgraphicsscene_types.QGraphicsScene, line: gen_qline_types.QLineF, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsLineItem =
-  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine3(self.h, line.h, pen.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLineLinePen(self.h, line.h, pen.h), owned: false)
 
 proc addPath*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsPathItem =
-  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPath2(self.h, path.h, pen.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPathPathPen(self.h, path.h, pen.h), owned: false)
 
 proc addPath*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsPathItem =
-  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPath3(self.h, path.h, pen.h, brush.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPathPathPenBrush(self.h, path.h, pen.h, brush.h), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect3(self.h, rect.h, pen.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRectRectPen(self.h, rect.h, pen.h), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect4(self.h, rect.h, pen.h, brush.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRectRectPenBrush(self.h, rect.h, pen.h, brush.h), owned: false)
 
 proc addText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: openArray[char], font: gen_qfont_types.QFont): gen_qgraphicsitem_types.QGraphicsTextItem =
-  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsScene_addText2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), font.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsScene_addTextTextFont(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), font.h), owned: false)
 
 proc addSimpleText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: openArray[char], font: gen_qfont_types.QFont): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
-  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsScene_addSimpleText2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), font.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsScene_addSimpleTextTextFont(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), font.h), owned: false)
 
 proc addWidget*(self: gen_qgraphicsscene_types.QGraphicsScene, widget: gen_qwidget_types.QWidget, wFlags: cint): gen_qgraphicsproxywidget_types.QGraphicsProxyWidget =
-  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsScene_addWidget2(self.h, widget.h, cint(wFlags)), owned: false)
+  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsScene_addWidgetWidgetWFlags(self.h, widget.h, cint(wFlags)), owned: false)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse5(self.h, x, y, w, h, pen.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipseXYWHPen(self.h, x, y, w, h, pen.h), owned: false)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse6(self.h, x, y, w, h, pen.h, brush.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipseXYWHPenBrush(self.h, x, y, w, h, pen.h, brush.h), owned: false)
 
 proc addLine*(self: gen_qgraphicsscene_types.QGraphicsScene, x1: float64, y1: float64, x2: float64, y2: float64, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsLineItem =
-  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine4(self.h, x1, y1, x2, y2, pen.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLineX1Y1X2Y2Pen(self.h, x1, y1, x2, y2, pen.h), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect5(self.h, x, y, w, h, pen.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRectXYWHPen(self.h, x, y, w, h, pen.h), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect6(self.h, x, y, w, h, pen.h, brush.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRectXYWHPenBrush(self.h, x, y, w, h, pen.h, brush.h), owned: false)
 
 proc setFocusItem*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem, focusReason: cint): void =
-  fcQGraphicsScene_setFocusItem2(self.h, item.h, cint(focusReason))
+  fcQGraphicsScene_setFocusItemItemFocusReason(self.h, item.h, cint(focusReason))
 
 proc setFocus*(self: gen_qgraphicsscene_types.QGraphicsScene, focusReason: cint): void =
-  fcQGraphicsScene_setFocusWithFocusReason(self.h, cint(focusReason))
+  fcQGraphicsScene_setFocusFocusReason(self.h, cint(focusReason))
 
 proc invalidate*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, layers: cint): void =
-  fcQGraphicsScene_invalidate3(self.h, x, y, w, h, cint(layers))
+  fcQGraphicsScene_invalidateXYWHLayers(self.h, x, y, w, h, cint(layers))
 
 proc update*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsScene_updateWithRect(self.h, rect.h)
+  fcQGraphicsScene_updateRect(self.h, rect.h)
 
 proc invalidate*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsScene_invalidateWithRect(self.h, rect.h)
+  fcQGraphicsScene_invalidateRect(self.h, rect.h)
 
 proc invalidate*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, layers: cint): void =
-  fcQGraphicsScene_invalidate4(self.h, rect.h, cint(layers))
+  fcQGraphicsScene_invalidateRectLayers(self.h, rect.h, cint(layers))
 
 type QGraphicsScenemetaObjectProc* = proc(self: QGraphicsScene): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QGraphicsScenemetacastProc* = proc(self: QGraphicsScene, param1: cstring): pointer {.raises: [], gcsafe.}

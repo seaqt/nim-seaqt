@@ -142,13 +142,13 @@ void* QQuickPaintedItem_vdata(VirtualQQuickPaintedItem* self);
 VirtualQQuickPaintedItem* vdata_QQuickPaintedItem(void* vdata);
 
 VirtualQQuickPaintedItem* QQuickPaintedItem_new(const QQuickPaintedItem_VTable* vtbl, size_t vdata);
-VirtualQQuickPaintedItem* QQuickPaintedItem_new2(const QQuickPaintedItem_VTable* vtbl, size_t vdata, QQuickItem* parent);
+VirtualQQuickPaintedItem* QQuickPaintedItem_new_parent(const QQuickPaintedItem_VTable* vtbl, size_t vdata, QQuickItem* parent);
 
 void QQuickPaintedItem_virtbase(QQuickPaintedItem* src, QQuickItem** outptr_QQuickItem);
 QMetaObject* QQuickPaintedItem_metaObject(const QQuickPaintedItem* self);
 void* QQuickPaintedItem_metacast(QQuickPaintedItem* self, const char* param1);
 int QQuickPaintedItem_metacall(QQuickPaintedItem* self, int param1, int param2, void** param3);
-struct seaqt_string QQuickPaintedItem_tr(const char* s);
+struct seaqt_string QQuickPaintedItem_tr_s(const char* s);
 void QQuickPaintedItem_update(QQuickPaintedItem* self);
 bool QQuickPaintedItem_opaquePainting(const QQuickPaintedItem* self);
 void QQuickPaintedItem_setOpaquePainting(QQuickPaintedItem* self, bool opaque);
@@ -157,7 +157,7 @@ void QQuickPaintedItem_setAntialiasing(QQuickPaintedItem* self, bool enable);
 bool QQuickPaintedItem_mipmap(const QQuickPaintedItem* self);
 void QQuickPaintedItem_setMipmap(QQuickPaintedItem* self, bool enable);
 int QQuickPaintedItem_performanceHints(const QQuickPaintedItem* self);
-void QQuickPaintedItem_setPerformanceHint(QQuickPaintedItem* self, int hint);
+void QQuickPaintedItem_setPerformanceHint_hint(QQuickPaintedItem* self, int hint);
 void QQuickPaintedItem_setPerformanceHints(QQuickPaintedItem* self, int hints);
 QRectF* QQuickPaintedItem_contentsBoundingRect(const QQuickPaintedItem* self);
 QSize* QQuickPaintedItem_contentsSize(const QQuickPaintedItem* self);
@@ -187,10 +187,10 @@ void QQuickPaintedItem_connect_textureSizeChanged(QQuickPaintedItem* self, intpt
 QSGNode* QQuickPaintedItem_updatePaintNode(QQuickPaintedItem* self, QSGNode* param1, QQuickItem__UpdatePaintNodeData* param2);
 void QQuickPaintedItem_releaseResources(QQuickPaintedItem* self);
 void QQuickPaintedItem_itemChange(QQuickPaintedItem* self, int param1, QQuickItem__ItemChangeData* param2);
-struct seaqt_string QQuickPaintedItem_tr2(const char* s, const char* c);
-struct seaqt_string QQuickPaintedItem_tr3(const char* s, const char* c, int n);
-void QQuickPaintedItem_updateWithRect(QQuickPaintedItem* self, QRect* rect);
-void QQuickPaintedItem_setPerformanceHint2(QQuickPaintedItem* self, int hint, bool enabled);
+struct seaqt_string QQuickPaintedItem_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQuickPaintedItem_tr_s_c_n(const char* s, const char* c, int n);
+void QQuickPaintedItem_update_rect(QQuickPaintedItem* self, QRect* rect);
+void QQuickPaintedItem_setPerformanceHint_hint_enabled(QQuickPaintedItem* self, int hint, bool enabled);
 
 QMetaObject* QQuickPaintedItem_virtualbase_metaObject(const VirtualQQuickPaintedItem* self);
 void* QQuickPaintedItem_virtualbase_metacast(VirtualQQuickPaintedItem* self, const char* param1);

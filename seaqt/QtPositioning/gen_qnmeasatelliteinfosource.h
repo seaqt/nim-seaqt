@@ -68,14 +68,14 @@ typedef struct QNmeaSatelliteInfoSource_VTable{
 void* QNmeaSatelliteInfoSource_vdata(VirtualQNmeaSatelliteInfoSource* self);
 VirtualQNmeaSatelliteInfoSource* vdata_QNmeaSatelliteInfoSource(void* vdata);
 
-VirtualQNmeaSatelliteInfoSource* QNmeaSatelliteInfoSource_new(const QNmeaSatelliteInfoSource_VTable* vtbl, size_t vdata, int mode);
-VirtualQNmeaSatelliteInfoSource* QNmeaSatelliteInfoSource_new2(const QNmeaSatelliteInfoSource_VTable* vtbl, size_t vdata, int mode, QObject* parent);
+VirtualQNmeaSatelliteInfoSource* QNmeaSatelliteInfoSource_new_mode(const QNmeaSatelliteInfoSource_VTable* vtbl, size_t vdata, int mode);
+VirtualQNmeaSatelliteInfoSource* QNmeaSatelliteInfoSource_new_mode_parent(const QNmeaSatelliteInfoSource_VTable* vtbl, size_t vdata, int mode, QObject* parent);
 
 void QNmeaSatelliteInfoSource_virtbase(QNmeaSatelliteInfoSource* src, QGeoSatelliteInfoSource** outptr_QGeoSatelliteInfoSource);
 QMetaObject* QNmeaSatelliteInfoSource_metaObject(const QNmeaSatelliteInfoSource* self);
 void* QNmeaSatelliteInfoSource_metacast(QNmeaSatelliteInfoSource* self, const char* param1);
 int QNmeaSatelliteInfoSource_metacall(QNmeaSatelliteInfoSource* self, int param1, int param2, void** param3);
-struct seaqt_string QNmeaSatelliteInfoSource_tr(const char* s);
+struct seaqt_string QNmeaSatelliteInfoSource_tr_s(const char* s);
 int QNmeaSatelliteInfoSource_updateMode(const QNmeaSatelliteInfoSource* self);
 void QNmeaSatelliteInfoSource_setDevice(QNmeaSatelliteInfoSource* self, QIODevice* source);
 QIODevice* QNmeaSatelliteInfoSource_device(const QNmeaSatelliteInfoSource* self);
@@ -89,8 +89,8 @@ void QNmeaSatelliteInfoSource_stopUpdates(QNmeaSatelliteInfoSource* self);
 void QNmeaSatelliteInfoSource_requestUpdate(QNmeaSatelliteInfoSource* self, int timeout);
 int QNmeaSatelliteInfoSource_parseSatellitesInUseFromNmea(QNmeaSatelliteInfoSource* self, const char* data, int size, struct seaqt_array /* of int */  pnrsInUse);
 int QNmeaSatelliteInfoSource_parseSatelliteInfoFromNmea(QNmeaSatelliteInfoSource* self, const char* data, int size, struct seaqt_array /* of QGeoSatelliteInfo* */  infos, int* system);
-struct seaqt_string QNmeaSatelliteInfoSource_tr2(const char* s, const char* c);
-struct seaqt_string QNmeaSatelliteInfoSource_tr3(const char* s, const char* c, int n);
+struct seaqt_string QNmeaSatelliteInfoSource_tr_s_c(const char* s, const char* c);
+struct seaqt_string QNmeaSatelliteInfoSource_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QNmeaSatelliteInfoSource_virtualbase_metaObject(const VirtualQNmeaSatelliteInfoSource* self);
 void* QNmeaSatelliteInfoSource_virtualbase_metacast(VirtualQNmeaSatelliteInfoSource* self, const char* param1);

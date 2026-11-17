@@ -174,7 +174,7 @@ VirtualQButtonGroup* QButtonGroup_new(const QButtonGroup_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQButtonGroup(vtbl) : nullptr;
 }
 
-VirtualQButtonGroup* QButtonGroup_new2(const QButtonGroup_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQButtonGroup* QButtonGroup_new_parent(const QButtonGroup_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQButtonGroup>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQButtonGroup(vtbl, parent) : nullptr;
 }
@@ -195,7 +195,7 @@ int QButtonGroup_metacall(QButtonGroup* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QButtonGroup_tr(const char* s) {
+struct seaqt_string QButtonGroup_tr_s(const char* s) {
 	QString _ret = QButtonGroup::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -214,7 +214,7 @@ bool QButtonGroup_exclusive(const QButtonGroup* self) {
 	return self->exclusive();
 }
 
-void QButtonGroup_addButton(QButtonGroup* self, QAbstractButton* param1) {
+void QButtonGroup_addButton_QAbstractButton(QButtonGroup* self, QAbstractButton* param1) {
 	self->addButton(param1);
 }
 
@@ -385,7 +385,7 @@ void QButtonGroup_connect_idToggled(QButtonGroup* self, intptr_t slot, void (*ca
 	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int, bool)>(&QButtonGroup::idToggled), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QButtonGroup_tr2(const char* s, const char* c) {
+struct seaqt_string QButtonGroup_tr_s_c(const char* s, const char* c) {
 	QString _ret = QButtonGroup::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -396,7 +396,7 @@ struct seaqt_string QButtonGroup_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QButtonGroup_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QButtonGroup_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QButtonGroup::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -407,7 +407,7 @@ struct seaqt_string QButtonGroup_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QButtonGroup_addButton2(QButtonGroup* self, QAbstractButton* param1, int id) {
+void QButtonGroup_addButton_QAbstractButton_int(QButtonGroup* self, QAbstractButton* param1, int id) {
 	self->addButton(param1, static_cast<int>(id));
 }
 

@@ -63,13 +63,13 @@ void* QVariantAnimation_vdata(VirtualQVariantAnimation* self);
 VirtualQVariantAnimation* vdata_QVariantAnimation(void* vdata);
 
 VirtualQVariantAnimation* QVariantAnimation_new(const QVariantAnimation_VTable* vtbl, size_t vdata);
-VirtualQVariantAnimation* QVariantAnimation_new2(const QVariantAnimation_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQVariantAnimation* QVariantAnimation_new_parent(const QVariantAnimation_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QVariantAnimation_virtbase(QVariantAnimation* src, QAbstractAnimation** outptr_QAbstractAnimation);
 QMetaObject* QVariantAnimation_metaObject(const QVariantAnimation* self);
 void* QVariantAnimation_metacast(QVariantAnimation* self, const char* param1);
 int QVariantAnimation_metacall(QVariantAnimation* self, int param1, int param2, void** param3);
-struct seaqt_string QVariantAnimation_tr(const char* s);
+struct seaqt_string QVariantAnimation_tr_s(const char* s);
 QVariant* QVariantAnimation_startValue(const QVariantAnimation* self);
 void QVariantAnimation_setStartValue(QVariantAnimation* self, QVariant* value);
 QVariant* QVariantAnimation_endValue(const QVariantAnimation* self);
@@ -90,8 +90,8 @@ void QVariantAnimation_updateCurrentTime(QVariantAnimation* self, int param1);
 void QVariantAnimation_updateState(QVariantAnimation* self, int newState, int oldState);
 void QVariantAnimation_updateCurrentValue(QVariantAnimation* self, QVariant* value);
 QVariant* QVariantAnimation_interpolated(const QVariantAnimation* self, QVariant* from, QVariant* to, double progress);
-struct seaqt_string QVariantAnimation_tr2(const char* s, const char* c);
-struct seaqt_string QVariantAnimation_tr3(const char* s, const char* c, int n);
+struct seaqt_string QVariantAnimation_tr_s_c(const char* s, const char* c);
+struct seaqt_string QVariantAnimation_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QVariantAnimation_virtualbase_metaObject(const VirtualQVariantAnimation* self);
 void* QVariantAnimation_virtualbase_metacast(VirtualQVariantAnimation* self, const char* param1);

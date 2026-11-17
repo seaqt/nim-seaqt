@@ -54,7 +54,7 @@ export
 type cQFontMetrics*{.exportc: "QFontMetrics", incompleteStruct.} = object
 type cQFontMetricsF*{.exportc: "QFontMetricsF", incompleteStruct.} = object
 
-proc fcQFontMetrics_operatorAssign(self: pointer, param1: pointer): void {.importc: "QFontMetrics_operatorAssign".}
+proc fcQFontMetrics_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QFontMetrics_operatorAssign".}
 proc fcQFontMetrics_swap(self: pointer, other: pointer): void {.importc: "QFontMetrics_swap".}
 proc fcQFontMetrics_ascent(self: pointer): cint {.importc: "QFontMetrics_ascent".}
 proc fcQFontMetrics_capHeight(self: pointer): cint {.importc: "QFontMetrics_capHeight".}
@@ -71,18 +71,18 @@ proc fcQFontMetrics_inFont(self: pointer, param1: pointer): bool {.importc: "QFo
 proc fcQFontMetrics_inFontUcs4(self: pointer, ucs4: cuint): bool {.importc: "QFontMetrics_inFontUcs4".}
 proc fcQFontMetrics_leftBearing(self: pointer, param1: pointer): cint {.importc: "QFontMetrics_leftBearing".}
 proc fcQFontMetrics_rightBearing(self: pointer, param1: pointer): cint {.importc: "QFontMetrics_rightBearing".}
-proc fcQFontMetrics_horizontalAdvance(self: pointer, param1: struct_seaqt_string): cint {.importc: "QFontMetrics_horizontalAdvance".}
-proc fcQFontMetrics_horizontalAdvance2(self: pointer, param1: struct_seaqt_string, textOption: pointer): cint {.importc: "QFontMetrics_horizontalAdvance2".}
-proc fcQFontMetrics_horizontalAdvanceWithQChar(self: pointer, param1: pointer): cint {.importc: "QFontMetrics_horizontalAdvanceWithQChar".}
-proc fcQFontMetrics_boundingRect(self: pointer, param1: pointer): pointer {.importc: "QFontMetrics_boundingRect".}
-proc fcQFontMetrics_boundingRectWithText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QFontMetrics_boundingRectWithText".}
-proc fcQFontMetrics_boundingRect2(self: pointer, text: struct_seaqt_string, textOption: pointer): pointer {.importc: "QFontMetrics_boundingRect2".}
-proc fcQFontMetrics_boundingRect3(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string): pointer {.importc: "QFontMetrics_boundingRect3".}
-proc fcQFontMetrics_boundingRect4(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string): pointer {.importc: "QFontMetrics_boundingRect4".}
-proc fcQFontMetrics_size(self: pointer, flags: cint, str: struct_seaqt_string): pointer {.importc: "QFontMetrics_size".}
-proc fcQFontMetrics_tightBoundingRect(self: pointer, text: struct_seaqt_string): pointer {.importc: "QFontMetrics_tightBoundingRect".}
-proc fcQFontMetrics_tightBoundingRect2(self: pointer, text: struct_seaqt_string, textOption: pointer): pointer {.importc: "QFontMetrics_tightBoundingRect2".}
-proc fcQFontMetrics_elidedText(self: pointer, text: struct_seaqt_string, mode: cint, width: cint): struct_seaqt_string {.importc: "QFontMetrics_elidedText".}
+proc fcQFontMetrics_horizontalAdvance_QString(self: pointer, param1: struct_seaqt_string): cint {.importc: "QFontMetrics_horizontalAdvance_QString".}
+proc fcQFontMetrics_horizontalAdvance_QString_QTextOption(self: pointer, param1: struct_seaqt_string, textOption: pointer): cint {.importc: "QFontMetrics_horizontalAdvance_QString_QTextOption".}
+proc fcQFontMetrics_horizontalAdvance_QChar(self: pointer, param1: pointer): cint {.importc: "QFontMetrics_horizontalAdvance_QChar".}
+proc fcQFontMetrics_boundingRect_QChar(self: pointer, param1: pointer): pointer {.importc: "QFontMetrics_boundingRect_QChar".}
+proc fcQFontMetrics_boundingRect_QString(self: pointer, text: struct_seaqt_string): pointer {.importc: "QFontMetrics_boundingRect_QString".}
+proc fcQFontMetrics_boundingRect_QString_QTextOption(self: pointer, text: struct_seaqt_string, textOption: pointer): pointer {.importc: "QFontMetrics_boundingRect_QString_QTextOption".}
+proc fcQFontMetrics_boundingRect_QRectInt_QString(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string): pointer {.importc: "QFontMetrics_boundingRect_QRect_int_QString".}
+proc fcQFontMetrics_boundingRectIntIntIntIntInt_QString(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string): pointer {.importc: "QFontMetrics_boundingRect_int_int_int_int_int_QString".}
+proc fcQFontMetrics_sizeFlagsStr(self: pointer, flags: cint, str: struct_seaqt_string): pointer {.importc: "QFontMetrics_size_flags_str".}
+proc fcQFontMetrics_tightBoundingRectText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QFontMetrics_tightBoundingRect_text".}
+proc fcQFontMetrics_tightBoundingRectTextTextOption(self: pointer, text: struct_seaqt_string, textOption: pointer): pointer {.importc: "QFontMetrics_tightBoundingRect_text_textOption".}
+proc fcQFontMetrics_elidedTextTextModeWidth(self: pointer, text: struct_seaqt_string, mode: cint, width: cint): struct_seaqt_string {.importc: "QFontMetrics_elidedText_text_mode_width".}
 proc fcQFontMetrics_underlinePos(self: pointer): cint {.importc: "QFontMetrics_underlinePos".}
 proc fcQFontMetrics_overlinePos(self: pointer): cint {.importc: "QFontMetrics_overlinePos".}
 proc fcQFontMetrics_strikeOutPos(self: pointer): cint {.importc: "QFontMetrics_strikeOutPos".}
@@ -90,19 +90,19 @@ proc fcQFontMetrics_lineWidth(self: pointer): cint {.importc: "QFontMetrics_line
 proc fcQFontMetrics_fontDpi(self: pointer): float64 {.importc: "QFontMetrics_fontDpi".}
 proc fcQFontMetrics_operatorEqual(self: pointer, other: pointer): bool {.importc: "QFontMetrics_operatorEqual".}
 proc fcQFontMetrics_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QFontMetrics_operatorNotEqual".}
-proc fcQFontMetrics_horizontalAdvance3(self: pointer, param1: struct_seaqt_string, len: cint): cint {.importc: "QFontMetrics_horizontalAdvance3".}
-proc fcQFontMetrics_boundingRect5(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string, tabstops: cint): pointer {.importc: "QFontMetrics_boundingRect5".}
-proc fcQFontMetrics_boundingRect6(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetrics_boundingRect6".}
-proc fcQFontMetrics_boundingRect7(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string, tabstops: cint): pointer {.importc: "QFontMetrics_boundingRect7".}
-proc fcQFontMetrics_boundingRect8(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetrics_boundingRect8".}
-proc fcQFontMetrics_size2(self: pointer, flags: cint, str: struct_seaqt_string, tabstops: cint): pointer {.importc: "QFontMetrics_size2".}
-proc fcQFontMetrics_size3(self: pointer, flags: cint, str: struct_seaqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetrics_size3".}
-proc fcQFontMetrics_elidedText2(self: pointer, text: struct_seaqt_string, mode: cint, width: cint, flags: cint): struct_seaqt_string {.importc: "QFontMetrics_elidedText2".}
-proc fcQFontMetrics_new(param1: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new".}
-proc fcQFontMetrics_new2(font: pointer, pd: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new2".}
-proc fcQFontMetrics_new3(param1: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new3".}
-proc fcQFontMetricsF_operatorAssign(self: pointer, param1: pointer): void {.importc: "QFontMetricsF_operatorAssign".}
-proc fcQFontMetricsF_operatorAssignWithQFontMetrics(self: pointer, param1: pointer): void {.importc: "QFontMetricsF_operatorAssignWithQFontMetrics".}
+proc fcQFontMetrics_horizontalAdvance_QStringInt(self: pointer, param1: struct_seaqt_string, len: cint): cint {.importc: "QFontMetrics_horizontalAdvance_QString_int".}
+proc fcQFontMetrics_boundingRect_QRectInt_QStringInt(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string, tabstops: cint): pointer {.importc: "QFontMetrics_boundingRect_QRect_int_QString_int".}
+proc fcQFontMetrics_boundingRect_QRectInt_QStringIntInt(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetrics_boundingRect_QRect_int_QString_int_int".}
+proc fcQFontMetrics_boundingRectIntIntIntIntInt_QStringInt(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string, tabstops: cint): pointer {.importc: "QFontMetrics_boundingRect_int_int_int_int_int_QString_int".}
+proc fcQFontMetrics_boundingRectIntIntIntIntInt_QStringIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetrics_boundingRect_int_int_int_int_int_QString_int_int".}
+proc fcQFontMetrics_sizeFlagsStrTabstops(self: pointer, flags: cint, str: struct_seaqt_string, tabstops: cint): pointer {.importc: "QFontMetrics_size_flags_str_tabstops".}
+proc fcQFontMetrics_sizeFlagsStrTabstopsTabarray(self: pointer, flags: cint, str: struct_seaqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetrics_size_flags_str_tabstops_tabarray".}
+proc fcQFontMetrics_elidedTextTextModeWidthFlags(self: pointer, text: struct_seaqt_string, mode: cint, width: cint, flags: cint): struct_seaqt_string {.importc: "QFontMetrics_elidedText_text_mode_width_flags".}
+proc fcQFontMetrics_new(param1: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new_QFont".}
+proc fcQFontMetrics_new2(font: pointer, pd: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new_QFont_QPaintDevice".}
+proc fcQFontMetrics_new3(fromVal: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new_QFontMetrics".}
+proc fcQFontMetricsF_operatorAssign_QFontMetricsF(self: pointer, fromVal: pointer): void {.importc: "QFontMetricsF_operatorAssign_QFontMetricsF".}
+proc fcQFontMetricsF_operatorAssign_QFontMetrics(self: pointer, param1: pointer): void {.importc: "QFontMetricsF_operatorAssign_QFontMetrics".}
 proc fcQFontMetricsF_swap(self: pointer, other: pointer): void {.importc: "QFontMetricsF_swap".}
 proc fcQFontMetricsF_ascent(self: pointer): float64 {.importc: "QFontMetricsF_ascent".}
 proc fcQFontMetricsF_capHeight(self: pointer): float64 {.importc: "QFontMetricsF_capHeight".}
@@ -119,17 +119,17 @@ proc fcQFontMetricsF_inFont(self: pointer, param1: pointer): bool {.importc: "QF
 proc fcQFontMetricsF_inFontUcs4(self: pointer, ucs4: cuint): bool {.importc: "QFontMetricsF_inFontUcs4".}
 proc fcQFontMetricsF_leftBearing(self: pointer, param1: pointer): float64 {.importc: "QFontMetricsF_leftBearing".}
 proc fcQFontMetricsF_rightBearing(self: pointer, param1: pointer): float64 {.importc: "QFontMetricsF_rightBearing".}
-proc fcQFontMetricsF_horizontalAdvance(self: pointer, stringVal: struct_seaqt_string): float64 {.importc: "QFontMetricsF_horizontalAdvance".}
-proc fcQFontMetricsF_horizontalAdvanceWithQChar(self: pointer, param1: pointer): float64 {.importc: "QFontMetricsF_horizontalAdvanceWithQChar".}
-proc fcQFontMetricsF_horizontalAdvance2(self: pointer, stringVal: struct_seaqt_string, textOption: pointer): float64 {.importc: "QFontMetricsF_horizontalAdvance2".}
-proc fcQFontMetricsF_boundingRect(self: pointer, stringVal: struct_seaqt_string): pointer {.importc: "QFontMetricsF_boundingRect".}
-proc fcQFontMetricsF_boundingRect2(self: pointer, text: struct_seaqt_string, textOption: pointer): pointer {.importc: "QFontMetricsF_boundingRect2".}
-proc fcQFontMetricsF_boundingRectWithQChar(self: pointer, param1: pointer): pointer {.importc: "QFontMetricsF_boundingRectWithQChar".}
-proc fcQFontMetricsF_boundingRect3(self: pointer, r: pointer, flags: cint, stringVal: struct_seaqt_string): pointer {.importc: "QFontMetricsF_boundingRect3".}
-proc fcQFontMetricsF_size(self: pointer, flags: cint, str: struct_seaqt_string): pointer {.importc: "QFontMetricsF_size".}
-proc fcQFontMetricsF_tightBoundingRect(self: pointer, text: struct_seaqt_string): pointer {.importc: "QFontMetricsF_tightBoundingRect".}
-proc fcQFontMetricsF_tightBoundingRect2(self: pointer, text: struct_seaqt_string, textOption: pointer): pointer {.importc: "QFontMetricsF_tightBoundingRect2".}
-proc fcQFontMetricsF_elidedText(self: pointer, text: struct_seaqt_string, mode: cint, width: float64): struct_seaqt_string {.importc: "QFontMetricsF_elidedText".}
+proc fcQFontMetricsF_horizontalAdvance_QString(self: pointer, stringVal: struct_seaqt_string): float64 {.importc: "QFontMetricsF_horizontalAdvance_QString".}
+proc fcQFontMetricsF_horizontalAdvance_QChar(self: pointer, param1: pointer): float64 {.importc: "QFontMetricsF_horizontalAdvance_QChar".}
+proc fcQFontMetricsF_horizontalAdvance_QString_QTextOption(self: pointer, stringVal: struct_seaqt_string, textOption: pointer): float64 {.importc: "QFontMetricsF_horizontalAdvance_QString_QTextOption".}
+proc fcQFontMetricsF_boundingRect_QString(self: pointer, stringVal: struct_seaqt_string): pointer {.importc: "QFontMetricsF_boundingRect_QString".}
+proc fcQFontMetricsF_boundingRect_QString_QTextOption(self: pointer, text: struct_seaqt_string, textOption: pointer): pointer {.importc: "QFontMetricsF_boundingRect_QString_QTextOption".}
+proc fcQFontMetricsF_boundingRect_QChar(self: pointer, param1: pointer): pointer {.importc: "QFontMetricsF_boundingRect_QChar".}
+proc fcQFontMetricsF_boundingRect_QRectFInt_QString(self: pointer, r: pointer, flags: cint, stringVal: struct_seaqt_string): pointer {.importc: "QFontMetricsF_boundingRect_QRectF_int_QString".}
+proc fcQFontMetricsF_sizeFlagsStr(self: pointer, flags: cint, str: struct_seaqt_string): pointer {.importc: "QFontMetricsF_size_flags_str".}
+proc fcQFontMetricsF_tightBoundingRectText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QFontMetricsF_tightBoundingRect_text".}
+proc fcQFontMetricsF_tightBoundingRectTextTextOption(self: pointer, text: struct_seaqt_string, textOption: pointer): pointer {.importc: "QFontMetricsF_tightBoundingRect_text_textOption".}
+proc fcQFontMetricsF_elidedTextTextModeWidth(self: pointer, text: struct_seaqt_string, mode: cint, width: float64): struct_seaqt_string {.importc: "QFontMetricsF_elidedText_text_mode_width".}
 proc fcQFontMetricsF_underlinePos(self: pointer): float64 {.importc: "QFontMetricsF_underlinePos".}
 proc fcQFontMetricsF_overlinePos(self: pointer): float64 {.importc: "QFontMetricsF_overlinePos".}
 proc fcQFontMetricsF_strikeOutPos(self: pointer): float64 {.importc: "QFontMetricsF_strikeOutPos".}
@@ -137,19 +137,19 @@ proc fcQFontMetricsF_lineWidth(self: pointer): float64 {.importc: "QFontMetricsF
 proc fcQFontMetricsF_fontDpi(self: pointer): float64 {.importc: "QFontMetricsF_fontDpi".}
 proc fcQFontMetricsF_operatorEqual(self: pointer, other: pointer): bool {.importc: "QFontMetricsF_operatorEqual".}
 proc fcQFontMetricsF_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QFontMetricsF_operatorNotEqual".}
-proc fcQFontMetricsF_horizontalAdvance3(self: pointer, stringVal: struct_seaqt_string, length: cint): float64 {.importc: "QFontMetricsF_horizontalAdvance3".}
-proc fcQFontMetricsF_boundingRect4(self: pointer, r: pointer, flags: cint, stringVal: struct_seaqt_string, tabstops: cint): pointer {.importc: "QFontMetricsF_boundingRect4".}
-proc fcQFontMetricsF_boundingRect5(self: pointer, r: pointer, flags: cint, stringVal: struct_seaqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetricsF_boundingRect5".}
-proc fcQFontMetricsF_size2(self: pointer, flags: cint, str: struct_seaqt_string, tabstops: cint): pointer {.importc: "QFontMetricsF_size2".}
-proc fcQFontMetricsF_size3(self: pointer, flags: cint, str: struct_seaqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetricsF_size3".}
-proc fcQFontMetricsF_elidedText2(self: pointer, text: struct_seaqt_string, mode: cint, width: float64, flags: cint): struct_seaqt_string {.importc: "QFontMetricsF_elidedText2".}
-proc fcQFontMetricsF_new(font: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new".}
-proc fcQFontMetricsF_new2(font: pointer, pd: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new2".}
-proc fcQFontMetricsF_new3(param1: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new3".}
-proc fcQFontMetricsF_new4(param1: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new4".}
+proc fcQFontMetricsF_horizontalAdvance_QStringInt(self: pointer, stringVal: struct_seaqt_string, length: cint): float64 {.importc: "QFontMetricsF_horizontalAdvance_QString_int".}
+proc fcQFontMetricsF_boundingRect_QRectFInt_QStringInt(self: pointer, r: pointer, flags: cint, stringVal: struct_seaqt_string, tabstops: cint): pointer {.importc: "QFontMetricsF_boundingRect_QRectF_int_QString_int".}
+proc fcQFontMetricsF_boundingRect_QRectFInt_QStringIntInt(self: pointer, r: pointer, flags: cint, stringVal: struct_seaqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetricsF_boundingRect_QRectF_int_QString_int_int".}
+proc fcQFontMetricsF_sizeFlagsStrTabstops(self: pointer, flags: cint, str: struct_seaqt_string, tabstops: cint): pointer {.importc: "QFontMetricsF_size_flags_str_tabstops".}
+proc fcQFontMetricsF_sizeFlagsStrTabstopsTabarray(self: pointer, flags: cint, str: struct_seaqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetricsF_size_flags_str_tabstops_tabarray".}
+proc fcQFontMetricsF_elidedTextTextModeWidthFlags(self: pointer, text: struct_seaqt_string, mode: cint, width: float64, flags: cint): struct_seaqt_string {.importc: "QFontMetricsF_elidedText_text_mode_width_flags".}
+proc fcQFontMetricsF_new(font: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new_QFont".}
+proc fcQFontMetricsF_new2(font: pointer, pd: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new_QFont_QPaintDevice".}
+proc fcQFontMetricsF_new3(param1: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new_QFontMetrics".}
+proc fcQFontMetricsF_new4(fromVal: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new_QFontMetricsF".}
 
-proc operatorAssign*(self: gen_qfontmetrics_types.QFontMetrics, param1: gen_qfontmetrics_types.QFontMetrics): void =
-  fcQFontMetrics_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qfontmetrics_types.QFontMetrics, fromVal: gen_qfontmetrics_types.QFontMetrics): void =
+  fcQFontMetrics_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qfontmetrics_types.QFontMetrics, other: gen_qfontmetrics_types.QFontMetrics): void =
   fcQFontMetrics_swap(self.h, other.h)
@@ -200,40 +200,40 @@ proc rightBearing*(self: gen_qfontmetrics_types.QFontMetrics, param1: gen_qchar_
   fcQFontMetrics_rightBearing(self.h, param1.h)
 
 proc horizontalAdvance*(self: gen_qfontmetrics_types.QFontMetrics, param1: openArray[char]): cint =
-  fcQFontMetrics_horizontalAdvance(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
+  fcQFontMetrics_horizontalAdvance_QString(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc horizontalAdvance*(self: gen_qfontmetrics_types.QFontMetrics, param1: openArray[char], textOption: gen_qtextoption_types.QTextOption): cint =
-  fcQFontMetrics_horizontalAdvance2(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), textOption.h)
+  fcQFontMetrics_horizontalAdvance_QString_QTextOption(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), textOption.h)
 
 proc horizontalAdvance*(self: gen_qfontmetrics_types.QFontMetrics, param1: gen_qchar_types.QChar): cint =
-  fcQFontMetrics_horizontalAdvanceWithQChar(self.h, param1.h)
+  fcQFontMetrics_horizontalAdvance_QChar(self.h, param1.h)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetrics, param1: gen_qchar_types.QChar): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect(self.h, param1.h), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect_QChar(self.h, param1.h), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetrics, text: openArray[char]): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRectWithText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect_QString(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetrics, text: openArray[char], textOption: gen_qtextoption_types.QTextOption): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), textOption.h), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect_QString_QTextOption(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), textOption.h), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, text: openArray[char]): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect3(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect_QRectInt_QString(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetrics, x: cint, y: cint, w: cint, h: cint, flags: cint, text: openArray[char]): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect4(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRectIntIntIntIntInt_QString(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc size*(self: gen_qfontmetrics_types.QFontMetrics, flags: cint, str: openArray[char]): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFontMetrics_size(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str)))), owned: true)
+  gen_qsize_types.QSize(h: fcQFontMetrics_sizeFlagsStr(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str)))), owned: true)
 
 proc tightBoundingRect*(self: gen_qfontmetrics_types.QFontMetrics, text: openArray[char]): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_tightBoundingRect(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_tightBoundingRectText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc tightBoundingRect*(self: gen_qfontmetrics_types.QFontMetrics, text: openArray[char], textOption: gen_qtextoption_types.QTextOption): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_tightBoundingRect2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), textOption.h), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_tightBoundingRectTextTextOption(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), textOption.h), owned: true)
 
 proc elidedText*(self: gen_qfontmetrics_types.QFontMetrics, text: openArray[char], mode: cint, width: cint): string =
-  let v_ms = fcQFontMetrics_elidedText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(mode), width)
+  let v_ms = fcQFontMetrics_elidedTextTextModeWidth(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(mode), width)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -260,28 +260,28 @@ proc operatorNotEqual*(self: gen_qfontmetrics_types.QFontMetrics, other: gen_qfo
   fcQFontMetrics_operatorNotEqual(self.h, other.h)
 
 proc horizontalAdvance*(self: gen_qfontmetrics_types.QFontMetrics, param1: openArray[char], len: cint): cint =
-  fcQFontMetrics_horizontalAdvance3(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), len)
+  fcQFontMetrics_horizontalAdvance_QStringInt(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), len)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, text: openArray[char], tabstops: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect5(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), tabstops), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect_QRectInt_QStringInt(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), tabstops), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, text: openArray[char], tabstops: cint, tabarray: ptr cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect6(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), tabstops, tabarray), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect_QRectInt_QStringIntInt(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), tabstops, tabarray), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetrics, x: cint, y: cint, w: cint, h: cint, flags: cint, text: openArray[char], tabstops: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect7(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), tabstops), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRectIntIntIntIntInt_QStringInt(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), tabstops), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetrics, x: cint, y: cint, w: cint, h: cint, flags: cint, text: openArray[char], tabstops: cint, tabarray: ptr cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRect8(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), tabstops, tabarray), owned: true)
+  gen_qrect_types.QRect(h: fcQFontMetrics_boundingRectIntIntIntIntInt_QStringIntInt(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), tabstops, tabarray), owned: true)
 
 proc size*(self: gen_qfontmetrics_types.QFontMetrics, flags: cint, str: openArray[char], tabstops: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFontMetrics_size2(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tabstops), owned: true)
+  gen_qsize_types.QSize(h: fcQFontMetrics_sizeFlagsStrTabstops(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tabstops), owned: true)
 
 proc size*(self: gen_qfontmetrics_types.QFontMetrics, flags: cint, str: openArray[char], tabstops: cint, tabarray: ptr cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFontMetrics_size3(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tabstops, tabarray), owned: true)
+  gen_qsize_types.QSize(h: fcQFontMetrics_sizeFlagsStrTabstopsTabarray(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tabstops, tabarray), owned: true)
 
 proc elidedText*(self: gen_qfontmetrics_types.QFontMetrics, text: openArray[char], mode: cint, width: cint, flags: cint): string =
-  let v_ms = fcQFontMetrics_elidedText2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(mode), width, flags)
+  let v_ms = fcQFontMetrics_elidedTextTextModeWidthFlags(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(mode), width, flags)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -295,14 +295,14 @@ proc create*(T: type gen_qfontmetrics_types.QFontMetrics,
   let tmp = gen_qfontmetrics_types.QFontMetrics(h: fcQFontMetrics_new2(font.h, pd.h), owned: true)
   tmp
 proc create*(T: type gen_qfontmetrics_types.QFontMetrics,
-    param1: gen_qfontmetrics_types.QFontMetrics): gen_qfontmetrics_types.QFontMetrics =
-  let tmp = gen_qfontmetrics_types.QFontMetrics(h: fcQFontMetrics_new3(param1.h), owned: true)
+    fromVal: gen_qfontmetrics_types.QFontMetrics): gen_qfontmetrics_types.QFontMetrics =
+  let tmp = gen_qfontmetrics_types.QFontMetrics(h: fcQFontMetrics_new3(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qfontmetrics_types.QFontMetricsF, param1: gen_qfontmetrics_types.QFontMetricsF): void =
-  fcQFontMetricsF_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qfontmetrics_types.QFontMetricsF, fromVal: gen_qfontmetrics_types.QFontMetricsF): void =
+  fcQFontMetricsF_operatorAssign_QFontMetricsF(self.h, fromVal.h)
 
 proc operatorAssign*(self: gen_qfontmetrics_types.QFontMetricsF, param1: gen_qfontmetrics_types.QFontMetrics): void =
-  fcQFontMetricsF_operatorAssignWithQFontMetrics(self.h, param1.h)
+  fcQFontMetricsF_operatorAssign_QFontMetrics(self.h, param1.h)
 
 proc swap*(self: gen_qfontmetrics_types.QFontMetricsF, other: gen_qfontmetrics_types.QFontMetricsF): void =
   fcQFontMetricsF_swap(self.h, other.h)
@@ -353,37 +353,37 @@ proc rightBearing*(self: gen_qfontmetrics_types.QFontMetricsF, param1: gen_qchar
   fcQFontMetricsF_rightBearing(self.h, param1.h)
 
 proc horizontalAdvance*(self: gen_qfontmetrics_types.QFontMetricsF, stringVal: openArray[char]): float64 =
-  fcQFontMetricsF_horizontalAdvance(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))))
+  fcQFontMetricsF_horizontalAdvance_QString(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))))
 
 proc horizontalAdvance*(self: gen_qfontmetrics_types.QFontMetricsF, param1: gen_qchar_types.QChar): float64 =
-  fcQFontMetricsF_horizontalAdvanceWithQChar(self.h, param1.h)
+  fcQFontMetricsF_horizontalAdvance_QChar(self.h, param1.h)
 
 proc horizontalAdvance*(self: gen_qfontmetrics_types.QFontMetricsF, stringVal: openArray[char], textOption: gen_qtextoption_types.QTextOption): float64 =
-  fcQFontMetricsF_horizontalAdvance2(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), textOption.h)
+  fcQFontMetricsF_horizontalAdvance_QString_QTextOption(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), textOption.h)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetricsF, stringVal: openArray[char]): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
+  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect_QString(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetricsF, text: openArray[char], textOption: gen_qtextoption_types.QTextOption): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), textOption.h), owned: true)
+  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect_QString_QTextOption(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), textOption.h), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetricsF, param1: gen_qchar_types.QChar): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRectWithQChar(self.h, param1.h), owned: true)
+  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect_QChar(self.h, param1.h), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetricsF, r: gen_qrect_types.QRectF, flags: cint, stringVal: openArray[char]): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect3(self.h, r.h, flags, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
+  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect_QRectFInt_QString(self.h, r.h, flags, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc size*(self: gen_qfontmetrics_types.QFontMetricsF, flags: cint, str: openArray[char]): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQFontMetricsF_size(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str)))), owned: true)
+  gen_qsize_types.QSizeF(h: fcQFontMetricsF_sizeFlagsStr(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str)))), owned: true)
 
 proc tightBoundingRect*(self: gen_qfontmetrics_types.QFontMetricsF, text: openArray[char]): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQFontMetricsF_tightBoundingRect(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qrect_types.QRectF(h: fcQFontMetricsF_tightBoundingRectText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc tightBoundingRect*(self: gen_qfontmetrics_types.QFontMetricsF, text: openArray[char], textOption: gen_qtextoption_types.QTextOption): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQFontMetricsF_tightBoundingRect2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), textOption.h), owned: true)
+  gen_qrect_types.QRectF(h: fcQFontMetricsF_tightBoundingRectTextTextOption(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), textOption.h), owned: true)
 
 proc elidedText*(self: gen_qfontmetrics_types.QFontMetricsF, text: openArray[char], mode: cint, width: float64): string =
-  let v_ms = fcQFontMetricsF_elidedText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(mode), width)
+  let v_ms = fcQFontMetricsF_elidedTextTextModeWidth(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(mode), width)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -410,22 +410,22 @@ proc operatorNotEqual*(self: gen_qfontmetrics_types.QFontMetricsF, other: gen_qf
   fcQFontMetricsF_operatorNotEqual(self.h, other.h)
 
 proc horizontalAdvance*(self: gen_qfontmetrics_types.QFontMetricsF, stringVal: openArray[char], length: cint): float64 =
-  fcQFontMetricsF_horizontalAdvance3(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), length)
+  fcQFontMetricsF_horizontalAdvance_QStringInt(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), length)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetricsF, r: gen_qrect_types.QRectF, flags: cint, stringVal: openArray[char], tabstops: cint): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect4(self.h, r.h, flags, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), tabstops), owned: true)
+  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect_QRectFInt_QStringInt(self.h, r.h, flags, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), tabstops), owned: true)
 
 proc boundingRect*(self: gen_qfontmetrics_types.QFontMetricsF, r: gen_qrect_types.QRectF, flags: cint, stringVal: openArray[char], tabstops: cint, tabarray: ptr cint): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect5(self.h, r.h, flags, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), tabstops, tabarray), owned: true)
+  gen_qrect_types.QRectF(h: fcQFontMetricsF_boundingRect_QRectFInt_QStringIntInt(self.h, r.h, flags, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), tabstops, tabarray), owned: true)
 
 proc size*(self: gen_qfontmetrics_types.QFontMetricsF, flags: cint, str: openArray[char], tabstops: cint): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQFontMetricsF_size2(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tabstops), owned: true)
+  gen_qsize_types.QSizeF(h: fcQFontMetricsF_sizeFlagsStrTabstops(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tabstops), owned: true)
 
 proc size*(self: gen_qfontmetrics_types.QFontMetricsF, flags: cint, str: openArray[char], tabstops: cint, tabarray: ptr cint): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQFontMetricsF_size3(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tabstops, tabarray), owned: true)
+  gen_qsize_types.QSizeF(h: fcQFontMetricsF_sizeFlagsStrTabstopsTabarray(self.h, flags, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tabstops, tabarray), owned: true)
 
 proc elidedText*(self: gen_qfontmetrics_types.QFontMetricsF, text: openArray[char], mode: cint, width: float64, flags: cint): string =
-  let v_ms = fcQFontMetricsF_elidedText2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(mode), width, flags)
+  let v_ms = fcQFontMetricsF_elidedTextTextModeWidthFlags(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(mode), width, flags)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -443,6 +443,6 @@ proc create*(T: type gen_qfontmetrics_types.QFontMetricsF,
   let tmp = gen_qfontmetrics_types.QFontMetricsF(h: fcQFontMetricsF_new3(param1.h), owned: true)
   tmp
 proc create*(T: type gen_qfontmetrics_types.QFontMetricsF,
-    param1: gen_qfontmetrics_types.QFontMetricsF): gen_qfontmetrics_types.QFontMetricsF =
-  let tmp = gen_qfontmetrics_types.QFontMetricsF(h: fcQFontMetricsF_new4(param1.h), owned: true)
+    fromVal: gen_qfontmetrics_types.QFontMetricsF): gen_qfontmetrics_types.QFontMetricsF =
+  let tmp = gen_qfontmetrics_types.QFontMetricsF(h: fcQFontMetricsF_new4(fromVal.h), owned: true)
   tmp

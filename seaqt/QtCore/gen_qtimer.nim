@@ -55,21 +55,21 @@ type cQTimer*{.exportc: "QTimer", incompleteStruct.} = object
 proc fcQTimer_metaObject(self: pointer): pointer {.importc: "QTimer_metaObject".}
 proc fcQTimer_metacast(self: pointer, param1: cstring): pointer {.importc: "QTimer_metacast".}
 proc fcQTimer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTimer_metacall".}
-proc fcQTimer_tr(s: cstring): struct_seaqt_string {.importc: "QTimer_tr".}
+proc fcQTimer_trS(s: cstring): struct_seaqt_string {.importc: "QTimer_tr_s".}
 proc fcQTimer_isActive(self: pointer): bool {.importc: "QTimer_isActive".}
 proc fcQTimer_timerId(self: pointer): cint {.importc: "QTimer_timerId".}
-proc fcQTimer_setInterval(self: pointer, msec: cint): void {.importc: "QTimer_setInterval".}
+proc fcQTimer_setIntervalMsec(self: pointer, msec: cint): void {.importc: "QTimer_setInterval_msec".}
 proc fcQTimer_interval(self: pointer): cint {.importc: "QTimer_interval".}
 proc fcQTimer_remainingTime(self: pointer): cint {.importc: "QTimer_remainingTime".}
 proc fcQTimer_setTimerType(self: pointer, atype: cint): void {.importc: "QTimer_setTimerType".}
 proc fcQTimer_timerType(self: pointer): cint {.importc: "QTimer_timerType".}
 proc fcQTimer_setSingleShot(self: pointer, singleShot: bool): void {.importc: "QTimer_setSingleShot".}
 proc fcQTimer_isSingleShot(self: pointer): bool {.importc: "QTimer_isSingleShot".}
-proc fcQTimer_start(self: pointer, msec: cint): void {.importc: "QTimer_start".}
-proc fcQTimer_start2(self: pointer): void {.importc: "QTimer_start2".}
+proc fcQTimer_startMsec(self: pointer, msec: cint): void {.importc: "QTimer_start_msec".}
+proc fcQTimer_start(self: pointer): void {.importc: "QTimer_start".}
 proc fcQTimer_stop(self: pointer): void {.importc: "QTimer_stop".}
-proc fcQTimer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTimer_tr2".}
-proc fcQTimer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimer_tr3".}
+proc fcQTimer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTimer_tr_s_c".}
+proc fcQTimer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimer_tr_s_c_n".}
 proc fcQTimer_vdata(self: pointer): ptr pointer {.importc: "QTimer_vdata".}
 proc fvdata_cQTimer(self: pointer): pointer {.importc: "vdata_QTimer".}
 
@@ -100,7 +100,7 @@ proc fcQTimer_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "Q
 proc fcQTimer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTimer_protectedbase_receivers".}
 proc fcQTimer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTimer_protectedbase_isSignalConnected".}
 proc fcQTimer_new(vtbl: pointer, vdata: csize_t): ptr cQTimer {.importc: "QTimer_new".}
-proc fcQTimer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTimer {.importc: "QTimer_new2".}
+proc fcQTimer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTimer {.importc: "QTimer_new_parent".}
 proc fcQTimer_staticMetaObject(): pointer {.importc: "QTimer_staticMetaObject".}
 
 proc metaObject*(self: gen_qtimer_types.QTimer): gen_qobjectdefs_types.QMetaObject =
@@ -113,7 +113,7 @@ proc metacall*(self: gen_qtimer_types.QTimer, param1: cint, param2: cint, param3
   fcQTimer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtimer_types.QTimer, s: cstring): string =
-  let v_ms = fcQTimer_tr(s)
+  let v_ms = fcQTimer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -125,7 +125,7 @@ proc timerId*(self: gen_qtimer_types.QTimer): cint =
   fcQTimer_timerId(self.h)
 
 proc setInterval*(self: gen_qtimer_types.QTimer, msec: cint): void =
-  fcQTimer_setInterval(self.h, msec)
+  fcQTimer_setIntervalMsec(self.h, msec)
 
 proc interval*(self: gen_qtimer_types.QTimer): cint =
   fcQTimer_interval(self.h)
@@ -146,22 +146,22 @@ proc isSingleShot*(self: gen_qtimer_types.QTimer): bool =
   fcQTimer_isSingleShot(self.h)
 
 proc start*(self: gen_qtimer_types.QTimer, msec: cint): void =
-  fcQTimer_start(self.h, msec)
+  fcQTimer_startMsec(self.h, msec)
 
 proc start*(self: gen_qtimer_types.QTimer): void =
-  fcQTimer_start2(self.h)
+  fcQTimer_start(self.h)
 
 proc stop*(self: gen_qtimer_types.QTimer): void =
   fcQTimer_stop(self.h)
 
 proc tr*(_: type gen_qtimer_types.QTimer, s: cstring, c: cstring): string =
-  let v_ms = fcQTimer_tr2(s, c)
+  let v_ms = fcQTimer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtimer_types.QTimer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTimer_tr3(s, c, n)
+  let v_ms = fcQTimer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -33,11 +33,11 @@ typedef struct QSGTexture QSGTexture;
 #endif
 
 void QSGImageNode_virtbase(QSGImageNode* src, QSGGeometryNode** outptr_QSGGeometryNode);
-void QSGImageNode_setRect(QSGImageNode* self, QRectF* rect);
-void QSGImageNode_setRect2(QSGImageNode* self, double x, double y, double w, double h);
+void QSGImageNode_setRect_rect(QSGImageNode* self, QRectF* rect);
+void QSGImageNode_setRect_x_y_w_h(QSGImageNode* self, double x, double y, double w, double h);
 QRectF* QSGImageNode_rect(const QSGImageNode* self);
-void QSGImageNode_setSourceRect(QSGImageNode* self, QRectF* r);
-void QSGImageNode_setSourceRect2(QSGImageNode* self, double x, double y, double w, double h);
+void QSGImageNode_setSourceRect_r(QSGImageNode* self, QRectF* r);
+void QSGImageNode_setSourceRect_x_y_w_h(QSGImageNode* self, double x, double y, double w, double h);
 QRectF* QSGImageNode_sourceRect(const QSGImageNode* self);
 void QSGImageNode_setTexture(QSGImageNode* self, QSGTexture* texture);
 QSGTexture* QSGImageNode_texture(const QSGImageNode* self);

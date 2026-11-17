@@ -186,42 +186,42 @@ VirtualQMovie* QMovie_new(const QMovie_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQMovie(vtbl) : nullptr;
 }
 
-VirtualQMovie* QMovie_new2(const QMovie_VTable* vtbl, size_t vdata, QIODevice* device) {
+VirtualQMovie* QMovie_new_device(const QMovie_VTable* vtbl, size_t vdata, QIODevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMovie>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMovie(vtbl, device) : nullptr;
 }
 
-VirtualQMovie* QMovie_new3(const QMovie_VTable* vtbl, size_t vdata, struct seaqt_string fileName) {
+VirtualQMovie* QMovie_new_fileName(const QMovie_VTable* vtbl, size_t vdata, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMovie>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMovie(vtbl, fileName_QString) : nullptr;
 }
 
-VirtualQMovie* QMovie_new4(const QMovie_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQMovie* QMovie_new_parent(const QMovie_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMovie>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMovie(vtbl, parent) : nullptr;
 }
 
-VirtualQMovie* QMovie_new5(const QMovie_VTable* vtbl, size_t vdata, QIODevice* device, struct seaqt_string format) {
+VirtualQMovie* QMovie_new_device_format(const QMovie_VTable* vtbl, size_t vdata, QIODevice* device, struct seaqt_string format) {
 	QByteArray format_QByteArray(format.data, format.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMovie>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMovie(vtbl, device, format_QByteArray) : nullptr;
 }
 
-VirtualQMovie* QMovie_new6(const QMovie_VTable* vtbl, size_t vdata, QIODevice* device, struct seaqt_string format, QObject* parent) {
+VirtualQMovie* QMovie_new_device_format_parent(const QMovie_VTable* vtbl, size_t vdata, QIODevice* device, struct seaqt_string format, QObject* parent) {
 	QByteArray format_QByteArray(format.data, format.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMovie>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMovie(vtbl, device, format_QByteArray, parent) : nullptr;
 }
 
-VirtualQMovie* QMovie_new7(const QMovie_VTable* vtbl, size_t vdata, struct seaqt_string fileName, struct seaqt_string format) {
+VirtualQMovie* QMovie_new_fileName_format(const QMovie_VTable* vtbl, size_t vdata, struct seaqt_string fileName, struct seaqt_string format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QByteArray format_QByteArray(format.data, format.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMovie>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMovie(vtbl, fileName_QString, format_QByteArray) : nullptr;
 }
 
-VirtualQMovie* QMovie_new8(const QMovie_VTable* vtbl, size_t vdata, struct seaqt_string fileName, struct seaqt_string format, QObject* parent) {
+VirtualQMovie* QMovie_new_fileName_format_parent(const QMovie_VTable* vtbl, size_t vdata, struct seaqt_string fileName, struct seaqt_string format, QObject* parent) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QByteArray format_QByteArray(format.data, format.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMovie>() + vdata, std::nothrow);
@@ -244,7 +244,7 @@ int QMovie_metacall(QMovie* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMovie_tr(const char* s) {
+struct seaqt_string QMovie_tr_s(const char* s) {
 	QString _ret = QMovie::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -533,7 +533,7 @@ void QMovie_setSpeed(QMovie* self, int percentSpeed) {
 	self->setSpeed(static_cast<int>(percentSpeed));
 }
 
-struct seaqt_string QMovie_tr2(const char* s, const char* c) {
+struct seaqt_string QMovie_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMovie::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -544,7 +544,7 @@ struct seaqt_string QMovie_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMovie_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMovie_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMovie::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

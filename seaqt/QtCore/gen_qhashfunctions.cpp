@@ -16,7 +16,7 @@ QHashSeed* QHashSeed_new() {
 	return new (std::nothrow) QHashSeed();
 }
 
-QHashSeed* QHashSeed_new2(size_t d) {
+QHashSeed* QHashSeed_new_d(size_t d) {
 	return new (std::nothrow) QHashSeed(static_cast<size_t>(d));
 }
 

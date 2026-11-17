@@ -34,7 +34,7 @@ VirtualQQmlPropertyValueSource* vdata_QQmlPropertyValueSource(void* vdata);
 VirtualQQmlPropertyValueSource* QQmlPropertyValueSource_new(const QQmlPropertyValueSource_VTable* vtbl, size_t vdata);
 
 void QQmlPropertyValueSource_setTarget(QQmlPropertyValueSource* self, QQmlProperty* target);
-void QQmlPropertyValueSource_operatorAssign(QQmlPropertyValueSource* self, QQmlPropertyValueSource* param1);
+void QQmlPropertyValueSource_operatorAssign(QQmlPropertyValueSource* self, QQmlPropertyValueSource* from);
 
 void QQmlPropertyValueSource_virtualbase_setTarget(VirtualQQmlPropertyValueSource* self, QQmlProperty* target);
 

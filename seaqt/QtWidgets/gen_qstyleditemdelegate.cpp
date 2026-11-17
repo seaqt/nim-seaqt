@@ -394,7 +394,7 @@ VirtualQStyledItemDelegate* QStyledItemDelegate_new(const QStyledItemDelegate_VT
 	return _mem_ ? new (_mem_)VirtualQStyledItemDelegate(vtbl) : nullptr;
 }
 
-VirtualQStyledItemDelegate* QStyledItemDelegate_new2(const QStyledItemDelegate_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQStyledItemDelegate* QStyledItemDelegate_new_parent(const QStyledItemDelegate_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQStyledItemDelegate>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQStyledItemDelegate(vtbl, parent) : nullptr;
 }
@@ -415,7 +415,7 @@ int QStyledItemDelegate_metacall(QStyledItemDelegate* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QStyledItemDelegate_tr(const char* s) {
+struct seaqt_string QStyledItemDelegate_tr_s(const char* s) {
 	QString _ret = QStyledItemDelegate::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -469,7 +469,7 @@ struct seaqt_string QStyledItemDelegate_displayText(const QStyledItemDelegate* s
 	return _ms;
 }
 
-struct seaqt_string QStyledItemDelegate_tr2(const char* s, const char* c) {
+struct seaqt_string QStyledItemDelegate_tr_s_c(const char* s, const char* c) {
 	QString _ret = QStyledItemDelegate::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -480,7 +480,7 @@ struct seaqt_string QStyledItemDelegate_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QStyledItemDelegate_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QStyledItemDelegate_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QStyledItemDelegate::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

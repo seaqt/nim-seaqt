@@ -16,12 +16,12 @@ QGeoSatelliteInfo* QGeoSatelliteInfo_new() {
 	return new (std::nothrow) QGeoSatelliteInfo();
 }
 
-QGeoSatelliteInfo* QGeoSatelliteInfo_new2(QGeoSatelliteInfo* other) {
-	return new (std::nothrow) QGeoSatelliteInfo(*other);
+QGeoSatelliteInfo* QGeoSatelliteInfo_new_from(QGeoSatelliteInfo* from) {
+	return new (std::nothrow) QGeoSatelliteInfo(*from);
 }
 
-void QGeoSatelliteInfo_operatorAssign(QGeoSatelliteInfo* self, QGeoSatelliteInfo* other) {
-	self->operator=(*other);
+void QGeoSatelliteInfo_operatorAssign(QGeoSatelliteInfo* self, QGeoSatelliteInfo* from) {
+	self->operator=(*from);
 }
 
 void QGeoSatelliteInfo_swap(QGeoSatelliteInfo* self, QGeoSatelliteInfo* other) {

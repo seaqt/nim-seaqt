@@ -61,15 +61,15 @@ type cQQmlContextPropertyPair*{.exportc: "QQmlContext__PropertyPair", incomplete
 proc fcQQmlContext_metaObject(self: pointer): pointer {.importc: "QQmlContext_metaObject".}
 proc fcQQmlContext_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlContext_metacast".}
 proc fcQQmlContext_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlContext_metacall".}
-proc fcQQmlContext_tr(s: cstring): struct_seaqt_string {.importc: "QQmlContext_tr".}
+proc fcQQmlContext_trS(s: cstring): struct_seaqt_string {.importc: "QQmlContext_tr_s".}
 proc fcQQmlContext_isValid(self: pointer): bool {.importc: "QQmlContext_isValid".}
 proc fcQQmlContext_engine(self: pointer): pointer {.importc: "QQmlContext_engine".}
 proc fcQQmlContext_parentContext(self: pointer): pointer {.importc: "QQmlContext_parentContext".}
 proc fcQQmlContext_contextObject(self: pointer): pointer {.importc: "QQmlContext_contextObject".}
 proc fcQQmlContext_setContextObject(self: pointer, contextObject: pointer): void {.importc: "QQmlContext_setContextObject".}
 proc fcQQmlContext_contextProperty(self: pointer, param1: struct_seaqt_string): pointer {.importc: "QQmlContext_contextProperty".}
-proc fcQQmlContext_setContextProperty(self: pointer, param1: struct_seaqt_string, param2: pointer): void {.importc: "QQmlContext_setContextProperty".}
-proc fcQQmlContext_setContextProperty2(self: pointer, param1: struct_seaqt_string, param2: pointer): void {.importc: "QQmlContext_setContextProperty2".}
+proc fcQQmlContext_setContextProperty_QString_QObject(self: pointer, param1: struct_seaqt_string, param2: pointer): void {.importc: "QQmlContext_setContextProperty_QString_QObject".}
+proc fcQQmlContext_setContextProperty_QString_QVariant(self: pointer, param1: struct_seaqt_string, param2: pointer): void {.importc: "QQmlContext_setContextProperty_QString_QVariant".}
 proc fcQQmlContext_setContextProperties(self: pointer, properties: struct_seaqt_array): void {.importc: "QQmlContext_setContextProperties".}
 proc fcQQmlContext_nameForObject(self: pointer, param1: pointer): struct_seaqt_string {.importc: "QQmlContext_nameForObject".}
 proc fcQQmlContext_objectForName(self: pointer, param1: struct_seaqt_string): pointer {.importc: "QQmlContext_objectForName".}
@@ -77,8 +77,8 @@ proc fcQQmlContext_resolvedUrl(self: pointer, param1: pointer): pointer {.import
 proc fcQQmlContext_setBaseUrl(self: pointer, baseUrl: pointer): void {.importc: "QQmlContext_setBaseUrl".}
 proc fcQQmlContext_baseUrl(self: pointer): pointer {.importc: "QQmlContext_baseUrl".}
 proc fcQQmlContext_importedScript(self: pointer, name: struct_seaqt_string): pointer {.importc: "QQmlContext_importedScript".}
-proc fcQQmlContext_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlContext_tr2".}
-proc fcQQmlContext_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlContext_tr3".}
+proc fcQQmlContext_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlContext_tr_s_c".}
+proc fcQQmlContext_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlContext_tr_s_c_n".}
 proc fcQQmlContext_vdata(self: pointer): ptr pointer {.importc: "QQmlContext_vdata".}
 proc fvdata_cQQmlContext(self: pointer): pointer {.importc: "vdata_QQmlContext".}
 
@@ -108,17 +108,17 @@ proc fcQQmlContext_protectedbase_sender(self: pointer): pointer {.importc: "QQml
 proc fcQQmlContext_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QQmlContext_protectedbase_senderSignalIndex".}
 proc fcQQmlContext_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlContext_protectedbase_receivers".}
 proc fcQQmlContext_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlContext_protectedbase_isSignalConnected".}
-proc fcQQmlContext_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new".}
-proc fcQQmlContext_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new2".}
-proc fcQQmlContext_new3(vtbl: pointer, vdata: csize_t, parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new3".}
-proc fcQQmlContext_new4(vtbl: pointer, vdata: csize_t, parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new4".}
+proc fcQQmlContext_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new_QQmlEngine".}
+proc fcQQmlContext_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new_QQmlContext".}
+proc fcQQmlContext_new3(vtbl: pointer, vdata: csize_t, parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new_QQmlEngine_QObject".}
+proc fcQQmlContext_new4(vtbl: pointer, vdata: csize_t, parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new_QQmlContext_QObject".}
 proc fcQQmlContext_staticMetaObject(): pointer {.importc: "QQmlContext_staticMetaObject".}
 proc fcQQmlContextPropertyPair_name(self: pointer): struct_seaqt_string {.importc: "QQmlContext__PropertyPair_name".}
 proc fcQQmlContextPropertyPair_setName(self: pointer, name: struct_seaqt_string): void {.importc: "QQmlContext__PropertyPair_setName".}
 proc fcQQmlContextPropertyPair_value(self: pointer): pointer {.importc: "QQmlContext__PropertyPair_value".}
 proc fcQQmlContextPropertyPair_setValue(self: pointer, value: pointer): void {.importc: "QQmlContext__PropertyPair_setValue".}
-proc fcQQmlContextPropertyPair_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlContext__PropertyPair_operatorAssign".}
-proc fcQQmlContextPropertyPair_new(param1: pointer): ptr cQQmlContextPropertyPair {.importc: "QQmlContext__PropertyPair_new".}
+proc fcQQmlContextPropertyPair_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlContext__PropertyPair_operatorAssign".}
+proc fcQQmlContextPropertyPair_new(fromVal: pointer): ptr cQQmlContextPropertyPair {.importc: "QQmlContext__PropertyPair_new".}
 
 proc metaObject*(self: gen_qqmlcontext_types.QQmlContext): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlContext_metaObject(self.h), owned: false)
@@ -130,7 +130,7 @@ proc metacall*(self: gen_qqmlcontext_types.QQmlContext, param1: cint, param2: ci
   fcQQmlContext_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring): string =
-  let v_ms = fcQQmlContext_tr(s)
+  let v_ms = fcQQmlContext_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -154,10 +154,10 @@ proc contextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray
   gen_qvariant_types.QVariant(h: fcQQmlContext_contextProperty(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: true)
 
 proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char], param2: gen_qobject_types.QObject): void =
-  fcQQmlContext_setContextProperty(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2.h)
+  fcQQmlContext_setContextProperty_QString_QObject(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2.h)
 
 proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char], param2: gen_qvariant_types.QVariant): void =
-  fcQQmlContext_setContextProperty2(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2.h)
+  fcQQmlContext_setContextProperty_QString_QVariant(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2.h)
 
 proc setContextProperties*(self: gen_qqmlcontext_types.QQmlContext, properties: openArray[gen_qqmlcontext_types.QQmlContextPropertyPair]): void =
   var properties_CArray = newSeq[pointer](len(properties))
@@ -188,13 +188,13 @@ proc importedScript*(self: gen_qqmlcontext_types.QQmlContext, name: openArray[ch
   gen_qjsvalue_types.QJSValue(h: fcQQmlContext_importedScript(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc tr*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlContext_tr2(s, c)
+  let v_ms = fcQQmlContext_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlContext_tr3(s, c, n)
+  let v_ms = fcQQmlContext_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -611,10 +611,10 @@ proc value*(self: gen_qqmlcontext_types.QQmlContextPropertyPair): gen_qvariant_t
 proc setValue*(self: gen_qqmlcontext_types.QQmlContextPropertyPair, value: gen_qvariant_types.QVariant): void =
   fcQQmlContextPropertyPair_setValue(self.h, value.h)
 
-proc operatorAssign*(self: gen_qqmlcontext_types.QQmlContextPropertyPair, param1: gen_qqmlcontext_types.QQmlContextPropertyPair): void =
-  fcQQmlContextPropertyPair_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlcontext_types.QQmlContextPropertyPair, fromVal: gen_qqmlcontext_types.QQmlContextPropertyPair): void =
+  fcQQmlContextPropertyPair_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qqmlcontext_types.QQmlContextPropertyPair,
-    param1: gen_qqmlcontext_types.QQmlContextPropertyPair): gen_qqmlcontext_types.QQmlContextPropertyPair =
-  let tmp = gen_qqmlcontext_types.QQmlContextPropertyPair(h: fcQQmlContextPropertyPair_new(param1.h), owned: true)
+    fromVal: gen_qqmlcontext_types.QQmlContextPropertyPair): gen_qqmlcontext_types.QQmlContextPropertyPair =
+  let tmp = gen_qqmlcontext_types.QQmlContextPropertyPair(h: fcQQmlContextPropertyPair_new(fromVal.h), owned: true)
   tmp

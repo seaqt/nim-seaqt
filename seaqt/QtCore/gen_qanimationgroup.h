@@ -57,13 +57,13 @@ void* QAnimationGroup_vdata(VirtualQAnimationGroup* self);
 VirtualQAnimationGroup* vdata_QAnimationGroup(void* vdata);
 
 VirtualQAnimationGroup* QAnimationGroup_new(const QAnimationGroup_VTable* vtbl, size_t vdata);
-VirtualQAnimationGroup* QAnimationGroup_new2(const QAnimationGroup_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAnimationGroup* QAnimationGroup_new_parent(const QAnimationGroup_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAnimationGroup_virtbase(QAnimationGroup* src, QAbstractAnimation** outptr_QAbstractAnimation);
 QMetaObject* QAnimationGroup_metaObject(const QAnimationGroup* self);
 void* QAnimationGroup_metacast(QAnimationGroup* self, const char* param1);
 int QAnimationGroup_metacall(QAnimationGroup* self, int param1, int param2, void** param3);
-struct seaqt_string QAnimationGroup_tr(const char* s);
+struct seaqt_string QAnimationGroup_tr_s(const char* s);
 QAbstractAnimation* QAnimationGroup_animationAt(const QAnimationGroup* self, int index);
 int QAnimationGroup_animationCount(const QAnimationGroup* self);
 int QAnimationGroup_indexOfAnimation(const QAnimationGroup* self, QAbstractAnimation* animation);
@@ -73,8 +73,8 @@ void QAnimationGroup_removeAnimation(QAnimationGroup* self, QAbstractAnimation* 
 QAbstractAnimation* QAnimationGroup_takeAnimation(QAnimationGroup* self, int index);
 void QAnimationGroup_clear(QAnimationGroup* self);
 bool QAnimationGroup_event(QAnimationGroup* self, QEvent* event);
-struct seaqt_string QAnimationGroup_tr2(const char* s, const char* c);
-struct seaqt_string QAnimationGroup_tr3(const char* s, const char* c, int n);
+struct seaqt_string QAnimationGroup_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAnimationGroup_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAnimationGroup_virtualbase_metaObject(const VirtualQAnimationGroup* self);
 void* QAnimationGroup_virtualbase_metacast(VirtualQAnimationGroup* self, const char* param1);

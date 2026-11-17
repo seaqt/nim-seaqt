@@ -71,15 +71,15 @@ proc fcQDesignerMetaDataBaseItemInterface_new(vtbl: pointer, vdata: csize_t): pt
 proc fcQDesignerMetaDataBaseInterface_metaObject(self: pointer): pointer {.importc: "QDesignerMetaDataBaseInterface_metaObject".}
 proc fcQDesignerMetaDataBaseInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerMetaDataBaseInterface_metacast".}
 proc fcQDesignerMetaDataBaseInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerMetaDataBaseInterface_metacall".}
-proc fcQDesignerMetaDataBaseInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerMetaDataBaseInterface_tr".}
+proc fcQDesignerMetaDataBaseInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerMetaDataBaseInterface_tr_s".}
 proc fcQDesignerMetaDataBaseInterface_item(self: pointer, objectVal: pointer): pointer {.importc: "QDesignerMetaDataBaseInterface_item".}
 proc fcQDesignerMetaDataBaseInterface_add(self: pointer, objectVal: pointer): void {.importc: "QDesignerMetaDataBaseInterface_add".}
 proc fcQDesignerMetaDataBaseInterface_remove(self: pointer, objectVal: pointer): void {.importc: "QDesignerMetaDataBaseInterface_remove".}
 proc fcQDesignerMetaDataBaseInterface_objects(self: pointer): struct_seaqt_array {.importc: "QDesignerMetaDataBaseInterface_objects".}
 proc fcQDesignerMetaDataBaseInterface_changed(self: pointer): void {.importc: "QDesignerMetaDataBaseInterface_changed".}
 proc fcQDesignerMetaDataBaseInterface_connect_changed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerMetaDataBaseInterface_connect_changed".}
-proc fcQDesignerMetaDataBaseInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerMetaDataBaseInterface_tr2".}
-proc fcQDesignerMetaDataBaseInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerMetaDataBaseInterface_tr3".}
+proc fcQDesignerMetaDataBaseInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerMetaDataBaseInterface_tr_s_c".}
+proc fcQDesignerMetaDataBaseInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerMetaDataBaseInterface_tr_s_c_n".}
 proc fcQDesignerMetaDataBaseInterface_protectedbase_sender(self: pointer): pointer {.importc: "QDesignerMetaDataBaseInterface_protectedbase_sender".}
 proc fcQDesignerMetaDataBaseInterface_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDesignerMetaDataBaseInterface_protectedbase_senderSignalIndex".}
 proc fcQDesignerMetaDataBaseInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerMetaDataBaseInterface_protectedbase_receivers".}
@@ -305,7 +305,7 @@ proc metacall*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterfa
   fcQDesignerMetaDataBaseInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface, s: cstring): string =
-  let v_ms = fcQDesignerMetaDataBaseInterface_tr(s)
+  let v_ms = fcQDesignerMetaDataBaseInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -347,13 +347,13 @@ proc onChanged*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterf
   fcQDesignerMetaDataBaseInterface_connect_changed(self.h, cast[int](addr tmp[]), fcQDesignerMetaDataBaseInterface_slot_callback_changed, fcQDesignerMetaDataBaseInterface_slot_callback_changed_release)
 
 proc tr*(_: type gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerMetaDataBaseInterface_tr2(s, c)
+  let v_ms = fcQDesignerMetaDataBaseInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerMetaDataBaseInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerMetaDataBaseInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

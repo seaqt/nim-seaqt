@@ -44,9 +44,9 @@ typedef struct QWebEngineHistoryItem QWebEngineHistoryItem;
 typedef struct QWebEngineHistoryModel QWebEngineHistoryModel;
 #endif
 
-QWebEngineHistoryItem* QWebEngineHistoryItem_new(QWebEngineHistoryItem* other);
+QWebEngineHistoryItem* QWebEngineHistoryItem_new(QWebEngineHistoryItem* from);
 
-void QWebEngineHistoryItem_operatorAssign(QWebEngineHistoryItem* self, QWebEngineHistoryItem* other);
+void QWebEngineHistoryItem_operatorAssign(QWebEngineHistoryItem* self, QWebEngineHistoryItem* from);
 QUrl* QWebEngineHistoryItem_originalUrl(const QWebEngineHistoryItem* self);
 QUrl* QWebEngineHistoryItem_url(const QWebEngineHistoryItem* self);
 struct seaqt_string QWebEngineHistoryItem_title(const QWebEngineHistoryItem* self);
@@ -61,13 +61,13 @@ void QWebEngineHistoryModel_virtbase(QWebEngineHistoryModel* src, QAbstractListM
 QMetaObject* QWebEngineHistoryModel_metaObject(const QWebEngineHistoryModel* self);
 void* QWebEngineHistoryModel_metacast(QWebEngineHistoryModel* self, const char* param1);
 int QWebEngineHistoryModel_metacall(QWebEngineHistoryModel* self, int param1, int param2, void** param3);
-struct seaqt_string QWebEngineHistoryModel_tr(const char* s);
+struct seaqt_string QWebEngineHistoryModel_tr_s(const char* s);
 int QWebEngineHistoryModel_rowCount(const QWebEngineHistoryModel* self, QModelIndex* parent);
 QVariant* QWebEngineHistoryModel_data(const QWebEngineHistoryModel* self, QModelIndex* index, int role);
 struct seaqt_map /* of int to struct seaqt_string */  QWebEngineHistoryModel_roleNames(const QWebEngineHistoryModel* self);
 void QWebEngineHistoryModel_reset(QWebEngineHistoryModel* self);
-struct seaqt_string QWebEngineHistoryModel_tr2(const char* s, const char* c);
-struct seaqt_string QWebEngineHistoryModel_tr3(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineHistoryModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineHistoryModel_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebEngineHistoryModel_staticMetaObject();
 
@@ -75,7 +75,7 @@ void QWebEngineHistory_virtbase(QWebEngineHistory* src, QObject** outptr_QObject
 QMetaObject* QWebEngineHistory_metaObject(const QWebEngineHistory* self);
 void* QWebEngineHistory_metacast(QWebEngineHistory* self, const char* param1);
 int QWebEngineHistory_metacall(QWebEngineHistory* self, int param1, int param2, void** param3);
-struct seaqt_string QWebEngineHistory_tr(const char* s);
+struct seaqt_string QWebEngineHistory_tr_s(const char* s);
 void QWebEngineHistory_clear(QWebEngineHistory* self);
 struct seaqt_array /* of QWebEngineHistoryItem* */  QWebEngineHistory_items(const QWebEngineHistory* self);
 struct seaqt_array /* of QWebEngineHistoryItem* */  QWebEngineHistory_backItems(const QWebEngineHistory* self, int maxItems);
@@ -94,8 +94,8 @@ int QWebEngineHistory_count(const QWebEngineHistory* self);
 QWebEngineHistoryModel* QWebEngineHistory_itemsModel(const QWebEngineHistory* self);
 QWebEngineHistoryModel* QWebEngineHistory_backItemsModel(const QWebEngineHistory* self);
 QWebEngineHistoryModel* QWebEngineHistory_forwardItemsModel(const QWebEngineHistory* self);
-struct seaqt_string QWebEngineHistory_tr2(const char* s, const char* c);
-struct seaqt_string QWebEngineHistory_tr3(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineHistory_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineHistory_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebEngineHistory_staticMetaObject();
 

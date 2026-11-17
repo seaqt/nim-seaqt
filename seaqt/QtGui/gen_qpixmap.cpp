@@ -41,7 +41,7 @@ public:
 	VirtualQPixmap(const QPixmap_VTable* vtbl, int w, int h): QPixmap(w, h), vtbl(vtbl) {}
 	VirtualQPixmap(const QPixmap_VTable* vtbl, const QSize& param1): QPixmap(param1), vtbl(vtbl) {}
 	VirtualQPixmap(const QPixmap_VTable* vtbl, const QString& fileName): QPixmap(fileName), vtbl(vtbl) {}
-	VirtualQPixmap(const QPixmap_VTable* vtbl, const QPixmap& param1): QPixmap(param1), vtbl(vtbl) {}
+	VirtualQPixmap(const QPixmap_VTable* vtbl, const QPixmap& from): QPixmap(from), vtbl(vtbl) {}
 	VirtualQPixmap(const QPixmap_VTable* vtbl, const QString& fileName, const char* format): QPixmap(fileName, format), vtbl(vtbl) {}
 	VirtualQPixmap(const QPixmap_VTable* vtbl, const QString& fileName, const char* format, Qt::ImageConversionFlags flags): QPixmap(fileName, format, flags), vtbl(vtbl) {}
 
@@ -125,34 +125,34 @@ VirtualQPixmap* QPixmap_new(const QPixmap_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQPixmap(vtbl) : nullptr;
 }
 
-VirtualQPixmap* QPixmap_new2(const QPixmap_VTable* vtbl, size_t vdata, int w, int h) {
+VirtualQPixmap* QPixmap_new_int_int(const QPixmap_VTable* vtbl, size_t vdata, int w, int h) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPixmap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPixmap(vtbl, static_cast<int>(w), static_cast<int>(h)) : nullptr;
 }
 
-VirtualQPixmap* QPixmap_new3(const QPixmap_VTable* vtbl, size_t vdata, QSize* param1) {
+VirtualQPixmap* QPixmap_new_QSize(const QPixmap_VTable* vtbl, size_t vdata, QSize* param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPixmap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPixmap(vtbl, *param1) : nullptr;
 }
 
-VirtualQPixmap* QPixmap_new4(const QPixmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName) {
+VirtualQPixmap* QPixmap_new_QString(const QPixmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPixmap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPixmap(vtbl, fileName_QString) : nullptr;
 }
 
-VirtualQPixmap* QPixmap_new5(const QPixmap_VTable* vtbl, size_t vdata, QPixmap* param1) {
+VirtualQPixmap* QPixmap_new_QPixmap(const QPixmap_VTable* vtbl, size_t vdata, QPixmap* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPixmap>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQPixmap(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQPixmap(vtbl, *from) : nullptr;
 }
 
-VirtualQPixmap* QPixmap_new6(const QPixmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName, const char* format) {
+VirtualQPixmap* QPixmap_new_QString_char(const QPixmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName, const char* format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPixmap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPixmap(vtbl, fileName_QString, format) : nullptr;
 }
 
-VirtualQPixmap* QPixmap_new7(const QPixmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName, const char* format, int flags) {
+VirtualQPixmap* QPixmap_new_QString_char_Qt_ImageConversionFlags(const QPixmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName, const char* format, int flags) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPixmap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPixmap(vtbl, fileName_QString, format, static_cast<Qt::ImageConversionFlags>(flags)) : nullptr;
@@ -162,8 +162,8 @@ void QPixmap_virtbase(QPixmap* src, QPaintDevice** outptr_QPaintDevice) {
 	*outptr_QPaintDevice = static_cast<QPaintDevice*>(src);
 }
 
-void QPixmap_operatorAssign(QPixmap* self, QPixmap* param1) {
-	self->operator=(*param1);
+void QPixmap_operatorAssign(QPixmap* self, QPixmap* from) {
+	self->operator=(*from);
 }
 
 void QPixmap_swap(QPixmap* self, QPixmap* other) {
@@ -243,27 +243,27 @@ QBitmap* QPixmap_createHeuristicMask(const QPixmap* self) {
 	return new QBitmap(self->createHeuristicMask());
 }
 
-QBitmap* QPixmap_createMaskFromColor(const QPixmap* self, QColor* maskColor) {
+QBitmap* QPixmap_createMaskFromColor_maskColor(const QPixmap* self, QColor* maskColor) {
 	return new QBitmap(self->createMaskFromColor(*maskColor));
 }
 
-QPixmap* QPixmap_scaled(const QPixmap* self, int w, int h) {
+QPixmap* QPixmap_scaled_w_h(const QPixmap* self, int w, int h) {
 	return new QPixmap(self->scaled(static_cast<int>(w), static_cast<int>(h)));
 }
 
-QPixmap* QPixmap_scaledWithQSize(const QPixmap* self, QSize* s) {
+QPixmap* QPixmap_scaled_s(const QPixmap* self, QSize* s) {
 	return new QPixmap(self->scaled(*s));
 }
 
-QPixmap* QPixmap_scaledToWidth(const QPixmap* self, int w) {
+QPixmap* QPixmap_scaledToWidth_w(const QPixmap* self, int w) {
 	return new QPixmap(self->scaledToWidth(static_cast<int>(w)));
 }
 
-QPixmap* QPixmap_scaledToHeight(const QPixmap* self, int h) {
+QPixmap* QPixmap_scaledToHeight_h(const QPixmap* self, int h) {
 	return new QPixmap(self->scaledToHeight(static_cast<int>(h)));
 }
 
-QPixmap* QPixmap_transformed(const QPixmap* self, QTransform* param1) {
+QPixmap* QPixmap_transformed_QTransform(const QPixmap* self, QTransform* param1) {
 	return new QPixmap(self->transformed(*param1));
 }
 
@@ -275,54 +275,54 @@ QImage* QPixmap_toImage(const QPixmap* self) {
 	return new QImage(self->toImage());
 }
 
-QPixmap* QPixmap_fromImage(QImage* image) {
+QPixmap* QPixmap_fromImage_image(QImage* image) {
 	return new QPixmap(QPixmap::fromImage(*image));
 }
 
-QPixmap* QPixmap_fromImageReader(QImageReader* imageReader) {
+QPixmap* QPixmap_fromImageReader_imageReader(QImageReader* imageReader) {
 	return new QPixmap(QPixmap::fromImageReader(imageReader));
 }
 
-bool QPixmap_load(QPixmap* self, struct seaqt_string fileName) {
+bool QPixmap_load_fileName(QPixmap* self, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->load(fileName_QString);
 }
 
-bool QPixmap_loadFromData(QPixmap* self, const unsigned char* buf, unsigned int len) {
+bool QPixmap_loadFromData_buf_len(QPixmap* self, const unsigned char* buf, unsigned int len) {
 	return self->loadFromData(static_cast<const uchar*>(buf), static_cast<uint>(len));
 }
 
-bool QPixmap_loadFromDataWithData(QPixmap* self, struct seaqt_string data) {
+bool QPixmap_loadFromData_data(QPixmap* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return self->loadFromData(data_QByteArray);
 }
 
-bool QPixmap_save(const QPixmap* self, struct seaqt_string fileName) {
+bool QPixmap_save_fileName(const QPixmap* self, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->save(fileName_QString);
 }
 
-bool QPixmap_saveWithDevice(const QPixmap* self, QIODevice* device) {
+bool QPixmap_save_device(const QPixmap* self, QIODevice* device) {
 	return self->save(device);
 }
 
-bool QPixmap_convertFromImage(QPixmap* self, QImage* img) {
+bool QPixmap_convertFromImage_img(QPixmap* self, QImage* img) {
 	return self->convertFromImage(*img);
 }
 
-QPixmap* QPixmap_copy(const QPixmap* self, int x, int y, int width, int height) {
+QPixmap* QPixmap_copy_x_y_width_height(const QPixmap* self, int x, int y, int width, int height) {
 	return new QPixmap(self->copy(static_cast<int>(x), static_cast<int>(y), static_cast<int>(width), static_cast<int>(height)));
 }
 
-QPixmap* QPixmap_copy2(const QPixmap* self) {
+QPixmap* QPixmap_copy(const QPixmap* self) {
 	return new QPixmap(self->copy());
 }
 
-void QPixmap_scroll(QPixmap* self, int dx, int dy, int x, int y, int width, int height) {
+void QPixmap_scroll_dx_dy_x_y_width_height(QPixmap* self, int dx, int dy, int x, int y, int width, int height) {
 	self->scroll(static_cast<int>(dx), static_cast<int>(dy), static_cast<int>(x), static_cast<int>(y), static_cast<int>(width), static_cast<int>(height));
 }
 
-void QPixmap_scroll2(QPixmap* self, int dx, int dy, QRect* rect) {
+void QPixmap_scroll_dx_dy_rect(QPixmap* self, int dx, int dy, QRect* rect) {
 	self->scroll(static_cast<int>(dx), static_cast<int>(dy), *rect);
 }
 
@@ -351,113 +351,113 @@ bool QPixmap_operatorNot(const QPixmap* self) {
 	return self->operator!();
 }
 
-void QPixmap_fillWithFillColor(QPixmap* self, QColor* fillColor) {
+void QPixmap_fill_fillColor(QPixmap* self, QColor* fillColor) {
 	self->fill(*fillColor);
 }
 
-QBitmap* QPixmap_createHeuristicMaskWithClipTight(const QPixmap* self, bool clipTight) {
+QBitmap* QPixmap_createHeuristicMask_clipTight(const QPixmap* self, bool clipTight) {
 	return new QBitmap(self->createHeuristicMask(clipTight));
 }
 
-QBitmap* QPixmap_createMaskFromColor2(const QPixmap* self, QColor* maskColor, int mode) {
+QBitmap* QPixmap_createMaskFromColor_maskColor_mode(const QPixmap* self, QColor* maskColor, int mode) {
 	return new QBitmap(self->createMaskFromColor(*maskColor, static_cast<Qt::MaskMode>(mode)));
 }
 
-QPixmap* QPixmap_scaled2(const QPixmap* self, int w, int h, int aspectMode) {
+QPixmap* QPixmap_scaled_w_h_aspectMode(const QPixmap* self, int w, int h, int aspectMode) {
 	return new QPixmap(self->scaled(static_cast<int>(w), static_cast<int>(h), static_cast<Qt::AspectRatioMode>(aspectMode)));
 }
 
-QPixmap* QPixmap_scaled3(const QPixmap* self, int w, int h, int aspectMode, int mode) {
+QPixmap* QPixmap_scaled_w_h_aspectMode_mode(const QPixmap* self, int w, int h, int aspectMode, int mode) {
 	return new QPixmap(self->scaled(static_cast<int>(w), static_cast<int>(h), static_cast<Qt::AspectRatioMode>(aspectMode), static_cast<Qt::TransformationMode>(mode)));
 }
 
-QPixmap* QPixmap_scaled4(const QPixmap* self, QSize* s, int aspectMode) {
+QPixmap* QPixmap_scaled_s_aspectMode(const QPixmap* self, QSize* s, int aspectMode) {
 	return new QPixmap(self->scaled(*s, static_cast<Qt::AspectRatioMode>(aspectMode)));
 }
 
-QPixmap* QPixmap_scaled5(const QPixmap* self, QSize* s, int aspectMode, int mode) {
+QPixmap* QPixmap_scaled_s_aspectMode_mode(const QPixmap* self, QSize* s, int aspectMode, int mode) {
 	return new QPixmap(self->scaled(*s, static_cast<Qt::AspectRatioMode>(aspectMode), static_cast<Qt::TransformationMode>(mode)));
 }
 
-QPixmap* QPixmap_scaledToWidth2(const QPixmap* self, int w, int mode) {
+QPixmap* QPixmap_scaledToWidth_w_mode(const QPixmap* self, int w, int mode) {
 	return new QPixmap(self->scaledToWidth(static_cast<int>(w), static_cast<Qt::TransformationMode>(mode)));
 }
 
-QPixmap* QPixmap_scaledToHeight2(const QPixmap* self, int h, int mode) {
+QPixmap* QPixmap_scaledToHeight_h_mode(const QPixmap* self, int h, int mode) {
 	return new QPixmap(self->scaledToHeight(static_cast<int>(h), static_cast<Qt::TransformationMode>(mode)));
 }
 
-QPixmap* QPixmap_transformed2(const QPixmap* self, QTransform* param1, int mode) {
+QPixmap* QPixmap_transformed_QTransform_Qt_TransformationMode(const QPixmap* self, QTransform* param1, int mode) {
 	return new QPixmap(self->transformed(*param1, static_cast<Qt::TransformationMode>(mode)));
 }
 
-QPixmap* QPixmap_fromImage2(QImage* image, int flags) {
+QPixmap* QPixmap_fromImage_image_flags(QImage* image, int flags) {
 	return new QPixmap(QPixmap::fromImage(*image, static_cast<Qt::ImageConversionFlags>(flags)));
 }
 
-QPixmap* QPixmap_fromImageReader2(QImageReader* imageReader, int flags) {
+QPixmap* QPixmap_fromImageReader_imageReader_flags(QImageReader* imageReader, int flags) {
 	return new QPixmap(QPixmap::fromImageReader(imageReader, static_cast<Qt::ImageConversionFlags>(flags)));
 }
 
-bool QPixmap_load2(QPixmap* self, struct seaqt_string fileName, const char* format) {
+bool QPixmap_load_fileName_format(QPixmap* self, struct seaqt_string fileName, const char* format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->load(fileName_QString, format);
 }
 
-bool QPixmap_load3(QPixmap* self, struct seaqt_string fileName, const char* format, int flags) {
+bool QPixmap_load_fileName_format_flags(QPixmap* self, struct seaqt_string fileName, const char* format, int flags) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->load(fileName_QString, format, static_cast<Qt::ImageConversionFlags>(flags));
 }
 
-bool QPixmap_loadFromData2(QPixmap* self, const unsigned char* buf, unsigned int len, const char* format) {
+bool QPixmap_loadFromData_buf_len_format(QPixmap* self, const unsigned char* buf, unsigned int len, const char* format) {
 	return self->loadFromData(static_cast<const uchar*>(buf), static_cast<uint>(len), format);
 }
 
-bool QPixmap_loadFromData3(QPixmap* self, const unsigned char* buf, unsigned int len, const char* format, int flags) {
+bool QPixmap_loadFromData_buf_len_format_flags(QPixmap* self, const unsigned char* buf, unsigned int len, const char* format, int flags) {
 	return self->loadFromData(static_cast<const uchar*>(buf), static_cast<uint>(len), format, static_cast<Qt::ImageConversionFlags>(flags));
 }
 
-bool QPixmap_loadFromData4(QPixmap* self, struct seaqt_string data, const char* format) {
+bool QPixmap_loadFromData_data_format(QPixmap* self, struct seaqt_string data, const char* format) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return self->loadFromData(data_QByteArray, format);
 }
 
-bool QPixmap_loadFromData5(QPixmap* self, struct seaqt_string data, const char* format, int flags) {
+bool QPixmap_loadFromData_data_format_flags(QPixmap* self, struct seaqt_string data, const char* format, int flags) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return self->loadFromData(data_QByteArray, format, static_cast<Qt::ImageConversionFlags>(flags));
 }
 
-bool QPixmap_save2(const QPixmap* self, struct seaqt_string fileName, const char* format) {
+bool QPixmap_save_fileName_format(const QPixmap* self, struct seaqt_string fileName, const char* format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->save(fileName_QString, format);
 }
 
-bool QPixmap_save3(const QPixmap* self, struct seaqt_string fileName, const char* format, int quality) {
+bool QPixmap_save_fileName_format_quality(const QPixmap* self, struct seaqt_string fileName, const char* format, int quality) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->save(fileName_QString, format, static_cast<int>(quality));
 }
 
-bool QPixmap_save4(const QPixmap* self, QIODevice* device, const char* format) {
+bool QPixmap_save_device_format(const QPixmap* self, QIODevice* device, const char* format) {
 	return self->save(device, format);
 }
 
-bool QPixmap_save5(const QPixmap* self, QIODevice* device, const char* format, int quality) {
+bool QPixmap_save_device_format_quality(const QPixmap* self, QIODevice* device, const char* format, int quality) {
 	return self->save(device, format, static_cast<int>(quality));
 }
 
-bool QPixmap_convertFromImage2(QPixmap* self, QImage* img, int flags) {
+bool QPixmap_convertFromImage_img_flags(QPixmap* self, QImage* img, int flags) {
 	return self->convertFromImage(*img, static_cast<Qt::ImageConversionFlags>(flags));
 }
 
-QPixmap* QPixmap_copyWithRect(const QPixmap* self, QRect* rect) {
+QPixmap* QPixmap_copy_rect(const QPixmap* self, QRect* rect) {
 	return new QPixmap(self->copy(*rect));
 }
 
-void QPixmap_scroll3(QPixmap* self, int dx, int dy, int x, int y, int width, int height, QRegion* exposed) {
+void QPixmap_scroll_dx_dy_x_y_width_height_exposed(QPixmap* self, int dx, int dy, int x, int y, int width, int height, QRegion* exposed) {
 	self->scroll(static_cast<int>(dx), static_cast<int>(dy), static_cast<int>(x), static_cast<int>(y), static_cast<int>(width), static_cast<int>(height), exposed);
 }
 
-void QPixmap_scroll4(QPixmap* self, int dx, int dy, QRect* rect, QRegion* exposed) {
+void QPixmap_scroll_dx_dy_rect_exposed(QPixmap* self, int dx, int dy, QRect* rect, QRegion* exposed) {
 	self->scroll(static_cast<int>(dx), static_cast<int>(dy), *rect, exposed);
 }
 

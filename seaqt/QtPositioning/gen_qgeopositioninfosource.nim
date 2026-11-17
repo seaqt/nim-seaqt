@@ -75,7 +75,7 @@ type cQGeoPositionInfoSource*{.exportc: "QGeoPositionInfoSource", incompleteStru
 proc fcQGeoPositionInfoSource_metaObject(self: pointer): pointer {.importc: "QGeoPositionInfoSource_metaObject".}
 proc fcQGeoPositionInfoSource_metacast(self: pointer, param1: cstring): pointer {.importc: "QGeoPositionInfoSource_metacast".}
 proc fcQGeoPositionInfoSource_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGeoPositionInfoSource_metacall".}
-proc fcQGeoPositionInfoSource_tr(s: cstring): struct_seaqt_string {.importc: "QGeoPositionInfoSource_tr".}
+proc fcQGeoPositionInfoSource_trS(s: cstring): struct_seaqt_string {.importc: "QGeoPositionInfoSource_tr_s".}
 proc fcQGeoPositionInfoSource_setUpdateInterval(self: pointer, msec: cint): void {.importc: "QGeoPositionInfoSource_setUpdateInterval".}
 proc fcQGeoPositionInfoSource_updateInterval(self: pointer): cint {.importc: "QGeoPositionInfoSource_updateInterval".}
 proc fcQGeoPositionInfoSource_setPreferredPositioningMethods(self: pointer, methods: cint): void {.importc: "QGeoPositionInfoSource_setPreferredPositioningMethods".}
@@ -86,10 +86,10 @@ proc fcQGeoPositionInfoSource_minimumUpdateInterval(self: pointer): cint {.impor
 proc fcQGeoPositionInfoSource_sourceName(self: pointer): struct_seaqt_string {.importc: "QGeoPositionInfoSource_sourceName".}
 proc fcQGeoPositionInfoSource_setBackendProperty(self: pointer, name: struct_seaqt_string, value: pointer): bool {.importc: "QGeoPositionInfoSource_setBackendProperty".}
 proc fcQGeoPositionInfoSource_backendProperty(self: pointer, name: struct_seaqt_string): pointer {.importc: "QGeoPositionInfoSource_backendProperty".}
-proc fcQGeoPositionInfoSource_createDefaultSource(parent: pointer): pointer {.importc: "QGeoPositionInfoSource_createDefaultSource".}
-proc fcQGeoPositionInfoSource_createDefaultSource2(parameters: struct_seaqt_map, parent: pointer): pointer {.importc: "QGeoPositionInfoSource_createDefaultSource2".}
-proc fcQGeoPositionInfoSource_createSource(sourceName: struct_seaqt_string, parent: pointer): pointer {.importc: "QGeoPositionInfoSource_createSource".}
-proc fcQGeoPositionInfoSource_createSource2(sourceName: struct_seaqt_string, parameters: struct_seaqt_map, parent: pointer): pointer {.importc: "QGeoPositionInfoSource_createSource2".}
+proc fcQGeoPositionInfoSource_createDefaultSource_QObject(parent: pointer): pointer {.importc: "QGeoPositionInfoSource_createDefaultSource_QObject".}
+proc fcQGeoPositionInfoSource_createDefaultSource_QVariantMap_QObject(parameters: struct_seaqt_map, parent: pointer): pointer {.importc: "QGeoPositionInfoSource_createDefaultSource_QVariantMap_QObject".}
+proc fcQGeoPositionInfoSource_createSource_QString_QObject(sourceName: struct_seaqt_string, parent: pointer): pointer {.importc: "QGeoPositionInfoSource_createSource_QString_QObject".}
+proc fcQGeoPositionInfoSource_createSource_QString_QVariantMap_QObject(sourceName: struct_seaqt_string, parameters: struct_seaqt_map, parent: pointer): pointer {.importc: "QGeoPositionInfoSource_createSource_QString_QVariantMap_QObject".}
 proc fcQGeoPositionInfoSource_availableSources(): struct_seaqt_array {.importc: "QGeoPositionInfoSource_availableSources".}
 proc fcQGeoPositionInfoSource_error(self: pointer): cint {.importc: "QGeoPositionInfoSource_error".}
 proc fcQGeoPositionInfoSource_startUpdates(self: pointer): void {.importc: "QGeoPositionInfoSource_startUpdates".}
@@ -101,8 +101,8 @@ proc fcQGeoPositionInfoSource_errorOccurred(self: pointer, param1: cint): void {
 proc fcQGeoPositionInfoSource_connect_errorOccurred(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoPositionInfoSource_connect_errorOccurred".}
 proc fcQGeoPositionInfoSource_supportedPositioningMethodsChanged(self: pointer): void {.importc: "QGeoPositionInfoSource_supportedPositioningMethodsChanged".}
 proc fcQGeoPositionInfoSource_connect_supportedPositioningMethodsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoPositionInfoSource_connect_supportedPositioningMethodsChanged".}
-proc fcQGeoPositionInfoSource_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGeoPositionInfoSource_tr2".}
-proc fcQGeoPositionInfoSource_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGeoPositionInfoSource_tr3".}
+proc fcQGeoPositionInfoSource_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGeoPositionInfoSource_tr_s_c".}
+proc fcQGeoPositionInfoSource_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGeoPositionInfoSource_tr_s_c_n".}
 proc fcQGeoPositionInfoSource_vdata(self: pointer): ptr pointer {.importc: "QGeoPositionInfoSource_vdata".}
 proc fvdata_cQGeoPositionInfoSource(self: pointer): pointer {.importc: "vdata_QGeoPositionInfoSource".}
 
@@ -160,7 +160,7 @@ proc metacall*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource, pa
   fcQGeoPositionInfoSource_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, s: cstring): string =
-  let v_ms = fcQGeoPositionInfoSource_tr(s)
+  let v_ms = fcQGeoPositionInfoSource_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -199,7 +199,7 @@ proc backendProperty*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSou
   gen_qvariant_types.QVariant(h: fcQGeoPositionInfoSource_backendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc createDefaultSource*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createDefaultSource(parent.h), owned: false)
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createDefaultSource_QObject(parent.h), owned: false)
 
 proc createDefaultSource*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, parameters: Table[string,gen_qvariant_types.QVariant], parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
@@ -213,10 +213,10 @@ proc createDefaultSource*(_: type gen_qgeopositioninfosource_types.QGeoPositionI
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createDefaultSource2(struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createDefaultSource_QVariantMap_QObject(struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
 
 proc createSource*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, sourceName: openArray[char], parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createSource(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), parent.h), owned: false)
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createSource_QString_QObject(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), parent.h), owned: false)
 
 proc createSource*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, sourceName: openArray[char], parameters: Table[string,gen_qvariant_types.QVariant], parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
@@ -230,7 +230,7 @@ proc createSource*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSour
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createSource2(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createSource_QString_QVariantMap_QObject(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
 
 proc availableSources*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource): seq[string] =
   var v_ma = fcQGeoPositionInfoSource_availableSources()
@@ -315,13 +315,13 @@ proc onSupportedPositioningMethodsChanged*(self: gen_qgeopositioninfosource_type
   fcQGeoPositionInfoSource_connect_supportedPositioningMethodsChanged(self.h, cast[int](addr tmp[]), fcQGeoPositionInfoSource_slot_callback_supportedPositioningMethodsChanged, fcQGeoPositionInfoSource_slot_callback_supportedPositioningMethodsChanged_release)
 
 proc tr*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, s: cstring, c: cstring): string =
-  let v_ms = fcQGeoPositionInfoSource_tr2(s, c)
+  let v_ms = fcQGeoPositionInfoSource_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGeoPositionInfoSource_tr3(s, c, n)
+  let v_ms = fcQGeoPositionInfoSource_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

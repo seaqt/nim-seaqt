@@ -45,25 +45,25 @@ export
 
 type cQSqlRecord*{.exportc: "QSqlRecord", incompleteStruct.} = object
 
-proc fcQSqlRecord_operatorAssign(self: pointer, other: pointer): void {.importc: "QSqlRecord_operatorAssign".}
+proc fcQSqlRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSqlRecord_operatorAssign".}
 proc fcQSqlRecord_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSqlRecord_operatorEqual".}
 proc fcQSqlRecord_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QSqlRecord_operatorNotEqual".}
-proc fcQSqlRecord_value(self: pointer, i: cint): pointer {.importc: "QSqlRecord_value".}
-proc fcQSqlRecord_valueWithName(self: pointer, name: struct_seaqt_string): pointer {.importc: "QSqlRecord_valueWithName".}
-proc fcQSqlRecord_setValue(self: pointer, i: cint, val: pointer): void {.importc: "QSqlRecord_setValue".}
-proc fcQSqlRecord_setValue2(self: pointer, name: struct_seaqt_string, val: pointer): void {.importc: "QSqlRecord_setValue2".}
-proc fcQSqlRecord_setNull(self: pointer, i: cint): void {.importc: "QSqlRecord_setNull".}
-proc fcQSqlRecord_setNullWithName(self: pointer, name: struct_seaqt_string): void {.importc: "QSqlRecord_setNullWithName".}
-proc fcQSqlRecord_isNull(self: pointer, i: cint): bool {.importc: "QSqlRecord_isNull".}
-proc fcQSqlRecord_isNullWithName(self: pointer, name: struct_seaqt_string): bool {.importc: "QSqlRecord_isNullWithName".}
+proc fcQSqlRecord_valueI(self: pointer, i: cint): pointer {.importc: "QSqlRecord_value_i".}
+proc fcQSqlRecord_valueName(self: pointer, name: struct_seaqt_string): pointer {.importc: "QSqlRecord_value_name".}
+proc fcQSqlRecord_setValueIVal(self: pointer, i: cint, val: pointer): void {.importc: "QSqlRecord_setValue_i_val".}
+proc fcQSqlRecord_setValueNameVal(self: pointer, name: struct_seaqt_string, val: pointer): void {.importc: "QSqlRecord_setValue_name_val".}
+proc fcQSqlRecord_setNullI(self: pointer, i: cint): void {.importc: "QSqlRecord_setNull_i".}
+proc fcQSqlRecord_setNullName(self: pointer, name: struct_seaqt_string): void {.importc: "QSqlRecord_setNull_name".}
+proc fcQSqlRecord_isNullI(self: pointer, i: cint): bool {.importc: "QSqlRecord_isNull_i".}
+proc fcQSqlRecord_isNullName(self: pointer, name: struct_seaqt_string): bool {.importc: "QSqlRecord_isNull_name".}
 proc fcQSqlRecord_indexOf(self: pointer, name: struct_seaqt_string): cint {.importc: "QSqlRecord_indexOf".}
 proc fcQSqlRecord_fieldName(self: pointer, i: cint): struct_seaqt_string {.importc: "QSqlRecord_fieldName".}
-proc fcQSqlRecord_field(self: pointer, i: cint): pointer {.importc: "QSqlRecord_field".}
-proc fcQSqlRecord_fieldWithName(self: pointer, name: struct_seaqt_string): pointer {.importc: "QSqlRecord_fieldWithName".}
-proc fcQSqlRecord_isGenerated(self: pointer, i: cint): bool {.importc: "QSqlRecord_isGenerated".}
-proc fcQSqlRecord_isGeneratedWithName(self: pointer, name: struct_seaqt_string): bool {.importc: "QSqlRecord_isGeneratedWithName".}
-proc fcQSqlRecord_setGenerated(self: pointer, name: struct_seaqt_string, generated: bool): void {.importc: "QSqlRecord_setGenerated".}
-proc fcQSqlRecord_setGenerated2(self: pointer, i: cint, generated: bool): void {.importc: "QSqlRecord_setGenerated2".}
+proc fcQSqlRecord_fieldI(self: pointer, i: cint): pointer {.importc: "QSqlRecord_field_i".}
+proc fcQSqlRecord_fieldName(self: pointer, name: struct_seaqt_string): pointer {.importc: "QSqlRecord_field_name".}
+proc fcQSqlRecord_isGeneratedI(self: pointer, i: cint): bool {.importc: "QSqlRecord_isGenerated_i".}
+proc fcQSqlRecord_isGeneratedName(self: pointer, name: struct_seaqt_string): bool {.importc: "QSqlRecord_isGenerated_name".}
+proc fcQSqlRecord_setGeneratedNameGenerated(self: pointer, name: struct_seaqt_string, generated: bool): void {.importc: "QSqlRecord_setGenerated_name_generated".}
+proc fcQSqlRecord_setGeneratedIGenerated(self: pointer, i: cint, generated: bool): void {.importc: "QSqlRecord_setGenerated_i_generated".}
 proc fcQSqlRecord_append(self: pointer, field: pointer): void {.importc: "QSqlRecord_append".}
 proc fcQSqlRecord_replace(self: pointer, pos: cint, field: pointer): void {.importc: "QSqlRecord_replace".}
 proc fcQSqlRecord_insert(self: pointer, pos: cint, field: pointer): void {.importc: "QSqlRecord_insert".}
@@ -75,10 +75,10 @@ proc fcQSqlRecord_clearValues(self: pointer): void {.importc: "QSqlRecord_clearV
 proc fcQSqlRecord_count(self: pointer): cint {.importc: "QSqlRecord_count".}
 proc fcQSqlRecord_keyValues(self: pointer, keyFields: pointer): pointer {.importc: "QSqlRecord_keyValues".}
 proc fcQSqlRecord_new(): ptr cQSqlRecord {.importc: "QSqlRecord_new".}
-proc fcQSqlRecord_new2(other: pointer): ptr cQSqlRecord {.importc: "QSqlRecord_new2".}
+proc fcQSqlRecord_new2(fromVal: pointer): ptr cQSqlRecord {.importc: "QSqlRecord_new_from".}
 
-proc operatorAssign*(self: gen_qsqlrecord_types.QSqlRecord, other: gen_qsqlrecord_types.QSqlRecord): void =
-  fcQSqlRecord_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qsqlrecord_types.QSqlRecord, fromVal: gen_qsqlrecord_types.QSqlRecord): void =
+  fcQSqlRecord_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qsqlrecord_types.QSqlRecord, other: gen_qsqlrecord_types.QSqlRecord): bool =
   fcQSqlRecord_operatorEqual(self.h, other.h)
@@ -87,28 +87,28 @@ proc operatorNotEqual*(self: gen_qsqlrecord_types.QSqlRecord, other: gen_qsqlrec
   fcQSqlRecord_operatorNotEqual(self.h, other.h)
 
 proc value*(self: gen_qsqlrecord_types.QSqlRecord, i: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlRecord_value(self.h, i), owned: true)
+  gen_qvariant_types.QVariant(h: fcQSqlRecord_valueI(self.h, i), owned: true)
 
 proc value*(self: gen_qsqlrecord_types.QSqlRecord, name: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlRecord_valueWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
+  gen_qvariant_types.QVariant(h: fcQSqlRecord_valueName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc setValue*(self: gen_qsqlrecord_types.QSqlRecord, i: cint, val: gen_qvariant_types.QVariant): void =
-  fcQSqlRecord_setValue(self.h, i, val.h)
+  fcQSqlRecord_setValueIVal(self.h, i, val.h)
 
 proc setValue*(self: gen_qsqlrecord_types.QSqlRecord, name: openArray[char], val: gen_qvariant_types.QVariant): void =
-  fcQSqlRecord_setValue2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), val.h)
+  fcQSqlRecord_setValueNameVal(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), val.h)
 
 proc setNull*(self: gen_qsqlrecord_types.QSqlRecord, i: cint): void =
-  fcQSqlRecord_setNull(self.h, i)
+  fcQSqlRecord_setNullI(self.h, i)
 
 proc setNull*(self: gen_qsqlrecord_types.QSqlRecord, name: openArray[char]): void =
-  fcQSqlRecord_setNullWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  fcQSqlRecord_setNullName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc isNull*(self: gen_qsqlrecord_types.QSqlRecord, i: cint): bool =
-  fcQSqlRecord_isNull(self.h, i)
+  fcQSqlRecord_isNullI(self.h, i)
 
 proc isNull*(self: gen_qsqlrecord_types.QSqlRecord, name: openArray[char]): bool =
-  fcQSqlRecord_isNullWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  fcQSqlRecord_isNullName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc indexOf*(self: gen_qsqlrecord_types.QSqlRecord, name: openArray[char]): cint =
   fcQSqlRecord_indexOf(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
@@ -120,22 +120,22 @@ proc fieldName*(self: gen_qsqlrecord_types.QSqlRecord, i: cint): string =
   vx_ret
 
 proc field*(self: gen_qsqlrecord_types.QSqlRecord, i: cint): gen_qsqlfield_types.QSqlField =
-  gen_qsqlfield_types.QSqlField(h: fcQSqlRecord_field(self.h, i), owned: true)
+  gen_qsqlfield_types.QSqlField(h: fcQSqlRecord_fieldI(self.h, i), owned: true)
 
 proc field*(self: gen_qsqlrecord_types.QSqlRecord, name: openArray[char]): gen_qsqlfield_types.QSqlField =
-  gen_qsqlfield_types.QSqlField(h: fcQSqlRecord_fieldWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
+  gen_qsqlfield_types.QSqlField(h: fcQSqlRecord_fieldName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc isGenerated*(self: gen_qsqlrecord_types.QSqlRecord, i: cint): bool =
-  fcQSqlRecord_isGenerated(self.h, i)
+  fcQSqlRecord_isGeneratedI(self.h, i)
 
 proc isGenerated*(self: gen_qsqlrecord_types.QSqlRecord, name: openArray[char]): bool =
-  fcQSqlRecord_isGeneratedWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  fcQSqlRecord_isGeneratedName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc setGenerated*(self: gen_qsqlrecord_types.QSqlRecord, name: openArray[char], generated: bool): void =
-  fcQSqlRecord_setGenerated(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), generated)
+  fcQSqlRecord_setGeneratedNameGenerated(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), generated)
 
 proc setGenerated*(self: gen_qsqlrecord_types.QSqlRecord, i: cint, generated: bool): void =
-  fcQSqlRecord_setGenerated2(self.h, i, generated)
+  fcQSqlRecord_setGeneratedIGenerated(self.h, i, generated)
 
 proc append*(self: gen_qsqlrecord_types.QSqlRecord, field: gen_qsqlfield_types.QSqlField): void =
   fcQSqlRecord_append(self.h, field.h)
@@ -171,6 +171,6 @@ proc create*(T: type gen_qsqlrecord_types.QSqlRecord): gen_qsqlrecord_types.QSql
   let tmp = gen_qsqlrecord_types.QSqlRecord(h: fcQSqlRecord_new(), owned: true)
   tmp
 proc create*(T: type gen_qsqlrecord_types.QSqlRecord,
-    other: gen_qsqlrecord_types.QSqlRecord): gen_qsqlrecord_types.QSqlRecord =
-  let tmp = gen_qsqlrecord_types.QSqlRecord(h: fcQSqlRecord_new2(other.h), owned: true)
+    fromVal: gen_qsqlrecord_types.QSqlRecord): gen_qsqlrecord_types.QSqlRecord =
+  let tmp = gen_qsqlrecord_types.QSqlRecord(h: fcQSqlRecord_new2(fromVal.h), owned: true)
   tmp

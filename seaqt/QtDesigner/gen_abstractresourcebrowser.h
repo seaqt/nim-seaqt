@@ -145,21 +145,21 @@ void* QDesignerResourceBrowserInterface_vdata(VirtualQDesignerResourceBrowserInt
 VirtualQDesignerResourceBrowserInterface* vdata_QDesignerResourceBrowserInterface(void* vdata);
 
 VirtualQDesignerResourceBrowserInterface* QDesignerResourceBrowserInterface_new(const QDesignerResourceBrowserInterface_VTable* vtbl, size_t vdata);
-VirtualQDesignerResourceBrowserInterface* QDesignerResourceBrowserInterface_new2(const QDesignerResourceBrowserInterface_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDesignerResourceBrowserInterface* QDesignerResourceBrowserInterface_new_parent(const QDesignerResourceBrowserInterface_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QDesignerResourceBrowserInterface_virtbase(QDesignerResourceBrowserInterface* src, QWidget** outptr_QWidget);
 QMetaObject* QDesignerResourceBrowserInterface_metaObject(const QDesignerResourceBrowserInterface* self);
 void* QDesignerResourceBrowserInterface_metacast(QDesignerResourceBrowserInterface* self, const char* param1);
 int QDesignerResourceBrowserInterface_metacall(QDesignerResourceBrowserInterface* self, int param1, int param2, void** param3);
-struct seaqt_string QDesignerResourceBrowserInterface_tr(const char* s);
+struct seaqt_string QDesignerResourceBrowserInterface_tr_s(const char* s);
 void QDesignerResourceBrowserInterface_setCurrentPath(QDesignerResourceBrowserInterface* self, struct seaqt_string filePath);
 struct seaqt_string QDesignerResourceBrowserInterface_currentPath(const QDesignerResourceBrowserInterface* self);
 void QDesignerResourceBrowserInterface_currentPathChanged(QDesignerResourceBrowserInterface* self, struct seaqt_string filePath);
 void QDesignerResourceBrowserInterface_connect_currentPathChanged(QDesignerResourceBrowserInterface* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
 void QDesignerResourceBrowserInterface_pathActivated(QDesignerResourceBrowserInterface* self, struct seaqt_string filePath);
 void QDesignerResourceBrowserInterface_connect_pathActivated(QDesignerResourceBrowserInterface* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
-struct seaqt_string QDesignerResourceBrowserInterface_tr2(const char* s, const char* c);
-struct seaqt_string QDesignerResourceBrowserInterface_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDesignerResourceBrowserInterface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDesignerResourceBrowserInterface_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDesignerResourceBrowserInterface_virtualbase_metaObject(const VirtualQDesignerResourceBrowserInterface* self);
 void* QDesignerResourceBrowserInterface_virtualbase_metacast(VirtualQDesignerResourceBrowserInterface* self, const char* param1);

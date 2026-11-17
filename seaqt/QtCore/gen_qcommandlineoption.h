@@ -20,17 +20,17 @@ class QCommandLineOption;
 typedef struct QCommandLineOption QCommandLineOption;
 #endif
 
-QCommandLineOption* QCommandLineOption_new(struct seaqt_string name);
-QCommandLineOption* QCommandLineOption_new2(struct seaqt_array /* of struct seaqt_string */  names);
-QCommandLineOption* QCommandLineOption_new3(struct seaqt_string name, struct seaqt_string description);
-QCommandLineOption* QCommandLineOption_new4(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description);
-QCommandLineOption* QCommandLineOption_new5(QCommandLineOption* other);
-QCommandLineOption* QCommandLineOption_new6(struct seaqt_string name, struct seaqt_string description, struct seaqt_string valueName);
-QCommandLineOption* QCommandLineOption_new7(struct seaqt_string name, struct seaqt_string description, struct seaqt_string valueName, struct seaqt_string defaultValue);
-QCommandLineOption* QCommandLineOption_new8(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description, struct seaqt_string valueName);
-QCommandLineOption* QCommandLineOption_new9(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description, struct seaqt_string valueName, struct seaqt_string defaultValue);
+QCommandLineOption* QCommandLineOption_new_name(struct seaqt_string name);
+QCommandLineOption* QCommandLineOption_new_names(struct seaqt_array /* of struct seaqt_string */  names);
+QCommandLineOption* QCommandLineOption_new_name_description(struct seaqt_string name, struct seaqt_string description);
+QCommandLineOption* QCommandLineOption_new_names_description(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description);
+QCommandLineOption* QCommandLineOption_new_from(QCommandLineOption* from);
+QCommandLineOption* QCommandLineOption_new_name_description_valueName(struct seaqt_string name, struct seaqt_string description, struct seaqt_string valueName);
+QCommandLineOption* QCommandLineOption_new_name_description_valueName_defaultValue(struct seaqt_string name, struct seaqt_string description, struct seaqt_string valueName, struct seaqt_string defaultValue);
+QCommandLineOption* QCommandLineOption_new_names_description_valueName(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description, struct seaqt_string valueName);
+QCommandLineOption* QCommandLineOption_new_names_description_valueName_defaultValue(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description, struct seaqt_string valueName, struct seaqt_string defaultValue);
 
-void QCommandLineOption_operatorAssign(QCommandLineOption* self, QCommandLineOption* other);
+void QCommandLineOption_operatorAssign(QCommandLineOption* self, QCommandLineOption* from);
 void QCommandLineOption_swap(QCommandLineOption* self, QCommandLineOption* other);
 struct seaqt_array /* of struct seaqt_string */  QCommandLineOption_names(const QCommandLineOption* self);
 void QCommandLineOption_setValueName(QCommandLineOption* self, struct seaqt_string name);

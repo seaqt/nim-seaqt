@@ -49,8 +49,8 @@ typedef struct QTcpSocket_VTable{
 	void* (*metacast)(VirtualQTcpSocket* self, const char* param1);
 	int (*metacall)(VirtualQTcpSocket* self, int param1, int param2, void** param3);
 	void (*resume)(VirtualQTcpSocket* self);
-	bool (*bind)(VirtualQTcpSocket* self, QHostAddress* address, unsigned short port, int mode);
-	void (*connectToHost)(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
+	bool (*bind_address_port_mode)(VirtualQTcpSocket* self, QHostAddress* address, unsigned short port, int mode);
+	void (*connectToHost_hostName_port_mode_protocol)(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
 	void (*disconnectFromHost)(VirtualQTcpSocket* self);
 	long long (*bytesAvailable)(const VirtualQTcpSocket* self);
 	long long (*bytesToWrite)(const VirtualQTcpSocket* self);
@@ -89,25 +89,25 @@ void* QTcpSocket_vdata(VirtualQTcpSocket* self);
 VirtualQTcpSocket* vdata_QTcpSocket(void* vdata);
 
 VirtualQTcpSocket* QTcpSocket_new(const QTcpSocket_VTable* vtbl, size_t vdata);
-VirtualQTcpSocket* QTcpSocket_new2(const QTcpSocket_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQTcpSocket* QTcpSocket_new_parent(const QTcpSocket_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QTcpSocket_virtbase(QTcpSocket* src, QAbstractSocket** outptr_QAbstractSocket);
 QMetaObject* QTcpSocket_metaObject(const QTcpSocket* self);
 void* QTcpSocket_metacast(QTcpSocket* self, const char* param1);
 int QTcpSocket_metacall(QTcpSocket* self, int param1, int param2, void** param3);
-struct seaqt_string QTcpSocket_tr(const char* s);
-bool QTcpSocket_bind(QTcpSocket* self, int addr);
-struct seaqt_string QTcpSocket_tr2(const char* s, const char* c);
-struct seaqt_string QTcpSocket_tr3(const char* s, const char* c, int n);
-bool QTcpSocket_bind2(QTcpSocket* self, int addr, unsigned short port);
-bool QTcpSocket_bind3(QTcpSocket* self, int addr, unsigned short port, int mode);
+struct seaqt_string QTcpSocket_tr_s(const char* s);
+bool QTcpSocket_bind_addr(QTcpSocket* self, int addr);
+struct seaqt_string QTcpSocket_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTcpSocket_tr_s_c_n(const char* s, const char* c, int n);
+bool QTcpSocket_bind_addr_port(QTcpSocket* self, int addr, unsigned short port);
+bool QTcpSocket_bind_addr_port_mode(QTcpSocket* self, int addr, unsigned short port, int mode);
 
 QMetaObject* QTcpSocket_virtualbase_metaObject(const VirtualQTcpSocket* self);
 void* QTcpSocket_virtualbase_metacast(VirtualQTcpSocket* self, const char* param1);
 int QTcpSocket_virtualbase_metacall(VirtualQTcpSocket* self, int param1, int param2, void** param3);
 void QTcpSocket_virtualbase_resume(VirtualQTcpSocket* self);
-bool QTcpSocket_virtualbase_bind(VirtualQTcpSocket* self, QHostAddress* address, unsigned short port, int mode);
-void QTcpSocket_virtualbase_connectToHost(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
+bool QTcpSocket_virtualbase_bind_address_port_mode(VirtualQTcpSocket* self, QHostAddress* address, unsigned short port, int mode);
+void QTcpSocket_virtualbase_connectToHost_hostName_port_mode_protocol(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
 void QTcpSocket_virtualbase_disconnectFromHost(VirtualQTcpSocket* self);
 long long QTcpSocket_virtualbase_bytesAvailable(const VirtualQTcpSocket* self);
 long long QTcpSocket_virtualbase_bytesToWrite(const VirtualQTcpSocket* self);

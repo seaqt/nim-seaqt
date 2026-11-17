@@ -54,11 +54,11 @@ void QQmlImageProviderBase_virtbase(QQmlImageProviderBase* src, QObject** outptr
 QMetaObject* QQmlImageProviderBase_metaObject(const QQmlImageProviderBase* self);
 void* QQmlImageProviderBase_metacast(QQmlImageProviderBase* self, const char* param1);
 int QQmlImageProviderBase_metacall(QQmlImageProviderBase* self, int param1, int param2, void** param3);
-struct seaqt_string QQmlImageProviderBase_tr(const char* s);
+struct seaqt_string QQmlImageProviderBase_tr_s(const char* s);
 int QQmlImageProviderBase_imageType(const QQmlImageProviderBase* self);
 int QQmlImageProviderBase_flags(const QQmlImageProviderBase* self);
-struct seaqt_string QQmlImageProviderBase_tr2(const char* s, const char* c);
-struct seaqt_string QQmlImageProviderBase_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQmlImageProviderBase_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQmlImageProviderBase_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QQmlImageProviderBase_staticMetaObject();
 void QQmlImageProviderBase_delete(QQmlImageProviderBase* self);
@@ -82,13 +82,13 @@ void* QQmlEngine_vdata(VirtualQQmlEngine* self);
 VirtualQQmlEngine* vdata_QQmlEngine(void* vdata);
 
 VirtualQQmlEngine* QQmlEngine_new(const QQmlEngine_VTable* vtbl, size_t vdata);
-VirtualQQmlEngine* QQmlEngine_new2(const QQmlEngine_VTable* vtbl, size_t vdata, QObject* p);
+VirtualQQmlEngine* QQmlEngine_new_p(const QQmlEngine_VTable* vtbl, size_t vdata, QObject* p);
 
 void QQmlEngine_virtbase(QQmlEngine* src, QJSEngine** outptr_QJSEngine);
 QMetaObject* QQmlEngine_metaObject(const QQmlEngine* self);
 void* QQmlEngine_metacast(QQmlEngine* self, const char* param1);
 int QQmlEngine_metacall(QQmlEngine* self, int param1, int param2, void** param3);
-struct seaqt_string QQmlEngine_tr(const char* s);
+struct seaqt_string QQmlEngine_tr_s(const char* s);
 QQmlContext* QQmlEngine_rootContext(const QQmlEngine* self);
 void QQmlEngine_clearComponentCache(QQmlEngine* self);
 void QQmlEngine_trimComponentCache(QQmlEngine* self);
@@ -132,8 +132,8 @@ void QQmlEngine_exit(QQmlEngine* self, int retCode);
 void QQmlEngine_connect_exit(QQmlEngine* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QQmlEngine_warnings(QQmlEngine* self, struct seaqt_array /* of QQmlError* */  warnings);
 void QQmlEngine_connect_warnings(QQmlEngine* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QQmlError* */ ), void (*release)(intptr_t));
-struct seaqt_string QQmlEngine_tr2(const char* s, const char* c);
-struct seaqt_string QQmlEngine_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQmlEngine_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQmlEngine_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQmlEngine_virtualbase_metaObject(const VirtualQQmlEngine* self);
 void* QQmlEngine_virtualbase_metacast(VirtualQQmlEngine* self, const char* param1);

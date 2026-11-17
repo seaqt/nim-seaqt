@@ -146,11 +146,11 @@ int QSGNode_flags(const QSGNode* self) {
 	return static_cast<int>(_ret);
 }
 
-void QSGNode_setFlag(QSGNode* self, int param1) {
+void QSGNode_setFlag_QSGNode_Flag(QSGNode* self, int param1) {
 	self->setFlag(static_cast<QSGNode::Flag>(param1));
 }
 
-void QSGNode_setFlags(QSGNode* self, int param1) {
+void QSGNode_setFlags_QSGNode_Flags(QSGNode* self, int param1) {
 	self->setFlags(static_cast<QSGNode::Flags>(param1));
 }
 
@@ -158,11 +158,11 @@ void QSGNode_preprocess(QSGNode* self) {
 	self->preprocess();
 }
 
-void QSGNode_setFlag2(QSGNode* self, int param1, bool param2) {
+void QSGNode_setFlag_QSGNode_Flag_bool(QSGNode* self, int param1, bool param2) {
 	self->setFlag(static_cast<QSGNode::Flag>(param1), param2);
 }
 
-void QSGNode_setFlags2(QSGNode* self, int param1, bool param2) {
+void QSGNode_setFlags_QSGNode_Flags_bool(QSGNode* self, int param1, bool param2) {
 	self->setFlags(static_cast<QSGNode::Flags>(param1), param2);
 }
 
@@ -191,11 +191,11 @@ void QSGBasicGeometryNode_setGeometry(QSGBasicGeometryNode* self, QSGGeometry* g
 	self->setGeometry(geometry);
 }
 
-QSGGeometry* QSGBasicGeometryNode_geometry(const QSGBasicGeometryNode* self) {
+QSGGeometry* QSGBasicGeometryNode_geometry_const(const QSGBasicGeometryNode* self) {
 	return (QSGGeometry*) self->geometry();
 }
 
-QSGGeometry* QSGBasicGeometryNode_geometry2(QSGBasicGeometryNode* self) {
+QSGGeometry* QSGBasicGeometryNode_geometry(QSGBasicGeometryNode* self) {
 	return self->geometry();
 }
 
@@ -619,8 +619,8 @@ void QSGOpacityNode_delete(QSGOpacityNode* self) {
 	delete self;
 }
 
-void QSGNodeVisitor_operatorAssign(QSGNodeVisitor* self, QSGNodeVisitor* param1) {
-	self->operator=(*param1);
+void QSGNodeVisitor_operatorAssign(QSGNodeVisitor* self, QSGNodeVisitor* from) {
+	self->operator=(*from);
 }
 
 void QSGNodeVisitor_delete(QSGNodeVisitor* self) {

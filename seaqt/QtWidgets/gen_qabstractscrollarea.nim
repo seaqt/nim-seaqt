@@ -85,7 +85,7 @@ type cQAbstractScrollArea*{.exportc: "QAbstractScrollArea", incompleteStruct.} =
 proc fcQAbstractScrollArea_metaObject(self: pointer): pointer {.importc: "QAbstractScrollArea_metaObject".}
 proc fcQAbstractScrollArea_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractScrollArea_metacast".}
 proc fcQAbstractScrollArea_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractScrollArea_metacall".}
-proc fcQAbstractScrollArea_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractScrollArea_tr".}
+proc fcQAbstractScrollArea_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractScrollArea_tr_s".}
 proc fcQAbstractScrollArea_verticalScrollBarPolicy(self: pointer): cint {.importc: "QAbstractScrollArea_verticalScrollBarPolicy".}
 proc fcQAbstractScrollArea_setVerticalScrollBarPolicy(self: pointer, verticalScrollBarPolicy: cint): void {.importc: "QAbstractScrollArea_setVerticalScrollBarPolicy".}
 proc fcQAbstractScrollArea_verticalScrollBar(self: pointer): pointer {.importc: "QAbstractScrollArea_verticalScrollBar".}
@@ -106,8 +106,8 @@ proc fcQAbstractScrollArea_sizeHint(self: pointer): pointer {.importc: "QAbstrac
 proc fcQAbstractScrollArea_setupViewport(self: pointer, viewport: pointer): void {.importc: "QAbstractScrollArea_setupViewport".}
 proc fcQAbstractScrollArea_sizeAdjustPolicy(self: pointer): cint {.importc: "QAbstractScrollArea_sizeAdjustPolicy".}
 proc fcQAbstractScrollArea_setSizeAdjustPolicy(self: pointer, policy: cint): void {.importc: "QAbstractScrollArea_setSizeAdjustPolicy".}
-proc fcQAbstractScrollArea_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractScrollArea_tr2".}
-proc fcQAbstractScrollArea_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractScrollArea_tr3".}
+proc fcQAbstractScrollArea_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractScrollArea_tr_s_c".}
+proc fcQAbstractScrollArea_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractScrollArea_tr_s_c_n".}
 proc fcQAbstractScrollArea_vdata(self: pointer): ptr pointer {.importc: "QAbstractScrollArea_vdata".}
 proc fvdata_cQAbstractScrollArea(self: pointer): pointer {.importc: "vdata_QAbstractScrollArea".}
 
@@ -223,8 +223,8 @@ proc fcQAbstractScrollArea_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQAbstractScrollArea_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractScrollArea_virtualbase_customEvent".}
 proc fcQAbstractScrollArea_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractScrollArea_virtualbase_connectNotify".}
 proc fcQAbstractScrollArea_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractScrollArea_virtualbase_disconnectNotify".}
-proc fcQAbstractScrollArea_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QAbstractScrollArea_protectedbase_setViewportMargins".}
-proc fcQAbstractScrollArea_protectedbase_setViewportMarginsWithMargins(self: pointer, margins: pointer): void {.importc: "QAbstractScrollArea_protectedbase_setViewportMarginsWithMargins".}
+proc fcQAbstractScrollArea_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QAbstractScrollArea_protectedbase_setViewportMargins_left_top_right_bottom".}
+proc fcQAbstractScrollArea_protectedbase_setViewportMargins_margins(self: pointer, margins: pointer): void {.importc: "QAbstractScrollArea_protectedbase_setViewportMargins_margins".}
 proc fcQAbstractScrollArea_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QAbstractScrollArea_protectedbase_viewportMargins".}
 proc fcQAbstractScrollArea_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QAbstractScrollArea_protectedbase_drawFrame".}
 proc fcQAbstractScrollArea_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QAbstractScrollArea_protectedbase_updateMicroFocus".}
@@ -237,7 +237,7 @@ proc fcQAbstractScrollArea_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQAbstractScrollArea_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractScrollArea_protectedbase_receivers".}
 proc fcQAbstractScrollArea_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractScrollArea_protectedbase_isSignalConnected".}
 proc fcQAbstractScrollArea_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractScrollArea {.importc: "QAbstractScrollArea_new".}
-proc fcQAbstractScrollArea_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractScrollArea {.importc: "QAbstractScrollArea_new2".}
+proc fcQAbstractScrollArea_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractScrollArea {.importc: "QAbstractScrollArea_new_parent".}
 proc fcQAbstractScrollArea_staticMetaObject(): pointer {.importc: "QAbstractScrollArea_staticMetaObject".}
 
 proc metaObject*(self: gen_qabstractscrollarea_types.QAbstractScrollArea): gen_qobjectdefs_types.QMetaObject =
@@ -250,7 +250,7 @@ proc metacall*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, param1: 
   fcQAbstractScrollArea_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractscrollarea_types.QAbstractScrollArea, s: cstring): string =
-  let v_ms = fcQAbstractScrollArea_tr(s)
+  let v_ms = fcQAbstractScrollArea_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -322,13 +322,13 @@ proc setSizeAdjustPolicy*(self: gen_qabstractscrollarea_types.QAbstractScrollAre
   fcQAbstractScrollArea_setSizeAdjustPolicy(self.h, cint(policy))
 
 proc tr*(_: type gen_qabstractscrollarea_types.QAbstractScrollArea, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractScrollArea_tr2(s, c)
+  let v_ms = fcQAbstractScrollArea_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractscrollarea_types.QAbstractScrollArea, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractScrollArea_tr3(s, c, n)
+  let v_ms = fcQAbstractScrollArea_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1422,10 +1422,10 @@ proc fcQAbstractScrollArea_method_callback_disconnectNotify(self: pointer, signa
 
 
 proc setViewportMargins*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQAbstractScrollArea_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQAbstractScrollArea_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc setViewportMargins*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, margins: gen_qmargins_types.QMargins): void =
-  fcQAbstractScrollArea_protectedbase_setViewportMarginsWithMargins(self.h, margins.h)
+  fcQAbstractScrollArea_protectedbase_setViewportMargins_margins(self.h, margins.h)
 
 proc viewportMargins*(self: gen_qabstractscrollarea_types.QAbstractScrollArea): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQAbstractScrollArea_protectedbase_viewportMargins(self.h), owned: true)

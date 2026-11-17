@@ -52,25 +52,25 @@ typedef struct QShortcut_VTable{
 void* QShortcut_vdata(VirtualQShortcut* self);
 VirtualQShortcut* vdata_QShortcut(void* vdata);
 
-VirtualQShortcut* QShortcut_new(const QShortcut_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQShortcut* QShortcut_new2(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent);
-VirtualQShortcut* QShortcut_new3(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent);
-VirtualQShortcut* QShortcut_new4(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member);
-VirtualQShortcut* QShortcut_new5(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member, const char* ambiguousMember);
-VirtualQShortcut* QShortcut_new6(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member, const char* ambiguousMember, int context);
-VirtualQShortcut* QShortcut_new7(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member);
-VirtualQShortcut* QShortcut_new8(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member, const char* ambiguousMember);
-VirtualQShortcut* QShortcut_new9(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member, const char* ambiguousMember, int context);
+VirtualQShortcut* QShortcut_new_QObject(const QShortcut_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQShortcut* QShortcut_new_QKeySequence_QObject(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent);
+VirtualQShortcut* QShortcut_new_QKeySequence_StandardKey_QObject(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent);
+VirtualQShortcut* QShortcut_new_QKeySequence_QObject_char(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member);
+VirtualQShortcut* QShortcut_new_QKeySequence_QObject_char_char(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member, const char* ambiguousMember);
+VirtualQShortcut* QShortcut_new_QKeySequence_QObject_char_char_Qt_ShortcutContext(const QShortcut_VTable* vtbl, size_t vdata, QKeySequence* key, QObject* parent, const char* member, const char* ambiguousMember, int context);
+VirtualQShortcut* QShortcut_new_QKeySequence_StandardKey_QObject_char(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member);
+VirtualQShortcut* QShortcut_new_QKeySequence_StandardKey_QObject_char_char(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member, const char* ambiguousMember);
+VirtualQShortcut* QShortcut_new_QKeySequence_StandardKey_QObject_char_char_Qt_ShortcutContext(const QShortcut_VTable* vtbl, size_t vdata, int key, QObject* parent, const char* member, const char* ambiguousMember, int context);
 
 void QShortcut_virtbase(QShortcut* src, QObject** outptr_QObject);
 QMetaObject* QShortcut_metaObject(const QShortcut* self);
 void* QShortcut_metacast(QShortcut* self, const char* param1);
 int QShortcut_metacall(QShortcut* self, int param1, int param2, void** param3);
-struct seaqt_string QShortcut_tr(const char* s);
+struct seaqt_string QShortcut_tr_s(const char* s);
 void QShortcut_setKey(QShortcut* self, QKeySequence* key);
 QKeySequence* QShortcut_key(const QShortcut* self);
-void QShortcut_setKeys(QShortcut* self, int key);
-void QShortcut_setKeysWithKeys(QShortcut* self, struct seaqt_array /* of QKeySequence* */  keys);
+void QShortcut_setKeys_key(QShortcut* self, int key);
+void QShortcut_setKeys_keys(QShortcut* self, struct seaqt_array /* of QKeySequence* */  keys);
 struct seaqt_array /* of QKeySequence* */  QShortcut_keys(const QShortcut* self);
 void QShortcut_setEnabled(QShortcut* self, bool enable);
 bool QShortcut_isEnabled(const QShortcut* self);
@@ -86,8 +86,8 @@ void QShortcut_connect_activated(QShortcut* self, intptr_t slot, void (*callback
 void QShortcut_activatedAmbiguously(QShortcut* self);
 void QShortcut_connect_activatedAmbiguously(QShortcut* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 bool QShortcut_event(QShortcut* self, QEvent* e);
-struct seaqt_string QShortcut_tr2(const char* s, const char* c);
-struct seaqt_string QShortcut_tr3(const char* s, const char* c, int n);
+struct seaqt_string QShortcut_tr_s_c(const char* s, const char* c);
+struct seaqt_string QShortcut_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QShortcut_virtualbase_metaObject(const VirtualQShortcut* self);
 void* QShortcut_virtualbase_metacast(VirtualQShortcut* self, const char* param1);

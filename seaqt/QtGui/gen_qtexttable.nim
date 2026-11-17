@@ -58,7 +58,7 @@ export
 type cQTextTableCell*{.exportc: "QTextTableCell", incompleteStruct.} = object
 type cQTextTable*{.exportc: "QTextTable", incompleteStruct.} = object
 
-proc fcQTextTableCell_operatorAssign(self: pointer, o: pointer): void {.importc: "QTextTableCell_operatorAssign".}
+proc fcQTextTableCell_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTextTableCell_operatorAssign".}
 proc fcQTextTableCell_setFormat(self: pointer, format: pointer): void {.importc: "QTextTableCell_setFormat".}
 proc fcQTextTableCell_format(self: pointer): pointer {.importc: "QTextTableCell_format".}
 proc fcQTextTableCell_row(self: pointer): cint {.importc: "QTextTableCell_row".}
@@ -76,11 +76,11 @@ proc fcQTextTableCell_begin(self: pointer): pointer {.importc: "QTextTableCell_b
 proc fcQTextTableCell_endX(self: pointer): pointer {.importc: "QTextTableCell_end".}
 proc fcQTextTableCell_tableCellFormatIndex(self: pointer): cint {.importc: "QTextTableCell_tableCellFormatIndex".}
 proc fcQTextTableCell_new(): ptr cQTextTableCell {.importc: "QTextTableCell_new".}
-proc fcQTextTableCell_new2(o: pointer): ptr cQTextTableCell {.importc: "QTextTableCell_new2".}
+proc fcQTextTableCell_new2(fromVal: pointer): ptr cQTextTableCell {.importc: "QTextTableCell_new_from".}
 proc fcQTextTable_metaObject(self: pointer): pointer {.importc: "QTextTable_metaObject".}
 proc fcQTextTable_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextTable_metacast".}
 proc fcQTextTable_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextTable_metacall".}
-proc fcQTextTable_tr(s: cstring): struct_seaqt_string {.importc: "QTextTable_tr".}
+proc fcQTextTable_trS(s: cstring): struct_seaqt_string {.importc: "QTextTable_tr_s".}
 proc fcQTextTable_resize(self: pointer, rows: cint, cols: cint): void {.importc: "QTextTable_resize".}
 proc fcQTextTable_insertRows(self: pointer, pos: cint, num: cint): void {.importc: "QTextTable_insertRows".}
 proc fcQTextTable_insertColumns(self: pointer, pos: cint, num: cint): void {.importc: "QTextTable_insertColumns".}
@@ -88,20 +88,20 @@ proc fcQTextTable_appendRows(self: pointer, count: cint): void {.importc: "QText
 proc fcQTextTable_appendColumns(self: pointer, count: cint): void {.importc: "QTextTable_appendColumns".}
 proc fcQTextTable_removeRows(self: pointer, pos: cint, num: cint): void {.importc: "QTextTable_removeRows".}
 proc fcQTextTable_removeColumns(self: pointer, pos: cint, num: cint): void {.importc: "QTextTable_removeColumns".}
-proc fcQTextTable_mergeCells(self: pointer, row: cint, col: cint, numRows: cint, numCols: cint): void {.importc: "QTextTable_mergeCells".}
-proc fcQTextTable_mergeCellsWithCursor(self: pointer, cursor: pointer): void {.importc: "QTextTable_mergeCellsWithCursor".}
+proc fcQTextTable_mergeCellsRowColNumRowsNumCols(self: pointer, row: cint, col: cint, numRows: cint, numCols: cint): void {.importc: "QTextTable_mergeCells_row_col_numRows_numCols".}
+proc fcQTextTable_mergeCellsCursor(self: pointer, cursor: pointer): void {.importc: "QTextTable_mergeCells_cursor".}
 proc fcQTextTable_splitCell(self: pointer, row: cint, col: cint, numRows: cint, numCols: cint): void {.importc: "QTextTable_splitCell".}
 proc fcQTextTable_rows(self: pointer): cint {.importc: "QTextTable_rows".}
 proc fcQTextTable_columns(self: pointer): cint {.importc: "QTextTable_columns".}
-proc fcQTextTable_cellAt(self: pointer, row: cint, col: cint): pointer {.importc: "QTextTable_cellAt".}
-proc fcQTextTable_cellAtWithPosition(self: pointer, position: cint): pointer {.importc: "QTextTable_cellAtWithPosition".}
-proc fcQTextTable_cellAtWithQTextCursor(self: pointer, c: pointer): pointer {.importc: "QTextTable_cellAtWithQTextCursor".}
+proc fcQTextTable_cellAtRowCol(self: pointer, row: cint, col: cint): pointer {.importc: "QTextTable_cellAt_row_col".}
+proc fcQTextTable_cellAtPosition(self: pointer, position: cint): pointer {.importc: "QTextTable_cellAt_position".}
+proc fcQTextTable_cellAtC(self: pointer, c: pointer): pointer {.importc: "QTextTable_cellAt_c".}
 proc fcQTextTable_rowStart(self: pointer, c: pointer): pointer {.importc: "QTextTable_rowStart".}
 proc fcQTextTable_rowEnd(self: pointer, c: pointer): pointer {.importc: "QTextTable_rowEnd".}
 proc fcQTextTable_setFormat(self: pointer, format: pointer): void {.importc: "QTextTable_setFormat".}
 proc fcQTextTable_format(self: pointer): pointer {.importc: "QTextTable_format".}
-proc fcQTextTable_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextTable_tr2".}
-proc fcQTextTable_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextTable_tr3".}
+proc fcQTextTable_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextTable_tr_s_c".}
+proc fcQTextTable_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextTable_tr_s_c_n".}
 proc fcQTextTable_vdata(self: pointer): ptr pointer {.importc: "QTextTable_vdata".}
 proc fvdata_cQTextTable(self: pointer): pointer {.importc: "vdata_QTextTable".}
 
@@ -134,8 +134,8 @@ proc fcQTextTable_protectedbase_isSignalConnected(self: pointer, signal: pointer
 proc fcQTextTable_new(vtbl: pointer, vdata: csize_t, doc: pointer): ptr cQTextTable {.importc: "QTextTable_new".}
 proc fcQTextTable_staticMetaObject(): pointer {.importc: "QTextTable_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qtexttable_types.QTextTableCell, o: gen_qtexttable_types.QTextTableCell): void =
-  fcQTextTableCell_operatorAssign(self.h, o.h)
+proc operatorAssign*(self: gen_qtexttable_types.QTextTableCell, fromVal: gen_qtexttable_types.QTextTableCell): void =
+  fcQTextTableCell_operatorAssign(self.h, fromVal.h)
 
 proc setFormat*(self: gen_qtexttable_types.QTextTableCell, format: gen_qtextformat_types.QTextCharFormat): void =
   fcQTextTableCell_setFormat(self.h, format.h)
@@ -189,8 +189,8 @@ proc create*(T: type gen_qtexttable_types.QTextTableCell): gen_qtexttable_types.
   let tmp = gen_qtexttable_types.QTextTableCell(h: fcQTextTableCell_new(), owned: true)
   tmp
 proc create*(T: type gen_qtexttable_types.QTextTableCell,
-    o: gen_qtexttable_types.QTextTableCell): gen_qtexttable_types.QTextTableCell =
-  let tmp = gen_qtexttable_types.QTextTableCell(h: fcQTextTableCell_new2(o.h), owned: true)
+    fromVal: gen_qtexttable_types.QTextTableCell): gen_qtexttable_types.QTextTableCell =
+  let tmp = gen_qtexttable_types.QTextTableCell(h: fcQTextTableCell_new2(fromVal.h), owned: true)
   tmp
 proc metaObject*(self: gen_qtexttable_types.QTextTable): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextTable_metaObject(self.h), owned: false)
@@ -202,7 +202,7 @@ proc metacall*(self: gen_qtexttable_types.QTextTable, param1: cint, param2: cint
   fcQTextTable_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtexttable_types.QTextTable, s: cstring): string =
-  let v_ms = fcQTextTable_tr(s)
+  let v_ms = fcQTextTable_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -229,10 +229,10 @@ proc removeColumns*(self: gen_qtexttable_types.QTextTable, pos: cint, num: cint)
   fcQTextTable_removeColumns(self.h, pos, num)
 
 proc mergeCells*(self: gen_qtexttable_types.QTextTable, row: cint, col: cint, numRows: cint, numCols: cint): void =
-  fcQTextTable_mergeCells(self.h, row, col, numRows, numCols)
+  fcQTextTable_mergeCellsRowColNumRowsNumCols(self.h, row, col, numRows, numCols)
 
 proc mergeCells*(self: gen_qtexttable_types.QTextTable, cursor: gen_qtextcursor_types.QTextCursor): void =
-  fcQTextTable_mergeCellsWithCursor(self.h, cursor.h)
+  fcQTextTable_mergeCellsCursor(self.h, cursor.h)
 
 proc splitCell*(self: gen_qtexttable_types.QTextTable, row: cint, col: cint, numRows: cint, numCols: cint): void =
   fcQTextTable_splitCell(self.h, row, col, numRows, numCols)
@@ -244,13 +244,13 @@ proc columns*(self: gen_qtexttable_types.QTextTable): cint =
   fcQTextTable_columns(self.h)
 
 proc cellAt*(self: gen_qtexttable_types.QTextTable, row: cint, col: cint): gen_qtexttable_types.QTextTableCell =
-  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAt(self.h, row, col), owned: true)
+  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAtRowCol(self.h, row, col), owned: true)
 
 proc cellAt*(self: gen_qtexttable_types.QTextTable, position: cint): gen_qtexttable_types.QTextTableCell =
-  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAtWithPosition(self.h, position), owned: true)
+  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAtPosition(self.h, position), owned: true)
 
 proc cellAt*(self: gen_qtexttable_types.QTextTable, c: gen_qtextcursor_types.QTextCursor): gen_qtexttable_types.QTextTableCell =
-  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAtWithQTextCursor(self.h, c.h), owned: true)
+  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAtC(self.h, c.h), owned: true)
 
 proc rowStart*(self: gen_qtexttable_types.QTextTable, c: gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
   gen_qtextcursor_types.QTextCursor(h: fcQTextTable_rowStart(self.h, c.h), owned: true)
@@ -265,13 +265,13 @@ proc format*(self: gen_qtexttable_types.QTextTable): gen_qtextformat_types.QText
   gen_qtextformat_types.QTextTableFormat(h: fcQTextTable_format(self.h), owned: true)
 
 proc tr*(_: type gen_qtexttable_types.QTextTable, s: cstring, c: cstring): string =
-  let v_ms = fcQTextTable_tr2(s, c)
+  let v_ms = fcQTextTable_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtexttable_types.QTextTable, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextTable_tr3(s, c, n)
+  let v_ms = fcQTextTable_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

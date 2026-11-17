@@ -88,7 +88,7 @@ public:
 	friend void QTcpSocket_virtualbase_resume(VirtualQTcpSocket* self);
 
 	virtual bool bind(const QHostAddress& address, quint16 port, QAbstractSocket::BindMode mode) override {
-		if (vtbl->bind == 0) {
+		if (vtbl->bind_address_port_mode == 0) {
 			return QTcpSocket::bind(address, port, mode);
 		}
 
@@ -99,14 +99,14 @@ public:
 		unsigned short sigval2 = static_cast<unsigned short>(port_ret);
 		QAbstractSocket::BindMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
-		bool callback_return_value = vtbl->bind(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->bind_address_port_mode(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_bind(VirtualQTcpSocket* self, QHostAddress* address, unsigned short port, int mode);
+	friend bool QTcpSocket_virtualbase_bind_address_port_mode(VirtualQTcpSocket* self, QHostAddress* address, unsigned short port, int mode);
 
 	virtual void connectToHost(const QString& hostName, quint16 port, QIODeviceBase::OpenMode mode, QAbstractSocket::NetworkLayerProtocol protocol) override {
-		if (vtbl->connectToHost == 0) {
+		if (vtbl->connectToHost_hostName_port_mode_protocol == 0) {
 			QTcpSocket::connectToHost(hostName, port, mode, protocol);
 			return;
 		}
@@ -125,10 +125,10 @@ public:
 		int sigval3 = static_cast<int>(mode_ret);
 		QAbstractSocket::NetworkLayerProtocol protocol_ret = protocol;
 		int sigval4 = static_cast<int>(protocol_ret);
-		vtbl->connectToHost(this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->connectToHost_hostName_port_mode_protocol(this, sigval1, sigval2, sigval3, sigval4);
 	}
 
-	friend void QTcpSocket_virtualbase_connectToHost(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
+	friend void QTcpSocket_virtualbase_connectToHost_hostName_port_mode_protocol(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
 
 	virtual void disconnectFromHost() override {
 		if (vtbl->disconnectFromHost == 0) {
@@ -551,7 +551,7 @@ VirtualQTcpSocket* QTcpSocket_new(const QTcpSocket_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQTcpSocket(vtbl) : nullptr;
 }
 
-VirtualQTcpSocket* QTcpSocket_new2(const QTcpSocket_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQTcpSocket* QTcpSocket_new_parent(const QTcpSocket_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTcpSocket>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTcpSocket(vtbl, parent) : nullptr;
 }
@@ -572,7 +572,7 @@ int QTcpSocket_metacall(QTcpSocket* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTcpSocket_tr(const char* s) {
+struct seaqt_string QTcpSocket_tr_s(const char* s) {
 	QString _ret = QTcpSocket::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -583,11 +583,11 @@ struct seaqt_string QTcpSocket_tr(const char* s) {
 	return _ms;
 }
 
-bool QTcpSocket_bind(QTcpSocket* self, int addr) {
+bool QTcpSocket_bind_addr(QTcpSocket* self, int addr) {
 	return self->bind(static_cast<QHostAddress::SpecialAddress>(addr));
 }
 
-struct seaqt_string QTcpSocket_tr2(const char* s, const char* c) {
+struct seaqt_string QTcpSocket_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTcpSocket::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -598,7 +598,7 @@ struct seaqt_string QTcpSocket_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTcpSocket_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTcpSocket_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTcpSocket::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -609,11 +609,11 @@ struct seaqt_string QTcpSocket_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QTcpSocket_bind2(QTcpSocket* self, int addr, unsigned short port) {
+bool QTcpSocket_bind_addr_port(QTcpSocket* self, int addr, unsigned short port) {
 	return self->bind(static_cast<QHostAddress::SpecialAddress>(addr), static_cast<quint16>(port));
 }
 
-bool QTcpSocket_bind3(QTcpSocket* self, int addr, unsigned short port, int mode) {
+bool QTcpSocket_bind_addr_port_mode(QTcpSocket* self, int addr, unsigned short port, int mode) {
 	return self->bind(static_cast<QHostAddress::SpecialAddress>(addr), static_cast<quint16>(port), static_cast<QAbstractSocket::BindMode>(mode));
 }
 
@@ -641,12 +641,12 @@ void QTcpSocket_virtualbase_resume(VirtualQTcpSocket* self) {
 	self->QTcpSocket::resume();
 }
 
-bool QTcpSocket_virtualbase_bind(VirtualQTcpSocket* self, QHostAddress* address, unsigned short port, int mode) {
+bool QTcpSocket_virtualbase_bind_address_port_mode(VirtualQTcpSocket* self, QHostAddress* address, unsigned short port, int mode) {
 
 	return self->QTcpSocket::bind(*address, static_cast<quint16>(port), static_cast<VirtualQTcpSocket::BindMode>(mode));
 }
 
-void QTcpSocket_virtualbase_connectToHost(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol) {
+void QTcpSocket_virtualbase_connectToHost_hostName_port_mode_protocol(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol) {
 	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
 
 	self->QTcpSocket::connectToHost(hostName_QString, static_cast<quint16>(port), static_cast<VirtualQTcpSocket::OpenMode>(mode), static_cast<VirtualQTcpSocket::NetworkLayerProtocol>(protocol));

@@ -66,15 +66,15 @@ type cQHistoryState*{.exportc: "QHistoryState", incompleteStruct.} = object
 proc fcQHistoryState_metaObject(self: pointer): pointer {.importc: "QHistoryState_metaObject".}
 proc fcQHistoryState_metacast(self: pointer, param1: cstring): pointer {.importc: "QHistoryState_metacast".}
 proc fcQHistoryState_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QHistoryState_metacall".}
-proc fcQHistoryState_tr(s: cstring): struct_seaqt_string {.importc: "QHistoryState_tr".}
+proc fcQHistoryState_trS(s: cstring): struct_seaqt_string {.importc: "QHistoryState_tr_s".}
 proc fcQHistoryState_defaultTransition(self: pointer): pointer {.importc: "QHistoryState_defaultTransition".}
 proc fcQHistoryState_setDefaultTransition(self: pointer, transition: pointer): void {.importc: "QHistoryState_setDefaultTransition".}
 proc fcQHistoryState_defaultState(self: pointer): pointer {.importc: "QHistoryState_defaultState".}
 proc fcQHistoryState_setDefaultState(self: pointer, state: pointer): void {.importc: "QHistoryState_setDefaultState".}
 proc fcQHistoryState_historyType(self: pointer): cint {.importc: "QHistoryState_historyType".}
 proc fcQHistoryState_setHistoryType(self: pointer, typeVal: cint): void {.importc: "QHistoryState_setHistoryType".}
-proc fcQHistoryState_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHistoryState_tr2".}
-proc fcQHistoryState_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHistoryState_tr3".}
+proc fcQHistoryState_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHistoryState_tr_s_c".}
+proc fcQHistoryState_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHistoryState_tr_s_c_n".}
 proc fcQHistoryState_vdata(self: pointer): ptr pointer {.importc: "QHistoryState_vdata".}
 proc fvdata_cQHistoryState(self: pointer): pointer {.importc: "vdata_QHistoryState".}
 
@@ -109,9 +109,9 @@ proc fcQHistoryState_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQHistoryState_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QHistoryState_protectedbase_receivers".}
 proc fcQHistoryState_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QHistoryState_protectedbase_isSignalConnected".}
 proc fcQHistoryState_new(vtbl: pointer, vdata: csize_t): ptr cQHistoryState {.importc: "QHistoryState_new".}
-proc fcQHistoryState_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQHistoryState {.importc: "QHistoryState_new2".}
-proc fcQHistoryState_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQHistoryState {.importc: "QHistoryState_new3".}
-proc fcQHistoryState_new4(vtbl: pointer, vdata: csize_t, typeVal: cint, parent: pointer): ptr cQHistoryState {.importc: "QHistoryState_new4".}
+proc fcQHistoryState_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQHistoryState {.importc: "QHistoryState_new_type".}
+proc fcQHistoryState_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQHistoryState {.importc: "QHistoryState_new_parent".}
+proc fcQHistoryState_new4(vtbl: pointer, vdata: csize_t, typeVal: cint, parent: pointer): ptr cQHistoryState {.importc: "QHistoryState_new_type_parent".}
 proc fcQHistoryState_staticMetaObject(): pointer {.importc: "QHistoryState_staticMetaObject".}
 
 proc metaObject*(self: gen_qhistorystate_types.QHistoryState): gen_qobjectdefs_types.QMetaObject =
@@ -124,7 +124,7 @@ proc metacall*(self: gen_qhistorystate_types.QHistoryState, param1: cint, param2
   fcQHistoryState_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qhistorystate_types.QHistoryState, s: cstring): string =
-  let v_ms = fcQHistoryState_tr(s)
+  let v_ms = fcQHistoryState_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -148,13 +148,13 @@ proc setHistoryType*(self: gen_qhistorystate_types.QHistoryState, typeVal: cint)
   fcQHistoryState_setHistoryType(self.h, cint(typeVal))
 
 proc tr*(_: type gen_qhistorystate_types.QHistoryState, s: cstring, c: cstring): string =
-  let v_ms = fcQHistoryState_tr2(s, c)
+  let v_ms = fcQHistoryState_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qhistorystate_types.QHistoryState, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQHistoryState_tr3(s, c, n)
+  let v_ms = fcQHistoryState_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

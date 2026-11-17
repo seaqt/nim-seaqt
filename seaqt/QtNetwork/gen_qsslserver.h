@@ -66,13 +66,13 @@ void* QSslServer_vdata(VirtualQSslServer* self);
 VirtualQSslServer* vdata_QSslServer(void* vdata);
 
 VirtualQSslServer* QSslServer_new(const QSslServer_VTable* vtbl, size_t vdata);
-VirtualQSslServer* QSslServer_new2(const QSslServer_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSslServer* QSslServer_new_parent(const QSslServer_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QSslServer_virtbase(QSslServer* src, QTcpServer** outptr_QTcpServer);
 QMetaObject* QSslServer_metaObject(const QSslServer* self);
 void* QSslServer_metacast(QSslServer* self, const char* param1);
 int QSslServer_metacall(QSslServer* self, int param1, int param2, void** param3);
-struct seaqt_string QSslServer_tr(const char* s);
+struct seaqt_string QSslServer_tr_s(const char* s);
 void QSslServer_setSslConfiguration(QSslServer* self, QSslConfiguration* sslConfiguration);
 QSslConfiguration* QSslServer_sslConfiguration(const QSslServer* self);
 void QSslServer_setHandshakeTimeout(QSslServer* self, int timeout);
@@ -94,8 +94,8 @@ void QSslServer_connect_handshakeInterruptedOnError(QSslServer* self, intptr_t s
 void QSslServer_startedEncryptionHandshake(QSslServer* self, QSslSocket* socket);
 void QSslServer_connect_startedEncryptionHandshake(QSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*), void (*release)(intptr_t));
 void QSslServer_incomingConnection(QSslServer* self, intptr_t socket);
-struct seaqt_string QSslServer_tr2(const char* s, const char* c);
-struct seaqt_string QSslServer_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSslServer_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSslServer_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSslServer_virtualbase_metaObject(const VirtualQSslServer* self);
 void* QSslServer_virtualbase_metacast(VirtualQSslServer* self, const char* param1);

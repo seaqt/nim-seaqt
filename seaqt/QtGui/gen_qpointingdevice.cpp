@@ -29,8 +29,8 @@ QPointingDeviceUniqueId* QPointingDeviceUniqueId_new() {
 	return new (std::nothrow) QPointingDeviceUniqueId();
 }
 
-QPointingDeviceUniqueId* QPointingDeviceUniqueId_new2(QPointingDeviceUniqueId* param1) {
-	return new (std::nothrow) QPointingDeviceUniqueId(*param1);
+QPointingDeviceUniqueId* QPointingDeviceUniqueId_new_from(QPointingDeviceUniqueId* from) {
+	return new (std::nothrow) QPointingDeviceUniqueId(*from);
 }
 
 QPointingDeviceUniqueId* QPointingDeviceUniqueId_fromNumericId(long long id) {
@@ -206,32 +206,32 @@ VirtualQPointingDevice* QPointingDevice_new(const QPointingDevice_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQPointingDevice(vtbl) : nullptr;
 }
 
-VirtualQPointingDevice* QPointingDevice_new2(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount) {
+VirtualQPointingDevice* QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPointingDevice>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPointingDevice(vtbl, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(devType), static_cast<QPointingDevice::PointerType>(pType), static_cast<QInputDevice::Capabilities>(caps), static_cast<int>(maxPoints), static_cast<int>(buttonCount)) : nullptr;
 }
 
-VirtualQPointingDevice* QPointingDevice_new3(const QPointingDevice_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQPointingDevice* QPointingDevice_new_parent(const QPointingDevice_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPointingDevice>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPointingDevice(vtbl, parent) : nullptr;
 }
 
-VirtualQPointingDevice* QPointingDevice_new4(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName) {
+VirtualQPointingDevice* QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount_seatName(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString seatName_QString = QString::fromUtf8(seatName.data, seatName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPointingDevice>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPointingDevice(vtbl, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(devType), static_cast<QPointingDevice::PointerType>(pType), static_cast<QInputDevice::Capabilities>(caps), static_cast<int>(maxPoints), static_cast<int>(buttonCount), seatName_QString) : nullptr;
 }
 
-VirtualQPointingDevice* QPointingDevice_new5(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName, QPointingDeviceUniqueId* uniqueId) {
+VirtualQPointingDevice* QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount_seatName_uniqueId(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName, QPointingDeviceUniqueId* uniqueId) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString seatName_QString = QString::fromUtf8(seatName.data, seatName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPointingDevice>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPointingDevice(vtbl, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(devType), static_cast<QPointingDevice::PointerType>(pType), static_cast<QInputDevice::Capabilities>(caps), static_cast<int>(maxPoints), static_cast<int>(buttonCount), seatName_QString, *uniqueId) : nullptr;
 }
 
-VirtualQPointingDevice* QPointingDevice_new6(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName, QPointingDeviceUniqueId* uniqueId, QObject* parent) {
+VirtualQPointingDevice* QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount_seatName_uniqueId_parent(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName, QPointingDeviceUniqueId* uniqueId, QObject* parent) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString seatName_QString = QString::fromUtf8(seatName.data, seatName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPointingDevice>() + vdata, std::nothrow);
@@ -254,7 +254,7 @@ int QPointingDevice_metacall(QPointingDevice* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPointingDevice_tr(const char* s) {
+struct seaqt_string QPointingDevice_tr_s(const char* s) {
 	QString _ret = QPointingDevice::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -324,7 +324,7 @@ void QPointingDevice_connect_grabChanged(QPointingDevice* self, intptr_t slot, v
 	QPointingDevice::connect(self, static_cast<void (QPointingDevice::*)(QObject*, QPointingDevice::GrabTransition, const QPointerEvent*, const QEventPoint&) const>(&QPointingDevice::grabChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QPointingDevice_tr2(const char* s, const char* c) {
+struct seaqt_string QPointingDevice_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPointingDevice::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -335,7 +335,7 @@ struct seaqt_string QPointingDevice_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPointingDevice_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPointingDevice_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPointingDevice::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -346,7 +346,7 @@ struct seaqt_string QPointingDevice_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QPointingDevice* QPointingDevice_primaryPointingDeviceWithSeatName(struct seaqt_string seatName) {
+QPointingDevice* QPointingDevice_primaryPointingDevice_seatName(struct seaqt_string seatName) {
 	QString seatName_QString = QString::fromUtf8(seatName.data, seatName.len);
 	return (QPointingDevice*) QPointingDevice::primaryPointingDevice(seatName_QString);
 }

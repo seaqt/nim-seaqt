@@ -17,12 +17,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QWebEngineLoadingInfo* QWebEngineLoadingInfo_new(QWebEngineLoadingInfo* other) {
-	return new (std::nothrow) QWebEngineLoadingInfo(*other);
+QWebEngineLoadingInfo* QWebEngineLoadingInfo_new(QWebEngineLoadingInfo* from) {
+	return new (std::nothrow) QWebEngineLoadingInfo(*from);
 }
 
-void QWebEngineLoadingInfo_operatorAssign(QWebEngineLoadingInfo* self, QWebEngineLoadingInfo* other) {
-	self->operator=(*other);
+void QWebEngineLoadingInfo_operatorAssign(QWebEngineLoadingInfo* self, QWebEngineLoadingInfo* from) {
+	self->operator=(*from);
 }
 
 QUrl* QWebEngineLoadingInfo_url(const QWebEngineLoadingInfo* self) {

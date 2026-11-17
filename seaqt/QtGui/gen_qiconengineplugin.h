@@ -54,16 +54,16 @@ void* QIconEnginePlugin_vdata(VirtualQIconEnginePlugin* self);
 VirtualQIconEnginePlugin* vdata_QIconEnginePlugin(void* vdata);
 
 VirtualQIconEnginePlugin* QIconEnginePlugin_new(const QIconEnginePlugin_VTable* vtbl, size_t vdata);
-VirtualQIconEnginePlugin* QIconEnginePlugin_new2(const QIconEnginePlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQIconEnginePlugin* QIconEnginePlugin_new_parent(const QIconEnginePlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QIconEnginePlugin_virtbase(QIconEnginePlugin* src, QObject** outptr_QObject);
 QMetaObject* QIconEnginePlugin_metaObject(const QIconEnginePlugin* self);
 void* QIconEnginePlugin_metacast(QIconEnginePlugin* self, const char* param1);
 int QIconEnginePlugin_metacall(QIconEnginePlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QIconEnginePlugin_tr(const char* s);
+struct seaqt_string QIconEnginePlugin_tr_s(const char* s);
 QIconEngine* QIconEnginePlugin_create(QIconEnginePlugin* self, struct seaqt_string filename);
-struct seaqt_string QIconEnginePlugin_tr2(const char* s, const char* c);
-struct seaqt_string QIconEnginePlugin_tr3(const char* s, const char* c, int n);
+struct seaqt_string QIconEnginePlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QIconEnginePlugin_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QIconEnginePlugin_virtualbase_metaObject(const VirtualQIconEnginePlugin* self);
 void* QIconEnginePlugin_virtualbase_metacast(VirtualQIconEnginePlugin* self, const char* param1);

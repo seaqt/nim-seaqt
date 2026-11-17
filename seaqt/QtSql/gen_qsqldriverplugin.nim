@@ -57,10 +57,10 @@ type cQSqlDriverPlugin*{.exportc: "QSqlDriverPlugin", incompleteStruct.} = objec
 proc fcQSqlDriverPlugin_metaObject(self: pointer): pointer {.importc: "QSqlDriverPlugin_metaObject".}
 proc fcQSqlDriverPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QSqlDriverPlugin_metacast".}
 proc fcQSqlDriverPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSqlDriverPlugin_metacall".}
-proc fcQSqlDriverPlugin_tr(s: cstring): struct_seaqt_string {.importc: "QSqlDriverPlugin_tr".}
+proc fcQSqlDriverPlugin_trS(s: cstring): struct_seaqt_string {.importc: "QSqlDriverPlugin_tr_s".}
 proc fcQSqlDriverPlugin_createX(self: pointer, key: struct_seaqt_string): pointer {.importc: "QSqlDriverPlugin_create".}
-proc fcQSqlDriverPlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlDriverPlugin_tr2".}
-proc fcQSqlDriverPlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlDriverPlugin_tr3".}
+proc fcQSqlDriverPlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlDriverPlugin_tr_s_c".}
+proc fcQSqlDriverPlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlDriverPlugin_tr_s_c_n".}
 proc fcQSqlDriverPlugin_vdata(self: pointer): ptr pointer {.importc: "QSqlDriverPlugin_vdata".}
 proc fvdata_cQSqlDriverPlugin(self: pointer): pointer {.importc: "vdata_QSqlDriverPlugin".}
 
@@ -92,7 +92,7 @@ proc fcQSqlDriverPlugin_protectedbase_senderSignalIndex(self: pointer): cint {.i
 proc fcQSqlDriverPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSqlDriverPlugin_protectedbase_receivers".}
 proc fcQSqlDriverPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSqlDriverPlugin_protectedbase_isSignalConnected".}
 proc fcQSqlDriverPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQSqlDriverPlugin {.importc: "QSqlDriverPlugin_new".}
-proc fcQSqlDriverPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlDriverPlugin {.importc: "QSqlDriverPlugin_new2".}
+proc fcQSqlDriverPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlDriverPlugin {.importc: "QSqlDriverPlugin_new_parent".}
 proc fcQSqlDriverPlugin_staticMetaObject(): pointer {.importc: "QSqlDriverPlugin_staticMetaObject".}
 
 proc metaObject*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin): gen_qobjectdefs_types.QMetaObject =
@@ -105,7 +105,7 @@ proc metacall*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin, param1: cint, 
   fcQSqlDriverPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsqldriverplugin_types.QSqlDriverPlugin, s: cstring): string =
-  let v_ms = fcQSqlDriverPlugin_tr(s)
+  let v_ms = fcQSqlDriverPlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -114,13 +114,13 @@ proc createX*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin, key: openArray[
   gen_qsqldriver_types.QSqlDriver(h: fcQSqlDriverPlugin_createX(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc tr*(_: type gen_qsqldriverplugin_types.QSqlDriverPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQSqlDriverPlugin_tr2(s, c)
+  let v_ms = fcQSqlDriverPlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsqldriverplugin_types.QSqlDriverPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSqlDriverPlugin_tr3(s, c, n)
+  let v_ms = fcQSqlDriverPlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

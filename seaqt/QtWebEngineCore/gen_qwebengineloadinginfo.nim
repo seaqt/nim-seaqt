@@ -63,18 +63,18 @@ export
 
 type cQWebEngineLoadingInfo*{.exportc: "QWebEngineLoadingInfo", incompleteStruct.} = object
 
-proc fcQWebEngineLoadingInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineLoadingInfo_operatorAssign".}
+proc fcQWebEngineLoadingInfo_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineLoadingInfo_operatorAssign".}
 proc fcQWebEngineLoadingInfo_url(self: pointer): pointer {.importc: "QWebEngineLoadingInfo_url".}
 proc fcQWebEngineLoadingInfo_isErrorPage(self: pointer): bool {.importc: "QWebEngineLoadingInfo_isErrorPage".}
 proc fcQWebEngineLoadingInfo_status(self: pointer): cint {.importc: "QWebEngineLoadingInfo_status".}
 proc fcQWebEngineLoadingInfo_errorString(self: pointer): struct_seaqt_string {.importc: "QWebEngineLoadingInfo_errorString".}
 proc fcQWebEngineLoadingInfo_errorDomain(self: pointer): cint {.importc: "QWebEngineLoadingInfo_errorDomain".}
 proc fcQWebEngineLoadingInfo_errorCode(self: pointer): cint {.importc: "QWebEngineLoadingInfo_errorCode".}
-proc fcQWebEngineLoadingInfo_new(other: pointer): ptr cQWebEngineLoadingInfo {.importc: "QWebEngineLoadingInfo_new".}
+proc fcQWebEngineLoadingInfo_new(fromVal: pointer): ptr cQWebEngineLoadingInfo {.importc: "QWebEngineLoadingInfo_new".}
 proc fcQWebEngineLoadingInfo_staticMetaObject(): pointer {.importc: "QWebEngineLoadingInfo_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, other: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): void =
-  fcQWebEngineLoadingInfo_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, fromVal: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): void =
+  fcQWebEngineLoadingInfo_operatorAssign(self.h, fromVal.h)
 
 proc url*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineLoadingInfo_url(self.h), owned: true)
@@ -98,8 +98,8 @@ proc errorCode*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): ci
   fcQWebEngineLoadingInfo_errorCode(self.h)
 
 proc create*(T: type gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo,
-    other: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo =
-  let tmp = gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo(h: fcQWebEngineLoadingInfo_new(other.h), owned: true)
+    fromVal: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo =
+  let tmp = gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo(h: fcQWebEngineLoadingInfo_new(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineLoadingInfo_staticMetaObject())

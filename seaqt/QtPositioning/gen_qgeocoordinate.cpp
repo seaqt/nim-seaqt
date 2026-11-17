@@ -20,20 +20,20 @@ QGeoCoordinate* QGeoCoordinate_new() {
 	return new (std::nothrow) QGeoCoordinate();
 }
 
-QGeoCoordinate* QGeoCoordinate_new2(double latitude, double longitude) {
+QGeoCoordinate* QGeoCoordinate_new_latitude_longitude(double latitude, double longitude) {
 	return new (std::nothrow) QGeoCoordinate(static_cast<double>(latitude), static_cast<double>(longitude));
 }
 
-QGeoCoordinate* QGeoCoordinate_new3(double latitude, double longitude, double altitude) {
+QGeoCoordinate* QGeoCoordinate_new_latitude_longitude_altitude(double latitude, double longitude, double altitude) {
 	return new (std::nothrow) QGeoCoordinate(static_cast<double>(latitude), static_cast<double>(longitude), static_cast<double>(altitude));
 }
 
-QGeoCoordinate* QGeoCoordinate_new4(QGeoCoordinate* other) {
-	return new (std::nothrow) QGeoCoordinate(*other);
+QGeoCoordinate* QGeoCoordinate_new_from(QGeoCoordinate* from) {
+	return new (std::nothrow) QGeoCoordinate(*from);
 }
 
-void QGeoCoordinate_operatorAssign(QGeoCoordinate* self, QGeoCoordinate* other) {
-	self->operator=(*other);
+void QGeoCoordinate_operatorAssign(QGeoCoordinate* self, QGeoCoordinate* from) {
+	self->operator=(*from);
 }
 
 void QGeoCoordinate_swap(QGeoCoordinate* self, QGeoCoordinate* other) {
@@ -83,7 +83,7 @@ double QGeoCoordinate_azimuthTo(const QGeoCoordinate* self, QGeoCoordinate* othe
 	return static_cast<double>(_ret);
 }
 
-QGeoCoordinate* QGeoCoordinate_atDistanceAndAzimuth(const QGeoCoordinate* self, double distance, double azimuth) {
+QGeoCoordinate* QGeoCoordinate_atDistanceAndAzimuth_distance_azimuth(const QGeoCoordinate* self, double distance, double azimuth) {
 	return new QGeoCoordinate(self->atDistanceAndAzimuth(static_cast<qreal>(distance), static_cast<qreal>(azimuth)));
 }
 
@@ -98,11 +98,11 @@ struct seaqt_string QGeoCoordinate_toString(const QGeoCoordinate* self) {
 	return _ms;
 }
 
-QGeoCoordinate* QGeoCoordinate_atDistanceAndAzimuth2(const QGeoCoordinate* self, double distance, double azimuth, double distanceUp) {
+QGeoCoordinate* QGeoCoordinate_atDistanceAndAzimuth_distance_azimuth_distanceUp(const QGeoCoordinate* self, double distance, double azimuth, double distanceUp) {
 	return new QGeoCoordinate(self->atDistanceAndAzimuth(static_cast<qreal>(distance), static_cast<qreal>(azimuth), static_cast<qreal>(distanceUp)));
 }
 
-struct seaqt_string QGeoCoordinate_toStringWithFormat(const QGeoCoordinate* self, int format) {
+struct seaqt_string QGeoCoordinate_toString_format(const QGeoCoordinate* self, int format) {
 	QString _ret = self->toString(static_cast<QGeoCoordinate::CoordinateFormat>(format));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

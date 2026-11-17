@@ -186,94 +186,94 @@ public:
 	friend bool QSettings_protectedbase_isSignalConnected(const VirtualQSettings* self, QMetaMethod* signal);
 };
 
-VirtualQSettings* QSettings_new(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string organization) {
+VirtualQSettings* QSettings_new_organization(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string organization) {
 	QString organization_QString = QString::fromUtf8(organization.data, organization.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, organization_QString) : nullptr;
 }
 
-VirtualQSettings* QSettings_new2(const QSettings_VTable* vtbl, size_t vdata, int scope, struct seaqt_string organization) {
+VirtualQSettings* QSettings_new_scope_organization(const QSettings_VTable* vtbl, size_t vdata, int scope, struct seaqt_string organization) {
 	QString organization_QString = QString::fromUtf8(organization.data, organization.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, static_cast<QSettings::Scope>(scope), organization_QString) : nullptr;
 }
 
-VirtualQSettings* QSettings_new3(const QSettings_VTable* vtbl, size_t vdata, int format, int scope, struct seaqt_string organization) {
+VirtualQSettings* QSettings_new_format_scope_organization(const QSettings_VTable* vtbl, size_t vdata, int format, int scope, struct seaqt_string organization) {
 	QString organization_QString = QString::fromUtf8(organization.data, organization.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, static_cast<QSettings::Format>(format), static_cast<QSettings::Scope>(scope), organization_QString) : nullptr;
 }
 
-VirtualQSettings* QSettings_new4(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string fileName, int format) {
+VirtualQSettings* QSettings_new_fileName_format(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string fileName, int format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, fileName_QString, static_cast<QSettings::Format>(format)) : nullptr;
 }
 
-VirtualQSettings* QSettings_new5(const QSettings_VTable* vtbl, size_t vdata) {
+VirtualQSettings* QSettings_new(const QSettings_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl) : nullptr;
 }
 
-VirtualQSettings* QSettings_new6(const QSettings_VTable* vtbl, size_t vdata, int scope) {
+VirtualQSettings* QSettings_new_scope(const QSettings_VTable* vtbl, size_t vdata, int scope) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, static_cast<QSettings::Scope>(scope)) : nullptr;
 }
 
-VirtualQSettings* QSettings_new7(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string organization, struct seaqt_string application) {
+VirtualQSettings* QSettings_new_organization_application(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string organization, struct seaqt_string application) {
 	QString organization_QString = QString::fromUtf8(organization.data, organization.len);
 	QString application_QString = QString::fromUtf8(application.data, application.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, organization_QString, application_QString) : nullptr;
 }
 
-VirtualQSettings* QSettings_new8(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string organization, struct seaqt_string application, QObject* parent) {
+VirtualQSettings* QSettings_new_organization_application_parent(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string organization, struct seaqt_string application, QObject* parent) {
 	QString organization_QString = QString::fromUtf8(organization.data, organization.len);
 	QString application_QString = QString::fromUtf8(application.data, application.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, organization_QString, application_QString, parent) : nullptr;
 }
 
-VirtualQSettings* QSettings_new9(const QSettings_VTable* vtbl, size_t vdata, int scope, struct seaqt_string organization, struct seaqt_string application) {
+VirtualQSettings* QSettings_new_scope_organization_application(const QSettings_VTable* vtbl, size_t vdata, int scope, struct seaqt_string organization, struct seaqt_string application) {
 	QString organization_QString = QString::fromUtf8(organization.data, organization.len);
 	QString application_QString = QString::fromUtf8(application.data, application.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, static_cast<QSettings::Scope>(scope), organization_QString, application_QString) : nullptr;
 }
 
-VirtualQSettings* QSettings_new10(const QSettings_VTable* vtbl, size_t vdata, int scope, struct seaqt_string organization, struct seaqt_string application, QObject* parent) {
+VirtualQSettings* QSettings_new_scope_organization_application_parent(const QSettings_VTable* vtbl, size_t vdata, int scope, struct seaqt_string organization, struct seaqt_string application, QObject* parent) {
 	QString organization_QString = QString::fromUtf8(organization.data, organization.len);
 	QString application_QString = QString::fromUtf8(application.data, application.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, static_cast<QSettings::Scope>(scope), organization_QString, application_QString, parent) : nullptr;
 }
 
-VirtualQSettings* QSettings_new11(const QSettings_VTable* vtbl, size_t vdata, int format, int scope, struct seaqt_string organization, struct seaqt_string application) {
+VirtualQSettings* QSettings_new_format_scope_organization_application(const QSettings_VTable* vtbl, size_t vdata, int format, int scope, struct seaqt_string organization, struct seaqt_string application) {
 	QString organization_QString = QString::fromUtf8(organization.data, organization.len);
 	QString application_QString = QString::fromUtf8(application.data, application.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, static_cast<QSettings::Format>(format), static_cast<QSettings::Scope>(scope), organization_QString, application_QString) : nullptr;
 }
 
-VirtualQSettings* QSettings_new12(const QSettings_VTable* vtbl, size_t vdata, int format, int scope, struct seaqt_string organization, struct seaqt_string application, QObject* parent) {
+VirtualQSettings* QSettings_new_format_scope_organization_application_parent(const QSettings_VTable* vtbl, size_t vdata, int format, int scope, struct seaqt_string organization, struct seaqt_string application, QObject* parent) {
 	QString organization_QString = QString::fromUtf8(organization.data, organization.len);
 	QString application_QString = QString::fromUtf8(application.data, application.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, static_cast<QSettings::Format>(format), static_cast<QSettings::Scope>(scope), organization_QString, application_QString, parent) : nullptr;
 }
 
-VirtualQSettings* QSettings_new13(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string fileName, int format, QObject* parent) {
+VirtualQSettings* QSettings_new_fileName_format_parent(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string fileName, int format, QObject* parent) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, fileName_QString, static_cast<QSettings::Format>(format), parent) : nullptr;
 }
 
-VirtualQSettings* QSettings_new14(const QSettings_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSettings* QSettings_new_parent(const QSettings_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, parent) : nullptr;
 }
 
-VirtualQSettings* QSettings_new15(const QSettings_VTable* vtbl, size_t vdata, int scope, QObject* parent) {
+VirtualQSettings* QSettings_new_scope_parent(const QSettings_VTable* vtbl, size_t vdata, int scope, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSettings>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSettings(vtbl, static_cast<QSettings::Scope>(scope), parent) : nullptr;
 }
@@ -294,7 +294,7 @@ int QSettings_metacall(QSettings* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSettings_tr(const char* s) {
+struct seaqt_string QSettings_tr_s(const char* s) {
 	QString _ret = QSettings::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -351,7 +351,7 @@ int QSettings_beginReadArray(QSettings* self, struct seaqt_string prefix) {
 	return self->beginReadArray(prefix_QString);
 }
 
-void QSettings_beginWriteArray(QSettings* self, struct seaqt_string prefix) {
+void QSettings_beginWriteArray_prefix(QSettings* self, struct seaqt_string prefix) {
 	QAnyStringView prefix_QString = QAnyStringView(prefix.data, prefix.len);
 	self->beginWriteArray(prefix_QString);
 }
@@ -433,12 +433,12 @@ void QSettings_setValue(QSettings* self, struct seaqt_string key, QVariant* valu
 	self->setValue(key_QString, *value);
 }
 
-QVariant* QSettings_value(const QSettings* self, struct seaqt_string key, QVariant* defaultValue) {
+QVariant* QSettings_value_key_defaultValue(const QSettings* self, struct seaqt_string key, QVariant* defaultValue) {
 	QAnyStringView key_QString = QAnyStringView(key.data, key.len);
 	return new QVariant(self->value(key_QString, *defaultValue));
 }
 
-QVariant* QSettings_valueWithKey(const QSettings* self, struct seaqt_string key) {
+QVariant* QSettings_value_key(const QSettings* self, struct seaqt_string key) {
 	QAnyStringView key_QString = QAnyStringView(key.data, key.len);
 	return new QVariant(self->value(key_QString));
 }
@@ -518,7 +518,7 @@ void QSettings_setPath(int format, int scope, struct seaqt_string path) {
 	QSettings::setPath(static_cast<QSettings::Format>(format), static_cast<QSettings::Scope>(scope), path_QString);
 }
 
-struct seaqt_string QSettings_tr2(const char* s, const char* c) {
+struct seaqt_string QSettings_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSettings::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -529,7 +529,7 @@ struct seaqt_string QSettings_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSettings_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSettings_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSettings::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -540,7 +540,7 @@ struct seaqt_string QSettings_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QSettings_beginWriteArray2(QSettings* self, struct seaqt_string prefix, int size) {
+void QSettings_beginWriteArray_prefix_size(QSettings* self, struct seaqt_string prefix, int size) {
 	QAnyStringView prefix_QString = QAnyStringView(prefix.data, prefix.len);
 	self->beginWriteArray(prefix_QString, static_cast<int>(size));
 }

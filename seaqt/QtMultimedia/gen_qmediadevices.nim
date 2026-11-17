@@ -59,7 +59,7 @@ type cQMediaDevices*{.exportc: "QMediaDevices", incompleteStruct.} = object
 proc fcQMediaDevices_metaObject(self: pointer): pointer {.importc: "QMediaDevices_metaObject".}
 proc fcQMediaDevices_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaDevices_metacast".}
 proc fcQMediaDevices_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaDevices_metacall".}
-proc fcQMediaDevices_tr(s: cstring): struct_seaqt_string {.importc: "QMediaDevices_tr".}
+proc fcQMediaDevices_trS(s: cstring): struct_seaqt_string {.importc: "QMediaDevices_tr_s".}
 proc fcQMediaDevices_audioInputs(): struct_seaqt_array {.importc: "QMediaDevices_audioInputs".}
 proc fcQMediaDevices_audioOutputs(): struct_seaqt_array {.importc: "QMediaDevices_audioOutputs".}
 proc fcQMediaDevices_videoInputs(): struct_seaqt_array {.importc: "QMediaDevices_videoInputs".}
@@ -72,8 +72,8 @@ proc fcQMediaDevices_audioOutputsChanged(self: pointer): void {.importc: "QMedia
 proc fcQMediaDevices_connect_audioOutputsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaDevices_connect_audioOutputsChanged".}
 proc fcQMediaDevices_videoInputsChanged(self: pointer): void {.importc: "QMediaDevices_videoInputsChanged".}
 proc fcQMediaDevices_connect_videoInputsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaDevices_connect_videoInputsChanged".}
-proc fcQMediaDevices_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaDevices_tr2".}
-proc fcQMediaDevices_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaDevices_tr3".}
+proc fcQMediaDevices_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaDevices_tr_s_c".}
+proc fcQMediaDevices_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaDevices_tr_s_c_n".}
 proc fcQMediaDevices_vdata(self: pointer): ptr pointer {.importc: "QMediaDevices_vdata".}
 proc fvdata_cQMediaDevices(self: pointer): pointer {.importc: "vdata_QMediaDevices".}
 
@@ -104,7 +104,7 @@ proc fcQMediaDevices_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQMediaDevices_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaDevices_protectedbase_receivers".}
 proc fcQMediaDevices_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaDevices_protectedbase_isSignalConnected".}
 proc fcQMediaDevices_new(vtbl: pointer, vdata: csize_t): ptr cQMediaDevices {.importc: "QMediaDevices_new".}
-proc fcQMediaDevices_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaDevices {.importc: "QMediaDevices_new2".}
+proc fcQMediaDevices_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaDevices {.importc: "QMediaDevices_new_parent".}
 proc fcQMediaDevices_staticMetaObject(): pointer {.importc: "QMediaDevices_staticMetaObject".}
 
 proc metaObject*(self: gen_qmediadevices_types.QMediaDevices): gen_qobjectdefs_types.QMetaObject =
@@ -117,7 +117,7 @@ proc metacall*(self: gen_qmediadevices_types.QMediaDevices, param1: cint, param2
   fcQMediaDevices_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediadevices_types.QMediaDevices, s: cstring): string =
-  let v_ms = fcQMediaDevices_tr(s)
+  let v_ms = fcQMediaDevices_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -213,13 +213,13 @@ proc onVideoInputsChanged*(self: gen_qmediadevices_types.QMediaDevices, slot: QM
   fcQMediaDevices_connect_videoInputsChanged(self.h, cast[int](addr tmp[]), fcQMediaDevices_slot_callback_videoInputsChanged, fcQMediaDevices_slot_callback_videoInputsChanged_release)
 
 proc tr*(_: type gen_qmediadevices_types.QMediaDevices, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaDevices_tr2(s, c)
+  let v_ms = fcQMediaDevices_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediadevices_types.QMediaDevices, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaDevices_tr3(s, c, n)
+  let v_ms = fcQMediaDevices_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -24,17 +24,17 @@ QTextDocumentWriter* QTextDocumentWriter_new() {
 	return new (std::nothrow) QTextDocumentWriter();
 }
 
-QTextDocumentWriter* QTextDocumentWriter_new2(QIODevice* device, struct seaqt_string format) {
+QTextDocumentWriter* QTextDocumentWriter_new_device_format(QIODevice* device, struct seaqt_string format) {
 	QByteArray format_QByteArray(format.data, format.len);
 	return new (std::nothrow) QTextDocumentWriter(device, format_QByteArray);
 }
 
-QTextDocumentWriter* QTextDocumentWriter_new3(struct seaqt_string fileName) {
+QTextDocumentWriter* QTextDocumentWriter_new_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new (std::nothrow) QTextDocumentWriter(fileName_QString);
 }
 
-QTextDocumentWriter* QTextDocumentWriter_new4(struct seaqt_string fileName, struct seaqt_string format) {
+QTextDocumentWriter* QTextDocumentWriter_new_fileName_format(struct seaqt_string fileName, struct seaqt_string format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QByteArray format_QByteArray(format.data, format.len);
 	return new (std::nothrow) QTextDocumentWriter(fileName_QString, format_QByteArray);
@@ -78,11 +78,11 @@ struct seaqt_string QTextDocumentWriter_fileName(const QTextDocumentWriter* self
 	return _ms;
 }
 
-bool QTextDocumentWriter_write(QTextDocumentWriter* self, QTextDocument* document) {
+bool QTextDocumentWriter_write_document(QTextDocumentWriter* self, QTextDocument* document) {
 	return self->write(document);
 }
 
-bool QTextDocumentWriter_writeWithFragment(QTextDocumentWriter* self, QTextDocumentFragment* fragment) {
+bool QTextDocumentWriter_write_fragment(QTextDocumentWriter* self, QTextDocumentFragment* fragment) {
 	return self->write(*fragment);
 }
 

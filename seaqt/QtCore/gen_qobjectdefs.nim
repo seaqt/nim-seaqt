@@ -69,19 +69,19 @@ type cQMetaObjectData*{.exportc: "QMetaObject__Data", incompleteStruct.} = objec
 proc fcQGenericArgument_data(self: pointer): pointer {.importc: "QGenericArgument_data".}
 proc fcQGenericArgument_name(self: pointer): cstring {.importc: "QGenericArgument_name".}
 proc fcQGenericArgument_new(): ptr cQGenericArgument {.importc: "QGenericArgument_new".}
-proc fcQGenericArgument_new2(param1: pointer): ptr cQGenericArgument {.importc: "QGenericArgument_new2".}
-proc fcQGenericArgument_new3(aName: cstring): ptr cQGenericArgument {.importc: "QGenericArgument_new3".}
-proc fcQGenericArgument_new4(aName: cstring, aData: pointer): ptr cQGenericArgument {.importc: "QGenericArgument_new4".}
+proc fcQGenericArgument_new2(fromVal: pointer): ptr cQGenericArgument {.importc: "QGenericArgument_new_from".}
+proc fcQGenericArgument_new3(aName: cstring): ptr cQGenericArgument {.importc: "QGenericArgument_new_aName".}
+proc fcQGenericArgument_new4(aName: cstring, aData: pointer): ptr cQGenericArgument {.importc: "QGenericArgument_new_aName_aData".}
 proc fcQGenericReturnArgument_new(): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new".}
-proc fcQGenericReturnArgument_new2(param1: pointer): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new2".}
-proc fcQGenericReturnArgument_new3(aName: cstring): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new3".}
-proc fcQGenericReturnArgument_new4(aName: cstring, aData: pointer): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new4".}
+proc fcQGenericReturnArgument_new2(fromVal: pointer): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new_from".}
+proc fcQGenericReturnArgument_new3(aName: cstring): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new_aName".}
+proc fcQGenericReturnArgument_new4(aName: cstring, aData: pointer): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new_aName_aData".}
 proc fcQMetaObject_className(self: pointer): cstring {.importc: "QMetaObject_className".}
 proc fcQMetaObject_superClass(self: pointer): pointer {.importc: "QMetaObject_superClass".}
 proc fcQMetaObject_inherits(self: pointer, metaObject: pointer): bool {.importc: "QMetaObject_inherits".}
-proc fcQMetaObject_castX(self: pointer, obj: pointer): pointer {.importc: "QMetaObject_cast".}
-proc fcQMetaObject_castWithObj(self: pointer, obj: pointer): pointer {.importc: "QMetaObject_castWithObj".}
-proc fcQMetaObject_tr(self: pointer, s: cstring, c: cstring): struct_seaqt_string {.importc: "QMetaObject_tr".}
+proc fcQMetaObject_castConstPQObject(self: pointer, obj: pointer): pointer {.importc: "QMetaObject_cast_const_pQObject".}
+proc fcQMetaObject_castConstPcQObject(self: pointer, obj: pointer): pointer {.importc: "QMetaObject_cast_const_pcQObject".}
+proc fcQMetaObject_trSC(self: pointer, s: cstring, c: cstring): struct_seaqt_string {.importc: "QMetaObject_tr_s_c".}
 proc fcQMetaObject_metaType(self: pointer): pointer {.importc: "QMetaObject_metaType".}
 proc fcQMetaObject_methodOffset(self: pointer): cint {.importc: "QMetaObject_methodOffset".}
 proc fcQMetaObject_enumeratorOffset(self: pointer): cint {.importc: "QMetaObject_enumeratorOffset".}
@@ -105,92 +105,92 @@ proc fcQMetaObject_enumerator(self: pointer, index: cint): pointer {.importc: "Q
 proc fcQMetaObject_property(self: pointer, index: cint): pointer {.importc: "QMetaObject_property".}
 proc fcQMetaObject_classInfo(self: pointer, index: cint): pointer {.importc: "QMetaObject_classInfo".}
 proc fcQMetaObject_userProperty(self: pointer): pointer {.importc: "QMetaObject_userProperty".}
-proc fcQMetaObject_checkConnectArgs(signal: cstring, methodVal: cstring): bool {.importc: "QMetaObject_checkConnectArgs".}
-proc fcQMetaObject_checkConnectArgs2(signal: pointer, methodVal: pointer): bool {.importc: "QMetaObject_checkConnectArgs2".}
+proc fcQMetaObject_checkConnectArgsCharChar(signal: cstring, methodVal: cstring): bool {.importc: "QMetaObject_checkConnectArgs_char_char".}
+proc fcQMetaObject_checkConnectArgs_QMetaMethod_QMetaMethod(signal: pointer, methodVal: pointer): bool {.importc: "QMetaObject_checkConnectArgs_QMetaMethod_QMetaMethod".}
 proc fcQMetaObject_normalizedSignature(methodVal: cstring): struct_seaqt_string {.importc: "QMetaObject_normalizedSignature".}
 proc fcQMetaObject_normalizedType(typeVal: cstring): struct_seaqt_string {.importc: "QMetaObject_normalizedType".}
-proc fcQMetaObject_connect(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint): pointer {.importc: "QMetaObject_connect".}
+proc fcQMetaObject_connectSenderSignalIndexReceiverMethodIndex(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint): pointer {.importc: "QMetaObject_connect_sender_signal_index_receiver_method_index".}
 proc fcQMetaObject_disconnect(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint): bool {.importc: "QMetaObject_disconnect".}
 proc fcQMetaObject_disconnectOne(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint): bool {.importc: "QMetaObject_disconnectOne".}
 proc fcQMetaObject_connectSlotsByName(o: pointer): void {.importc: "QMetaObject_connectSlotsByName".}
-proc fcQMetaObject_activate(sender: pointer, signal_index: cint, argv: pointer): void {.importc: "QMetaObject_activate".}
-proc fcQMetaObject_activate2(sender: pointer, param2: pointer, local_signal_index: cint, argv: pointer): void {.importc: "QMetaObject_activate2".}
-proc fcQMetaObject_activate3(sender: pointer, signal_offset: cint, local_signal_index: cint, argv: pointer): void {.importc: "QMetaObject_activate3".}
-proc fcQMetaObject_invokeMethod(obj: pointer, member: cstring, param3: cint, retVal: pointer): bool {.importc: "QMetaObject_invokeMethod".}
-proc fcQMetaObject_invokeMethod2(obj: pointer, member: cstring, retVal: pointer): bool {.importc: "QMetaObject_invokeMethod2".}
-proc fcQMetaObject_invokeMethod3(obj: pointer, member: cstring, typeVal: cint): bool {.importc: "QMetaObject_invokeMethod3".}
-proc fcQMetaObject_invokeMethod4(obj: pointer, member: cstring): bool {.importc: "QMetaObject_invokeMethod4".}
+proc fcQMetaObject_activate_QObjectIntVoid(sender: pointer, signal_index: cint, argv: pointer): void {.importc: "QMetaObject_activate_QObject_int_void".}
+proc fcQMetaObject_activate_QObject_QMetaObjectIntVoid(sender: pointer, param2: pointer, local_signal_index: cint, argv: pointer): void {.importc: "QMetaObject_activate_QObject_QMetaObject_int_void".}
+proc fcQMetaObject_activate_QObjectIntIntVoid(sender: pointer, signal_offset: cint, local_signal_index: cint, argv: pointer): void {.importc: "QMetaObject_activate_QObject_int_int_void".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument(obj: pointer, member: cstring, retVal: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType(obj: pointer, member: cstring, typeVal: cint): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType".}
+proc fcQMetaObject_invokeMethod_QObjectChar(obj: pointer, member: cstring): bool {.importc: "QMetaObject_invokeMethod_QObject_char".}
 proc fcQMetaObject_newInstance(self: pointer): pointer {.importc: "QMetaObject_newInstance".}
-proc fcQMetaObject_staticMetacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMetaObject_staticMetacall".}
+proc fcQMetaObject_staticMetacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMetaObject_static_metacall".}
 proc fcQMetaObject_metacall(param1: pointer, param2: cint, param3: cint, param4: pointer): cint {.importc: "QMetaObject_metacall".}
-proc fcQMetaObject_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMetaObject_operatorAssign".}
-proc fcQMetaObject_tr2(self: pointer, s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMetaObject_tr2".}
-proc fcQMetaObject_connect2(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint, typeVal: cint): pointer {.importc: "QMetaObject_connect2".}
-proc fcQMetaObject_connect3(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint, typeVal: cint, types: ptr cint): pointer {.importc: "QMetaObject_connect3".}
-proc fcQMetaObject_invokeMethod5(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer): bool {.importc: "QMetaObject_invokeMethod5".}
-proc fcQMetaObject_invokeMethod6(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer): bool {.importc: "QMetaObject_invokeMethod6".}
-proc fcQMetaObject_invokeMethod7(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer): bool {.importc: "QMetaObject_invokeMethod7".}
-proc fcQMetaObject_invokeMethod8(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer): bool {.importc: "QMetaObject_invokeMethod8".}
-proc fcQMetaObject_invokeMethod9(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer): bool {.importc: "QMetaObject_invokeMethod9".}
-proc fcQMetaObject_invokeMethod10(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer): bool {.importc: "QMetaObject_invokeMethod10".}
-proc fcQMetaObject_invokeMethod11(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer): bool {.importc: "QMetaObject_invokeMethod11".}
-proc fcQMetaObject_invokeMethod12(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): bool {.importc: "QMetaObject_invokeMethod12".}
-proc fcQMetaObject_invokeMethod13(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): bool {.importc: "QMetaObject_invokeMethod13".}
-proc fcQMetaObject_invokeMethod14(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): bool {.importc: "QMetaObject_invokeMethod14".}
-proc fcQMetaObject_invokeMethod15(obj: pointer, member: cstring, retVal: pointer, val0: pointer): bool {.importc: "QMetaObject_invokeMethod15".}
-proc fcQMetaObject_invokeMethod16(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer): bool {.importc: "QMetaObject_invokeMethod16".}
-proc fcQMetaObject_invokeMethod17(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer): bool {.importc: "QMetaObject_invokeMethod17".}
-proc fcQMetaObject_invokeMethod18(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer): bool {.importc: "QMetaObject_invokeMethod18".}
-proc fcQMetaObject_invokeMethod19(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer): bool {.importc: "QMetaObject_invokeMethod19".}
-proc fcQMetaObject_invokeMethod20(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer): bool {.importc: "QMetaObject_invokeMethod20".}
-proc fcQMetaObject_invokeMethod21(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer): bool {.importc: "QMetaObject_invokeMethod21".}
-proc fcQMetaObject_invokeMethod22(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): bool {.importc: "QMetaObject_invokeMethod22".}
-proc fcQMetaObject_invokeMethod23(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): bool {.importc: "QMetaObject_invokeMethod23".}
-proc fcQMetaObject_invokeMethod24(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): bool {.importc: "QMetaObject_invokeMethod24".}
-proc fcQMetaObject_invokeMethod25(obj: pointer, member: cstring, typeVal: cint, val0: pointer): bool {.importc: "QMetaObject_invokeMethod25".}
-proc fcQMetaObject_invokeMethod26(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer): bool {.importc: "QMetaObject_invokeMethod26".}
-proc fcQMetaObject_invokeMethod27(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer): bool {.importc: "QMetaObject_invokeMethod27".}
-proc fcQMetaObject_invokeMethod28(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer): bool {.importc: "QMetaObject_invokeMethod28".}
-proc fcQMetaObject_invokeMethod29(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer): bool {.importc: "QMetaObject_invokeMethod29".}
-proc fcQMetaObject_invokeMethod30(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer): bool {.importc: "QMetaObject_invokeMethod30".}
-proc fcQMetaObject_invokeMethod31(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer): bool {.importc: "QMetaObject_invokeMethod31".}
-proc fcQMetaObject_invokeMethod32(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): bool {.importc: "QMetaObject_invokeMethod32".}
-proc fcQMetaObject_invokeMethod33(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): bool {.importc: "QMetaObject_invokeMethod33".}
-proc fcQMetaObject_invokeMethod34(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): bool {.importc: "QMetaObject_invokeMethod34".}
-proc fcQMetaObject_invokeMethod35(obj: pointer, member: cstring, val0: pointer): bool {.importc: "QMetaObject_invokeMethod35".}
-proc fcQMetaObject_invokeMethod36(obj: pointer, member: cstring, val0: pointer, val1: pointer): bool {.importc: "QMetaObject_invokeMethod36".}
-proc fcQMetaObject_invokeMethod37(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer): bool {.importc: "QMetaObject_invokeMethod37".}
-proc fcQMetaObject_invokeMethod38(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer): bool {.importc: "QMetaObject_invokeMethod38".}
-proc fcQMetaObject_invokeMethod39(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer): bool {.importc: "QMetaObject_invokeMethod39".}
-proc fcQMetaObject_invokeMethod40(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer): bool {.importc: "QMetaObject_invokeMethod40".}
-proc fcQMetaObject_invokeMethod41(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer): bool {.importc: "QMetaObject_invokeMethod41".}
-proc fcQMetaObject_invokeMethod42(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): bool {.importc: "QMetaObject_invokeMethod42".}
-proc fcQMetaObject_invokeMethod43(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): bool {.importc: "QMetaObject_invokeMethod43".}
-proc fcQMetaObject_invokeMethod44(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): bool {.importc: "QMetaObject_invokeMethod44".}
-proc fcQMetaObject_newInstanceWithVal0(self: pointer, val0: pointer): pointer {.importc: "QMetaObject_newInstanceWithVal0".}
-proc fcQMetaObject_newInstance2(self: pointer, val0: pointer, val1: pointer): pointer {.importc: "QMetaObject_newInstance2".}
-proc fcQMetaObject_newInstance3(self: pointer, val0: pointer, val1: pointer, val2: pointer): pointer {.importc: "QMetaObject_newInstance3".}
-proc fcQMetaObject_newInstance4(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer): pointer {.importc: "QMetaObject_newInstance4".}
-proc fcQMetaObject_newInstance5(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer): pointer {.importc: "QMetaObject_newInstance5".}
-proc fcQMetaObject_newInstance6(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer): pointer {.importc: "QMetaObject_newInstance6".}
-proc fcQMetaObject_newInstance7(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer): pointer {.importc: "QMetaObject_newInstance7".}
-proc fcQMetaObject_newInstance8(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): pointer {.importc: "QMetaObject_newInstance8".}
-proc fcQMetaObject_newInstance9(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): pointer {.importc: "QMetaObject_newInstance9".}
-proc fcQMetaObject_newInstance10(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): pointer {.importc: "QMetaObject_newInstance10".}
+proc fcQMetaObject_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QMetaObject_operatorAssign".}
+proc fcQMetaObject_trSCN(self: pointer, s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMetaObject_tr_s_c_n".}
+proc fcQMetaObject_connectSenderSignalIndexReceiverMethodIndexType(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint, typeVal: cint): pointer {.importc: "QMetaObject_connect_sender_signal_index_receiver_method_index_type".}
+proc fcQMetaObject_connectSenderSignalIndexReceiverMethodIndexTypeTypes(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint, typeVal: cint, types: ptr cint): pointer {.importc: "QMetaObject_connect_sender_signal_index_receiver_method_index_type_types".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, param3: cint, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument(obj: pointer, member: cstring, retVal: pointer, val0: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, retVal: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument(obj: pointer, member: cstring, typeVal: cint, val0: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, typeVal: cint, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument(obj: pointer, member: cstring, val0: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, val0: pointer, val1: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj: pointer, member: cstring, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): bool {.importc: "QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument".}
+proc fcQMetaObject_newInstanceVal0(self: pointer, val0: pointer): pointer {.importc: "QMetaObject_newInstance_val0".}
+proc fcQMetaObject_newInstanceVal0Val1(self: pointer, val0: pointer, val1: pointer): pointer {.importc: "QMetaObject_newInstance_val0_val1".}
+proc fcQMetaObject_newInstanceVal0Val1Val2(self: pointer, val0: pointer, val1: pointer, val2: pointer): pointer {.importc: "QMetaObject_newInstance_val0_val1_val2".}
+proc fcQMetaObject_newInstanceVal0Val1Val2Val3(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer): pointer {.importc: "QMetaObject_newInstance_val0_val1_val2_val3".}
+proc fcQMetaObject_newInstanceVal0Val1Val2Val3Val4(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer): pointer {.importc: "QMetaObject_newInstance_val0_val1_val2_val3_val4".}
+proc fcQMetaObject_newInstanceVal0Val1Val2Val3Val4Val5(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer): pointer {.importc: "QMetaObject_newInstance_val0_val1_val2_val3_val4_val5".}
+proc fcQMetaObject_newInstanceVal0Val1Val2Val3Val4Val5Val6(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer): pointer {.importc: "QMetaObject_newInstance_val0_val1_val2_val3_val4_val5_val6".}
+proc fcQMetaObject_newInstanceVal0Val1Val2Val3Val4Val5Val6Val7(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): pointer {.importc: "QMetaObject_newInstance_val0_val1_val2_val3_val4_val5_val6_val7".}
+proc fcQMetaObject_newInstanceVal0Val1Val2Val3Val4Val5Val6Val7Val8(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): pointer {.importc: "QMetaObject_newInstance_val0_val1_val2_val3_val4_val5_val6_val7_val8".}
+proc fcQMetaObject_newInstanceVal0Val1Val2Val3Val4Val5Val6Val7Val8Val9(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): pointer {.importc: "QMetaObject_newInstance_val0_val1_val2_val3_val4_val5_val6_val7_val8_val9".}
 proc fcQMetaObject_new(): ptr cQMetaObject {.importc: "QMetaObject_new".}
-proc fcQMetaObject_new2(param1: pointer): ptr cQMetaObject {.importc: "QMetaObject_new2".}
-proc fcQMetaObjectConnection_operatorAssign(self: pointer, other: pointer): void {.importc: "QMetaObject__Connection_operatorAssign".}
+proc fcQMetaObject_new2(fromVal: pointer): ptr cQMetaObject {.importc: "QMetaObject_new_from".}
+proc fcQMetaObjectConnection_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QMetaObject__Connection_operatorAssign".}
 proc fcQMetaObjectConnection_swap(self: pointer, other: pointer): void {.importc: "QMetaObject__Connection_swap".}
 proc fcQMetaObjectConnection_new(): ptr cQMetaObjectConnection {.importc: "QMetaObject__Connection_new".}
-proc fcQMetaObjectConnection_new2(other: pointer): ptr cQMetaObjectConnection {.importc: "QMetaObject__Connection_new2".}
+proc fcQMetaObjectConnection_new2(fromVal: pointer): ptr cQMetaObjectConnection {.importc: "QMetaObject__Connection_new_from".}
 proc fcQMetaObjectSuperData_direct(self: pointer): pointer {.importc: "QMetaObject__SuperData_direct".}
 proc fcQMetaObjectSuperData_setDirect(self: pointer, direct: pointer): void {.importc: "QMetaObject__SuperData_setDirect".}
 proc fcQMetaObjectSuperData_operatorMinusGreater(self: pointer): pointer {.importc: "QMetaObject__SuperData_operatorMinusGreater".}
 proc fcQMetaObjectSuperData_ToConstQMetaObjectMultiply(self: pointer): pointer {.importc: "QMetaObject__SuperData_ToConstQMetaObjectMultiply".}
-proc fcQMetaObjectSuperData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMetaObject__SuperData_operatorAssign".}
+proc fcQMetaObjectSuperData_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QMetaObject__SuperData_operatorAssign".}
 proc fcQMetaObjectSuperData_new(): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new".}
-proc fcQMetaObjectSuperData_new2(mo: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new2".}
-proc fcQMetaObjectSuperData_new3(param1: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new3".}
+proc fcQMetaObjectSuperData_new2(mo: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new_QMetaObject".}
+proc fcQMetaObjectSuperData_new3(fromVal: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new_QMetaObject_SuperData".}
 proc fcQMetaObjectData_superdata(self: pointer): pointer {.importc: "QMetaObject__Data_superdata".}
 proc fcQMetaObjectData_setSuperdata(self: pointer, superdata: pointer): void {.importc: "QMetaObject__Data_setSuperdata".}
 proc fcQMetaObjectData_stringdata(self: pointer): ptr cuint {.importc: "QMetaObject__Data_stringdata".}
@@ -199,9 +199,9 @@ proc fcQMetaObjectData_data(self: pointer): ptr cuint {.importc: "QMetaObject__D
 proc fcQMetaObjectData_setData(self: pointer, data: ptr cuint): void {.importc: "QMetaObject__Data_setData".}
 proc fcQMetaObjectData_relatedMetaObjects(self: pointer): pointer {.importc: "QMetaObject__Data_relatedMetaObjects".}
 proc fcQMetaObjectData_setRelatedMetaObjects(self: pointer, relatedMetaObjects: pointer): void {.importc: "QMetaObject__Data_setRelatedMetaObjects".}
-proc fcQMetaObjectData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMetaObject__Data_operatorAssign".}
+proc fcQMetaObjectData_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QMetaObject__Data_operatorAssign".}
 proc fcQMetaObjectData_new(): ptr cQMetaObjectData {.importc: "QMetaObject__Data_new".}
-proc fcQMetaObjectData_new2(param1: pointer): ptr cQMetaObjectData {.importc: "QMetaObject__Data_new2".}
+proc fcQMetaObjectData_new2(fromVal: pointer): ptr cQMetaObjectData {.importc: "QMetaObject__Data_new_from".}
 
 proc data*(self: gen_qobjectdefs_types.QGenericArgument): pointer =
   fcQGenericArgument_data(self.h)
@@ -213,8 +213,8 @@ proc create*(T: type gen_qobjectdefs_types.QGenericArgument): gen_qobjectdefs_ty
   let tmp = gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new(), owned: true)
   tmp
 proc create*(T: type gen_qobjectdefs_types.QGenericArgument,
-    param1: gen_qobjectdefs_types.QGenericArgument): gen_qobjectdefs_types.QGenericArgument =
-  let tmp = gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new2(param1.h), owned: true)
+    fromVal: gen_qobjectdefs_types.QGenericArgument): gen_qobjectdefs_types.QGenericArgument =
+  let tmp = gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qobjectdefs_types.QGenericArgument,
     aName: cstring): gen_qobjectdefs_types.QGenericArgument =
@@ -228,8 +228,8 @@ proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument): gen_qobjectd
   let tmp = gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new(), owned: true)
   tmp
 proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument,
-    param1: gen_qobjectdefs_types.QGenericReturnArgument): gen_qobjectdefs_types.QGenericReturnArgument =
-  let tmp = gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new2(param1.h), owned: true)
+    fromVal: gen_qobjectdefs_types.QGenericReturnArgument): gen_qobjectdefs_types.QGenericReturnArgument =
+  let tmp = gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument,
     aName: cstring): gen_qobjectdefs_types.QGenericReturnArgument =
@@ -249,13 +249,13 @@ proc inherits*(self: gen_qobjectdefs_types.QMetaObject, metaObject: gen_qobjectd
   fcQMetaObject_inherits(self.h, metaObject.h)
 
 proc castX*(self: gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_castX(self.h, obj.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_castConstPQObject(self.h, obj.h), owned: false)
 
 proc castX2*(self: gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_castWithObj(self.h, obj.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_castConstPcQObject(self.h, obj.h), owned: false)
 
 proc tr*(self: gen_qobjectdefs_types.QMetaObject, s: cstring, c: cstring): string =
-  let v_ms = fcQMetaObject_tr(self.h, s, c)
+  let v_ms = fcQMetaObject_trSC(self.h, s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -330,10 +330,10 @@ proc userProperty*(self: gen_qobjectdefs_types.QMetaObject): gen_qmetaobject_typ
   gen_qmetaobject_types.QMetaProperty(h: fcQMetaObject_userProperty(self.h), owned: true)
 
 proc checkConnectArgs*(_: type gen_qobjectdefs_types.QMetaObject, signal: cstring, methodVal: cstring): bool =
-  fcQMetaObject_checkConnectArgs(signal, methodVal)
+  fcQMetaObject_checkConnectArgsCharChar(signal, methodVal)
 
 proc checkConnectArgs*(_: type gen_qobjectdefs_types.QMetaObject, signal: gen_qmetaobject_types.QMetaMethod, methodVal: gen_qmetaobject_types.QMetaMethod): bool =
-  fcQMetaObject_checkConnectArgs2(signal.h, methodVal.h)
+  fcQMetaObject_checkConnectArgs_QMetaMethod_QMetaMethod(signal.h, methodVal.h)
 
 proc normalizedSignature*(_: type gen_qobjectdefs_types.QMetaObject, methodVal: cstring): seq[byte] =
   var v_bytearray = fcQMetaObject_normalizedSignature(methodVal)
@@ -348,7 +348,7 @@ proc normalizedType*(_: type gen_qobjectdefs_types.QMetaObject, typeVal: cstring
   vx_ret
 
 proc connect*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_index: cint, receiver: gen_qobject_types.QObject, method_index: cint): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connect(sender.h, signal_index, receiver.h, method_index), owned: true)
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connectSenderSignalIndexReceiverMethodIndex(sender.h, signal_index, receiver.h, method_index), owned: true)
 
 proc disconnect*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_index: cint, receiver: gen_qobject_types.QObject, method_index: cint): bool =
   fcQMetaObject_disconnect(sender.h, signal_index, receiver.h, method_index)
@@ -360,25 +360,25 @@ proc connectSlotsByName*(_: type gen_qobjectdefs_types.QMetaObject, o: gen_qobje
   fcQMetaObject_connectSlotsByName(o.h)
 
 proc activate*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_index: cint, argv: pointer): void =
-  fcQMetaObject_activate(sender.h, signal_index, argv)
+  fcQMetaObject_activate_QObjectIntVoid(sender.h, signal_index, argv)
 
 proc activate*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, param2: gen_qobjectdefs_types.QMetaObject, local_signal_index: cint, argv: pointer): void =
-  fcQMetaObject_activate2(sender.h, param2.h, local_signal_index, argv)
+  fcQMetaObject_activate_QObject_QMetaObjectIntVoid(sender.h, param2.h, local_signal_index, argv)
 
 proc activate*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_offset: cint, local_signal_index: cint, argv: pointer): void =
-  fcQMetaObject_activate3(sender.h, signal_offset, local_signal_index, argv)
+  fcQMetaObject_activate_QObjectIntIntVoid(sender.h, signal_offset, local_signal_index, argv)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument): bool =
-  fcQMetaObject_invokeMethod(obj.h, member, cint(param3), retVal.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument(obj.h, member, cint(param3), retVal.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument): bool =
-  fcQMetaObject_invokeMethod2(obj.h, member, retVal.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument(obj.h, member, retVal.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint): bool =
-  fcQMetaObject_invokeMethod3(obj.h, member, cint(typeVal))
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType(obj.h, member, cint(typeVal))
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring): bool =
-  fcQMetaObject_invokeMethod4(obj.h, member)
+  fcQMetaObject_invokeMethod_QObjectChar(obj.h, member)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMetaObject_newInstance(self.h), owned: false)
@@ -389,180 +389,180 @@ proc staticMetacall*(self: gen_qobjectdefs_types.QMetaObject, param1: cint, para
 proc metacall*(_: type gen_qobjectdefs_types.QMetaObject, param1: gen_qobject_types.QObject, param2: cint, param3: cint, param4: pointer): cint =
   fcQMetaObject_metacall(param1.h, cint(param2), param3, param4)
 
-proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObject, param1: gen_qobjectdefs_types.QMetaObject): void =
-  fcQMetaObject_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObject, fromVal: gen_qobjectdefs_types.QMetaObject): void =
+  fcQMetaObject_operatorAssign(self.h, fromVal.h)
 
 proc tr*(self: gen_qobjectdefs_types.QMetaObject, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMetaObject_tr2(self.h, s, c, n)
+  let v_ms = fcQMetaObject_trSCN(self.h, s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc connect*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_index: cint, receiver: gen_qobject_types.QObject, method_index: cint, typeVal: cint): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connect2(sender.h, signal_index, receiver.h, method_index, typeVal), owned: true)
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connectSenderSignalIndexReceiverMethodIndexType(sender.h, signal_index, receiver.h, method_index, typeVal), owned: true)
 
 proc connect*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_index: cint, receiver: gen_qobject_types.QObject, method_index: cint, typeVal: cint, types: ptr cint): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connect3(sender.h, signal_index, receiver.h, method_index, typeVal, types), owned: true)
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connectSenderSignalIndexReceiverMethodIndexTypeTypes(sender.h, signal_index, receiver.h, method_index, typeVal, types), owned: true)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod5(obj.h, member, cint(param3), retVal.h, val0.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument(obj.h, member, cint(param3), retVal.h, val0.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod6(obj.h, member, cint(param3), retVal.h, val0.h, val1.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(param3), retVal.h, val0.h, val1.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod7(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod8(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod9(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod10(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod11(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod12(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod13(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument, val9: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod14(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(param3), retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod15(obj.h, member, retVal.h, val0.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument(obj.h, member, retVal.h, val0.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod16(obj.h, member, retVal.h, val0.h, val1.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument(obj.h, member, retVal.h, val0.h, val1.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod17(obj.h, member, retVal.h, val0.h, val1.h, val2.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, retVal.h, val0.h, val1.h, val2.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod18(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod19(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod20(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod21(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod22(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod23(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument, val9: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod24(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, retVal.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint, val0: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod25(obj.h, member, cint(typeVal), val0.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument(obj.h, member, cint(typeVal), val0.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod26(obj.h, member, cint(typeVal), val0.h, val1.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument(obj.h, member, cint(typeVal), val0.h, val1.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod27(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod28(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod29(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod30(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h, val5.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h, val5.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod31(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod32(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod33(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, typeVal: cint, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument, val9: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod34(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h)
+  fcQMetaObject_invokeMethod_QObjectChar_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, cint(typeVal), val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, val0: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod35(obj.h, member, val0.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument(obj.h, member, val0.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod36(obj.h, member, val0.h, val1.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument(obj.h, member, val0.h, val1.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod37(obj.h, member, val0.h, val1.h, val2.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, val0.h, val1.h, val2.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod38(obj.h, member, val0.h, val1.h, val2.h, val3.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, val0.h, val1.h, val2.h, val3.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod39(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod40(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod41(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod42(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod43(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument, val9: gen_qobjectdefs_types.QGenericArgument): bool =
-  fcQMetaObject_invokeMethod44(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h)
+  fcQMetaObject_invokeMethod_QObjectChar_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceWithVal0(self.h, val0.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceVal0(self.h, val0.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance2(self.h, val0.h, val1.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceVal0Val1(self.h, val0.h, val1.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance3(self.h, val0.h, val1.h, val2.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceVal0Val1Val2(self.h, val0.h, val1.h, val2.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance4(self.h, val0.h, val1.h, val2.h, val3.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceVal0Val1Val2Val3(self.h, val0.h, val1.h, val2.h, val3.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance5(self.h, val0.h, val1.h, val2.h, val3.h, val4.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceVal0Val1Val2Val3Val4(self.h, val0.h, val1.h, val2.h, val3.h, val4.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance6(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceVal0Val1Val2Val3Val4Val5(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance7(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceVal0Val1Val2Val3Val4Val5Val6(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance8(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceVal0Val1Val2Val3Val4Val5Val6Val7(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance9(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceVal0Val1Val2Val3Val4Val5Val6Val7Val8(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument, val9: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance10(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h), owned: false)
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstanceVal0Val1Val2Val3Val4Val5Val6Val7Val8Val9(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h), owned: false)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObject =
   let tmp = gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_new(), owned: true)
   tmp
 proc create*(T: type gen_qobjectdefs_types.QMetaObject,
-    param1: gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObject =
-  let tmp = gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_new2(param1.h), owned: true)
+    fromVal: gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObject =
+  let tmp = gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectConnection, other: gen_qobjectdefs_types.QMetaObjectConnection): void =
-  fcQMetaObjectConnection_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectConnection, fromVal: gen_qobjectdefs_types.QMetaObjectConnection): void =
+  fcQMetaObjectConnection_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qobjectdefs_types.QMetaObjectConnection, other: gen_qobjectdefs_types.QMetaObjectConnection): void =
   fcQMetaObjectConnection_swap(self.h, other.h)
@@ -571,8 +571,8 @@ proc create*(T: type gen_qobjectdefs_types.QMetaObjectConnection): gen_qobjectde
   let tmp = gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObjectConnection_new(), owned: true)
   tmp
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectConnection,
-    other: gen_qobjectdefs_types.QMetaObjectConnection): gen_qobjectdefs_types.QMetaObjectConnection =
-  let tmp = gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObjectConnection_new2(other.h), owned: true)
+    fromVal: gen_qobjectdefs_types.QMetaObjectConnection): gen_qobjectdefs_types.QMetaObjectConnection =
+  let tmp = gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObjectConnection_new2(fromVal.h), owned: true)
   tmp
 proc direct*(self: gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaObjectSuperData_direct(self.h), owned: false)
@@ -586,8 +586,8 @@ proc operatorMinusGreater*(self: gen_qobjectdefs_types.QMetaObjectSuperData): ge
 proc ToConstQMetaObjectMultiply*(self: gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaObjectSuperData_ToConstQMetaObjectMultiply(self.h), owned: false)
 
-proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectSuperData, param1: gen_qobjectdefs_types.QMetaObjectSuperData): void =
-  fcQMetaObjectSuperData_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectSuperData, fromVal: gen_qobjectdefs_types.QMetaObjectSuperData): void =
+  fcQMetaObjectSuperData_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObjectSuperData =
   let tmp = gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new(), owned: true)
@@ -597,8 +597,8 @@ proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData,
   let tmp = gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new2(mo.h), owned: true)
   tmp
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData,
-    param1: gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObjectSuperData =
-  let tmp = gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new3(param1.h), owned: true)
+    fromVal: gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObjectSuperData =
+  let tmp = gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new3(fromVal.h), owned: true)
   tmp
 proc superdata*(self: gen_qobjectdefs_types.QMetaObjectData): gen_qobjectdefs_types.QMetaObjectSuperData =
   gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectData_superdata(self.h), owned: true)
@@ -624,13 +624,13 @@ proc relatedMetaObjects*(self: gen_qobjectdefs_types.QMetaObjectData): gen_qobje
 proc setRelatedMetaObjects*(self: gen_qobjectdefs_types.QMetaObjectData, relatedMetaObjects: gen_qobjectdefs_types.QMetaObjectSuperData): void =
   fcQMetaObjectData_setRelatedMetaObjects(self.h, relatedMetaObjects.h)
 
-proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectData, param1: gen_qobjectdefs_types.QMetaObjectData): void =
-  fcQMetaObjectData_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectData, fromVal: gen_qobjectdefs_types.QMetaObjectData): void =
+  fcQMetaObjectData_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectData): gen_qobjectdefs_types.QMetaObjectData =
   let tmp = gen_qobjectdefs_types.QMetaObjectData(h: fcQMetaObjectData_new(), owned: true)
   tmp
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectData,
-    param1: gen_qobjectdefs_types.QMetaObjectData): gen_qobjectdefs_types.QMetaObjectData =
-  let tmp = gen_qobjectdefs_types.QMetaObjectData(h: fcQMetaObjectData_new2(param1.h), owned: true)
+    fromVal: gen_qobjectdefs_types.QMetaObjectData): gen_qobjectdefs_types.QMetaObjectData =
+  let tmp = gen_qobjectdefs_types.QMetaObjectData(h: fcQMetaObjectData_new2(fromVal.h), owned: true)
   tmp

@@ -203,17 +203,17 @@ VirtualQState* QState_new(const QState_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQState(vtbl) : nullptr;
 }
 
-VirtualQState* QState_new2(const QState_VTable* vtbl, size_t vdata, int childMode) {
+VirtualQState* QState_new_childMode(const QState_VTable* vtbl, size_t vdata, int childMode) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQState>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQState(vtbl, static_cast<QState::ChildMode>(childMode)) : nullptr;
 }
 
-VirtualQState* QState_new3(const QState_VTable* vtbl, size_t vdata, QState* parent) {
+VirtualQState* QState_new_parent(const QState_VTable* vtbl, size_t vdata, QState* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQState>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQState(vtbl, parent) : nullptr;
 }
 
-VirtualQState* QState_new4(const QState_VTable* vtbl, size_t vdata, int childMode, QState* parent) {
+VirtualQState* QState_new_childMode_parent(const QState_VTable* vtbl, size_t vdata, int childMode, QState* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQState>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQState(vtbl, static_cast<QState::ChildMode>(childMode), parent) : nullptr;
 }
@@ -234,7 +234,7 @@ int QState_metacall(QState* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QState_tr(const char* s) {
+struct seaqt_string QState_tr_s(const char* s) {
 	QString _ret = QState::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -253,15 +253,15 @@ void QState_setErrorState(QState* self, QAbstractState* state) {
 	self->setErrorState(state);
 }
 
-void QState_addTransition(QState* self, QAbstractTransition* transition) {
+void QState_addTransition_transition(QState* self, QAbstractTransition* transition) {
 	self->addTransition(transition);
 }
 
-QSignalTransition* QState_addTransition2(QState* self, QObject* sender, const char* signal, QAbstractState* target) {
+QSignalTransition* QState_addTransition_sender_signal_target(QState* self, QObject* sender, const char* signal, QAbstractState* target) {
 	return self->addTransition(sender, signal, target);
 }
 
-QAbstractTransition* QState_addTransitionWithTarget(QState* self, QAbstractState* target) {
+QAbstractTransition* QState_addTransition_target(QState* self, QAbstractState* target) {
 	return self->addTransition(target);
 }
 
@@ -303,7 +303,7 @@ void QState_assignProperty(QState* self, QObject* object, const char* name, QVar
 	self->assignProperty(object, name, *value);
 }
 
-struct seaqt_string QState_tr2(const char* s, const char* c) {
+struct seaqt_string QState_tr_s_c(const char* s, const char* c) {
 	QString _ret = QState::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -314,7 +314,7 @@ struct seaqt_string QState_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QState_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QState_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QState::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

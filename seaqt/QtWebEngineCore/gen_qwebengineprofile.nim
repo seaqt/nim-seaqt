@@ -83,7 +83,7 @@ type cQWebEngineProfile*{.exportc: "QWebEngineProfile", incompleteStruct.} = obj
 proc fcQWebEngineProfile_metaObject(self: pointer): pointer {.importc: "QWebEngineProfile_metaObject".}
 proc fcQWebEngineProfile_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineProfile_metacast".}
 proc fcQWebEngineProfile_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineProfile_metacall".}
-proc fcQWebEngineProfile_tr(s: cstring): struct_seaqt_string {.importc: "QWebEngineProfile_tr".}
+proc fcQWebEngineProfile_trS(s: cstring): struct_seaqt_string {.importc: "QWebEngineProfile_tr_s".}
 proc fcQWebEngineProfile_storageName(self: pointer): struct_seaqt_string {.importc: "QWebEngineProfile_storageName".}
 proc fcQWebEngineProfile_isOffTheRecord(self: pointer): bool {.importc: "QWebEngineProfile_isOffTheRecord".}
 proc fcQWebEngineProfile_persistentStoragePath(self: pointer): struct_seaqt_string {.importc: "QWebEngineProfile_persistentStoragePath".}
@@ -123,8 +123,8 @@ proc fcQWebEngineProfile_clientCertificateStore(self: pointer): pointer {.import
 proc fcQWebEngineProfile_defaultProfile(): pointer {.importc: "QWebEngineProfile_defaultProfile".}
 proc fcQWebEngineProfile_downloadRequested(self: pointer, download: pointer): void {.importc: "QWebEngineProfile_downloadRequested".}
 proc fcQWebEngineProfile_connect_downloadRequested(self: pointer, slot: int, callback: proc (slot: int, download: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineProfile_connect_downloadRequested".}
-proc fcQWebEngineProfile_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineProfile_tr2".}
-proc fcQWebEngineProfile_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineProfile_tr3".}
+proc fcQWebEngineProfile_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineProfile_tr_s_c".}
+proc fcQWebEngineProfile_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineProfile_tr_s_c_n".}
 proc fcQWebEngineProfile_vdata(self: pointer): ptr pointer {.importc: "QWebEngineProfile_vdata".}
 proc fvdata_cQWebEngineProfile(self: pointer): pointer {.importc: "vdata_QWebEngineProfile".}
 
@@ -155,9 +155,9 @@ proc fcQWebEngineProfile_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQWebEngineProfile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineProfile_protectedbase_receivers".}
 proc fcQWebEngineProfile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineProfile_protectedbase_isSignalConnected".}
 proc fcQWebEngineProfile_new(vtbl: pointer, vdata: csize_t): ptr cQWebEngineProfile {.importc: "QWebEngineProfile_new".}
-proc fcQWebEngineProfile_new2(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string): ptr cQWebEngineProfile {.importc: "QWebEngineProfile_new2".}
-proc fcQWebEngineProfile_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebEngineProfile {.importc: "QWebEngineProfile_new3".}
-proc fcQWebEngineProfile_new4(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, parent: pointer): ptr cQWebEngineProfile {.importc: "QWebEngineProfile_new4".}
+proc fcQWebEngineProfile_new2(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string): ptr cQWebEngineProfile {.importc: "QWebEngineProfile_new_name".}
+proc fcQWebEngineProfile_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebEngineProfile {.importc: "QWebEngineProfile_new_parent".}
+proc fcQWebEngineProfile_new4(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, parent: pointer): ptr cQWebEngineProfile {.importc: "QWebEngineProfile_new_name_parent".}
 proc fcQWebEngineProfile_staticMetaObject(): pointer {.importc: "QWebEngineProfile_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebengineprofile_types.QWebEngineProfile): gen_qobjectdefs_types.QMetaObject =
@@ -170,7 +170,7 @@ proc metacall*(self: gen_qwebengineprofile_types.QWebEngineProfile, param1: cint
   fcQWebEngineProfile_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebengineprofile_types.QWebEngineProfile, s: cstring): string =
-  let v_ms = fcQWebEngineProfile_tr(s)
+  let v_ms = fcQWebEngineProfile_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -342,13 +342,13 @@ proc onDownloadRequested*(self: gen_qwebengineprofile_types.QWebEngineProfile, s
   fcQWebEngineProfile_connect_downloadRequested(self.h, cast[int](addr tmp[]), fcQWebEngineProfile_slot_callback_downloadRequested, fcQWebEngineProfile_slot_callback_downloadRequested_release)
 
 proc tr*(_: type gen_qwebengineprofile_types.QWebEngineProfile, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineProfile_tr2(s, c)
+  let v_ms = fcQWebEngineProfile_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebengineprofile_types.QWebEngineProfile, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineProfile_tr3(s, c, n)
+  let v_ms = fcQWebEngineProfile_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

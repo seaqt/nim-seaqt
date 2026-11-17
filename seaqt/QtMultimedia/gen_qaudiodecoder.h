@@ -59,13 +59,13 @@ void* QAudioDecoder_vdata(VirtualQAudioDecoder* self);
 VirtualQAudioDecoder* vdata_QAudioDecoder(void* vdata);
 
 VirtualQAudioDecoder* QAudioDecoder_new(const QAudioDecoder_VTable* vtbl, size_t vdata);
-VirtualQAudioDecoder* QAudioDecoder_new2(const QAudioDecoder_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAudioDecoder* QAudioDecoder_new_parent(const QAudioDecoder_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAudioDecoder_virtbase(QAudioDecoder* src, QObject** outptr_QObject);
 QMetaObject* QAudioDecoder_metaObject(const QAudioDecoder* self);
 void* QAudioDecoder_metacast(QAudioDecoder* self, const char* param1);
 int QAudioDecoder_metacall(QAudioDecoder* self, int param1, int param2, void** param3);
-struct seaqt_string QAudioDecoder_tr(const char* s);
+struct seaqt_string QAudioDecoder_tr_s(const char* s);
 bool QAudioDecoder_isSupported(const QAudioDecoder* self);
 bool QAudioDecoder_isDecoding(const QAudioDecoder* self);
 QUrl* QAudioDecoder_source(const QAudioDecoder* self);
@@ -92,16 +92,16 @@ void QAudioDecoder_isDecodingChanged(QAudioDecoder* self, bool param1);
 void QAudioDecoder_connect_isDecodingChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QAudioDecoder_formatChanged(QAudioDecoder* self, QAudioFormat* format);
 void QAudioDecoder_connect_formatChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, QAudioFormat*), void (*release)(intptr_t));
-void QAudioDecoder_errorWithError(QAudioDecoder* self, int error);
-void QAudioDecoder_connect_errorWithError(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QAudioDecoder_error_error(QAudioDecoder* self, int error);
+void QAudioDecoder_connect_error_error(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QAudioDecoder_sourceChanged(QAudioDecoder* self);
 void QAudioDecoder_connect_sourceChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QAudioDecoder_positionChanged(QAudioDecoder* self, long long position);
 void QAudioDecoder_connect_positionChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t));
 void QAudioDecoder_durationChanged(QAudioDecoder* self, long long duration);
 void QAudioDecoder_connect_durationChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t));
-struct seaqt_string QAudioDecoder_tr2(const char* s, const char* c);
-struct seaqt_string QAudioDecoder_tr3(const char* s, const char* c, int n);
+struct seaqt_string QAudioDecoder_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAudioDecoder_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAudioDecoder_virtualbase_metaObject(const VirtualQAudioDecoder* self);
 void* QAudioDecoder_virtualbase_metacast(VirtualQAudioDecoder* self, const char* param1);

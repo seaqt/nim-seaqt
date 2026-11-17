@@ -111,13 +111,13 @@ void* QTransposeProxyModel_vdata(VirtualQTransposeProxyModel* self);
 VirtualQTransposeProxyModel* vdata_QTransposeProxyModel(void* vdata);
 
 VirtualQTransposeProxyModel* QTransposeProxyModel_new(const QTransposeProxyModel_VTable* vtbl, size_t vdata);
-VirtualQTransposeProxyModel* QTransposeProxyModel_new2(const QTransposeProxyModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQTransposeProxyModel* QTransposeProxyModel_new_parent(const QTransposeProxyModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QTransposeProxyModel_virtbase(QTransposeProxyModel* src, QAbstractProxyModel** outptr_QAbstractProxyModel);
 QMetaObject* QTransposeProxyModel_metaObject(const QTransposeProxyModel* self);
 void* QTransposeProxyModel_metacast(QTransposeProxyModel* self, const char* param1);
 int QTransposeProxyModel_metacall(QTransposeProxyModel* self, int param1, int param2, void** param3);
-struct seaqt_string QTransposeProxyModel_tr(const char* s);
+struct seaqt_string QTransposeProxyModel_tr_s(const char* s);
 void QTransposeProxyModel_setSourceModel(QTransposeProxyModel* self, QAbstractItemModel* newSourceModel);
 int QTransposeProxyModel_rowCount(const QTransposeProxyModel* self, QModelIndex* parent);
 int QTransposeProxyModel_columnCount(const QTransposeProxyModel* self, QModelIndex* parent);
@@ -137,8 +137,8 @@ bool QTransposeProxyModel_insertColumns(QTransposeProxyModel* self, int column, 
 bool QTransposeProxyModel_removeColumns(QTransposeProxyModel* self, int column, int count, QModelIndex* parent);
 bool QTransposeProxyModel_moveColumns(QTransposeProxyModel* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild);
 void QTransposeProxyModel_sort(QTransposeProxyModel* self, int column, int order);
-struct seaqt_string QTransposeProxyModel_tr2(const char* s, const char* c);
-struct seaqt_string QTransposeProxyModel_tr3(const char* s, const char* c, int n);
+struct seaqt_string QTransposeProxyModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTransposeProxyModel_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QTransposeProxyModel_virtualbase_metaObject(const VirtualQTransposeProxyModel* self);
 void* QTransposeProxyModel_virtualbase_metacast(VirtualQTransposeProxyModel* self, const char* param1);
@@ -194,7 +194,7 @@ void QTransposeProxyModel_virtualbase_connectNotify(VirtualQTransposeProxyModel*
 void QTransposeProxyModel_virtualbase_disconnectNotify(VirtualQTransposeProxyModel* self, QMetaMethod* signal);
 
 QModelIndex* QTransposeProxyModel_protectedbase_createSourceIndex(const VirtualQTransposeProxyModel* self, int row, int col, void* internalPtr);
-QModelIndex* QTransposeProxyModel_protectedbase_createIndex(const VirtualQTransposeProxyModel* self, int row, int column);
+QModelIndex* QTransposeProxyModel_protectedbase_createIndex_row_column(const VirtualQTransposeProxyModel* self, int row, int column);
 void QTransposeProxyModel_protectedbase_encodeData(const VirtualQTransposeProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QTransposeProxyModel_protectedbase_decodeData(VirtualQTransposeProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QTransposeProxyModel_protectedbase_beginInsertRows(VirtualQTransposeProxyModel* self, QModelIndex* parent, int first, int last);

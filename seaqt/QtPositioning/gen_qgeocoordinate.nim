@@ -58,7 +58,7 @@ export
 
 type cQGeoCoordinate*{.exportc: "QGeoCoordinate", incompleteStruct.} = object
 
-proc fcQGeoCoordinate_operatorAssign(self: pointer, other: pointer): void {.importc: "QGeoCoordinate_operatorAssign".}
+proc fcQGeoCoordinate_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGeoCoordinate_operatorAssign".}
 proc fcQGeoCoordinate_swap(self: pointer, other: pointer): void {.importc: "QGeoCoordinate_swap".}
 proc fcQGeoCoordinate_isValid(self: pointer): bool {.importc: "QGeoCoordinate_isValid".}
 proc fcQGeoCoordinate_typeX(self: pointer): cint {.importc: "QGeoCoordinate_type".}
@@ -70,18 +70,18 @@ proc fcQGeoCoordinate_setAltitude(self: pointer, altitude: float64): void {.impo
 proc fcQGeoCoordinate_altitude(self: pointer): float64 {.importc: "QGeoCoordinate_altitude".}
 proc fcQGeoCoordinate_distanceTo(self: pointer, other: pointer): float64 {.importc: "QGeoCoordinate_distanceTo".}
 proc fcQGeoCoordinate_azimuthTo(self: pointer, other: pointer): float64 {.importc: "QGeoCoordinate_azimuthTo".}
-proc fcQGeoCoordinate_atDistanceAndAzimuth(self: pointer, distance: float64, azimuth: float64): pointer {.importc: "QGeoCoordinate_atDistanceAndAzimuth".}
+proc fcQGeoCoordinate_atDistanceAndAzimuthDistanceAzimuth(self: pointer, distance: float64, azimuth: float64): pointer {.importc: "QGeoCoordinate_atDistanceAndAzimuth_distance_azimuth".}
 proc fcQGeoCoordinate_toString(self: pointer): struct_seaqt_string {.importc: "QGeoCoordinate_toString".}
-proc fcQGeoCoordinate_atDistanceAndAzimuth2(self: pointer, distance: float64, azimuth: float64, distanceUp: float64): pointer {.importc: "QGeoCoordinate_atDistanceAndAzimuth2".}
-proc fcQGeoCoordinate_toStringWithFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QGeoCoordinate_toStringWithFormat".}
+proc fcQGeoCoordinate_atDistanceAndAzimuthDistanceAzimuthDistanceUp(self: pointer, distance: float64, azimuth: float64, distanceUp: float64): pointer {.importc: "QGeoCoordinate_atDistanceAndAzimuth_distance_azimuth_distanceUp".}
+proc fcQGeoCoordinate_toStringFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QGeoCoordinate_toString_format".}
 proc fcQGeoCoordinate_new(): ptr cQGeoCoordinate {.importc: "QGeoCoordinate_new".}
-proc fcQGeoCoordinate_new2(latitude: float64, longitude: float64): ptr cQGeoCoordinate {.importc: "QGeoCoordinate_new2".}
-proc fcQGeoCoordinate_new3(latitude: float64, longitude: float64, altitude: float64): ptr cQGeoCoordinate {.importc: "QGeoCoordinate_new3".}
-proc fcQGeoCoordinate_new4(other: pointer): ptr cQGeoCoordinate {.importc: "QGeoCoordinate_new4".}
+proc fcQGeoCoordinate_new2(latitude: float64, longitude: float64): ptr cQGeoCoordinate {.importc: "QGeoCoordinate_new_latitude_longitude".}
+proc fcQGeoCoordinate_new3(latitude: float64, longitude: float64, altitude: float64): ptr cQGeoCoordinate {.importc: "QGeoCoordinate_new_latitude_longitude_altitude".}
+proc fcQGeoCoordinate_new4(fromVal: pointer): ptr cQGeoCoordinate {.importc: "QGeoCoordinate_new_from".}
 proc fcQGeoCoordinate_staticMetaObject(): pointer {.importc: "QGeoCoordinate_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qgeocoordinate_types.QGeoCoordinate, other: gen_qgeocoordinate_types.QGeoCoordinate): void =
-  fcQGeoCoordinate_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qgeocoordinate_types.QGeoCoordinate, fromVal: gen_qgeocoordinate_types.QGeoCoordinate): void =
+  fcQGeoCoordinate_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qgeocoordinate_types.QGeoCoordinate, other: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoCoordinate_swap(self.h, other.h)
@@ -117,7 +117,7 @@ proc azimuthTo*(self: gen_qgeocoordinate_types.QGeoCoordinate, other: gen_qgeoco
   fcQGeoCoordinate_azimuthTo(self.h, other.h)
 
 proc atDistanceAndAzimuth*(self: gen_qgeocoordinate_types.QGeoCoordinate, distance: float64, azimuth: float64): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_atDistanceAndAzimuth(self.h, distance, azimuth), owned: true)
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_atDistanceAndAzimuthDistanceAzimuth(self.h, distance, azimuth), owned: true)
 
 proc toString*(self: gen_qgeocoordinate_types.QGeoCoordinate): string =
   let v_ms = fcQGeoCoordinate_toString(self.h)
@@ -126,10 +126,10 @@ proc toString*(self: gen_qgeocoordinate_types.QGeoCoordinate): string =
   vx_ret
 
 proc atDistanceAndAzimuth*(self: gen_qgeocoordinate_types.QGeoCoordinate, distance: float64, azimuth: float64, distanceUp: float64): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_atDistanceAndAzimuth2(self.h, distance, azimuth, distanceUp), owned: true)
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_atDistanceAndAzimuthDistanceAzimuthDistanceUp(self.h, distance, azimuth, distanceUp), owned: true)
 
 proc toString*(self: gen_qgeocoordinate_types.QGeoCoordinate, format: cint): string =
-  let v_ms = fcQGeoCoordinate_toStringWithFormat(self.h, cint(format))
+  let v_ms = fcQGeoCoordinate_toStringFormat(self.h, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -146,8 +146,8 @@ proc create*(T: type gen_qgeocoordinate_types.QGeoCoordinate,
   let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new3(latitude, longitude, altitude), owned: true)
   tmp
 proc create*(T: type gen_qgeocoordinate_types.QGeoCoordinate,
-    other: gen_qgeocoordinate_types.QGeoCoordinate): gen_qgeocoordinate_types.QGeoCoordinate =
-  let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new4(other.h), owned: true)
+    fromVal: gen_qgeocoordinate_types.QGeoCoordinate): gen_qgeocoordinate_types.QGeoCoordinate =
+  let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new4(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qgeocoordinate_types.QGeoCoordinate): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoCoordinate_staticMetaObject())

@@ -41,7 +41,7 @@ type cQQmlParserStatus*{.exportc: "QQmlParserStatus", incompleteStruct.} = objec
 
 proc fcQQmlParserStatus_classBegin(self: pointer): void {.importc: "QQmlParserStatus_classBegin".}
 proc fcQQmlParserStatus_componentComplete(self: pointer): void {.importc: "QQmlParserStatus_componentComplete".}
-proc fcQQmlParserStatus_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlParserStatus_operatorAssign".}
+proc fcQQmlParserStatus_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlParserStatus_operatorAssign".}
 proc fcQQmlParserStatus_vdata(self: pointer): ptr pointer {.importc: "QQmlParserStatus_vdata".}
 proc fvdata_cQQmlParserStatus(self: pointer): pointer {.importc: "vdata_QQmlParserStatus".}
 
@@ -57,8 +57,8 @@ proc classBegin*(self: gen_qqmlparserstatus_types.QQmlParserStatus): void =
 proc componentComplete*(self: gen_qqmlparserstatus_types.QQmlParserStatus): void =
   fcQQmlParserStatus_componentComplete(self.h)
 
-proc operatorAssign*(self: gen_qqmlparserstatus_types.QQmlParserStatus, param1: gen_qqmlparserstatus_types.QQmlParserStatus): void =
-  fcQQmlParserStatus_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlparserstatus_types.QQmlParserStatus, fromVal: gen_qqmlparserstatus_types.QQmlParserStatus): void =
+  fcQQmlParserStatus_operatorAssign(self.h, fromVal.h)
 
 type QQmlParserStatusclassBeginProc* = proc(self: QQmlParserStatus): void {.raises: [], gcsafe.}
 type QQmlParserStatuscomponentCompleteProc* = proc(self: QQmlParserStatus): void {.raises: [], gcsafe.}

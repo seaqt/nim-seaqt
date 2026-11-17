@@ -174,7 +174,7 @@ VirtualQJSEngine* QJSEngine_new(const QJSEngine_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQJSEngine(vtbl) : nullptr;
 }
 
-VirtualQJSEngine* QJSEngine_new2(const QJSEngine_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQJSEngine* QJSEngine_new_parent(const QJSEngine_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQJSEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQJSEngine(vtbl, parent) : nullptr;
 }
@@ -195,7 +195,7 @@ int QJSEngine_metacall(QJSEngine* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QJSEngine_tr(const char* s) {
+struct seaqt_string QJSEngine_tr_s(const char* s) {
 	QString _ret = QJSEngine::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -210,7 +210,7 @@ QJSValue* QJSEngine_globalObject(const QJSEngine* self) {
 	return new QJSValue(self->globalObject());
 }
 
-QJSValue* QJSEngine_evaluate(QJSEngine* self, struct seaqt_string program) {
+QJSValue* QJSEngine_evaluate_program(QJSEngine* self, struct seaqt_string program) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	return new QJSValue(self->evaluate(program_QString));
 }
@@ -246,7 +246,7 @@ QJSValue* QJSEngine_newQMetaObject(QJSEngine* self, QMetaObject* metaObject) {
 	return new QJSValue(self->newQMetaObject(metaObject));
 }
 
-QJSValue* QJSEngine_newErrorObject(QJSEngine* self, int errorType) {
+QJSValue* QJSEngine_newErrorObject_errorType(QJSEngine* self, int errorType) {
 	return new QJSValue(self->newErrorObject(static_cast<QJSValue::ErrorType>(errorType)));
 }
 
@@ -263,7 +263,7 @@ int QJSEngine_objectOwnership(QObject* param1) {
 	return static_cast<int>(_ret);
 }
 
-void QJSEngine_installExtensions(QJSEngine* self, int extensions) {
+void QJSEngine_installExtensions_extensions(QJSEngine* self, int extensions) {
 	self->installExtensions(static_cast<QJSEngine::Extensions>(extensions));
 }
 
@@ -275,16 +275,16 @@ bool QJSEngine_isInterrupted(const QJSEngine* self) {
 	return self->isInterrupted();
 }
 
-void QJSEngine_throwError(QJSEngine* self, struct seaqt_string message) {
+void QJSEngine_throwError_message(QJSEngine* self, struct seaqt_string message) {
 	QString message_QString = QString::fromUtf8(message.data, message.len);
 	self->throwError(message_QString);
 }
 
-void QJSEngine_throwErrorWithErrorType(QJSEngine* self, int errorType) {
+void QJSEngine_throwError_errorType(QJSEngine* self, int errorType) {
 	self->throwError(static_cast<QJSValue::ErrorType>(errorType));
 }
 
-void QJSEngine_throwErrorWithError(QJSEngine* self, QJSValue* error) {
+void QJSEngine_throwError_error(QJSEngine* self, QJSValue* error) {
 	self->throwError(*error);
 }
 
@@ -327,7 +327,7 @@ void QJSEngine_connect_uiLanguageChanged(QJSEngine* self, intptr_t slot, void (*
 	QJSEngine::connect(self, static_cast<void (QJSEngine::*)()>(&QJSEngine::uiLanguageChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QJSEngine_tr2(const char* s, const char* c) {
+struct seaqt_string QJSEngine_tr_s_c(const char* s, const char* c) {
 	QString _ret = QJSEngine::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -338,7 +338,7 @@ struct seaqt_string QJSEngine_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QJSEngine_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QJSEngine_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QJSEngine::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -349,19 +349,19 @@ struct seaqt_string QJSEngine_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QJSValue* QJSEngine_evaluate2(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName) {
+QJSValue* QJSEngine_evaluate_program_fileName(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new QJSValue(self->evaluate(program_QString, fileName_QString));
 }
 
-QJSValue* QJSEngine_evaluate3(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName, int lineNumber) {
+QJSValue* QJSEngine_evaluate_program_fileName_lineNumber(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName, int lineNumber) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new QJSValue(self->evaluate(program_QString, fileName_QString, static_cast<int>(lineNumber)));
 }
 
-QJSValue* QJSEngine_evaluate4(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName, int lineNumber, struct seaqt_array /* of struct seaqt_string */  exceptionStackTrace) {
+QJSValue* QJSEngine_evaluate_program_fileName_lineNumber_exceptionStackTrace(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName, int lineNumber, struct seaqt_array /* of struct seaqt_string */  exceptionStackTrace) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QStringList exceptionStackTrace_QList;
@@ -374,20 +374,20 @@ QJSValue* QJSEngine_evaluate4(QJSEngine* self, struct seaqt_string program, stru
 	return new QJSValue(self->evaluate(program_QString, fileName_QString, static_cast<int>(lineNumber), &exceptionStackTrace_QList));
 }
 
-QJSValue* QJSEngine_newArrayWithLength(QJSEngine* self, unsigned int length) {
+QJSValue* QJSEngine_newArray_length(QJSEngine* self, unsigned int length) {
 	return new QJSValue(self->newArray(static_cast<uint>(length)));
 }
 
-QJSValue* QJSEngine_newErrorObject2(QJSEngine* self, int errorType, struct seaqt_string message) {
+QJSValue* QJSEngine_newErrorObject_errorType_message(QJSEngine* self, int errorType, struct seaqt_string message) {
 	QString message_QString = QString::fromUtf8(message.data, message.len);
 	return new QJSValue(self->newErrorObject(static_cast<QJSValue::ErrorType>(errorType), message_QString));
 }
 
-void QJSEngine_installExtensions2(QJSEngine* self, int extensions, QJSValue* object) {
+void QJSEngine_installExtensions_extensions_object(QJSEngine* self, int extensions, QJSValue* object) {
 	self->installExtensions(static_cast<QJSEngine::Extensions>(extensions), *object);
 }
 
-void QJSEngine_throwError2(QJSEngine* self, int errorType, struct seaqt_string message) {
+void QJSEngine_throwError_errorType_message(QJSEngine* self, int errorType, struct seaqt_string message) {
 	QString message_QString = QString::fromUtf8(message.data, message.len);
 	self->throwError(static_cast<QJSValue::ErrorType>(errorType), message_QString);
 }

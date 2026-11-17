@@ -43,7 +43,7 @@ export
 
 type cQFontInfo*{.exportc: "QFontInfo", incompleteStruct.} = object
 
-proc fcQFontInfo_operatorAssign(self: pointer, param1: pointer): void {.importc: "QFontInfo_operatorAssign".}
+proc fcQFontInfo_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QFontInfo_operatorAssign".}
 proc fcQFontInfo_swap(self: pointer, other: pointer): void {.importc: "QFontInfo_swap".}
 proc fcQFontInfo_family(self: pointer): struct_seaqt_string {.importc: "QFontInfo_family".}
 proc fcQFontInfo_styleName(self: pointer): struct_seaqt_string {.importc: "QFontInfo_styleName".}
@@ -61,11 +61,11 @@ proc fcQFontInfo_fixedPitch(self: pointer): bool {.importc: "QFontInfo_fixedPitc
 proc fcQFontInfo_styleHint(self: pointer): cint {.importc: "QFontInfo_styleHint".}
 proc fcQFontInfo_legacyWeight(self: pointer): cint {.importc: "QFontInfo_legacyWeight".}
 proc fcQFontInfo_exactMatch(self: pointer): bool {.importc: "QFontInfo_exactMatch".}
-proc fcQFontInfo_new(param1: pointer): ptr cQFontInfo {.importc: "QFontInfo_new".}
-proc fcQFontInfo_new2(param1: pointer): ptr cQFontInfo {.importc: "QFontInfo_new2".}
+proc fcQFontInfo_new(param1: pointer): ptr cQFontInfo {.importc: "QFontInfo_new_QFont".}
+proc fcQFontInfo_new2(fromVal: pointer): ptr cQFontInfo {.importc: "QFontInfo_new_QFontInfo".}
 
-proc operatorAssign*(self: gen_qfontinfo_types.QFontInfo, param1: gen_qfontinfo_types.QFontInfo): void =
-  fcQFontInfo_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qfontinfo_types.QFontInfo, fromVal: gen_qfontinfo_types.QFontInfo): void =
+  fcQFontInfo_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qfontinfo_types.QFontInfo, other: gen_qfontinfo_types.QFontInfo): void =
   fcQFontInfo_swap(self.h, other.h)
@@ -129,6 +129,6 @@ proc create*(T: type gen_qfontinfo_types.QFontInfo,
   let tmp = gen_qfontinfo_types.QFontInfo(h: fcQFontInfo_new(param1.h), owned: true)
   tmp
 proc create*(T: type gen_qfontinfo_types.QFontInfo,
-    param1: gen_qfontinfo_types.QFontInfo): gen_qfontinfo_types.QFontInfo =
-  let tmp = gen_qfontinfo_types.QFontInfo(h: fcQFontInfo_new2(param1.h), owned: true)
+    fromVal: gen_qfontinfo_types.QFontInfo): gen_qfontinfo_types.QFontInfo =
+  let tmp = gen_qfontinfo_types.QFontInfo(h: fcQFontInfo_new2(fromVal.h), owned: true)
   tmp

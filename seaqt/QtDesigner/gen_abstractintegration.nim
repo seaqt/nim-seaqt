@@ -75,7 +75,7 @@ type cQDesignerIntegration*{.exportc: "QDesignerIntegration", incompleteStruct.}
 proc fcQDesignerIntegrationInterface_metaObject(self: pointer): pointer {.importc: "QDesignerIntegrationInterface_metaObject".}
 proc fcQDesignerIntegrationInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerIntegrationInterface_metacast".}
 proc fcQDesignerIntegrationInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerIntegrationInterface_metacall".}
-proc fcQDesignerIntegrationInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerIntegrationInterface_tr".}
+proc fcQDesignerIntegrationInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerIntegrationInterface_tr_s".}
 proc fcQDesignerIntegrationInterface_containerWindow(self: pointer, widget: pointer): pointer {.importc: "QDesignerIntegrationInterface_containerWindow".}
 proc fcQDesignerIntegrationInterface_createResourceBrowser(self: pointer, parent: pointer): pointer {.importc: "QDesignerIntegrationInterface_createResourceBrowser".}
 proc fcQDesignerIntegrationInterface_headerSuffix(self: pointer): struct_seaqt_string {.importc: "QDesignerIntegrationInterface_headerSuffix".}
@@ -88,8 +88,8 @@ proc fcQDesignerIntegrationInterface_resourceFileWatcherBehaviour(self: pointer)
 proc fcQDesignerIntegrationInterface_setResourceFileWatcherBehaviour(self: pointer, behaviour: cint): void {.importc: "QDesignerIntegrationInterface_setResourceFileWatcherBehaviour".}
 proc fcQDesignerIntegrationInterface_contextHelpId(self: pointer): struct_seaqt_string {.importc: "QDesignerIntegrationInterface_contextHelpId".}
 proc fcQDesignerIntegrationInterface_emitObjectNameChanged(self: pointer, formWindow: pointer, objectVal: pointer, newName: struct_seaqt_string, oldName: struct_seaqt_string): void {.importc: "QDesignerIntegrationInterface_emitObjectNameChanged".}
-proc fcQDesignerIntegrationInterface_emitNavigateToSlot(self: pointer, objectName: struct_seaqt_string, signalSignature: struct_seaqt_string, parameterNames: struct_seaqt_array): void {.importc: "QDesignerIntegrationInterface_emitNavigateToSlot".}
-proc fcQDesignerIntegrationInterface_emitNavigateToSlotWithSlotSignature(self: pointer, slotSignature: struct_seaqt_string): void {.importc: "QDesignerIntegrationInterface_emitNavigateToSlotWithSlotSignature".}
+proc fcQDesignerIntegrationInterface_emitNavigateToSlot_QString_QString_QStringList(self: pointer, objectName: struct_seaqt_string, signalSignature: struct_seaqt_string, parameterNames: struct_seaqt_array): void {.importc: "QDesignerIntegrationInterface_emitNavigateToSlot_QString_QString_QStringList".}
+proc fcQDesignerIntegrationInterface_emitNavigateToSlot_QString(self: pointer, slotSignature: struct_seaqt_string): void {.importc: "QDesignerIntegrationInterface_emitNavigateToSlot_QString".}
 proc fcQDesignerIntegrationInterface_emitHelpRequested(self: pointer, manual: struct_seaqt_string, document: struct_seaqt_string): void {.importc: "QDesignerIntegrationInterface_emitHelpRequested".}
 proc fcQDesignerIntegrationInterface_propertyChanged(self: pointer, formWindow: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QDesignerIntegrationInterface_propertyChanged".}
 proc fcQDesignerIntegrationInterface_connect_propertyChanged(self: pointer, slot: int, callback: proc (slot: int, formWindow: pointer, name: struct_seaqt_string, value: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerIntegrationInterface_connect_propertyChanged".}
@@ -97,13 +97,13 @@ proc fcQDesignerIntegrationInterface_objectNameChanged(self: pointer, formWindow
 proc fcQDesignerIntegrationInterface_connect_objectNameChanged(self: pointer, slot: int, callback: proc (slot: int, formWindow: pointer, objectVal: pointer, newName: struct_seaqt_string, oldName: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerIntegrationInterface_connect_objectNameChanged".}
 proc fcQDesignerIntegrationInterface_helpRequested(self: pointer, manual: struct_seaqt_string, document: struct_seaqt_string): void {.importc: "QDesignerIntegrationInterface_helpRequested".}
 proc fcQDesignerIntegrationInterface_connect_helpRequested(self: pointer, slot: int, callback: proc (slot: int, manual: struct_seaqt_string, document: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerIntegrationInterface_connect_helpRequested".}
-proc fcQDesignerIntegrationInterface_navigateToSlot(self: pointer, objectName: struct_seaqt_string, signalSignature: struct_seaqt_string, parameterNames: struct_seaqt_array): void {.importc: "QDesignerIntegrationInterface_navigateToSlot".}
-proc fcQDesignerIntegrationInterface_connect_navigateToSlot(self: pointer, slot: int, callback: proc (slot: int, objectName: struct_seaqt_string, signalSignature: struct_seaqt_string, parameterNames: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerIntegrationInterface_connect_navigateToSlot".}
-proc fcQDesignerIntegrationInterface_navigateToSlotWithSlotSignature(self: pointer, slotSignature: struct_seaqt_string): void {.importc: "QDesignerIntegrationInterface_navigateToSlotWithSlotSignature".}
-proc fcQDesignerIntegrationInterface_connect_navigateToSlotWithSlotSignature(self: pointer, slot: int, callback: proc (slot: int, slotSignature: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerIntegrationInterface_connect_navigateToSlotWithSlotSignature".}
+proc fcQDesignerIntegrationInterface_navigateToSlot_QString_QString_QStringList(self: pointer, objectName: struct_seaqt_string, signalSignature: struct_seaqt_string, parameterNames: struct_seaqt_array): void {.importc: "QDesignerIntegrationInterface_navigateToSlot_QString_QString_QStringList".}
+proc fcQDesignerIntegrationInterface_connect_navigateToSlot_QString_QString_QStringList(self: pointer, slot: int, callback: proc (slot: int, objectName: struct_seaqt_string, signalSignature: struct_seaqt_string, parameterNames: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerIntegrationInterface_connect_navigateToSlot_QString_QString_QStringList".}
+proc fcQDesignerIntegrationInterface_navigateToSlot_QString(self: pointer, slotSignature: struct_seaqt_string): void {.importc: "QDesignerIntegrationInterface_navigateToSlot_QString".}
+proc fcQDesignerIntegrationInterface_connect_navigateToSlot_QString(self: pointer, slot: int, callback: proc (slot: int, slotSignature: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerIntegrationInterface_connect_navigateToSlot_QString".}
 proc fcQDesignerIntegrationInterface_setFeatures(self: pointer, f: cint): void {.importc: "QDesignerIntegrationInterface_setFeatures".}
-proc fcQDesignerIntegrationInterface_updateProperty(self: pointer, name: struct_seaqt_string, value: pointer, enableSubPropertyHandling: bool): void {.importc: "QDesignerIntegrationInterface_updateProperty".}
-proc fcQDesignerIntegrationInterface_updateProperty2(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QDesignerIntegrationInterface_updateProperty2".}
+proc fcQDesignerIntegrationInterface_updatePropertyNameValueEnableSubPropertyHandling(self: pointer, name: struct_seaqt_string, value: pointer, enableSubPropertyHandling: bool): void {.importc: "QDesignerIntegrationInterface_updateProperty_name_value_enableSubPropertyHandling".}
+proc fcQDesignerIntegrationInterface_updatePropertyNameValue(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QDesignerIntegrationInterface_updateProperty_name_value".}
 proc fcQDesignerIntegrationInterface_resetProperty(self: pointer, name: struct_seaqt_string): void {.importc: "QDesignerIntegrationInterface_resetProperty".}
 proc fcQDesignerIntegrationInterface_addDynamicProperty(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QDesignerIntegrationInterface_addDynamicProperty".}
 proc fcQDesignerIntegrationInterface_removeDynamicProperty(self: pointer, name: struct_seaqt_string): void {.importc: "QDesignerIntegrationInterface_removeDynamicProperty".}
@@ -111,8 +111,8 @@ proc fcQDesignerIntegrationInterface_updateActiveFormWindow(self: pointer, formW
 proc fcQDesignerIntegrationInterface_setupFormWindow(self: pointer, formWindow: pointer): void {.importc: "QDesignerIntegrationInterface_setupFormWindow".}
 proc fcQDesignerIntegrationInterface_updateSelection(self: pointer): void {.importc: "QDesignerIntegrationInterface_updateSelection".}
 proc fcQDesignerIntegrationInterface_updateCustomWidgetPlugins(self: pointer): void {.importc: "QDesignerIntegrationInterface_updateCustomWidgetPlugins".}
-proc fcQDesignerIntegrationInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerIntegrationInterface_tr2".}
-proc fcQDesignerIntegrationInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerIntegrationInterface_tr3".}
+proc fcQDesignerIntegrationInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerIntegrationInterface_tr_s_c".}
+proc fcQDesignerIntegrationInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerIntegrationInterface_tr_s_c_n".}
 proc fcQDesignerIntegrationInterface_protectedbase_sender(self: pointer): pointer {.importc: "QDesignerIntegrationInterface_protectedbase_sender".}
 proc fcQDesignerIntegrationInterface_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDesignerIntegrationInterface_protectedbase_senderSignalIndex".}
 proc fcQDesignerIntegrationInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerIntegrationInterface_protectedbase_receivers".}
@@ -121,7 +121,7 @@ proc fcQDesignerIntegrationInterface_staticMetaObject(): pointer {.importc: "QDe
 proc fcQDesignerIntegration_metaObject(self: pointer): pointer {.importc: "QDesignerIntegration_metaObject".}
 proc fcQDesignerIntegration_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerIntegration_metacast".}
 proc fcQDesignerIntegration_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerIntegration_metacall".}
-proc fcQDesignerIntegration_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerIntegration_tr".}
+proc fcQDesignerIntegration_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerIntegration_tr_s".}
 proc fcQDesignerIntegration_headerSuffix(self: pointer): struct_seaqt_string {.importc: "QDesignerIntegration_headerSuffix".}
 proc fcQDesignerIntegration_setHeaderSuffix(self: pointer, headerSuffix: struct_seaqt_string): void {.importc: "QDesignerIntegration_setHeaderSuffix".}
 proc fcQDesignerIntegration_isHeaderLowercase(self: pointer): bool {.importc: "QDesignerIntegration_isHeaderLowercase".}
@@ -133,8 +133,8 @@ proc fcQDesignerIntegration_setResourceFileWatcherBehaviour(self: pointer, behav
 proc fcQDesignerIntegration_containerWindow(self: pointer, widget: pointer): pointer {.importc: "QDesignerIntegration_containerWindow".}
 proc fcQDesignerIntegration_createResourceBrowser(self: pointer, parent: pointer): pointer {.importc: "QDesignerIntegration_createResourceBrowser".}
 proc fcQDesignerIntegration_contextHelpId(self: pointer): struct_seaqt_string {.importc: "QDesignerIntegration_contextHelpId".}
-proc fcQDesignerIntegration_updateProperty(self: pointer, name: struct_seaqt_string, value: pointer, enableSubPropertyHandling: bool): void {.importc: "QDesignerIntegration_updateProperty".}
-proc fcQDesignerIntegration_updateProperty2(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QDesignerIntegration_updateProperty2".}
+proc fcQDesignerIntegration_updatePropertyNameValueEnableSubPropertyHandling(self: pointer, name: struct_seaqt_string, value: pointer, enableSubPropertyHandling: bool): void {.importc: "QDesignerIntegration_updateProperty_name_value_enableSubPropertyHandling".}
+proc fcQDesignerIntegration_updatePropertyNameValue(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QDesignerIntegration_updateProperty_name_value".}
 proc fcQDesignerIntegration_resetProperty(self: pointer, name: struct_seaqt_string): void {.importc: "QDesignerIntegration_resetProperty".}
 proc fcQDesignerIntegration_addDynamicProperty(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QDesignerIntegration_addDynamicProperty".}
 proc fcQDesignerIntegration_removeDynamicProperty(self: pointer, name: struct_seaqt_string): void {.importc: "QDesignerIntegration_removeDynamicProperty".}
@@ -142,8 +142,8 @@ proc fcQDesignerIntegration_updateActiveFormWindow(self: pointer, formWindow: po
 proc fcQDesignerIntegration_setupFormWindow(self: pointer, formWindow: pointer): void {.importc: "QDesignerIntegration_setupFormWindow".}
 proc fcQDesignerIntegration_updateSelection(self: pointer): void {.importc: "QDesignerIntegration_updateSelection".}
 proc fcQDesignerIntegration_updateCustomWidgetPlugins(self: pointer): void {.importc: "QDesignerIntegration_updateCustomWidgetPlugins".}
-proc fcQDesignerIntegration_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerIntegration_tr2".}
-proc fcQDesignerIntegration_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerIntegration_tr3".}
+proc fcQDesignerIntegration_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerIntegration_tr_s_c".}
+proc fcQDesignerIntegration_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerIntegration_tr_s_c_n".}
 proc fcQDesignerIntegration_protectedbase_sender(self: pointer): pointer {.importc: "QDesignerIntegration_protectedbase_sender".}
 proc fcQDesignerIntegration_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDesignerIntegration_protectedbase_senderSignalIndex".}
 proc fcQDesignerIntegration_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerIntegration_protectedbase_receivers".}
@@ -160,7 +160,7 @@ proc metacall*(self: gen_abstractintegration_types.QDesignerIntegrationInterface
   fcQDesignerIntegrationInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractintegration_types.QDesignerIntegrationInterface, s: cstring): string =
-  let v_ms = fcQDesignerIntegrationInterface_tr(s)
+  let v_ms = fcQDesignerIntegrationInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -212,10 +212,10 @@ proc emitNavigateToSlot*(self: gen_abstractintegration_types.QDesignerIntegratio
   for i in 0..<len(parameterNames):
     parameterNames_CArray[i] = struct_seaqt_string(data: if len(parameterNames[i]) > 0: addr parameterNames[i][0] else: nil, len: csize_t(len(parameterNames[i])))
 
-  fcQDesignerIntegrationInterface_emitNavigateToSlot(self.h, struct_seaqt_string(data: if len(objectName) > 0: addr objectName[0] else: nil, len: csize_t(len(objectName))), struct_seaqt_string(data: if len(signalSignature) > 0: addr signalSignature[0] else: nil, len: csize_t(len(signalSignature))), struct_seaqt_array(len: csize_t(len(parameterNames)), data: if len(parameterNames) == 0: nil else: addr(parameterNames_CArray[0])))
+  fcQDesignerIntegrationInterface_emitNavigateToSlot_QString_QString_QStringList(self.h, struct_seaqt_string(data: if len(objectName) > 0: addr objectName[0] else: nil, len: csize_t(len(objectName))), struct_seaqt_string(data: if len(signalSignature) > 0: addr signalSignature[0] else: nil, len: csize_t(len(signalSignature))), struct_seaqt_array(len: csize_t(len(parameterNames)), data: if len(parameterNames) == 0: nil else: addr(parameterNames_CArray[0])))
 
 proc emitNavigateToSlot*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, slotSignature: openArray[char]): void =
-  fcQDesignerIntegrationInterface_emitNavigateToSlotWithSlotSignature(self.h, struct_seaqt_string(data: if len(slotSignature) > 0: addr slotSignature[0] else: nil, len: csize_t(len(slotSignature))))
+  fcQDesignerIntegrationInterface_emitNavigateToSlot_QString(self.h, struct_seaqt_string(data: if len(slotSignature) > 0: addr slotSignature[0] else: nil, len: csize_t(len(slotSignature))))
 
 proc emitHelpRequested*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, manual: openArray[char], document: openArray[char]): void =
   fcQDesignerIntegrationInterface_emitHelpRequested(self.h, struct_seaqt_string(data: if len(manual) > 0: addr manual[0] else: nil, len: csize_t(len(manual))), struct_seaqt_string(data: if len(document) > 0: addr document[0] else: nil, len: csize_t(len(document))))
@@ -312,11 +312,11 @@ proc navigateToSlot*(self: gen_abstractintegration_types.QDesignerIntegrationInt
   for i in 0..<len(parameterNames):
     parameterNames_CArray[i] = struct_seaqt_string(data: if len(parameterNames[i]) > 0: addr parameterNames[i][0] else: nil, len: csize_t(len(parameterNames[i])))
 
-  fcQDesignerIntegrationInterface_navigateToSlot(self.h, struct_seaqt_string(data: if len(objectName) > 0: addr objectName[0] else: nil, len: csize_t(len(objectName))), struct_seaqt_string(data: if len(signalSignature) > 0: addr signalSignature[0] else: nil, len: csize_t(len(signalSignature))), struct_seaqt_array(len: csize_t(len(parameterNames)), data: if len(parameterNames) == 0: nil else: addr(parameterNames_CArray[0])))
+  fcQDesignerIntegrationInterface_navigateToSlot_QString_QString_QStringList(self.h, struct_seaqt_string(data: if len(objectName) > 0: addr objectName[0] else: nil, len: csize_t(len(objectName))), struct_seaqt_string(data: if len(signalSignature) > 0: addr signalSignature[0] else: nil, len: csize_t(len(signalSignature))), struct_seaqt_array(len: csize_t(len(parameterNames)), data: if len(parameterNames) == 0: nil else: addr(parameterNames_CArray[0])))
 
-type QDesignerIntegrationInterfacenavigateToSlotSlot* = proc(objectName: openArray[char], signalSignature: openArray[char], parameterNames: openArray[string])
-proc fcQDesignerIntegrationInterface_slot_callback_navigateToSlot(slot: int, objectName: struct_seaqt_string, signalSignature: struct_seaqt_string, parameterNames: struct_seaqt_array) {.cdecl.} =
-  let nimfunc = cast[ptr QDesignerIntegrationInterfacenavigateToSlotSlot](cast[pointer](slot))
+type QDesignerIntegrationInterfacenavigateToSlot_QString_QString_QStringListSlot* = proc(objectName: openArray[char], signalSignature: openArray[char], parameterNames: openArray[string])
+proc fcQDesignerIntegrationInterface_slot_callback_navigateToSlot_QString_QString_QStringList(slot: int, objectName: struct_seaqt_string, signalSignature: struct_seaqt_string, parameterNames: struct_seaqt_array) {.cdecl.} =
+  let nimfunc = cast[ptr QDesignerIntegrationInterfacenavigateToSlot_QString_QString_QStringListSlot](cast[pointer](slot))
   let vobjectName_ms = objectName
   let vobjectNamex_ret = string.fromBytes(vobjectName_ms)
   c_free(vobjectName_ms.data)
@@ -340,22 +340,22 @@ proc fcQDesignerIntegrationInterface_slot_callback_navigateToSlot(slot: int, obj
 
   nimfunc[](slotval1, slotval2, slotval3)
 
-proc fcQDesignerIntegrationInterface_slot_callback_navigateToSlot_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QDesignerIntegrationInterfacenavigateToSlotSlot](cast[pointer](slot))
+proc fcQDesignerIntegrationInterface_slot_callback_navigateToSlot_QString_QString_QStringList_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDesignerIntegrationInterfacenavigateToSlot_QString_QString_QStringListSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onNavigateToSlot*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, slot: QDesignerIntegrationInterfacenavigateToSlotSlot) =
-  var tmp = new QDesignerIntegrationInterfacenavigateToSlotSlot
+proc onNavigateToSlot*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, slot: QDesignerIntegrationInterfacenavigateToSlot_QString_QString_QStringListSlot) =
+  var tmp = new QDesignerIntegrationInterfacenavigateToSlot_QString_QString_QStringListSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDesignerIntegrationInterface_connect_navigateToSlot(self.h, cast[int](addr tmp[]), fcQDesignerIntegrationInterface_slot_callback_navigateToSlot, fcQDesignerIntegrationInterface_slot_callback_navigateToSlot_release)
+  fcQDesignerIntegrationInterface_connect_navigateToSlot_QString_QString_QStringList(self.h, cast[int](addr tmp[]), fcQDesignerIntegrationInterface_slot_callback_navigateToSlot_QString_QString_QStringList, fcQDesignerIntegrationInterface_slot_callback_navigateToSlot_QString_QString_QStringList_release)
 
 proc navigateToSlot*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, slotSignature: openArray[char]): void =
-  fcQDesignerIntegrationInterface_navigateToSlotWithSlotSignature(self.h, struct_seaqt_string(data: if len(slotSignature) > 0: addr slotSignature[0] else: nil, len: csize_t(len(slotSignature))))
+  fcQDesignerIntegrationInterface_navigateToSlot_QString(self.h, struct_seaqt_string(data: if len(slotSignature) > 0: addr slotSignature[0] else: nil, len: csize_t(len(slotSignature))))
 
-type QDesignerIntegrationInterfacenavigateToSlotWithSlotSignatureSlot* = proc(slotSignature: openArray[char])
-proc fcQDesignerIntegrationInterface_slot_callback_navigateToSlotWithSlotSignature(slot: int, slotSignature: struct_seaqt_string) {.cdecl.} =
-  let nimfunc = cast[ptr QDesignerIntegrationInterfacenavigateToSlotWithSlotSignatureSlot](cast[pointer](slot))
+type QDesignerIntegrationInterfacenavigateToSlot_QStringSlot* = proc(slotSignature: openArray[char])
+proc fcQDesignerIntegrationInterface_slot_callback_navigateToSlot_QString(slot: int, slotSignature: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QDesignerIntegrationInterfacenavigateToSlot_QStringSlot](cast[pointer](slot))
   let vslotSignature_ms = slotSignature
   let vslotSignaturex_ret = string.fromBytes(vslotSignature_ms)
   c_free(vslotSignature_ms.data)
@@ -363,24 +363,24 @@ proc fcQDesignerIntegrationInterface_slot_callback_navigateToSlotWithSlotSignatu
 
   nimfunc[](slotval1)
 
-proc fcQDesignerIntegrationInterface_slot_callback_navigateToSlotWithSlotSignature_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QDesignerIntegrationInterfacenavigateToSlotWithSlotSignatureSlot](cast[pointer](slot))
+proc fcQDesignerIntegrationInterface_slot_callback_navigateToSlot_QString_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDesignerIntegrationInterfacenavigateToSlot_QStringSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onNavigateToSlot*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, slot: QDesignerIntegrationInterfacenavigateToSlotWithSlotSignatureSlot) =
-  var tmp = new QDesignerIntegrationInterfacenavigateToSlotWithSlotSignatureSlot
+proc onNavigateToSlot*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, slot: QDesignerIntegrationInterfacenavigateToSlot_QStringSlot) =
+  var tmp = new QDesignerIntegrationInterfacenavigateToSlot_QStringSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDesignerIntegrationInterface_connect_navigateToSlotWithSlotSignature(self.h, cast[int](addr tmp[]), fcQDesignerIntegrationInterface_slot_callback_navigateToSlotWithSlotSignature, fcQDesignerIntegrationInterface_slot_callback_navigateToSlotWithSlotSignature_release)
+  fcQDesignerIntegrationInterface_connect_navigateToSlot_QString(self.h, cast[int](addr tmp[]), fcQDesignerIntegrationInterface_slot_callback_navigateToSlot_QString, fcQDesignerIntegrationInterface_slot_callback_navigateToSlot_QString_release)
 
 proc setFeatures*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, f: cint): void =
   fcQDesignerIntegrationInterface_setFeatures(self.h, cint(f))
 
 proc updateProperty*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, name: openArray[char], value: gen_qvariant_types.QVariant, enableSubPropertyHandling: bool): void =
-  fcQDesignerIntegrationInterface_updateProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h, enableSubPropertyHandling)
+  fcQDesignerIntegrationInterface_updatePropertyNameValueEnableSubPropertyHandling(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h, enableSubPropertyHandling)
 
 proc updateProperty*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, name: openArray[char], value: gen_qvariant_types.QVariant): void =
-  fcQDesignerIntegrationInterface_updateProperty2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
+  fcQDesignerIntegrationInterface_updatePropertyNameValue(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
 proc resetProperty*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, name: openArray[char]): void =
   fcQDesignerIntegrationInterface_resetProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
@@ -404,13 +404,13 @@ proc updateCustomWidgetPlugins*(self: gen_abstractintegration_types.QDesignerInt
   fcQDesignerIntegrationInterface_updateCustomWidgetPlugins(self.h)
 
 proc tr*(_: type gen_abstractintegration_types.QDesignerIntegrationInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerIntegrationInterface_tr2(s, c)
+  let v_ms = fcQDesignerIntegrationInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractintegration_types.QDesignerIntegrationInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerIntegrationInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerIntegrationInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -439,7 +439,7 @@ proc metacall*(self: gen_abstractintegration_types.QDesignerIntegration, param1:
   fcQDesignerIntegration_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractintegration_types.QDesignerIntegration, s: cstring): string =
-  let v_ms = fcQDesignerIntegration_tr(s)
+  let v_ms = fcQDesignerIntegration_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -484,10 +484,10 @@ proc contextHelpId*(self: gen_abstractintegration_types.QDesignerIntegration): s
   vx_ret
 
 proc updateProperty*(self: gen_abstractintegration_types.QDesignerIntegration, name: openArray[char], value: gen_qvariant_types.QVariant, enableSubPropertyHandling: bool): void =
-  fcQDesignerIntegration_updateProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h, enableSubPropertyHandling)
+  fcQDesignerIntegration_updatePropertyNameValueEnableSubPropertyHandling(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h, enableSubPropertyHandling)
 
 proc updateProperty*(self: gen_abstractintegration_types.QDesignerIntegration, name: openArray[char], value: gen_qvariant_types.QVariant): void =
-  fcQDesignerIntegration_updateProperty2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
+  fcQDesignerIntegration_updatePropertyNameValue(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
 proc resetProperty*(self: gen_abstractintegration_types.QDesignerIntegration, name: openArray[char]): void =
   fcQDesignerIntegration_resetProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
@@ -511,13 +511,13 @@ proc updateCustomWidgetPlugins*(self: gen_abstractintegration_types.QDesignerInt
   fcQDesignerIntegration_updateCustomWidgetPlugins(self.h)
 
 proc tr*(_: type gen_abstractintegration_types.QDesignerIntegration, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerIntegration_tr2(s, c)
+  let v_ms = fcQDesignerIntegration_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractintegration_types.QDesignerIntegration, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerIntegration_tr3(s, c, n)
+  let v_ms = fcQDesignerIntegration_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

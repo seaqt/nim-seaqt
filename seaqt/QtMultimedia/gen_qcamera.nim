@@ -128,7 +128,7 @@ type cQCamera*{.exportc: "QCamera", incompleteStruct.} = object
 proc fcQCamera_metaObject(self: pointer): pointer {.importc: "QCamera_metaObject".}
 proc fcQCamera_metacast(self: pointer, param1: cstring): pointer {.importc: "QCamera_metacast".}
 proc fcQCamera_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCamera_metacall".}
-proc fcQCamera_tr(s: cstring): struct_seaqt_string {.importc: "QCamera_tr".}
+proc fcQCamera_trS(s: cstring): struct_seaqt_string {.importc: "QCamera_tr_s".}
 proc fcQCamera_isAvailable(self: pointer): bool {.importc: "QCamera_isAvailable".}
 proc fcQCamera_isActive(self: pointer): bool {.importc: "QCamera_isActive".}
 proc fcQCamera_captureSession(self: pointer): pointer {.importc: "QCamera_captureSession".}
@@ -240,8 +240,8 @@ proc fcQCamera_saturationChanged(self: pointer): void {.importc: "QCamera_satura
 proc fcQCamera_connect_saturationChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCamera_connect_saturationChanged".}
 proc fcQCamera_hueChanged(self: pointer): void {.importc: "QCamera_hueChanged".}
 proc fcQCamera_connect_hueChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCamera_connect_hueChanged".}
-proc fcQCamera_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCamera_tr2".}
-proc fcQCamera_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCamera_tr3".}
+proc fcQCamera_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCamera_tr_s_c".}
+proc fcQCamera_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCamera_tr_s_c_n".}
 proc fcQCamera_vdata(self: pointer): ptr pointer {.importc: "QCamera_vdata".}
 proc fvdata_cQCamera(self: pointer): pointer {.importc: "vdata_QCamera".}
 
@@ -272,11 +272,11 @@ proc fcQCamera_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "
 proc fcQCamera_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCamera_protectedbase_receivers".}
 proc fcQCamera_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCamera_protectedbase_isSignalConnected".}
 proc fcQCamera_new(vtbl: pointer, vdata: csize_t): ptr cQCamera {.importc: "QCamera_new".}
-proc fcQCamera_new2(vtbl: pointer, vdata: csize_t, cameraDevice: pointer): ptr cQCamera {.importc: "QCamera_new2".}
-proc fcQCamera_new3(vtbl: pointer, vdata: csize_t, position: cint): ptr cQCamera {.importc: "QCamera_new3".}
-proc fcQCamera_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCamera {.importc: "QCamera_new4".}
-proc fcQCamera_new5(vtbl: pointer, vdata: csize_t, cameraDevice: pointer, parent: pointer): ptr cQCamera {.importc: "QCamera_new5".}
-proc fcQCamera_new6(vtbl: pointer, vdata: csize_t, position: cint, parent: pointer): ptr cQCamera {.importc: "QCamera_new6".}
+proc fcQCamera_new2(vtbl: pointer, vdata: csize_t, cameraDevice: pointer): ptr cQCamera {.importc: "QCamera_new_cameraDevice".}
+proc fcQCamera_new3(vtbl: pointer, vdata: csize_t, position: cint): ptr cQCamera {.importc: "QCamera_new_position".}
+proc fcQCamera_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCamera {.importc: "QCamera_new_parent".}
+proc fcQCamera_new5(vtbl: pointer, vdata: csize_t, cameraDevice: pointer, parent: pointer): ptr cQCamera {.importc: "QCamera_new_cameraDevice_parent".}
+proc fcQCamera_new6(vtbl: pointer, vdata: csize_t, position: cint, parent: pointer): ptr cQCamera {.importc: "QCamera_new_position_parent".}
 proc fcQCamera_staticMetaObject(): pointer {.importc: "QCamera_staticMetaObject".}
 
 proc metaObject*(self: gen_qcamera_types.QCamera): gen_qobjectdefs_types.QMetaObject =
@@ -289,7 +289,7 @@ proc metacall*(self: gen_qcamera_types.QCamera, param1: cint, param2: cint, para
   fcQCamera_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcamera_types.QCamera, s: cstring): string =
-  let v_ms = fcQCamera_tr(s)
+  let v_ms = fcQCamera_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -996,13 +996,13 @@ proc onHueChanged*(self: gen_qcamera_types.QCamera, slot: QCamerahueChangedSlot)
   fcQCamera_connect_hueChanged(self.h, cast[int](addr tmp[]), fcQCamera_slot_callback_hueChanged, fcQCamera_slot_callback_hueChanged_release)
 
 proc tr*(_: type gen_qcamera_types.QCamera, s: cstring, c: cstring): string =
-  let v_ms = fcQCamera_tr2(s, c)
+  let v_ms = fcQCamera_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcamera_types.QCamera, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCamera_tr3(s, c, n)
+  let v_ms = fcQCamera_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

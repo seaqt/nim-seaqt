@@ -54,16 +54,16 @@ void* QWebEngineUrlRequestInterceptor_vdata(VirtualQWebEngineUrlRequestIntercept
 VirtualQWebEngineUrlRequestInterceptor* vdata_QWebEngineUrlRequestInterceptor(void* vdata);
 
 VirtualQWebEngineUrlRequestInterceptor* QWebEngineUrlRequestInterceptor_new(const QWebEngineUrlRequestInterceptor_VTable* vtbl, size_t vdata);
-VirtualQWebEngineUrlRequestInterceptor* QWebEngineUrlRequestInterceptor_new2(const QWebEngineUrlRequestInterceptor_VTable* vtbl, size_t vdata, QObject* p);
+VirtualQWebEngineUrlRequestInterceptor* QWebEngineUrlRequestInterceptor_new_p(const QWebEngineUrlRequestInterceptor_VTable* vtbl, size_t vdata, QObject* p);
 
 void QWebEngineUrlRequestInterceptor_virtbase(QWebEngineUrlRequestInterceptor* src, QObject** outptr_QObject);
 QMetaObject* QWebEngineUrlRequestInterceptor_metaObject(const QWebEngineUrlRequestInterceptor* self);
 void* QWebEngineUrlRequestInterceptor_metacast(QWebEngineUrlRequestInterceptor* self, const char* param1);
 int QWebEngineUrlRequestInterceptor_metacall(QWebEngineUrlRequestInterceptor* self, int param1, int param2, void** param3);
-struct seaqt_string QWebEngineUrlRequestInterceptor_tr(const char* s);
+struct seaqt_string QWebEngineUrlRequestInterceptor_tr_s(const char* s);
 void QWebEngineUrlRequestInterceptor_interceptRequest(QWebEngineUrlRequestInterceptor* self, QWebEngineUrlRequestInfo* info);
-struct seaqt_string QWebEngineUrlRequestInterceptor_tr2(const char* s, const char* c);
-struct seaqt_string QWebEngineUrlRequestInterceptor_tr3(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineUrlRequestInterceptor_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineUrlRequestInterceptor_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QWebEngineUrlRequestInterceptor_virtualbase_metaObject(const VirtualQWebEngineUrlRequestInterceptor* self);
 void* QWebEngineUrlRequestInterceptor_virtualbase_metacast(VirtualQWebEngineUrlRequestInterceptor* self, const char* param1);

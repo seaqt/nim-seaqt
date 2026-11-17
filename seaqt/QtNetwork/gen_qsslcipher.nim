@@ -39,7 +39,7 @@ export gen_qsslcipher_types
 
 type cQSslCipher*{.exportc: "QSslCipher", incompleteStruct.} = object
 
-proc fcQSslCipher_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslCipher_operatorAssign".}
+proc fcQSslCipher_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSslCipher_operatorAssign".}
 proc fcQSslCipher_swap(self: pointer, other: pointer): void {.importc: "QSslCipher_swap".}
 proc fcQSslCipher_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSslCipher_operatorEqual".}
 proc fcQSslCipher_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QSslCipher_operatorNotEqual".}
@@ -53,12 +53,12 @@ proc fcQSslCipher_encryptionMethod(self: pointer): struct_seaqt_string {.importc
 proc fcQSslCipher_protocolString(self: pointer): struct_seaqt_string {.importc: "QSslCipher_protocolString".}
 proc fcQSslCipher_protocol(self: pointer): cint {.importc: "QSslCipher_protocol".}
 proc fcQSslCipher_new(): ptr cQSslCipher {.importc: "QSslCipher_new".}
-proc fcQSslCipher_new2(name: struct_seaqt_string): ptr cQSslCipher {.importc: "QSslCipher_new2".}
-proc fcQSslCipher_new3(name: struct_seaqt_string, protocol: cint): ptr cQSslCipher {.importc: "QSslCipher_new3".}
-proc fcQSslCipher_new4(other: pointer): ptr cQSslCipher {.importc: "QSslCipher_new4".}
+proc fcQSslCipher_new2(name: struct_seaqt_string): ptr cQSslCipher {.importc: "QSslCipher_new_name".}
+proc fcQSslCipher_new3(name: struct_seaqt_string, protocol: cint): ptr cQSslCipher {.importc: "QSslCipher_new_name_protocol".}
+proc fcQSslCipher_new4(fromVal: pointer): ptr cQSslCipher {.importc: "QSslCipher_new_from".}
 
-proc operatorAssign*(self: gen_qsslcipher_types.QSslCipher, other: gen_qsslcipher_types.QSslCipher): void =
-  fcQSslCipher_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qsslcipher_types.QSslCipher, fromVal: gen_qsslcipher_types.QSslCipher): void =
+  fcQSslCipher_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qsslcipher_types.QSslCipher, other: gen_qsslcipher_types.QSslCipher): void =
   fcQSslCipher_swap(self.h, other.h)
@@ -123,6 +123,6 @@ proc create*(T: type gen_qsslcipher_types.QSslCipher,
   let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new3(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(protocol)), owned: true)
   tmp
 proc create*(T: type gen_qsslcipher_types.QSslCipher,
-    other: gen_qsslcipher_types.QSslCipher): gen_qsslcipher_types.QSslCipher =
-  let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new4(other.h), owned: true)
+    fromVal: gen_qsslcipher_types.QSslCipher): gen_qsslcipher_types.QSslCipher =
+  let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new4(fromVal.h), owned: true)
   tmp

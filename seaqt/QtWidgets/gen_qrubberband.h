@@ -147,21 +147,21 @@ typedef struct QRubberBand_VTable{
 void* QRubberBand_vdata(VirtualQRubberBand* self);
 VirtualQRubberBand* vdata_QRubberBand(void* vdata);
 
-VirtualQRubberBand* QRubberBand_new(const QRubberBand_VTable* vtbl, size_t vdata, int param1);
-VirtualQRubberBand* QRubberBand_new2(const QRubberBand_VTable* vtbl, size_t vdata, int param1, QWidget* param2);
+VirtualQRubberBand* QRubberBand_new_QRubberBand_Shape(const QRubberBand_VTable* vtbl, size_t vdata, int param1);
+VirtualQRubberBand* QRubberBand_new_QRubberBand_Shape_QWidget(const QRubberBand_VTable* vtbl, size_t vdata, int param1, QWidget* param2);
 
 void QRubberBand_virtbase(QRubberBand* src, QWidget** outptr_QWidget);
 QMetaObject* QRubberBand_metaObject(const QRubberBand* self);
 void* QRubberBand_metacast(QRubberBand* self, const char* param1);
 int QRubberBand_metacall(QRubberBand* self, int param1, int param2, void** param3);
-struct seaqt_string QRubberBand_tr(const char* s);
+struct seaqt_string QRubberBand_tr_s(const char* s);
 int QRubberBand_shape(const QRubberBand* self);
-void QRubberBand_setGeometry(QRubberBand* self, QRect* r);
-void QRubberBand_setGeometry2(QRubberBand* self, int x, int y, int w, int h);
-void QRubberBand_move(QRubberBand* self, int x, int y);
-void QRubberBand_moveWithQPoint(QRubberBand* self, QPoint* p);
-void QRubberBand_resize(QRubberBand* self, int w, int h);
-void QRubberBand_resizeWithQSize(QRubberBand* self, QSize* s);
+void QRubberBand_setGeometry_r(QRubberBand* self, QRect* r);
+void QRubberBand_setGeometry_x_y_w_h(QRubberBand* self, int x, int y, int w, int h);
+void QRubberBand_move_x_y(QRubberBand* self, int x, int y);
+void QRubberBand_move_p(QRubberBand* self, QPoint* p);
+void QRubberBand_resize_w_h(QRubberBand* self, int w, int h);
+void QRubberBand_resize_s(QRubberBand* self, QSize* s);
 bool QRubberBand_event(QRubberBand* self, QEvent* e);
 void QRubberBand_paintEvent(QRubberBand* self, QPaintEvent* param1);
 void QRubberBand_changeEvent(QRubberBand* self, QEvent* param1);
@@ -169,8 +169,8 @@ void QRubberBand_showEvent(QRubberBand* self, QShowEvent* param1);
 void QRubberBand_resizeEvent(QRubberBand* self, QResizeEvent* param1);
 void QRubberBand_moveEvent(QRubberBand* self, QMoveEvent* param1);
 void QRubberBand_initStyleOption(const QRubberBand* self, QStyleOptionRubberBand* option);
-struct seaqt_string QRubberBand_tr2(const char* s, const char* c);
-struct seaqt_string QRubberBand_tr3(const char* s, const char* c, int n);
+struct seaqt_string QRubberBand_tr_s_c(const char* s, const char* c);
+struct seaqt_string QRubberBand_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QRubberBand_virtualbase_metaObject(const VirtualQRubberBand* self);
 void* QRubberBand_virtualbase_metacast(VirtualQRubberBand* self, const char* param1);

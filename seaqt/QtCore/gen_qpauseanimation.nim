@@ -57,11 +57,11 @@ type cQPauseAnimation*{.exportc: "QPauseAnimation", incompleteStruct.} = object
 proc fcQPauseAnimation_metaObject(self: pointer): pointer {.importc: "QPauseAnimation_metaObject".}
 proc fcQPauseAnimation_metacast(self: pointer, param1: cstring): pointer {.importc: "QPauseAnimation_metacast".}
 proc fcQPauseAnimation_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPauseAnimation_metacall".}
-proc fcQPauseAnimation_tr(s: cstring): struct_seaqt_string {.importc: "QPauseAnimation_tr".}
+proc fcQPauseAnimation_trS(s: cstring): struct_seaqt_string {.importc: "QPauseAnimation_tr_s".}
 proc fcQPauseAnimation_duration(self: pointer): cint {.importc: "QPauseAnimation_duration".}
 proc fcQPauseAnimation_setDuration(self: pointer, msecs: cint): void {.importc: "QPauseAnimation_setDuration".}
-proc fcQPauseAnimation_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPauseAnimation_tr2".}
-proc fcQPauseAnimation_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPauseAnimation_tr3".}
+proc fcQPauseAnimation_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPauseAnimation_tr_s_c".}
+proc fcQPauseAnimation_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPauseAnimation_tr_s_c_n".}
 proc fcQPauseAnimation_vdata(self: pointer): ptr pointer {.importc: "QPauseAnimation_vdata".}
 proc fvdata_cQPauseAnimation(self: pointer): pointer {.importc: "vdata_QPauseAnimation".}
 
@@ -100,9 +100,9 @@ proc fcQPauseAnimation_protectedbase_senderSignalIndex(self: pointer): cint {.im
 proc fcQPauseAnimation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPauseAnimation_protectedbase_receivers".}
 proc fcQPauseAnimation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPauseAnimation_protectedbase_isSignalConnected".}
 proc fcQPauseAnimation_new(vtbl: pointer, vdata: csize_t): ptr cQPauseAnimation {.importc: "QPauseAnimation_new".}
-proc fcQPauseAnimation_new2(vtbl: pointer, vdata: csize_t, msecs: cint): ptr cQPauseAnimation {.importc: "QPauseAnimation_new2".}
-proc fcQPauseAnimation_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPauseAnimation {.importc: "QPauseAnimation_new3".}
-proc fcQPauseAnimation_new4(vtbl: pointer, vdata: csize_t, msecs: cint, parent: pointer): ptr cQPauseAnimation {.importc: "QPauseAnimation_new4".}
+proc fcQPauseAnimation_new2(vtbl: pointer, vdata: csize_t, msecs: cint): ptr cQPauseAnimation {.importc: "QPauseAnimation_new_msecs".}
+proc fcQPauseAnimation_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPauseAnimation {.importc: "QPauseAnimation_new_parent".}
+proc fcQPauseAnimation_new4(vtbl: pointer, vdata: csize_t, msecs: cint, parent: pointer): ptr cQPauseAnimation {.importc: "QPauseAnimation_new_msecs_parent".}
 proc fcQPauseAnimation_staticMetaObject(): pointer {.importc: "QPauseAnimation_staticMetaObject".}
 
 proc metaObject*(self: gen_qpauseanimation_types.QPauseAnimation): gen_qobjectdefs_types.QMetaObject =
@@ -115,7 +115,7 @@ proc metacall*(self: gen_qpauseanimation_types.QPauseAnimation, param1: cint, pa
   fcQPauseAnimation_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpauseanimation_types.QPauseAnimation, s: cstring): string =
-  let v_ms = fcQPauseAnimation_tr(s)
+  let v_ms = fcQPauseAnimation_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -127,13 +127,13 @@ proc setDuration*(self: gen_qpauseanimation_types.QPauseAnimation, msecs: cint):
   fcQPauseAnimation_setDuration(self.h, msecs)
 
 proc tr*(_: type gen_qpauseanimation_types.QPauseAnimation, s: cstring, c: cstring): string =
-  let v_ms = fcQPauseAnimation_tr2(s, c)
+  let v_ms = fcQPauseAnimation_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpauseanimation_types.QPauseAnimation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPauseAnimation_tr3(s, c, n)
+  let v_ms = fcQPauseAnimation_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

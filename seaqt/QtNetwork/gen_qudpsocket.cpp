@@ -91,7 +91,7 @@ public:
 	friend void QUdpSocket_virtualbase_resume(VirtualQUdpSocket* self);
 
 	virtual bool bind(const QHostAddress& address, quint16 port, QAbstractSocket::BindMode mode) override {
-		if (vtbl->bind == 0) {
+		if (vtbl->bind_address_port_mode == 0) {
 			return QUdpSocket::bind(address, port, mode);
 		}
 
@@ -102,14 +102,14 @@ public:
 		unsigned short sigval2 = static_cast<unsigned short>(port_ret);
 		QAbstractSocket::BindMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
-		bool callback_return_value = vtbl->bind(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->bind_address_port_mode(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QUdpSocket_virtualbase_bind(VirtualQUdpSocket* self, QHostAddress* address, unsigned short port, int mode);
+	friend bool QUdpSocket_virtualbase_bind_address_port_mode(VirtualQUdpSocket* self, QHostAddress* address, unsigned short port, int mode);
 
 	virtual void connectToHost(const QString& hostName, quint16 port, QIODeviceBase::OpenMode mode, QAbstractSocket::NetworkLayerProtocol protocol) override {
-		if (vtbl->connectToHost == 0) {
+		if (vtbl->connectToHost_hostName_port_mode_protocol == 0) {
 			QUdpSocket::connectToHost(hostName, port, mode, protocol);
 			return;
 		}
@@ -128,10 +128,10 @@ public:
 		int sigval3 = static_cast<int>(mode_ret);
 		QAbstractSocket::NetworkLayerProtocol protocol_ret = protocol;
 		int sigval4 = static_cast<int>(protocol_ret);
-		vtbl->connectToHost(this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->connectToHost_hostName_port_mode_protocol(this, sigval1, sigval2, sigval3, sigval4);
 	}
 
-	friend void QUdpSocket_virtualbase_connectToHost(VirtualQUdpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
+	friend void QUdpSocket_virtualbase_connectToHost_hostName_port_mode_protocol(VirtualQUdpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
 
 	virtual void disconnectFromHost() override {
 		if (vtbl->disconnectFromHost == 0) {
@@ -554,7 +554,7 @@ VirtualQUdpSocket* QUdpSocket_new(const QUdpSocket_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQUdpSocket(vtbl) : nullptr;
 }
 
-VirtualQUdpSocket* QUdpSocket_new2(const QUdpSocket_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQUdpSocket* QUdpSocket_new_parent(const QUdpSocket_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQUdpSocket>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQUdpSocket(vtbl, parent) : nullptr;
 }
@@ -575,7 +575,7 @@ int QUdpSocket_metacall(QUdpSocket* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QUdpSocket_tr(const char* s) {
+struct seaqt_string QUdpSocket_tr_s(const char* s) {
 	QString _ret = QUdpSocket::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -586,23 +586,23 @@ struct seaqt_string QUdpSocket_tr(const char* s) {
 	return _ms;
 }
 
-bool QUdpSocket_bind(QUdpSocket* self, int addr) {
+bool QUdpSocket_bind_addr(QUdpSocket* self, int addr) {
 	return self->bind(static_cast<QHostAddress::SpecialAddress>(addr));
 }
 
-bool QUdpSocket_joinMulticastGroup(QUdpSocket* self, QHostAddress* groupAddress) {
+bool QUdpSocket_joinMulticastGroup_groupAddress(QUdpSocket* self, QHostAddress* groupAddress) {
 	return self->joinMulticastGroup(*groupAddress);
 }
 
-bool QUdpSocket_joinMulticastGroup2(QUdpSocket* self, QHostAddress* groupAddress, QNetworkInterface* iface) {
+bool QUdpSocket_joinMulticastGroup_groupAddress_iface(QUdpSocket* self, QHostAddress* groupAddress, QNetworkInterface* iface) {
 	return self->joinMulticastGroup(*groupAddress, *iface);
 }
 
-bool QUdpSocket_leaveMulticastGroup(QUdpSocket* self, QHostAddress* groupAddress) {
+bool QUdpSocket_leaveMulticastGroup_groupAddress(QUdpSocket* self, QHostAddress* groupAddress) {
 	return self->leaveMulticastGroup(*groupAddress);
 }
 
-bool QUdpSocket_leaveMulticastGroup2(QUdpSocket* self, QHostAddress* groupAddress, QNetworkInterface* iface) {
+bool QUdpSocket_leaveMulticastGroup_groupAddress_iface(QUdpSocket* self, QHostAddress* groupAddress, QNetworkInterface* iface) {
 	return self->leaveMulticastGroup(*groupAddress, *iface);
 }
 
@@ -627,28 +627,28 @@ QNetworkDatagram* QUdpSocket_receiveDatagram(QUdpSocket* self) {
 	return new QNetworkDatagram(self->receiveDatagram());
 }
 
-long long QUdpSocket_readDatagram(QUdpSocket* self, char* data, long long maxlen) {
+long long QUdpSocket_readDatagram_data_maxlen(QUdpSocket* self, char* data, long long maxlen) {
 	qint64 _ret = self->readDatagram(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
 }
 
-long long QUdpSocket_writeDatagram(QUdpSocket* self, QNetworkDatagram* datagram) {
+long long QUdpSocket_writeDatagram_datagram(QUdpSocket* self, QNetworkDatagram* datagram) {
 	qint64 _ret = self->writeDatagram(*datagram);
 	return static_cast<long long>(_ret);
 }
 
-long long QUdpSocket_writeDatagram2(QUdpSocket* self, const char* data, long long len, QHostAddress* host, unsigned short port) {
+long long QUdpSocket_writeDatagram_data_len_host_port(QUdpSocket* self, const char* data, long long len, QHostAddress* host, unsigned short port) {
 	qint64 _ret = self->writeDatagram(data, static_cast<qint64>(len), *host, static_cast<quint16>(port));
 	return static_cast<long long>(_ret);
 }
 
-long long QUdpSocket_writeDatagram3(QUdpSocket* self, struct seaqt_string datagram, QHostAddress* host, unsigned short port) {
+long long QUdpSocket_writeDatagram_datagram_host_port(QUdpSocket* self, struct seaqt_string datagram, QHostAddress* host, unsigned short port) {
 	QByteArray datagram_QByteArray(datagram.data, datagram.len);
 	qint64 _ret = self->writeDatagram(datagram_QByteArray, *host, static_cast<quint16>(port));
 	return static_cast<long long>(_ret);
 }
 
-struct seaqt_string QUdpSocket_tr2(const char* s, const char* c) {
+struct seaqt_string QUdpSocket_tr_s_c(const char* s, const char* c) {
 	QString _ret = QUdpSocket::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -659,7 +659,7 @@ struct seaqt_string QUdpSocket_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QUdpSocket_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QUdpSocket_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QUdpSocket::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -670,24 +670,24 @@ struct seaqt_string QUdpSocket_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QUdpSocket_bind2(QUdpSocket* self, int addr, unsigned short port) {
+bool QUdpSocket_bind_addr_port(QUdpSocket* self, int addr, unsigned short port) {
 	return self->bind(static_cast<QHostAddress::SpecialAddress>(addr), static_cast<quint16>(port));
 }
 
-bool QUdpSocket_bind3(QUdpSocket* self, int addr, unsigned short port, int mode) {
+bool QUdpSocket_bind_addr_port_mode(QUdpSocket* self, int addr, unsigned short port, int mode) {
 	return self->bind(static_cast<QHostAddress::SpecialAddress>(addr), static_cast<quint16>(port), static_cast<QAbstractSocket::BindMode>(mode));
 }
 
-QNetworkDatagram* QUdpSocket_receiveDatagramWithMaxSize(QUdpSocket* self, long long maxSize) {
+QNetworkDatagram* QUdpSocket_receiveDatagram_maxSize(QUdpSocket* self, long long maxSize) {
 	return new QNetworkDatagram(self->receiveDatagram(static_cast<qint64>(maxSize)));
 }
 
-long long QUdpSocket_readDatagram2(QUdpSocket* self, char* data, long long maxlen, QHostAddress* host) {
+long long QUdpSocket_readDatagram_data_maxlen_host(QUdpSocket* self, char* data, long long maxlen, QHostAddress* host) {
 	qint64 _ret = self->readDatagram(data, static_cast<qint64>(maxlen), host);
 	return static_cast<long long>(_ret);
 }
 
-long long QUdpSocket_readDatagram3(QUdpSocket* self, char* data, long long maxlen, QHostAddress* host, unsigned short* port) {
+long long QUdpSocket_readDatagram_data_maxlen_host_port(QUdpSocket* self, char* data, long long maxlen, QHostAddress* host, unsigned short* port) {
 	qint64 _ret = self->readDatagram(data, static_cast<qint64>(maxlen), host, static_cast<quint16*>(port));
 	return static_cast<long long>(_ret);
 }
@@ -716,12 +716,12 @@ void QUdpSocket_virtualbase_resume(VirtualQUdpSocket* self) {
 	self->QUdpSocket::resume();
 }
 
-bool QUdpSocket_virtualbase_bind(VirtualQUdpSocket* self, QHostAddress* address, unsigned short port, int mode) {
+bool QUdpSocket_virtualbase_bind_address_port_mode(VirtualQUdpSocket* self, QHostAddress* address, unsigned short port, int mode) {
 
 	return self->QUdpSocket::bind(*address, static_cast<quint16>(port), static_cast<VirtualQUdpSocket::BindMode>(mode));
 }
 
-void QUdpSocket_virtualbase_connectToHost(VirtualQUdpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol) {
+void QUdpSocket_virtualbase_connectToHost_hostName_port_mode_protocol(VirtualQUdpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol) {
 	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
 
 	self->QUdpSocket::connectToHost(hostName_QString, static_cast<quint16>(port), static_cast<VirtualQUdpSocket::OpenMode>(mode), static_cast<VirtualQUdpSocket::NetworkLayerProtocol>(protocol));

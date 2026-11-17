@@ -115,12 +115,12 @@ type cQQuickItemUpdatePaintNodeData*{.exportc: "QQuickItem__UpdatePaintNodeData"
 proc fcQQuickTransform_metaObject(self: pointer): pointer {.importc: "QQuickTransform_metaObject".}
 proc fcQQuickTransform_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickTransform_metacast".}
 proc fcQQuickTransform_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickTransform_metacall".}
-proc fcQQuickTransform_tr(s: cstring): struct_seaqt_string {.importc: "QQuickTransform_tr".}
+proc fcQQuickTransform_trS(s: cstring): struct_seaqt_string {.importc: "QQuickTransform_tr_s".}
 proc fcQQuickTransform_appendToItem(self: pointer, param1: pointer): void {.importc: "QQuickTransform_appendToItem".}
 proc fcQQuickTransform_prependToItem(self: pointer, param1: pointer): void {.importc: "QQuickTransform_prependToItem".}
 proc fcQQuickTransform_applyTo(self: pointer, matrix: pointer): void {.importc: "QQuickTransform_applyTo".}
-proc fcQQuickTransform_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickTransform_tr2".}
-proc fcQQuickTransform_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickTransform_tr3".}
+proc fcQQuickTransform_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickTransform_tr_s_c".}
+proc fcQQuickTransform_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickTransform_tr_s_c_n".}
 proc fcQQuickTransform_vdata(self: pointer): ptr pointer {.importc: "QQuickTransform_vdata".}
 proc fvdata_cQQuickTransform(self: pointer): pointer {.importc: "vdata_QQuickTransform".}
 
@@ -153,12 +153,12 @@ proc fcQQuickTransform_protectedbase_senderSignalIndex(self: pointer): cint {.im
 proc fcQQuickTransform_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickTransform_protectedbase_receivers".}
 proc fcQQuickTransform_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickTransform_protectedbase_isSignalConnected".}
 proc fcQQuickTransform_new(vtbl: pointer, vdata: csize_t): ptr cQQuickTransform {.importc: "QQuickTransform_new".}
-proc fcQQuickTransform_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickTransform {.importc: "QQuickTransform_new2".}
+proc fcQQuickTransform_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickTransform {.importc: "QQuickTransform_new_parent".}
 proc fcQQuickTransform_staticMetaObject(): pointer {.importc: "QQuickTransform_staticMetaObject".}
 proc fcQQuickItem_metaObject(self: pointer): pointer {.importc: "QQuickItem_metaObject".}
 proc fcQQuickItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickItem_metacast".}
 proc fcQQuickItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickItem_metacall".}
-proc fcQQuickItem_tr(s: cstring): struct_seaqt_string {.importc: "QQuickItem_tr".}
+proc fcQQuickItem_trS(s: cstring): struct_seaqt_string {.importc: "QQuickItem_tr_s".}
 proc fcQQuickItem_window(self: pointer): pointer {.importc: "QQuickItem_window".}
 proc fcQQuickItem_parentItem(self: pointer): pointer {.importc: "QQuickItem_parentItem".}
 proc fcQQuickItem_setParentItem(self: pointer, parent: pointer): void {.importc: "QQuickItem_setParentItem".}
@@ -214,15 +214,15 @@ proc fcQQuickItem_antialiasing(self: pointer): bool {.importc: "QQuickItem_antia
 proc fcQQuickItem_setAntialiasing(self: pointer, antialiasing: bool): void {.importc: "QQuickItem_setAntialiasing".}
 proc fcQQuickItem_resetAntialiasing(self: pointer): void {.importc: "QQuickItem_resetAntialiasing".}
 proc fcQQuickItem_flags(self: pointer): cint {.importc: "QQuickItem_flags".}
-proc fcQQuickItem_setFlag(self: pointer, flag: cint): void {.importc: "QQuickItem_setFlag".}
+proc fcQQuickItem_setFlagFlag(self: pointer, flag: cint): void {.importc: "QQuickItem_setFlag_flag".}
 proc fcQQuickItem_setFlags(self: pointer, flags: cint): void {.importc: "QQuickItem_setFlags".}
 proc fcQQuickItem_boundingRect(self: pointer): pointer {.importc: "QQuickItem_boundingRect".}
 proc fcQQuickItem_clipRect(self: pointer): pointer {.importc: "QQuickItem_clipRect".}
 proc fcQQuickItem_viewportItem(self: pointer): pointer {.importc: "QQuickItem_viewportItem".}
 proc fcQQuickItem_hasActiveFocus(self: pointer): bool {.importc: "QQuickItem_hasActiveFocus".}
 proc fcQQuickItem_hasFocus(self: pointer): bool {.importc: "QQuickItem_hasFocus".}
-proc fcQQuickItem_setFocus(self: pointer, focus: bool): void {.importc: "QQuickItem_setFocus".}
-proc fcQQuickItem_setFocus2(self: pointer, focus: bool, reason: cint): void {.importc: "QQuickItem_setFocus2".}
+proc fcQQuickItem_setFocusFocus(self: pointer, focus: bool): void {.importc: "QQuickItem_setFocus_focus".}
+proc fcQQuickItem_setFocusFocusReason(self: pointer, focus: bool, reason: cint): void {.importc: "QQuickItem_setFocus_focus_reason".}
 proc fcQQuickItem_isFocusScope(self: pointer): bool {.importc: "QQuickItem_isFocusScope".}
 proc fcQQuickItem_scopedFocusItem(self: pointer): pointer {.importc: "QQuickItem_scopedFocusItem".}
 proc fcQQuickItem_isAncestorOf(self: pointer, child: pointer): bool {.importc: "QQuickItem_isAncestorOf".}
@@ -246,24 +246,24 @@ proc fcQQuickItem_grabTouchPoints(self: pointer, ids: struct_seaqt_array): void 
 proc fcQQuickItem_ungrabTouchPoints(self: pointer): void {.importc: "QQuickItem_ungrabTouchPoints".}
 proc fcQQuickItem_keepTouchGrab(self: pointer): bool {.importc: "QQuickItem_keepTouchGrab".}
 proc fcQQuickItem_setKeepTouchGrab(self: pointer, keepTouchGrab: bool): void {.importc: "QQuickItem_setKeepTouchGrab".}
-proc fcQQuickItem_grabToImage(self: pointer, callback: pointer): bool {.importc: "QQuickItem_grabToImage".}
+proc fcQQuickItem_grabToImageCallback(self: pointer, callback: pointer): bool {.importc: "QQuickItem_grabToImage_callback".}
 proc fcQQuickItem_contains(self: pointer, point: pointer): bool {.importc: "QQuickItem_contains".}
 proc fcQQuickItem_containmentMask(self: pointer): pointer {.importc: "QQuickItem_containmentMask".}
 proc fcQQuickItem_setContainmentMask(self: pointer, mask: pointer): void {.importc: "QQuickItem_setContainmentMask".}
 proc fcQQuickItem_itemTransform(self: pointer, param1: pointer, param2: ptr bool): pointer {.importc: "QQuickItem_itemTransform".}
-proc fcQQuickItem_mapToItem(self: pointer, item: pointer, point: pointer): pointer {.importc: "QQuickItem_mapToItem".}
+proc fcQQuickItem_mapToItem_QQuickItem_QPointF(self: pointer, item: pointer, point: pointer): pointer {.importc: "QQuickItem_mapToItem_QQuickItem_QPointF".}
 proc fcQQuickItem_mapToScene(self: pointer, point: pointer): pointer {.importc: "QQuickItem_mapToScene".}
-proc fcQQuickItem_mapToGlobal(self: pointer, point: pointer): pointer {.importc: "QQuickItem_mapToGlobal".}
+proc fcQQuickItem_mapToGlobal_QPointF(self: pointer, point: pointer): pointer {.importc: "QQuickItem_mapToGlobal_QPointF".}
 proc fcQQuickItem_mapRectToItem(self: pointer, item: pointer, rect: pointer): pointer {.importc: "QQuickItem_mapRectToItem".}
 proc fcQQuickItem_mapRectToScene(self: pointer, rect: pointer): pointer {.importc: "QQuickItem_mapRectToScene".}
-proc fcQQuickItem_mapFromItem(self: pointer, item: pointer, point: pointer): pointer {.importc: "QQuickItem_mapFromItem".}
+proc fcQQuickItem_mapFromItem_QQuickItem_QPointF(self: pointer, item: pointer, point: pointer): pointer {.importc: "QQuickItem_mapFromItem_QQuickItem_QPointF".}
 proc fcQQuickItem_mapFromScene(self: pointer, point: pointer): pointer {.importc: "QQuickItem_mapFromScene".}
-proc fcQQuickItem_mapFromGlobal(self: pointer, point: pointer): pointer {.importc: "QQuickItem_mapFromGlobal".}
+proc fcQQuickItem_mapFromGlobal_QPointF(self: pointer, point: pointer): pointer {.importc: "QQuickItem_mapFromGlobal_QPointF".}
 proc fcQQuickItem_mapRectFromItem(self: pointer, item: pointer, rect: pointer): pointer {.importc: "QQuickItem_mapRectFromItem".}
 proc fcQQuickItem_mapRectFromScene(self: pointer, rect: pointer): pointer {.importc: "QQuickItem_mapRectFromScene".}
 proc fcQQuickItem_polish(self: pointer): void {.importc: "QQuickItem_polish".}
 proc fcQQuickItem_forceActiveFocus(self: pointer): void {.importc: "QQuickItem_forceActiveFocus".}
-proc fcQQuickItem_forceActiveFocusWithReason(self: pointer, reason: cint): void {.importc: "QQuickItem_forceActiveFocusWithReason".}
+proc fcQQuickItem_forceActiveFocusReason(self: pointer, reason: cint): void {.importc: "QQuickItem_forceActiveFocus_reason".}
 proc fcQQuickItem_nextItemInFocusChain(self: pointer): pointer {.importc: "QQuickItem_nextItemInFocusChain".}
 proc fcQQuickItem_childAt(self: pointer, x: float64, y: float64): pointer {.importc: "QQuickItem_childAt".}
 proc fcQQuickItem_ensurePolished(self: pointer): void {.importc: "QQuickItem_ensurePolished".}
@@ -330,11 +330,11 @@ proc fcQQuickItem_paletteChanged(self: pointer): void {.importc: "QQuickItem_pal
 proc fcQQuickItem_connect_paletteChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_paletteChanged".}
 proc fcQQuickItem_paletteCreated(self: pointer): void {.importc: "QQuickItem_paletteCreated".}
 proc fcQQuickItem_connect_paletteCreated(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_paletteCreated".}
-proc fcQQuickItem_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickItem_tr2".}
-proc fcQQuickItem_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickItem_tr3".}
-proc fcQQuickItem_setFlag2(self: pointer, flag: cint, enabled: bool): void {.importc: "QQuickItem_setFlag2".}
-proc fcQQuickItem_grabToImage3(self: pointer, callback: pointer, targetSize: pointer): bool {.importc: "QQuickItem_grabToImage3".}
-proc fcQQuickItem_nextItemInFocusChainWithForward(self: pointer, forward: bool): pointer {.importc: "QQuickItem_nextItemInFocusChainWithForward".}
+proc fcQQuickItem_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickItem_tr_s_c".}
+proc fcQQuickItem_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickItem_tr_s_c_n".}
+proc fcQQuickItem_setFlagFlagEnabled(self: pointer, flag: cint, enabled: bool): void {.importc: "QQuickItem_setFlag_flag_enabled".}
+proc fcQQuickItem_grabToImageCallbackTargetSize(self: pointer, callback: pointer, targetSize: pointer): bool {.importc: "QQuickItem_grabToImage_callback_targetSize".}
+proc fcQQuickItem_nextItemInFocusChainForward(self: pointer, forward: bool): pointer {.importc: "QQuickItem_nextItemInFocusChain_forward".}
 proc fcQQuickItem_vdata(self: pointer): ptr pointer {.importc: "QQuickItem_vdata".}
 proc fvdata_cQQuickItem(self: pointer): pointer {.importc: "vdata_QQuickItem".}
 
@@ -433,13 +433,13 @@ proc fcQQuickItem_protectedbase_updateInputMethod(self: pointer): void {.importc
 proc fcQQuickItem_protectedbase_widthValid(self: pointer): bool {.importc: "QQuickItem_protectedbase_widthValid".}
 proc fcQQuickItem_protectedbase_heightValid(self: pointer): bool {.importc: "QQuickItem_protectedbase_heightValid".}
 proc fcQQuickItem_protectedbase_setImplicitSize(self: pointer, param1: float64, param2: float64): void {.importc: "QQuickItem_protectedbase_setImplicitSize".}
-proc fcQQuickItem_protectedbase_updateInputMethodWithQueries(self: pointer, queries: cint): void {.importc: "QQuickItem_protectedbase_updateInputMethodWithQueries".}
+proc fcQQuickItem_protectedbase_updateInputMethod_queries(self: pointer, queries: cint): void {.importc: "QQuickItem_protectedbase_updateInputMethod_queries".}
 proc fcQQuickItem_protectedbase_sender(self: pointer): pointer {.importc: "QQuickItem_protectedbase_sender".}
 proc fcQQuickItem_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QQuickItem_protectedbase_senderSignalIndex".}
 proc fcQQuickItem_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickItem_protectedbase_receivers".}
 proc fcQQuickItem_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickItem_protectedbase_isSignalConnected".}
 proc fcQQuickItem_new(vtbl: pointer, vdata: csize_t): ptr cQQuickItem {.importc: "QQuickItem_new".}
-proc fcQQuickItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickItem {.importc: "QQuickItem_new2".}
+proc fcQQuickItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickItem {.importc: "QQuickItem_new_parent".}
 proc fcQQuickItem_staticMetaObject(): pointer {.importc: "QQuickItem_staticMetaObject".}
 proc fcQQuickItemItemChangeData_item(self: pointer): pointer {.importc: "QQuickItem__ItemChangeData_item".}
 proc fcQQuickItemItemChangeData_setItem(self: pointer, item: pointer): void {.importc: "QQuickItem__ItemChangeData_setItem".}
@@ -449,10 +449,10 @@ proc fcQQuickItemItemChangeData_realValue(self: pointer): float64 {.importc: "QQ
 proc fcQQuickItemItemChangeData_setRealValue(self: pointer, realValue: float64): void {.importc: "QQuickItem__ItemChangeData_setRealValue".}
 proc fcQQuickItemItemChangeData_boolValue(self: pointer): bool {.importc: "QQuickItem__ItemChangeData_boolValue".}
 proc fcQQuickItemItemChangeData_setBoolValue(self: pointer, boolValue: bool): void {.importc: "QQuickItem__ItemChangeData_setBoolValue".}
-proc fcQQuickItemItemChangeData_new(v: pointer): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new".}
-proc fcQQuickItemItemChangeData_new2(v: pointer): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new2".}
-proc fcQQuickItemItemChangeData_new3(v: float64): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new3".}
-proc fcQQuickItemItemChangeData_new4(v: bool): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new4".}
+proc fcQQuickItemItemChangeData_new(v: pointer): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new_QQuickItem".}
+proc fcQQuickItemItemChangeData_new2(v: pointer): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new_QQuickWindow".}
+proc fcQQuickItemItemChangeData_new3(v: float64): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new_qreal".}
+proc fcQQuickItemItemChangeData_new4(v: bool): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new_bool".}
 proc fcQQuickItemUpdatePaintNodeData_transformNode(self: pointer): pointer {.importc: "QQuickItem__UpdatePaintNodeData_transformNode".}
 proc fcQQuickItemUpdatePaintNodeData_setTransformNode(self: pointer, transformNode: pointer): void {.importc: "QQuickItem__UpdatePaintNodeData_setTransformNode".}
 
@@ -466,7 +466,7 @@ proc metacall*(self: gen_qquickitem_types.QQuickTransform, param1: cint, param2:
   fcQQuickTransform_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickitem_types.QQuickTransform, s: cstring): string =
-  let v_ms = fcQQuickTransform_tr(s)
+  let v_ms = fcQQuickTransform_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -481,13 +481,13 @@ proc applyTo*(self: gen_qquickitem_types.QQuickTransform, matrix: gen_qmatrix4x4
   fcQQuickTransform_applyTo(self.h, matrix.h)
 
 proc tr*(_: type gen_qquickitem_types.QQuickTransform, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickTransform_tr2(s, c)
+  let v_ms = fcQQuickTransform_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickitem_types.QQuickTransform, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickTransform_tr3(s, c, n)
+  let v_ms = fcQQuickTransform_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -842,7 +842,7 @@ proc metacall*(self: gen_qquickitem_types.QQuickItem, param1: cint, param2: cint
   fcQQuickItem_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickitem_types.QQuickItem, s: cstring): string =
-  let v_ms = fcQQuickItem_tr(s)
+  let v_ms = fcQQuickItem_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1022,7 +1022,7 @@ proc flags*(self: gen_qquickitem_types.QQuickItem): cint =
   cint(fcQQuickItem_flags(self.h))
 
 proc setFlag*(self: gen_qquickitem_types.QQuickItem, flag: cint): void =
-  fcQQuickItem_setFlag(self.h, cint(flag))
+  fcQQuickItem_setFlagFlag(self.h, cint(flag))
 
 proc setFlags*(self: gen_qquickitem_types.QQuickItem, flags: cint): void =
   fcQQuickItem_setFlags(self.h, cint(flags))
@@ -1043,10 +1043,10 @@ proc hasFocus*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_hasFocus(self.h)
 
 proc setFocus*(self: gen_qquickitem_types.QQuickItem, focus: bool): void =
-  fcQQuickItem_setFocus(self.h, focus)
+  fcQQuickItem_setFocusFocus(self.h, focus)
 
 proc setFocus*(self: gen_qquickitem_types.QQuickItem, focus: bool, reason: cint): void =
-  fcQQuickItem_setFocus2(self.h, focus, cint(reason))
+  fcQQuickItem_setFocusFocusReason(self.h, focus, cint(reason))
 
 proc isFocusScope*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_isFocusScope(self.h)
@@ -1122,7 +1122,7 @@ proc setKeepTouchGrab*(self: gen_qquickitem_types.QQuickItem, keepTouchGrab: boo
   fcQQuickItem_setKeepTouchGrab(self.h, keepTouchGrab)
 
 proc grabToImage*(self: gen_qquickitem_types.QQuickItem, callback: gen_qjsvalue_types.QJSValue): bool =
-  fcQQuickItem_grabToImage(self.h, callback.h)
+  fcQQuickItem_grabToImageCallback(self.h, callback.h)
 
 proc contains*(self: gen_qquickitem_types.QQuickItem, point: gen_qpoint_types.QPointF): bool =
   fcQQuickItem_contains(self.h, point.h)
@@ -1137,13 +1137,13 @@ proc itemTransform*(self: gen_qquickitem_types.QQuickItem, param1: gen_qquickite
   gen_qtransform_types.QTransform(h: fcQQuickItem_itemTransform(self.h, param1.h, param2), owned: true)
 
 proc mapToItem*(self: gen_qquickitem_types.QQuickItem, item: gen_qquickitem_types.QQuickItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQQuickItem_mapToItem(self.h, item.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQQuickItem_mapToItem_QQuickItem_QPointF(self.h, item.h, point.h), owned: true)
 
 proc mapToScene*(self: gen_qquickitem_types.QQuickItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQQuickItem_mapToScene(self.h, point.h), owned: true)
 
 proc mapToGlobal*(self: gen_qquickitem_types.QQuickItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQQuickItem_mapToGlobal(self.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQQuickItem_mapToGlobal_QPointF(self.h, point.h), owned: true)
 
 proc mapRectToItem*(self: gen_qquickitem_types.QQuickItem, item: gen_qquickitem_types.QQuickItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQQuickItem_mapRectToItem(self.h, item.h, rect.h), owned: true)
@@ -1152,13 +1152,13 @@ proc mapRectToScene*(self: gen_qquickitem_types.QQuickItem, rect: gen_qrect_type
   gen_qrect_types.QRectF(h: fcQQuickItem_mapRectToScene(self.h, rect.h), owned: true)
 
 proc mapFromItem*(self: gen_qquickitem_types.QQuickItem, item: gen_qquickitem_types.QQuickItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQQuickItem_mapFromItem(self.h, item.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQQuickItem_mapFromItem_QQuickItem_QPointF(self.h, item.h, point.h), owned: true)
 
 proc mapFromScene*(self: gen_qquickitem_types.QQuickItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQQuickItem_mapFromScene(self.h, point.h), owned: true)
 
 proc mapFromGlobal*(self: gen_qquickitem_types.QQuickItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQQuickItem_mapFromGlobal(self.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQQuickItem_mapFromGlobal_QPointF(self.h, point.h), owned: true)
 
 proc mapRectFromItem*(self: gen_qquickitem_types.QQuickItem, item: gen_qquickitem_types.QQuickItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQQuickItem_mapRectFromItem(self.h, item.h, rect.h), owned: true)
@@ -1173,7 +1173,7 @@ proc forceActiveFocus*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_forceActiveFocus(self.h)
 
 proc forceActiveFocus*(self: gen_qquickitem_types.QQuickItem, reason: cint): void =
-  fcQQuickItem_forceActiveFocusWithReason(self.h, cint(reason))
+  fcQQuickItem_forceActiveFocusReason(self.h, cint(reason))
 
 proc nextItemInFocusChain*(self: gen_qquickitem_types.QQuickItem): gen_qquickitem_types.QQuickItem =
   gen_qquickitem_types.QQuickItem(h: fcQQuickItem_nextItemInFocusChain(self.h), owned: false)
@@ -1749,25 +1749,25 @@ proc onPaletteCreated*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItempa
   fcQQuickItem_connect_paletteCreated(self.h, cast[int](addr tmp[]), fcQQuickItem_slot_callback_paletteCreated, fcQQuickItem_slot_callback_paletteCreated_release)
 
 proc tr*(_: type gen_qquickitem_types.QQuickItem, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickItem_tr2(s, c)
+  let v_ms = fcQQuickItem_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickitem_types.QQuickItem, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickItem_tr3(s, c, n)
+  let v_ms = fcQQuickItem_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setFlag*(self: gen_qquickitem_types.QQuickItem, flag: cint, enabled: bool): void =
-  fcQQuickItem_setFlag2(self.h, cint(flag), enabled)
+  fcQQuickItem_setFlagFlagEnabled(self.h, cint(flag), enabled)
 
 proc grabToImage*(self: gen_qquickitem_types.QQuickItem, callback: gen_qjsvalue_types.QJSValue, targetSize: gen_qsize_types.QSize): bool =
-  fcQQuickItem_grabToImage3(self.h, callback.h, targetSize.h)
+  fcQQuickItem_grabToImageCallbackTargetSize(self.h, callback.h, targetSize.h)
 
 proc nextItemInFocusChain*(self: gen_qquickitem_types.QQuickItem, forward: bool): gen_qquickitem_types.QQuickItem =
-  gen_qquickitem_types.QQuickItem(h: fcQQuickItem_nextItemInFocusChainWithForward(self.h, forward), owned: false)
+  gen_qquickitem_types.QQuickItem(h: fcQQuickItem_nextItemInFocusChainForward(self.h, forward), owned: false)
 
 type QQuickItemmetaObjectProc* = proc(self: QQuickItem): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QQuickItemmetacastProc* = proc(self: QQuickItem, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -2641,7 +2641,7 @@ proc setImplicitSize*(self: gen_qquickitem_types.QQuickItem, param1: float64, pa
   fcQQuickItem_protectedbase_setImplicitSize(self.h, param1, param2)
 
 proc updateInputMethod*(self: gen_qquickitem_types.QQuickItem, queries: cint): void =
-  fcQQuickItem_protectedbase_updateInputMethodWithQueries(self.h, cint(queries))
+  fcQQuickItem_protectedbase_updateInputMethod_queries(self.h, cint(queries))
 
 proc sender*(self: gen_qquickitem_types.QQuickItem): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQuickItem_protectedbase_sender(self.h), owned: false)

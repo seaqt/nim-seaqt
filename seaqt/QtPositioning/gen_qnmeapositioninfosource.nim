@@ -68,7 +68,7 @@ type cQNmeaPositionInfoSource*{.exportc: "QNmeaPositionInfoSource", incompleteSt
 proc fcQNmeaPositionInfoSource_metaObject(self: pointer): pointer {.importc: "QNmeaPositionInfoSource_metaObject".}
 proc fcQNmeaPositionInfoSource_metacast(self: pointer, param1: cstring): pointer {.importc: "QNmeaPositionInfoSource_metacast".}
 proc fcQNmeaPositionInfoSource_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNmeaPositionInfoSource_metacall".}
-proc fcQNmeaPositionInfoSource_tr(s: cstring): struct_seaqt_string {.importc: "QNmeaPositionInfoSource_tr".}
+proc fcQNmeaPositionInfoSource_trS(s: cstring): struct_seaqt_string {.importc: "QNmeaPositionInfoSource_tr_s".}
 proc fcQNmeaPositionInfoSource_setUserEquivalentRangeError(self: pointer, uere: float64): void {.importc: "QNmeaPositionInfoSource_setUserEquivalentRangeError".}
 proc fcQNmeaPositionInfoSource_userEquivalentRangeError(self: pointer): float64 {.importc: "QNmeaPositionInfoSource_userEquivalentRangeError".}
 proc fcQNmeaPositionInfoSource_updateMode(self: pointer): cint {.importc: "QNmeaPositionInfoSource_updateMode".}
@@ -82,8 +82,8 @@ proc fcQNmeaPositionInfoSource_error(self: pointer): cint {.importc: "QNmeaPosit
 proc fcQNmeaPositionInfoSource_startUpdates(self: pointer): void {.importc: "QNmeaPositionInfoSource_startUpdates".}
 proc fcQNmeaPositionInfoSource_stopUpdates(self: pointer): void {.importc: "QNmeaPositionInfoSource_stopUpdates".}
 proc fcQNmeaPositionInfoSource_requestUpdate(self: pointer, timeout: cint): void {.importc: "QNmeaPositionInfoSource_requestUpdate".}
-proc fcQNmeaPositionInfoSource_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNmeaPositionInfoSource_tr2".}
-proc fcQNmeaPositionInfoSource_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNmeaPositionInfoSource_tr3".}
+proc fcQNmeaPositionInfoSource_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNmeaPositionInfoSource_tr_s_c".}
+proc fcQNmeaPositionInfoSource_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNmeaPositionInfoSource_tr_s_c_n".}
 proc fcQNmeaPositionInfoSource_vdata(self: pointer): ptr pointer {.importc: "QNmeaPositionInfoSource_vdata".}
 proc fvdata_cQNmeaPositionInfoSource(self: pointer): pointer {.importc: "vdata_QNmeaPositionInfoSource".}
 
@@ -138,8 +138,8 @@ proc fcQNmeaPositionInfoSource_protectedbase_sender(self: pointer): pointer {.im
 proc fcQNmeaPositionInfoSource_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QNmeaPositionInfoSource_protectedbase_senderSignalIndex".}
 proc fcQNmeaPositionInfoSource_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNmeaPositionInfoSource_protectedbase_receivers".}
 proc fcQNmeaPositionInfoSource_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNmeaPositionInfoSource_protectedbase_isSignalConnected".}
-proc fcQNmeaPositionInfoSource_new(vtbl: pointer, vdata: csize_t, updateMode: cint): ptr cQNmeaPositionInfoSource {.importc: "QNmeaPositionInfoSource_new".}
-proc fcQNmeaPositionInfoSource_new2(vtbl: pointer, vdata: csize_t, updateMode: cint, parent: pointer): ptr cQNmeaPositionInfoSource {.importc: "QNmeaPositionInfoSource_new2".}
+proc fcQNmeaPositionInfoSource_new(vtbl: pointer, vdata: csize_t, updateMode: cint): ptr cQNmeaPositionInfoSource {.importc: "QNmeaPositionInfoSource_new_updateMode".}
+proc fcQNmeaPositionInfoSource_new2(vtbl: pointer, vdata: csize_t, updateMode: cint, parent: pointer): ptr cQNmeaPositionInfoSource {.importc: "QNmeaPositionInfoSource_new_updateMode_parent".}
 proc fcQNmeaPositionInfoSource_staticMetaObject(): pointer {.importc: "QNmeaPositionInfoSource_staticMetaObject".}
 
 proc metaObject*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource): gen_qobjectdefs_types.QMetaObject =
@@ -152,7 +152,7 @@ proc metacall*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource, 
   fcQNmeaPositionInfoSource_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource, s: cstring): string =
-  let v_ms = fcQNmeaPositionInfoSource_tr(s)
+  let v_ms = fcQNmeaPositionInfoSource_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -197,13 +197,13 @@ proc requestUpdate*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSou
   fcQNmeaPositionInfoSource_requestUpdate(self.h, timeout)
 
 proc tr*(_: type gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource, s: cstring, c: cstring): string =
-  let v_ms = fcQNmeaPositionInfoSource_tr2(s, c)
+  let v_ms = fcQNmeaPositionInfoSource_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQNmeaPositionInfoSource_tr3(s, c, n)
+  let v_ms = fcQNmeaPositionInfoSource_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

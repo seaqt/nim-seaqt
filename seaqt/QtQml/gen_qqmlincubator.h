@@ -41,7 +41,7 @@ void* QQmlIncubator_vdata(VirtualQQmlIncubator* self);
 VirtualQQmlIncubator* vdata_QQmlIncubator(void* vdata);
 
 VirtualQQmlIncubator* QQmlIncubator_new(const QQmlIncubator_VTable* vtbl, size_t vdata);
-VirtualQQmlIncubator* QQmlIncubator_new2(const QQmlIncubator_VTable* vtbl, size_t vdata, int param1);
+VirtualQQmlIncubator* QQmlIncubator_new_QQmlIncubator_IncubationMode(const QQmlIncubator_VTable* vtbl, size_t vdata, int param1);
 
 void QQmlIncubator_clear(QQmlIncubator* self);
 void QQmlIncubator_forceCompletion(QQmlIncubator* self);

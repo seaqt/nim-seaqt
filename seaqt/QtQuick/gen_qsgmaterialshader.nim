@@ -110,10 +110,10 @@ type cQSGMaterialShaderGraphicsPipelineState*{.exportc: "QSGMaterialShader__Grap
 proc fcQSGMaterialShader_updateUniformData(self: pointer, state: pointer, newMaterial: pointer, oldMaterial: pointer): bool {.importc: "QSGMaterialShader_updateUniformData".}
 proc fcQSGMaterialShader_updateGraphicsPipelineState(self: pointer, state: pointer, ps: pointer, newMaterial: pointer, oldMaterial: pointer): bool {.importc: "QSGMaterialShader_updateGraphicsPipelineState".}
 proc fcQSGMaterialShader_flags(self: pointer): cint {.importc: "QSGMaterialShader_flags".}
-proc fcQSGMaterialShader_setFlag(self: pointer, flags: cint): void {.importc: "QSGMaterialShader_setFlag".}
+proc fcQSGMaterialShader_setFlagFlags(self: pointer, flags: cint): void {.importc: "QSGMaterialShader_setFlag_flags".}
 proc fcQSGMaterialShader_setFlags(self: pointer, flags: cint): void {.importc: "QSGMaterialShader_setFlags".}
 proc fcQSGMaterialShader_combinedImageSamplerCount(self: pointer, binding: cint): cint {.importc: "QSGMaterialShader_combinedImageSamplerCount".}
-proc fcQSGMaterialShader_setFlag2(self: pointer, flags: cint, on: bool): void {.importc: "QSGMaterialShader_setFlag2".}
+proc fcQSGMaterialShader_setFlagFlagsOn(self: pointer, flags: cint, on: bool): void {.importc: "QSGMaterialShader_setFlag_flags_on".}
 proc fcQSGMaterialShader_vdata(self: pointer): ptr pointer {.importc: "QSGMaterialShader_vdata".}
 proc fvdata_cQSGMaterialShader(self: pointer): pointer {.importc: "vdata_QSGMaterialShader".}
 
@@ -162,7 +162,7 @@ proc flags*(self: gen_qsgmaterialshader_types.QSGMaterialShader): cint =
   cint(fcQSGMaterialShader_flags(self.h))
 
 proc setFlag*(self: gen_qsgmaterialshader_types.QSGMaterialShader, flags: cint): void =
-  fcQSGMaterialShader_setFlag(self.h, cint(flags))
+  fcQSGMaterialShader_setFlagFlags(self.h, cint(flags))
 
 proc setFlags*(self: gen_qsgmaterialshader_types.QSGMaterialShader, flags: cint): void =
   fcQSGMaterialShader_setFlags(self.h, cint(flags))
@@ -171,7 +171,7 @@ proc combinedImageSamplerCount*(self: gen_qsgmaterialshader_types.QSGMaterialSha
   fcQSGMaterialShader_combinedImageSamplerCount(self.h, binding)
 
 proc setFlag*(self: gen_qsgmaterialshader_types.QSGMaterialShader, flags: cint, on: bool): void =
-  fcQSGMaterialShader_setFlag2(self.h, cint(flags), on)
+  fcQSGMaterialShader_setFlagFlagsOn(self.h, cint(flags), on)
 
 type QSGMaterialShaderupdateUniformDataProc* = proc(self: QSGMaterialShader, state: gen_qsgmaterialshader_types.QSGMaterialShaderRenderState, newMaterial: gen_qsgmaterial_types.QSGMaterial, oldMaterial: gen_qsgmaterial_types.QSGMaterial): bool {.raises: [], gcsafe.}
 type QSGMaterialShaderupdateGraphicsPipelineStateProc* = proc(self: QSGMaterialShader, state: gen_qsgmaterialshader_types.QSGMaterialShaderRenderState, ps: gen_qsgmaterialshader_types.QSGMaterialShaderGraphicsPipelineState, newMaterial: gen_qsgmaterial_types.QSGMaterial, oldMaterial: gen_qsgmaterial_types.QSGMaterial): bool {.raises: [], gcsafe.}

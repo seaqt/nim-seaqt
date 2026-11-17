@@ -63,7 +63,7 @@ type cQQuickRenderControl*{.exportc: "QQuickRenderControl", incompleteStruct.} =
 proc fcQQuickRenderControl_metaObject(self: pointer): pointer {.importc: "QQuickRenderControl_metaObject".}
 proc fcQQuickRenderControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickRenderControl_metacast".}
 proc fcQQuickRenderControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickRenderControl_metacall".}
-proc fcQQuickRenderControl_tr(s: cstring): struct_seaqt_string {.importc: "QQuickRenderControl_tr".}
+proc fcQQuickRenderControl_trS(s: cstring): struct_seaqt_string {.importc: "QQuickRenderControl_tr_s".}
 proc fcQQuickRenderControl_prepareThread(self: pointer, targetThread: pointer): void {.importc: "QQuickRenderControl_prepareThread".}
 proc fcQQuickRenderControl_setSamples(self: pointer, sampleCount: cint): void {.importc: "QQuickRenderControl_setSamples".}
 proc fcQQuickRenderControl_samples(self: pointer): cint {.importc: "QQuickRenderControl_samples".}
@@ -74,16 +74,16 @@ proc fcQQuickRenderControl_endFrame(self: pointer): void {.importc: "QQuickRende
 proc fcQQuickRenderControl_polishItems(self: pointer): void {.importc: "QQuickRenderControl_polishItems".}
 proc fcQQuickRenderControl_sync(self: pointer): bool {.importc: "QQuickRenderControl_sync".}
 proc fcQQuickRenderControl_render(self: pointer): void {.importc: "QQuickRenderControl_render".}
-proc fcQQuickRenderControl_renderWindowFor(win: pointer): pointer {.importc: "QQuickRenderControl_renderWindowFor".}
+proc fcQQuickRenderControl_renderWindowForWin(win: pointer): pointer {.importc: "QQuickRenderControl_renderWindowFor_win".}
 proc fcQQuickRenderControl_renderWindow(self: pointer, offset: pointer): pointer {.importc: "QQuickRenderControl_renderWindow".}
 proc fcQQuickRenderControl_window(self: pointer): pointer {.importc: "QQuickRenderControl_window".}
 proc fcQQuickRenderControl_renderRequested(self: pointer): void {.importc: "QQuickRenderControl_renderRequested".}
 proc fcQQuickRenderControl_connect_renderRequested(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickRenderControl_connect_renderRequested".}
 proc fcQQuickRenderControl_sceneChanged(self: pointer): void {.importc: "QQuickRenderControl_sceneChanged".}
 proc fcQQuickRenderControl_connect_sceneChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickRenderControl_connect_sceneChanged".}
-proc fcQQuickRenderControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickRenderControl_tr2".}
-proc fcQQuickRenderControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickRenderControl_tr3".}
-proc fcQQuickRenderControl_renderWindowFor2(win: pointer, offset: pointer): pointer {.importc: "QQuickRenderControl_renderWindowFor2".}
+proc fcQQuickRenderControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickRenderControl_tr_s_c".}
+proc fcQQuickRenderControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickRenderControl_tr_s_c_n".}
+proc fcQQuickRenderControl_renderWindowForWinOffset(win: pointer, offset: pointer): pointer {.importc: "QQuickRenderControl_renderWindowFor_win_offset".}
 proc fcQQuickRenderControl_vdata(self: pointer): ptr pointer {.importc: "QQuickRenderControl_vdata".}
 proc fvdata_cQQuickRenderControl(self: pointer): pointer {.importc: "vdata_QQuickRenderControl".}
 
@@ -116,7 +116,7 @@ proc fcQQuickRenderControl_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQQuickRenderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickRenderControl_protectedbase_receivers".}
 proc fcQQuickRenderControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickRenderControl_protectedbase_isSignalConnected".}
 proc fcQQuickRenderControl_new(vtbl: pointer, vdata: csize_t): ptr cQQuickRenderControl {.importc: "QQuickRenderControl_new".}
-proc fcQQuickRenderControl_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickRenderControl {.importc: "QQuickRenderControl_new2".}
+proc fcQQuickRenderControl_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickRenderControl {.importc: "QQuickRenderControl_new_parent".}
 proc fcQQuickRenderControl_staticMetaObject(): pointer {.importc: "QQuickRenderControl_staticMetaObject".}
 
 proc metaObject*(self: gen_qquickrendercontrol_types.QQuickRenderControl): gen_qobjectdefs_types.QMetaObject =
@@ -129,7 +129,7 @@ proc metacall*(self: gen_qquickrendercontrol_types.QQuickRenderControl, param1: 
   fcQQuickRenderControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, s: cstring): string =
-  let v_ms = fcQQuickRenderControl_tr(s)
+  let v_ms = fcQQuickRenderControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -165,7 +165,7 @@ proc render*(self: gen_qquickrendercontrol_types.QQuickRenderControl): void =
   fcQQuickRenderControl_render(self.h)
 
 proc renderWindowFor*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, win: gen_qquickwindow_types.QQuickWindow): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindowFor(win.h), owned: false)
+  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindowForWin(win.h), owned: false)
 
 proc renderWindow*(self: gen_qquickrendercontrol_types.QQuickRenderControl, offset: gen_qpoint_types.QPoint): gen_qwindow_types.QWindow =
   gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindow(self.h, offset.h), owned: false)
@@ -210,19 +210,19 @@ proc onSceneChanged*(self: gen_qquickrendercontrol_types.QQuickRenderControl, sl
   fcQQuickRenderControl_connect_sceneChanged(self.h, cast[int](addr tmp[]), fcQQuickRenderControl_slot_callback_sceneChanged, fcQQuickRenderControl_slot_callback_sceneChanged_release)
 
 proc tr*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickRenderControl_tr2(s, c)
+  let v_ms = fcQQuickRenderControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickRenderControl_tr3(s, c, n)
+  let v_ms = fcQQuickRenderControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc renderWindowFor*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, win: gen_qquickwindow_types.QQuickWindow, offset: gen_qpoint_types.QPoint): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindowFor2(win.h, offset.h), owned: false)
+  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindowForWinOffset(win.h, offset.h), owned: false)
 
 type QQuickRenderControlmetaObjectProc* = proc(self: QQuickRenderControl): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QQuickRenderControlmetacastProc* = proc(self: QQuickRenderControl, param1: cstring): pointer {.raises: [], gcsafe.}

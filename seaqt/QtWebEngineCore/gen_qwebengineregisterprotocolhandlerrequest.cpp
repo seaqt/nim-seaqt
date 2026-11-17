@@ -21,8 +21,8 @@ QWebEngineRegisterProtocolHandlerRequest* QWebEngineRegisterProtocolHandlerReque
 	return new (std::nothrow) QWebEngineRegisterProtocolHandlerRequest();
 }
 
-QWebEngineRegisterProtocolHandlerRequest* QWebEngineRegisterProtocolHandlerRequest_new2(QWebEngineRegisterProtocolHandlerRequest* param1) {
-	return new (std::nothrow) QWebEngineRegisterProtocolHandlerRequest(*param1);
+QWebEngineRegisterProtocolHandlerRequest* QWebEngineRegisterProtocolHandlerRequest_new_from(QWebEngineRegisterProtocolHandlerRequest* from) {
+	return new (std::nothrow) QWebEngineRegisterProtocolHandlerRequest(*from);
 }
 
 void QWebEngineRegisterProtocolHandlerRequest_accept(QWebEngineRegisterProtocolHandlerRequest* self) {
@@ -56,8 +56,8 @@ bool QWebEngineRegisterProtocolHandlerRequest_operatorNotEqual(const QWebEngineR
 	return (*self != *that);
 }
 
-void QWebEngineRegisterProtocolHandlerRequest_operatorAssign(QWebEngineRegisterProtocolHandlerRequest* self, QWebEngineRegisterProtocolHandlerRequest* param1) {
-	self->operator=(*param1);
+void QWebEngineRegisterProtocolHandlerRequest_operatorAssign(QWebEngineRegisterProtocolHandlerRequest* self, QWebEngineRegisterProtocolHandlerRequest* from) {
+	self->operator=(*from);
 }
 
 const QMetaObject* QWebEngineRegisterProtocolHandlerRequest_staticMetaObject() { return &QWebEngineRegisterProtocolHandlerRequest::staticMetaObject; }

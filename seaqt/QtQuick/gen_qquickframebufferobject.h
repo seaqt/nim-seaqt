@@ -140,13 +140,13 @@ void* QQuickFramebufferObject_vdata(VirtualQQuickFramebufferObject* self);
 VirtualQQuickFramebufferObject* vdata_QQuickFramebufferObject(void* vdata);
 
 VirtualQQuickFramebufferObject* QQuickFramebufferObject_new(const QQuickFramebufferObject_VTable* vtbl, size_t vdata);
-VirtualQQuickFramebufferObject* QQuickFramebufferObject_new2(const QQuickFramebufferObject_VTable* vtbl, size_t vdata, QQuickItem* parent);
+VirtualQQuickFramebufferObject* QQuickFramebufferObject_new_parent(const QQuickFramebufferObject_VTable* vtbl, size_t vdata, QQuickItem* parent);
 
 void QQuickFramebufferObject_virtbase(QQuickFramebufferObject* src, QQuickItem** outptr_QQuickItem);
 QMetaObject* QQuickFramebufferObject_metaObject(const QQuickFramebufferObject* self);
 void* QQuickFramebufferObject_metacast(QQuickFramebufferObject* self, const char* param1);
 int QQuickFramebufferObject_metacall(QQuickFramebufferObject* self, int param1, int param2, void** param3);
-struct seaqt_string QQuickFramebufferObject_tr(const char* s);
+struct seaqt_string QQuickFramebufferObject_tr_s(const char* s);
 bool QQuickFramebufferObject_textureFollowsItemSize(const QQuickFramebufferObject* self);
 void QQuickFramebufferObject_setTextureFollowsItemSize(QQuickFramebufferObject* self, bool follows);
 bool QQuickFramebufferObject_mirrorVertically(const QQuickFramebufferObject* self);
@@ -161,8 +161,8 @@ void QQuickFramebufferObject_textureFollowsItemSizeChanged(QQuickFramebufferObje
 void QQuickFramebufferObject_connect_textureFollowsItemSizeChanged(QQuickFramebufferObject* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QQuickFramebufferObject_mirrorVerticallyChanged(QQuickFramebufferObject* self, bool param1);
 void QQuickFramebufferObject_connect_mirrorVerticallyChanged(QQuickFramebufferObject* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
-struct seaqt_string QQuickFramebufferObject_tr2(const char* s, const char* c);
-struct seaqt_string QQuickFramebufferObject_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQuickFramebufferObject_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQuickFramebufferObject_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQuickFramebufferObject_virtualbase_metaObject(const VirtualQQuickFramebufferObject* self);
 void* QQuickFramebufferObject_virtualbase_metacast(VirtualQQuickFramebufferObject* self, const char* param1);
@@ -225,7 +225,7 @@ void QQuickFramebufferObject_delete(QQuickFramebufferObject* self);
 
 void QQuickFramebufferObject__Renderer_render(QQuickFramebufferObject__Renderer* self);
 void QQuickFramebufferObject__Renderer_synchronize(QQuickFramebufferObject__Renderer* self, QQuickFramebufferObject* param1);
-void QQuickFramebufferObject__Renderer_operatorAssign(QQuickFramebufferObject__Renderer* self, QQuickFramebufferObject__Renderer* param1);
+void QQuickFramebufferObject__Renderer_operatorAssign(QQuickFramebufferObject__Renderer* self, QQuickFramebufferObject__Renderer* from);
 
 
 #ifdef __cplusplus

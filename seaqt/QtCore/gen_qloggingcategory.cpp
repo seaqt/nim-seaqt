@@ -15,7 +15,7 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QLoggingCategory* QLoggingCategory_new(const char* category) {
+QLoggingCategory* QLoggingCategory_new_category(const char* category) {
 	return new (std::nothrow) QLoggingCategory(category);
 }
 
@@ -45,7 +45,7 @@ QLoggingCategory* QLoggingCategory_operatorCall(QLoggingCategory* self) {
 	return &_ret;
 }
 
-QLoggingCategory* QLoggingCategory_operatorCall2(const QLoggingCategory* self) {
+QLoggingCategory* QLoggingCategory_operatorCall_const(const QLoggingCategory* self) {
 	const QLoggingCategory& _ret = self->operator()();
 	// Cast returned reference into pointer
 	return const_cast<QLoggingCategory*>(&_ret);

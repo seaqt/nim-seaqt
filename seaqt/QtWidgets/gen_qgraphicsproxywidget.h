@@ -160,14 +160,14 @@ void* QGraphicsProxyWidget_vdata(VirtualQGraphicsProxyWidget* self);
 VirtualQGraphicsProxyWidget* vdata_QGraphicsProxyWidget(void* vdata);
 
 VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new(const QGraphicsProxyWidget_VTable* vtbl, size_t vdata);
-VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new2(const QGraphicsProxyWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent);
-VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new3(const QGraphicsProxyWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent, int wFlags);
+VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new_parent(const QGraphicsProxyWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent);
+VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new_parent_wFlags(const QGraphicsProxyWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent, int wFlags);
 
 void QGraphicsProxyWidget_virtbase(QGraphicsProxyWidget* src, QGraphicsWidget** outptr_QGraphicsWidget);
 QMetaObject* QGraphicsProxyWidget_metaObject(const QGraphicsProxyWidget* self);
 void* QGraphicsProxyWidget_metacast(QGraphicsProxyWidget* self, const char* param1);
 int QGraphicsProxyWidget_metacall(QGraphicsProxyWidget* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsProxyWidget_tr(const char* s);
+struct seaqt_string QGraphicsProxyWidget_tr_s(const char* s);
 void QGraphicsProxyWidget_setWidget(QGraphicsProxyWidget* self, QWidget* widget);
 QWidget* QGraphicsProxyWidget_widget(const QGraphicsProxyWidget* self);
 QRectF* QGraphicsProxyWidget_subWidgetRect(const QGraphicsProxyWidget* self, QWidget* widget);
@@ -204,8 +204,8 @@ QVariant* QGraphicsProxyWidget_inputMethodQuery(const QGraphicsProxyWidget* self
 void QGraphicsProxyWidget_inputMethodEvent(QGraphicsProxyWidget* self, QInputMethodEvent* event);
 QSizeF* QGraphicsProxyWidget_sizeHint(const QGraphicsProxyWidget* self, int which, QSizeF* constraint);
 void QGraphicsProxyWidget_resizeEvent(QGraphicsProxyWidget* self, QGraphicsSceneResizeEvent* event);
-struct seaqt_string QGraphicsProxyWidget_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsProxyWidget_tr3(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsProxyWidget_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsProxyWidget_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGraphicsProxyWidget_virtualbase_metaObject(const VirtualQGraphicsProxyWidget* self);
 void* QGraphicsProxyWidget_virtualbase_metacast(VirtualQGraphicsProxyWidget* self, const char* param1);

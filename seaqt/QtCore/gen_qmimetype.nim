@@ -43,7 +43,7 @@ export
 
 type cQMimeType*{.exportc: "QMimeType", incompleteStruct.} = object
 
-proc fcQMimeType_operatorAssign(self: pointer, other: pointer): void {.importc: "QMimeType_operatorAssign".}
+proc fcQMimeType_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QMimeType_operatorAssign".}
 proc fcQMimeType_swap(self: pointer, other: pointer): void {.importc: "QMimeType_swap".}
 proc fcQMimeType_operatorEqual(self: pointer, other: pointer): bool {.importc: "QMimeType_operatorEqual".}
 proc fcQMimeType_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QMimeType_operatorNotEqual".}
@@ -62,11 +62,11 @@ proc fcQMimeType_preferredSuffix(self: pointer): struct_seaqt_string {.importc: 
 proc fcQMimeType_inherits(self: pointer, mimeTypeName: struct_seaqt_string): bool {.importc: "QMimeType_inherits".}
 proc fcQMimeType_filterString(self: pointer): struct_seaqt_string {.importc: "QMimeType_filterString".}
 proc fcQMimeType_new(): ptr cQMimeType {.importc: "QMimeType_new".}
-proc fcQMimeType_new2(other: pointer): ptr cQMimeType {.importc: "QMimeType_new2".}
+proc fcQMimeType_new2(fromVal: pointer): ptr cQMimeType {.importc: "QMimeType_new_from".}
 proc fcQMimeType_staticMetaObject(): pointer {.importc: "QMimeType_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qmimetype_types.QMimeType, other: gen_qmimetype_types.QMimeType): void =
-  fcQMimeType_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qmimetype_types.QMimeType, fromVal: gen_qmimetype_types.QMimeType): void =
+  fcQMimeType_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qmimetype_types.QMimeType, other: gen_qmimetype_types.QMimeType): void =
   fcQMimeType_swap(self.h, other.h)
@@ -186,8 +186,8 @@ proc create*(T: type gen_qmimetype_types.QMimeType): gen_qmimetype_types.QMimeTy
   let tmp = gen_qmimetype_types.QMimeType(h: fcQMimeType_new(), owned: true)
   tmp
 proc create*(T: type gen_qmimetype_types.QMimeType,
-    other: gen_qmimetype_types.QMimeType): gen_qmimetype_types.QMimeType =
-  let tmp = gen_qmimetype_types.QMimeType(h: fcQMimeType_new2(other.h), owned: true)
+    fromVal: gen_qmimetype_types.QMimeType): gen_qmimetype_types.QMimeType =
+  let tmp = gen_qmimetype_types.QMimeType(h: fcQMimeType_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qmimetype_types.QMimeType): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMimeType_staticMetaObject())

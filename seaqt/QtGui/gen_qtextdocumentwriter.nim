@@ -53,13 +53,13 @@ proc fcQTextDocumentWriter_setDevice(self: pointer, device: pointer): void {.imp
 proc fcQTextDocumentWriter_device(self: pointer): pointer {.importc: "QTextDocumentWriter_device".}
 proc fcQTextDocumentWriter_setFileName(self: pointer, fileName: struct_seaqt_string): void {.importc: "QTextDocumentWriter_setFileName".}
 proc fcQTextDocumentWriter_fileName(self: pointer): struct_seaqt_string {.importc: "QTextDocumentWriter_fileName".}
-proc fcQTextDocumentWriter_write(self: pointer, document: pointer): bool {.importc: "QTextDocumentWriter_write".}
-proc fcQTextDocumentWriter_writeWithFragment(self: pointer, fragment: pointer): bool {.importc: "QTextDocumentWriter_writeWithFragment".}
+proc fcQTextDocumentWriter_writeDocument(self: pointer, document: pointer): bool {.importc: "QTextDocumentWriter_write_document".}
+proc fcQTextDocumentWriter_writeFragment(self: pointer, fragment: pointer): bool {.importc: "QTextDocumentWriter_write_fragment".}
 proc fcQTextDocumentWriter_supportedDocumentFormats(): struct_seaqt_array {.importc: "QTextDocumentWriter_supportedDocumentFormats".}
 proc fcQTextDocumentWriter_new(): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new".}
-proc fcQTextDocumentWriter_new2(device: pointer, format: struct_seaqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new2".}
-proc fcQTextDocumentWriter_new3(fileName: struct_seaqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new3".}
-proc fcQTextDocumentWriter_new4(fileName: struct_seaqt_string, format: struct_seaqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new4".}
+proc fcQTextDocumentWriter_new2(device: pointer, format: struct_seaqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new_device_format".}
+proc fcQTextDocumentWriter_new3(fileName: struct_seaqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new_fileName".}
+proc fcQTextDocumentWriter_new4(fileName: struct_seaqt_string, format: struct_seaqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new_fileName_format".}
 
 proc setFormat*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, format: openArray[byte]): void =
   fcQTextDocumentWriter_setFormat(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
@@ -86,10 +86,10 @@ proc fileName*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter): string 
   vx_ret
 
 proc write*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, document: gen_qtextdocument_types.QTextDocument): bool =
-  fcQTextDocumentWriter_write(self.h, document.h)
+  fcQTextDocumentWriter_writeDocument(self.h, document.h)
 
 proc write*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, fragment: gen_qtextdocumentfragment_types.QTextDocumentFragment): bool =
-  fcQTextDocumentWriter_writeWithFragment(self.h, fragment.h)
+  fcQTextDocumentWriter_writeFragment(self.h, fragment.h)
 
 proc supportedDocumentFormats*(_: type gen_qtextdocumentwriter_types.QTextDocumentWriter): seq[seq[byte]] =
   var v_ma = fcQTextDocumentWriter_supportedDocumentFormats()

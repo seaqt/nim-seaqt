@@ -186,12 +186,12 @@ VirtualQTimeLine* QTimeLine_new(const QTimeLine_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQTimeLine(vtbl) : nullptr;
 }
 
-VirtualQTimeLine* QTimeLine_new2(const QTimeLine_VTable* vtbl, size_t vdata, int duration) {
+VirtualQTimeLine* QTimeLine_new_duration(const QTimeLine_VTable* vtbl, size_t vdata, int duration) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTimeLine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTimeLine(vtbl, static_cast<int>(duration)) : nullptr;
 }
 
-VirtualQTimeLine* QTimeLine_new3(const QTimeLine_VTable* vtbl, size_t vdata, int duration, QObject* parent) {
+VirtualQTimeLine* QTimeLine_new_duration_parent(const QTimeLine_VTable* vtbl, size_t vdata, int duration, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTimeLine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTimeLine(vtbl, static_cast<int>(duration), parent) : nullptr;
 }
@@ -212,7 +212,7 @@ int QTimeLine_metacall(QTimeLine* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTimeLine_tr(const char* s) {
+struct seaqt_string QTimeLine_tr_s(const char* s) {
 	QString _ret = QTimeLine::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -335,7 +335,7 @@ void QTimeLine_toggleDirection(QTimeLine* self) {
 	self->toggleDirection();
 }
 
-struct seaqt_string QTimeLine_tr2(const char* s, const char* c) {
+struct seaqt_string QTimeLine_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTimeLine::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -346,7 +346,7 @@ struct seaqt_string QTimeLine_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTimeLine_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTimeLine_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTimeLine::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

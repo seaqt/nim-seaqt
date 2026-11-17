@@ -30,7 +30,7 @@ void QNetworkInformation_virtbase(QNetworkInformation* src, QObject** outptr_QOb
 QMetaObject* QNetworkInformation_metaObject(const QNetworkInformation* self);
 void* QNetworkInformation_metacast(QNetworkInformation* self, const char* param1);
 int QNetworkInformation_metacall(QNetworkInformation* self, int param1, int param2, void** param3);
-struct seaqt_string QNetworkInformation_tr(const char* s);
+struct seaqt_string QNetworkInformation_tr_s(const char* s);
 int QNetworkInformation_reachability(const QNetworkInformation* self);
 bool QNetworkInformation_isBehindCaptivePortal(const QNetworkInformation* self);
 int QNetworkInformation_transportMedium(const QNetworkInformation* self);
@@ -40,7 +40,7 @@ bool QNetworkInformation_supports(const QNetworkInformation* self, int features)
 int QNetworkInformation_supportedFeatures(const QNetworkInformation* self);
 bool QNetworkInformation_loadDefaultBackend();
 bool QNetworkInformation_loadBackendByFeatures(int features);
-bool QNetworkInformation_loadWithFeatures(int features);
+bool QNetworkInformation_load_features(int features);
 struct seaqt_array /* of struct seaqt_string */  QNetworkInformation_availableBackends();
 QNetworkInformation* QNetworkInformation_instance();
 void QNetworkInformation_reachabilityChanged(QNetworkInformation* self, int newReachability);
@@ -51,8 +51,8 @@ void QNetworkInformation_transportMediumChanged(QNetworkInformation* self, int c
 void QNetworkInformation_connect_transportMediumChanged(QNetworkInformation* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QNetworkInformation_isMeteredChanged(QNetworkInformation* self, bool isMetered);
 void QNetworkInformation_connect_isMeteredChanged(QNetworkInformation* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
-struct seaqt_string QNetworkInformation_tr2(const char* s, const char* c);
-struct seaqt_string QNetworkInformation_tr3(const char* s, const char* c, int n);
+struct seaqt_string QNetworkInformation_tr_s_c(const char* s, const char* c);
+struct seaqt_string QNetworkInformation_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QNetworkInformation_staticMetaObject();
 

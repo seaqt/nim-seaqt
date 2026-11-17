@@ -97,7 +97,7 @@ type cQAudioRoom*{.exportc: "QAudioRoom", incompleteStruct.} = object
 proc fcQAudioRoom_metaObject(self: pointer): pointer {.importc: "QAudioRoom_metaObject".}
 proc fcQAudioRoom_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioRoom_metacast".}
 proc fcQAudioRoom_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioRoom_metacall".}
-proc fcQAudioRoom_tr(s: cstring): struct_seaqt_string {.importc: "QAudioRoom_tr".}
+proc fcQAudioRoom_trS(s: cstring): struct_seaqt_string {.importc: "QAudioRoom_tr_s".}
 proc fcQAudioRoom_setPosition(self: pointer, pos: pointer): void {.importc: "QAudioRoom_setPosition".}
 proc fcQAudioRoom_position(self: pointer): pointer {.importc: "QAudioRoom_position".}
 proc fcQAudioRoom_setDimensions(self: pointer, dim: pointer): void {.importc: "QAudioRoom_setDimensions".}
@@ -130,8 +130,8 @@ proc fcQAudioRoom_reverbTimeChanged(self: pointer): void {.importc: "QAudioRoom_
 proc fcQAudioRoom_connect_reverbTimeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoom_connect_reverbTimeChanged".}
 proc fcQAudioRoom_reverbBrightnessChanged(self: pointer): void {.importc: "QAudioRoom_reverbBrightnessChanged".}
 proc fcQAudioRoom_connect_reverbBrightnessChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoom_connect_reverbBrightnessChanged".}
-proc fcQAudioRoom_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioRoom_tr2".}
-proc fcQAudioRoom_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioRoom_tr3".}
+proc fcQAudioRoom_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioRoom_tr_s_c".}
+proc fcQAudioRoom_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioRoom_tr_s_c_n".}
 proc fcQAudioRoom_vdata(self: pointer): ptr pointer {.importc: "QAudioRoom_vdata".}
 proc fvdata_cQAudioRoom(self: pointer): pointer {.importc: "vdata_QAudioRoom".}
 
@@ -174,7 +174,7 @@ proc metacall*(self: gen_qaudioroom_types.QAudioRoom, param1: cint, param2: cint
   fcQAudioRoom_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudioroom_types.QAudioRoom, s: cstring): string =
-  let v_ms = fcQAudioRoom_tr(s)
+  let v_ms = fcQAudioRoom_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -372,13 +372,13 @@ proc onReverbBrightnessChanged*(self: gen_qaudioroom_types.QAudioRoom, slot: QAu
   fcQAudioRoom_connect_reverbBrightnessChanged(self.h, cast[int](addr tmp[]), fcQAudioRoom_slot_callback_reverbBrightnessChanged, fcQAudioRoom_slot_callback_reverbBrightnessChanged_release)
 
 proc tr*(_: type gen_qaudioroom_types.QAudioRoom, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioRoom_tr2(s, c)
+  let v_ms = fcQAudioRoom_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudioroom_types.QAudioRoom, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioRoom_tr3(s, c, n)
+  let v_ms = fcQAudioRoom_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

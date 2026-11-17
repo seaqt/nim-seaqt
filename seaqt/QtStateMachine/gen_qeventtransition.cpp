@@ -200,17 +200,17 @@ VirtualQEventTransition* QEventTransition_new(const QEventTransition_VTable* vtb
 	return _mem_ ? new (_mem_)VirtualQEventTransition(vtbl) : nullptr;
 }
 
-VirtualQEventTransition* QEventTransition_new2(const QEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type) {
+VirtualQEventTransition* QEventTransition_new_object_type(const QEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQEventTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQEventTransition(vtbl, object, static_cast<QEvent::Type>(type)) : nullptr;
 }
 
-VirtualQEventTransition* QEventTransition_new3(const QEventTransition_VTable* vtbl, size_t vdata, QState* sourceState) {
+VirtualQEventTransition* QEventTransition_new_sourceState(const QEventTransition_VTable* vtbl, size_t vdata, QState* sourceState) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQEventTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQEventTransition(vtbl, sourceState) : nullptr;
 }
 
-VirtualQEventTransition* QEventTransition_new4(const QEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, QState* sourceState) {
+VirtualQEventTransition* QEventTransition_new_object_type_sourceState(const QEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, QState* sourceState) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQEventTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQEventTransition(vtbl, object, static_cast<QEvent::Type>(type), sourceState) : nullptr;
 }
@@ -231,7 +231,7 @@ int QEventTransition_metacall(QEventTransition* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QEventTransition_tr(const char* s) {
+struct seaqt_string QEventTransition_tr_s(const char* s) {
 	QString _ret = QEventTransition::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -259,7 +259,7 @@ void QEventTransition_setEventType(QEventTransition* self, int type) {
 	self->setEventType(static_cast<QEvent::Type>(type));
 }
 
-struct seaqt_string QEventTransition_tr2(const char* s, const char* c) {
+struct seaqt_string QEventTransition_tr_s_c(const char* s, const char* c) {
 	QString _ret = QEventTransition::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -270,7 +270,7 @@ struct seaqt_string QEventTransition_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QEventTransition_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QEventTransition_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QEventTransition::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

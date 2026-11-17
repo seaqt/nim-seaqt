@@ -113,11 +113,11 @@ type cQTextDocument*{.exportc: "QTextDocument", incompleteStruct.} = object
 
 proc fcQAbstractUndoItem_undo(self: pointer): void {.importc: "QAbstractUndoItem_undo".}
 proc fcQAbstractUndoItem_redo(self: pointer): void {.importc: "QAbstractUndoItem_redo".}
-proc fcQAbstractUndoItem_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAbstractUndoItem_operatorAssign".}
+proc fcQAbstractUndoItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAbstractUndoItem_operatorAssign".}
 proc fcQTextDocument_metaObject(self: pointer): pointer {.importc: "QTextDocument_metaObject".}
 proc fcQTextDocument_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextDocument_metacast".}
 proc fcQTextDocument_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextDocument_metacall".}
-proc fcQTextDocument_tr(s: cstring): struct_seaqt_string {.importc: "QTextDocument_tr".}
+proc fcQTextDocument_trS(s: cstring): struct_seaqt_string {.importc: "QTextDocument_tr_s".}
 proc fcQTextDocument_clone(self: pointer): pointer {.importc: "QTextDocument_clone".}
 proc fcQTextDocument_isEmpty(self: pointer): bool {.importc: "QTextDocument_isEmpty".}
 proc fcQTextDocument_clear(self: pointer): void {.importc: "QTextDocument_clear".}
@@ -135,15 +135,15 @@ proc fcQTextDocument_metaInformation(self: pointer, info: cint): struct_seaqt_st
 proc fcQTextDocument_toHtml(self: pointer): struct_seaqt_string {.importc: "QTextDocument_toHtml".}
 proc fcQTextDocument_setHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QTextDocument_setHtml".}
 proc fcQTextDocument_toMarkdown(self: pointer): struct_seaqt_string {.importc: "QTextDocument_toMarkdown".}
-proc fcQTextDocument_setMarkdown(self: pointer, markdown: struct_seaqt_string): void {.importc: "QTextDocument_setMarkdown".}
+proc fcQTextDocument_setMarkdownMarkdown(self: pointer, markdown: struct_seaqt_string): void {.importc: "QTextDocument_setMarkdown_markdown".}
 proc fcQTextDocument_toRawText(self: pointer): struct_seaqt_string {.importc: "QTextDocument_toRawText".}
 proc fcQTextDocument_toPlainText(self: pointer): struct_seaqt_string {.importc: "QTextDocument_toPlainText".}
 proc fcQTextDocument_setPlainText(self: pointer, text: struct_seaqt_string): void {.importc: "QTextDocument_setPlainText".}
 proc fcQTextDocument_characterAt(self: pointer, pos: cint): pointer {.importc: "QTextDocument_characterAt".}
-proc fcQTextDocument_find(self: pointer, subString: struct_seaqt_string): pointer {.importc: "QTextDocument_find".}
-proc fcQTextDocument_find2(self: pointer, subString: struct_seaqt_string, cursor: pointer): pointer {.importc: "QTextDocument_find2".}
-proc fcQTextDocument_findWithExpr(self: pointer, expr: pointer): pointer {.importc: "QTextDocument_findWithExpr".}
-proc fcQTextDocument_find3(self: pointer, expr: pointer, cursor: pointer): pointer {.importc: "QTextDocument_find3".}
+proc fcQTextDocument_findSubString(self: pointer, subString: struct_seaqt_string): pointer {.importc: "QTextDocument_find_subString".}
+proc fcQTextDocument_findSubStringCursor(self: pointer, subString: struct_seaqt_string, cursor: pointer): pointer {.importc: "QTextDocument_find_subString_cursor".}
+proc fcQTextDocument_findExpr(self: pointer, expr: pointer): pointer {.importc: "QTextDocument_find_expr".}
+proc fcQTextDocument_findExprCursor(self: pointer, expr: pointer, cursor: pointer): pointer {.importc: "QTextDocument_find_expr_cursor".}
 proc fcQTextDocument_frameAt(self: pointer, pos: cint): pointer {.importc: "QTextDocument_frameAt".}
 proc fcQTextDocument_rootFrame(self: pointer): pointer {.importc: "QTextDocument_rootFrame".}
 proc fcQTextDocument_objectX(self: pointer, objectIndex: cint): pointer {.importc: "QTextDocument_object".}
@@ -176,7 +176,7 @@ proc fcQTextDocument_setUseDesignMetrics(self: pointer, b: bool): void {.importc
 proc fcQTextDocument_useDesignMetrics(self: pointer): bool {.importc: "QTextDocument_useDesignMetrics".}
 proc fcQTextDocument_setLayoutEnabled(self: pointer, b: bool): void {.importc: "QTextDocument_setLayoutEnabled".}
 proc fcQTextDocument_isLayoutEnabled(self: pointer): bool {.importc: "QTextDocument_isLayoutEnabled".}
-proc fcQTextDocument_drawContents(self: pointer, painter: pointer): void {.importc: "QTextDocument_drawContents".}
+proc fcQTextDocument_drawContentsPainter(self: pointer, painter: pointer): void {.importc: "QTextDocument_drawContents_painter".}
 proc fcQTextDocument_setTextWidth(self: pointer, width: float64): void {.importc: "QTextDocument_setTextWidth".}
 proc fcQTextDocument_textWidth(self: pointer): float64 {.importc: "QTextDocument_textWidth".}
 proc fcQTextDocument_idealWidth(self: pointer): float64 {.importc: "QTextDocument_idealWidth".}
@@ -191,8 +191,8 @@ proc fcQTextDocument_lineCount(self: pointer): cint {.importc: "QTextDocument_li
 proc fcQTextDocument_characterCount(self: pointer): cint {.importc: "QTextDocument_characterCount".}
 proc fcQTextDocument_setDefaultStyleSheet(self: pointer, sheet: struct_seaqt_string): void {.importc: "QTextDocument_setDefaultStyleSheet".}
 proc fcQTextDocument_defaultStyleSheet(self: pointer): struct_seaqt_string {.importc: "QTextDocument_defaultStyleSheet".}
-proc fcQTextDocument_undo(self: pointer, cursor: pointer): void {.importc: "QTextDocument_undo".}
-proc fcQTextDocument_redo(self: pointer, cursor: pointer): void {.importc: "QTextDocument_redo".}
+proc fcQTextDocument_undoCursor(self: pointer, cursor: pointer): void {.importc: "QTextDocument_undo_cursor".}
+proc fcQTextDocument_redoCursor(self: pointer, cursor: pointer): void {.importc: "QTextDocument_redo_cursor".}
 proc fcQTextDocument_clearUndoRedoStacks(self: pointer): void {.importc: "QTextDocument_clearUndoRedoStacks".}
 proc fcQTextDocument_maximumBlockCount(self: pointer): cint {.importc: "QTextDocument_maximumBlockCount".}
 proc fcQTextDocument_setMaximumBlockCount(self: pointer, maximum: cint): void {.importc: "QTextDocument_setMaximumBlockCount".}
@@ -222,24 +222,24 @@ proc fcQTextDocument_baseUrlChanged(self: pointer, url: pointer): void {.importc
 proc fcQTextDocument_connect_baseUrlChanged(self: pointer, slot: int, callback: proc (slot: int, url: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_baseUrlChanged".}
 proc fcQTextDocument_documentLayoutChanged(self: pointer): void {.importc: "QTextDocument_documentLayoutChanged".}
 proc fcQTextDocument_connect_documentLayoutChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_documentLayoutChanged".}
-proc fcQTextDocument_undo2(self: pointer): void {.importc: "QTextDocument_undo2".}
-proc fcQTextDocument_redo2(self: pointer): void {.importc: "QTextDocument_redo2".}
+proc fcQTextDocument_undo(self: pointer): void {.importc: "QTextDocument_undo".}
+proc fcQTextDocument_redo(self: pointer): void {.importc: "QTextDocument_redo".}
 proc fcQTextDocument_appendUndoItem(self: pointer, param1: pointer): void {.importc: "QTextDocument_appendUndoItem".}
 proc fcQTextDocument_setModified(self: pointer): void {.importc: "QTextDocument_setModified".}
-proc fcQTextDocument_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextDocument_tr2".}
-proc fcQTextDocument_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextDocument_tr3".}
-proc fcQTextDocument_cloneWithParent(self: pointer, parent: pointer): pointer {.importc: "QTextDocument_cloneWithParent".}
-proc fcQTextDocument_toMarkdownWithFeatures(self: pointer, features: cint): struct_seaqt_string {.importc: "QTextDocument_toMarkdownWithFeatures".}
-proc fcQTextDocument_setMarkdown2(self: pointer, markdown: struct_seaqt_string, features: cint): void {.importc: "QTextDocument_setMarkdown2".}
-proc fcQTextDocument_find4(self: pointer, subString: struct_seaqt_string, fromVal: cint): pointer {.importc: "QTextDocument_find4".}
-proc fcQTextDocument_find5(self: pointer, subString: struct_seaqt_string, fromVal: cint, options: cint): pointer {.importc: "QTextDocument_find5".}
-proc fcQTextDocument_find6(self: pointer, subString: struct_seaqt_string, cursor: pointer, options: cint): pointer {.importc: "QTextDocument_find6".}
-proc fcQTextDocument_find7(self: pointer, expr: pointer, fromVal: cint): pointer {.importc: "QTextDocument_find7".}
-proc fcQTextDocument_find8(self: pointer, expr: pointer, fromVal: cint, options: cint): pointer {.importc: "QTextDocument_find8".}
-proc fcQTextDocument_find9(self: pointer, expr: pointer, cursor: pointer, options: cint): pointer {.importc: "QTextDocument_find9".}
-proc fcQTextDocument_drawContents2(self: pointer, painter: pointer, rect: pointer): void {.importc: "QTextDocument_drawContents2".}
-proc fcQTextDocument_clearUndoRedoStacksWithHistoryToClear(self: pointer, historyToClear: cint): void {.importc: "QTextDocument_clearUndoRedoStacksWithHistoryToClear".}
-proc fcQTextDocument_setModifiedWithBool(self: pointer, m: bool): void {.importc: "QTextDocument_setModifiedWithBool".}
+proc fcQTextDocument_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextDocument_tr_s_c".}
+proc fcQTextDocument_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextDocument_tr_s_c_n".}
+proc fcQTextDocument_cloneParent(self: pointer, parent: pointer): pointer {.importc: "QTextDocument_clone_parent".}
+proc fcQTextDocument_toMarkdownFeatures(self: pointer, features: cint): struct_seaqt_string {.importc: "QTextDocument_toMarkdown_features".}
+proc fcQTextDocument_setMarkdownMarkdownFeatures(self: pointer, markdown: struct_seaqt_string, features: cint): void {.importc: "QTextDocument_setMarkdown_markdown_features".}
+proc fcQTextDocument_findSubStringFrom(self: pointer, subString: struct_seaqt_string, fromVal: cint): pointer {.importc: "QTextDocument_find_subString_from".}
+proc fcQTextDocument_findSubStringFromOptions(self: pointer, subString: struct_seaqt_string, fromVal: cint, options: cint): pointer {.importc: "QTextDocument_find_subString_from_options".}
+proc fcQTextDocument_findSubStringCursorOptions(self: pointer, subString: struct_seaqt_string, cursor: pointer, options: cint): pointer {.importc: "QTextDocument_find_subString_cursor_options".}
+proc fcQTextDocument_findExprFrom(self: pointer, expr: pointer, fromVal: cint): pointer {.importc: "QTextDocument_find_expr_from".}
+proc fcQTextDocument_findExprFromOptions(self: pointer, expr: pointer, fromVal: cint, options: cint): pointer {.importc: "QTextDocument_find_expr_from_options".}
+proc fcQTextDocument_findExprCursorOptions(self: pointer, expr: pointer, cursor: pointer, options: cint): pointer {.importc: "QTextDocument_find_expr_cursor_options".}
+proc fcQTextDocument_drawContentsPainterRect(self: pointer, painter: pointer, rect: pointer): void {.importc: "QTextDocument_drawContents_painter_rect".}
+proc fcQTextDocument_clearUndoRedoStacksHistoryToClear(self: pointer, historyToClear: cint): void {.importc: "QTextDocument_clearUndoRedoStacks_historyToClear".}
+proc fcQTextDocument_setModifiedM(self: pointer, m: bool): void {.importc: "QTextDocument_setModified_m".}
 proc fcQTextDocument_vdata(self: pointer): ptr pointer {.importc: "QTextDocument_vdata".}
 proc fvdata_cQTextDocument(self: pointer): pointer {.importc: "vdata_QTextDocument".}
 
@@ -276,9 +276,9 @@ proc fcQTextDocument_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQTextDocument_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTextDocument_protectedbase_receivers".}
 proc fcQTextDocument_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextDocument_protectedbase_isSignalConnected".}
 proc fcQTextDocument_new(vtbl: pointer, vdata: csize_t): ptr cQTextDocument {.importc: "QTextDocument_new".}
-proc fcQTextDocument_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQTextDocument {.importc: "QTextDocument_new2".}
-proc fcQTextDocument_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTextDocument {.importc: "QTextDocument_new3".}
-proc fcQTextDocument_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQTextDocument {.importc: "QTextDocument_new4".}
+proc fcQTextDocument_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQTextDocument {.importc: "QTextDocument_new_text".}
+proc fcQTextDocument_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTextDocument {.importc: "QTextDocument_new_parent".}
+proc fcQTextDocument_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQTextDocument {.importc: "QTextDocument_new_text_parent".}
 proc fcQTextDocument_staticMetaObject(): pointer {.importc: "QTextDocument_staticMetaObject".}
 
 proc undo*(self: gen_qtextdocument_types.QAbstractUndoItem): void =
@@ -287,8 +287,8 @@ proc undo*(self: gen_qtextdocument_types.QAbstractUndoItem): void =
 proc redo*(self: gen_qtextdocument_types.QAbstractUndoItem): void =
   fcQAbstractUndoItem_redo(self.h)
 
-proc operatorAssign*(self: gen_qtextdocument_types.QAbstractUndoItem, param1: gen_qtextdocument_types.QAbstractUndoItem): void =
-  fcQAbstractUndoItem_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qtextdocument_types.QAbstractUndoItem, fromVal: gen_qtextdocument_types.QAbstractUndoItem): void =
+  fcQAbstractUndoItem_operatorAssign(self.h, fromVal.h)
 
 proc metaObject*(self: gen_qtextdocument_types.QTextDocument): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextDocument_metaObject(self.h), owned: false)
@@ -300,7 +300,7 @@ proc metacall*(self: gen_qtextdocument_types.QTextDocument, param1: cint, param2
   fcQTextDocument_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtextdocument_types.QTextDocument, s: cstring): string =
-  let v_ms = fcQTextDocument_tr(s)
+  let v_ms = fcQTextDocument_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -366,7 +366,7 @@ proc toMarkdown*(self: gen_qtextdocument_types.QTextDocument): string =
   vx_ret
 
 proc setMarkdown*(self: gen_qtextdocument_types.QTextDocument, markdown: openArray[char]): void =
-  fcQTextDocument_setMarkdown(self.h, struct_seaqt_string(data: if len(markdown) > 0: addr markdown[0] else: nil, len: csize_t(len(markdown))))
+  fcQTextDocument_setMarkdownMarkdown(self.h, struct_seaqt_string(data: if len(markdown) > 0: addr markdown[0] else: nil, len: csize_t(len(markdown))))
 
 proc toRawText*(self: gen_qtextdocument_types.QTextDocument): string =
   let v_ms = fcQTextDocument_toRawText(self.h)
@@ -387,16 +387,16 @@ proc characterAt*(self: gen_qtextdocument_types.QTextDocument, pos: cint): gen_q
   gen_qchar_types.QChar(h: fcQTextDocument_characterAt(self.h, pos), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, subString: openArray[char]): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString)))), owned: true)
+  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findSubString(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString)))), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, subString: openArray[char], cursor: gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find2(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cursor.h), owned: true)
+  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findSubStringCursor(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cursor.h), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, expr: gen_qregularexpression_types.QRegularExpression): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findWithExpr(self.h, expr.h), owned: true)
+  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findExpr(self.h, expr.h), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, expr: gen_qregularexpression_types.QRegularExpression, cursor: gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find3(self.h, expr.h, cursor.h), owned: true)
+  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findExprCursor(self.h, expr.h, cursor.h), owned: true)
 
 proc frameAt*(self: gen_qtextdocument_types.QTextDocument, pos: cint): gen_qtextobject_types.QTextFrame =
   gen_qtextobject_types.QTextFrame(h: fcQTextDocument_frameAt(self.h, pos), owned: false)
@@ -501,7 +501,7 @@ proc isLayoutEnabled*(self: gen_qtextdocument_types.QTextDocument): bool =
   fcQTextDocument_isLayoutEnabled(self.h)
 
 proc drawContents*(self: gen_qtextdocument_types.QTextDocument, painter: gen_qpainter_types.QPainter): void =
-  fcQTextDocument_drawContents(self.h, painter.h)
+  fcQTextDocument_drawContentsPainter(self.h, painter.h)
 
 proc setTextWidth*(self: gen_qtextdocument_types.QTextDocument, width: float64): void =
   fcQTextDocument_setTextWidth(self.h, width)
@@ -549,10 +549,10 @@ proc defaultStyleSheet*(self: gen_qtextdocument_types.QTextDocument): string =
   vx_ret
 
 proc undo*(self: gen_qtextdocument_types.QTextDocument, cursor: gen_qtextcursor_types.QTextCursor): void =
-  fcQTextDocument_undo(self.h, cursor.h)
+  fcQTextDocument_undoCursor(self.h, cursor.h)
 
 proc redo*(self: gen_qtextdocument_types.QTextDocument, cursor: gen_qtextcursor_types.QTextCursor): void =
-  fcQTextDocument_redo(self.h, cursor.h)
+  fcQTextDocument_redoCursor(self.h, cursor.h)
 
 proc clearUndoRedoStacks*(self: gen_qtextdocument_types.QTextDocument): void =
   fcQTextDocument_clearUndoRedoStacks(self.h)
@@ -780,10 +780,10 @@ proc onDocumentLayoutChanged*(self: gen_qtextdocument_types.QTextDocument, slot:
   fcQTextDocument_connect_documentLayoutChanged(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_documentLayoutChanged, fcQTextDocument_slot_callback_documentLayoutChanged_release)
 
 proc undo*(self: gen_qtextdocument_types.QTextDocument): void =
-  fcQTextDocument_undo2(self.h)
+  fcQTextDocument_undo(self.h)
 
 proc redo*(self: gen_qtextdocument_types.QTextDocument): void =
-  fcQTextDocument_redo2(self.h)
+  fcQTextDocument_redo(self.h)
 
 proc appendUndoItem*(self: gen_qtextdocument_types.QTextDocument, param1: gen_qtextdocument_types.QAbstractUndoItem): void =
   fcQTextDocument_appendUndoItem(self.h, param1.h)
@@ -792,55 +792,55 @@ proc setModified*(self: gen_qtextdocument_types.QTextDocument): void =
   fcQTextDocument_setModified(self.h)
 
 proc tr*(_: type gen_qtextdocument_types.QTextDocument, s: cstring, c: cstring): string =
-  let v_ms = fcQTextDocument_tr2(s, c)
+  let v_ms = fcQTextDocument_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextdocument_types.QTextDocument, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextDocument_tr3(s, c, n)
+  let v_ms = fcQTextDocument_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc clone*(self: gen_qtextdocument_types.QTextDocument, parent: gen_qobject_types.QObject): gen_qtextdocument_types.QTextDocument =
-  gen_qtextdocument_types.QTextDocument(h: fcQTextDocument_cloneWithParent(self.h, parent.h), owned: false)
+  gen_qtextdocument_types.QTextDocument(h: fcQTextDocument_cloneParent(self.h, parent.h), owned: false)
 
 proc toMarkdown*(self: gen_qtextdocument_types.QTextDocument, features: cint): string =
-  let v_ms = fcQTextDocument_toMarkdownWithFeatures(self.h, cint(features))
+  let v_ms = fcQTextDocument_toMarkdownFeatures(self.h, cint(features))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setMarkdown*(self: gen_qtextdocument_types.QTextDocument, markdown: openArray[char], features: cint): void =
-  fcQTextDocument_setMarkdown2(self.h, struct_seaqt_string(data: if len(markdown) > 0: addr markdown[0] else: nil, len: csize_t(len(markdown))), cint(features))
+  fcQTextDocument_setMarkdownMarkdownFeatures(self.h, struct_seaqt_string(data: if len(markdown) > 0: addr markdown[0] else: nil, len: csize_t(len(markdown))), cint(features))
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, subString: openArray[char], fromVal: cint): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find4(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), fromVal), owned: true)
+  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findSubStringFrom(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), fromVal), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, subString: openArray[char], fromVal: cint, options: cint): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find5(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), fromVal, cint(options)), owned: true)
+  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findSubStringFromOptions(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), fromVal, cint(options)), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, subString: openArray[char], cursor: gen_qtextcursor_types.QTextCursor, options: cint): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find6(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cursor.h, cint(options)), owned: true)
+  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findSubStringCursorOptions(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cursor.h, cint(options)), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, expr: gen_qregularexpression_types.QRegularExpression, fromVal: cint): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find7(self.h, expr.h, fromVal), owned: true)
+  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findExprFrom(self.h, expr.h, fromVal), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, expr: gen_qregularexpression_types.QRegularExpression, fromVal: cint, options: cint): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find8(self.h, expr.h, fromVal, cint(options)), owned: true)
+  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findExprFromOptions(self.h, expr.h, fromVal, cint(options)), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, expr: gen_qregularexpression_types.QRegularExpression, cursor: gen_qtextcursor_types.QTextCursor, options: cint): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find9(self.h, expr.h, cursor.h, cint(options)), owned: true)
+  gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_findExprCursorOptions(self.h, expr.h, cursor.h, cint(options)), owned: true)
 
 proc drawContents*(self: gen_qtextdocument_types.QTextDocument, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void =
-  fcQTextDocument_drawContents2(self.h, painter.h, rect.h)
+  fcQTextDocument_drawContentsPainterRect(self.h, painter.h, rect.h)
 
 proc clearUndoRedoStacks*(self: gen_qtextdocument_types.QTextDocument, historyToClear: cint): void =
-  fcQTextDocument_clearUndoRedoStacksWithHistoryToClear(self.h, cint(historyToClear))
+  fcQTextDocument_clearUndoRedoStacksHistoryToClear(self.h, cint(historyToClear))
 
 proc setModified*(self: gen_qtextdocument_types.QTextDocument, m: bool): void =
-  fcQTextDocument_setModifiedWithBool(self.h, m)
+  fcQTextDocument_setModifiedM(self.h, m)
 
 type QTextDocumentmetaObjectProc* = proc(self: QTextDocument): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QTextDocumentmetacastProc* = proc(self: QTextDocument, param1: cstring): pointer {.raises: [], gcsafe.}

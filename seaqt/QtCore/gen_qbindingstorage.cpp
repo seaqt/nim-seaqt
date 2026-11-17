@@ -59,11 +59,11 @@ void QBindingStorage_registerDependency(const QBindingStorage* self, QUntypedPro
 	self->registerDependency(data);
 }
 
-void* QBindingStorage_bindingData(const QBindingStorage* self, QUntypedPropertyData* data) {
+void* QBindingStorage_bindingData_data(const QBindingStorage* self, QUntypedPropertyData* data) {
 	return self->bindingData(data);
 }
 
-void* QBindingStorage_bindingData2(QBindingStorage* self, QUntypedPropertyData* data, bool create) {
+void* QBindingStorage_bindingData_data_create(QBindingStorage* self, QUntypedPropertyData* data, bool create) {
 	return self->bindingData(data, create);
 }
 

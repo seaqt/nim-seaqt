@@ -85,7 +85,7 @@ type cQQmlIncubatorVTable {.pure.} = object
 proc fcQQmlIncubator_virtualbase_statusChanged(self: pointer, param1: cint): void {.importc: "QQmlIncubator_virtualbase_statusChanged".}
 proc fcQQmlIncubator_virtualbase_setInitialState(self: pointer, initialState: pointer): void {.importc: "QQmlIncubator_virtualbase_setInitialState".}
 proc fcQQmlIncubator_new(vtbl: pointer, vdata: csize_t): ptr cQQmlIncubator {.importc: "QQmlIncubator_new".}
-proc fcQQmlIncubator_new2(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQQmlIncubator {.importc: "QQmlIncubator_new2".}
+proc fcQQmlIncubator_new2(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQQmlIncubator {.importc: "QQmlIncubator_new_QQmlIncubator_IncubationMode".}
 proc fcQQmlIncubationController_engine(self: pointer): pointer {.importc: "QQmlIncubationController_engine".}
 proc fcQQmlIncubationController_incubatingObjectCount(self: pointer): cint {.importc: "QQmlIncubationController_incubatingObjectCount".}
 proc fcQQmlIncubationController_incubateFor(self: pointer, msecs: cint): void {.importc: "QQmlIncubationController_incubateFor".}

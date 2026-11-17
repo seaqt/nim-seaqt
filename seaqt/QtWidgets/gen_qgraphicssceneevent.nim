@@ -120,7 +120,7 @@ type cQGraphicsSceneMouseEventVTable {.pure.} = object
 proc fcQGraphicsSceneMouseEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneMouseEvent_virtualbase_setAccepted".}
 proc fcQGraphicsSceneMouseEvent_virtualbase_clone(self: pointer): pointer {.importc: "QGraphicsSceneMouseEvent_virtualbase_clone".}
 proc fcQGraphicsSceneMouseEvent_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new".}
-proc fcQGraphicsSceneMouseEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new2".}
+proc fcQGraphicsSceneMouseEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new_type".}
 proc fcQGraphicsSceneWheelEvent_pos(self: pointer): pointer {.importc: "QGraphicsSceneWheelEvent_pos".}
 proc fcQGraphicsSceneWheelEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneWheelEvent_setPos".}
 proc fcQGraphicsSceneWheelEvent_scenePos(self: pointer): pointer {.importc: "QGraphicsSceneWheelEvent_scenePos".}
@@ -151,7 +151,7 @@ type cQGraphicsSceneWheelEventVTable {.pure.} = object
 proc fcQGraphicsSceneWheelEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneWheelEvent_virtualbase_setAccepted".}
 proc fcQGraphicsSceneWheelEvent_virtualbase_clone(self: pointer): pointer {.importc: "QGraphicsSceneWheelEvent_virtualbase_clone".}
 proc fcQGraphicsSceneWheelEvent_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new".}
-proc fcQGraphicsSceneWheelEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new2".}
+proc fcQGraphicsSceneWheelEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new_type".}
 proc fcQGraphicsSceneContextMenuEvent_pos(self: pointer): pointer {.importc: "QGraphicsSceneContextMenuEvent_pos".}
 proc fcQGraphicsSceneContextMenuEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneContextMenuEvent_setPos".}
 proc fcQGraphicsSceneContextMenuEvent_scenePos(self: pointer): pointer {.importc: "QGraphicsSceneContextMenuEvent_scenePos".}
@@ -172,7 +172,7 @@ type cQGraphicsSceneContextMenuEventVTable {.pure.} = object
 proc fcQGraphicsSceneContextMenuEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneContextMenuEvent_virtualbase_setAccepted".}
 proc fcQGraphicsSceneContextMenuEvent_virtualbase_clone(self: pointer): pointer {.importc: "QGraphicsSceneContextMenuEvent_virtualbase_clone".}
 proc fcQGraphicsSceneContextMenuEvent_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new".}
-proc fcQGraphicsSceneContextMenuEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new2".}
+proc fcQGraphicsSceneContextMenuEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new_type".}
 proc fcQGraphicsSceneHoverEvent_pos(self: pointer): pointer {.importc: "QGraphicsSceneHoverEvent_pos".}
 proc fcQGraphicsSceneHoverEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHoverEvent_setPos".}
 proc fcQGraphicsSceneHoverEvent_scenePos(self: pointer): pointer {.importc: "QGraphicsSceneHoverEvent_scenePos".}
@@ -197,7 +197,7 @@ type cQGraphicsSceneHoverEventVTable {.pure.} = object
 proc fcQGraphicsSceneHoverEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneHoverEvent_virtualbase_setAccepted".}
 proc fcQGraphicsSceneHoverEvent_virtualbase_clone(self: pointer): pointer {.importc: "QGraphicsSceneHoverEvent_virtualbase_clone".}
 proc fcQGraphicsSceneHoverEvent_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new".}
-proc fcQGraphicsSceneHoverEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new2".}
+proc fcQGraphicsSceneHoverEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new_type".}
 proc fcQGraphicsSceneHelpEvent_scenePos(self: pointer): pointer {.importc: "QGraphicsSceneHelpEvent_scenePos".}
 proc fcQGraphicsSceneHelpEvent_setScenePos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHelpEvent_setScenePos".}
 proc fcQGraphicsSceneHelpEvent_screenPos(self: pointer): pointer {.importc: "QGraphicsSceneHelpEvent_screenPos".}
@@ -212,7 +212,7 @@ type cQGraphicsSceneHelpEventVTable {.pure.} = object
 proc fcQGraphicsSceneHelpEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneHelpEvent_virtualbase_setAccepted".}
 proc fcQGraphicsSceneHelpEvent_virtualbase_clone(self: pointer): pointer {.importc: "QGraphicsSceneHelpEvent_virtualbase_clone".}
 proc fcQGraphicsSceneHelpEvent_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new".}
-proc fcQGraphicsSceneHelpEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new2".}
+proc fcQGraphicsSceneHelpEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new_type".}
 proc fcQGraphicsSceneDragDropEvent_pos(self: pointer): pointer {.importc: "QGraphicsSceneDragDropEvent_pos".}
 proc fcQGraphicsSceneDragDropEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneDragDropEvent_setPos".}
 proc fcQGraphicsSceneDragDropEvent_scenePos(self: pointer): pointer {.importc: "QGraphicsSceneDragDropEvent_scenePos".}
@@ -244,7 +244,7 @@ type cQGraphicsSceneDragDropEventVTable {.pure.} = object
 proc fcQGraphicsSceneDragDropEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneDragDropEvent_virtualbase_setAccepted".}
 proc fcQGraphicsSceneDragDropEvent_virtualbase_clone(self: pointer): pointer {.importc: "QGraphicsSceneDragDropEvent_virtualbase_clone".}
 proc fcQGraphicsSceneDragDropEvent_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new".}
-proc fcQGraphicsSceneDragDropEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new2".}
+proc fcQGraphicsSceneDragDropEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new_type".}
 proc fcQGraphicsSceneResizeEvent_oldSize(self: pointer): pointer {.importc: "QGraphicsSceneResizeEvent_oldSize".}
 proc fcQGraphicsSceneResizeEvent_setOldSize(self: pointer, size: pointer): void {.importc: "QGraphicsSceneResizeEvent_setOldSize".}
 proc fcQGraphicsSceneResizeEvent_newSize(self: pointer): pointer {.importc: "QGraphicsSceneResizeEvent_newSize".}

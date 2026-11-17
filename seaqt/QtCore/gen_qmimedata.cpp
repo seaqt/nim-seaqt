@@ -253,7 +253,7 @@ int QMimeData_metacall(QMimeData* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMimeData_tr(const char* s) {
+struct seaqt_string QMimeData_tr_s(const char* s) {
 	QString _ret = QMimeData::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -405,7 +405,7 @@ void QMimeData_clear(QMimeData* self) {
 	self->clear();
 }
 
-struct seaqt_string QMimeData_tr2(const char* s, const char* c) {
+struct seaqt_string QMimeData_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMimeData::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -416,7 +416,7 @@ struct seaqt_string QMimeData_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMimeData_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMimeData_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMimeData::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -157,19 +157,19 @@ void* QTabBar_vdata(VirtualQTabBar* self);
 VirtualQTabBar* vdata_QTabBar(void* vdata);
 
 VirtualQTabBar* QTabBar_new(const QTabBar_VTable* vtbl, size_t vdata);
-VirtualQTabBar* QTabBar_new2(const QTabBar_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQTabBar* QTabBar_new_parent(const QTabBar_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QTabBar_virtbase(QTabBar* src, QWidget** outptr_QWidget);
 QMetaObject* QTabBar_metaObject(const QTabBar* self);
 void* QTabBar_metacast(QTabBar* self, const char* param1);
 int QTabBar_metacall(QTabBar* self, int param1, int param2, void** param3);
-struct seaqt_string QTabBar_tr(const char* s);
+struct seaqt_string QTabBar_tr_s(const char* s);
 int QTabBar_shape(const QTabBar* self);
 void QTabBar_setShape(QTabBar* self, int shape);
-int QTabBar_addTab(QTabBar* self, struct seaqt_string text);
-int QTabBar_addTab2(QTabBar* self, QIcon* icon, struct seaqt_string text);
-int QTabBar_insertTab(QTabBar* self, int index, struct seaqt_string text);
-int QTabBar_insertTab2(QTabBar* self, int index, QIcon* icon, struct seaqt_string text);
+int QTabBar_addTab_text(QTabBar* self, struct seaqt_string text);
+int QTabBar_addTab_icon_text(QTabBar* self, QIcon* icon, struct seaqt_string text);
+int QTabBar_insertTab_index_text(QTabBar* self, int index, struct seaqt_string text);
+int QTabBar_insertTab_index_icon_text(QTabBar* self, int index, QIcon* icon, struct seaqt_string text);
 void QTabBar_removeTab(QTabBar* self, int index);
 void QTabBar_moveTab(QTabBar* self, int from, int to);
 bool QTabBar_isTabEnabled(const QTabBar* self, int index);
@@ -250,8 +250,8 @@ void QTabBar_keyPressEvent(QTabBar* self, QKeyEvent* param1);
 void QTabBar_changeEvent(QTabBar* self, QEvent* param1);
 void QTabBar_timerEvent(QTabBar* self, QTimerEvent* event);
 void QTabBar_initStyleOption(const QTabBar* self, QStyleOptionTab* option, int tabIndex);
-struct seaqt_string QTabBar_tr2(const char* s, const char* c);
-struct seaqt_string QTabBar_tr3(const char* s, const char* c, int n);
+struct seaqt_string QTabBar_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTabBar_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QTabBar_virtualbase_metaObject(const VirtualQTabBar* self);
 void* QTabBar_virtualbase_metacast(VirtualQTabBar* self, const char* param1);

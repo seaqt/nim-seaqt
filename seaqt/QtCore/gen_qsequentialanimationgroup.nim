@@ -61,15 +61,15 @@ type cQSequentialAnimationGroup*{.exportc: "QSequentialAnimationGroup", incomple
 proc fcQSequentialAnimationGroup_metaObject(self: pointer): pointer {.importc: "QSequentialAnimationGroup_metaObject".}
 proc fcQSequentialAnimationGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QSequentialAnimationGroup_metacast".}
 proc fcQSequentialAnimationGroup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSequentialAnimationGroup_metacall".}
-proc fcQSequentialAnimationGroup_tr(s: cstring): struct_seaqt_string {.importc: "QSequentialAnimationGroup_tr".}
+proc fcQSequentialAnimationGroup_trS(s: cstring): struct_seaqt_string {.importc: "QSequentialAnimationGroup_tr_s".}
 proc fcQSequentialAnimationGroup_addPause(self: pointer, msecs: cint): pointer {.importc: "QSequentialAnimationGroup_addPause".}
 proc fcQSequentialAnimationGroup_insertPause(self: pointer, index: cint, msecs: cint): pointer {.importc: "QSequentialAnimationGroup_insertPause".}
 proc fcQSequentialAnimationGroup_currentAnimation(self: pointer): pointer {.importc: "QSequentialAnimationGroup_currentAnimation".}
 proc fcQSequentialAnimationGroup_duration(self: pointer): cint {.importc: "QSequentialAnimationGroup_duration".}
 proc fcQSequentialAnimationGroup_currentAnimationChanged(self: pointer, current: pointer): void {.importc: "QSequentialAnimationGroup_currentAnimationChanged".}
 proc fcQSequentialAnimationGroup_connect_currentAnimationChanged(self: pointer, slot: int, callback: proc (slot: int, current: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSequentialAnimationGroup_connect_currentAnimationChanged".}
-proc fcQSequentialAnimationGroup_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSequentialAnimationGroup_tr2".}
-proc fcQSequentialAnimationGroup_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSequentialAnimationGroup_tr3".}
+proc fcQSequentialAnimationGroup_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSequentialAnimationGroup_tr_s_c".}
+proc fcQSequentialAnimationGroup_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSequentialAnimationGroup_tr_s_c_n".}
 proc fcQSequentialAnimationGroup_vdata(self: pointer): ptr pointer {.importc: "QSequentialAnimationGroup_vdata".}
 proc fvdata_cQSequentialAnimationGroup(self: pointer): pointer {.importc: "vdata_QSequentialAnimationGroup".}
 
@@ -108,7 +108,7 @@ proc fcQSequentialAnimationGroup_protectedbase_senderSignalIndex(self: pointer):
 proc fcQSequentialAnimationGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSequentialAnimationGroup_protectedbase_receivers".}
 proc fcQSequentialAnimationGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSequentialAnimationGroup_protectedbase_isSignalConnected".}
 proc fcQSequentialAnimationGroup_new(vtbl: pointer, vdata: csize_t): ptr cQSequentialAnimationGroup {.importc: "QSequentialAnimationGroup_new".}
-proc fcQSequentialAnimationGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSequentialAnimationGroup {.importc: "QSequentialAnimationGroup_new2".}
+proc fcQSequentialAnimationGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSequentialAnimationGroup {.importc: "QSequentialAnimationGroup_new_parent".}
 proc fcQSequentialAnimationGroup_staticMetaObject(): pointer {.importc: "QSequentialAnimationGroup_staticMetaObject".}
 
 proc metaObject*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup): gen_qobjectdefs_types.QMetaObject =
@@ -121,7 +121,7 @@ proc metacall*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGro
   fcQSequentialAnimationGroup_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, s: cstring): string =
-  let v_ms = fcQSequentialAnimationGroup_tr(s)
+  let v_ms = fcQSequentialAnimationGroup_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -159,13 +159,13 @@ proc onCurrentAnimationChanged*(self: gen_qsequentialanimationgroup_types.QSeque
   fcQSequentialAnimationGroup_connect_currentAnimationChanged(self.h, cast[int](addr tmp[]), fcQSequentialAnimationGroup_slot_callback_currentAnimationChanged, fcQSequentialAnimationGroup_slot_callback_currentAnimationChanged_release)
 
 proc tr*(_: type gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQSequentialAnimationGroup_tr2(s, c)
+  let v_ms = fcQSequentialAnimationGroup_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSequentialAnimationGroup_tr3(s, c, n)
+  let v_ms = fcQSequentialAnimationGroup_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

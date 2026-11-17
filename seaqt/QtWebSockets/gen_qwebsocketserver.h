@@ -69,20 +69,20 @@ typedef struct QWebSocketServer_VTable{
 void* QWebSocketServer_vdata(VirtualQWebSocketServer* self);
 VirtualQWebSocketServer* vdata_QWebSocketServer(void* vdata);
 
-VirtualQWebSocketServer* QWebSocketServer_new(const QWebSocketServer_VTable* vtbl, size_t vdata, struct seaqt_string serverName, int secureMode);
-VirtualQWebSocketServer* QWebSocketServer_new2(const QWebSocketServer_VTable* vtbl, size_t vdata, struct seaqt_string serverName, int secureMode, QObject* parent);
+VirtualQWebSocketServer* QWebSocketServer_new_serverName_secureMode(const QWebSocketServer_VTable* vtbl, size_t vdata, struct seaqt_string serverName, int secureMode);
+VirtualQWebSocketServer* QWebSocketServer_new_serverName_secureMode_parent(const QWebSocketServer_VTable* vtbl, size_t vdata, struct seaqt_string serverName, int secureMode, QObject* parent);
 
 void QWebSocketServer_virtbase(QWebSocketServer* src, QObject** outptr_QObject);
 QMetaObject* QWebSocketServer_metaObject(const QWebSocketServer* self);
 void* QWebSocketServer_metacast(QWebSocketServer* self, const char* param1);
 int QWebSocketServer_metacall(QWebSocketServer* self, int param1, int param2, void** param3);
-struct seaqt_string QWebSocketServer_tr(const char* s);
+struct seaqt_string QWebSocketServer_tr_s(const char* s);
 bool QWebSocketServer_listen(QWebSocketServer* self);
 void QWebSocketServer_close(QWebSocketServer* self);
 bool QWebSocketServer_isListening(const QWebSocketServer* self);
 void QWebSocketServer_setMaxPendingConnections(QWebSocketServer* self, int numConnections);
 int QWebSocketServer_maxPendingConnections(const QWebSocketServer* self);
-void QWebSocketServer_setHandshakeTimeoutWithMsec(QWebSocketServer* self, int msec);
+void QWebSocketServer_setHandshakeTimeout_int(QWebSocketServer* self, int msec);
 int QWebSocketServer_handshakeTimeoutMS(const QWebSocketServer* self);
 unsigned short QWebSocketServer_serverPort(const QWebSocketServer* self);
 QHostAddress* QWebSocketServer_serverAddress(const QWebSocketServer* self);
@@ -130,10 +130,10 @@ void QWebSocketServer_handshakeInterruptedOnError(QWebSocketServer* self, QSslEr
 void QWebSocketServer_connect_handshakeInterruptedOnError(QWebSocketServer* self, intptr_t slot, void (*callback)(intptr_t, QSslError*), void (*release)(intptr_t));
 void QWebSocketServer_closed(QWebSocketServer* self);
 void QWebSocketServer_connect_closed(QWebSocketServer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QWebSocketServer_tr2(const char* s, const char* c);
-struct seaqt_string QWebSocketServer_tr3(const char* s, const char* c, int n);
-bool QWebSocketServer_listenWithAddress(QWebSocketServer* self, QHostAddress* address);
-bool QWebSocketServer_listen2(QWebSocketServer* self, QHostAddress* address, unsigned short port);
+struct seaqt_string QWebSocketServer_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebSocketServer_tr_s_c_n(const char* s, const char* c, int n);
+bool QWebSocketServer_listen_address(QWebSocketServer* self, QHostAddress* address);
+bool QWebSocketServer_listen_address_port(QWebSocketServer* self, QHostAddress* address, unsigned short port);
 
 QMetaObject* QWebSocketServer_virtualbase_metaObject(const VirtualQWebSocketServer* self);
 void* QWebSocketServer_virtualbase_metacast(VirtualQWebSocketServer* self, const char* param1);

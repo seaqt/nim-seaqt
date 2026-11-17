@@ -48,7 +48,7 @@ struct seaqt_array /* of struct seaqt_string */  QStandardPaths_standardLocation
 	return _out;
 }
 
-struct seaqt_string QStandardPaths_locate(int type, struct seaqt_string fileName) {
+struct seaqt_string QStandardPaths_locate_type_fileName(int type, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QString _ret = QStandardPaths::locate(static_cast<QStandardPaths::StandardLocation>(type), fileName_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -60,7 +60,7 @@ struct seaqt_string QStandardPaths_locate(int type, struct seaqt_string fileName
 	return _ms;
 }
 
-struct seaqt_array /* of struct seaqt_string */  QStandardPaths_locateAll(int type, struct seaqt_string fileName) {
+struct seaqt_array /* of struct seaqt_string */  QStandardPaths_locateAll_type_fileName(int type, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QStringList _ret = QStandardPaths::locateAll(static_cast<QStandardPaths::StandardLocation>(type), fileName_QString);
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -92,7 +92,7 @@ struct seaqt_string QStandardPaths_displayName(int type) {
 	return _ms;
 }
 
-struct seaqt_string QStandardPaths_findExecutable(struct seaqt_string executableName) {
+struct seaqt_string QStandardPaths_findExecutable_executableName(struct seaqt_string executableName) {
 	QString executableName_QString = QString::fromUtf8(executableName.data, executableName.len);
 	QString _ret = QStandardPaths::findExecutable(executableName_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -112,7 +112,7 @@ bool QStandardPaths_isTestModeEnabled() {
 	return QStandardPaths::isTestModeEnabled();
 }
 
-struct seaqt_string QStandardPaths_locate2(int type, struct seaqt_string fileName, int options) {
+struct seaqt_string QStandardPaths_locate_type_fileName_options(int type, struct seaqt_string fileName, int options) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QString _ret = QStandardPaths::locate(static_cast<QStandardPaths::StandardLocation>(type), fileName_QString, static_cast<QStandardPaths::LocateOptions>(options));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -124,7 +124,7 @@ struct seaqt_string QStandardPaths_locate2(int type, struct seaqt_string fileNam
 	return _ms;
 }
 
-struct seaqt_array /* of struct seaqt_string */  QStandardPaths_locateAll2(int type, struct seaqt_string fileName, int options) {
+struct seaqt_array /* of struct seaqt_string */  QStandardPaths_locateAll_type_fileName_options(int type, struct seaqt_string fileName, int options) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QStringList _ret = QStandardPaths::locateAll(static_cast<QStandardPaths::StandardLocation>(type), fileName_QString, static_cast<QStandardPaths::LocateOptions>(options));
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -145,7 +145,7 @@ struct seaqt_array /* of struct seaqt_string */  QStandardPaths_locateAll2(int t
 	return _out;
 }
 
-struct seaqt_string QStandardPaths_findExecutable2(struct seaqt_string executableName, struct seaqt_array /* of struct seaqt_string */  paths) {
+struct seaqt_string QStandardPaths_findExecutable_executableName_paths(struct seaqt_string executableName, struct seaqt_array /* of struct seaqt_string */  paths) {
 	QString executableName_QString = QString::fromUtf8(executableName.data, executableName.len);
 	QStringList paths_QList;
 	paths_QList.reserve(paths.len);

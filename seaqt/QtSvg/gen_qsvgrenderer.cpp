@@ -185,41 +185,41 @@ VirtualQSvgRenderer* QSvgRenderer_new(const QSvgRenderer_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQSvgRenderer(vtbl) : nullptr;
 }
 
-VirtualQSvgRenderer* QSvgRenderer_new2(const QSvgRenderer_VTable* vtbl, size_t vdata, struct seaqt_string filename) {
+VirtualQSvgRenderer* QSvgRenderer_new_QString(const QSvgRenderer_VTable* vtbl, size_t vdata, struct seaqt_string filename) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSvgRenderer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSvgRenderer(vtbl, filename_QString) : nullptr;
 }
 
-VirtualQSvgRenderer* QSvgRenderer_new3(const QSvgRenderer_VTable* vtbl, size_t vdata, struct seaqt_string contents) {
+VirtualQSvgRenderer* QSvgRenderer_new_QByteArray(const QSvgRenderer_VTable* vtbl, size_t vdata, struct seaqt_string contents) {
 	QByteArray contents_QByteArray(contents.data, contents.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSvgRenderer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSvgRenderer(vtbl, contents_QByteArray) : nullptr;
 }
 
-VirtualQSvgRenderer* QSvgRenderer_new4(const QSvgRenderer_VTable* vtbl, size_t vdata, QXmlStreamReader* contents) {
+VirtualQSvgRenderer* QSvgRenderer_new_QXmlStreamReader(const QSvgRenderer_VTable* vtbl, size_t vdata, QXmlStreamReader* contents) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSvgRenderer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSvgRenderer(vtbl, contents) : nullptr;
 }
 
-VirtualQSvgRenderer* QSvgRenderer_new5(const QSvgRenderer_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSvgRenderer* QSvgRenderer_new_QObject(const QSvgRenderer_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSvgRenderer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSvgRenderer(vtbl, parent) : nullptr;
 }
 
-VirtualQSvgRenderer* QSvgRenderer_new6(const QSvgRenderer_VTable* vtbl, size_t vdata, struct seaqt_string filename, QObject* parent) {
+VirtualQSvgRenderer* QSvgRenderer_new_QString_QObject(const QSvgRenderer_VTable* vtbl, size_t vdata, struct seaqt_string filename, QObject* parent) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSvgRenderer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSvgRenderer(vtbl, filename_QString, parent) : nullptr;
 }
 
-VirtualQSvgRenderer* QSvgRenderer_new7(const QSvgRenderer_VTable* vtbl, size_t vdata, struct seaqt_string contents, QObject* parent) {
+VirtualQSvgRenderer* QSvgRenderer_new_QByteArray_QObject(const QSvgRenderer_VTable* vtbl, size_t vdata, struct seaqt_string contents, QObject* parent) {
 	QByteArray contents_QByteArray(contents.data, contents.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSvgRenderer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSvgRenderer(vtbl, contents_QByteArray, parent) : nullptr;
 }
 
-VirtualQSvgRenderer* QSvgRenderer_new8(const QSvgRenderer_VTable* vtbl, size_t vdata, QXmlStreamReader* contents, QObject* parent) {
+VirtualQSvgRenderer* QSvgRenderer_new_QXmlStreamReader_QObject(const QSvgRenderer_VTable* vtbl, size_t vdata, QXmlStreamReader* contents, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSvgRenderer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSvgRenderer(vtbl, contents, parent) : nullptr;
 }
@@ -240,7 +240,7 @@ int QSvgRenderer_metacall(QSvgRenderer* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSvgRenderer_tr(const char* s) {
+struct seaqt_string QSvgRenderer_tr_s(const char* s) {
 	QString _ret = QSvgRenderer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -267,11 +267,11 @@ QRectF* QSvgRenderer_viewBoxF(const QSvgRenderer* self) {
 	return new QRectF(self->viewBoxF());
 }
 
-void QSvgRenderer_setViewBox(QSvgRenderer* self, QRect* viewbox) {
+void QSvgRenderer_setViewBox_QRect(QSvgRenderer* self, QRect* viewbox) {
 	self->setViewBox(*viewbox);
 }
 
-void QSvgRenderer_setViewBoxWithViewbox(QSvgRenderer* self, QRectF* viewbox) {
+void QSvgRenderer_setViewBox_QRectF(QSvgRenderer* self, QRectF* viewbox) {
 	self->setViewBox(*viewbox);
 }
 
@@ -323,29 +323,29 @@ QTransform* QSvgRenderer_transformForElement(const QSvgRenderer* self, struct se
 	return new QTransform(self->transformForElement(id_QString));
 }
 
-bool QSvgRenderer_load(QSvgRenderer* self, struct seaqt_string filename) {
+bool QSvgRenderer_load_QString(QSvgRenderer* self, struct seaqt_string filename) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	return self->load(filename_QString);
 }
 
-bool QSvgRenderer_loadWithContents(QSvgRenderer* self, struct seaqt_string contents) {
+bool QSvgRenderer_load_QByteArray(QSvgRenderer* self, struct seaqt_string contents) {
 	QByteArray contents_QByteArray(contents.data, contents.len);
 	return self->load(contents_QByteArray);
 }
 
-bool QSvgRenderer_load2(QSvgRenderer* self, QXmlStreamReader* contents) {
+bool QSvgRenderer_load_QXmlStreamReader(QSvgRenderer* self, QXmlStreamReader* contents) {
 	return self->load(contents);
 }
 
-void QSvgRenderer_render(QSvgRenderer* self, QPainter* p) {
+void QSvgRenderer_render_p(QSvgRenderer* self, QPainter* p) {
 	self->render(p);
 }
 
-void QSvgRenderer_render2(QSvgRenderer* self, QPainter* p, QRectF* bounds) {
+void QSvgRenderer_render_p_bounds(QSvgRenderer* self, QPainter* p, QRectF* bounds) {
 	self->render(p, *bounds);
 }
 
-void QSvgRenderer_render3(QSvgRenderer* self, QPainter* p, struct seaqt_string elementId) {
+void QSvgRenderer_render_p_elementId(QSvgRenderer* self, QPainter* p, struct seaqt_string elementId) {
 	QString elementId_QString = QString::fromUtf8(elementId.data, elementId.len);
 	self->render(p, elementId_QString);
 }
@@ -365,7 +365,7 @@ void QSvgRenderer_connect_repaintNeeded(QSvgRenderer* self, intptr_t slot, void 
 	QSvgRenderer::connect(self, static_cast<void (QSvgRenderer::*)()>(&QSvgRenderer::repaintNeeded), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QSvgRenderer_tr2(const char* s, const char* c) {
+struct seaqt_string QSvgRenderer_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSvgRenderer::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -376,7 +376,7 @@ struct seaqt_string QSvgRenderer_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSvgRenderer_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSvgRenderer_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSvgRenderer::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -387,7 +387,7 @@ struct seaqt_string QSvgRenderer_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QSvgRenderer_render4(QSvgRenderer* self, QPainter* p, struct seaqt_string elementId, QRectF* bounds) {
+void QSvgRenderer_render_p_elementId_bounds(QSvgRenderer* self, QPainter* p, struct seaqt_string elementId, QRectF* bounds) {
 	QString elementId_QString = QString::fromUtf8(elementId.data, elementId.len);
 	self->render(p, elementId_QString, *bounds);
 }

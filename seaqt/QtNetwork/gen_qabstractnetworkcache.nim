@@ -57,7 +57,7 @@ export
 type cQNetworkCacheMetaData*{.exportc: "QNetworkCacheMetaData", incompleteStruct.} = object
 type cQAbstractNetworkCache*{.exportc: "QAbstractNetworkCache", incompleteStruct.} = object
 
-proc fcQNetworkCacheMetaData_operatorAssign(self: pointer, other: pointer): void {.importc: "QNetworkCacheMetaData_operatorAssign".}
+proc fcQNetworkCacheMetaData_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QNetworkCacheMetaData_operatorAssign".}
 proc fcQNetworkCacheMetaData_swap(self: pointer, other: pointer): void {.importc: "QNetworkCacheMetaData_swap".}
 proc fcQNetworkCacheMetaData_operatorEqual(self: pointer, other: pointer): bool {.importc: "QNetworkCacheMetaData_operatorEqual".}
 proc fcQNetworkCacheMetaData_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QNetworkCacheMetaData_operatorNotEqual".}
@@ -75,11 +75,11 @@ proc fcQNetworkCacheMetaData_setSaveToDisk(self: pointer, allow: bool): void {.i
 proc fcQNetworkCacheMetaData_attributes(self: pointer): struct_seaqt_map {.importc: "QNetworkCacheMetaData_attributes".}
 proc fcQNetworkCacheMetaData_setAttributes(self: pointer, attributes: struct_seaqt_map): void {.importc: "QNetworkCacheMetaData_setAttributes".}
 proc fcQNetworkCacheMetaData_new(): ptr cQNetworkCacheMetaData {.importc: "QNetworkCacheMetaData_new".}
-proc fcQNetworkCacheMetaData_new2(other: pointer): ptr cQNetworkCacheMetaData {.importc: "QNetworkCacheMetaData_new2".}
+proc fcQNetworkCacheMetaData_new2(fromVal: pointer): ptr cQNetworkCacheMetaData {.importc: "QNetworkCacheMetaData_new_from".}
 proc fcQAbstractNetworkCache_metaObject(self: pointer): pointer {.importc: "QAbstractNetworkCache_metaObject".}
 proc fcQAbstractNetworkCache_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractNetworkCache_metacast".}
 proc fcQAbstractNetworkCache_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractNetworkCache_metacall".}
-proc fcQAbstractNetworkCache_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractNetworkCache_tr".}
+proc fcQAbstractNetworkCache_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractNetworkCache_tr_s".}
 proc fcQAbstractNetworkCache_metaData(self: pointer, url: pointer): pointer {.importc: "QAbstractNetworkCache_metaData".}
 proc fcQAbstractNetworkCache_updateMetaData(self: pointer, metaData: pointer): void {.importc: "QAbstractNetworkCache_updateMetaData".}
 proc fcQAbstractNetworkCache_data(self: pointer, url: pointer): pointer {.importc: "QAbstractNetworkCache_data".}
@@ -88,16 +88,16 @@ proc fcQAbstractNetworkCache_cacheSize(self: pointer): clonglong {.importc: "QAb
 proc fcQAbstractNetworkCache_prepare(self: pointer, metaData: pointer): pointer {.importc: "QAbstractNetworkCache_prepare".}
 proc fcQAbstractNetworkCache_insert(self: pointer, device: pointer): void {.importc: "QAbstractNetworkCache_insert".}
 proc fcQAbstractNetworkCache_clear(self: pointer): void {.importc: "QAbstractNetworkCache_clear".}
-proc fcQAbstractNetworkCache_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractNetworkCache_tr2".}
-proc fcQAbstractNetworkCache_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractNetworkCache_tr3".}
+proc fcQAbstractNetworkCache_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractNetworkCache_tr_s_c".}
+proc fcQAbstractNetworkCache_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractNetworkCache_tr_s_c_n".}
 proc fcQAbstractNetworkCache_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractNetworkCache_protectedbase_sender".}
 proc fcQAbstractNetworkCache_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractNetworkCache_protectedbase_senderSignalIndex".}
 proc fcQAbstractNetworkCache_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractNetworkCache_protectedbase_receivers".}
 proc fcQAbstractNetworkCache_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractNetworkCache_protectedbase_isSignalConnected".}
 proc fcQAbstractNetworkCache_staticMetaObject(): pointer {.importc: "QAbstractNetworkCache_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, other: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): void =
-  fcQNetworkCacheMetaData_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, fromVal: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): void =
+  fcQNetworkCacheMetaData_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, other: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): void =
   fcQNetworkCacheMetaData_swap(self.h, other.h)
@@ -203,8 +203,8 @@ proc create*(T: type gen_qabstractnetworkcache_types.QNetworkCacheMetaData): gen
   let tmp = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkCacheMetaData_new(), owned: true)
   tmp
 proc create*(T: type gen_qabstractnetworkcache_types.QNetworkCacheMetaData,
-    other: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
-  let tmp = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkCacheMetaData_new2(other.h), owned: true)
+    fromVal: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
+  let tmp = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkCacheMetaData_new2(fromVal.h), owned: true)
   tmp
 proc metaObject*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractNetworkCache_metaObject(self.h), owned: false)
@@ -216,7 +216,7 @@ proc metacall*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache, para
   fcQAbstractNetworkCache_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: cstring): string =
-  let v_ms = fcQAbstractNetworkCache_tr(s)
+  let v_ms = fcQAbstractNetworkCache_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -246,13 +246,13 @@ proc clear*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache): void =
   fcQAbstractNetworkCache_clear(self.h)
 
 proc tr*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractNetworkCache_tr2(s, c)
+  let v_ms = fcQAbstractNetworkCache_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractNetworkCache_tr3(s, c, n)
+  let v_ms = fcQAbstractNetworkCache_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -51,9 +51,9 @@ proc fcQWebEngineRegisterProtocolHandlerRequest_origin(self: pointer): pointer {
 proc fcQWebEngineRegisterProtocolHandlerRequest_scheme(self: pointer): struct_seaqt_string {.importc: "QWebEngineRegisterProtocolHandlerRequest_scheme".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_operatorEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineRegisterProtocolHandlerRequest_operatorEqual".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_operatorNotEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineRegisterProtocolHandlerRequest_operatorNotEqual".}
-proc fcQWebEngineRegisterProtocolHandlerRequest_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebEngineRegisterProtocolHandlerRequest_operatorAssign".}
+proc fcQWebEngineRegisterProtocolHandlerRequest_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineRegisterProtocolHandlerRequest_operatorAssign".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_new(): ptr cQWebEngineRegisterProtocolHandlerRequest {.importc: "QWebEngineRegisterProtocolHandlerRequest_new".}
-proc fcQWebEngineRegisterProtocolHandlerRequest_new2(param1: pointer): ptr cQWebEngineRegisterProtocolHandlerRequest {.importc: "QWebEngineRegisterProtocolHandlerRequest_new2".}
+proc fcQWebEngineRegisterProtocolHandlerRequest_new2(fromVal: pointer): ptr cQWebEngineRegisterProtocolHandlerRequest {.importc: "QWebEngineRegisterProtocolHandlerRequest_new_from".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_staticMetaObject(): pointer {.importc: "QWebEngineRegisterProtocolHandlerRequest_staticMetaObject".}
 
 proc accept*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): void =
@@ -77,15 +77,15 @@ proc operatorEqual*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWe
 proc operatorNotEqual*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest, that: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): bool =
   fcQWebEngineRegisterProtocolHandlerRequest_operatorNotEqual(self.h, that.h)
 
-proc operatorAssign*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest, param1: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): void =
-  fcQWebEngineRegisterProtocolHandlerRequest_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest, fromVal: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): void =
+  fcQWebEngineRegisterProtocolHandlerRequest_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest =
   let tmp = gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest(h: fcQWebEngineRegisterProtocolHandlerRequest_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest,
-    param1: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest =
-  let tmp = gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest(h: fcQWebEngineRegisterProtocolHandlerRequest_new2(param1.h), owned: true)
+    fromVal: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest =
+  let tmp = gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest(h: fcQWebEngineRegisterProtocolHandlerRequest_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineRegisterProtocolHandlerRequest_staticMetaObject())

@@ -50,12 +50,12 @@ proc fcQLockFile_fileName(self: pointer): struct_seaqt_string {.importc: "QLockF
 proc fcQLockFile_lock(self: pointer): bool {.importc: "QLockFile_lock".}
 proc fcQLockFile_tryLock(self: pointer): bool {.importc: "QLockFile_tryLock".}
 proc fcQLockFile_unlock(self: pointer): void {.importc: "QLockFile_unlock".}
-proc fcQLockFile_setStaleLockTime(self: pointer, staleLockTime: cint): void {.importc: "QLockFile_setStaleLockTime".}
+proc fcQLockFile_setStaleLockTimeStaleLockTime(self: pointer, staleLockTime: cint): void {.importc: "QLockFile_setStaleLockTime_staleLockTime".}
 proc fcQLockFile_staleLockTime(self: pointer): cint {.importc: "QLockFile_staleLockTime".}
 proc fcQLockFile_isLocked(self: pointer): bool {.importc: "QLockFile_isLocked".}
 proc fcQLockFile_removeStaleLockFile(self: pointer): bool {.importc: "QLockFile_removeStaleLockFile".}
 proc fcQLockFile_error(self: pointer): cint {.importc: "QLockFile_error".}
-proc fcQLockFile_tryLock2(self: pointer, timeout: cint): bool {.importc: "QLockFile_tryLock2".}
+proc fcQLockFile_tryLockInt(self: pointer, timeout: cint): bool {.importc: "QLockFile_tryLock_int".}
 proc fcQLockFile_new(fileName: struct_seaqt_string): ptr cQLockFile {.importc: "QLockFile_new".}
 
 proc fileName*(self: gen_qlockfile_types.QLockFile): string =
@@ -74,7 +74,7 @@ proc unlock*(self: gen_qlockfile_types.QLockFile): void =
   fcQLockFile_unlock(self.h)
 
 proc setStaleLockTime*(self: gen_qlockfile_types.QLockFile, staleLockTime: cint): void =
-  fcQLockFile_setStaleLockTime(self.h, staleLockTime)
+  fcQLockFile_setStaleLockTimeStaleLockTime(self.h, staleLockTime)
 
 proc staleLockTime*(self: gen_qlockfile_types.QLockFile): cint =
   fcQLockFile_staleLockTime(self.h)
@@ -89,7 +89,7 @@ proc error*(self: gen_qlockfile_types.QLockFile): cint =
   cint(fcQLockFile_error(self.h))
 
 proc tryLock*(self: gen_qlockfile_types.QLockFile, timeout: cint): bool =
-  fcQLockFile_tryLock2(self.h, timeout)
+  fcQLockFile_tryLockInt(self.h, timeout)
 
 proc create*(T: type gen_qlockfile_types.QLockFile,
     fileName: openArray[char]): gen_qlockfile_types.QLockFile =

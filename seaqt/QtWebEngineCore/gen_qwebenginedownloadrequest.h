@@ -34,7 +34,7 @@ void QWebEngineDownloadRequest_virtbase(QWebEngineDownloadRequest* src, QObject*
 QMetaObject* QWebEngineDownloadRequest_metaObject(const QWebEngineDownloadRequest* self);
 void* QWebEngineDownloadRequest_metacast(QWebEngineDownloadRequest* self, const char* param1);
 int QWebEngineDownloadRequest_metacall(QWebEngineDownloadRequest* self, int param1, int param2, void** param3);
-struct seaqt_string QWebEngineDownloadRequest_tr(const char* s);
+struct seaqt_string QWebEngineDownloadRequest_tr_s(const char* s);
 unsigned int QWebEngineDownloadRequest_id(const QWebEngineDownloadRequest* self);
 int QWebEngineDownloadRequest_state(const QWebEngineDownloadRequest* self);
 long long QWebEngineDownloadRequest_totalBytes(const QWebEngineDownloadRequest* self);
@@ -76,8 +76,8 @@ void QWebEngineDownloadRequest_downloadDirectoryChanged(QWebEngineDownloadReques
 void QWebEngineDownloadRequest_connect_downloadDirectoryChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QWebEngineDownloadRequest_downloadFileNameChanged(QWebEngineDownloadRequest* self);
 void QWebEngineDownloadRequest_connect_downloadFileNameChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QWebEngineDownloadRequest_tr2(const char* s, const char* c);
-struct seaqt_string QWebEngineDownloadRequest_tr3(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineDownloadRequest_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineDownloadRequest_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebEngineDownloadRequest_staticMetaObject();
 void QWebEngineDownloadRequest_delete(QWebEngineDownloadRequest* self);

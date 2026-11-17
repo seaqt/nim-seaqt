@@ -59,12 +59,12 @@ type cQPaintDeviceWindow*{.exportc: "QPaintDeviceWindow", incompleteStruct.} = o
 proc fcQPaintDeviceWindow_metaObject(self: pointer): pointer {.importc: "QPaintDeviceWindow_metaObject".}
 proc fcQPaintDeviceWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QPaintDeviceWindow_metacast".}
 proc fcQPaintDeviceWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPaintDeviceWindow_metacall".}
-proc fcQPaintDeviceWindow_tr(s: cstring): struct_seaqt_string {.importc: "QPaintDeviceWindow_tr".}
-proc fcQPaintDeviceWindow_update(self: pointer, rect: pointer): void {.importc: "QPaintDeviceWindow_update".}
-proc fcQPaintDeviceWindow_updateWithRegion(self: pointer, region: pointer): void {.importc: "QPaintDeviceWindow_updateWithRegion".}
-proc fcQPaintDeviceWindow_update2(self: pointer): void {.importc: "QPaintDeviceWindow_update2".}
-proc fcQPaintDeviceWindow_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPaintDeviceWindow_tr2".}
-proc fcQPaintDeviceWindow_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPaintDeviceWindow_tr3".}
+proc fcQPaintDeviceWindow_trS(s: cstring): struct_seaqt_string {.importc: "QPaintDeviceWindow_tr_s".}
+proc fcQPaintDeviceWindow_updateRect(self: pointer, rect: pointer): void {.importc: "QPaintDeviceWindow_update_rect".}
+proc fcQPaintDeviceWindow_updateRegion(self: pointer, region: pointer): void {.importc: "QPaintDeviceWindow_update_region".}
+proc fcQPaintDeviceWindow_update(self: pointer): void {.importc: "QPaintDeviceWindow_update".}
+proc fcQPaintDeviceWindow_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPaintDeviceWindow_tr_s_c".}
+proc fcQPaintDeviceWindow_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPaintDeviceWindow_tr_s_c_n".}
 proc fcQPaintDeviceWindow_protectedbase_resolveInterface(self: pointer, name: cstring, revision: cint): pointer {.importc: "QPaintDeviceWindow_protectedbase_resolveInterface".}
 proc fcQPaintDeviceWindow_protectedbase_sender(self: pointer): pointer {.importc: "QPaintDeviceWindow_protectedbase_sender".}
 proc fcQPaintDeviceWindow_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QPaintDeviceWindow_protectedbase_senderSignalIndex".}
@@ -82,28 +82,28 @@ proc metacall*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, param1: ci
   fcQPaintDeviceWindow_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpaintdevicewindow_types.QPaintDeviceWindow, s: cstring): string =
-  let v_ms = fcQPaintDeviceWindow_tr(s)
+  let v_ms = fcQPaintDeviceWindow_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc update*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, rect: gen_qrect_types.QRect): void =
-  fcQPaintDeviceWindow_update(self.h, rect.h)
+  fcQPaintDeviceWindow_updateRect(self.h, rect.h)
 
 proc update*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, region: gen_qregion_types.QRegion): void =
-  fcQPaintDeviceWindow_updateWithRegion(self.h, region.h)
+  fcQPaintDeviceWindow_updateRegion(self.h, region.h)
 
 proc update*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow): void =
-  fcQPaintDeviceWindow_update2(self.h)
+  fcQPaintDeviceWindow_update(self.h)
 
 proc tr*(_: type gen_qpaintdevicewindow_types.QPaintDeviceWindow, s: cstring, c: cstring): string =
-  let v_ms = fcQPaintDeviceWindow_tr2(s, c)
+  let v_ms = fcQPaintDeviceWindow_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpaintdevicewindow_types.QPaintDeviceWindow, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPaintDeviceWindow_tr3(s, c, n)
+  let v_ms = fcQPaintDeviceWindow_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

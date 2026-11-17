@@ -30,43 +30,43 @@ typedef struct QIODeviceBase QIODeviceBase;
 typedef struct QNoDebug QNoDebug;
 #endif
 
-QDebug* QDebug_new(QIODevice* device);
-QDebug* QDebug_new2(QDebug* o);
+QDebug* QDebug_new_device(QIODevice* device);
+QDebug* QDebug_new_from(QDebug* from);
 
 void QDebug_virtbase(QDebug* src, QIODeviceBase** outptr_QIODeviceBase);
-void QDebug_operatorAssign(QDebug* self, QDebug* other);
+void QDebug_operatorAssign(QDebug* self, QDebug* from);
 void QDebug_swap(QDebug* self, QDebug* other);
 QDebug* QDebug_resetFormat(QDebug* self);
 QDebug* QDebug_space(QDebug* self);
 QDebug* QDebug_nospace(QDebug* self);
 QDebug* QDebug_maybeSpace(QDebug* self);
-QDebug* QDebug_verbosity(QDebug* self, int verbosityLevel);
-int QDebug_verbosity2(const QDebug* self);
+QDebug* QDebug_verbosity_verbosityLevel(QDebug* self, int verbosityLevel);
+int QDebug_verbosity(const QDebug* self);
 void QDebug_setVerbosity(QDebug* self, int verbosityLevel);
 bool QDebug_autoInsertSpaces(const QDebug* self);
 void QDebug_setAutoInsertSpaces(QDebug* self, bool b);
 QDebug* QDebug_quote(QDebug* self);
 QDebug* QDebug_noquote(QDebug* self);
 QDebug* QDebug_maybeQuote(QDebug* self);
-QDebug* QDebug_operatorShiftLeft(QDebug* self, QChar* t);
-QDebug* QDebug_operatorShiftLeftWithBool(QDebug* self, bool t);
-QDebug* QDebug_operatorShiftLeftWithChar(QDebug* self, char t);
-QDebug* QDebug_operatorShiftLeftWithShort(QDebug* self, short t);
-QDebug* QDebug_operatorShiftLeftWithUnsignedshort(QDebug* self, unsigned short t);
-QDebug* QDebug_operatorShiftLeftWithInt(QDebug* self, int t);
-QDebug* QDebug_operatorShiftLeftWithUnsignedint(QDebug* self, unsigned int t);
-QDebug* QDebug_operatorShiftLeftWithLong(QDebug* self, long t);
-QDebug* QDebug_operatorShiftLeftWithUnsignedlong(QDebug* self, unsigned long t);
-QDebug* QDebug_operatorShiftLeftWithQint64(QDebug* self, long long t);
-QDebug* QDebug_operatorShiftLeftWithQuint64(QDebug* self, unsigned long long t);
-QDebug* QDebug_operatorShiftLeftWithFloat(QDebug* self, float t);
-QDebug* QDebug_operatorShiftLeftWithDouble(QDebug* self, double t);
-QDebug* QDebug_operatorShiftLeft2(QDebug* self, const char* t);
-QDebug* QDebug_operatorShiftLeftWithQString(QDebug* self, struct seaqt_string t);
-QDebug* QDebug_operatorShiftLeftWithQByteArray(QDebug* self, struct seaqt_string t);
-QDebug* QDebug_operatorShiftLeftWithQByteArrayView(QDebug* self, struct seaqt_string t);
-QDebug* QDebug_operatorShiftLeftWithVoid(QDebug* self, const void* t);
-QDebug* QDebug_maybeQuoteWithChar(QDebug* self, char c);
+QDebug* QDebug_operatorShiftLeft_QChar(QDebug* self, QChar* t);
+QDebug* QDebug_operatorShiftLeft_bool(QDebug* self, bool t);
+QDebug* QDebug_operatorShiftLeft_char(QDebug* self, char t);
+QDebug* QDebug_operatorShiftLeft_short(QDebug* self, short t);
+QDebug* QDebug_operatorShiftLeft_unsignedshort(QDebug* self, unsigned short t);
+QDebug* QDebug_operatorShiftLeft_int(QDebug* self, int t);
+QDebug* QDebug_operatorShiftLeft_unsignedint(QDebug* self, unsigned int t);
+QDebug* QDebug_operatorShiftLeft_long(QDebug* self, long t);
+QDebug* QDebug_operatorShiftLeft_unsignedlong(QDebug* self, unsigned long t);
+QDebug* QDebug_operatorShiftLeft_qint64(QDebug* self, long long t);
+QDebug* QDebug_operatorShiftLeft_quint64(QDebug* self, unsigned long long t);
+QDebug* QDebug_operatorShiftLeft_float(QDebug* self, float t);
+QDebug* QDebug_operatorShiftLeft_double(QDebug* self, double t);
+QDebug* QDebug_operatorShiftLeft_pcchar(QDebug* self, const char* t);
+QDebug* QDebug_operatorShiftLeft_cQString(QDebug* self, struct seaqt_string t);
+QDebug* QDebug_operatorShiftLeft_cQByteArray(QDebug* self, struct seaqt_string t);
+QDebug* QDebug_operatorShiftLeft_QByteArrayView(QDebug* self, struct seaqt_string t);
+QDebug* QDebug_operatorShiftLeft_pcvoid(QDebug* self, const void* t);
+QDebug* QDebug_maybeQuote_c(QDebug* self, char c);
 
 void QDebug_delete(QDebug* self);
 
@@ -81,7 +81,7 @@ QNoDebug* QNoDebug_quote(QNoDebug* self);
 QNoDebug* QNoDebug_noquote(QNoDebug* self);
 QNoDebug* QNoDebug_maybeQuote(QNoDebug* self);
 QNoDebug* QNoDebug_verbosity(QNoDebug* self, int param1);
-QNoDebug* QNoDebug_maybeQuoteWithChar(QNoDebug* self, const char param1);
+QNoDebug* QNoDebug_maybeQuote_char(QNoDebug* self, const char param1);
 
 void QNoDebug_delete(QNoDebug* self);
 

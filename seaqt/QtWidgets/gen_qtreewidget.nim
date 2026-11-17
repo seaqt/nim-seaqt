@@ -132,9 +132,9 @@ proc fcQTreeWidgetItem_setWhatsThis(self: pointer, column: cint, whatsThis: stru
 proc fcQTreeWidgetItem_font(self: pointer, column: cint): pointer {.importc: "QTreeWidgetItem_font".}
 proc fcQTreeWidgetItem_setFont(self: pointer, column: cint, font: pointer): void {.importc: "QTreeWidgetItem_setFont".}
 proc fcQTreeWidgetItem_textAlignment(self: pointer, column: cint): cint {.importc: "QTreeWidgetItem_textAlignment".}
-proc fcQTreeWidgetItem_setTextAlignment(self: pointer, column: cint, alignment: cint): void {.importc: "QTreeWidgetItem_setTextAlignment".}
-proc fcQTreeWidgetItem_setTextAlignment2(self: pointer, column: cint, alignment: cint): void {.importc: "QTreeWidgetItem_setTextAlignment2".}
-proc fcQTreeWidgetItem_setTextAlignment3(self: pointer, column: cint, alignment: cint): void {.importc: "QTreeWidgetItem_setTextAlignment3".}
+proc fcQTreeWidgetItem_setTextAlignmentIntInt(self: pointer, column: cint, alignment: cint): void {.importc: "QTreeWidgetItem_setTextAlignment_int_int".}
+proc fcQTreeWidgetItem_setTextAlignmentInt_Qt_AlignmentFlag(self: pointer, column: cint, alignment: cint): void {.importc: "QTreeWidgetItem_setTextAlignment_int_Qt_AlignmentFlag".}
+proc fcQTreeWidgetItem_setTextAlignmentInt_Qt_Alignment(self: pointer, column: cint, alignment: cint): void {.importc: "QTreeWidgetItem_setTextAlignment_int_Qt_Alignment".}
 proc fcQTreeWidgetItem_background(self: pointer, column: cint): pointer {.importc: "QTreeWidgetItem_background".}
 proc fcQTreeWidgetItem_setBackground(self: pointer, column: cint, brush: pointer): void {.importc: "QTreeWidgetItem_setBackground".}
 proc fcQTreeWidgetItem_foreground(self: pointer, column: cint): pointer {.importc: "QTreeWidgetItem_foreground".}
@@ -148,7 +148,7 @@ proc fcQTreeWidgetItem_setData(self: pointer, column: cint, role: cint, value: p
 proc fcQTreeWidgetItem_operatorLesser(self: pointer, other: pointer): bool {.importc: "QTreeWidgetItem_operatorLesser".}
 proc fcQTreeWidgetItem_read(self: pointer, inVal: pointer): void {.importc: "QTreeWidgetItem_read".}
 proc fcQTreeWidgetItem_write(self: pointer, outVal: pointer): void {.importc: "QTreeWidgetItem_write".}
-proc fcQTreeWidgetItem_operatorAssign(self: pointer, other: pointer): void {.importc: "QTreeWidgetItem_operatorAssign".}
+proc fcQTreeWidgetItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTreeWidgetItem_operatorAssign".}
 proc fcQTreeWidgetItem_parent(self: pointer): pointer {.importc: "QTreeWidgetItem_parent".}
 proc fcQTreeWidgetItem_child(self: pointer, index: cint): pointer {.importc: "QTreeWidgetItem_child".}
 proc fcQTreeWidgetItem_childCount(self: pointer): cint {.importc: "QTreeWidgetItem_childCount".}
@@ -182,26 +182,26 @@ proc fcQTreeWidgetItem_virtualbase_read(self: pointer, inVal: pointer): void {.i
 proc fcQTreeWidgetItem_virtualbase_write(self: pointer, outVal: pointer): void {.importc: "QTreeWidgetItem_virtualbase_write".}
 proc fcQTreeWidgetItem_protectedbase_emitDataChanged(self: pointer): void {.importc: "QTreeWidgetItem_protectedbase_emitDataChanged".}
 proc fcQTreeWidgetItem_new(vtbl: pointer, vdata: csize_t): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new".}
-proc fcQTreeWidgetItem_new2(vtbl: pointer, vdata: csize_t, strings: struct_seaqt_array): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new2".}
-proc fcQTreeWidgetItem_new3(vtbl: pointer, vdata: csize_t, treeview: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new3".}
-proc fcQTreeWidgetItem_new4(vtbl: pointer, vdata: csize_t, treeview: pointer, strings: struct_seaqt_array): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new4".}
-proc fcQTreeWidgetItem_new5(vtbl: pointer, vdata: csize_t, treeview: pointer, after: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new5".}
-proc fcQTreeWidgetItem_new6(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new6".}
-proc fcQTreeWidgetItem_new7(vtbl: pointer, vdata: csize_t, parent: pointer, strings: struct_seaqt_array): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new7".}
-proc fcQTreeWidgetItem_new8(vtbl: pointer, vdata: csize_t, parent: pointer, after: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new8".}
-proc fcQTreeWidgetItem_new9(vtbl: pointer, vdata: csize_t, other: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new9".}
-proc fcQTreeWidgetItem_new10(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new10".}
-proc fcQTreeWidgetItem_new11(vtbl: pointer, vdata: csize_t, strings: struct_seaqt_array, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new11".}
-proc fcQTreeWidgetItem_new12(vtbl: pointer, vdata: csize_t, treeview: pointer, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new12".}
-proc fcQTreeWidgetItem_new13(vtbl: pointer, vdata: csize_t, treeview: pointer, strings: struct_seaqt_array, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new13".}
-proc fcQTreeWidgetItem_new14(vtbl: pointer, vdata: csize_t, treeview: pointer, after: pointer, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new14".}
-proc fcQTreeWidgetItem_new15(vtbl: pointer, vdata: csize_t, parent: pointer, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new15".}
-proc fcQTreeWidgetItem_new16(vtbl: pointer, vdata: csize_t, parent: pointer, strings: struct_seaqt_array, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new16".}
-proc fcQTreeWidgetItem_new17(vtbl: pointer, vdata: csize_t, parent: pointer, after: pointer, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new17".}
+proc fcQTreeWidgetItem_new2(vtbl: pointer, vdata: csize_t, strings: struct_seaqt_array): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_strings".}
+proc fcQTreeWidgetItem_new3(vtbl: pointer, vdata: csize_t, treeview: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_treeview".}
+proc fcQTreeWidgetItem_new4(vtbl: pointer, vdata: csize_t, treeview: pointer, strings: struct_seaqt_array): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_treeview_strings".}
+proc fcQTreeWidgetItem_new5(vtbl: pointer, vdata: csize_t, treeview: pointer, after: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_treeview_after".}
+proc fcQTreeWidgetItem_new6(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_parent".}
+proc fcQTreeWidgetItem_new7(vtbl: pointer, vdata: csize_t, parent: pointer, strings: struct_seaqt_array): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_parent_strings".}
+proc fcQTreeWidgetItem_new8(vtbl: pointer, vdata: csize_t, parent: pointer, after: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_parent_after".}
+proc fcQTreeWidgetItem_new9(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_from".}
+proc fcQTreeWidgetItem_new10(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_type".}
+proc fcQTreeWidgetItem_new11(vtbl: pointer, vdata: csize_t, strings: struct_seaqt_array, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_strings_type".}
+proc fcQTreeWidgetItem_new12(vtbl: pointer, vdata: csize_t, treeview: pointer, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_treeview_type".}
+proc fcQTreeWidgetItem_new13(vtbl: pointer, vdata: csize_t, treeview: pointer, strings: struct_seaqt_array, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_treeview_strings_type".}
+proc fcQTreeWidgetItem_new14(vtbl: pointer, vdata: csize_t, treeview: pointer, after: pointer, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_treeview_after_type".}
+proc fcQTreeWidgetItem_new15(vtbl: pointer, vdata: csize_t, parent: pointer, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_parent_type".}
+proc fcQTreeWidgetItem_new16(vtbl: pointer, vdata: csize_t, parent: pointer, strings: struct_seaqt_array, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_parent_strings_type".}
+proc fcQTreeWidgetItem_new17(vtbl: pointer, vdata: csize_t, parent: pointer, after: pointer, typeVal: cint): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new_parent_after_type".}
 proc fcQTreeWidget_metaObject(self: pointer): pointer {.importc: "QTreeWidget_metaObject".}
 proc fcQTreeWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QTreeWidget_metacast".}
 proc fcQTreeWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTreeWidget_metacall".}
-proc fcQTreeWidget_tr(s: cstring): struct_seaqt_string {.importc: "QTreeWidget_tr".}
+proc fcQTreeWidget_trS(s: cstring): struct_seaqt_string {.importc: "QTreeWidget_tr_s".}
 proc fcQTreeWidget_columnCount(self: pointer): cint {.importc: "QTreeWidget_columnCount".}
 proc fcQTreeWidget_setColumnCount(self: pointer, columns: cint): void {.importc: "QTreeWidget_setColumnCount".}
 proc fcQTreeWidget_invisibleRootItem(self: pointer): pointer {.importc: "QTreeWidget_invisibleRootItem".}
@@ -219,29 +219,29 @@ proc fcQTreeWidget_setHeaderLabels(self: pointer, labels: struct_seaqt_array): v
 proc fcQTreeWidget_setHeaderLabel(self: pointer, label: struct_seaqt_string): void {.importc: "QTreeWidget_setHeaderLabel".}
 proc fcQTreeWidget_currentItem(self: pointer): pointer {.importc: "QTreeWidget_currentItem".}
 proc fcQTreeWidget_currentColumn(self: pointer): cint {.importc: "QTreeWidget_currentColumn".}
-proc fcQTreeWidget_setCurrentItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_setCurrentItem".}
-proc fcQTreeWidget_setCurrentItem2(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_setCurrentItem2".}
-proc fcQTreeWidget_setCurrentItem3(self: pointer, item: pointer, column: cint, command: cint): void {.importc: "QTreeWidget_setCurrentItem3".}
-proc fcQTreeWidget_itemAt(self: pointer, p: pointer): pointer {.importc: "QTreeWidget_itemAt".}
-proc fcQTreeWidget_itemAt2(self: pointer, x: cint, y: cint): pointer {.importc: "QTreeWidget_itemAt2".}
+proc fcQTreeWidget_setCurrentItemItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_setCurrentItem_item".}
+proc fcQTreeWidget_setCurrentItemItemColumn(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_setCurrentItem_item_column".}
+proc fcQTreeWidget_setCurrentItemItemColumnCommand(self: pointer, item: pointer, column: cint, command: cint): void {.importc: "QTreeWidget_setCurrentItem_item_column_command".}
+proc fcQTreeWidget_itemAtP(self: pointer, p: pointer): pointer {.importc: "QTreeWidget_itemAt_p".}
+proc fcQTreeWidget_itemAtXY(self: pointer, x: cint, y: cint): pointer {.importc: "QTreeWidget_itemAt_x_y".}
 proc fcQTreeWidget_visualItemRect(self: pointer, item: pointer): pointer {.importc: "QTreeWidget_visualItemRect".}
 proc fcQTreeWidget_sortColumn(self: pointer): cint {.importc: "QTreeWidget_sortColumn".}
 proc fcQTreeWidget_sortItems(self: pointer, column: cint, order: cint): void {.importc: "QTreeWidget_sortItems".}
-proc fcQTreeWidget_editItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_editItem".}
-proc fcQTreeWidget_openPersistentEditor(self: pointer, item: pointer): void {.importc: "QTreeWidget_openPersistentEditor".}
-proc fcQTreeWidget_closePersistentEditor(self: pointer, item: pointer): void {.importc: "QTreeWidget_closePersistentEditor".}
-proc fcQTreeWidget_isPersistentEditorOpen(self: pointer, item: pointer): bool {.importc: "QTreeWidget_isPersistentEditorOpen".}
+proc fcQTreeWidget_editItemItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_editItem_item".}
+proc fcQTreeWidget_openPersistentEditorItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_openPersistentEditor_item".}
+proc fcQTreeWidget_closePersistentEditorItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_closePersistentEditor_item".}
+proc fcQTreeWidget_isPersistentEditorOpenItem(self: pointer, item: pointer): bool {.importc: "QTreeWidget_isPersistentEditorOpen_item".}
 proc fcQTreeWidget_itemWidget(self: pointer, item: pointer, column: cint): pointer {.importc: "QTreeWidget_itemWidget".}
 proc fcQTreeWidget_setItemWidget(self: pointer, item: pointer, column: cint, widget: pointer): void {.importc: "QTreeWidget_setItemWidget".}
 proc fcQTreeWidget_removeItemWidget(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_removeItemWidget".}
 proc fcQTreeWidget_selectedItems(self: pointer): struct_seaqt_array {.importc: "QTreeWidget_selectedItems".}
-proc fcQTreeWidget_findItems(self: pointer, text: struct_seaqt_string, flags: cint): struct_seaqt_array {.importc: "QTreeWidget_findItems".}
+proc fcQTreeWidget_findItemsTextFlags(self: pointer, text: struct_seaqt_string, flags: cint): struct_seaqt_array {.importc: "QTreeWidget_findItems_text_flags".}
 proc fcQTreeWidget_itemAbove(self: pointer, item: pointer): pointer {.importc: "QTreeWidget_itemAbove".}
 proc fcQTreeWidget_itemBelow(self: pointer, item: pointer): pointer {.importc: "QTreeWidget_itemBelow".}
-proc fcQTreeWidget_indexFromItem(self: pointer, item: pointer): pointer {.importc: "QTreeWidget_indexFromItem".}
+proc fcQTreeWidget_indexFromItemItem(self: pointer, item: pointer): pointer {.importc: "QTreeWidget_indexFromItem_item".}
 proc fcQTreeWidget_itemFromIndex(self: pointer, index: pointer): pointer {.importc: "QTreeWidget_itemFromIndex".}
 proc fcQTreeWidget_setSelectionModel(self: pointer, selectionModel: pointer): void {.importc: "QTreeWidget_setSelectionModel".}
-proc fcQTreeWidget_scrollToItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_scrollToItem".}
+proc fcQTreeWidget_scrollToItemItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_scrollToItem_item".}
 proc fcQTreeWidget_expandItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_expandItem".}
 proc fcQTreeWidget_collapseItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_collapseItem".}
 proc fcQTreeWidget_clear(self: pointer): void {.importc: "QTreeWidget_clear".}
@@ -265,15 +265,15 @@ proc fcQTreeWidget_currentItemChanged(self: pointer, current: pointer, previous:
 proc fcQTreeWidget_connect_currentItemChanged(self: pointer, slot: int, callback: proc (slot: int, current: pointer, previous: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_currentItemChanged".}
 proc fcQTreeWidget_itemSelectionChanged(self: pointer): void {.importc: "QTreeWidget_itemSelectionChanged".}
 proc fcQTreeWidget_connect_itemSelectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_itemSelectionChanged".}
-proc fcQTreeWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTreeWidget_tr2".}
-proc fcQTreeWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTreeWidget_tr3".}
-proc fcQTreeWidget_editItem2(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_editItem2".}
-proc fcQTreeWidget_openPersistentEditor2(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_openPersistentEditor2".}
-proc fcQTreeWidget_closePersistentEditor2(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_closePersistentEditor2".}
-proc fcQTreeWidget_isPersistentEditorOpen2(self: pointer, item: pointer, column: cint): bool {.importc: "QTreeWidget_isPersistentEditorOpen2".}
-proc fcQTreeWidget_findItems2(self: pointer, text: struct_seaqt_string, flags: cint, column: cint): struct_seaqt_array {.importc: "QTreeWidget_findItems2".}
-proc fcQTreeWidget_indexFromItem2(self: pointer, item: pointer, column: cint): pointer {.importc: "QTreeWidget_indexFromItem2".}
-proc fcQTreeWidget_scrollToItem2(self: pointer, item: pointer, hint: cint): void {.importc: "QTreeWidget_scrollToItem2".}
+proc fcQTreeWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTreeWidget_tr_s_c".}
+proc fcQTreeWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTreeWidget_tr_s_c_n".}
+proc fcQTreeWidget_editItemItemColumn(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_editItem_item_column".}
+proc fcQTreeWidget_openPersistentEditorItemColumn(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_openPersistentEditor_item_column".}
+proc fcQTreeWidget_closePersistentEditorItemColumn(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_closePersistentEditor_item_column".}
+proc fcQTreeWidget_isPersistentEditorOpenItemColumn(self: pointer, item: pointer, column: cint): bool {.importc: "QTreeWidget_isPersistentEditorOpen_item_column".}
+proc fcQTreeWidget_findItemsTextFlagsColumn(self: pointer, text: struct_seaqt_string, flags: cint, column: cint): struct_seaqt_array {.importc: "QTreeWidget_findItems_text_flags_column".}
+proc fcQTreeWidget_indexFromItemItemColumn(self: pointer, item: pointer, column: cint): pointer {.importc: "QTreeWidget_indexFromItem_item_column".}
+proc fcQTreeWidget_scrollToItemItemHint(self: pointer, item: pointer, hint: cint): void {.importc: "QTreeWidget_scrollToItem_item_hint".}
 proc fcQTreeWidget_vdata(self: pointer): ptr pointer {.importc: "QTreeWidget_vdata".}
 proc fvdata_cQTreeWidget(self: pointer): pointer {.importc: "vdata_QTreeWidget".}
 
@@ -337,7 +337,7 @@ type cQTreeWidgetVTable {.pure.} = object
   closeEditor*: proc(self: pointer, editor: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
   commitData*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   editorDestroyed*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  editIndexTriggerEvent*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
   startDrag*: proc(self: pointer, supportedActions: cint): void {.cdecl, raises: [], gcsafe.}
   initViewItemOption*: proc(self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -436,7 +436,7 @@ proc fcQTreeWidget_virtualbase_horizontalScrollbarValueChanged(self: pointer, va
 proc fcQTreeWidget_virtualbase_closeEditor(self: pointer, editor: pointer, hint: cint): void {.importc: "QTreeWidget_virtualbase_closeEditor".}
 proc fcQTreeWidget_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QTreeWidget_virtualbase_commitData".}
 proc fcQTreeWidget_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QTreeWidget_virtualbase_editorDestroyed".}
-proc fcQTreeWidget_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QTreeWidget_virtualbase_edit2".}
+proc fcQTreeWidget_virtualbase_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QTreeWidget_virtualbase_edit_index_trigger_event".}
 proc fcQTreeWidget_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QTreeWidget_virtualbase_selectionCommand".}
 proc fcQTreeWidget_virtualbase_startDrag(self: pointer, supportedActions: cint): void {.importc: "QTreeWidget_virtualbase_startDrag".}
 proc fcQTreeWidget_virtualbase_initViewItemOption(self: pointer, option: pointer): void {.importc: "QTreeWidget_virtualbase_initViewItemOption".}
@@ -496,7 +496,7 @@ proc fcQTreeWidget_protectedbase_startAutoScroll(self: pointer): void {.importc:
 proc fcQTreeWidget_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QTreeWidget_protectedbase_stopAutoScroll".}
 proc fcQTreeWidget_protectedbase_doAutoScroll(self: pointer): void {.importc: "QTreeWidget_protectedbase_doAutoScroll".}
 proc fcQTreeWidget_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QTreeWidget_protectedbase_dropIndicatorPosition".}
-proc fcQTreeWidget_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTreeWidget_protectedbase_setViewportMargins".}
+proc fcQTreeWidget_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTreeWidget_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQTreeWidget_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QTreeWidget_protectedbase_viewportMargins".}
 proc fcQTreeWidget_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QTreeWidget_protectedbase_drawFrame".}
 proc fcQTreeWidget_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QTreeWidget_protectedbase_updateMicroFocus".}
@@ -509,7 +509,7 @@ proc fcQTreeWidget_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQTreeWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTreeWidget_protectedbase_receivers".}
 proc fcQTreeWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTreeWidget_protectedbase_isSignalConnected".}
 proc fcQTreeWidget_new(vtbl: pointer, vdata: csize_t): ptr cQTreeWidget {.importc: "QTreeWidget_new".}
-proc fcQTreeWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTreeWidget {.importc: "QTreeWidget_new2".}
+proc fcQTreeWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTreeWidget {.importc: "QTreeWidget_new_parent".}
 proc fcQTreeWidget_staticMetaObject(): pointer {.importc: "QTreeWidget_staticMetaObject".}
 
 proc clone*(self: gen_qtreewidget_types.QTreeWidgetItem): gen_qtreewidget_types.QTreeWidgetItem =
@@ -612,13 +612,13 @@ proc textAlignment*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint): 
   fcQTreeWidgetItem_textAlignment(self.h, column)
 
 proc setTextAlignment*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, alignment: cint): void =
-  fcQTreeWidgetItem_setTextAlignment(self.h, column, alignment)
+  fcQTreeWidgetItem_setTextAlignmentIntInt(self.h, column, alignment)
 
 proc setTextAlignment2*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, alignment: cint): void =
-  fcQTreeWidgetItem_setTextAlignment2(self.h, column, cint(alignment))
+  fcQTreeWidgetItem_setTextAlignmentInt_Qt_AlignmentFlag(self.h, column, cint(alignment))
 
 proc setTextAlignment3*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, alignment: cint): void =
-  fcQTreeWidgetItem_setTextAlignment3(self.h, column, cint(alignment))
+  fcQTreeWidgetItem_setTextAlignmentInt_Qt_Alignment(self.h, column, cint(alignment))
 
 proc background*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint): gen_qbrush_types.QBrush =
   gen_qbrush_types.QBrush(h: fcQTreeWidgetItem_background(self.h, column), owned: true)
@@ -659,8 +659,8 @@ proc read*(self: gen_qtreewidget_types.QTreeWidgetItem, inVal: gen_qdatastream_t
 proc write*(self: gen_qtreewidget_types.QTreeWidgetItem, outVal: gen_qdatastream_types.QDataStream): void =
   fcQTreeWidgetItem_write(self.h, outVal.h)
 
-proc operatorAssign*(self: gen_qtreewidget_types.QTreeWidgetItem, other: gen_qtreewidget_types.QTreeWidgetItem): void =
-  fcQTreeWidgetItem_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qtreewidget_types.QTreeWidgetItem, fromVal: gen_qtreewidget_types.QTreeWidgetItem): void =
+  fcQTreeWidgetItem_operatorAssign(self.h, fromVal.h)
 
 proc parent*(self: gen_qtreewidget_types.QTreeWidgetItem): gen_qtreewidget_types.QTreeWidgetItem =
   gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidgetItem_parent(self.h), owned: false)
@@ -1057,7 +1057,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   fcQTreeWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create2*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    other: gen_qtreewidget_types.QTreeWidgetItem,
+    fromVal: gen_qtreewidget_types.QTreeWidgetItem,
     vtbl: ref QTreeWidgetItemVTable = nil): gen_qtreewidget_types.QTreeWidgetItem =
   let vtbl = if vtbl == nil: new QTreeWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -1076,7 +1076,7 @@ proc create2*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     vtbl[].vtbl.read = fcQTreeWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
     vtbl[].vtbl.write = fcQTreeWidgetItem_vtable_callback_write
-  let tmp = gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidgetItem_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), other.h), owned: true)
+  let tmp = gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidgetItem_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQTreeWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
@@ -1364,10 +1364,10 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   inst[].owned = true
 
 proc create2*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    other: gen_qtreewidget_types.QTreeWidgetItem,
+    fromVal: gen_qtreewidget_types.QTreeWidgetItem,
     inst: VirtualQTreeWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQTreeWidgetItem_new9(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), other.h)
+  inst[].h = fcQTreeWidgetItem_new9(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
@@ -1457,7 +1457,7 @@ proc metacall*(self: gen_qtreewidget_types.QTreeWidget, param1: cint, param2: ci
   fcQTreeWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtreewidget_types.QTreeWidget, s: cstring): string =
-  let v_ms = fcQTreeWidget_tr(s)
+  let v_ms = fcQTreeWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1526,19 +1526,19 @@ proc currentColumn*(self: gen_qtreewidget_types.QTreeWidget): cint =
   fcQTreeWidget_currentColumn(self.h)
 
 proc setCurrentItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): void =
-  fcQTreeWidget_setCurrentItem(self.h, item.h)
+  fcQTreeWidget_setCurrentItemItem(self.h, item.h)
 
 proc setCurrentItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): void =
-  fcQTreeWidget_setCurrentItem2(self.h, item.h, column)
+  fcQTreeWidget_setCurrentItemItemColumn(self.h, item.h, column)
 
 proc setCurrentItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint, command: cint): void =
-  fcQTreeWidget_setCurrentItem3(self.h, item.h, column, cint(command))
+  fcQTreeWidget_setCurrentItemItemColumnCommand(self.h, item.h, column, cint(command))
 
 proc itemAt*(self: gen_qtreewidget_types.QTreeWidget, p: gen_qpoint_types.QPoint): gen_qtreewidget_types.QTreeWidgetItem =
-  gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidget_itemAt(self.h, p.h), owned: false)
+  gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidget_itemAtP(self.h, p.h), owned: false)
 
 proc itemAt*(self: gen_qtreewidget_types.QTreeWidget, x: cint, y: cint): gen_qtreewidget_types.QTreeWidgetItem =
-  gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidget_itemAt2(self.h, x, y), owned: false)
+  gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidget_itemAtXY(self.h, x, y), owned: false)
 
 proc visualItemRect*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQTreeWidget_visualItemRect(self.h, item.h), owned: true)
@@ -1550,16 +1550,16 @@ proc sortItems*(self: gen_qtreewidget_types.QTreeWidget, column: cint, order: ci
   fcQTreeWidget_sortItems(self.h, column, cint(order))
 
 proc editItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): void =
-  fcQTreeWidget_editItem(self.h, item.h)
+  fcQTreeWidget_editItemItem(self.h, item.h)
 
 proc openPersistentEditor*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): void =
-  fcQTreeWidget_openPersistentEditor(self.h, item.h)
+  fcQTreeWidget_openPersistentEditorItem(self.h, item.h)
 
 proc closePersistentEditor*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): void =
-  fcQTreeWidget_closePersistentEditor(self.h, item.h)
+  fcQTreeWidget_closePersistentEditorItem(self.h, item.h)
 
 proc isPersistentEditorOpen*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): bool =
-  fcQTreeWidget_isPersistentEditorOpen(self.h, item.h)
+  fcQTreeWidget_isPersistentEditorOpenItem(self.h, item.h)
 
 proc itemWidget*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQTreeWidget_itemWidget(self.h, item.h, column), owned: false)
@@ -1580,7 +1580,7 @@ proc selectedItems*(self: gen_qtreewidget_types.QTreeWidget): seq[gen_qtreewidge
   vx_ret
 
 proc findItems*(self: gen_qtreewidget_types.QTreeWidget, text: openArray[char], flags: cint): seq[gen_qtreewidget_types.QTreeWidgetItem] =
-  var v_ma = fcQTreeWidget_findItems(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
+  var v_ma = fcQTreeWidget_findItemsTextFlags(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
   var vx_ret = newSeq[gen_qtreewidget_types.QTreeWidgetItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1595,7 +1595,7 @@ proc itemBelow*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_t
   gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidget_itemBelow(self.h, item.h), owned: false)
 
 proc indexFromItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTreeWidget_indexFromItem(self.h, item.h), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTreeWidget_indexFromItemItem(self.h, item.h), owned: true)
 
 proc itemFromIndex*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qtreewidget_types.QTreeWidgetItem =
   gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidget_itemFromIndex(self.h, index.h), owned: false)
@@ -1604,7 +1604,7 @@ proc setSelectionModel*(self: gen_qtreewidget_types.QTreeWidget, selectionModel:
   fcQTreeWidget_setSelectionModel(self.h, selectionModel.h)
 
 proc scrollToItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): void =
-  fcQTreeWidget_scrollToItem(self.h, item.h)
+  fcQTreeWidget_scrollToItemItem(self.h, item.h)
 
 proc expandItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): void =
   fcQTreeWidget_expandItem(self.h, item.h)
@@ -1828,31 +1828,31 @@ proc onItemSelectionChanged*(self: gen_qtreewidget_types.QTreeWidget, slot: QTre
   fcQTreeWidget_connect_itemSelectionChanged(self.h, cast[int](addr tmp[]), fcQTreeWidget_slot_callback_itemSelectionChanged, fcQTreeWidget_slot_callback_itemSelectionChanged_release)
 
 proc tr*(_: type gen_qtreewidget_types.QTreeWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQTreeWidget_tr2(s, c)
+  let v_ms = fcQTreeWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtreewidget_types.QTreeWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTreeWidget_tr3(s, c, n)
+  let v_ms = fcQTreeWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc editItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): void =
-  fcQTreeWidget_editItem2(self.h, item.h, column)
+  fcQTreeWidget_editItemItemColumn(self.h, item.h, column)
 
 proc openPersistentEditor*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): void =
-  fcQTreeWidget_openPersistentEditor2(self.h, item.h, column)
+  fcQTreeWidget_openPersistentEditorItemColumn(self.h, item.h, column)
 
 proc closePersistentEditor*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): void =
-  fcQTreeWidget_closePersistentEditor2(self.h, item.h, column)
+  fcQTreeWidget_closePersistentEditorItemColumn(self.h, item.h, column)
 
 proc isPersistentEditorOpen*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): bool =
-  fcQTreeWidget_isPersistentEditorOpen2(self.h, item.h, column)
+  fcQTreeWidget_isPersistentEditorOpenItemColumn(self.h, item.h, column)
 
 proc findItems*(self: gen_qtreewidget_types.QTreeWidget, text: openArray[char], flags: cint, column: cint): seq[gen_qtreewidget_types.QTreeWidgetItem] =
-  var v_ma = fcQTreeWidget_findItems2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags), column)
+  var v_ma = fcQTreeWidget_findItemsTextFlagsColumn(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags), column)
   var vx_ret = newSeq[gen_qtreewidget_types.QTreeWidgetItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1861,10 +1861,10 @@ proc findItems*(self: gen_qtreewidget_types.QTreeWidget, text: openArray[char], 
   vx_ret
 
 proc indexFromItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTreeWidget_indexFromItem2(self.h, item.h, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTreeWidget_indexFromItemItemColumn(self.h, item.h, column), owned: true)
 
 proc scrollToItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, hint: cint): void =
-  fcQTreeWidget_scrollToItem2(self.h, item.h, cint(hint))
+  fcQTreeWidget_scrollToItemItemHint(self.h, item.h, cint(hint))
 
 type QTreeWidgetmetaObjectProc* = proc(self: QTreeWidget): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QTreeWidgetmetacastProc* = proc(self: QTreeWidget, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1924,7 +1924,7 @@ type QTreeWidgethorizontalScrollbarValueChangedProc* = proc(self: QTreeWidget, v
 type QTreeWidgetcloseEditorProc* = proc(self: QTreeWidget, editor: gen_qwidget_types.QWidget, hint: cint): void {.raises: [], gcsafe.}
 type QTreeWidgetcommitDataProc* = proc(self: QTreeWidget, editor: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QTreeWidgeteditorDestroyedProc* = proc(self: QTreeWidget, editor: gen_qobject_types.QObject): void {.raises: [], gcsafe.}
-type QTreeWidgetedit2Proc* = proc(self: QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTreeWidgeteditIndexTriggerEventProc* = proc(self: QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QTreeWidgetselectionCommandProc* = proc(self: QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
 type QTreeWidgetstartDragProc* = proc(self: QTreeWidget, supportedActions: cint): void {.raises: [], gcsafe.}
 type QTreeWidgetinitViewItemOptionProc* = proc(self: QTreeWidget, option: gen_qstyleoption_types.QStyleOptionViewItem): void {.raises: [], gcsafe.}
@@ -2026,7 +2026,7 @@ type QTreeWidgetVTable* {.inheritable, pure.} = object
   closeEditor*: QTreeWidgetcloseEditorProc
   commitData*: QTreeWidgetcommitDataProc
   editorDestroyed*: QTreeWidgeteditorDestroyedProc
-  edit2*: QTreeWidgetedit2Proc
+  editIndexTriggerEvent*: QTreeWidgeteditIndexTriggerEventProc
   selectionCommand*: QTreeWidgetselectionCommandProc
   startDrag*: QTreeWidgetstartDragProc
   initViewItemOption*: QTreeWidgetinitViewItemOptionProc
@@ -2266,7 +2266,7 @@ proc QTreeWidgeteditorDestroyed*(self: gen_qtreewidget_types.QTreeWidget, editor
   fcQTreeWidget_virtualbase_editorDestroyed(self.h, editor.h)
 
 proc QTreeWidgetedit*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTreeWidget_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQTreeWidget_virtualbase_editIndexTriggerEvent(self.h, index.h, cint(trigger), event.h)
 
 proc QTreeWidgetselectionCommand*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQTreeWidget_virtualbase_selectionCommand(self.h, index.h, event.h))
@@ -2823,13 +2823,13 @@ proc fcQTreeWidget_vtable_callback_editorDestroyed(self: pointer, editor: pointe
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
-proc fcQTreeWidget_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQTreeWidget_vtable_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].editIndexTriggerEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQTreeWidget_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
@@ -3679,7 +3679,7 @@ proc fcQTreeWidget_method_callback_editorDestroyed(self: pointer, editor: pointe
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
-proc fcQTreeWidget_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQTreeWidget_method_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -3975,7 +3975,7 @@ proc dropIndicatorPosition*(self: gen_qtreewidget_types.QTreeWidget): cint =
   cint(fcQTreeWidget_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qtreewidget_types.QTreeWidget, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQTreeWidget_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQTreeWidget_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qtreewidget_types.QTreeWidget): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQTreeWidget_protectedbase_viewportMargins(self.h), owned: true)
@@ -4133,8 +4133,8 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidget,
     vtbl[].vtbl.commitData = fcQTreeWidget_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQTreeWidget_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQTreeWidget_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQTreeWidget_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQTreeWidget_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -4342,8 +4342,8 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidget,
     vtbl[].vtbl.commitData = fcQTreeWidget_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQTreeWidget_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQTreeWidget_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQTreeWidget_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQTreeWidget_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -4491,7 +4491,7 @@ const cQTreeWidget_mvtbl = cQTreeWidgetVTable(
   closeEditor: fcQTreeWidget_method_callback_closeEditor,
   commitData: fcQTreeWidget_method_callback_commitData,
   editorDestroyed: fcQTreeWidget_method_callback_editorDestroyed,
-  edit2: fcQTreeWidget_method_callback_edit2,
+  editIndexTriggerEvent: fcQTreeWidget_method_callback_editIndexTriggerEvent,
   selectionCommand: fcQTreeWidget_method_callback_selectionCommand,
   startDrag: fcQTreeWidget_method_callback_startDrag,
   initViewItemOption: fcQTreeWidget_method_callback_initViewItemOption,

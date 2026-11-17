@@ -60,22 +60,22 @@ public:
 	}
 
 	virtual int indexOf(QWidget* widget) const override {
-		if (vtbl->indexOf == 0) {
+		if (vtbl->indexOf_widget == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 		QWidget* sigval1 = widget;
-		int callback_return_value = vtbl->indexOf(this, sigval1);
+		int callback_return_value = vtbl->indexOf_widget(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	virtual int indexOf(QLayoutItem* item) const override {
-		if (vtbl->indexOfWithItem == 0) {
+		if (vtbl->indexOf_item == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 		QLayoutItem* sigval1 = item;
-		int callback_return_value = vtbl->indexOfWithItem(this, sigval1);
+		int callback_return_value = vtbl->indexOf_item(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
@@ -169,25 +169,25 @@ public:
 	}
 
 	virtual int findItemAt(const QPoint& pos) const override {
-		if (vtbl->findItemAt == 0) {
+		if (vtbl->findItemAt_pos == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 		const QPoint& pos_ret = pos;
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&pos_ret);
-		int callback_return_value = vtbl->findItemAt(this, sigval1);
+		int callback_return_value = vtbl->findItemAt_pos(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	virtual int findItemAt(int row, int column) const override {
-		if (vtbl->findItemAt2 == 0) {
+		if (vtbl->findItemAt_row_column == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 		int sigval1 = row;
 		int sigval2 = column;
-		int callback_return_value = vtbl->findItemAt2(this, sigval1, sigval2);
+		int callback_return_value = vtbl->findItemAt_row_column(this, sigval1, sigval2);
 		return static_cast<int>(callback_return_value);
 	}
 
@@ -227,11 +227,11 @@ QRect* QDesignerLayoutDecorationExtension_itemInfo(const QDesignerLayoutDecorati
 	return new QRect(self->itemInfo(static_cast<int>(index)));
 }
 
-int QDesignerLayoutDecorationExtension_indexOf(const QDesignerLayoutDecorationExtension* self, QWidget* widget) {
+int QDesignerLayoutDecorationExtension_indexOf_widget(const QDesignerLayoutDecorationExtension* self, QWidget* widget) {
 	return self->indexOf(widget);
 }
 
-int QDesignerLayoutDecorationExtension_indexOfWithItem(const QDesignerLayoutDecorationExtension* self, QLayoutItem* item) {
+int QDesignerLayoutDecorationExtension_indexOf_item(const QDesignerLayoutDecorationExtension* self, QLayoutItem* item) {
 	return self->indexOf(item);
 }
 
@@ -283,11 +283,11 @@ void QDesignerLayoutDecorationExtension_simplify(QDesignerLayoutDecorationExtens
 	self->simplify();
 }
 
-int QDesignerLayoutDecorationExtension_findItemAt(const QDesignerLayoutDecorationExtension* self, QPoint* pos) {
+int QDesignerLayoutDecorationExtension_findItemAt_pos(const QDesignerLayoutDecorationExtension* self, QPoint* pos) {
 	return self->findItemAt(*pos);
 }
 
-int QDesignerLayoutDecorationExtension_findItemAt2(const QDesignerLayoutDecorationExtension* self, int row, int column) {
+int QDesignerLayoutDecorationExtension_findItemAt_row_column(const QDesignerLayoutDecorationExtension* self, int row, int column) {
 	return self->findItemAt(static_cast<int>(row), static_cast<int>(column));
 }
 

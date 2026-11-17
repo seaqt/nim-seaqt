@@ -54,16 +54,16 @@ void* QAccessiblePlugin_vdata(VirtualQAccessiblePlugin* self);
 VirtualQAccessiblePlugin* vdata_QAccessiblePlugin(void* vdata);
 
 VirtualQAccessiblePlugin* QAccessiblePlugin_new(const QAccessiblePlugin_VTable* vtbl, size_t vdata);
-VirtualQAccessiblePlugin* QAccessiblePlugin_new2(const QAccessiblePlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAccessiblePlugin* QAccessiblePlugin_new_parent(const QAccessiblePlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAccessiblePlugin_virtbase(QAccessiblePlugin* src, QObject** outptr_QObject);
 QMetaObject* QAccessiblePlugin_metaObject(const QAccessiblePlugin* self);
 void* QAccessiblePlugin_metacast(QAccessiblePlugin* self, const char* param1);
 int QAccessiblePlugin_metacall(QAccessiblePlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QAccessiblePlugin_tr(const char* s);
+struct seaqt_string QAccessiblePlugin_tr_s(const char* s);
 QAccessibleInterface* QAccessiblePlugin_create(QAccessiblePlugin* self, struct seaqt_string key, QObject* object);
-struct seaqt_string QAccessiblePlugin_tr2(const char* s, const char* c);
-struct seaqt_string QAccessiblePlugin_tr3(const char* s, const char* c, int n);
+struct seaqt_string QAccessiblePlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAccessiblePlugin_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAccessiblePlugin_virtualbase_metaObject(const VirtualQAccessiblePlugin* self);
 void* QAccessiblePlugin_virtualbase_metacast(VirtualQAccessiblePlugin* self, const char* param1);

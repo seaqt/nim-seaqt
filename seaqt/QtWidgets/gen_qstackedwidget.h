@@ -148,13 +148,13 @@ void* QStackedWidget_vdata(VirtualQStackedWidget* self);
 VirtualQStackedWidget* vdata_QStackedWidget(void* vdata);
 
 VirtualQStackedWidget* QStackedWidget_new(const QStackedWidget_VTable* vtbl, size_t vdata);
-VirtualQStackedWidget* QStackedWidget_new2(const QStackedWidget_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQStackedWidget* QStackedWidget_new_parent(const QStackedWidget_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QStackedWidget_virtbase(QStackedWidget* src, QFrame** outptr_QFrame);
 QMetaObject* QStackedWidget_metaObject(const QStackedWidget* self);
 void* QStackedWidget_metacast(QStackedWidget* self, const char* param1);
 int QStackedWidget_metacall(QStackedWidget* self, int param1, int param2, void** param3);
-struct seaqt_string QStackedWidget_tr(const char* s);
+struct seaqt_string QStackedWidget_tr_s(const char* s);
 int QStackedWidget_addWidget(QStackedWidget* self, QWidget* w);
 int QStackedWidget_insertWidget(QStackedWidget* self, int index, QWidget* w);
 void QStackedWidget_removeWidget(QStackedWidget* self, QWidget* w);
@@ -170,8 +170,8 @@ void QStackedWidget_connect_currentChanged(QStackedWidget* self, intptr_t slot, 
 void QStackedWidget_widgetRemoved(QStackedWidget* self, int index);
 void QStackedWidget_connect_widgetRemoved(QStackedWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 bool QStackedWidget_event(QStackedWidget* self, QEvent* e);
-struct seaqt_string QStackedWidget_tr2(const char* s, const char* c);
-struct seaqt_string QStackedWidget_tr3(const char* s, const char* c, int n);
+struct seaqt_string QStackedWidget_tr_s_c(const char* s, const char* c);
+struct seaqt_string QStackedWidget_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QStackedWidget_virtualbase_metaObject(const VirtualQStackedWidget* self);
 void* QStackedWidget_virtualbase_metacast(VirtualQStackedWidget* self, const char* param1);

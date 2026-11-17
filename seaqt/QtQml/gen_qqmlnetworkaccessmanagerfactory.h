@@ -20,7 +20,7 @@ class QQmlNetworkAccessManagerFactory;
 typedef struct QQmlNetworkAccessManagerFactory QQmlNetworkAccessManagerFactory;
 #endif
 
-void QQmlNetworkAccessManagerFactory_operatorAssign(QQmlNetworkAccessManagerFactory* self, QQmlNetworkAccessManagerFactory* param1);
+void QQmlNetworkAccessManagerFactory_operatorAssign(QQmlNetworkAccessManagerFactory* self, QQmlNetworkAccessManagerFactory* from);
 
 void QQmlNetworkAccessManagerFactory_delete(QQmlNetworkAccessManagerFactory* self);
 

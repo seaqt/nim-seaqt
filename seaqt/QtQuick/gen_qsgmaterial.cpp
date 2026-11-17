@@ -81,11 +81,11 @@ int QSGMaterial_flags(const QSGMaterial* self) {
 	return static_cast<int>(_ret);
 }
 
-void QSGMaterial_setFlag(QSGMaterial* self, int flags) {
+void QSGMaterial_setFlag_flags(QSGMaterial* self, int flags) {
 	self->setFlag(static_cast<QSGMaterial::Flags>(flags));
 }
 
-void QSGMaterial_setFlag2(QSGMaterial* self, int flags, bool on) {
+void QSGMaterial_setFlag_flags_on(QSGMaterial* self, int flags, bool on) {
 	self->setFlag(static_cast<QSGMaterial::Flags>(flags), on);
 }
 

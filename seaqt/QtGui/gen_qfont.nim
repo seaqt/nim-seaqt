@@ -185,7 +185,7 @@ proc fcQFont_kerning(self: pointer): bool {.importc: "QFont_kerning".}
 proc fcQFont_setKerning(self: pointer, kerning: bool): void {.importc: "QFont_setKerning".}
 proc fcQFont_styleHint(self: pointer): cint {.importc: "QFont_styleHint".}
 proc fcQFont_styleStrategy(self: pointer): cint {.importc: "QFont_styleStrategy".}
-proc fcQFont_setStyleHint(self: pointer, param1: cint): void {.importc: "QFont_setStyleHint".}
+proc fcQFont_setStyleHint_QFont_StyleHint(self: pointer, param1: cint): void {.importc: "QFont_setStyleHint_QFont_StyleHint".}
 proc fcQFont_setStyleStrategy(self: pointer, s: cint): void {.importc: "QFont_setStyleStrategy".}
 proc fcQFont_stretch(self: pointer): cint {.importc: "QFont_stretch".}
 proc fcQFont_setStretch(self: pointer, stretch: cint): void {.importc: "QFont_setStretch".}
@@ -199,7 +199,7 @@ proc fcQFont_capitalization(self: pointer): cint {.importc: "QFont_capitalizatio
 proc fcQFont_setHintingPreference(self: pointer, hintingPreference: cint): void {.importc: "QFont_setHintingPreference".}
 proc fcQFont_hintingPreference(self: pointer): cint {.importc: "QFont_hintingPreference".}
 proc fcQFont_exactMatch(self: pointer): bool {.importc: "QFont_exactMatch".}
-proc fcQFont_operatorAssign(self: pointer, param1: pointer): void {.importc: "QFont_operatorAssign".}
+proc fcQFont_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QFont_operatorAssign".}
 proc fcQFont_operatorEqual(self: pointer, param1: pointer): bool {.importc: "QFont_operatorEqual".}
 proc fcQFont_operatorNotEqual(self: pointer, param1: pointer): bool {.importc: "QFont_operatorNotEqual".}
 proc fcQFont_operatorLesser(self: pointer, param1: pointer): bool {.importc: "QFont_operatorLesser".}
@@ -223,18 +223,18 @@ proc fcQFont_resolveMask(self: pointer): cuint {.importc: "QFont_resolveMask".}
 proc fcQFont_setResolveMask(self: pointer, mask: cuint): void {.importc: "QFont_setResolveMask".}
 proc fcQFont_setLegacyWeight(self: pointer, legacyWeight: cint): void {.importc: "QFont_setLegacyWeight".}
 proc fcQFont_legacyWeight(self: pointer): cint {.importc: "QFont_legacyWeight".}
-proc fcQFont_setStyleHint2(self: pointer, param1: cint, param2: cint): void {.importc: "QFont_setStyleHint2".}
+proc fcQFont_setStyleHint_QFont_StyleHint_QFont_StyleStrategy(self: pointer, param1: cint, param2: cint): void {.importc: "QFont_setStyleHint_QFont_StyleHint_QFont_StyleStrategy".}
 proc fcQFont_new(): ptr cQFont {.importc: "QFont_new".}
-proc fcQFont_new2(family: struct_seaqt_string): ptr cQFont {.importc: "QFont_new2".}
-proc fcQFont_new3(families: struct_seaqt_array): ptr cQFont {.importc: "QFont_new3".}
-proc fcQFont_new4(font: pointer, pd: pointer): ptr cQFont {.importc: "QFont_new4".}
-proc fcQFont_new5(font: pointer): ptr cQFont {.importc: "QFont_new5".}
-proc fcQFont_new6(family: struct_seaqt_string, pointSize: cint): ptr cQFont {.importc: "QFont_new6".}
-proc fcQFont_new7(family: struct_seaqt_string, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new7".}
-proc fcQFont_new8(family: struct_seaqt_string, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new8".}
-proc fcQFont_new9(families: struct_seaqt_array, pointSize: cint): ptr cQFont {.importc: "QFont_new9".}
-proc fcQFont_new10(families: struct_seaqt_array, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new10".}
-proc fcQFont_new11(families: struct_seaqt_array, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new11".}
+proc fcQFont_new2(family: struct_seaqt_string): ptr cQFont {.importc: "QFont_new_family".}
+proc fcQFont_new3(families: struct_seaqt_array): ptr cQFont {.importc: "QFont_new_families".}
+proc fcQFont_new4(font: pointer, pd: pointer): ptr cQFont {.importc: "QFont_new_font_pd".}
+proc fcQFont_new5(fromVal: pointer): ptr cQFont {.importc: "QFont_new_from".}
+proc fcQFont_new6(family: struct_seaqt_string, pointSize: cint): ptr cQFont {.importc: "QFont_new_family_pointSize".}
+proc fcQFont_new7(family: struct_seaqt_string, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new_family_pointSize_weight".}
+proc fcQFont_new8(family: struct_seaqt_string, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new_family_pointSize_weight_italic".}
+proc fcQFont_new9(families: struct_seaqt_array, pointSize: cint): ptr cQFont {.importc: "QFont_new_families_pointSize".}
+proc fcQFont_new10(families: struct_seaqt_array, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new_families_pointSize_weight".}
+proc fcQFont_new11(families: struct_seaqt_array, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new_families_pointSize_weight_italic".}
 proc fcQFont_staticMetaObject(): pointer {.importc: "QFont_staticMetaObject".}
 
 proc swap*(self: gen_qfont_types.QFont, other: gen_qfont_types.QFont): void =
@@ -356,7 +356,7 @@ proc styleStrategy*(self: gen_qfont_types.QFont): cint =
   cint(fcQFont_styleStrategy(self.h))
 
 proc setStyleHint*(self: gen_qfont_types.QFont, param1: cint): void =
-  fcQFont_setStyleHint(self.h, cint(param1))
+  fcQFont_setStyleHint_QFont_StyleHint(self.h, cint(param1))
 
 proc setStyleStrategy*(self: gen_qfont_types.QFont, s: cint): void =
   fcQFont_setStyleStrategy(self.h, cint(s))
@@ -397,8 +397,8 @@ proc hintingPreference*(self: gen_qfont_types.QFont): cint =
 proc exactMatch*(self: gen_qfont_types.QFont): bool =
   fcQFont_exactMatch(self.h)
 
-proc operatorAssign*(self: gen_qfont_types.QFont, param1: gen_qfont_types.QFont): void =
-  fcQFont_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qfont_types.QFont, fromVal: gen_qfont_types.QFont): void =
+  fcQFont_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qfont_types.QFont, param1: gen_qfont_types.QFont): bool =
   fcQFont_operatorEqual(self.h, param1.h)
@@ -504,7 +504,7 @@ proc legacyWeight*(self: gen_qfont_types.QFont): cint =
   fcQFont_legacyWeight(self.h)
 
 proc setStyleHint*(self: gen_qfont_types.QFont, param1: cint, param2: cint): void =
-  fcQFont_setStyleHint2(self.h, cint(param1), cint(param2))
+  fcQFont_setStyleHint_QFont_StyleHint_QFont_StyleStrategy(self.h, cint(param1), cint(param2))
 
 proc create*(T: type gen_qfont_types.QFont): gen_qfont_types.QFont =
   let tmp = gen_qfont_types.QFont(h: fcQFont_new(), owned: true)
@@ -526,8 +526,8 @@ proc create*(T: type gen_qfont_types.QFont,
   let tmp = gen_qfont_types.QFont(h: fcQFont_new4(font.h, pd.h), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
-    font: gen_qfont_types.QFont): gen_qfont_types.QFont =
-  let tmp = gen_qfont_types.QFont(h: fcQFont_new5(font.h), owned: true)
+    fromVal: gen_qfont_types.QFont): gen_qfont_types.QFont =
+  let tmp = gen_qfont_types.QFont(h: fcQFont_new5(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
     family: openArray[char], pointSize: cint): gen_qfont_types.QFont =

@@ -59,10 +59,10 @@ type cQQuickTextDocument*{.exportc: "QQuickTextDocument", incompleteStruct.} = o
 proc fcQQuickTextDocument_metaObject(self: pointer): pointer {.importc: "QQuickTextDocument_metaObject".}
 proc fcQQuickTextDocument_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickTextDocument_metacast".}
 proc fcQQuickTextDocument_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickTextDocument_metacall".}
-proc fcQQuickTextDocument_tr(s: cstring): struct_seaqt_string {.importc: "QQuickTextDocument_tr".}
+proc fcQQuickTextDocument_trS(s: cstring): struct_seaqt_string {.importc: "QQuickTextDocument_tr_s".}
 proc fcQQuickTextDocument_textDocument(self: pointer): pointer {.importc: "QQuickTextDocument_textDocument".}
-proc fcQQuickTextDocument_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickTextDocument_tr2".}
-proc fcQQuickTextDocument_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickTextDocument_tr3".}
+proc fcQQuickTextDocument_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickTextDocument_tr_s_c".}
+proc fcQQuickTextDocument_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickTextDocument_tr_s_c_n".}
 proc fcQQuickTextDocument_vdata(self: pointer): ptr pointer {.importc: "QQuickTextDocument_vdata".}
 proc fvdata_cQQuickTextDocument(self: pointer): pointer {.importc: "vdata_QQuickTextDocument".}
 
@@ -105,7 +105,7 @@ proc metacall*(self: gen_qquicktextdocument_types.QQuickTextDocument, param1: ci
   fcQQuickTextDocument_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquicktextdocument_types.QQuickTextDocument, s: cstring): string =
-  let v_ms = fcQQuickTextDocument_tr(s)
+  let v_ms = fcQQuickTextDocument_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -114,13 +114,13 @@ proc textDocument*(self: gen_qquicktextdocument_types.QQuickTextDocument): gen_q
   gen_qtextdocument_types.QTextDocument(h: fcQQuickTextDocument_textDocument(self.h), owned: false)
 
 proc tr*(_: type gen_qquicktextdocument_types.QQuickTextDocument, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickTextDocument_tr2(s, c)
+  let v_ms = fcQQuickTextDocument_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquicktextdocument_types.QQuickTextDocument, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickTextDocument_tr3(s, c, n)
+  let v_ms = fcQQuickTextDocument_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

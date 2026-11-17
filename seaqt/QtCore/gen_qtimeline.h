@@ -54,14 +54,14 @@ void* QTimeLine_vdata(VirtualQTimeLine* self);
 VirtualQTimeLine* vdata_QTimeLine(void* vdata);
 
 VirtualQTimeLine* QTimeLine_new(const QTimeLine_VTable* vtbl, size_t vdata);
-VirtualQTimeLine* QTimeLine_new2(const QTimeLine_VTable* vtbl, size_t vdata, int duration);
-VirtualQTimeLine* QTimeLine_new3(const QTimeLine_VTable* vtbl, size_t vdata, int duration, QObject* parent);
+VirtualQTimeLine* QTimeLine_new_duration(const QTimeLine_VTable* vtbl, size_t vdata, int duration);
+VirtualQTimeLine* QTimeLine_new_duration_parent(const QTimeLine_VTable* vtbl, size_t vdata, int duration, QObject* parent);
 
 void QTimeLine_virtbase(QTimeLine* src, QObject** outptr_QObject);
 QMetaObject* QTimeLine_metaObject(const QTimeLine* self);
 void* QTimeLine_metacast(QTimeLine* self, const char* param1);
 int QTimeLine_metacall(QTimeLine* self, int param1, int param2, void** param3);
-struct seaqt_string QTimeLine_tr(const char* s);
+struct seaqt_string QTimeLine_tr_s(const char* s);
 int QTimeLine_state(const QTimeLine* self);
 int QTimeLine_loopCount(const QTimeLine* self);
 void QTimeLine_setLoopCount(QTimeLine* self, int count);
@@ -90,8 +90,8 @@ void QTimeLine_setPaused(QTimeLine* self, bool paused);
 void QTimeLine_setCurrentTime(QTimeLine* self, int msec);
 void QTimeLine_toggleDirection(QTimeLine* self);
 void QTimeLine_timerEvent(QTimeLine* self, QTimerEvent* event);
-struct seaqt_string QTimeLine_tr2(const char* s, const char* c);
-struct seaqt_string QTimeLine_tr3(const char* s, const char* c, int n);
+struct seaqt_string QTimeLine_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTimeLine_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QTimeLine_virtualbase_metaObject(const VirtualQTimeLine* self);
 void* QTimeLine_virtualbase_metacast(VirtualQTimeLine* self, const char* param1);

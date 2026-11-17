@@ -59,9 +59,9 @@ type cQFinalState*{.exportc: "QFinalState", incompleteStruct.} = object
 proc fcQFinalState_metaObject(self: pointer): pointer {.importc: "QFinalState_metaObject".}
 proc fcQFinalState_metacast(self: pointer, param1: cstring): pointer {.importc: "QFinalState_metacast".}
 proc fcQFinalState_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFinalState_metacall".}
-proc fcQFinalState_tr(s: cstring): struct_seaqt_string {.importc: "QFinalState_tr".}
-proc fcQFinalState_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFinalState_tr2".}
-proc fcQFinalState_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFinalState_tr3".}
+proc fcQFinalState_trS(s: cstring): struct_seaqt_string {.importc: "QFinalState_tr_s".}
+proc fcQFinalState_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFinalState_tr_s_c".}
+proc fcQFinalState_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFinalState_tr_s_c_n".}
 proc fcQFinalState_vdata(self: pointer): ptr pointer {.importc: "QFinalState_vdata".}
 proc fvdata_cQFinalState(self: pointer): pointer {.importc: "vdata_QFinalState".}
 
@@ -96,7 +96,7 @@ proc fcQFinalState_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQFinalState_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFinalState_protectedbase_receivers".}
 proc fcQFinalState_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFinalState_protectedbase_isSignalConnected".}
 proc fcQFinalState_new(vtbl: pointer, vdata: csize_t): ptr cQFinalState {.importc: "QFinalState_new".}
-proc fcQFinalState_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFinalState {.importc: "QFinalState_new2".}
+proc fcQFinalState_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFinalState {.importc: "QFinalState_new_parent".}
 proc fcQFinalState_staticMetaObject(): pointer {.importc: "QFinalState_staticMetaObject".}
 
 proc metaObject*(self: gen_qfinalstate_types.QFinalState): gen_qobjectdefs_types.QMetaObject =
@@ -109,19 +109,19 @@ proc metacall*(self: gen_qfinalstate_types.QFinalState, param1: cint, param2: ci
   fcQFinalState_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfinalstate_types.QFinalState, s: cstring): string =
-  let v_ms = fcQFinalState_tr(s)
+  let v_ms = fcQFinalState_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfinalstate_types.QFinalState, s: cstring, c: cstring): string =
-  let v_ms = fcQFinalState_tr2(s, c)
+  let v_ms = fcQFinalState_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfinalstate_types.QFinalState, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFinalState_tr3(s, c, n)
+  let v_ms = fcQFinalState_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -182,7 +182,7 @@ VirtualQObject* QObject_new(const QObject_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQObject(vtbl) : nullptr;
 }
 
-VirtualQObject* QObject_new2(const QObject_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQObject* QObject_new_parent(const QObject_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQObject>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQObject(vtbl, parent) : nullptr;
 }
@@ -199,7 +199,7 @@ int QObject_metacall(QObject* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QObject_tr(const char* s) {
+struct seaqt_string QObject_tr_s(const char* s) {
 	QString _ret = QObject::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -262,7 +262,7 @@ void QObject_moveToThread(QObject* self, QThread* thread) {
 	self->moveToThread(thread);
 }
 
-int QObject_startTimer(QObject* self, int interval) {
+int QObject_startTimer_interval(QObject* self, int interval) {
 	return self->startTimer(static_cast<int>(interval));
 }
 
@@ -295,19 +295,19 @@ void QObject_removeEventFilter(QObject* self, QObject* obj) {
 	self->removeEventFilter(obj);
 }
 
-QMetaObject__Connection* QObject_connect(QObject* sender, QMetaMethod* signal, QObject* receiver, QMetaMethod* method) {
+QMetaObject__Connection* QObject_connect_sender_signal_receiver_method(QObject* sender, QMetaMethod* signal, QObject* receiver, QMetaMethod* method) {
 	return new QMetaObject::Connection(QObject::connect(sender, *signal, receiver, *method));
 }
 
-QMetaObject__Connection* QObject_connect2(const QObject* self, QObject* sender, const char* signal, const char* member) {
+QMetaObject__Connection* QObject_connect_sender_signal_member(const QObject* self, QObject* sender, const char* signal, const char* member) {
 	return new QMetaObject::Connection(self->connect(sender, signal, member));
 }
 
-bool QObject_disconnect(QObject* sender, QMetaMethod* signal, QObject* receiver, QMetaMethod* member) {
+bool QObject_disconnect_QObject_QMetaMethod_QObject_QMetaMethod(QObject* sender, QMetaMethod* signal, QObject* receiver, QMetaMethod* member) {
 	return QObject::disconnect(sender, *signal, receiver, *member);
 }
 
-bool QObject_disconnectWithQMetaObjectConnection(QMetaObject__Connection* param1) {
+bool QObject_disconnect_QMetaObject_Connection(QMetaObject__Connection* param1) {
 	return QObject::disconnect(*param1);
 }
 
@@ -349,7 +349,7 @@ QBindingStorage* QObject_bindingStorage(QObject* self) {
 	return self->bindingStorage();
 }
 
-QBindingStorage* QObject_bindingStorage2(const QObject* self) {
+QBindingStorage* QObject_bindingStorage_const(const QObject* self) {
 	return (QBindingStorage*) self->bindingStorage();
 }
 
@@ -380,7 +380,7 @@ void QObject_deleteLater(QObject* self) {
 	self->deleteLater();
 }
 
-struct seaqt_string QObject_tr2(const char* s, const char* c) {
+struct seaqt_string QObject_tr_s_c(const char* s, const char* c) {
 	QString _ret = QObject::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -391,7 +391,7 @@ struct seaqt_string QObject_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QObject_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QObject_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QObject::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -402,23 +402,23 @@ struct seaqt_string QObject_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-int QObject_startTimer2(QObject* self, int interval, int timerType) {
+int QObject_startTimer_interval_timerType(QObject* self, int interval, int timerType) {
 	return self->startTimer(static_cast<int>(interval), static_cast<Qt::TimerType>(timerType));
 }
 
-QMetaObject__Connection* QObject_connect3(QObject* sender, QMetaMethod* signal, QObject* receiver, QMetaMethod* method, int type) {
+QMetaObject__Connection* QObject_connect_sender_signal_receiver_method_type(QObject* sender, QMetaMethod* signal, QObject* receiver, QMetaMethod* method, int type) {
 	return new QMetaObject::Connection(QObject::connect(sender, *signal, receiver, *method, static_cast<Qt::ConnectionType>(type)));
 }
 
-QMetaObject__Connection* QObject_connect4(const QObject* self, QObject* sender, const char* signal, const char* member, int type) {
+QMetaObject__Connection* QObject_connect_sender_signal_member_type(const QObject* self, QObject* sender, const char* signal, const char* member, int type) {
 	return new QMetaObject::Connection(self->connect(sender, signal, member, static_cast<Qt::ConnectionType>(type)));
 }
 
-void QObject_destroyedWithQObject(QObject* self, QObject* param1) {
+void QObject_destroyed_QObject(QObject* self, QObject* param1) {
 	self->destroyed(param1);
 }
 
-void QObject_connect_destroyedWithQObject(QObject* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
+void QObject_connect_destroyed_QObject(QObject* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QObject*);
@@ -504,11 +504,11 @@ void QObject_delete(QObject* self) {
 	delete self;
 }
 
-QSignalBlocker* QSignalBlocker_new(QObject* o) {
+QSignalBlocker* QSignalBlocker_new_pQObject(QObject* o) {
 	return new (std::nothrow) QSignalBlocker(o);
 }
 
-QSignalBlocker* QSignalBlocker_new2(QObject* o) {
+QSignalBlocker* QSignalBlocker_new_QObject(QObject* o) {
 	return new (std::nothrow) QSignalBlocker(*o);
 }
 

@@ -34,15 +34,15 @@ void QDesignerWidgetFactoryInterface_virtbase(QDesignerWidgetFactoryInterface* s
 QMetaObject* QDesignerWidgetFactoryInterface_metaObject(const QDesignerWidgetFactoryInterface* self);
 void* QDesignerWidgetFactoryInterface_metacast(QDesignerWidgetFactoryInterface* self, const char* param1);
 int QDesignerWidgetFactoryInterface_metacall(QDesignerWidgetFactoryInterface* self, int param1, int param2, void** param3);
-struct seaqt_string QDesignerWidgetFactoryInterface_tr(const char* s);
+struct seaqt_string QDesignerWidgetFactoryInterface_tr_s(const char* s);
 QWidget* QDesignerWidgetFactoryInterface_containerOfWidget(const QDesignerWidgetFactoryInterface* self, QWidget* w);
 QWidget* QDesignerWidgetFactoryInterface_widgetOfContainer(const QDesignerWidgetFactoryInterface* self, QWidget* w);
 QWidget* QDesignerWidgetFactoryInterface_createWidget(const QDesignerWidgetFactoryInterface* self, struct seaqt_string name, QWidget* parentWidget);
 QLayout* QDesignerWidgetFactoryInterface_createLayout(const QDesignerWidgetFactoryInterface* self, QWidget* widget, QLayout* layout, int type);
 bool QDesignerWidgetFactoryInterface_isPassiveInteractor(QDesignerWidgetFactoryInterface* self, QWidget* widget);
 void QDesignerWidgetFactoryInterface_initialize(const QDesignerWidgetFactoryInterface* self, QObject* object);
-struct seaqt_string QDesignerWidgetFactoryInterface_tr2(const char* s, const char* c);
-struct seaqt_string QDesignerWidgetFactoryInterface_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDesignerWidgetFactoryInterface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDesignerWidgetFactoryInterface_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QDesignerWidgetFactoryInterface_staticMetaObject();
 void QDesignerWidgetFactoryInterface_delete(QDesignerWidgetFactoryInterface* self);

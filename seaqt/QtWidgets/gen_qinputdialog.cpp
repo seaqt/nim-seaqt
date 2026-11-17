@@ -754,12 +754,12 @@ VirtualQInputDialog* QInputDialog_new(const QInputDialog_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQInputDialog(vtbl) : nullptr;
 }
 
-VirtualQInputDialog* QInputDialog_new2(const QInputDialog_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQInputDialog* QInputDialog_new_parent(const QInputDialog_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQInputDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQInputDialog(vtbl, parent) : nullptr;
 }
 
-VirtualQInputDialog* QInputDialog_new3(const QInputDialog_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
+VirtualQInputDialog* QInputDialog_new_parent_flags(const QInputDialog_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQInputDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQInputDialog(vtbl, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
@@ -780,7 +780,7 @@ int QInputDialog_metacall(QInputDialog* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QInputDialog_tr(const char* s) {
+struct seaqt_string QInputDialog_tr_s(const char* s) {
 	QString _ret = QInputDialog::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -816,7 +816,7 @@ struct seaqt_string QInputDialog_labelText(const QInputDialog* self) {
 	return _ms;
 }
 
-void QInputDialog_setOption(QInputDialog* self, int option) {
+void QInputDialog_setOption_option(QInputDialog* self, int option) {
 	self->setOption(static_cast<QInputDialog::InputDialogOption>(option));
 }
 
@@ -1013,7 +1013,7 @@ void QInputDialog_setVisible(QInputDialog* self, bool visible) {
 	self->setVisible(visible);
 }
 
-struct seaqt_string QInputDialog_getText(QWidget* parent, struct seaqt_string title, struct seaqt_string label) {
+struct seaqt_string QInputDialog_getText_parent_title_label(QWidget* parent, struct seaqt_string title, struct seaqt_string label) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString _ret = QInputDialog::getText(parent, title_QString, label_QString);
@@ -1026,7 +1026,7 @@ struct seaqt_string QInputDialog_getText(QWidget* parent, struct seaqt_string ti
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getMultiLineText(QWidget* parent, struct seaqt_string title, struct seaqt_string label) {
+struct seaqt_string QInputDialog_getMultiLineText_parent_title_label(QWidget* parent, struct seaqt_string title, struct seaqt_string label) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString _ret = QInputDialog::getMultiLineText(parent, title_QString, label_QString);
@@ -1039,7 +1039,7 @@ struct seaqt_string QInputDialog_getMultiLineText(QWidget* parent, struct seaqt_
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getItem(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items) {
+struct seaqt_string QInputDialog_getItem_parent_title_label_items(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QStringList items_QList;
@@ -1059,13 +1059,13 @@ struct seaqt_string QInputDialog_getItem(QWidget* parent, struct seaqt_string ti
 	return _ms;
 }
 
-int QInputDialog_getInt(QWidget* parent, struct seaqt_string title, struct seaqt_string label) {
+int QInputDialog_getInt_parent_title_label(QWidget* parent, struct seaqt_string title, struct seaqt_string label) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getInt(parent, title_QString, label_QString);
 }
 
-double QInputDialog_getDouble(QWidget* parent, struct seaqt_string title, struct seaqt_string label) {
+double QInputDialog_getDouble_parent_title_label(QWidget* parent, struct seaqt_string title, struct seaqt_string label) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getDouble(parent, title_QString, label_QString);
@@ -1195,7 +1195,7 @@ void QInputDialog_done(QInputDialog* self, int result) {
 	self->done(static_cast<int>(result));
 }
 
-struct seaqt_string QInputDialog_tr2(const char* s, const char* c) {
+struct seaqt_string QInputDialog_tr_s_c(const char* s, const char* c) {
 	QString _ret = QInputDialog::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1206,7 +1206,7 @@ struct seaqt_string QInputDialog_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QInputDialog_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QInputDialog::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1217,11 +1217,11 @@ struct seaqt_string QInputDialog_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QInputDialog_setOption2(QInputDialog* self, int option, bool on) {
+void QInputDialog_setOption_option_on(QInputDialog* self, int option, bool on) {
 	self->setOption(static_cast<QInputDialog::InputDialogOption>(option), on);
 }
 
-struct seaqt_string QInputDialog_getText2(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int echo) {
+struct seaqt_string QInputDialog_getText_parent_title_label_echo(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int echo) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString _ret = QInputDialog::getText(parent, title_QString, label_QString, static_cast<QLineEdit::EchoMode>(echo));
@@ -1234,7 +1234,7 @@ struct seaqt_string QInputDialog_getText2(QWidget* parent, struct seaqt_string t
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getText3(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int echo, struct seaqt_string text) {
+struct seaqt_string QInputDialog_getText_parent_title_label_echo_text(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int echo, struct seaqt_string text) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
@@ -1248,7 +1248,7 @@ struct seaqt_string QInputDialog_getText3(QWidget* parent, struct seaqt_string t
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getText4(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int echo, struct seaqt_string text, bool* ok) {
+struct seaqt_string QInputDialog_getText_parent_title_label_echo_text_ok(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int echo, struct seaqt_string text, bool* ok) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
@@ -1262,7 +1262,7 @@ struct seaqt_string QInputDialog_getText4(QWidget* parent, struct seaqt_string t
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getText5(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int echo, struct seaqt_string text, bool* ok, int flags) {
+struct seaqt_string QInputDialog_getText_parent_title_label_echo_text_ok_flags(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int echo, struct seaqt_string text, bool* ok, int flags) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
@@ -1276,7 +1276,7 @@ struct seaqt_string QInputDialog_getText5(QWidget* parent, struct seaqt_string t
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getText6(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int echo, struct seaqt_string text, bool* ok, int flags, int inputMethodHints) {
+struct seaqt_string QInputDialog_getText_parent_title_label_echo_text_ok_flags_inputMethodHints(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int echo, struct seaqt_string text, bool* ok, int flags, int inputMethodHints) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
@@ -1290,7 +1290,7 @@ struct seaqt_string QInputDialog_getText6(QWidget* parent, struct seaqt_string t
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getMultiLineText2(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_string text) {
+struct seaqt_string QInputDialog_getMultiLineText_parent_title_label_text(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_string text) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
@@ -1304,7 +1304,7 @@ struct seaqt_string QInputDialog_getMultiLineText2(QWidget* parent, struct seaqt
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getMultiLineText3(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_string text, bool* ok) {
+struct seaqt_string QInputDialog_getMultiLineText_parent_title_label_text_ok(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_string text, bool* ok) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
@@ -1318,7 +1318,7 @@ struct seaqt_string QInputDialog_getMultiLineText3(QWidget* parent, struct seaqt
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getMultiLineText4(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_string text, bool* ok, int flags) {
+struct seaqt_string QInputDialog_getMultiLineText_parent_title_label_text_ok_flags(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_string text, bool* ok, int flags) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
@@ -1332,7 +1332,7 @@ struct seaqt_string QInputDialog_getMultiLineText4(QWidget* parent, struct seaqt
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getMultiLineText5(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_string text, bool* ok, int flags, int inputMethodHints) {
+struct seaqt_string QInputDialog_getMultiLineText_parent_title_label_text_ok_flags_inputMethodHints(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_string text, bool* ok, int flags, int inputMethodHints) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
@@ -1346,7 +1346,7 @@ struct seaqt_string QInputDialog_getMultiLineText5(QWidget* parent, struct seaqt
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getItem2(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items, int current) {
+struct seaqt_string QInputDialog_getItem_parent_title_label_items_current(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items, int current) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QStringList items_QList;
@@ -1366,7 +1366,7 @@ struct seaqt_string QInputDialog_getItem2(QWidget* parent, struct seaqt_string t
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getItem3(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items, int current, bool editable) {
+struct seaqt_string QInputDialog_getItem_parent_title_label_items_current_editable(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items, int current, bool editable) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QStringList items_QList;
@@ -1386,7 +1386,7 @@ struct seaqt_string QInputDialog_getItem3(QWidget* parent, struct seaqt_string t
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getItem4(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items, int current, bool editable, bool* ok) {
+struct seaqt_string QInputDialog_getItem_parent_title_label_items_current_editable_ok(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items, int current, bool editable, bool* ok) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QStringList items_QList;
@@ -1406,7 +1406,7 @@ struct seaqt_string QInputDialog_getItem4(QWidget* parent, struct seaqt_string t
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getItem5(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items, int current, bool editable, bool* ok, int flags) {
+struct seaqt_string QInputDialog_getItem_parent_title_label_items_current_editable_ok_flags(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items, int current, bool editable, bool* ok, int flags) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QStringList items_QList;
@@ -1426,7 +1426,7 @@ struct seaqt_string QInputDialog_getItem5(QWidget* parent, struct seaqt_string t
 	return _ms;
 }
 
-struct seaqt_string QInputDialog_getItem6(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items, int current, bool editable, bool* ok, int flags, int inputMethodHints) {
+struct seaqt_string QInputDialog_getItem_parent_title_label_items_current_editable_ok_flags_inputMethodHints(QWidget* parent, struct seaqt_string title, struct seaqt_string label, struct seaqt_array /* of struct seaqt_string */  items, int current, bool editable, bool* ok, int flags, int inputMethodHints) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	QStringList items_QList;
@@ -1446,79 +1446,79 @@ struct seaqt_string QInputDialog_getItem6(QWidget* parent, struct seaqt_string t
 	return _ms;
 }
 
-int QInputDialog_getInt2(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value) {
+int QInputDialog_getInt_parent_title_label_value(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getInt(parent, title_QString, label_QString, static_cast<int>(value));
 }
 
-int QInputDialog_getInt3(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value, int minValue) {
+int QInputDialog_getInt_parent_title_label_value_minValue(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value, int minValue) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getInt(parent, title_QString, label_QString, static_cast<int>(value), static_cast<int>(minValue));
 }
 
-int QInputDialog_getInt4(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value, int minValue, int maxValue) {
+int QInputDialog_getInt_parent_title_label_value_minValue_maxValue(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value, int minValue, int maxValue) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getInt(parent, title_QString, label_QString, static_cast<int>(value), static_cast<int>(minValue), static_cast<int>(maxValue));
 }
 
-int QInputDialog_getInt5(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value, int minValue, int maxValue, int step) {
+int QInputDialog_getInt_parent_title_label_value_minValue_maxValue_step(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value, int minValue, int maxValue, int step) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getInt(parent, title_QString, label_QString, static_cast<int>(value), static_cast<int>(minValue), static_cast<int>(maxValue), static_cast<int>(step));
 }
 
-int QInputDialog_getInt6(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value, int minValue, int maxValue, int step, bool* ok) {
+int QInputDialog_getInt_parent_title_label_value_minValue_maxValue_step_ok(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value, int minValue, int maxValue, int step, bool* ok) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getInt(parent, title_QString, label_QString, static_cast<int>(value), static_cast<int>(minValue), static_cast<int>(maxValue), static_cast<int>(step), ok);
 }
 
-int QInputDialog_getInt7(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value, int minValue, int maxValue, int step, bool* ok, int flags) {
+int QInputDialog_getInt_parent_title_label_value_minValue_maxValue_step_ok_flags(QWidget* parent, struct seaqt_string title, struct seaqt_string label, int value, int minValue, int maxValue, int step, bool* ok, int flags) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getInt(parent, title_QString, label_QString, static_cast<int>(value), static_cast<int>(minValue), static_cast<int>(maxValue), static_cast<int>(step), ok, static_cast<Qt::WindowFlags>(flags));
 }
 
-double QInputDialog_getDouble2(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value) {
+double QInputDialog_getDouble_parent_title_label_value(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getDouble(parent, title_QString, label_QString, static_cast<double>(value));
 }
 
-double QInputDialog_getDouble3(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue) {
+double QInputDialog_getDouble_parent_title_label_value_minValue(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getDouble(parent, title_QString, label_QString, static_cast<double>(value), static_cast<double>(minValue));
 }
 
-double QInputDialog_getDouble4(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue, double maxValue) {
+double QInputDialog_getDouble_parent_title_label_value_minValue_maxValue(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue, double maxValue) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getDouble(parent, title_QString, label_QString, static_cast<double>(value), static_cast<double>(minValue), static_cast<double>(maxValue));
 }
 
-double QInputDialog_getDouble5(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue, double maxValue, int decimals) {
+double QInputDialog_getDouble_parent_title_label_value_minValue_maxValue_decimals(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue, double maxValue, int decimals) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getDouble(parent, title_QString, label_QString, static_cast<double>(value), static_cast<double>(minValue), static_cast<double>(maxValue), static_cast<int>(decimals));
 }
 
-double QInputDialog_getDouble6(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue, double maxValue, int decimals, bool* ok) {
+double QInputDialog_getDouble_parent_title_label_value_minValue_maxValue_decimals_ok(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue, double maxValue, int decimals, bool* ok) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getDouble(parent, title_QString, label_QString, static_cast<double>(value), static_cast<double>(minValue), static_cast<double>(maxValue), static_cast<int>(decimals), ok);
 }
 
-double QInputDialog_getDouble7(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue, double maxValue, int decimals, bool* ok, int flags) {
+double QInputDialog_getDouble_parent_title_label_value_minValue_maxValue_decimals_ok_flags(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue, double maxValue, int decimals, bool* ok, int flags) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getDouble(parent, title_QString, label_QString, static_cast<double>(value), static_cast<double>(minValue), static_cast<double>(maxValue), static_cast<int>(decimals), ok, static_cast<Qt::WindowFlags>(flags));
 }
 
-double QInputDialog_getDouble8(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue, double maxValue, int decimals, bool* ok, int flags, double step) {
+double QInputDialog_getDouble_parent_title_label_value_minValue_maxValue_decimals_ok_flags_step(QWidget* parent, struct seaqt_string title, struct seaqt_string label, double value, double minValue, double maxValue, int decimals, bool* ok, int flags, double step) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getDouble(parent, title_QString, label_QString, static_cast<double>(value), static_cast<double>(minValue), static_cast<double>(maxValue), static_cast<int>(decimals), ok, static_cast<Qt::WindowFlags>(flags), static_cast<double>(step));

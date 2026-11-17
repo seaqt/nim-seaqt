@@ -38,7 +38,7 @@ int QScroller_metacall(QScroller* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QScroller_tr(const char* s) {
+struct seaqt_string QScroller_tr_s(const char* s) {
 	QString _ret = QScroller::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -53,15 +53,15 @@ bool QScroller_hasScroller(QObject* target) {
 	return QScroller::hasScroller(target);
 }
 
-QScroller* QScroller_scroller(QObject* target) {
+QScroller* QScroller_scroller_pQObject(QObject* target) {
 	return QScroller::scroller(target);
 }
 
-QScroller* QScroller_scrollerWithTarget(QObject* target) {
+QScroller* QScroller_scroller_pcQObject(QObject* target) {
 	return (QScroller*) QScroller::scroller(target);
 }
 
-int QScroller_grabGesture(QObject* target) {
+int QScroller_grabGesture_target(QObject* target) {
 	Qt::GestureType _ret = QScroller::grabGesture(target);
 	return static_cast<int>(_ret);
 }
@@ -97,7 +97,7 @@ int QScroller_state(const QScroller* self) {
 	return static_cast<int>(_ret);
 }
 
-bool QScroller_handleInput(QScroller* self, int input, QPointF* position) {
+bool QScroller_handleInput_input_position(QScroller* self, int input, QPointF* position) {
 	return self->handleInput(static_cast<QScroller::Input>(input), *position);
 }
 
@@ -121,7 +121,7 @@ QScrollerProperties* QScroller_scrollerProperties(const QScroller* self) {
 	return new QScrollerProperties(self->scrollerProperties());
 }
 
-void QScroller_setSnapPositionsX(QScroller* self, struct seaqt_array /* of double */  positions) {
+void QScroller_setSnapPositionsX_positions(QScroller* self, struct seaqt_array /* of double */  positions) {
 	QList<qreal> positions_QList;
 	positions_QList.reserve(positions.len);
 	double* positions_arr = static_cast<double*>(positions.data);
@@ -131,11 +131,11 @@ void QScroller_setSnapPositionsX(QScroller* self, struct seaqt_array /* of doubl
 	self->setSnapPositionsX(positions_QList);
 }
 
-void QScroller_setSnapPositionsX2(QScroller* self, double first, double interval) {
+void QScroller_setSnapPositionsX_first_interval(QScroller* self, double first, double interval) {
 	self->setSnapPositionsX(static_cast<qreal>(first), static_cast<qreal>(interval));
 }
 
-void QScroller_setSnapPositionsY(QScroller* self, struct seaqt_array /* of double */  positions) {
+void QScroller_setSnapPositionsY_positions(QScroller* self, struct seaqt_array /* of double */  positions) {
 	QList<qreal> positions_QList;
 	positions_QList.reserve(positions.len);
 	double* positions_arr = static_cast<double*>(positions.data);
@@ -145,7 +145,7 @@ void QScroller_setSnapPositionsY(QScroller* self, struct seaqt_array /* of doubl
 	self->setSnapPositionsY(positions_QList);
 }
 
-void QScroller_setSnapPositionsY2(QScroller* self, double first, double interval) {
+void QScroller_setSnapPositionsY_first_interval(QScroller* self, double first, double interval) {
 	self->setSnapPositionsY(static_cast<qreal>(first), static_cast<qreal>(interval));
 }
 
@@ -153,19 +153,19 @@ void QScroller_setScrollerProperties(QScroller* self, QScrollerProperties* prop)
 	self->setScrollerProperties(*prop);
 }
 
-void QScroller_scrollTo(QScroller* self, QPointF* pos) {
+void QScroller_scrollTo_pos(QScroller* self, QPointF* pos) {
 	self->scrollTo(*pos);
 }
 
-void QScroller_scrollTo2(QScroller* self, QPointF* pos, int scrollTime) {
+void QScroller_scrollTo_pos_scrollTime(QScroller* self, QPointF* pos, int scrollTime) {
 	self->scrollTo(*pos, static_cast<int>(scrollTime));
 }
 
-void QScroller_ensureVisible(QScroller* self, QRectF* rect, double xmargin, double ymargin) {
+void QScroller_ensureVisible_rect_xmargin_ymargin(QScroller* self, QRectF* rect, double xmargin, double ymargin) {
 	self->ensureVisible(*rect, static_cast<qreal>(xmargin), static_cast<qreal>(ymargin));
 }
 
-void QScroller_ensureVisible2(QScroller* self, QRectF* rect, double xmargin, double ymargin, int scrollTime) {
+void QScroller_ensureVisible_rect_xmargin_ymargin_scrollTime(QScroller* self, QRectF* rect, double xmargin, double ymargin, int scrollTime) {
 	self->ensureVisible(*rect, static_cast<qreal>(xmargin), static_cast<qreal>(ymargin), static_cast<int>(scrollTime));
 }
 
@@ -208,7 +208,7 @@ void QScroller_connect_scrollerPropertiesChanged(QScroller* self, intptr_t slot,
 	QScroller::connect(self, static_cast<void (QScroller::*)(const QScrollerProperties&)>(&QScroller::scrollerPropertiesChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QScroller_tr2(const char* s, const char* c) {
+struct seaqt_string QScroller_tr_s_c(const char* s, const char* c) {
 	QString _ret = QScroller::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -219,7 +219,7 @@ struct seaqt_string QScroller_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QScroller_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QScroller_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QScroller::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -230,12 +230,12 @@ struct seaqt_string QScroller_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-int QScroller_grabGesture2(QObject* target, int gestureType) {
+int QScroller_grabGesture_target_gestureType(QObject* target, int gestureType) {
 	Qt::GestureType _ret = QScroller::grabGesture(target, static_cast<QScroller::ScrollerGestureType>(gestureType));
 	return static_cast<int>(_ret);
 }
 
-bool QScroller_handleInput2(QScroller* self, int input, QPointF* position, long long timestamp) {
+bool QScroller_handleInput_input_position_timestamp(QScroller* self, int input, QPointF* position, long long timestamp) {
 	return self->handleInput(static_cast<QScroller::Input>(input), *position, static_cast<qint64>(timestamp));
 }
 

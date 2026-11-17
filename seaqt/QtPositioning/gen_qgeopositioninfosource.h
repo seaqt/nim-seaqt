@@ -71,7 +71,7 @@ void QGeoPositionInfoSource_virtbase(QGeoPositionInfoSource* src, QObject** outp
 QMetaObject* QGeoPositionInfoSource_metaObject(const QGeoPositionInfoSource* self);
 void* QGeoPositionInfoSource_metacast(QGeoPositionInfoSource* self, const char* param1);
 int QGeoPositionInfoSource_metacall(QGeoPositionInfoSource* self, int param1, int param2, void** param3);
-struct seaqt_string QGeoPositionInfoSource_tr(const char* s);
+struct seaqt_string QGeoPositionInfoSource_tr_s(const char* s);
 void QGeoPositionInfoSource_setUpdateInterval(QGeoPositionInfoSource* self, int msec);
 int QGeoPositionInfoSource_updateInterval(const QGeoPositionInfoSource* self);
 void QGeoPositionInfoSource_setPreferredPositioningMethods(QGeoPositionInfoSource* self, int methods);
@@ -82,10 +82,10 @@ int QGeoPositionInfoSource_minimumUpdateInterval(const QGeoPositionInfoSource* s
 struct seaqt_string QGeoPositionInfoSource_sourceName(const QGeoPositionInfoSource* self);
 bool QGeoPositionInfoSource_setBackendProperty(QGeoPositionInfoSource* self, struct seaqt_string name, QVariant* value);
 QVariant* QGeoPositionInfoSource_backendProperty(const QGeoPositionInfoSource* self, struct seaqt_string name);
-QGeoPositionInfoSource* QGeoPositionInfoSource_createDefaultSource(QObject* parent);
-QGeoPositionInfoSource* QGeoPositionInfoSource_createDefaultSource2(struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent);
-QGeoPositionInfoSource* QGeoPositionInfoSource_createSource(struct seaqt_string sourceName, QObject* parent);
-QGeoPositionInfoSource* QGeoPositionInfoSource_createSource2(struct seaqt_string sourceName, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent);
+QGeoPositionInfoSource* QGeoPositionInfoSource_createDefaultSource_QObject(QObject* parent);
+QGeoPositionInfoSource* QGeoPositionInfoSource_createDefaultSource_QVariantMap_QObject(struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent);
+QGeoPositionInfoSource* QGeoPositionInfoSource_createSource_QString_QObject(struct seaqt_string sourceName, QObject* parent);
+QGeoPositionInfoSource* QGeoPositionInfoSource_createSource_QString_QVariantMap_QObject(struct seaqt_string sourceName, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent);
 struct seaqt_array /* of struct seaqt_string */  QGeoPositionInfoSource_availableSources();
 int QGeoPositionInfoSource_error(const QGeoPositionInfoSource* self);
 void QGeoPositionInfoSource_startUpdates(QGeoPositionInfoSource* self);
@@ -97,8 +97,8 @@ void QGeoPositionInfoSource_errorOccurred(QGeoPositionInfoSource* self, int para
 void QGeoPositionInfoSource_connect_errorOccurred(QGeoPositionInfoSource* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QGeoPositionInfoSource_supportedPositioningMethodsChanged(QGeoPositionInfoSource* self);
 void QGeoPositionInfoSource_connect_supportedPositioningMethodsChanged(QGeoPositionInfoSource* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QGeoPositionInfoSource_tr2(const char* s, const char* c);
-struct seaqt_string QGeoPositionInfoSource_tr3(const char* s, const char* c, int n);
+struct seaqt_string QGeoPositionInfoSource_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGeoPositionInfoSource_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGeoPositionInfoSource_virtualbase_metaObject(const VirtualQGeoPositionInfoSource* self);
 void* QGeoPositionInfoSource_virtualbase_metacast(VirtualQGeoPositionInfoSource* self, const char* param1);

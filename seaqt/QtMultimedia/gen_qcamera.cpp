@@ -180,27 +180,27 @@ VirtualQCamera* QCamera_new(const QCamera_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl) : nullptr;
 }
 
-VirtualQCamera* QCamera_new2(const QCamera_VTable* vtbl, size_t vdata, QCameraDevice* cameraDevice) {
+VirtualQCamera* QCamera_new_cameraDevice(const QCamera_VTable* vtbl, size_t vdata, QCameraDevice* cameraDevice) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, *cameraDevice) : nullptr;
 }
 
-VirtualQCamera* QCamera_new3(const QCamera_VTable* vtbl, size_t vdata, int position) {
+VirtualQCamera* QCamera_new_position(const QCamera_VTable* vtbl, size_t vdata, int position) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, static_cast<QCameraDevice::Position>(position)) : nullptr;
 }
 
-VirtualQCamera* QCamera_new4(const QCamera_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQCamera* QCamera_new_parent(const QCamera_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, parent) : nullptr;
 }
 
-VirtualQCamera* QCamera_new5(const QCamera_VTable* vtbl, size_t vdata, QCameraDevice* cameraDevice, QObject* parent) {
+VirtualQCamera* QCamera_new_cameraDevice_parent(const QCamera_VTable* vtbl, size_t vdata, QCameraDevice* cameraDevice, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, *cameraDevice, parent) : nullptr;
 }
 
-VirtualQCamera* QCamera_new6(const QCamera_VTable* vtbl, size_t vdata, int position, QObject* parent) {
+VirtualQCamera* QCamera_new_position_parent(const QCamera_VTable* vtbl, size_t vdata, int position, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, static_cast<QCameraDevice::Position>(position), parent) : nullptr;
 }
@@ -221,7 +221,7 @@ int QCamera_metacall(QCamera* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCamera_tr(const char* s) {
+struct seaqt_string QCamera_tr_s(const char* s) {
 	QString _ret = QCamera::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -908,7 +908,7 @@ void QCamera_connect_hueChanged(QCamera* self, intptr_t slot, void (*callback)(i
 	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::hueChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QCamera_tr2(const char* s, const char* c) {
+struct seaqt_string QCamera_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCamera::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -919,7 +919,7 @@ struct seaqt_string QCamera_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCamera_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCamera_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCamera::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

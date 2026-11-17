@@ -57,7 +57,7 @@ type cQSaveFile*{.exportc: "QSaveFile", incompleteStruct.} = object
 proc fcQSaveFile_metaObject(self: pointer): pointer {.importc: "QSaveFile_metaObject".}
 proc fcQSaveFile_metacast(self: pointer, param1: cstring): pointer {.importc: "QSaveFile_metacast".}
 proc fcQSaveFile_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSaveFile_metacall".}
-proc fcQSaveFile_tr(s: cstring): struct_seaqt_string {.importc: "QSaveFile_tr".}
+proc fcQSaveFile_trS(s: cstring): struct_seaqt_string {.importc: "QSaveFile_tr_s".}
 proc fcQSaveFile_fileName(self: pointer): struct_seaqt_string {.importc: "QSaveFile_fileName".}
 proc fcQSaveFile_setFileName(self: pointer, name: struct_seaqt_string): void {.importc: "QSaveFile_setFileName".}
 proc fcQSaveFile_open(self: pointer, flags: cint): bool {.importc: "QSaveFile_open".}
@@ -65,8 +65,8 @@ proc fcQSaveFile_commit(self: pointer): bool {.importc: "QSaveFile_commit".}
 proc fcQSaveFile_cancelWriting(self: pointer): void {.importc: "QSaveFile_cancelWriting".}
 proc fcQSaveFile_setDirectWriteFallback(self: pointer, enabled: bool): void {.importc: "QSaveFile_setDirectWriteFallback".}
 proc fcQSaveFile_directWriteFallback(self: pointer): bool {.importc: "QSaveFile_directWriteFallback".}
-proc fcQSaveFile_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSaveFile_tr2".}
-proc fcQSaveFile_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSaveFile_tr3".}
+proc fcQSaveFile_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSaveFile_tr_s_c".}
+proc fcQSaveFile_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSaveFile_tr_s_c_n".}
 proc fcQSaveFile_vdata(self: pointer): ptr pointer {.importc: "QSaveFile_vdata".}
 proc fvdata_cQSaveFile(self: pointer): pointer {.importc: "vdata_QSaveFile".}
 
@@ -138,10 +138,10 @@ proc fcQSaveFile_protectedbase_sender(self: pointer): pointer {.importc: "QSaveF
 proc fcQSaveFile_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSaveFile_protectedbase_senderSignalIndex".}
 proc fcQSaveFile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSaveFile_protectedbase_receivers".}
 proc fcQSaveFile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSaveFile_protectedbase_isSignalConnected".}
-proc fcQSaveFile_new(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string): ptr cQSaveFile {.importc: "QSaveFile_new".}
-proc fcQSaveFile_new2(vtbl: pointer, vdata: csize_t): ptr cQSaveFile {.importc: "QSaveFile_new2".}
-proc fcQSaveFile_new3(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new3".}
-proc fcQSaveFile_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new4".}
+proc fcQSaveFile_new(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string): ptr cQSaveFile {.importc: "QSaveFile_new_name".}
+proc fcQSaveFile_new2(vtbl: pointer, vdata: csize_t): ptr cQSaveFile {.importc: "QSaveFile_new".}
+proc fcQSaveFile_new3(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new_name_parent".}
+proc fcQSaveFile_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new_parent".}
 proc fcQSaveFile_staticMetaObject(): pointer {.importc: "QSaveFile_staticMetaObject".}
 
 proc metaObject*(self: gen_qsavefile_types.QSaveFile): gen_qobjectdefs_types.QMetaObject =
@@ -154,7 +154,7 @@ proc metacall*(self: gen_qsavefile_types.QSaveFile, param1: cint, param2: cint, 
   fcQSaveFile_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsavefile_types.QSaveFile, s: cstring): string =
-  let v_ms = fcQSaveFile_tr(s)
+  let v_ms = fcQSaveFile_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -184,13 +184,13 @@ proc directWriteFallback*(self: gen_qsavefile_types.QSaveFile): bool =
   fcQSaveFile_directWriteFallback(self.h)
 
 proc tr*(_: type gen_qsavefile_types.QSaveFile, s: cstring, c: cstring): string =
-  let v_ms = fcQSaveFile_tr2(s, c)
+  let v_ms = fcQSaveFile_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsavefile_types.QSaveFile, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSaveFile_tr3(s, c, n)
+  let v_ms = fcQSaveFile_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

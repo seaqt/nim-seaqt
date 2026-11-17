@@ -43,7 +43,7 @@ export
 
 type cQStorageInfo*{.exportc: "QStorageInfo", incompleteStruct.} = object
 
-proc fcQStorageInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QStorageInfo_operatorAssign".}
+proc fcQStorageInfo_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStorageInfo_operatorAssign".}
 proc fcQStorageInfo_swap(self: pointer, other: pointer): void {.importc: "QStorageInfo_swap".}
 proc fcQStorageInfo_setPath(self: pointer, path: struct_seaqt_string): void {.importc: "QStorageInfo_setPath".}
 proc fcQStorageInfo_rootPath(self: pointer): struct_seaqt_string {.importc: "QStorageInfo_rootPath".}
@@ -64,12 +64,12 @@ proc fcQStorageInfo_refresh(self: pointer): void {.importc: "QStorageInfo_refres
 proc fcQStorageInfo_mountedVolumes(): struct_seaqt_array {.importc: "QStorageInfo_mountedVolumes".}
 proc fcQStorageInfo_root(): pointer {.importc: "QStorageInfo_root".}
 proc fcQStorageInfo_new(): ptr cQStorageInfo {.importc: "QStorageInfo_new".}
-proc fcQStorageInfo_new2(path: struct_seaqt_string): ptr cQStorageInfo {.importc: "QStorageInfo_new2".}
-proc fcQStorageInfo_new3(dir: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new3".}
-proc fcQStorageInfo_new4(other: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new4".}
+proc fcQStorageInfo_new2(path: struct_seaqt_string): ptr cQStorageInfo {.importc: "QStorageInfo_new_path".}
+proc fcQStorageInfo_new3(dir: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new_dir".}
+proc fcQStorageInfo_new4(fromVal: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new_from".}
 
-proc operatorAssign*(self: gen_qstorageinfo_types.QStorageInfo, other: gen_qstorageinfo_types.QStorageInfo): void =
-  fcQStorageInfo_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qstorageinfo_types.QStorageInfo, fromVal: gen_qstorageinfo_types.QStorageInfo): void =
+  fcQStorageInfo_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qstorageinfo_types.QStorageInfo, other: gen_qstorageinfo_types.QStorageInfo): void =
   fcQStorageInfo_swap(self.h, other.h)
@@ -164,6 +164,6 @@ proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
   let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new3(dir.h), owned: true)
   tmp
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
-    other: gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
-  let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new4(other.h), owned: true)
+    fromVal: gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
+  let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new4(fromVal.h), owned: true)
   tmp

@@ -30,35 +30,35 @@ public:
 
 	void operator delete(void* p) { ::operator delete(p); }
 	virtual QIcon icon(QAbstractFileIconProvider::IconType type) const override {
-		if (vtbl->icon == 0) {
+		if (vtbl->icon_type == 0) {
 			return QFileIconProvider::icon(type);
 		}
 
 		QAbstractFileIconProvider::IconType type_ret = type;
 		int sigval1 = static_cast<int>(type_ret);
-		QIcon* callback_return_value = vtbl->icon(this, sigval1);
+		QIcon* callback_return_value = vtbl->icon_type(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 		return callback_return_value_Value;
 	}
 
-	friend QIcon* QFileIconProvider_virtualbase_icon(const VirtualQFileIconProvider* self, int type);
+	friend QIcon* QFileIconProvider_virtualbase_icon_type(const VirtualQFileIconProvider* self, int type);
 
 	virtual QIcon icon(const QFileInfo& info) const override {
-		if (vtbl->iconWithInfo == 0) {
+		if (vtbl->icon_info == 0) {
 			return QFileIconProvider::icon(info);
 		}
 
 		const QFileInfo& info_ret = info;
 		// Cast returned reference into pointer
 		QFileInfo* sigval1 = const_cast<QFileInfo*>(&info_ret);
-		QIcon* callback_return_value = vtbl->iconWithInfo(this, sigval1);
+		QIcon* callback_return_value = vtbl->icon_info(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 		return callback_return_value_Value;
 	}
 
-	friend QIcon* QFileIconProvider_virtualbase_iconWithInfo(const VirtualQFileIconProvider* self, QFileInfo* info);
+	friend QIcon* QFileIconProvider_virtualbase_icon_info(const VirtualQFileIconProvider* self, QFileInfo* info);
 
 	virtual QString type(const QFileInfo& param1) const override {
 		if (vtbl->type == 0) {
@@ -111,23 +111,23 @@ void QFileIconProvider_virtbase(QFileIconProvider* src, QAbstractFileIconProvide
 	*outptr_QAbstractFileIconProvider = static_cast<QAbstractFileIconProvider*>(src);
 }
 
-QIcon* QFileIconProvider_icon(const QFileIconProvider* self, int type) {
+QIcon* QFileIconProvider_icon_type(const QFileIconProvider* self, int type) {
 	return new QIcon(self->icon(static_cast<QAbstractFileIconProvider::IconType>(type)));
 }
 
-QIcon* QFileIconProvider_iconWithInfo(const QFileIconProvider* self, QFileInfo* info) {
+QIcon* QFileIconProvider_icon_info(const QFileIconProvider* self, QFileInfo* info) {
 	return new QIcon(self->icon(*info));
 }
 
 void* QFileIconProvider_vdata(VirtualQFileIconProvider* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQFileIconProvider>()); }
 VirtualQFileIconProvider* vdata_QFileIconProvider(void* vdata) { return reinterpret_cast<VirtualQFileIconProvider*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQFileIconProvider>()); }
 
-QIcon* QFileIconProvider_virtualbase_icon(const VirtualQFileIconProvider* self, int type) {
+QIcon* QFileIconProvider_virtualbase_icon_type(const VirtualQFileIconProvider* self, int type) {
 
 	return new QIcon(self->QFileIconProvider::icon(static_cast<VirtualQFileIconProvider::IconType>(type)));
 }
 
-QIcon* QFileIconProvider_virtualbase_iconWithInfo(const VirtualQFileIconProvider* self, QFileInfo* info) {
+QIcon* QFileIconProvider_virtualbase_icon_info(const VirtualQFileIconProvider* self, QFileInfo* info) {
 
 	return new QIcon(self->QFileIconProvider::icon(*info));
 }

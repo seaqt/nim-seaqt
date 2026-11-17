@@ -53,12 +53,12 @@ public:
 
 };
 
-VirtualQSGSimpleRectNode* QSGSimpleRectNode_new(const QSGSimpleRectNode_VTable* vtbl, size_t vdata, QRectF* rect, QColor* color) {
+VirtualQSGSimpleRectNode* QSGSimpleRectNode_new_rect_color(const QSGSimpleRectNode_VTable* vtbl, size_t vdata, QRectF* rect, QColor* color) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGSimpleRectNode>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSGSimpleRectNode(vtbl, *rect, *color) : nullptr;
 }
 
-VirtualQSGSimpleRectNode* QSGSimpleRectNode_new2(const QSGSimpleRectNode_VTable* vtbl, size_t vdata) {
+VirtualQSGSimpleRectNode* QSGSimpleRectNode_new(const QSGSimpleRectNode_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGSimpleRectNode>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSGSimpleRectNode(vtbl) : nullptr;
 }
@@ -67,11 +67,11 @@ void QSGSimpleRectNode_virtbase(QSGSimpleRectNode* src, QSGGeometryNode** outptr
 	*outptr_QSGGeometryNode = static_cast<QSGGeometryNode*>(src);
 }
 
-void QSGSimpleRectNode_setRect(QSGSimpleRectNode* self, QRectF* rect) {
+void QSGSimpleRectNode_setRect_rect(QSGSimpleRectNode* self, QRectF* rect) {
 	self->setRect(*rect);
 }
 
-void QSGSimpleRectNode_setRect2(QSGSimpleRectNode* self, double x, double y, double w, double h) {
+void QSGSimpleRectNode_setRect_x_y_w_h(QSGSimpleRectNode* self, double x, double y, double w, double h) {
 	self->setRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 

@@ -23,17 +23,17 @@ QStaticText* QStaticText_new() {
 	return new (std::nothrow) QStaticText();
 }
 
-QStaticText* QStaticText_new2(struct seaqt_string text) {
+QStaticText* QStaticText_new_text(struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return new (std::nothrow) QStaticText(text_QString);
 }
 
-QStaticText* QStaticText_new3(QStaticText* other) {
-	return new (std::nothrow) QStaticText(*other);
+QStaticText* QStaticText_new_from(QStaticText* from) {
+	return new (std::nothrow) QStaticText(*from);
 }
 
-void QStaticText_operatorAssign(QStaticText* self, QStaticText* param1) {
-	self->operator=(*param1);
+void QStaticText_operatorAssign(QStaticText* self, QStaticText* from) {
+	self->operator=(*from);
 }
 
 void QStaticText_swap(QStaticText* self, QStaticText* other) {
@@ -107,11 +107,11 @@ bool QStaticText_operatorNotEqual(const QStaticText* self, QStaticText* param1) 
 	return (*self != *param1);
 }
 
-void QStaticText_prepareWithMatrix(QStaticText* self, QTransform* matrix) {
+void QStaticText_prepare_matrix(QStaticText* self, QTransform* matrix) {
 	self->prepare(*matrix);
 }
 
-void QStaticText_prepare2(QStaticText* self, QTransform* matrix, QFont* font) {
+void QStaticText_prepare_matrix_font(QStaticText* self, QTransform* matrix, QFont* font) {
 	self->prepare(*matrix, *font);
 }
 

@@ -697,18 +697,18 @@ VirtualQSvgWidget* QSvgWidget_new(const QSvgWidget_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQSvgWidget(vtbl) : nullptr;
 }
 
-VirtualQSvgWidget* QSvgWidget_new2(const QSvgWidget_VTable* vtbl, size_t vdata, struct seaqt_string file) {
+VirtualQSvgWidget* QSvgWidget_new_file(const QSvgWidget_VTable* vtbl, size_t vdata, struct seaqt_string file) {
 	QString file_QString = QString::fromUtf8(file.data, file.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSvgWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSvgWidget(vtbl, file_QString) : nullptr;
 }
 
-VirtualQSvgWidget* QSvgWidget_new3(const QSvgWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQSvgWidget* QSvgWidget_new_parent(const QSvgWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSvgWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSvgWidget(vtbl, parent) : nullptr;
 }
 
-VirtualQSvgWidget* QSvgWidget_new4(const QSvgWidget_VTable* vtbl, size_t vdata, struct seaqt_string file, QWidget* parent) {
+VirtualQSvgWidget* QSvgWidget_new_file_parent(const QSvgWidget_VTable* vtbl, size_t vdata, struct seaqt_string file, QWidget* parent) {
 	QString file_QString = QString::fromUtf8(file.data, file.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSvgWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSvgWidget(vtbl, file_QString, parent) : nullptr;
@@ -730,7 +730,7 @@ int QSvgWidget_metacall(QSvgWidget* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSvgWidget_tr(const char* s) {
+struct seaqt_string QSvgWidget_tr_s(const char* s) {
 	QString _ret = QSvgWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -749,17 +749,17 @@ QSize* QSvgWidget_sizeHint(const QSvgWidget* self) {
 	return new QSize(self->sizeHint());
 }
 
-void QSvgWidget_load(QSvgWidget* self, struct seaqt_string file) {
+void QSvgWidget_load_file(QSvgWidget* self, struct seaqt_string file) {
 	QString file_QString = QString::fromUtf8(file.data, file.len);
 	self->load(file_QString);
 }
 
-void QSvgWidget_loadWithContents(QSvgWidget* self, struct seaqt_string contents) {
+void QSvgWidget_load_contents(QSvgWidget* self, struct seaqt_string contents) {
 	QByteArray contents_QByteArray(contents.data, contents.len);
 	self->load(contents_QByteArray);
 }
 
-struct seaqt_string QSvgWidget_tr2(const char* s, const char* c) {
+struct seaqt_string QSvgWidget_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSvgWidget::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -770,7 +770,7 @@ struct seaqt_string QSvgWidget_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSvgWidget_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSvgWidget_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSvgWidget::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

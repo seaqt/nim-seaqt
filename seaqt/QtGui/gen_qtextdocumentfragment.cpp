@@ -21,20 +21,20 @@ QTextDocumentFragment* QTextDocumentFragment_new() {
 	return new (std::nothrow) QTextDocumentFragment();
 }
 
-QTextDocumentFragment* QTextDocumentFragment_new2(QTextDocument* document) {
+QTextDocumentFragment* QTextDocumentFragment_new_document(QTextDocument* document) {
 	return new (std::nothrow) QTextDocumentFragment(document);
 }
 
-QTextDocumentFragment* QTextDocumentFragment_new3(QTextCursor* range) {
+QTextDocumentFragment* QTextDocumentFragment_new_range(QTextCursor* range) {
 	return new (std::nothrow) QTextDocumentFragment(*range);
 }
 
-QTextDocumentFragment* QTextDocumentFragment_new4(QTextDocumentFragment* rhs) {
-	return new (std::nothrow) QTextDocumentFragment(*rhs);
+QTextDocumentFragment* QTextDocumentFragment_new_from(QTextDocumentFragment* from) {
+	return new (std::nothrow) QTextDocumentFragment(*from);
 }
 
-void QTextDocumentFragment_operatorAssign(QTextDocumentFragment* self, QTextDocumentFragment* rhs) {
-	self->operator=(*rhs);
+void QTextDocumentFragment_operatorAssign(QTextDocumentFragment* self, QTextDocumentFragment* from) {
+	self->operator=(*from);
 }
 
 bool QTextDocumentFragment_isEmpty(const QTextDocumentFragment* self) {
@@ -90,17 +90,17 @@ QTextDocumentFragment* QTextDocumentFragment_fromPlainText(struct seaqt_string p
 	return new QTextDocumentFragment(QTextDocumentFragment::fromPlainText(plainText_QString));
 }
 
-QTextDocumentFragment* QTextDocumentFragment_fromHtml(struct seaqt_string html) {
+QTextDocumentFragment* QTextDocumentFragment_fromHtml_html(struct seaqt_string html) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	return new QTextDocumentFragment(QTextDocumentFragment::fromHtml(html_QString));
 }
 
-QTextDocumentFragment* QTextDocumentFragment_fromMarkdown(struct seaqt_string markdown) {
+QTextDocumentFragment* QTextDocumentFragment_fromMarkdown_markdown(struct seaqt_string markdown) {
 	QString markdown_QString = QString::fromUtf8(markdown.data, markdown.len);
 	return new QTextDocumentFragment(QTextDocumentFragment::fromMarkdown(markdown_QString));
 }
 
-struct seaqt_string QTextDocumentFragment_toMarkdownWithFeatures(const QTextDocumentFragment* self, int features) {
+struct seaqt_string QTextDocumentFragment_toMarkdown_features(const QTextDocumentFragment* self, int features) {
 	QString _ret = self->toMarkdown(static_cast<QTextDocument::MarkdownFeatures>(features));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -111,12 +111,12 @@ struct seaqt_string QTextDocumentFragment_toMarkdownWithFeatures(const QTextDocu
 	return _ms;
 }
 
-QTextDocumentFragment* QTextDocumentFragment_fromHtml2(struct seaqt_string html, QTextDocument* resourceProvider) {
+QTextDocumentFragment* QTextDocumentFragment_fromHtml_html_resourceProvider(struct seaqt_string html, QTextDocument* resourceProvider) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	return new QTextDocumentFragment(QTextDocumentFragment::fromHtml(html_QString, resourceProvider));
 }
 
-QTextDocumentFragment* QTextDocumentFragment_fromMarkdown2(struct seaqt_string markdown, int features) {
+QTextDocumentFragment* QTextDocumentFragment_fromMarkdown_markdown_features(struct seaqt_string markdown, int features) {
 	QString markdown_QString = QString::fromUtf8(markdown.data, markdown.len);
 	return new QTextDocumentFragment(QTextDocumentFragment::fromMarkdown(markdown_QString, static_cast<QTextDocument::MarkdownFeatures>(features)));
 }
