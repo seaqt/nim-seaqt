@@ -8,7 +8,12 @@ const
   QtWebChannelGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
-  QtWebChannelBuildVersion* = gorge("pkg-config --modversion Qt6WebChannel")
-    ## The version used when compiling the application
+  QtWebChannelBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6WebChannel")
+      if v.len > 0: v else: QtWebChannelGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtWebChannelBuildVersion=x.y.z
 
 {.passl: QtWebChannelLibs}

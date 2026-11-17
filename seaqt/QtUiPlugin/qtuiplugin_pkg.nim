@@ -8,7 +8,12 @@ const
   QtUiPluginGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
-  QtUiPluginBuildVersion* = gorge("pkg-config --modversion Qt6UiPlugin")
-    ## The version used when compiling the application
+  QtUiPluginBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6UiPlugin")
+      if v.len > 0: v else: QtUiPluginGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtUiPluginBuildVersion=x.y.z
 
 {.passl: QtUiPluginLibs}

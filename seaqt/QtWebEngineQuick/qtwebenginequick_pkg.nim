@@ -8,7 +8,12 @@ const
   QtWebEngineQuickGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
-  QtWebEngineQuickBuildVersion* = gorge("pkg-config --modversion Qt6WebEngineQuick")
-    ## The version used when compiling the application
+  QtWebEngineQuickBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6WebEngineQuick")
+      if v.len > 0: v else: QtWebEngineQuickGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtWebEngineQuickBuildVersion=x.y.z
 
 {.passl: QtWebEngineQuickLibs}

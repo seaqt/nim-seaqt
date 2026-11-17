@@ -8,7 +8,12 @@ const
   QtWidgetsGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
-  QtWidgetsBuildVersion* = gorge("pkg-config --modversion Qt6Widgets")
-    ## The version used when compiling the application
+  QtWidgetsBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6Widgets")
+      if v.len > 0: v else: QtWidgetsGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtWidgetsBuildVersion=x.y.z
 
 {.passl: QtWidgetsLibs}
