@@ -2,7 +2,7 @@ import ./qtpdfwidgets_pkg
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_seaqt_string {.used.} = object
