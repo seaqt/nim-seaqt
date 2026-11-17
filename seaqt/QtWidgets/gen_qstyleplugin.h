@@ -54,19 +54,19 @@ void* QStylePlugin_vdata(VirtualQStylePlugin* self);
 VirtualQStylePlugin* vdata_QStylePlugin(void* vdata);
 
 VirtualQStylePlugin* QStylePlugin_new(const QStylePlugin_VTable* vtbl, size_t vdata);
-VirtualQStylePlugin* QStylePlugin_new2(const QStylePlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQStylePlugin* QStylePlugin_new_parent(const QStylePlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QStylePlugin_virtbase(QStylePlugin* src, QObject** outptr_QObject);
 QMetaObject* QStylePlugin_metaObject(const QStylePlugin* self);
 void* QStylePlugin_metacast(QStylePlugin* self, const char* param1);
 int QStylePlugin_metacall(QStylePlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QStylePlugin_tr(const char* s);
-struct seaqt_string QStylePlugin_trUtf8(const char* s);
+struct seaqt_string QStylePlugin_tr_s(const char* s);
+struct seaqt_string QStylePlugin_trUtf8_s(const char* s);
 QStyle* QStylePlugin_create(QStylePlugin* self, struct seaqt_string key);
-struct seaqt_string QStylePlugin_tr2(const char* s, const char* c);
-struct seaqt_string QStylePlugin_tr3(const char* s, const char* c, int n);
-struct seaqt_string QStylePlugin_trUtf82(const char* s, const char* c);
-struct seaqt_string QStylePlugin_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QStylePlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QStylePlugin_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QStylePlugin_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QStylePlugin_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QStylePlugin_virtualbase_metaObject(const VirtualQStylePlugin* self);
 void* QStylePlugin_virtualbase_metacast(VirtualQStylePlugin* self, const char* param1);

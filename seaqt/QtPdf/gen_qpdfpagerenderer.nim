@@ -68,24 +68,24 @@ type cQPdfPageRenderer*{.exportc: "QPdfPageRenderer", incompleteStruct.} = objec
 proc fcQPdfPageRenderer_metaObject(self: pointer): pointer {.importc: "QPdfPageRenderer_metaObject".}
 proc fcQPdfPageRenderer_metacast(self: pointer, param1: cstring): pointer {.importc: "QPdfPageRenderer_metacast".}
 proc fcQPdfPageRenderer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPdfPageRenderer_metacall".}
-proc fcQPdfPageRenderer_tr(s: cstring): struct_seaqt_string {.importc: "QPdfPageRenderer_tr".}
-proc fcQPdfPageRenderer_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPdfPageRenderer_trUtf8".}
+proc fcQPdfPageRenderer_trS(s: cstring): struct_seaqt_string {.importc: "QPdfPageRenderer_tr_s".}
+proc fcQPdfPageRenderer_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPdfPageRenderer_trUtf8_s".}
 proc fcQPdfPageRenderer_renderMode(self: pointer): cint {.importc: "QPdfPageRenderer_renderMode".}
 proc fcQPdfPageRenderer_setRenderMode(self: pointer, mode: cint): void {.importc: "QPdfPageRenderer_setRenderMode".}
 proc fcQPdfPageRenderer_document(self: pointer): pointer {.importc: "QPdfPageRenderer_document".}
 proc fcQPdfPageRenderer_setDocument(self: pointer, document: pointer): void {.importc: "QPdfPageRenderer_setDocument".}
-proc fcQPdfPageRenderer_requestPage(self: pointer, pageNumber: cint, imageSize: pointer): culonglong {.importc: "QPdfPageRenderer_requestPage".}
+proc fcQPdfPageRenderer_requestPagePageNumberImageSize(self: pointer, pageNumber: cint, imageSize: pointer): culonglong {.importc: "QPdfPageRenderer_requestPage_pageNumber_imageSize".}
 proc fcQPdfPageRenderer_documentChanged(self: pointer, document: pointer): void {.importc: "QPdfPageRenderer_documentChanged".}
 proc fcQPdfPageRenderer_connect_documentChanged(self: pointer, slot: int, callback: proc (slot: int, document: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfPageRenderer_connect_documentChanged".}
 proc fcQPdfPageRenderer_renderModeChanged(self: pointer, renderMode: cint): void {.importc: "QPdfPageRenderer_renderModeChanged".}
 proc fcQPdfPageRenderer_connect_renderModeChanged(self: pointer, slot: int, callback: proc (slot: int, renderMode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfPageRenderer_connect_renderModeChanged".}
 proc fcQPdfPageRenderer_pageRendered(self: pointer, pageNumber: cint, imageSize: pointer, image: pointer, options: pointer, requestId: culonglong): void {.importc: "QPdfPageRenderer_pageRendered".}
 proc fcQPdfPageRenderer_connect_pageRendered(self: pointer, slot: int, callback: proc (slot: int, pageNumber: cint, imageSize: pointer, image: pointer, options: pointer, requestId: culonglong) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfPageRenderer_connect_pageRendered".}
-proc fcQPdfPageRenderer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfPageRenderer_tr2".}
-proc fcQPdfPageRenderer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfPageRenderer_tr3".}
-proc fcQPdfPageRenderer_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfPageRenderer_trUtf82".}
-proc fcQPdfPageRenderer_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfPageRenderer_trUtf83".}
-proc fcQPdfPageRenderer_requestPage2(self: pointer, pageNumber: cint, imageSize: pointer, options: pointer): culonglong {.importc: "QPdfPageRenderer_requestPage2".}
+proc fcQPdfPageRenderer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfPageRenderer_tr_s_c".}
+proc fcQPdfPageRenderer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfPageRenderer_tr_s_c_n".}
+proc fcQPdfPageRenderer_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfPageRenderer_trUtf8_s_c".}
+proc fcQPdfPageRenderer_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfPageRenderer_trUtf8_s_c_n".}
+proc fcQPdfPageRenderer_requestPagePageNumberImageSizeOptions(self: pointer, pageNumber: cint, imageSize: pointer, options: pointer): culonglong {.importc: "QPdfPageRenderer_requestPage_pageNumber_imageSize_options".}
 proc fcQPdfPageRenderer_vdata(self: pointer): ptr pointer {.importc: "QPdfPageRenderer_vdata".}
 proc fvdata_cQPdfPageRenderer(self: pointer): pointer {.importc: "vdata_QPdfPageRenderer".}
 
@@ -116,7 +116,7 @@ proc fcQPdfPageRenderer_protectedbase_senderSignalIndex(self: pointer): cint {.i
 proc fcQPdfPageRenderer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPdfPageRenderer_protectedbase_receivers".}
 proc fcQPdfPageRenderer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPdfPageRenderer_protectedbase_isSignalConnected".}
 proc fcQPdfPageRenderer_new(vtbl: pointer, vdata: csize_t): ptr cQPdfPageRenderer {.importc: "QPdfPageRenderer_new".}
-proc fcQPdfPageRenderer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfPageRenderer {.importc: "QPdfPageRenderer_new2".}
+proc fcQPdfPageRenderer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfPageRenderer {.importc: "QPdfPageRenderer_new_parent".}
 proc fcQPdfPageRenderer_staticMetaObject(): pointer {.importc: "QPdfPageRenderer_staticMetaObject".}
 
 proc metaObject*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer): gen_qobjectdefs_types.QMetaObject =
@@ -129,13 +129,13 @@ proc metacall*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, param1: cint, 
   fcQPdfPageRenderer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpdfpagerenderer_types.QPdfPageRenderer, s: cstring): string =
-  let v_ms = fcQPdfPageRenderer_tr(s)
+  let v_ms = fcQPdfPageRenderer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfpagerenderer_types.QPdfPageRenderer, s: cstring): string =
-  let v_ms = fcQPdfPageRenderer_trUtf8(s)
+  let v_ms = fcQPdfPageRenderer_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -153,7 +153,7 @@ proc setDocument*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, document: g
   fcQPdfPageRenderer_setDocument(self.h, document.h)
 
 proc requestPage*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, pageNumber: cint, imageSize: gen_qsize_types.QSize): culonglong =
-  fcQPdfPageRenderer_requestPage(self.h, pageNumber, imageSize.h)
+  fcQPdfPageRenderer_requestPagePageNumberImageSize(self.h, pageNumber, imageSize.h)
 
 proc documentChanged*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, document: gen_qpdfdocument_types.QPdfDocument): void =
   fcQPdfPageRenderer_documentChanged(self.h, document.h)
@@ -224,31 +224,31 @@ proc onPageRendered*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, slot: QP
   fcQPdfPageRenderer_connect_pageRendered(self.h, cast[int](addr tmp[]), fcQPdfPageRenderer_slot_callback_pageRendered, fcQPdfPageRenderer_slot_callback_pageRendered_release)
 
 proc tr*(_: type gen_qpdfpagerenderer_types.QPdfPageRenderer, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfPageRenderer_tr2(s, c)
+  let v_ms = fcQPdfPageRenderer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpdfpagerenderer_types.QPdfPageRenderer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfPageRenderer_tr3(s, c, n)
+  let v_ms = fcQPdfPageRenderer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfpagerenderer_types.QPdfPageRenderer, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfPageRenderer_trUtf82(s, c)
+  let v_ms = fcQPdfPageRenderer_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfpagerenderer_types.QPdfPageRenderer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfPageRenderer_trUtf83(s, c, n)
+  let v_ms = fcQPdfPageRenderer_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc requestPage*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, pageNumber: cint, imageSize: gen_qsize_types.QSize, options: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): culonglong =
-  fcQPdfPageRenderer_requestPage2(self.h, pageNumber, imageSize.h, options.h)
+  fcQPdfPageRenderer_requestPagePageNumberImageSizeOptions(self.h, pageNumber, imageSize.h, options.h)
 
 type QPdfPageRenderermetaObjectProc* = proc(self: QPdfPageRenderer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPdfPageRenderermetacastProc* = proc(self: QPdfPageRenderer, param1: cstring): pointer {.raises: [], gcsafe.}

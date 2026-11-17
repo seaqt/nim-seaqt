@@ -24,7 +24,7 @@ QGeoPath* QGeoPath_new() {
 	return new (std::nothrow) QGeoPath();
 }
 
-QGeoPath* QGeoPath_new2(struct seaqt_array /* of QGeoCoordinate* */  path) {
+QGeoPath* QGeoPath_new_path(struct seaqt_array /* of QGeoCoordinate* */  path) {
 	QList<QGeoCoordinate> path_QList;
 	path_QList.reserve(path.len);
 	QGeoCoordinate** path_arr = static_cast<QGeoCoordinate**>(path.data);
@@ -34,15 +34,15 @@ QGeoPath* QGeoPath_new2(struct seaqt_array /* of QGeoCoordinate* */  path) {
 	return new (std::nothrow) QGeoPath(path_QList);
 }
 
-QGeoPath* QGeoPath_new3(QGeoPath* other) {
+QGeoPath* QGeoPath_new_from(QGeoPath* from) {
+	return new (std::nothrow) QGeoPath(*from);
+}
+
+QGeoPath* QGeoPath_new_other(QGeoShape* other) {
 	return new (std::nothrow) QGeoPath(*other);
 }
 
-QGeoPath* QGeoPath_new4(QGeoShape* other) {
-	return new (std::nothrow) QGeoPath(*other);
-}
-
-QGeoPath* QGeoPath_new5(struct seaqt_array /* of QGeoCoordinate* */  path, const double* width) {
+QGeoPath* QGeoPath_new_path_width(struct seaqt_array /* of QGeoCoordinate* */  path, const double* width) {
 	QList<QGeoCoordinate> path_QList;
 	path_QList.reserve(path.len);
 	QGeoCoordinate** path_arr = static_cast<QGeoCoordinate**>(path.data);
@@ -56,8 +56,8 @@ void QGeoPath_virtbase(QGeoPath* src, QGeoShape** outptr_QGeoShape) {
 	*outptr_QGeoShape = static_cast<QGeoShape*>(src);
 }
 
-void QGeoPath_operatorAssign(QGeoPath* self, QGeoPath* other) {
-	self->operator=(*other);
+void QGeoPath_operatorAssign(QGeoPath* self, QGeoPath* from) {
+	self->operator=(*from);
 }
 
 bool QGeoPath_operatorEqual(const QGeoPath* self, QGeoPath* other) {
@@ -163,11 +163,11 @@ bool QGeoPath_containsCoordinate(const QGeoPath* self, QGeoCoordinate* coordinat
 	return self->containsCoordinate(*coordinate);
 }
 
-void QGeoPath_removeCoordinate(QGeoPath* self, QGeoCoordinate* coordinate) {
+void QGeoPath_removeCoordinate_coordinate(QGeoPath* self, QGeoCoordinate* coordinate) {
 	self->removeCoordinate(*coordinate);
 }
 
-void QGeoPath_removeCoordinateWithIndex(QGeoPath* self, int index) {
+void QGeoPath_removeCoordinate_index(QGeoPath* self, int index) {
 	self->removeCoordinate(static_cast<int>(index));
 }
 
@@ -182,11 +182,11 @@ struct seaqt_string QGeoPath_toString(const QGeoPath* self) {
 	return _ms;
 }
 
-double QGeoPath_lengthWithIndexFrom(const QGeoPath* self, int indexFrom) {
+double QGeoPath_length_indexFrom(const QGeoPath* self, int indexFrom) {
 	return self->length(static_cast<int>(indexFrom));
 }
 
-double QGeoPath_length2(const QGeoPath* self, int indexFrom, int indexTo) {
+double QGeoPath_length_indexFrom_indexTo(const QGeoPath* self, int indexFrom, int indexTo) {
 	return self->length(static_cast<int>(indexFrom), static_cast<int>(indexTo));
 }
 

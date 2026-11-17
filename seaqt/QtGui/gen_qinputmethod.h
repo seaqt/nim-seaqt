@@ -38,8 +38,8 @@ void QInputMethod_virtbase(QInputMethod* src, QObject** outptr_QObject);
 QMetaObject* QInputMethod_metaObject(const QInputMethod* self);
 void* QInputMethod_metacast(QInputMethod* self, const char* param1);
 int QInputMethod_metacall(QInputMethod* self, int param1, int param2, void** param3);
-struct seaqt_string QInputMethod_tr(const char* s);
-struct seaqt_string QInputMethod_trUtf8(const char* s);
+struct seaqt_string QInputMethod_tr_s(const char* s);
+struct seaqt_string QInputMethod_trUtf8_s(const char* s);
 QTransform* QInputMethod_inputItemTransform(const QInputMethod* self);
 void QInputMethod_setInputItemTransform(QInputMethod* self, QTransform* transform);
 QRectF* QInputMethod_inputItemRectangle(const QInputMethod* self);
@@ -76,10 +76,10 @@ void QInputMethod_localeChanged(QInputMethod* self);
 void QInputMethod_connect_localeChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QInputMethod_inputDirectionChanged(QInputMethod* self, int newDirection);
 void QInputMethod_connect_inputDirectionChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
-struct seaqt_string QInputMethod_tr2(const char* s, const char* c);
-struct seaqt_string QInputMethod_tr3(const char* s, const char* c, int n);
-struct seaqt_string QInputMethod_trUtf82(const char* s, const char* c);
-struct seaqt_string QInputMethod_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QInputMethod_tr_s_c(const char* s, const char* c);
+struct seaqt_string QInputMethod_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QInputMethod_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QInputMethod_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QInputMethod_staticMetaObject();
 

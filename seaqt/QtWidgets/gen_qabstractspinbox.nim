@@ -97,8 +97,8 @@ type cQAbstractSpinBox*{.exportc: "QAbstractSpinBox", incompleteStruct.} = objec
 proc fcQAbstractSpinBox_metaObject(self: pointer): pointer {.importc: "QAbstractSpinBox_metaObject".}
 proc fcQAbstractSpinBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractSpinBox_metacast".}
 proc fcQAbstractSpinBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractSpinBox_metacall".}
-proc fcQAbstractSpinBox_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractSpinBox_tr".}
-proc fcQAbstractSpinBox_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAbstractSpinBox_trUtf8".}
+proc fcQAbstractSpinBox_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractSpinBox_tr_s".}
+proc fcQAbstractSpinBox_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAbstractSpinBox_trUtf8_s".}
 proc fcQAbstractSpinBox_buttonSymbols(self: pointer): cint {.importc: "QAbstractSpinBox_buttonSymbols".}
 proc fcQAbstractSpinBox_setButtonSymbols(self: pointer, bs: cint): void {.importc: "QAbstractSpinBox_setButtonSymbols".}
 proc fcQAbstractSpinBox_setCorrectionMode(self: pointer, cm: cint): void {.importc: "QAbstractSpinBox_setCorrectionMode".}
@@ -135,10 +135,10 @@ proc fcQAbstractSpinBox_selectAll(self: pointer): void {.importc: "QAbstractSpin
 proc fcQAbstractSpinBox_clear(self: pointer): void {.importc: "QAbstractSpinBox_clear".}
 proc fcQAbstractSpinBox_editingFinished(self: pointer): void {.importc: "QAbstractSpinBox_editingFinished".}
 proc fcQAbstractSpinBox_connect_editingFinished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSpinBox_connect_editingFinished".}
-proc fcQAbstractSpinBox_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractSpinBox_tr2".}
-proc fcQAbstractSpinBox_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractSpinBox_tr3".}
-proc fcQAbstractSpinBox_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractSpinBox_trUtf82".}
-proc fcQAbstractSpinBox_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractSpinBox_trUtf83".}
+proc fcQAbstractSpinBox_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractSpinBox_tr_s_c".}
+proc fcQAbstractSpinBox_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractSpinBox_tr_s_c_n".}
+proc fcQAbstractSpinBox_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractSpinBox_trUtf8_s_c".}
+proc fcQAbstractSpinBox_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractSpinBox_trUtf8_s_c_n".}
 proc fcQAbstractSpinBox_vdata(self: pointer): ptr pointer {.importc: "QAbstractSpinBox_vdata".}
 proc fvdata_cQAbstractSpinBox(self: pointer): pointer {.importc: "vdata_QAbstractSpinBox".}
 
@@ -267,7 +267,7 @@ proc fcQAbstractSpinBox_protectedbase_senderSignalIndex(self: pointer): cint {.i
 proc fcQAbstractSpinBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractSpinBox_protectedbase_receivers".}
 proc fcQAbstractSpinBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractSpinBox_protectedbase_isSignalConnected".}
 proc fcQAbstractSpinBox_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractSpinBox {.importc: "QAbstractSpinBox_new".}
-proc fcQAbstractSpinBox_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractSpinBox {.importc: "QAbstractSpinBox_new2".}
+proc fcQAbstractSpinBox_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractSpinBox {.importc: "QAbstractSpinBox_new_parent".}
 proc fcQAbstractSpinBox_staticMetaObject(): pointer {.importc: "QAbstractSpinBox_staticMetaObject".}
 
 proc metaObject*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qobjectdefs_types.QMetaObject =
@@ -280,13 +280,13 @@ proc metacall*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint, 
   fcQAbstractSpinBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractspinbox_types.QAbstractSpinBox, s: cstring): string =
-  let v_ms = fcQAbstractSpinBox_tr(s)
+  let v_ms = fcQAbstractSpinBox_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractspinbox_types.QAbstractSpinBox, s: cstring): string =
-  let v_ms = fcQAbstractSpinBox_trUtf8(s)
+  let v_ms = fcQAbstractSpinBox_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -418,25 +418,25 @@ proc onEditingFinished*(self: gen_qabstractspinbox_types.QAbstractSpinBox, slot:
   fcQAbstractSpinBox_connect_editingFinished(self.h, cast[int](addr tmp[]), fcQAbstractSpinBox_slot_callback_editingFinished, fcQAbstractSpinBox_slot_callback_editingFinished_release)
 
 proc tr*(_: type gen_qabstractspinbox_types.QAbstractSpinBox, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractSpinBox_tr2(s, c)
+  let v_ms = fcQAbstractSpinBox_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractspinbox_types.QAbstractSpinBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractSpinBox_tr3(s, c, n)
+  let v_ms = fcQAbstractSpinBox_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractspinbox_types.QAbstractSpinBox, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractSpinBox_trUtf82(s, c)
+  let v_ms = fcQAbstractSpinBox_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractspinbox_types.QAbstractSpinBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractSpinBox_trUtf83(s, c, n)
+  let v_ms = fcQAbstractSpinBox_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

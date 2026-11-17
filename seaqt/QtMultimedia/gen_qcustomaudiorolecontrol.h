@@ -32,17 +32,17 @@ void QCustomAudioRoleControl_virtbase(QCustomAudioRoleControl* src, QMediaContro
 QMetaObject* QCustomAudioRoleControl_metaObject(const QCustomAudioRoleControl* self);
 void* QCustomAudioRoleControl_metacast(QCustomAudioRoleControl* self, const char* param1);
 int QCustomAudioRoleControl_metacall(QCustomAudioRoleControl* self, int param1, int param2, void** param3);
-struct seaqt_string QCustomAudioRoleControl_tr(const char* s);
-struct seaqt_string QCustomAudioRoleControl_trUtf8(const char* s);
+struct seaqt_string QCustomAudioRoleControl_tr_s(const char* s);
+struct seaqt_string QCustomAudioRoleControl_trUtf8_s(const char* s);
 struct seaqt_string QCustomAudioRoleControl_customAudioRole(const QCustomAudioRoleControl* self);
 void QCustomAudioRoleControl_setCustomAudioRole(QCustomAudioRoleControl* self, struct seaqt_string role);
 struct seaqt_array /* of struct seaqt_string */  QCustomAudioRoleControl_supportedCustomAudioRoles(const QCustomAudioRoleControl* self);
 void QCustomAudioRoleControl_customAudioRoleChanged(QCustomAudioRoleControl* self, struct seaqt_string role);
 void QCustomAudioRoleControl_connect_customAudioRoleChanged(QCustomAudioRoleControl* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
-struct seaqt_string QCustomAudioRoleControl_tr2(const char* s, const char* c);
-struct seaqt_string QCustomAudioRoleControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCustomAudioRoleControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QCustomAudioRoleControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCustomAudioRoleControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCustomAudioRoleControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCustomAudioRoleControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCustomAudioRoleControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCustomAudioRoleControl_staticMetaObject();
 void QCustomAudioRoleControl_delete(QCustomAudioRoleControl* self);

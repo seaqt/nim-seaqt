@@ -50,9 +50,9 @@ void* QGraphicsLinearLayout_vdata(VirtualQGraphicsLinearLayout* self);
 VirtualQGraphicsLinearLayout* vdata_QGraphicsLinearLayout(void* vdata);
 
 VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata);
-VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new2(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, int orientation);
-VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new3(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent);
-VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new4(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, int orientation, QGraphicsLayoutItem* parent);
+VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new_orientation(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, int orientation);
+VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new_parent(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent);
+VirtualQGraphicsLinearLayout* QGraphicsLinearLayout_new_orientation_parent(const QGraphicsLinearLayout_VTable* vtbl, size_t vdata, int orientation, QGraphicsLayoutItem* parent);
 
 void QGraphicsLinearLayout_virtbase(QGraphicsLinearLayout* src, QGraphicsLayout** outptr_QGraphicsLayout);
 void QGraphicsLinearLayout_setOrientation(QGraphicsLinearLayout* self, int orientation);
@@ -60,7 +60,7 @@ int QGraphicsLinearLayout_orientation(const QGraphicsLinearLayout* self);
 void QGraphicsLinearLayout_addItem(QGraphicsLinearLayout* self, QGraphicsLayoutItem* item);
 void QGraphicsLinearLayout_addStretch(QGraphicsLinearLayout* self);
 void QGraphicsLinearLayout_insertItem(QGraphicsLinearLayout* self, int index, QGraphicsLayoutItem* item);
-void QGraphicsLinearLayout_insertStretch(QGraphicsLinearLayout* self, int index);
+void QGraphicsLinearLayout_insertStretch_index(QGraphicsLinearLayout* self, int index);
 void QGraphicsLinearLayout_removeItem(QGraphicsLinearLayout* self, QGraphicsLayoutItem* item);
 void QGraphicsLinearLayout_removeAt(QGraphicsLinearLayout* self, int index);
 void QGraphicsLinearLayout_setSpacing(QGraphicsLinearLayout* self, double spacing);
@@ -77,9 +77,9 @@ QGraphicsLayoutItem* QGraphicsLinearLayout_itemAt(const QGraphicsLinearLayout* s
 void QGraphicsLinearLayout_invalidate(QGraphicsLinearLayout* self);
 QSizeF* QGraphicsLinearLayout_sizeHint(const QGraphicsLinearLayout* self, int which, QSizeF* constraint);
 void QGraphicsLinearLayout_dump(const QGraphicsLinearLayout* self);
-void QGraphicsLinearLayout_addStretchWithStretch(QGraphicsLinearLayout* self, int stretch);
-void QGraphicsLinearLayout_insertStretch2(QGraphicsLinearLayout* self, int index, int stretch);
-void QGraphicsLinearLayout_dumpWithIndent(const QGraphicsLinearLayout* self, int indent);
+void QGraphicsLinearLayout_addStretch_stretch(QGraphicsLinearLayout* self, int stretch);
+void QGraphicsLinearLayout_insertStretch_index_stretch(QGraphicsLinearLayout* self, int index, int stretch);
+void QGraphicsLinearLayout_dump_indent(const QGraphicsLinearLayout* self, int indent);
 
 void QGraphicsLinearLayout_virtualbase_removeAt(VirtualQGraphicsLinearLayout* self, int index);
 void QGraphicsLinearLayout_virtualbase_setGeometry(VirtualQGraphicsLinearLayout* self, QRectF* rect);

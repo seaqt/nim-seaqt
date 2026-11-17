@@ -18,58 +18,58 @@ QSslKey* QSslKey_new() {
 	return new (std::nothrow) QSslKey();
 }
 
-QSslKey* QSslKey_new2(struct seaqt_string encoded, int algorithm) {
+QSslKey* QSslKey_new_encoded_algorithm(struct seaqt_string encoded, int algorithm) {
 	QByteArray encoded_QByteArray(encoded.data, encoded.len);
 	return new (std::nothrow) QSslKey(encoded_QByteArray, static_cast<QSsl::KeyAlgorithm>(algorithm));
 }
 
-QSslKey* QSslKey_new3(QIODevice* device, int algorithm) {
+QSslKey* QSslKey_new_device_algorithm(QIODevice* device, int algorithm) {
 	return new (std::nothrow) QSslKey(device, static_cast<QSsl::KeyAlgorithm>(algorithm));
 }
 
-QSslKey* QSslKey_new4(void* handle) {
+QSslKey* QSslKey_new_handle(void* handle) {
 	return new (std::nothrow) QSslKey(handle);
 }
 
-QSslKey* QSslKey_new5(QSslKey* other) {
-	return new (std::nothrow) QSslKey(*other);
+QSslKey* QSslKey_new_from(QSslKey* from) {
+	return new (std::nothrow) QSslKey(*from);
 }
 
-QSslKey* QSslKey_new6(struct seaqt_string encoded, int algorithm, int format) {
+QSslKey* QSslKey_new_encoded_algorithm_format(struct seaqt_string encoded, int algorithm, int format) {
 	QByteArray encoded_QByteArray(encoded.data, encoded.len);
 	return new (std::nothrow) QSslKey(encoded_QByteArray, static_cast<QSsl::KeyAlgorithm>(algorithm), static_cast<QSsl::EncodingFormat>(format));
 }
 
-QSslKey* QSslKey_new7(struct seaqt_string encoded, int algorithm, int format, int type) {
+QSslKey* QSslKey_new_encoded_algorithm_format_type(struct seaqt_string encoded, int algorithm, int format, int type) {
 	QByteArray encoded_QByteArray(encoded.data, encoded.len);
 	return new (std::nothrow) QSslKey(encoded_QByteArray, static_cast<QSsl::KeyAlgorithm>(algorithm), static_cast<QSsl::EncodingFormat>(format), static_cast<QSsl::KeyType>(type));
 }
 
-QSslKey* QSslKey_new8(struct seaqt_string encoded, int algorithm, int format, int type, struct seaqt_string passPhrase) {
+QSslKey* QSslKey_new_encoded_algorithm_format_type_passPhrase(struct seaqt_string encoded, int algorithm, int format, int type, struct seaqt_string passPhrase) {
 	QByteArray encoded_QByteArray(encoded.data, encoded.len);
 	QByteArray passPhrase_QByteArray(passPhrase.data, passPhrase.len);
 	return new (std::nothrow) QSslKey(encoded_QByteArray, static_cast<QSsl::KeyAlgorithm>(algorithm), static_cast<QSsl::EncodingFormat>(format), static_cast<QSsl::KeyType>(type), passPhrase_QByteArray);
 }
 
-QSslKey* QSslKey_new9(QIODevice* device, int algorithm, int format) {
+QSslKey* QSslKey_new_device_algorithm_format(QIODevice* device, int algorithm, int format) {
 	return new (std::nothrow) QSslKey(device, static_cast<QSsl::KeyAlgorithm>(algorithm), static_cast<QSsl::EncodingFormat>(format));
 }
 
-QSslKey* QSslKey_new10(QIODevice* device, int algorithm, int format, int type) {
+QSslKey* QSslKey_new_device_algorithm_format_type(QIODevice* device, int algorithm, int format, int type) {
 	return new (std::nothrow) QSslKey(device, static_cast<QSsl::KeyAlgorithm>(algorithm), static_cast<QSsl::EncodingFormat>(format), static_cast<QSsl::KeyType>(type));
 }
 
-QSslKey* QSslKey_new11(QIODevice* device, int algorithm, int format, int type, struct seaqt_string passPhrase) {
+QSslKey* QSslKey_new_device_algorithm_format_type_passPhrase(QIODevice* device, int algorithm, int format, int type, struct seaqt_string passPhrase) {
 	QByteArray passPhrase_QByteArray(passPhrase.data, passPhrase.len);
 	return new (std::nothrow) QSslKey(device, static_cast<QSsl::KeyAlgorithm>(algorithm), static_cast<QSsl::EncodingFormat>(format), static_cast<QSsl::KeyType>(type), passPhrase_QByteArray);
 }
 
-QSslKey* QSslKey_new12(void* handle, int type) {
+QSslKey* QSslKey_new_handle_type(void* handle, int type) {
 	return new (std::nothrow) QSslKey(handle, static_cast<QSsl::KeyType>(type));
 }
 
-void QSslKey_operatorAssign(QSslKey* self, QSslKey* other) {
-	self->operator=(*other);
+void QSslKey_operatorAssign(QSslKey* self, QSslKey* from) {
+	self->operator=(*from);
 }
 
 void QSslKey_swap(QSslKey* self, QSslKey* other) {
@@ -129,7 +129,7 @@ bool QSslKey_operatorNotEqual(const QSslKey* self, QSslKey* key) {
 	return (*self != *key);
 }
 
-struct seaqt_string QSslKey_toPemWithPassPhrase(const QSslKey* self, struct seaqt_string passPhrase) {
+struct seaqt_string QSslKey_toPem_passPhrase(const QSslKey* self, struct seaqt_string passPhrase) {
 	QByteArray passPhrase_QByteArray(passPhrase.data, passPhrase.len);
 	QByteArray _qb = self->toPem(passPhrase_QByteArray);
 	struct seaqt_string _ms;
@@ -139,7 +139,7 @@ struct seaqt_string QSslKey_toPemWithPassPhrase(const QSslKey* self, struct seaq
 	return _ms;
 }
 
-struct seaqt_string QSslKey_toDerWithPassPhrase(const QSslKey* self, struct seaqt_string passPhrase) {
+struct seaqt_string QSslKey_toDer_passPhrase(const QSslKey* self, struct seaqt_string passPhrase) {
 	QByteArray passPhrase_QByteArray(passPhrase.data, passPhrase.len);
 	QByteArray _qb = self->toDer(passPhrase_QByteArray);
 	struct seaqt_string _ms;

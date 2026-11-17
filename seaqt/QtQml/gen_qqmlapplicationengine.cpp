@@ -183,28 +183,28 @@ VirtualQQmlApplicationEngine* QQmlApplicationEngine_new(const QQmlApplicationEng
 	return _mem_ ? new (_mem_)VirtualQQmlApplicationEngine(vtbl) : nullptr;
 }
 
-VirtualQQmlApplicationEngine* QQmlApplicationEngine_new2(const QQmlApplicationEngine_VTable* vtbl, size_t vdata, QUrl* url) {
+VirtualQQmlApplicationEngine* QQmlApplicationEngine_new_url(const QQmlApplicationEngine_VTable* vtbl, size_t vdata, QUrl* url) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlApplicationEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlApplicationEngine(vtbl, *url) : nullptr;
 }
 
-VirtualQQmlApplicationEngine* QQmlApplicationEngine_new3(const QQmlApplicationEngine_VTable* vtbl, size_t vdata, struct seaqt_string filePath) {
+VirtualQQmlApplicationEngine* QQmlApplicationEngine_new_filePath(const QQmlApplicationEngine_VTable* vtbl, size_t vdata, struct seaqt_string filePath) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlApplicationEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlApplicationEngine(vtbl, filePath_QString) : nullptr;
 }
 
-VirtualQQmlApplicationEngine* QQmlApplicationEngine_new4(const QQmlApplicationEngine_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQQmlApplicationEngine* QQmlApplicationEngine_new_parent(const QQmlApplicationEngine_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlApplicationEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlApplicationEngine(vtbl, parent) : nullptr;
 }
 
-VirtualQQmlApplicationEngine* QQmlApplicationEngine_new5(const QQmlApplicationEngine_VTable* vtbl, size_t vdata, QUrl* url, QObject* parent) {
+VirtualQQmlApplicationEngine* QQmlApplicationEngine_new_url_parent(const QQmlApplicationEngine_VTable* vtbl, size_t vdata, QUrl* url, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlApplicationEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlApplicationEngine(vtbl, *url, parent) : nullptr;
 }
 
-VirtualQQmlApplicationEngine* QQmlApplicationEngine_new6(const QQmlApplicationEngine_VTable* vtbl, size_t vdata, struct seaqt_string filePath, QObject* parent) {
+VirtualQQmlApplicationEngine* QQmlApplicationEngine_new_filePath_parent(const QQmlApplicationEngine_VTable* vtbl, size_t vdata, struct seaqt_string filePath, QObject* parent) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlApplicationEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlApplicationEngine(vtbl, filePath_QString, parent) : nullptr;
@@ -226,7 +226,7 @@ int QQmlApplicationEngine_metacall(QQmlApplicationEngine* self, int param1, int 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQmlApplicationEngine_tr(const char* s) {
+struct seaqt_string QQmlApplicationEngine_tr_s(const char* s) {
 	QString _ret = QQmlApplicationEngine::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -237,7 +237,7 @@ struct seaqt_string QQmlApplicationEngine_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QQmlApplicationEngine_trUtf8(const char* s) {
+struct seaqt_string QQmlApplicationEngine_trUtf8_s(const char* s) {
 	QString _ret = QQmlApplicationEngine::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -261,7 +261,7 @@ struct seaqt_array /* of QObject* */  QQmlApplicationEngine_rootObjects(QQmlAppl
 	return _out;
 }
 
-struct seaqt_array /* of QObject* */  QQmlApplicationEngine_rootObjects2(const QQmlApplicationEngine* self) {
+struct seaqt_array /* of QObject* */  QQmlApplicationEngine_rootObjects_const(const QQmlApplicationEngine* self) {
 	QList<QObject *> _ret = self->rootObjects();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QObject** _arr = static_cast<QObject**>(malloc(sizeof(QObject*) * _ret.length()));
@@ -274,11 +274,11 @@ struct seaqt_array /* of QObject* */  QQmlApplicationEngine_rootObjects2(const Q
 	return _out;
 }
 
-void QQmlApplicationEngine_load(QQmlApplicationEngine* self, QUrl* url) {
+void QQmlApplicationEngine_load_url(QQmlApplicationEngine* self, QUrl* url) {
 	self->load(*url);
 }
 
-void QQmlApplicationEngine_loadWithFilePath(QQmlApplicationEngine* self, struct seaqt_string filePath) {
+void QQmlApplicationEngine_load_filePath(QQmlApplicationEngine* self, struct seaqt_string filePath) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	self->load(filePath_QString);
 }
@@ -294,7 +294,7 @@ void QQmlApplicationEngine_setInitialProperties(QQmlApplicationEngine* self, str
 	self->setInitialProperties(initialProperties_QMap);
 }
 
-void QQmlApplicationEngine_loadData(QQmlApplicationEngine* self, struct seaqt_string data) {
+void QQmlApplicationEngine_loadData_data(QQmlApplicationEngine* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->loadData(data_QByteArray);
 }
@@ -318,7 +318,7 @@ void QQmlApplicationEngine_connect_objectCreated(QQmlApplicationEngine* self, in
 	QQmlApplicationEngine::connect(self, static_cast<void (QQmlApplicationEngine::*)(QObject*, const QUrl&)>(&QQmlApplicationEngine::objectCreated), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQmlApplicationEngine_tr2(const char* s, const char* c) {
+struct seaqt_string QQmlApplicationEngine_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQmlApplicationEngine::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -329,7 +329,7 @@ struct seaqt_string QQmlApplicationEngine_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQmlApplicationEngine_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQmlApplicationEngine_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQmlApplicationEngine::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -340,7 +340,7 @@ struct seaqt_string QQmlApplicationEngine_tr3(const char* s, const char* c, int 
 	return _ms;
 }
 
-struct seaqt_string QQmlApplicationEngine_trUtf82(const char* s, const char* c) {
+struct seaqt_string QQmlApplicationEngine_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QQmlApplicationEngine::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -351,7 +351,7 @@ struct seaqt_string QQmlApplicationEngine_trUtf82(const char* s, const char* c) 
 	return _ms;
 }
 
-struct seaqt_string QQmlApplicationEngine_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QQmlApplicationEngine_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQmlApplicationEngine::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -362,7 +362,7 @@ struct seaqt_string QQmlApplicationEngine_trUtf83(const char* s, const char* c, 
 	return _ms;
 }
 
-void QQmlApplicationEngine_loadData2(QQmlApplicationEngine* self, struct seaqt_string data, QUrl* url) {
+void QQmlApplicationEngine_loadData_data_url(QQmlApplicationEngine* self, struct seaqt_string data, QUrl* url) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->loadData(data_QByteArray, *url);
 }

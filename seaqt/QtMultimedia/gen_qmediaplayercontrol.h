@@ -38,8 +38,8 @@ void QMediaPlayerControl_virtbase(QMediaPlayerControl* src, QMediaControl** outp
 QMetaObject* QMediaPlayerControl_metaObject(const QMediaPlayerControl* self);
 void* QMediaPlayerControl_metacast(QMediaPlayerControl* self, const char* param1);
 int QMediaPlayerControl_metacall(QMediaPlayerControl* self, int param1, int param2, void** param3);
-struct seaqt_string QMediaPlayerControl_tr(const char* s);
-struct seaqt_string QMediaPlayerControl_trUtf8(const char* s);
+struct seaqt_string QMediaPlayerControl_tr_s(const char* s);
+struct seaqt_string QMediaPlayerControl_trUtf8_s(const char* s);
 int QMediaPlayerControl_state(const QMediaPlayerControl* self);
 int QMediaPlayerControl_mediaStatus(const QMediaPlayerControl* self);
 long long QMediaPlayerControl_duration(const QMediaPlayerControl* self);
@@ -90,10 +90,10 @@ void QMediaPlayerControl_playbackRateChanged(QMediaPlayerControl* self, double r
 void QMediaPlayerControl_connect_playbackRateChanged(QMediaPlayerControl* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t));
 void QMediaPlayerControl_error(QMediaPlayerControl* self, int error, struct seaqt_string errorString);
 void QMediaPlayerControl_connect_error(QMediaPlayerControl* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t));
-struct seaqt_string QMediaPlayerControl_tr2(const char* s, const char* c);
-struct seaqt_string QMediaPlayerControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QMediaPlayerControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QMediaPlayerControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QMediaPlayerControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMediaPlayerControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QMediaPlayerControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QMediaPlayerControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QMediaPlayerControl_staticMetaObject();
 void QMediaPlayerControl_delete(QMediaPlayerControl* self);

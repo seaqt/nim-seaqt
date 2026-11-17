@@ -190,7 +190,7 @@ int QDrag_metacall(QDrag* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDrag_tr(const char* s) {
+struct seaqt_string QDrag_tr_s(const char* s) {
 	QString _ret = QDrag::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -201,7 +201,7 @@ struct seaqt_string QDrag_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDrag_trUtf8(const char* s) {
+struct seaqt_string QDrag_trUtf8_s(const char* s) {
 	QString _ret = QDrag::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -254,7 +254,7 @@ int QDrag_exec(QDrag* self) {
 	return static_cast<int>(_ret);
 }
 
-int QDrag_exec2(QDrag* self, int supportedActions, int defaultAction) {
+int QDrag_exec_supportedActions_defaultAction(QDrag* self, int supportedActions, int defaultAction) {
 	Qt::DropAction _ret = self->exec(static_cast<Qt::DropActions>(supportedActions), static_cast<Qt::DropAction>(defaultAction));
 	return static_cast<int>(_ret);
 }
@@ -314,7 +314,7 @@ void QDrag_connect_targetChanged(QDrag* self, intptr_t slot, void (*callback)(in
 	QDrag::connect(self, static_cast<void (QDrag::*)(QObject*)>(&QDrag::targetChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDrag_tr2(const char* s, const char* c) {
+struct seaqt_string QDrag_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDrag::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -325,7 +325,7 @@ struct seaqt_string QDrag_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDrag_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDrag_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDrag::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -336,7 +336,7 @@ struct seaqt_string QDrag_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDrag_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDrag_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDrag::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -347,7 +347,7 @@ struct seaqt_string QDrag_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDrag_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDrag_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDrag::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -358,12 +358,12 @@ struct seaqt_string QDrag_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-int QDrag_startWithSupportedActions(QDrag* self, int supportedActions) {
+int QDrag_start_supportedActions(QDrag* self, int supportedActions) {
 	Qt::DropAction _ret = self->start(static_cast<Qt::DropActions>(supportedActions));
 	return static_cast<int>(_ret);
 }
 
-int QDrag_execWithSupportedActions(QDrag* self, int supportedActions) {
+int QDrag_exec_supportedActions(QDrag* self, int supportedActions) {
 	Qt::DropAction _ret = self->exec(static_cast<Qt::DropActions>(supportedActions));
 	return static_cast<int>(_ret);
 }

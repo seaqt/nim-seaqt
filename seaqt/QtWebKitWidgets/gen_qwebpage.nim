@@ -268,8 +268,8 @@ type cQWebPageErrorPageExtensionReturn*{.exportc: "QWebPage__ErrorPageExtensionR
 proc fcQWebPage_metaObject(self: pointer): pointer {.importc: "QWebPage_metaObject".}
 proc fcQWebPage_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebPage_metacast".}
 proc fcQWebPage_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebPage_metacall".}
-proc fcQWebPage_tr(s: cstring): struct_seaqt_string {.importc: "QWebPage_tr".}
-proc fcQWebPage_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebPage_trUtf8".}
+proc fcQWebPage_trS(s: cstring): struct_seaqt_string {.importc: "QWebPage_tr_s".}
+proc fcQWebPage_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebPage_trUtf8_s".}
 proc fcQWebPage_mainFrame(self: pointer): pointer {.importc: "QWebPage_mainFrame".}
 proc fcQWebPage_currentFrame(self: pointer): pointer {.importc: "QWebPage_currentFrame".}
 proc fcQWebPage_frameAt(self: pointer, pos: pointer): pointer {.importc: "QWebPage_frameAt".}
@@ -306,7 +306,7 @@ proc fcQWebPage_setActualVisibleContentRect(self: pointer, rect: pointer): void 
 proc fcQWebPage_event(self: pointer, param1: pointer): bool {.importc: "QWebPage_event".}
 proc fcQWebPage_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QWebPage_focusNextPrevChild".}
 proc fcQWebPage_inputMethodQuery(self: pointer, property: cint): pointer {.importc: "QWebPage_inputMethodQuery".}
-proc fcQWebPage_findText(self: pointer, subString: struct_seaqt_string): bool {.importc: "QWebPage_findText".}
+proc fcQWebPage_findTextSubString(self: pointer, subString: struct_seaqt_string): bool {.importc: "QWebPage_findText_subString".}
 proc fcQWebPage_setForwardUnsupportedContent(self: pointer, forward: bool): void {.importc: "QWebPage_setForwardUnsupportedContent".}
 proc fcQWebPage_forwardUnsupportedContent(self: pointer): bool {.importc: "QWebPage_forwardUnsupportedContent".}
 proc fcQWebPage_setLinkDelegationPolicy(self: pointer, policy: cint): void {.importc: "QWebPage_setLinkDelegationPolicy".}
@@ -386,11 +386,11 @@ proc fcQWebPage_consoleMessageReceived(self: pointer, source: cint, level: cint,
 proc fcQWebPage_connect_consoleMessageReceived(self: pointer, slot: int, callback: proc (slot: int, source: cint, level: cint, message: struct_seaqt_string, lineNumber: cint, sourceID: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_consoleMessageReceived".}
 proc fcQWebPage_recentlyAudibleChanged(self: pointer, recentlyAudible: bool): void {.importc: "QWebPage_recentlyAudibleChanged".}
 proc fcQWebPage_connect_recentlyAudibleChanged(self: pointer, slot: int, callback: proc (slot: int, recentlyAudible: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_recentlyAudibleChanged".}
-proc fcQWebPage_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebPage_tr2".}
-proc fcQWebPage_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebPage_tr3".}
-proc fcQWebPage_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebPage_trUtf82".}
-proc fcQWebPage_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebPage_trUtf83".}
-proc fcQWebPage_findText2(self: pointer, subString: struct_seaqt_string, options: cint): bool {.importc: "QWebPage_findText2".}
+proc fcQWebPage_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebPage_tr_s_c".}
+proc fcQWebPage_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebPage_tr_s_c_n".}
+proc fcQWebPage_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebPage_trUtf8_s_c".}
+proc fcQWebPage_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebPage_trUtf8_s_c_n".}
+proc fcQWebPage_findTextSubStringOptions(self: pointer, subString: struct_seaqt_string, options: cint): bool {.importc: "QWebPage_findText_subString_options".}
 proc fcQWebPage_vdata(self: pointer): ptr pointer {.importc: "QWebPage_vdata".}
 proc fvdata_cQWebPage(self: pointer): pointer {.importc: "vdata_QWebPage".}
 
@@ -445,9 +445,9 @@ proc fcQWebPage_protectedbase_senderSignalIndex(self: pointer): cint {.importc: 
 proc fcQWebPage_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebPage_protectedbase_receivers".}
 proc fcQWebPage_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebPage_protectedbase_isSignalConnected".}
 proc fcQWebPage_new(vtbl: pointer, vdata: csize_t): ptr cQWebPage {.importc: "QWebPage_new".}
-proc fcQWebPage_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebPage {.importc: "QWebPage_new2".}
+proc fcQWebPage_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebPage {.importc: "QWebPage_new_parent".}
 proc fcQWebPage_staticMetaObject(): pointer {.importc: "QWebPage_staticMetaObject".}
-proc fcQWebPageViewportAttributes_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebPage__ViewportAttributes_operatorAssign".}
+proc fcQWebPageViewportAttributes_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebPage__ViewportAttributes_operatorAssign".}
 proc fcQWebPageViewportAttributes_initialScaleFactor(self: pointer): float64 {.importc: "QWebPage__ViewportAttributes_initialScaleFactor".}
 proc fcQWebPageViewportAttributes_minimumScaleFactor(self: pointer): float64 {.importc: "QWebPage__ViewportAttributes_minimumScaleFactor".}
 proc fcQWebPageViewportAttributes_maximumScaleFactor(self: pointer): float64 {.importc: "QWebPage__ViewportAttributes_maximumScaleFactor".}
@@ -456,12 +456,12 @@ proc fcQWebPageViewportAttributes_isUserScalable(self: pointer): bool {.importc:
 proc fcQWebPageViewportAttributes_isValid(self: pointer): bool {.importc: "QWebPage__ViewportAttributes_isValid".}
 proc fcQWebPageViewportAttributes_size(self: pointer): pointer {.importc: "QWebPage__ViewportAttributes_size".}
 proc fcQWebPageViewportAttributes_new(): ptr cQWebPageViewportAttributes {.importc: "QWebPage__ViewportAttributes_new".}
-proc fcQWebPageViewportAttributes_new2(other: pointer): ptr cQWebPageViewportAttributes {.importc: "QWebPage__ViewportAttributes_new2".}
-proc fcQWebPageExtensionOption_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebPage__ExtensionOption_operatorAssign".}
-proc fcQWebPageExtensionOption_new(param1: pointer): ptr cQWebPageExtensionOption {.importc: "QWebPage__ExtensionOption_new".}
-proc fcQWebPageExtensionReturn_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebPage__ExtensionReturn_operatorAssign".}
-proc fcQWebPageExtensionReturn_new(param1: pointer): ptr cQWebPageExtensionReturn {.importc: "QWebPage__ExtensionReturn_new".}
-proc fcQWebPageExtensionReturn_new2(): ptr cQWebPageExtensionReturn {.importc: "QWebPage__ExtensionReturn_new2".}
+proc fcQWebPageViewportAttributes_new2(fromVal: pointer): ptr cQWebPageViewportAttributes {.importc: "QWebPage__ViewportAttributes_new_from".}
+proc fcQWebPageExtensionOption_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebPage__ExtensionOption_operatorAssign".}
+proc fcQWebPageExtensionOption_new(fromVal: pointer): ptr cQWebPageExtensionOption {.importc: "QWebPage__ExtensionOption_new".}
+proc fcQWebPageExtensionReturn_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebPage__ExtensionReturn_operatorAssign".}
+proc fcQWebPageExtensionReturn_new(fromVal: pointer): ptr cQWebPageExtensionReturn {.importc: "QWebPage__ExtensionReturn_new_from".}
+proc fcQWebPageExtensionReturn_new2(): ptr cQWebPageExtensionReturn {.importc: "QWebPage__ExtensionReturn_new".}
 proc fcQWebPageChooseMultipleFilesExtensionOption_parentFrame(self: pointer): pointer {.importc: "QWebPage__ChooseMultipleFilesExtensionOption_parentFrame".}
 proc fcQWebPageChooseMultipleFilesExtensionOption_setParentFrame(self: pointer, parentFrame: pointer): void {.importc: "QWebPage__ChooseMultipleFilesExtensionOption_setParentFrame".}
 proc fcQWebPageChooseMultipleFilesExtensionOption_suggestedFileNames(self: pointer): struct_seaqt_array {.importc: "QWebPage__ChooseMultipleFilesExtensionOption_suggestedFileNames".}
@@ -478,8 +478,8 @@ proc fcQWebPageErrorPageExtensionOption_error(self: pointer): cint {.importc: "Q
 proc fcQWebPageErrorPageExtensionOption_setError(self: pointer, error: cint): void {.importc: "QWebPage__ErrorPageExtensionOption_setError".}
 proc fcQWebPageErrorPageExtensionOption_errorString(self: pointer): struct_seaqt_string {.importc: "QWebPage__ErrorPageExtensionOption_errorString".}
 proc fcQWebPageErrorPageExtensionOption_setErrorString(self: pointer, errorString: struct_seaqt_string): void {.importc: "QWebPage__ErrorPageExtensionOption_setErrorString".}
-proc fcQWebPageErrorPageExtensionOption_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebPage__ErrorPageExtensionOption_operatorAssign".}
-proc fcQWebPageErrorPageExtensionOption_new(param1: pointer): ptr cQWebPageErrorPageExtensionOption {.importc: "QWebPage__ErrorPageExtensionOption_new".}
+proc fcQWebPageErrorPageExtensionOption_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebPage__ErrorPageExtensionOption_operatorAssign".}
+proc fcQWebPageErrorPageExtensionOption_new(fromVal: pointer): ptr cQWebPageErrorPageExtensionOption {.importc: "QWebPage__ErrorPageExtensionOption_new".}
 proc fcQWebPageErrorPageExtensionReturn_contentType(self: pointer): struct_seaqt_string {.importc: "QWebPage__ErrorPageExtensionReturn_contentType".}
 proc fcQWebPageErrorPageExtensionReturn_setContentType(self: pointer, contentType: struct_seaqt_string): void {.importc: "QWebPage__ErrorPageExtensionReturn_setContentType".}
 proc fcQWebPageErrorPageExtensionReturn_encoding(self: pointer): struct_seaqt_string {.importc: "QWebPage__ErrorPageExtensionReturn_encoding".}
@@ -488,9 +488,9 @@ proc fcQWebPageErrorPageExtensionReturn_baseUrl(self: pointer): pointer {.import
 proc fcQWebPageErrorPageExtensionReturn_setBaseUrl(self: pointer, baseUrl: pointer): void {.importc: "QWebPage__ErrorPageExtensionReturn_setBaseUrl".}
 proc fcQWebPageErrorPageExtensionReturn_content(self: pointer): struct_seaqt_string {.importc: "QWebPage__ErrorPageExtensionReturn_content".}
 proc fcQWebPageErrorPageExtensionReturn_setContent(self: pointer, content: struct_seaqt_string): void {.importc: "QWebPage__ErrorPageExtensionReturn_setContent".}
-proc fcQWebPageErrorPageExtensionReturn_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebPage__ErrorPageExtensionReturn_operatorAssign".}
+proc fcQWebPageErrorPageExtensionReturn_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebPage__ErrorPageExtensionReturn_operatorAssign".}
 proc fcQWebPageErrorPageExtensionReturn_new(): ptr cQWebPageErrorPageExtensionReturn {.importc: "QWebPage__ErrorPageExtensionReturn_new".}
-proc fcQWebPageErrorPageExtensionReturn_new2(param1: pointer): ptr cQWebPageErrorPageExtensionReturn {.importc: "QWebPage__ErrorPageExtensionReturn_new2".}
+proc fcQWebPageErrorPageExtensionReturn_new2(fromVal: pointer): ptr cQWebPageErrorPageExtensionReturn {.importc: "QWebPage__ErrorPageExtensionReturn_new_from".}
 
 proc metaObject*(self: gen_qwebpage_types.QWebPage): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebPage_metaObject(self.h), owned: false)
@@ -502,13 +502,13 @@ proc metacall*(self: gen_qwebpage_types.QWebPage, param1: cint, param2: cint, pa
   fcQWebPage_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebpage_types.QWebPage, s: cstring): string =
-  let v_ms = fcQWebPage_tr(s)
+  let v_ms = fcQWebPage_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpage_types.QWebPage, s: cstring): string =
-  let v_ms = fcQWebPage_trUtf8(s)
+  let v_ms = fcQWebPage_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -628,7 +628,7 @@ proc inputMethodQuery*(self: gen_qwebpage_types.QWebPage, property: cint): gen_q
   gen_qvariant_types.QVariant(h: fcQWebPage_inputMethodQuery(self.h, cint(property)), owned: true)
 
 proc findText*(self: gen_qwebpage_types.QWebPage, subString: openArray[char]): bool =
-  fcQWebPage_findText(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
+  fcQWebPage_findTextSubString(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
 
 proc setForwardUnsupportedContent*(self: gen_qwebpage_types.QWebPage, forward: bool): void =
   fcQWebPage_setForwardUnsupportedContent(self.h, forward)
@@ -1348,31 +1348,31 @@ proc onRecentlyAudibleChanged*(self: gen_qwebpage_types.QWebPage, slot: QWebPage
   fcQWebPage_connect_recentlyAudibleChanged(self.h, cast[int](addr tmp[]), fcQWebPage_slot_callback_recentlyAudibleChanged, fcQWebPage_slot_callback_recentlyAudibleChanged_release)
 
 proc tr*(_: type gen_qwebpage_types.QWebPage, s: cstring, c: cstring): string =
-  let v_ms = fcQWebPage_tr2(s, c)
+  let v_ms = fcQWebPage_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebpage_types.QWebPage, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebPage_tr3(s, c, n)
+  let v_ms = fcQWebPage_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpage_types.QWebPage, s: cstring, c: cstring): string =
-  let v_ms = fcQWebPage_trUtf82(s, c)
+  let v_ms = fcQWebPage_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpage_types.QWebPage, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebPage_trUtf83(s, c, n)
+  let v_ms = fcQWebPage_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc findText*(self: gen_qwebpage_types.QWebPage, subString: openArray[char], options: cint): bool =
-  fcQWebPage_findText2(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
+  fcQWebPage_findTextSubStringOptions(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
 
 type QWebPagemetaObjectProc* = proc(self: QWebPage): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebPagemetacastProc* = proc(self: QWebPage, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -2115,8 +2115,8 @@ proc create*(T: type gen_qwebpage_types.QWebPage,
 
 proc staticMetaObject*(_: type gen_qwebpage_types.QWebPage): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebPage_staticMetaObject())
-proc operatorAssign*(self: gen_qwebpage_types.QWebPageViewportAttributes, other: gen_qwebpage_types.QWebPageViewportAttributes): void =
-  fcQWebPageViewportAttributes_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebpage_types.QWebPageViewportAttributes, fromVal: gen_qwebpage_types.QWebPageViewportAttributes): void =
+  fcQWebPageViewportAttributes_operatorAssign(self.h, fromVal.h)
 
 proc initialScaleFactor*(self: gen_qwebpage_types.QWebPageViewportAttributes): float64 =
   fcQWebPageViewportAttributes_initialScaleFactor(self.h)
@@ -2143,22 +2143,22 @@ proc create*(T: type gen_qwebpage_types.QWebPageViewportAttributes): gen_qwebpag
   let tmp = gen_qwebpage_types.QWebPageViewportAttributes(h: fcQWebPageViewportAttributes_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebpage_types.QWebPageViewportAttributes,
-    other: gen_qwebpage_types.QWebPageViewportAttributes): gen_qwebpage_types.QWebPageViewportAttributes =
-  let tmp = gen_qwebpage_types.QWebPageViewportAttributes(h: fcQWebPageViewportAttributes_new2(other.h), owned: true)
+    fromVal: gen_qwebpage_types.QWebPageViewportAttributes): gen_qwebpage_types.QWebPageViewportAttributes =
+  let tmp = gen_qwebpage_types.QWebPageViewportAttributes(h: fcQWebPageViewportAttributes_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qwebpage_types.QWebPageExtensionOption, param1: gen_qwebpage_types.QWebPageExtensionOption): void =
-  fcQWebPageExtensionOption_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qwebpage_types.QWebPageExtensionOption, fromVal: gen_qwebpage_types.QWebPageExtensionOption): void =
+  fcQWebPageExtensionOption_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qwebpage_types.QWebPageExtensionOption,
-    param1: gen_qwebpage_types.QWebPageExtensionOption): gen_qwebpage_types.QWebPageExtensionOption =
-  let tmp = gen_qwebpage_types.QWebPageExtensionOption(h: fcQWebPageExtensionOption_new(param1.h), owned: true)
+    fromVal: gen_qwebpage_types.QWebPageExtensionOption): gen_qwebpage_types.QWebPageExtensionOption =
+  let tmp = gen_qwebpage_types.QWebPageExtensionOption(h: fcQWebPageExtensionOption_new(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qwebpage_types.QWebPageExtensionReturn, param1: gen_qwebpage_types.QWebPageExtensionReturn): void =
-  fcQWebPageExtensionReturn_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qwebpage_types.QWebPageExtensionReturn, fromVal: gen_qwebpage_types.QWebPageExtensionReturn): void =
+  fcQWebPageExtensionReturn_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qwebpage_types.QWebPageExtensionReturn,
-    param1: gen_qwebpage_types.QWebPageExtensionReturn): gen_qwebpage_types.QWebPageExtensionReturn =
-  let tmp = gen_qwebpage_types.QWebPageExtensionReturn(h: fcQWebPageExtensionReturn_new(param1.h), owned: true)
+    fromVal: gen_qwebpage_types.QWebPageExtensionReturn): gen_qwebpage_types.QWebPageExtensionReturn =
+  let tmp = gen_qwebpage_types.QWebPageExtensionReturn(h: fcQWebPageExtensionReturn_new(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qwebpage_types.QWebPageExtensionReturn): gen_qwebpage_types.QWebPageExtensionReturn =
   let tmp = gen_qwebpage_types.QWebPageExtensionReturn(h: fcQWebPageExtensionReturn_new2(), owned: true)
@@ -2240,12 +2240,12 @@ proc errorString*(self: gen_qwebpage_types.QWebPageErrorPageExtensionOption): st
 proc setErrorString*(self: gen_qwebpage_types.QWebPageErrorPageExtensionOption, errorString: openArray[char]): void =
   fcQWebPageErrorPageExtensionOption_setErrorString(self.h, struct_seaqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
-proc operatorAssign*(self: gen_qwebpage_types.QWebPageErrorPageExtensionOption, param1: gen_qwebpage_types.QWebPageErrorPageExtensionOption): void =
-  fcQWebPageErrorPageExtensionOption_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qwebpage_types.QWebPageErrorPageExtensionOption, fromVal: gen_qwebpage_types.QWebPageErrorPageExtensionOption): void =
+  fcQWebPageErrorPageExtensionOption_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qwebpage_types.QWebPageErrorPageExtensionOption,
-    param1: gen_qwebpage_types.QWebPageErrorPageExtensionOption): gen_qwebpage_types.QWebPageErrorPageExtensionOption =
-  let tmp = gen_qwebpage_types.QWebPageErrorPageExtensionOption(h: fcQWebPageErrorPageExtensionOption_new(param1.h), owned: true)
+    fromVal: gen_qwebpage_types.QWebPageErrorPageExtensionOption): gen_qwebpage_types.QWebPageErrorPageExtensionOption =
+  let tmp = gen_qwebpage_types.QWebPageErrorPageExtensionOption(h: fcQWebPageErrorPageExtensionOption_new(fromVal.h), owned: true)
   tmp
 proc contentType*(self: gen_qwebpage_types.QWebPageErrorPageExtensionReturn): string =
   let vcontentType_ms = fcQWebPageErrorPageExtensionReturn_contentType(self.h)
@@ -2280,13 +2280,13 @@ proc content*(self: gen_qwebpage_types.QWebPageErrorPageExtensionReturn): seq[by
 proc setContent*(self: gen_qwebpage_types.QWebPageErrorPageExtensionReturn, content: openArray[byte]): void =
   fcQWebPageErrorPageExtensionReturn_setContent(self.h, struct_seaqt_string(data: if len(content) > 0: addr content[0] else: nil, len: csize_t(len(content))))
 
-proc operatorAssign*(self: gen_qwebpage_types.QWebPageErrorPageExtensionReturn, param1: gen_qwebpage_types.QWebPageErrorPageExtensionReturn): void =
-  fcQWebPageErrorPageExtensionReturn_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qwebpage_types.QWebPageErrorPageExtensionReturn, fromVal: gen_qwebpage_types.QWebPageErrorPageExtensionReturn): void =
+  fcQWebPageErrorPageExtensionReturn_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qwebpage_types.QWebPageErrorPageExtensionReturn): gen_qwebpage_types.QWebPageErrorPageExtensionReturn =
   let tmp = gen_qwebpage_types.QWebPageErrorPageExtensionReturn(h: fcQWebPageErrorPageExtensionReturn_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebpage_types.QWebPageErrorPageExtensionReturn,
-    param1: gen_qwebpage_types.QWebPageErrorPageExtensionReturn): gen_qwebpage_types.QWebPageErrorPageExtensionReturn =
-  let tmp = gen_qwebpage_types.QWebPageErrorPageExtensionReturn(h: fcQWebPageErrorPageExtensionReturn_new2(param1.h), owned: true)
+    fromVal: gen_qwebpage_types.QWebPageErrorPageExtensionReturn): gen_qwebpage_types.QWebPageErrorPageExtensionReturn =
+  let tmp = gen_qwebpage_types.QWebPageErrorPageExtensionReturn(h: fcQWebPageErrorPageExtensionReturn_new2(fromVal.h), owned: true)
   tmp

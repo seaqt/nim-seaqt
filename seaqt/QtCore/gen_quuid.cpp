@@ -20,26 +20,26 @@ QUuid* QUuid_new() {
 	return new (std::nothrow) QUuid();
 }
 
-QUuid* QUuid_new2(unsigned int l, unsigned short w1, unsigned short w2, unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4, unsigned char b5, unsigned char b6, unsigned char b7, unsigned char b8) {
+QUuid* QUuid_new_uint_ushort_ushort_uchar_uchar_uchar_uchar_uchar_uchar_uchar_uchar(unsigned int l, unsigned short w1, unsigned short w2, unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4, unsigned char b5, unsigned char b6, unsigned char b7, unsigned char b8) {
 	return new (std::nothrow) QUuid(static_cast<uint>(l), static_cast<ushort>(w1), static_cast<ushort>(w2), static_cast<uchar>(b1), static_cast<uchar>(b2), static_cast<uchar>(b3), static_cast<uchar>(b4), static_cast<uchar>(b5), static_cast<uchar>(b6), static_cast<uchar>(b7), static_cast<uchar>(b8));
 }
 
-QUuid* QUuid_new3(struct seaqt_string param1) {
+QUuid* QUuid_new_QString(struct seaqt_string param1) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	return new (std::nothrow) QUuid(param1_QString);
 }
 
-QUuid* QUuid_new4(const char* param1) {
+QUuid* QUuid_new_char(const char* param1) {
 	return new (std::nothrow) QUuid(param1);
 }
 
-QUuid* QUuid_new5(struct seaqt_string param1) {
+QUuid* QUuid_new_QByteArray(struct seaqt_string param1) {
 	QByteArray param1_QByteArray(param1.data, param1.len);
 	return new (std::nothrow) QUuid(param1_QByteArray);
 }
 
-QUuid* QUuid_new6(QUuid* param1) {
-	return new (std::nothrow) QUuid(*param1);
+QUuid* QUuid_new_QUuid(QUuid* from) {
+	return new (std::nothrow) QUuid(*from);
 }
 
 struct seaqt_string QUuid_toString(const QUuid* self) {
@@ -53,7 +53,7 @@ struct seaqt_string QUuid_toString(const QUuid* self) {
 	return _ms;
 }
 
-struct seaqt_string QUuid_toStringWithMode(const QUuid* self, int mode) {
+struct seaqt_string QUuid_toString_mode(const QUuid* self, int mode) {
 	QString _ret = self->toString(static_cast<QUuid::StringFormat>(mode));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -73,7 +73,7 @@ struct seaqt_string QUuid_toByteArray(const QUuid* self) {
 	return _ms;
 }
 
-struct seaqt_string QUuid_toByteArrayWithMode(const QUuid* self, int mode) {
+struct seaqt_string QUuid_toByteArray_mode(const QUuid* self, int mode) {
 	QByteArray _qb = self->toByteArray(static_cast<QUuid::StringFormat>(mode));
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();
@@ -120,22 +120,22 @@ QUuid* QUuid_createUuid() {
 	return new QUuid(QUuid::createUuid());
 }
 
-QUuid* QUuid_createUuidV3(QUuid* ns, struct seaqt_string baseData) {
+QUuid* QUuid_createUuidV3_QUuid_QByteArray(QUuid* ns, struct seaqt_string baseData) {
 	QByteArray baseData_QByteArray(baseData.data, baseData.len);
 	return new QUuid(QUuid::createUuidV3(*ns, baseData_QByteArray));
 }
 
-QUuid* QUuid_createUuidV5(QUuid* ns, struct seaqt_string baseData) {
+QUuid* QUuid_createUuidV5_QUuid_QByteArray(QUuid* ns, struct seaqt_string baseData) {
 	QByteArray baseData_QByteArray(baseData.data, baseData.len);
 	return new QUuid(QUuid::createUuidV5(*ns, baseData_QByteArray));
 }
 
-QUuid* QUuid_createUuidV32(QUuid* ns, struct seaqt_string baseData) {
+QUuid* QUuid_createUuidV3_QUuid_QString(QUuid* ns, struct seaqt_string baseData) {
 	QString baseData_QString = QString::fromUtf8(baseData.data, baseData.len);
 	return new QUuid(QUuid::createUuidV3(*ns, baseData_QString));
 }
 
-QUuid* QUuid_createUuidV52(QUuid* ns, struct seaqt_string baseData) {
+QUuid* QUuid_createUuidV5_QUuid_QString(QUuid* ns, struct seaqt_string baseData) {
 	QString baseData_QString = QString::fromUtf8(baseData.data, baseData.len);
 	return new QUuid(QUuid::createUuidV5(*ns, baseData_QString));
 }

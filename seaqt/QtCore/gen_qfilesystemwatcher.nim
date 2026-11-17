@@ -55,18 +55,18 @@ type cQFileSystemWatcher*{.exportc: "QFileSystemWatcher", incompleteStruct.} = o
 proc fcQFileSystemWatcher_metaObject(self: pointer): pointer {.importc: "QFileSystemWatcher_metaObject".}
 proc fcQFileSystemWatcher_metacast(self: pointer, param1: cstring): pointer {.importc: "QFileSystemWatcher_metacast".}
 proc fcQFileSystemWatcher_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFileSystemWatcher_metacall".}
-proc fcQFileSystemWatcher_tr(s: cstring): struct_seaqt_string {.importc: "QFileSystemWatcher_tr".}
-proc fcQFileSystemWatcher_trUtf8(s: cstring): struct_seaqt_string {.importc: "QFileSystemWatcher_trUtf8".}
+proc fcQFileSystemWatcher_trS(s: cstring): struct_seaqt_string {.importc: "QFileSystemWatcher_tr_s".}
+proc fcQFileSystemWatcher_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QFileSystemWatcher_trUtf8_s".}
 proc fcQFileSystemWatcher_addPath(self: pointer, file: struct_seaqt_string): bool {.importc: "QFileSystemWatcher_addPath".}
 proc fcQFileSystemWatcher_addPaths(self: pointer, files: struct_seaqt_array): struct_seaqt_array {.importc: "QFileSystemWatcher_addPaths".}
 proc fcQFileSystemWatcher_removePath(self: pointer, file: struct_seaqt_string): bool {.importc: "QFileSystemWatcher_removePath".}
 proc fcQFileSystemWatcher_removePaths(self: pointer, files: struct_seaqt_array): struct_seaqt_array {.importc: "QFileSystemWatcher_removePaths".}
 proc fcQFileSystemWatcher_files(self: pointer): struct_seaqt_array {.importc: "QFileSystemWatcher_files".}
 proc fcQFileSystemWatcher_directories(self: pointer): struct_seaqt_array {.importc: "QFileSystemWatcher_directories".}
-proc fcQFileSystemWatcher_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSystemWatcher_tr2".}
-proc fcQFileSystemWatcher_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSystemWatcher_tr3".}
-proc fcQFileSystemWatcher_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSystemWatcher_trUtf82".}
-proc fcQFileSystemWatcher_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSystemWatcher_trUtf83".}
+proc fcQFileSystemWatcher_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSystemWatcher_tr_s_c".}
+proc fcQFileSystemWatcher_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSystemWatcher_tr_s_c_n".}
+proc fcQFileSystemWatcher_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSystemWatcher_trUtf8_s_c".}
+proc fcQFileSystemWatcher_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSystemWatcher_trUtf8_s_c_n".}
 proc fcQFileSystemWatcher_vdata(self: pointer): ptr pointer {.importc: "QFileSystemWatcher_vdata".}
 proc fvdata_cQFileSystemWatcher(self: pointer): pointer {.importc: "vdata_QFileSystemWatcher".}
 
@@ -97,9 +97,9 @@ proc fcQFileSystemWatcher_protectedbase_senderSignalIndex(self: pointer): cint {
 proc fcQFileSystemWatcher_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFileSystemWatcher_protectedbase_receivers".}
 proc fcQFileSystemWatcher_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFileSystemWatcher_protectedbase_isSignalConnected".}
 proc fcQFileSystemWatcher_new(vtbl: pointer, vdata: csize_t): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new".}
-proc fcQFileSystemWatcher_new2(vtbl: pointer, vdata: csize_t, paths: struct_seaqt_array): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new2".}
-proc fcQFileSystemWatcher_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new3".}
-proc fcQFileSystemWatcher_new4(vtbl: pointer, vdata: csize_t, paths: struct_seaqt_array, parent: pointer): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new4".}
+proc fcQFileSystemWatcher_new2(vtbl: pointer, vdata: csize_t, paths: struct_seaqt_array): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new_paths".}
+proc fcQFileSystemWatcher_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new_parent".}
+proc fcQFileSystemWatcher_new4(vtbl: pointer, vdata: csize_t, paths: struct_seaqt_array, parent: pointer): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new_paths_parent".}
 proc fcQFileSystemWatcher_staticMetaObject(): pointer {.importc: "QFileSystemWatcher_staticMetaObject".}
 
 proc metaObject*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher): gen_qobjectdefs_types.QMetaObject =
@@ -112,13 +112,13 @@ proc metacall*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, param1: ci
   fcQFileSystemWatcher_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher, s: cstring): string =
-  let v_ms = fcQFileSystemWatcher_tr(s)
+  let v_ms = fcQFileSystemWatcher_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher, s: cstring): string =
-  let v_ms = fcQFileSystemWatcher_trUtf8(s)
+  let v_ms = fcQFileSystemWatcher_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -186,25 +186,25 @@ proc directories*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher): seq[st
   vx_ret
 
 proc tr*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher, s: cstring, c: cstring): string =
-  let v_ms = fcQFileSystemWatcher_tr2(s, c)
+  let v_ms = fcQFileSystemWatcher_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFileSystemWatcher_tr3(s, c, n)
+  let v_ms = fcQFileSystemWatcher_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher, s: cstring, c: cstring): string =
-  let v_ms = fcQFileSystemWatcher_trUtf82(s, c)
+  let v_ms = fcQFileSystemWatcher_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFileSystemWatcher_trUtf83(s, c, n)
+  let v_ms = fcQFileSystemWatcher_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

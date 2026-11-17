@@ -40,8 +40,8 @@ int QQmlImageProviderBase_flags(const QQmlImageProviderBase* self) {
 	return static_cast<int>(_ret);
 }
 
-void QQmlImageProviderBase_operatorAssign(QQmlImageProviderBase* self, QQmlImageProviderBase* param1) {
-	self->operator=(*param1);
+void QQmlImageProviderBase_operatorAssign(QQmlImageProviderBase* self, QQmlImageProviderBase* from) {
+	self->operator=(*from);
 }
 
 void QQmlImageProviderBase_delete(QQmlImageProviderBase* self) {
@@ -199,7 +199,7 @@ VirtualQQmlEngine* QQmlEngine_new(const QQmlEngine_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQQmlEngine(vtbl) : nullptr;
 }
 
-VirtualQQmlEngine* QQmlEngine_new2(const QQmlEngine_VTable* vtbl, size_t vdata, QObject* p) {
+VirtualQQmlEngine* QQmlEngine_new_p(const QQmlEngine_VTable* vtbl, size_t vdata, QObject* p) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlEngine(vtbl, p) : nullptr;
 }
@@ -220,7 +220,7 @@ int QQmlEngine_metacall(QQmlEngine* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQmlEngine_tr(const char* s) {
+struct seaqt_string QQmlEngine_tr_s(const char* s) {
 	QString _ret = QQmlEngine::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -231,7 +231,7 @@ struct seaqt_string QQmlEngine_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QQmlEngine_trUtf8(const char* s) {
+struct seaqt_string QQmlEngine_trUtf8_s(const char* s) {
 	QString _ret = QQmlEngine::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -510,7 +510,7 @@ void QQmlEngine_connect_warnings(QQmlEngine* self, intptr_t slot, void (*callbac
 	QQmlEngine::connect(self, static_cast<void (QQmlEngine::*)(const QList<QQmlError>&)>(&QQmlEngine::warnings), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQmlEngine_tr2(const char* s, const char* c) {
+struct seaqt_string QQmlEngine_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQmlEngine::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -521,7 +521,7 @@ struct seaqt_string QQmlEngine_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQmlEngine_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQmlEngine_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQmlEngine::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -532,7 +532,7 @@ struct seaqt_string QQmlEngine_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QQmlEngine_trUtf82(const char* s, const char* c) {
+struct seaqt_string QQmlEngine_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QQmlEngine::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -543,7 +543,7 @@ struct seaqt_string QQmlEngine_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQmlEngine_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QQmlEngine_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQmlEngine::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -21,12 +21,12 @@ QAudioDeviceInfo* QAudioDeviceInfo_new() {
 	return new (std::nothrow) QAudioDeviceInfo();
 }
 
-QAudioDeviceInfo* QAudioDeviceInfo_new2(QAudioDeviceInfo* other) {
-	return new (std::nothrow) QAudioDeviceInfo(*other);
+QAudioDeviceInfo* QAudioDeviceInfo_new_from(QAudioDeviceInfo* from) {
+	return new (std::nothrow) QAudioDeviceInfo(*from);
 }
 
-void QAudioDeviceInfo_operatorAssign(QAudioDeviceInfo* self, QAudioDeviceInfo* other) {
-	self->operator=(*other);
+void QAudioDeviceInfo_operatorAssign(QAudioDeviceInfo* self, QAudioDeviceInfo* from) {
+	self->operator=(*from);
 }
 
 bool QAudioDeviceInfo_operatorEqual(const QAudioDeviceInfo* self, QAudioDeviceInfo* other) {

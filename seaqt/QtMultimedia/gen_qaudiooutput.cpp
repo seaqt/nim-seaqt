@@ -179,27 +179,27 @@ VirtualQAudioOutput* QAudioOutput_new(const QAudioOutput_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQAudioOutput(vtbl) : nullptr;
 }
 
-VirtualQAudioOutput* QAudioOutput_new2(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDeviceInfo) {
+VirtualQAudioOutput* QAudioOutput_new_audioDeviceInfo(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDeviceInfo) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioOutput>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioOutput(vtbl, *audioDeviceInfo) : nullptr;
 }
 
-VirtualQAudioOutput* QAudioOutput_new3(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioFormat* format) {
+VirtualQAudioOutput* QAudioOutput_new_format(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioFormat* format) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioOutput>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioOutput(vtbl, *format) : nullptr;
 }
 
-VirtualQAudioOutput* QAudioOutput_new4(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioFormat* format, QObject* parent) {
+VirtualQAudioOutput* QAudioOutput_new_format_parent(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioFormat* format, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioOutput>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioOutput(vtbl, *format, parent) : nullptr;
 }
 
-VirtualQAudioOutput* QAudioOutput_new5(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDeviceInfo, QAudioFormat* format) {
+VirtualQAudioOutput* QAudioOutput_new_audioDeviceInfo_format(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDeviceInfo, QAudioFormat* format) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioOutput>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioOutput(vtbl, *audioDeviceInfo, *format) : nullptr;
 }
 
-VirtualQAudioOutput* QAudioOutput_new6(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDeviceInfo, QAudioFormat* format, QObject* parent) {
+VirtualQAudioOutput* QAudioOutput_new_audioDeviceInfo_format_parent(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDeviceInfo, QAudioFormat* format, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioOutput>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioOutput(vtbl, *audioDeviceInfo, *format, parent) : nullptr;
 }
@@ -220,7 +220,7 @@ int QAudioOutput_metacall(QAudioOutput* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAudioOutput_tr(const char* s) {
+struct seaqt_string QAudioOutput_tr_s(const char* s) {
 	QString _ret = QAudioOutput::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -231,7 +231,7 @@ struct seaqt_string QAudioOutput_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QAudioOutput_trUtf8(const char* s) {
+struct seaqt_string QAudioOutput_trUtf8_s(const char* s) {
 	QString _ret = QAudioOutput::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -246,11 +246,11 @@ QAudioFormat* QAudioOutput_format(const QAudioOutput* self) {
 	return new QAudioFormat(self->format());
 }
 
-void QAudioOutput_start(QAudioOutput* self, QIODevice* device) {
+void QAudioOutput_start_device(QAudioOutput* self, QIODevice* device) {
 	self->start(device);
 }
 
-QIODevice* QAudioOutput_start2(QAudioOutput* self) {
+QIODevice* QAudioOutput_start(QAudioOutput* self) {
 	return self->start();
 }
 
@@ -371,7 +371,7 @@ void QAudioOutput_connect_notify(QAudioOutput* self, intptr_t slot, void (*callb
 	QAudioOutput::connect(self, static_cast<void (QAudioOutput::*)()>(&QAudioOutput::notify), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAudioOutput_tr2(const char* s, const char* c) {
+struct seaqt_string QAudioOutput_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAudioOutput::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -382,7 +382,7 @@ struct seaqt_string QAudioOutput_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAudioOutput_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAudioOutput_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAudioOutput::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -393,7 +393,7 @@ struct seaqt_string QAudioOutput_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QAudioOutput_trUtf82(const char* s, const char* c) {
+struct seaqt_string QAudioOutput_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QAudioOutput::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -404,7 +404,7 @@ struct seaqt_string QAudioOutput_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAudioOutput_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QAudioOutput_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAudioOutput::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

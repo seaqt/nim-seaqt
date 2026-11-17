@@ -22,14 +22,14 @@ typedef struct QIODevice QIODevice;
 typedef struct QMessageAuthenticationCode QMessageAuthenticationCode;
 #endif
 
-QMessageAuthenticationCode* QMessageAuthenticationCode_new(int method);
-QMessageAuthenticationCode* QMessageAuthenticationCode_new2(int method, struct seaqt_string key);
+QMessageAuthenticationCode* QMessageAuthenticationCode_new_method(int method);
+QMessageAuthenticationCode* QMessageAuthenticationCode_new_method_key(int method, struct seaqt_string key);
 
 void QMessageAuthenticationCode_reset(QMessageAuthenticationCode* self);
 void QMessageAuthenticationCode_setKey(QMessageAuthenticationCode* self, struct seaqt_string key);
-void QMessageAuthenticationCode_addData(QMessageAuthenticationCode* self, const char* data, int length);
-void QMessageAuthenticationCode_addDataWithData(QMessageAuthenticationCode* self, struct seaqt_string data);
-bool QMessageAuthenticationCode_addDataWithDevice(QMessageAuthenticationCode* self, QIODevice* device);
+void QMessageAuthenticationCode_addData_data_length(QMessageAuthenticationCode* self, const char* data, int length);
+void QMessageAuthenticationCode_addData_data(QMessageAuthenticationCode* self, struct seaqt_string data);
+bool QMessageAuthenticationCode_addData_device(QMessageAuthenticationCode* self, QIODevice* device);
 struct seaqt_string QMessageAuthenticationCode_result(const QMessageAuthenticationCode* self);
 struct seaqt_string QMessageAuthenticationCode_hash(struct seaqt_string message, struct seaqt_string key, int method);
 

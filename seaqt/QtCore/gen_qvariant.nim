@@ -151,13 +151,13 @@ type cQVariantHandler*{.exportc: "QVariant__Handler", incompleteStruct.} = objec
 type cQSequentialIterableconst_iterator*{.exportc: "QSequentialIterable__const_iterator", incompleteStruct.} = object
 type cQAssociativeIterableconst_iterator*{.exportc: "QAssociativeIterable__const_iterator", incompleteStruct.} = object
 
-proc fcQVariant_operatorAssign(self: pointer, other: pointer): void {.importc: "QVariant_operatorAssign".}
+proc fcQVariant_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QVariant_operatorAssign".}
 proc fcQVariant_swap(self: pointer, other: pointer): void {.importc: "QVariant_swap".}
 proc fcQVariant_typeX(self: pointer): cint {.importc: "QVariant_type".}
 proc fcQVariant_userType(self: pointer): cint {.importc: "QVariant_userType".}
 proc fcQVariant_typeName(self: pointer): cstring {.importc: "QVariant_typeName".}
 proc fcQVariant_canConvert(self: pointer, targetTypeId: cint): bool {.importc: "QVariant_canConvert".}
-proc fcQVariant_convert(self: pointer, targetTypeId: cint): bool {.importc: "QVariant_convert".}
+proc fcQVariant_convertTargetTypeId(self: pointer, targetTypeId: cint): bool {.importc: "QVariant_convert_targetTypeId".}
 proc fcQVariant_isValid(self: pointer): bool {.importc: "QVariant_isValid".}
 proc fcQVariant_isNull(self: pointer): bool {.importc: "QVariant_isNull".}
 proc fcQVariant_clear(self: pointer): void {.importc: "QVariant_clear".}
@@ -208,103 +208,103 @@ proc fcQVariant_typeToName(typeId: cint): cstring {.importc: "QVariant_typeToNam
 proc fcQVariant_nameToType(name: cstring): cint {.importc: "QVariant_nameToType".}
 proc fcQVariant_data(self: pointer): pointer {.importc: "QVariant_data".}
 proc fcQVariant_constData(self: pointer): pointer {.importc: "QVariant_constData".}
-proc fcQVariant_data2(self: pointer): pointer {.importc: "QVariant_data2".}
+proc fcQVariant_dataConst(self: pointer): pointer {.importc: "QVariant_data_const".}
 proc fcQVariant_operatorEqual(self: pointer, v: pointer): bool {.importc: "QVariant_operatorEqual".}
 proc fcQVariant_operatorNotEqual(self: pointer, v: pointer): bool {.importc: "QVariant_operatorNotEqual".}
 proc fcQVariant_operatorLesser(self: pointer, v: pointer): bool {.importc: "QVariant_operatorLesser".}
 proc fcQVariant_operatorLesserOrEqual(self: pointer, v: pointer): bool {.importc: "QVariant_operatorLesserOrEqual".}
 proc fcQVariant_operatorGreater(self: pointer, v: pointer): bool {.importc: "QVariant_operatorGreater".}
 proc fcQVariant_operatorGreaterOrEqual(self: pointer, v: pointer): bool {.importc: "QVariant_operatorGreaterOrEqual".}
-proc fcQVariant_toIntWithOk(self: pointer, ok: ptr bool): cint {.importc: "QVariant_toIntWithOk".}
-proc fcQVariant_toUIntWithOk(self: pointer, ok: ptr bool): cuint {.importc: "QVariant_toUIntWithOk".}
-proc fcQVariant_toLongLongWithOk(self: pointer, ok: ptr bool): clonglong {.importc: "QVariant_toLongLongWithOk".}
-proc fcQVariant_toULongLongWithOk(self: pointer, ok: ptr bool): culonglong {.importc: "QVariant_toULongLongWithOk".}
-proc fcQVariant_toDoubleWithOk(self: pointer, ok: ptr bool): float64 {.importc: "QVariant_toDoubleWithOk".}
-proc fcQVariant_toFloatWithOk(self: pointer, ok: ptr bool): float32 {.importc: "QVariant_toFloatWithOk".}
-proc fcQVariant_toRealWithOk(self: pointer, ok: ptr bool): float64 {.importc: "QVariant_toRealWithOk".}
+proc fcQVariant_toIntOk(self: pointer, ok: ptr bool): cint {.importc: "QVariant_toInt_ok".}
+proc fcQVariant_toUIntOk(self: pointer, ok: ptr bool): cuint {.importc: "QVariant_toUInt_ok".}
+proc fcQVariant_toLongLongOk(self: pointer, ok: ptr bool): clonglong {.importc: "QVariant_toLongLong_ok".}
+proc fcQVariant_toULongLongOk(self: pointer, ok: ptr bool): culonglong {.importc: "QVariant_toULongLong_ok".}
+proc fcQVariant_toDoubleOk(self: pointer, ok: ptr bool): float64 {.importc: "QVariant_toDouble_ok".}
+proc fcQVariant_toFloatOk(self: pointer, ok: ptr bool): float32 {.importc: "QVariant_toFloat_ok".}
+proc fcQVariant_toRealOk(self: pointer, ok: ptr bool): float64 {.importc: "QVariant_toReal_ok".}
 proc fcQVariant_fromValue(value: pointer): pointer {.importc: "QVariant_fromValue".}
 proc fcQVariant_protectedbase_create(self: pointer, typeVal: cint, copy: pointer): void {.importc: "QVariant_protectedbase_create".}
 proc fcQVariant_protectedbase_cmp(self: pointer, other: pointer): bool {.importc: "QVariant_protectedbase_cmp".}
 proc fcQVariant_protectedbase_compare(self: pointer, other: pointer): cint {.importc: "QVariant_protectedbase_compare".}
-proc fcQVariant_protectedbase_convert2(self: pointer, t: cint, ptrVal: pointer): bool {.importc: "QVariant_protectedbase_convert2".}
+proc fcQVariant_protectedbase_convert_t_ptr(self: pointer, t: cint, ptrVal: pointer): bool {.importc: "QVariant_protectedbase_convert_t_ptr".}
 proc fcQVariant_new(): ptr cQVariant {.importc: "QVariant_new".}
-proc fcQVariant_new2(typeVal: cint): ptr cQVariant {.importc: "QVariant_new2".}
-proc fcQVariant_new3(typeId: cint, copy: pointer): ptr cQVariant {.importc: "QVariant_new3".}
-proc fcQVariant_new4(typeId: cint, copy: pointer, flags: cuint): ptr cQVariant {.importc: "QVariant_new4".}
-proc fcQVariant_new5(other: pointer): ptr cQVariant {.importc: "QVariant_new5".}
-proc fcQVariant_new6(s: pointer): ptr cQVariant {.importc: "QVariant_new6".}
-proc fcQVariant_new7(i: cint): ptr cQVariant {.importc: "QVariant_new7".}
-proc fcQVariant_new8(ui: cuint): ptr cQVariant {.importc: "QVariant_new8".}
-proc fcQVariant_new9(ll: clonglong): ptr cQVariant {.importc: "QVariant_new9".}
-proc fcQVariant_new10(ull: culonglong): ptr cQVariant {.importc: "QVariant_new10".}
-proc fcQVariant_new11(b: bool): ptr cQVariant {.importc: "QVariant_new11".}
-proc fcQVariant_new12(d: float64): ptr cQVariant {.importc: "QVariant_new12".}
-proc fcQVariant_new13(f: float32): ptr cQVariant {.importc: "QVariant_new13".}
-proc fcQVariant_new14(str: cstring): ptr cQVariant {.importc: "QVariant_new14".}
-proc fcQVariant_new15(bytearray: struct_seaqt_string): ptr cQVariant {.importc: "QVariant_new15".}
-proc fcQVariant_new16(bitarray: pointer): ptr cQVariant {.importc: "QVariant_new16".}
-proc fcQVariant_new17(stringVal: struct_seaqt_string): ptr cQVariant {.importc: "QVariant_new17".}
-proc fcQVariant_new18(stringlist: struct_seaqt_array): ptr cQVariant {.importc: "QVariant_new18".}
-proc fcQVariant_new19(qchar: pointer): ptr cQVariant {.importc: "QVariant_new19".}
-proc fcQVariant_new20(date: pointer): ptr cQVariant {.importc: "QVariant_new20".}
-proc fcQVariant_new21(time: pointer): ptr cQVariant {.importc: "QVariant_new21".}
-proc fcQVariant_new22(datetime: pointer): ptr cQVariant {.importc: "QVariant_new22".}
-proc fcQVariant_new23(list: struct_seaqt_array): ptr cQVariant {.importc: "QVariant_new23".}
-proc fcQVariant_new24(map: struct_seaqt_map): ptr cQVariant {.importc: "QVariant_new24".}
-proc fcQVariant_new25(hash: struct_seaqt_map): ptr cQVariant {.importc: "QVariant_new25".}
-proc fcQVariant_new26(size: pointer): ptr cQVariant {.importc: "QVariant_new26".}
-proc fcQVariant_new27(size: pointer): ptr cQVariant {.importc: "QVariant_new27".}
-proc fcQVariant_new28(pt: pointer): ptr cQVariant {.importc: "QVariant_new28".}
-proc fcQVariant_new29(pt: pointer): ptr cQVariant {.importc: "QVariant_new29".}
-proc fcQVariant_new30(line: pointer): ptr cQVariant {.importc: "QVariant_new30".}
-proc fcQVariant_new31(line: pointer): ptr cQVariant {.importc: "QVariant_new31".}
-proc fcQVariant_new32(rect: pointer): ptr cQVariant {.importc: "QVariant_new32".}
-proc fcQVariant_new33(rect: pointer): ptr cQVariant {.importc: "QVariant_new33".}
-proc fcQVariant_new34(locale: pointer): ptr cQVariant {.importc: "QVariant_new34".}
-proc fcQVariant_new35(regExp: pointer): ptr cQVariant {.importc: "QVariant_new35".}
-proc fcQVariant_new36(re: pointer): ptr cQVariant {.importc: "QVariant_new36".}
-proc fcQVariant_new37(easing: pointer): ptr cQVariant {.importc: "QVariant_new37".}
-proc fcQVariant_new38(uuid: pointer): ptr cQVariant {.importc: "QVariant_new38".}
-proc fcQVariant_new39(url: pointer): ptr cQVariant {.importc: "QVariant_new39".}
-proc fcQVariant_new40(jsonValue: pointer): ptr cQVariant {.importc: "QVariant_new40".}
-proc fcQVariant_new41(jsonObject: pointer): ptr cQVariant {.importc: "QVariant_new41".}
-proc fcQVariant_new42(jsonArray: pointer): ptr cQVariant {.importc: "QVariant_new42".}
-proc fcQVariant_new43(jsonDocument: pointer): ptr cQVariant {.importc: "QVariant_new43".}
-proc fcQVariant_new44(modelIndex: pointer): ptr cQVariant {.importc: "QVariant_new44".}
-proc fcQVariant_new45(modelIndex: pointer): ptr cQVariant {.importc: "QVariant_new45".}
-proc fcQVariantComparisonHelper_new(varVal: pointer): ptr cQVariantComparisonHelper {.importc: "QVariantComparisonHelper_new".}
-proc fcQVariantComparisonHelper_new2(param1: pointer): ptr cQVariantComparisonHelper {.importc: "QVariantComparisonHelper_new2".}
-proc fcQSequentialIterableconst_iterator_operatorAssign(self: pointer, other: pointer): void {.importc: "QSequentialIterable__const_iterator_operatorAssign".}
+proc fcQVariant_new2(typeVal: cint): ptr cQVariant {.importc: "QVariant_new_QVariant_Type".}
+proc fcQVariant_new3(typeId: cint, copy: pointer): ptr cQVariant {.importc: "QVariant_new_int_void".}
+proc fcQVariant_new4(typeId: cint, copy: pointer, flags: cuint): ptr cQVariant {.importc: "QVariant_new_int_void_uint".}
+proc fcQVariant_new5(fromVal: pointer): ptr cQVariant {.importc: "QVariant_new_QVariant".}
+proc fcQVariant_new6(s: pointer): ptr cQVariant {.importc: "QVariant_new_QDataStream".}
+proc fcQVariant_new7(i: cint): ptr cQVariant {.importc: "QVariant_new_int".}
+proc fcQVariant_new8(ui: cuint): ptr cQVariant {.importc: "QVariant_new_uint".}
+proc fcQVariant_new9(ll: clonglong): ptr cQVariant {.importc: "QVariant_new_qlonglong".}
+proc fcQVariant_new10(ull: culonglong): ptr cQVariant {.importc: "QVariant_new_qulonglong".}
+proc fcQVariant_new11(b: bool): ptr cQVariant {.importc: "QVariant_new_bool".}
+proc fcQVariant_new12(d: float64): ptr cQVariant {.importc: "QVariant_new_double".}
+proc fcQVariant_new13(f: float32): ptr cQVariant {.importc: "QVariant_new_float".}
+proc fcQVariant_new14(str: cstring): ptr cQVariant {.importc: "QVariant_new_char".}
+proc fcQVariant_new15(bytearray: struct_seaqt_string): ptr cQVariant {.importc: "QVariant_new_QByteArray".}
+proc fcQVariant_new16(bitarray: pointer): ptr cQVariant {.importc: "QVariant_new_QBitArray".}
+proc fcQVariant_new17(stringVal: struct_seaqt_string): ptr cQVariant {.importc: "QVariant_new_QString".}
+proc fcQVariant_new18(stringlist: struct_seaqt_array): ptr cQVariant {.importc: "QVariant_new_QStringList".}
+proc fcQVariant_new19(qchar: pointer): ptr cQVariant {.importc: "QVariant_new_QChar".}
+proc fcQVariant_new20(date: pointer): ptr cQVariant {.importc: "QVariant_new_QDate".}
+proc fcQVariant_new21(time: pointer): ptr cQVariant {.importc: "QVariant_new_QTime".}
+proc fcQVariant_new22(datetime: pointer): ptr cQVariant {.importc: "QVariant_new_QDateTime".}
+proc fcQVariant_new23(list: struct_seaqt_array): ptr cQVariant {.importc: "QVariant_new_QListOfQVariant".}
+proc fcQVariant_new24(map: struct_seaqt_map): ptr cQVariant {.importc: "QVariant_new_QMapOfQString_QVariant".}
+proc fcQVariant_new25(hash: struct_seaqt_map): ptr cQVariant {.importc: "QVariant_new_QHashOfQString_QVariant".}
+proc fcQVariant_new26(size: pointer): ptr cQVariant {.importc: "QVariant_new_QSize".}
+proc fcQVariant_new27(size: pointer): ptr cQVariant {.importc: "QVariant_new_QSizeF".}
+proc fcQVariant_new28(pt: pointer): ptr cQVariant {.importc: "QVariant_new_QPoint".}
+proc fcQVariant_new29(pt: pointer): ptr cQVariant {.importc: "QVariant_new_QPointF".}
+proc fcQVariant_new30(line: pointer): ptr cQVariant {.importc: "QVariant_new_QLine".}
+proc fcQVariant_new31(line: pointer): ptr cQVariant {.importc: "QVariant_new_QLineF".}
+proc fcQVariant_new32(rect: pointer): ptr cQVariant {.importc: "QVariant_new_QRect".}
+proc fcQVariant_new33(rect: pointer): ptr cQVariant {.importc: "QVariant_new_QRectF".}
+proc fcQVariant_new34(locale: pointer): ptr cQVariant {.importc: "QVariant_new_QLocale".}
+proc fcQVariant_new35(regExp: pointer): ptr cQVariant {.importc: "QVariant_new_QRegExp".}
+proc fcQVariant_new36(re: pointer): ptr cQVariant {.importc: "QVariant_new_QRegularExpression".}
+proc fcQVariant_new37(easing: pointer): ptr cQVariant {.importc: "QVariant_new_QEasingCurve".}
+proc fcQVariant_new38(uuid: pointer): ptr cQVariant {.importc: "QVariant_new_QUuid".}
+proc fcQVariant_new39(url: pointer): ptr cQVariant {.importc: "QVariant_new_QUrl".}
+proc fcQVariant_new40(jsonValue: pointer): ptr cQVariant {.importc: "QVariant_new_QJsonValue".}
+proc fcQVariant_new41(jsonObject: pointer): ptr cQVariant {.importc: "QVariant_new_QJsonObject".}
+proc fcQVariant_new42(jsonArray: pointer): ptr cQVariant {.importc: "QVariant_new_QJsonArray".}
+proc fcQVariant_new43(jsonDocument: pointer): ptr cQVariant {.importc: "QVariant_new_QJsonDocument".}
+proc fcQVariant_new44(modelIndex: pointer): ptr cQVariant {.importc: "QVariant_new_QModelIndex".}
+proc fcQVariant_new45(modelIndex: pointer): ptr cQVariant {.importc: "QVariant_new_QPersistentModelIndex".}
+proc fcQVariantComparisonHelper_new(varVal: pointer): ptr cQVariantComparisonHelper {.importc: "QVariantComparisonHelper_new_var".}
+proc fcQVariantComparisonHelper_new2(fromVal: pointer): ptr cQVariantComparisonHelper {.importc: "QVariantComparisonHelper_new_from".}
+proc fcQSequentialIterableconst_iterator_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSequentialIterable__const_iterator_operatorAssign".}
 proc fcQSequentialIterableconst_iterator_operatorMultiply(self: pointer): pointer {.importc: "QSequentialIterable__const_iterator_operatorMultiply".}
 proc fcQSequentialIterableconst_iterator_operatorEqual(self: pointer, o: pointer): bool {.importc: "QSequentialIterable__const_iterator_operatorEqual".}
 proc fcQSequentialIterableconst_iterator_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QSequentialIterable__const_iterator_operatorNotEqual".}
 proc fcQSequentialIterableconst_iterator_operatorPlusPlus(self: pointer): pointer {.importc: "QSequentialIterable__const_iterator_operatorPlusPlus".}
-proc fcQSequentialIterableconst_iterator_operatorPlusPlusWithInt(self: pointer, param1: cint): pointer {.importc: "QSequentialIterable__const_iterator_operatorPlusPlusWithInt".}
+proc fcQSequentialIterableconst_iterator_operatorPlusPlusInt(self: pointer, param1: cint): pointer {.importc: "QSequentialIterable__const_iterator_operatorPlusPlus_int".}
 proc fcQSequentialIterableconst_iterator_operatorMinusMinus(self: pointer): pointer {.importc: "QSequentialIterable__const_iterator_operatorMinusMinus".}
-proc fcQSequentialIterableconst_iterator_operatorMinusMinusWithInt(self: pointer, param1: cint): pointer {.importc: "QSequentialIterable__const_iterator_operatorMinusMinusWithInt".}
+proc fcQSequentialIterableconst_iterator_operatorMinusMinusInt(self: pointer, param1: cint): pointer {.importc: "QSequentialIterable__const_iterator_operatorMinusMinus_int".}
 proc fcQSequentialIterableconst_iterator_operatorPlusAssign(self: pointer, j: cint): pointer {.importc: "QSequentialIterable__const_iterator_operatorPlusAssign".}
 proc fcQSequentialIterableconst_iterator_operatorMinusAssign(self: pointer, j: cint): pointer {.importc: "QSequentialIterable__const_iterator_operatorMinusAssign".}
 proc fcQSequentialIterableconst_iterator_operatorPlus(self: pointer, j: cint): pointer {.importc: "QSequentialIterable__const_iterator_operatorPlus".}
 proc fcQSequentialIterableconst_iterator_operatorMinus(self: pointer, j: cint): pointer {.importc: "QSequentialIterable__const_iterator_operatorMinus".}
-proc fcQSequentialIterableconst_iterator_new(other: pointer): ptr cQSequentialIterableconst_iterator {.importc: "QSequentialIterable__const_iterator_new".}
-proc fcQAssociativeIterableconst_iterator_operatorAssign(self: pointer, other: pointer): void {.importc: "QAssociativeIterable__const_iterator_operatorAssign".}
+proc fcQSequentialIterableconst_iterator_new(fromVal: pointer): ptr cQSequentialIterableconst_iterator {.importc: "QSequentialIterable__const_iterator_new".}
+proc fcQAssociativeIterableconst_iterator_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAssociativeIterable__const_iterator_operatorAssign".}
 proc fcQAssociativeIterableconst_iterator_key(self: pointer): pointer {.importc: "QAssociativeIterable__const_iterator_key".}
 proc fcQAssociativeIterableconst_iterator_value(self: pointer): pointer {.importc: "QAssociativeIterable__const_iterator_value".}
 proc fcQAssociativeIterableconst_iterator_operatorMultiply(self: pointer): pointer {.importc: "QAssociativeIterable__const_iterator_operatorMultiply".}
 proc fcQAssociativeIterableconst_iterator_operatorEqual(self: pointer, o: pointer): bool {.importc: "QAssociativeIterable__const_iterator_operatorEqual".}
 proc fcQAssociativeIterableconst_iterator_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QAssociativeIterable__const_iterator_operatorNotEqual".}
 proc fcQAssociativeIterableconst_iterator_operatorPlusPlus(self: pointer): pointer {.importc: "QAssociativeIterable__const_iterator_operatorPlusPlus".}
-proc fcQAssociativeIterableconst_iterator_operatorPlusPlusWithInt(self: pointer, param1: cint): pointer {.importc: "QAssociativeIterable__const_iterator_operatorPlusPlusWithInt".}
+proc fcQAssociativeIterableconst_iterator_operatorPlusPlusInt(self: pointer, param1: cint): pointer {.importc: "QAssociativeIterable__const_iterator_operatorPlusPlus_int".}
 proc fcQAssociativeIterableconst_iterator_operatorMinusMinus(self: pointer): pointer {.importc: "QAssociativeIterable__const_iterator_operatorMinusMinus".}
-proc fcQAssociativeIterableconst_iterator_operatorMinusMinusWithInt(self: pointer, param1: cint): pointer {.importc: "QAssociativeIterable__const_iterator_operatorMinusMinusWithInt".}
+proc fcQAssociativeIterableconst_iterator_operatorMinusMinusInt(self: pointer, param1: cint): pointer {.importc: "QAssociativeIterable__const_iterator_operatorMinusMinus_int".}
 proc fcQAssociativeIterableconst_iterator_operatorPlusAssign(self: pointer, j: cint): pointer {.importc: "QAssociativeIterable__const_iterator_operatorPlusAssign".}
 proc fcQAssociativeIterableconst_iterator_operatorMinusAssign(self: pointer, j: cint): pointer {.importc: "QAssociativeIterable__const_iterator_operatorMinusAssign".}
 proc fcQAssociativeIterableconst_iterator_operatorPlus(self: pointer, j: cint): pointer {.importc: "QAssociativeIterable__const_iterator_operatorPlus".}
 proc fcQAssociativeIterableconst_iterator_operatorMinus(self: pointer, j: cint): pointer {.importc: "QAssociativeIterable__const_iterator_operatorMinus".}
-proc fcQAssociativeIterableconst_iterator_new(other: pointer): ptr cQAssociativeIterableconst_iterator {.importc: "QAssociativeIterable__const_iterator_new".}
+proc fcQAssociativeIterableconst_iterator_new(fromVal: pointer): ptr cQAssociativeIterableconst_iterator {.importc: "QAssociativeIterable__const_iterator_new".}
 
-proc operatorAssign*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVariant): void =
-  fcQVariant_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qvariant_types.QVariant, fromVal: gen_qvariant_types.QVariant): void =
+  fcQVariant_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVariant): void =
   fcQVariant_swap(self.h, other.h)
@@ -322,7 +322,7 @@ proc canConvert*(self: gen_qvariant_types.QVariant, targetTypeId: cint): bool =
   fcQVariant_canConvert(self.h, targetTypeId)
 
 proc convert*(self: gen_qvariant_types.QVariant, targetTypeId: cint): bool =
-  fcQVariant_convert(self.h, targetTypeId)
+  fcQVariant_convertTargetTypeId(self.h, targetTypeId)
 
 proc isValid*(self: gen_qvariant_types.QVariant): bool =
   fcQVariant_isValid(self.h)
@@ -526,7 +526,7 @@ proc constData*(self: gen_qvariant_types.QVariant): pointer =
   fcQVariant_constData(self.h)
 
 proc data2*(self: gen_qvariant_types.QVariant): pointer =
-  fcQVariant_data2(self.h)
+  fcQVariant_dataConst(self.h)
 
 proc operatorEqual*(self: gen_qvariant_types.QVariant, v: gen_qvariant_types.QVariant): bool =
   fcQVariant_operatorEqual(self.h, v.h)
@@ -547,25 +547,25 @@ proc operatorGreaterOrEqual*(self: gen_qvariant_types.QVariant, v: gen_qvariant_
   fcQVariant_operatorGreaterOrEqual(self.h, v.h)
 
 proc toInt*(self: gen_qvariant_types.QVariant, ok: ptr bool): cint =
-  fcQVariant_toIntWithOk(self.h, ok)
+  fcQVariant_toIntOk(self.h, ok)
 
 proc toUInt*(self: gen_qvariant_types.QVariant, ok: ptr bool): cuint =
-  fcQVariant_toUIntWithOk(self.h, ok)
+  fcQVariant_toUIntOk(self.h, ok)
 
 proc toLongLong*(self: gen_qvariant_types.QVariant, ok: ptr bool): clonglong =
-  fcQVariant_toLongLongWithOk(self.h, ok)
+  fcQVariant_toLongLongOk(self.h, ok)
 
 proc toULongLong*(self: gen_qvariant_types.QVariant, ok: ptr bool): culonglong =
-  fcQVariant_toULongLongWithOk(self.h, ok)
+  fcQVariant_toULongLongOk(self.h, ok)
 
 proc toDouble*(self: gen_qvariant_types.QVariant, ok: ptr bool): float64 =
-  fcQVariant_toDoubleWithOk(self.h, ok)
+  fcQVariant_toDoubleOk(self.h, ok)
 
 proc toFloat*(self: gen_qvariant_types.QVariant, ok: ptr bool): float32 =
-  fcQVariant_toFloatWithOk(self.h, ok)
+  fcQVariant_toFloatOk(self.h, ok)
 
 proc toReal*(self: gen_qvariant_types.QVariant, ok: ptr bool): float64 =
-  fcQVariant_toRealWithOk(self.h, ok)
+  fcQVariant_toRealOk(self.h, ok)
 
 proc fromValue*(_: type gen_qvariant_types.QVariant, value: gen_qobject_types.QObject): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQVariant_fromValue(value.h), owned: true)
@@ -580,7 +580,7 @@ proc compare*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVari
   fcQVariant_protectedbase_compare(self.h, other.h)
 
 proc convert*(self: gen_qvariant_types.QVariant, t: cint, ptrVal: pointer): bool =
-  fcQVariant_protectedbase_convert2(self.h, t, ptrVal)
+  fcQVariant_protectedbase_convert_t_ptr(self.h, t, ptrVal)
 
 proc create*(T: type gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new(), owned: true)
@@ -598,8 +598,8 @@ proc create*(T: type gen_qvariant_types.QVariant,
   let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new4(typeId, copy, flags), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariant,
-    other: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new5(other.h), owned: true)
+    fromVal: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
+  let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new5(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariant,
     s: gen_qdatastream_types.QDataStream): gen_qvariant_types.QVariant =
@@ -796,11 +796,11 @@ proc create*(T: type gen_qvariant_types.QVariantComparisonHelper,
   let tmp = gen_qvariant_types.QVariantComparisonHelper(h: fcQVariantComparisonHelper_new(varVal.h), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariantComparisonHelper,
-    param1: gen_qvariant_types.QVariantComparisonHelper): gen_qvariant_types.QVariantComparisonHelper =
-  let tmp = gen_qvariant_types.QVariantComparisonHelper(h: fcQVariantComparisonHelper_new2(param1.h), owned: true)
+    fromVal: gen_qvariant_types.QVariantComparisonHelper): gen_qvariant_types.QVariantComparisonHelper =
+  let tmp = gen_qvariant_types.QVariantComparisonHelper(h: fcQVariantComparisonHelper_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qvariant_types.QSequentialIterableconst_iterator, other: gen_qvariant_types.QSequentialIterableconst_iterator): void =
-  fcQSequentialIterableconst_iterator_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qvariant_types.QSequentialIterableconst_iterator, fromVal: gen_qvariant_types.QSequentialIterableconst_iterator): void =
+  fcQSequentialIterableconst_iterator_operatorAssign(self.h, fromVal.h)
 
 proc operatorMultiply*(self: gen_qvariant_types.QSequentialIterableconst_iterator): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQSequentialIterableconst_iterator_operatorMultiply(self.h), owned: true)
@@ -815,13 +815,13 @@ proc operatorPlusPlus*(self: gen_qvariant_types.QSequentialIterableconst_iterato
   gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qvariant_types.QSequentialIterableconst_iterator, param1: cint): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlusPlusInt(self.h, param1), owned: true)
 
 proc operatorMinusMinus*(self: gen_qvariant_types.QSequentialIterableconst_iterator): gen_qvariant_types.QSequentialIterableconst_iterator =
   gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qvariant_types.QSequentialIterableconst_iterator, param1: cint): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinusMinusWithInt(self.h, param1), owned: true)
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinusMinusInt(self.h, param1), owned: true)
 
 proc operatorPlusAssign*(self: gen_qvariant_types.QSequentialIterableconst_iterator, j: cint): gen_qvariant_types.QSequentialIterableconst_iterator =
   gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlusAssign(self.h, j), owned: false)
@@ -836,11 +836,11 @@ proc operatorMinus*(self: gen_qvariant_types.QSequentialIterableconst_iterator, 
   gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinus(self.h, j), owned: true)
 
 proc create*(T: type gen_qvariant_types.QSequentialIterableconst_iterator,
-    other: gen_qvariant_types.QSequentialIterableconst_iterator): gen_qvariant_types.QSequentialIterableconst_iterator =
-  let tmp = gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_new(other.h), owned: true)
+    fromVal: gen_qvariant_types.QSequentialIterableconst_iterator): gen_qvariant_types.QSequentialIterableconst_iterator =
+  let tmp = gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_new(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, other: gen_qvariant_types.QAssociativeIterableconst_iterator): void =
-  fcQAssociativeIterableconst_iterator_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, fromVal: gen_qvariant_types.QAssociativeIterableconst_iterator): void =
+  fcQAssociativeIterableconst_iterator_operatorAssign(self.h, fromVal.h)
 
 proc key*(self: gen_qvariant_types.QAssociativeIterableconst_iterator): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAssociativeIterableconst_iterator_key(self.h), owned: true)
@@ -861,13 +861,13 @@ proc operatorPlusPlus*(self: gen_qvariant_types.QAssociativeIterableconst_iterat
   gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, param1: cint): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlusPlusInt(self.h, param1), owned: true)
 
 proc operatorMinusMinus*(self: gen_qvariant_types.QAssociativeIterableconst_iterator): gen_qvariant_types.QAssociativeIterableconst_iterator =
   gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, param1: cint): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinusMinusWithInt(self.h, param1), owned: true)
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinusMinusInt(self.h, param1), owned: true)
 
 proc operatorPlusAssign*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, j: cint): gen_qvariant_types.QAssociativeIterableconst_iterator =
   gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlusAssign(self.h, j), owned: false)
@@ -882,6 +882,6 @@ proc operatorMinus*(self: gen_qvariant_types.QAssociativeIterableconst_iterator,
   gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinus(self.h, j), owned: true)
 
 proc create*(T: type gen_qvariant_types.QAssociativeIterableconst_iterator,
-    other: gen_qvariant_types.QAssociativeIterableconst_iterator): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  let tmp = gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_new(other.h), owned: true)
+    fromVal: gen_qvariant_types.QAssociativeIterableconst_iterator): gen_qvariant_types.QAssociativeIterableconst_iterator =
+  let tmp = gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_new(fromVal.h), owned: true)
   tmp

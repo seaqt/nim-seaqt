@@ -70,17 +70,17 @@ type cQQuickAsyncImageProvider*{.exportc: "QQuickAsyncImageProvider", incomplete
 proc fcQQuickTextureFactory_metaObject(self: pointer): pointer {.importc: "QQuickTextureFactory_metaObject".}
 proc fcQQuickTextureFactory_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickTextureFactory_metacast".}
 proc fcQQuickTextureFactory_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickTextureFactory_metacall".}
-proc fcQQuickTextureFactory_tr(s: cstring): struct_seaqt_string {.importc: "QQuickTextureFactory_tr".}
-proc fcQQuickTextureFactory_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQuickTextureFactory_trUtf8".}
+proc fcQQuickTextureFactory_trS(s: cstring): struct_seaqt_string {.importc: "QQuickTextureFactory_tr_s".}
+proc fcQQuickTextureFactory_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQuickTextureFactory_trUtf8_s".}
 proc fcQQuickTextureFactory_createTexture(self: pointer, window: pointer): pointer {.importc: "QQuickTextureFactory_createTexture".}
 proc fcQQuickTextureFactory_textureSize(self: pointer): pointer {.importc: "QQuickTextureFactory_textureSize".}
 proc fcQQuickTextureFactory_textureByteCount(self: pointer): cint {.importc: "QQuickTextureFactory_textureByteCount".}
 proc fcQQuickTextureFactory_image(self: pointer): pointer {.importc: "QQuickTextureFactory_image".}
 proc fcQQuickTextureFactory_textureFactoryForImage(image: pointer): pointer {.importc: "QQuickTextureFactory_textureFactoryForImage".}
-proc fcQQuickTextureFactory_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickTextureFactory_tr2".}
-proc fcQQuickTextureFactory_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickTextureFactory_tr3".}
-proc fcQQuickTextureFactory_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickTextureFactory_trUtf82".}
-proc fcQQuickTextureFactory_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickTextureFactory_trUtf83".}
+proc fcQQuickTextureFactory_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickTextureFactory_tr_s_c".}
+proc fcQQuickTextureFactory_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickTextureFactory_tr_s_c_n".}
+proc fcQQuickTextureFactory_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickTextureFactory_trUtf8_s_c".}
+proc fcQQuickTextureFactory_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickTextureFactory_trUtf8_s_c_n".}
 proc fcQQuickTextureFactory_vdata(self: pointer): ptr pointer {.importc: "QQuickTextureFactory_vdata".}
 proc fvdata_cQQuickTextureFactory(self: pointer): pointer {.importc: "vdata_QQuickTextureFactory".}
 
@@ -120,17 +120,17 @@ proc fcQQuickTextureFactory_staticMetaObject(): pointer {.importc: "QQuickTextur
 proc fcQQuickImageResponse_metaObject(self: pointer): pointer {.importc: "QQuickImageResponse_metaObject".}
 proc fcQQuickImageResponse_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickImageResponse_metacast".}
 proc fcQQuickImageResponse_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickImageResponse_metacall".}
-proc fcQQuickImageResponse_tr(s: cstring): struct_seaqt_string {.importc: "QQuickImageResponse_tr".}
-proc fcQQuickImageResponse_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQuickImageResponse_trUtf8".}
+proc fcQQuickImageResponse_trS(s: cstring): struct_seaqt_string {.importc: "QQuickImageResponse_tr_s".}
+proc fcQQuickImageResponse_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQuickImageResponse_trUtf8_s".}
 proc fcQQuickImageResponse_textureFactory(self: pointer): pointer {.importc: "QQuickImageResponse_textureFactory".}
 proc fcQQuickImageResponse_errorString(self: pointer): struct_seaqt_string {.importc: "QQuickImageResponse_errorString".}
 proc fcQQuickImageResponse_cancel(self: pointer): void {.importc: "QQuickImageResponse_cancel".}
 proc fcQQuickImageResponse_finished(self: pointer): void {.importc: "QQuickImageResponse_finished".}
 proc fcQQuickImageResponse_connect_finished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickImageResponse_connect_finished".}
-proc fcQQuickImageResponse_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickImageResponse_tr2".}
-proc fcQQuickImageResponse_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickImageResponse_tr3".}
-proc fcQQuickImageResponse_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickImageResponse_trUtf82".}
-proc fcQQuickImageResponse_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickImageResponse_trUtf83".}
+proc fcQQuickImageResponse_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickImageResponse_tr_s_c".}
+proc fcQQuickImageResponse_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickImageResponse_tr_s_c_n".}
+proc fcQQuickImageResponse_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickImageResponse_trUtf8_s_c".}
+proc fcQQuickImageResponse_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickImageResponse_trUtf8_s_c_n".}
 proc fcQQuickImageResponse_vdata(self: pointer): ptr pointer {.importc: "QQuickImageResponse_vdata".}
 proc fvdata_cQQuickImageResponse(self: pointer): pointer {.importc: "vdata_QQuickImageResponse".}
 
@@ -172,7 +172,7 @@ proc fcQQuickImageProvider_flags(self: pointer): cint {.importc: "QQuickImagePro
 proc fcQQuickImageProvider_requestImage(self: pointer, id: struct_seaqt_string, size: pointer, requestedSize: pointer): pointer {.importc: "QQuickImageProvider_requestImage".}
 proc fcQQuickImageProvider_requestPixmap(self: pointer, id: struct_seaqt_string, size: pointer, requestedSize: pointer): pointer {.importc: "QQuickImageProvider_requestPixmap".}
 proc fcQQuickImageProvider_requestTexture(self: pointer, id: struct_seaqt_string, size: pointer, requestedSize: pointer): pointer {.importc: "QQuickImageProvider_requestTexture".}
-proc fcQQuickImageProvider_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQuickImageProvider_operatorAssign".}
+proc fcQQuickImageProvider_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQuickImageProvider_operatorAssign".}
 proc fcQQuickImageProvider_vdata(self: pointer): ptr pointer {.importc: "QQuickImageProvider_vdata".}
 proc fvdata_cQQuickImageProvider(self: pointer): pointer {.importc: "vdata_QQuickImageProvider".}
 
@@ -188,11 +188,11 @@ proc fcQQuickImageProvider_virtualbase_flags(self: pointer): cint {.importc: "QQ
 proc fcQQuickImageProvider_virtualbase_requestImage(self: pointer, id: struct_seaqt_string, size: pointer, requestedSize: pointer): pointer {.importc: "QQuickImageProvider_virtualbase_requestImage".}
 proc fcQQuickImageProvider_virtualbase_requestPixmap(self: pointer, id: struct_seaqt_string, size: pointer, requestedSize: pointer): pointer {.importc: "QQuickImageProvider_virtualbase_requestPixmap".}
 proc fcQQuickImageProvider_virtualbase_requestTexture(self: pointer, id: struct_seaqt_string, size: pointer, requestedSize: pointer): pointer {.importc: "QQuickImageProvider_virtualbase_requestTexture".}
-proc fcQQuickImageProvider_new(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQQuickImageProvider {.importc: "QQuickImageProvider_new".}
-proc fcQQuickImageProvider_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQQuickImageProvider {.importc: "QQuickImageProvider_new2".}
-proc fcQQuickImageProvider_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, flags: cint): ptr cQQuickImageProvider {.importc: "QQuickImageProvider_new3".}
+proc fcQQuickImageProvider_new(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQQuickImageProvider {.importc: "QQuickImageProvider_new_type".}
+proc fcQQuickImageProvider_new2(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQQuickImageProvider {.importc: "QQuickImageProvider_new_from".}
+proc fcQQuickImageProvider_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, flags: cint): ptr cQQuickImageProvider {.importc: "QQuickImageProvider_new_type_flags".}
 proc fcQQuickAsyncImageProvider_requestImageResponse(self: pointer, id: struct_seaqt_string, requestedSize: pointer): pointer {.importc: "QQuickAsyncImageProvider_requestImageResponse".}
-proc fcQQuickAsyncImageProvider_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQuickAsyncImageProvider_operatorAssign".}
+proc fcQQuickAsyncImageProvider_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQuickAsyncImageProvider_operatorAssign".}
 proc fcQQuickAsyncImageProvider_vdata(self: pointer): ptr pointer {.importc: "QQuickAsyncImageProvider_vdata".}
 proc fvdata_cQQuickAsyncImageProvider(self: pointer): pointer {.importc: "vdata_QQuickAsyncImageProvider".}
 
@@ -210,7 +210,7 @@ proc fcQQuickAsyncImageProvider_virtualbase_requestImage(self: pointer, id: stru
 proc fcQQuickAsyncImageProvider_virtualbase_requestPixmap(self: pointer, id: struct_seaqt_string, size: pointer, requestedSize: pointer): pointer {.importc: "QQuickAsyncImageProvider_virtualbase_requestPixmap".}
 proc fcQQuickAsyncImageProvider_virtualbase_requestTexture(self: pointer, id: struct_seaqt_string, size: pointer, requestedSize: pointer): pointer {.importc: "QQuickAsyncImageProvider_virtualbase_requestTexture".}
 proc fcQQuickAsyncImageProvider_new(vtbl: pointer, vdata: csize_t): ptr cQQuickAsyncImageProvider {.importc: "QQuickAsyncImageProvider_new".}
-proc fcQQuickAsyncImageProvider_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQQuickAsyncImageProvider {.importc: "QQuickAsyncImageProvider_new2".}
+proc fcQQuickAsyncImageProvider_new2(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQQuickAsyncImageProvider {.importc: "QQuickAsyncImageProvider_new_from".}
 
 proc metaObject*(self: gen_qquickimageprovider_types.QQuickTextureFactory): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickTextureFactory_metaObject(self.h), owned: false)
@@ -222,13 +222,13 @@ proc metacall*(self: gen_qquickimageprovider_types.QQuickTextureFactory, param1:
   fcQQuickTextureFactory_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickimageprovider_types.QQuickTextureFactory, s: cstring): string =
-  let v_ms = fcQQuickTextureFactory_tr(s)
+  let v_ms = fcQQuickTextureFactory_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickimageprovider_types.QQuickTextureFactory, s: cstring): string =
-  let v_ms = fcQQuickTextureFactory_trUtf8(s)
+  let v_ms = fcQQuickTextureFactory_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -249,25 +249,25 @@ proc textureFactoryForImage*(_: type gen_qquickimageprovider_types.QQuickTexture
   gen_qquickimageprovider_types.QQuickTextureFactory(h: fcQQuickTextureFactory_textureFactoryForImage(image.h), owned: false)
 
 proc tr*(_: type gen_qquickimageprovider_types.QQuickTextureFactory, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickTextureFactory_tr2(s, c)
+  let v_ms = fcQQuickTextureFactory_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickimageprovider_types.QQuickTextureFactory, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickTextureFactory_tr3(s, c, n)
+  let v_ms = fcQQuickTextureFactory_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickimageprovider_types.QQuickTextureFactory, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickTextureFactory_trUtf82(s, c)
+  let v_ms = fcQQuickTextureFactory_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickimageprovider_types.QQuickTextureFactory, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickTextureFactory_trUtf83(s, c, n)
+  let v_ms = fcQQuickTextureFactory_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -655,13 +655,13 @@ proc metacall*(self: gen_qquickimageprovider_types.QQuickImageResponse, param1: 
   fcQQuickImageResponse_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickimageprovider_types.QQuickImageResponse, s: cstring): string =
-  let v_ms = fcQQuickImageResponse_tr(s)
+  let v_ms = fcQQuickImageResponse_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickimageprovider_types.QQuickImageResponse, s: cstring): string =
-  let v_ms = fcQQuickImageResponse_trUtf8(s)
+  let v_ms = fcQQuickImageResponse_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -697,25 +697,25 @@ proc onFinished*(self: gen_qquickimageprovider_types.QQuickImageResponse, slot: 
   fcQQuickImageResponse_connect_finished(self.h, cast[int](addr tmp[]), fcQQuickImageResponse_slot_callback_finished, fcQQuickImageResponse_slot_callback_finished_release)
 
 proc tr*(_: type gen_qquickimageprovider_types.QQuickImageResponse, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickImageResponse_tr2(s, c)
+  let v_ms = fcQQuickImageResponse_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickimageprovider_types.QQuickImageResponse, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickImageResponse_tr3(s, c, n)
+  let v_ms = fcQQuickImageResponse_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickimageprovider_types.QQuickImageResponse, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickImageResponse_trUtf82(s, c)
+  let v_ms = fcQQuickImageResponse_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickimageprovider_types.QQuickImageResponse, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickImageResponse_trUtf83(s, c, n)
+  let v_ms = fcQQuickImageResponse_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1084,8 +1084,8 @@ proc requestPixmap*(self: gen_qquickimageprovider_types.QQuickImageProvider, id:
 proc requestTexture*(self: gen_qquickimageprovider_types.QQuickImageProvider, id: openArray[char], size: gen_qsize_types.QSize, requestedSize: gen_qsize_types.QSize): gen_qquickimageprovider_types.QQuickTextureFactory =
   gen_qquickimageprovider_types.QQuickTextureFactory(h: fcQQuickImageProvider_requestTexture(self.h, struct_seaqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id))), size.h, requestedSize.h), owned: false)
 
-proc operatorAssign*(self: gen_qquickimageprovider_types.QQuickImageProvider, param1: gen_qquickimageprovider_types.QQuickImageProvider): void =
-  fcQQuickImageProvider_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qquickimageprovider_types.QQuickImageProvider, fromVal: gen_qquickimageprovider_types.QQuickImageProvider): void =
+  fcQQuickImageProvider_operatorAssign(self.h, fromVal.h)
 
 type QQuickImageProviderimageTypeProc* = proc(self: QQuickImageProvider): cint {.raises: [], gcsafe.}
 type QQuickImageProviderflagsProc* = proc(self: QQuickImageProvider): cint {.raises: [], gcsafe.}
@@ -1263,7 +1263,7 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickImageProvider,
   fcQQuickImageProvider_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qquickimageprovider_types.QQuickImageProvider,
-    param1: gen_qquickimageprovider_types.QQuickImageProvider,
+    fromVal: gen_qquickimageprovider_types.QQuickImageProvider,
     vtbl: ref QQuickImageProviderVTable = nil): gen_qquickimageprovider_types.QQuickImageProvider =
   let vtbl = if vtbl == nil: new QQuickImageProviderVTable else: vtbl
   GC_ref(vtbl)
@@ -1280,7 +1280,7 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickImageProvider,
     vtbl[].vtbl.requestPixmap = fcQQuickImageProvider_vtable_callback_requestPixmap
   if not isNil(vtbl[].requestTexture):
     vtbl[].vtbl.requestTexture = fcQQuickImageProvider_vtable_callback_requestTexture
-  let tmp = gen_qquickimageprovider_types.QQuickImageProvider(h: fcQQuickImageProvider_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qquickimageprovider_types.QQuickImageProvider(h: fcQQuickImageProvider_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQQuickImageProvider_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qquickimageprovider_types.QQuickImageProvider,
@@ -1325,10 +1325,10 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickImageProvider,
   inst[].owned = true
 
 proc create*(T: type gen_qquickimageprovider_types.QQuickImageProvider,
-    param1: gen_qquickimageprovider_types.QQuickImageProvider,
+    fromVal: gen_qquickimageprovider_types.QQuickImageProvider,
     inst: VirtualQQuickImageProvider) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQQuickImageProvider_new2(addr(cQQuickImageProvider_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQQuickImageProvider_new2(addr(cQQuickImageProvider_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQQuickImageProvider_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
@@ -1343,8 +1343,8 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickImageProvider,
 proc requestImageResponse*(self: gen_qquickimageprovider_types.QQuickAsyncImageProvider, id: openArray[char], requestedSize: gen_qsize_types.QSize): gen_qquickimageprovider_types.QQuickImageResponse =
   gen_qquickimageprovider_types.QQuickImageResponse(h: fcQQuickAsyncImageProvider_requestImageResponse(self.h, struct_seaqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id))), requestedSize.h), owned: false)
 
-proc operatorAssign*(self: gen_qquickimageprovider_types.QQuickAsyncImageProvider, param1: gen_qquickimageprovider_types.QQuickAsyncImageProvider): void =
-  fcQQuickAsyncImageProvider_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qquickimageprovider_types.QQuickAsyncImageProvider, fromVal: gen_qquickimageprovider_types.QQuickAsyncImageProvider): void =
+  fcQQuickAsyncImageProvider_operatorAssign(self.h, fromVal.h)
 
 type QQuickAsyncImageProviderrequestImageResponseProc* = proc(self: QQuickAsyncImageProvider, id: openArray[char], requestedSize: gen_qsize_types.QSize): gen_qquickimageprovider_types.QQuickImageResponse {.raises: [], gcsafe.}
 type QQuickAsyncImageProviderimageTypeProc* = proc(self: QQuickAsyncImageProvider): cint {.raises: [], gcsafe.}
@@ -1554,7 +1554,7 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickAsyncImageProvider,
   fcQQuickAsyncImageProvider_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qquickimageprovider_types.QQuickAsyncImageProvider,
-    param1: gen_qquickimageprovider_types.QQuickAsyncImageProvider,
+    fromVal: gen_qquickimageprovider_types.QQuickAsyncImageProvider,
     vtbl: ref QQuickAsyncImageProviderVTable = nil): gen_qquickimageprovider_types.QQuickAsyncImageProvider =
   let vtbl = if vtbl == nil: new QQuickAsyncImageProviderVTable else: vtbl
   GC_ref(vtbl)
@@ -1573,7 +1573,7 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickAsyncImageProvider,
     vtbl[].vtbl.requestPixmap = fcQQuickAsyncImageProvider_vtable_callback_requestPixmap
   if not isNil(vtbl[].requestTexture):
     vtbl[].vtbl.requestTexture = fcQQuickAsyncImageProvider_vtable_callback_requestTexture
-  let tmp = gen_qquickimageprovider_types.QQuickAsyncImageProvider(h: fcQQuickAsyncImageProvider_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qquickimageprovider_types.QQuickAsyncImageProvider(h: fcQQuickAsyncImageProvider_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQQuickAsyncImageProvider_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQQuickAsyncImageProvider_mvtbl = cQQuickAsyncImageProviderVTable(
@@ -1597,10 +1597,10 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickAsyncImageProvider,
   inst[].owned = true
 
 proc create*(T: type gen_qquickimageprovider_types.QQuickAsyncImageProvider,
-    param1: gen_qquickimageprovider_types.QQuickAsyncImageProvider,
+    fromVal: gen_qquickimageprovider_types.QQuickAsyncImageProvider,
     inst: VirtualQQuickAsyncImageProvider) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQQuickAsyncImageProvider_new2(addr(cQQuickAsyncImageProvider_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQQuickAsyncImageProvider_new2(addr(cQQuickAsyncImageProvider_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQQuickAsyncImageProvider_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 

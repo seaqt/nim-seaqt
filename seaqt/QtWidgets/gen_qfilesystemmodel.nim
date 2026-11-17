@@ -89,16 +89,16 @@ type cQFileSystemModel*{.exportc: "QFileSystemModel", incompleteStruct.} = objec
 proc fcQFileSystemModel_metaObject(self: pointer): pointer {.importc: "QFileSystemModel_metaObject".}
 proc fcQFileSystemModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QFileSystemModel_metacast".}
 proc fcQFileSystemModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFileSystemModel_metacall".}
-proc fcQFileSystemModel_tr(s: cstring): struct_seaqt_string {.importc: "QFileSystemModel_tr".}
-proc fcQFileSystemModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QFileSystemModel_trUtf8".}
+proc fcQFileSystemModel_trS(s: cstring): struct_seaqt_string {.importc: "QFileSystemModel_tr_s".}
+proc fcQFileSystemModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QFileSystemModel_trUtf8_s".}
 proc fcQFileSystemModel_rootPathChanged(self: pointer, newPath: struct_seaqt_string): void {.importc: "QFileSystemModel_rootPathChanged".}
 proc fcQFileSystemModel_connect_rootPathChanged(self: pointer, slot: int, callback: proc (slot: int, newPath: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFileSystemModel_connect_rootPathChanged".}
 proc fcQFileSystemModel_fileRenamed(self: pointer, path: struct_seaqt_string, oldName: struct_seaqt_string, newName: struct_seaqt_string): void {.importc: "QFileSystemModel_fileRenamed".}
 proc fcQFileSystemModel_connect_fileRenamed(self: pointer, slot: int, callback: proc (slot: int, path: struct_seaqt_string, oldName: struct_seaqt_string, newName: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFileSystemModel_connect_fileRenamed".}
 proc fcQFileSystemModel_directoryLoaded(self: pointer, path: struct_seaqt_string): void {.importc: "QFileSystemModel_directoryLoaded".}
 proc fcQFileSystemModel_connect_directoryLoaded(self: pointer, slot: int, callback: proc (slot: int, path: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFileSystemModel_connect_directoryLoaded".}
-proc fcQFileSystemModel_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QFileSystemModel_index".}
-proc fcQFileSystemModel_indexWithPath(self: pointer, path: struct_seaqt_string): pointer {.importc: "QFileSystemModel_indexWithPath".}
+proc fcQFileSystemModel_indexRowColumnParent(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QFileSystemModel_index_row_column_parent".}
+proc fcQFileSystemModel_indexPath(self: pointer, path: struct_seaqt_string): pointer {.importc: "QFileSystemModel_index_path".}
 proc fcQFileSystemModel_parent(self: pointer, child: pointer): pointer {.importc: "QFileSystemModel_parent".}
 proc fcQFileSystemModel_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.importc: "QFileSystemModel_sibling".}
 proc fcQFileSystemModel_hasChildren(self: pointer, parent: pointer): bool {.importc: "QFileSystemModel_hasChildren".}
@@ -131,7 +131,7 @@ proc fcQFileSystemModel_setNameFilterDisables(self: pointer, enable: bool): void
 proc fcQFileSystemModel_nameFilterDisables(self: pointer): bool {.importc: "QFileSystemModel_nameFilterDisables".}
 proc fcQFileSystemModel_setNameFilters(self: pointer, filters: struct_seaqt_array): void {.importc: "QFileSystemModel_setNameFilters".}
 proc fcQFileSystemModel_nameFilters(self: pointer): struct_seaqt_array {.importc: "QFileSystemModel_nameFilters".}
-proc fcQFileSystemModel_setOption(self: pointer, option: cint): void {.importc: "QFileSystemModel_setOption".}
+proc fcQFileSystemModel_setOptionOption(self: pointer, option: cint): void {.importc: "QFileSystemModel_setOption_option".}
 proc fcQFileSystemModel_testOption(self: pointer, option: cint): bool {.importc: "QFileSystemModel_testOption".}
 proc fcQFileSystemModel_setOptions(self: pointer, options: cint): void {.importc: "QFileSystemModel_setOptions".}
 proc fcQFileSystemModel_options(self: pointer): cint {.importc: "QFileSystemModel_options".}
@@ -147,13 +147,13 @@ proc fcQFileSystemModel_fileIcon(self: pointer, index: pointer): pointer {.impor
 proc fcQFileSystemModel_permissions(self: pointer, index: pointer): cint {.importc: "QFileSystemModel_permissions".}
 proc fcQFileSystemModel_fileInfo(self: pointer, index: pointer): pointer {.importc: "QFileSystemModel_fileInfo".}
 proc fcQFileSystemModel_remove(self: pointer, index: pointer): bool {.importc: "QFileSystemModel_remove".}
-proc fcQFileSystemModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSystemModel_tr2".}
-proc fcQFileSystemModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSystemModel_tr3".}
-proc fcQFileSystemModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSystemModel_trUtf82".}
-proc fcQFileSystemModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSystemModel_trUtf83".}
-proc fcQFileSystemModel_index2(self: pointer, path: struct_seaqt_string, column: cint): pointer {.importc: "QFileSystemModel_index2".}
-proc fcQFileSystemModel_myComputerWithRole(self: pointer, role: cint): pointer {.importc: "QFileSystemModel_myComputerWithRole".}
-proc fcQFileSystemModel_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QFileSystemModel_setOption2".}
+proc fcQFileSystemModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSystemModel_tr_s_c".}
+proc fcQFileSystemModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSystemModel_tr_s_c_n".}
+proc fcQFileSystemModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSystemModel_trUtf8_s_c".}
+proc fcQFileSystemModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSystemModel_trUtf8_s_c_n".}
+proc fcQFileSystemModel_indexPathColumn(self: pointer, path: struct_seaqt_string, column: cint): pointer {.importc: "QFileSystemModel_index_path_column".}
+proc fcQFileSystemModel_myComputerRole(self: pointer, role: cint): pointer {.importc: "QFileSystemModel_myComputer_role".}
+proc fcQFileSystemModel_setOptionOptionOn(self: pointer, option: cint, on: bool): void {.importc: "QFileSystemModel_setOption_option_on".}
 proc fcQFileSystemModel_vdata(self: pointer): ptr pointer {.importc: "QFileSystemModel_vdata".}
 proc fvdata_cQFileSystemModel(self: pointer): pointer {.importc: "vdata_QFileSystemModel".}
 
@@ -162,7 +162,7 @@ type cQFileSystemModelVTable {.pure.} = object
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  index*: proc(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  indexRowColumnParent*: proc(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
   parent*: proc(self: pointer, child: pointer): pointer {.cdecl, raises: [], gcsafe.}
   sibling*: proc(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl, raises: [], gcsafe.}
   hasChildren*: proc(self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -206,7 +206,7 @@ type cQFileSystemModelVTable {.pure.} = object
 proc fcQFileSystemModel_virtualbase_metaObject(self: pointer): pointer {.importc: "QFileSystemModel_virtualbase_metaObject".}
 proc fcQFileSystemModel_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QFileSystemModel_virtualbase_metacast".}
 proc fcQFileSystemModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFileSystemModel_virtualbase_metacall".}
-proc fcQFileSystemModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QFileSystemModel_virtualbase_index".}
+proc fcQFileSystemModel_virtualbase_indexRowColumnParent(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QFileSystemModel_virtualbase_index_row_column_parent".}
 proc fcQFileSystemModel_virtualbase_parent(self: pointer, child: pointer): pointer {.importc: "QFileSystemModel_virtualbase_parent".}
 proc fcQFileSystemModel_virtualbase_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.importc: "QFileSystemModel_virtualbase_sibling".}
 proc fcQFileSystemModel_virtualbase_hasChildren(self: pointer, parent: pointer): bool {.importc: "QFileSystemModel_virtualbase_hasChildren".}
@@ -248,7 +248,7 @@ proc fcQFileSystemModel_virtualbase_customEvent(self: pointer, event: pointer): 
 proc fcQFileSystemModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QFileSystemModel_virtualbase_connectNotify".}
 proc fcQFileSystemModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QFileSystemModel_virtualbase_disconnectNotify".}
 proc fcQFileSystemModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QFileSystemModel_protectedbase_resetInternalData".}
-proc fcQFileSystemModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QFileSystemModel_protectedbase_createIndex".}
+proc fcQFileSystemModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QFileSystemModel_protectedbase_createIndex_row_column".}
 proc fcQFileSystemModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QFileSystemModel_protectedbase_encodeData".}
 proc fcQFileSystemModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QFileSystemModel_protectedbase_decodeData".}
 proc fcQFileSystemModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QFileSystemModel_protectedbase_beginInsertRows".}
@@ -273,7 +273,7 @@ proc fcQFileSystemModel_protectedbase_senderSignalIndex(self: pointer): cint {.i
 proc fcQFileSystemModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFileSystemModel_protectedbase_receivers".}
 proc fcQFileSystemModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFileSystemModel_protectedbase_isSignalConnected".}
 proc fcQFileSystemModel_new(vtbl: pointer, vdata: csize_t): ptr cQFileSystemModel {.importc: "QFileSystemModel_new".}
-proc fcQFileSystemModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFileSystemModel {.importc: "QFileSystemModel_new2".}
+proc fcQFileSystemModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFileSystemModel {.importc: "QFileSystemModel_new_parent".}
 proc fcQFileSystemModel_staticMetaObject(): pointer {.importc: "QFileSystemModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qfilesystemmodel_types.QFileSystemModel): gen_qobjectdefs_types.QMetaObject =
@@ -286,13 +286,13 @@ proc metacall*(self: gen_qfilesystemmodel_types.QFileSystemModel, param1: cint, 
   fcQFileSystemModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfilesystemmodel_types.QFileSystemModel, s: cstring): string =
-  let v_ms = fcQFileSystemModel_tr(s)
+  let v_ms = fcQFileSystemModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfilesystemmodel_types.QFileSystemModel, s: cstring): string =
-  let v_ms = fcQFileSystemModel_trUtf8(s)
+  let v_ms = fcQFileSystemModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -377,10 +377,10 @@ proc onDirectoryLoaded*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot:
   fcQFileSystemModel_connect_directoryLoaded(self.h, cast[int](addr tmp[]), fcQFileSystemModel_slot_callback_directoryLoaded, fcQFileSystemModel_slot_callback_directoryLoaded_release)
 
 proc index*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_index(self.h, row, column, parent.h), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_indexRowColumnParent(self.h, row, column, parent.h), owned: true)
 
 proc index*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: openArray[char]): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_indexWithPath(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_indexPath(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
 
 proc parent*(self: gen_qfilesystemmodel_types.QFileSystemModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_parent(self.h, child.h), owned: true)
@@ -508,7 +508,7 @@ proc nameFilters*(self: gen_qfilesystemmodel_types.QFileSystemModel): seq[string
   vx_ret
 
 proc setOption*(self: gen_qfilesystemmodel_types.QFileSystemModel, option: cint): void =
-  fcQFileSystemModel_setOption(self.h, cint(option))
+  fcQFileSystemModel_setOptionOption(self.h, cint(option))
 
 proc testOption*(self: gen_qfilesystemmodel_types.QFileSystemModel, option: cint): bool =
   fcQFileSystemModel_testOption(self.h, cint(option))
@@ -565,42 +565,42 @@ proc remove*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabst
   fcQFileSystemModel_remove(self.h, index.h)
 
 proc tr*(_: type gen_qfilesystemmodel_types.QFileSystemModel, s: cstring, c: cstring): string =
-  let v_ms = fcQFileSystemModel_tr2(s, c)
+  let v_ms = fcQFileSystemModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfilesystemmodel_types.QFileSystemModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFileSystemModel_tr3(s, c, n)
+  let v_ms = fcQFileSystemModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfilesystemmodel_types.QFileSystemModel, s: cstring, c: cstring): string =
-  let v_ms = fcQFileSystemModel_trUtf82(s, c)
+  let v_ms = fcQFileSystemModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfilesystemmodel_types.QFileSystemModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFileSystemModel_trUtf83(s, c, n)
+  let v_ms = fcQFileSystemModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc index*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: openArray[char], column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_index2(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_indexPathColumn(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), column), owned: true)
 
 proc myComputer*(self: gen_qfilesystemmodel_types.QFileSystemModel, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQFileSystemModel_myComputerWithRole(self.h, role), owned: true)
+  gen_qvariant_types.QVariant(h: fcQFileSystemModel_myComputerRole(self.h, role), owned: true)
 
 proc setOption*(self: gen_qfilesystemmodel_types.QFileSystemModel, option: cint, on: bool): void =
-  fcQFileSystemModel_setOption2(self.h, cint(option), on)
+  fcQFileSystemModel_setOptionOptionOn(self.h, cint(option), on)
 
 type QFileSystemModelmetaObjectProc* = proc(self: QFileSystemModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QFileSystemModelmetacastProc* = proc(self: QFileSystemModel, param1: cstring): pointer {.raises: [], gcsafe.}
 type QFileSystemModelmetacallProc* = proc(self: QFileSystemModel, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QFileSystemModelindexProc* = proc(self: QFileSystemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QFileSystemModelindexRowColumnParentProc* = proc(self: QFileSystemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
 type QFileSystemModelparentProc* = proc(self: QFileSystemModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
 type QFileSystemModelsiblingProc* = proc(self: QFileSystemModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
 type QFileSystemModelhasChildrenProc* = proc(self: QFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
@@ -647,7 +647,7 @@ type QFileSystemModelVTable* {.inheritable, pure.} = object
   metaObject*: QFileSystemModelmetaObjectProc
   metacast*: QFileSystemModelmetacastProc
   metacall*: QFileSystemModelmetacallProc
-  index*: QFileSystemModelindexProc
+  indexRowColumnParent*: QFileSystemModelindexRowColumnParentProc
   parent*: QFileSystemModelparentProc
   sibling*: QFileSystemModelsiblingProc
   hasChildren*: QFileSystemModelhasChildrenProc
@@ -699,7 +699,7 @@ proc QFileSystemModelmetacall*(self: gen_qfilesystemmodel_types.QFileSystemModel
   fcQFileSystemModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QFileSystemModelindex*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_virtualbase_indexRowColumnParent(self.h, row, column, parent.h), owned: true)
 
 proc QFileSystemModelparent*(self: gen_qfilesystemmodel_types.QFileSystemModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_virtualbase_parent(self.h, child.h), owned: true)
@@ -904,13 +904,13 @@ proc fcQFileSystemModel_vtable_callback_metacall(self: pointer, param1: cint, pa
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc fcQFileSystemModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+proc fcQFileSystemModel_vtable_callback_indexRowColumnParent(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
   let slotval1 = row
   let slotval2 = column
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].indexRowColumnParent(self, slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1416,7 +1416,7 @@ proc fcQFileSystemModel_method_callback_metacall(self: pointer, param1: cint, pa
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-proc fcQFileSystemModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+proc fcQFileSystemModel_method_callback_indexRowColumnParent(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
@@ -1778,7 +1778,7 @@ proc resetInternalData*(self: gen_qfilesystemmodel_types.QFileSystemModel): void
   fcQFileSystemModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
@@ -1880,8 +1880,8 @@ proc create*(T: type gen_qfilesystemmodel_types.QFileSystemModel,
     vtbl[].vtbl.metacast = fcQFileSystemModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = fcQFileSystemModel_vtable_callback_metacall
-  if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = fcQFileSystemModel_vtable_callback_index
+  if not isNil(vtbl[].indexRowColumnParent):
+    vtbl[].vtbl.indexRowColumnParent = fcQFileSystemModel_vtable_callback_indexRowColumnParent
   if not isNil(vtbl[].parent):
     vtbl[].vtbl.parent = fcQFileSystemModel_vtable_callback_parent
   if not isNil(vtbl[].sibling):
@@ -1979,8 +1979,8 @@ proc create*(T: type gen_qfilesystemmodel_types.QFileSystemModel,
     vtbl[].vtbl.metacast = fcQFileSystemModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = fcQFileSystemModel_vtable_callback_metacall
-  if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = fcQFileSystemModel_vtable_callback_index
+  if not isNil(vtbl[].indexRowColumnParent):
+    vtbl[].vtbl.indexRowColumnParent = fcQFileSystemModel_vtable_callback_indexRowColumnParent
   if not isNil(vtbl[].parent):
     vtbl[].vtbl.parent = fcQFileSystemModel_vtable_callback_parent
   if not isNil(vtbl[].sibling):
@@ -2073,7 +2073,7 @@ const cQFileSystemModel_mvtbl = cQFileSystemModelVTable(
   metaObject: fcQFileSystemModel_method_callback_metaObject,
   metacast: fcQFileSystemModel_method_callback_metacast,
   metacall: fcQFileSystemModel_method_callback_metacall,
-  index: fcQFileSystemModel_method_callback_index,
+  indexRowColumnParent: fcQFileSystemModel_method_callback_indexRowColumnParent,
   parent: fcQFileSystemModel_method_callback_parent,
   sibling: fcQFileSystemModel_method_callback_sibling,
   hasChildren: fcQFileSystemModel_method_callback_hasChildren,

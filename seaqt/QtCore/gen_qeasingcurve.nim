@@ -97,7 +97,7 @@ export
 
 type cQEasingCurve*{.exportc: "QEasingCurve", incompleteStruct.} = object
 
-proc fcQEasingCurve_operatorAssign(self: pointer, other: pointer): void {.importc: "QEasingCurve_operatorAssign".}
+proc fcQEasingCurve_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QEasingCurve_operatorAssign".}
 proc fcQEasingCurve_swap(self: pointer, other: pointer): void {.importc: "QEasingCurve_swap".}
 proc fcQEasingCurve_operatorEqual(self: pointer, other: pointer): bool {.importc: "QEasingCurve_operatorEqual".}
 proc fcQEasingCurve_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QEasingCurve_operatorNotEqual".}
@@ -114,12 +114,12 @@ proc fcQEasingCurve_typeX(self: pointer): cint {.importc: "QEasingCurve_type".}
 proc fcQEasingCurve_setType(self: pointer, typeVal: cint): void {.importc: "QEasingCurve_setType".}
 proc fcQEasingCurve_valueForProgress(self: pointer, progress: float64): float64 {.importc: "QEasingCurve_valueForProgress".}
 proc fcQEasingCurve_new(): ptr cQEasingCurve {.importc: "QEasingCurve_new".}
-proc fcQEasingCurve_new2(other: pointer): ptr cQEasingCurve {.importc: "QEasingCurve_new2".}
-proc fcQEasingCurve_new3(typeVal: cint): ptr cQEasingCurve {.importc: "QEasingCurve_new3".}
+proc fcQEasingCurve_new2(fromVal: pointer): ptr cQEasingCurve {.importc: "QEasingCurve_new_from".}
+proc fcQEasingCurve_new3(typeVal: cint): ptr cQEasingCurve {.importc: "QEasingCurve_new_type".}
 proc fcQEasingCurve_staticMetaObject(): pointer {.importc: "QEasingCurve_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qeasingcurve_types.QEasingCurve, other: gen_qeasingcurve_types.QEasingCurve): void =
-  fcQEasingCurve_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qeasingcurve_types.QEasingCurve, fromVal: gen_qeasingcurve_types.QEasingCurve): void =
+  fcQEasingCurve_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qeasingcurve_types.QEasingCurve, other: gen_qeasingcurve_types.QEasingCurve): void =
   fcQEasingCurve_swap(self.h, other.h)
@@ -176,8 +176,8 @@ proc create*(T: type gen_qeasingcurve_types.QEasingCurve): gen_qeasingcurve_type
   let tmp = gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new(), owned: true)
   tmp
 proc create*(T: type gen_qeasingcurve_types.QEasingCurve,
-    other: gen_qeasingcurve_types.QEasingCurve): gen_qeasingcurve_types.QEasingCurve =
-  let tmp = gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new2(other.h), owned: true)
+    fromVal: gen_qeasingcurve_types.QEasingCurve): gen_qeasingcurve_types.QEasingCurve =
+  let tmp = gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qeasingcurve_types.QEasingCurve,
     typeVal: cint): gen_qeasingcurve_types.QEasingCurve =

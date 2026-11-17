@@ -74,30 +74,30 @@ type cQSqlQueryModel*{.exportc: "QSqlQueryModel", incompleteStruct.} = object
 proc fcQSqlQueryModel_metaObject(self: pointer): pointer {.importc: "QSqlQueryModel_metaObject".}
 proc fcQSqlQueryModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QSqlQueryModel_metacast".}
 proc fcQSqlQueryModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSqlQueryModel_metacall".}
-proc fcQSqlQueryModel_tr(s: cstring): struct_seaqt_string {.importc: "QSqlQueryModel_tr".}
-proc fcQSqlQueryModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSqlQueryModel_trUtf8".}
+proc fcQSqlQueryModel_trS(s: cstring): struct_seaqt_string {.importc: "QSqlQueryModel_tr_s".}
+proc fcQSqlQueryModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSqlQueryModel_trUtf8_s".}
 proc fcQSqlQueryModel_rowCount(self: pointer, parent: pointer): cint {.importc: "QSqlQueryModel_rowCount".}
 proc fcQSqlQueryModel_columnCount(self: pointer, parent: pointer): cint {.importc: "QSqlQueryModel_columnCount".}
-proc fcQSqlQueryModel_record(self: pointer, row: cint): pointer {.importc: "QSqlQueryModel_record".}
-proc fcQSqlQueryModel_record2(self: pointer): pointer {.importc: "QSqlQueryModel_record2".}
+proc fcQSqlQueryModel_recordRow(self: pointer, row: cint): pointer {.importc: "QSqlQueryModel_record_row".}
+proc fcQSqlQueryModel_record(self: pointer): pointer {.importc: "QSqlQueryModel_record".}
 proc fcQSqlQueryModel_data(self: pointer, item: pointer, role: cint): pointer {.importc: "QSqlQueryModel_data".}
 proc fcQSqlQueryModel_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.importc: "QSqlQueryModel_headerData".}
 proc fcQSqlQueryModel_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.importc: "QSqlQueryModel_setHeaderData".}
 proc fcQSqlQueryModel_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QSqlQueryModel_insertColumns".}
 proc fcQSqlQueryModel_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QSqlQueryModel_removeColumns".}
-proc fcQSqlQueryModel_setQuery(self: pointer, query: pointer): void {.importc: "QSqlQueryModel_setQuery".}
-proc fcQSqlQueryModel_setQueryWithQuery(self: pointer, query: struct_seaqt_string): void {.importc: "QSqlQueryModel_setQueryWithQuery".}
+proc fcQSqlQueryModel_setQuery_QSqlQuery(self: pointer, query: pointer): void {.importc: "QSqlQueryModel_setQuery_QSqlQuery".}
+proc fcQSqlQueryModel_setQuery_QString(self: pointer, query: struct_seaqt_string): void {.importc: "QSqlQueryModel_setQuery_QString".}
 proc fcQSqlQueryModel_query(self: pointer): pointer {.importc: "QSqlQueryModel_query".}
 proc fcQSqlQueryModel_clear(self: pointer): void {.importc: "QSqlQueryModel_clear".}
 proc fcQSqlQueryModel_lastError(self: pointer): pointer {.importc: "QSqlQueryModel_lastError".}
 proc fcQSqlQueryModel_fetchMore(self: pointer, parent: pointer): void {.importc: "QSqlQueryModel_fetchMore".}
 proc fcQSqlQueryModel_canFetchMore(self: pointer, parent: pointer): bool {.importc: "QSqlQueryModel_canFetchMore".}
 proc fcQSqlQueryModel_roleNames(self: pointer): struct_seaqt_map {.importc: "QSqlQueryModel_roleNames".}
-proc fcQSqlQueryModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlQueryModel_tr2".}
-proc fcQSqlQueryModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlQueryModel_tr3".}
-proc fcQSqlQueryModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlQueryModel_trUtf82".}
-proc fcQSqlQueryModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlQueryModel_trUtf83".}
-proc fcQSqlQueryModel_setQuery2(self: pointer, query: struct_seaqt_string, db: pointer): void {.importc: "QSqlQueryModel_setQuery2".}
+proc fcQSqlQueryModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlQueryModel_tr_s_c".}
+proc fcQSqlQueryModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlQueryModel_tr_s_c_n".}
+proc fcQSqlQueryModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlQueryModel_trUtf8_s_c".}
+proc fcQSqlQueryModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlQueryModel_trUtf8_s_c_n".}
+proc fcQSqlQueryModel_setQuery_QString_QSqlDatabase(self: pointer, query: struct_seaqt_string, db: pointer): void {.importc: "QSqlQueryModel_setQuery_QString_QSqlDatabase".}
 proc fcQSqlQueryModel_vdata(self: pointer): ptr pointer {.importc: "QSqlQueryModel_vdata".}
 proc fvdata_cQSqlQueryModel(self: pointer): pointer {.importc: "vdata_QSqlQueryModel".}
 
@@ -205,7 +205,7 @@ proc fcQSqlQueryModel_protectedbase_beginResetModel(self: pointer): void {.impor
 proc fcQSqlQueryModel_protectedbase_endResetModel(self: pointer): void {.importc: "QSqlQueryModel_protectedbase_endResetModel".}
 proc fcQSqlQueryModel_protectedbase_setLastError(self: pointer, error: pointer): void {.importc: "QSqlQueryModel_protectedbase_setLastError".}
 proc fcQSqlQueryModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QSqlQueryModel_protectedbase_resetInternalData".}
-proc fcQSqlQueryModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QSqlQueryModel_protectedbase_createIndex".}
+proc fcQSqlQueryModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QSqlQueryModel_protectedbase_createIndex_row_column".}
 proc fcQSqlQueryModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QSqlQueryModel_protectedbase_encodeData".}
 proc fcQSqlQueryModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QSqlQueryModel_protectedbase_decodeData".}
 proc fcQSqlQueryModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QSqlQueryModel_protectedbase_beginMoveRows".}
@@ -220,7 +220,7 @@ proc fcQSqlQueryModel_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQSqlQueryModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSqlQueryModel_protectedbase_receivers".}
 proc fcQSqlQueryModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSqlQueryModel_protectedbase_isSignalConnected".}
 proc fcQSqlQueryModel_new(vtbl: pointer, vdata: csize_t): ptr cQSqlQueryModel {.importc: "QSqlQueryModel_new".}
-proc fcQSqlQueryModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlQueryModel {.importc: "QSqlQueryModel_new2".}
+proc fcQSqlQueryModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlQueryModel {.importc: "QSqlQueryModel_new_parent".}
 proc fcQSqlQueryModel_staticMetaObject(): pointer {.importc: "QSqlQueryModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qsqlquerymodel_types.QSqlQueryModel): gen_qobjectdefs_types.QMetaObject =
@@ -233,13 +233,13 @@ proc metacall*(self: gen_qsqlquerymodel_types.QSqlQueryModel, param1: cint, para
   fcQSqlQueryModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsqlquerymodel_types.QSqlQueryModel, s: cstring): string =
-  let v_ms = fcQSqlQueryModel_tr(s)
+  let v_ms = fcQSqlQueryModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsqlquerymodel_types.QSqlQueryModel, s: cstring): string =
-  let v_ms = fcQSqlQueryModel_trUtf8(s)
+  let v_ms = fcQSqlQueryModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -251,10 +251,10 @@ proc columnCount*(self: gen_qsqlquerymodel_types.QSqlQueryModel, parent: gen_qab
   fcQSqlQueryModel_columnCount(self.h, parent.h)
 
 proc record*(self: gen_qsqlquerymodel_types.QSqlQueryModel, row: cint): gen_qsqlrecord_types.QSqlRecord =
-  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlQueryModel_record(self.h, row), owned: true)
+  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlQueryModel_recordRow(self.h, row), owned: true)
 
 proc record*(self: gen_qsqlquerymodel_types.QSqlQueryModel): gen_qsqlrecord_types.QSqlRecord =
-  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlQueryModel_record2(self.h), owned: true)
+  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlQueryModel_record(self.h), owned: true)
 
 proc data*(self: gen_qsqlquerymodel_types.QSqlQueryModel, item: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQSqlQueryModel_data(self.h, item.h, role), owned: true)
@@ -272,10 +272,10 @@ proc removeColumns*(self: gen_qsqlquerymodel_types.QSqlQueryModel, column: cint,
   fcQSqlQueryModel_removeColumns(self.h, column, count, parent.h)
 
 proc setQuery*(self: gen_qsqlquerymodel_types.QSqlQueryModel, query: gen_qsqlquery_types.QSqlQuery): void =
-  fcQSqlQueryModel_setQuery(self.h, query.h)
+  fcQSqlQueryModel_setQuery_QSqlQuery(self.h, query.h)
 
 proc setQuery*(self: gen_qsqlquerymodel_types.QSqlQueryModel, query: openArray[char]): void =
-  fcQSqlQueryModel_setQueryWithQuery(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))))
+  fcQSqlQueryModel_setQuery_QString(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))))
 
 proc query*(self: gen_qsqlquerymodel_types.QSqlQueryModel): gen_qsqlquery_types.QSqlQuery =
   gen_qsqlquery_types.QSqlQuery(h: fcQSqlQueryModel_query(self.h), owned: true)
@@ -311,31 +311,31 @@ proc roleNames*(self: gen_qsqlquerymodel_types.QSqlQueryModel): Table[cint,seq[b
   vx_ret
 
 proc tr*(_: type gen_qsqlquerymodel_types.QSqlQueryModel, s: cstring, c: cstring): string =
-  let v_ms = fcQSqlQueryModel_tr2(s, c)
+  let v_ms = fcQSqlQueryModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsqlquerymodel_types.QSqlQueryModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSqlQueryModel_tr3(s, c, n)
+  let v_ms = fcQSqlQueryModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsqlquerymodel_types.QSqlQueryModel, s: cstring, c: cstring): string =
-  let v_ms = fcQSqlQueryModel_trUtf82(s, c)
+  let v_ms = fcQSqlQueryModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsqlquerymodel_types.QSqlQueryModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSqlQueryModel_trUtf83(s, c, n)
+  let v_ms = fcQSqlQueryModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setQuery*(self: gen_qsqlquerymodel_types.QSqlQueryModel, query: openArray[char], db: gen_qsqldatabase_types.QSqlDatabase): void =
-  fcQSqlQueryModel_setQuery2(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))), db.h)
+  fcQSqlQueryModel_setQuery_QString_QSqlDatabase(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))), db.h)
 
 type QSqlQueryModelmetaObjectProc* = proc(self: QSqlQueryModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSqlQueryModelmetacastProc* = proc(self: QSqlQueryModel, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1563,7 +1563,7 @@ proc resetInternalData*(self: gen_qsqlquerymodel_types.QSqlQueryModel): void =
   fcQSqlQueryModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qsqlquerymodel_types.QSqlQueryModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlQueryModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlQueryModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qsqlquerymodel_types.QSqlQueryModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

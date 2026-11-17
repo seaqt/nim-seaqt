@@ -14,28 +14,28 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QTreeWidgetItemIterator* QTreeWidgetItemIterator_new(QTreeWidgetItemIterator* it) {
-	return new (std::nothrow) QTreeWidgetItemIterator(*it);
+QTreeWidgetItemIterator* QTreeWidgetItemIterator_new_from(QTreeWidgetItemIterator* from) {
+	return new (std::nothrow) QTreeWidgetItemIterator(*from);
 }
 
-QTreeWidgetItemIterator* QTreeWidgetItemIterator_new2(QTreeWidget* widget) {
+QTreeWidgetItemIterator* QTreeWidgetItemIterator_new_widget(QTreeWidget* widget) {
 	return new (std::nothrow) QTreeWidgetItemIterator(widget);
 }
 
-QTreeWidgetItemIterator* QTreeWidgetItemIterator_new3(QTreeWidgetItem* item) {
+QTreeWidgetItemIterator* QTreeWidgetItemIterator_new_item(QTreeWidgetItem* item) {
 	return new (std::nothrow) QTreeWidgetItemIterator(item);
 }
 
-QTreeWidgetItemIterator* QTreeWidgetItemIterator_new4(QTreeWidget* widget, int flags) {
+QTreeWidgetItemIterator* QTreeWidgetItemIterator_new_widget_flags(QTreeWidget* widget, int flags) {
 	return new (std::nothrow) QTreeWidgetItemIterator(widget, static_cast<QTreeWidgetItemIterator::IteratorFlags>(flags));
 }
 
-QTreeWidgetItemIterator* QTreeWidgetItemIterator_new5(QTreeWidgetItem* item, int flags) {
+QTreeWidgetItemIterator* QTreeWidgetItemIterator_new_item_flags(QTreeWidgetItem* item, int flags) {
 	return new (std::nothrow) QTreeWidgetItemIterator(item, static_cast<QTreeWidgetItemIterator::IteratorFlags>(flags));
 }
 
-void QTreeWidgetItemIterator_operatorAssign(QTreeWidgetItemIterator* self, QTreeWidgetItemIterator* it) {
-	self->operator=(*it);
+void QTreeWidgetItemIterator_operatorAssign(QTreeWidgetItemIterator* self, QTreeWidgetItemIterator* from) {
+	self->operator=(*from);
 }
 
 QTreeWidgetItemIterator* QTreeWidgetItemIterator_operatorPlusPlus(QTreeWidgetItemIterator* self) {
@@ -44,7 +44,7 @@ QTreeWidgetItemIterator* QTreeWidgetItemIterator_operatorPlusPlus(QTreeWidgetIte
 	return &_ret;
 }
 
-QTreeWidgetItemIterator* QTreeWidgetItemIterator_operatorPlusPlusWithInt(QTreeWidgetItemIterator* self, int param1) {
+QTreeWidgetItemIterator* QTreeWidgetItemIterator_operatorPlusPlus_int(QTreeWidgetItemIterator* self, int param1) {
 	return new QTreeWidgetItemIterator(self->operator++(static_cast<int>(param1)));
 }
 
@@ -60,7 +60,7 @@ QTreeWidgetItemIterator* QTreeWidgetItemIterator_operatorMinusMinus(QTreeWidgetI
 	return &_ret;
 }
 
-QTreeWidgetItemIterator* QTreeWidgetItemIterator_operatorMinusMinusWithInt(QTreeWidgetItemIterator* self, int param1) {
+QTreeWidgetItemIterator* QTreeWidgetItemIterator_operatorMinusMinus_int(QTreeWidgetItemIterator* self, int param1) {
 	return new QTreeWidgetItemIterator(self->operator--(static_cast<int>(param1)));
 }
 

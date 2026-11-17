@@ -17,12 +17,12 @@ QMargins* QMargins_new() {
 	return new (std::nothrow) QMargins();
 }
 
-QMargins* QMargins_new2(int left, int top, int right, int bottom) {
+QMargins* QMargins_new_left_top_right_bottom(int left, int top, int right, int bottom) {
 	return new (std::nothrow) QMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
-QMargins* QMargins_new3(QMargins* param1) {
-	return new (std::nothrow) QMargins(*param1);
+QMargins* QMargins_new_from(QMargins* from) {
+	return new (std::nothrow) QMargins(*from);
 }
 
 bool QMargins_isNull(const QMargins* self) {
@@ -61,56 +61,56 @@ void QMargins_setBottom(QMargins* self, int bottom) {
 	self->setBottom(static_cast<int>(bottom));
 }
 
-QMargins* QMargins_operatorPlusAssign(QMargins* self, QMargins* margins) {
+QMargins* QMargins_operatorPlusAssign_QMargins(QMargins* self, QMargins* margins) {
 	QMargins& _ret = self->operator+=(*margins);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMargins* QMargins_operatorMinusAssign(QMargins* self, QMargins* margins) {
+QMargins* QMargins_operatorMinusAssign_QMargins(QMargins* self, QMargins* margins) {
 	QMargins& _ret = self->operator-=(*margins);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMargins* QMargins_operatorPlusAssignWithInt(QMargins* self, int param1) {
+QMargins* QMargins_operatorPlusAssign_int(QMargins* self, int param1) {
 	QMargins& _ret = self->operator+=(static_cast<int>(param1));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMargins* QMargins_operatorMinusAssignWithInt(QMargins* self, int param1) {
+QMargins* QMargins_operatorMinusAssign_int(QMargins* self, int param1) {
 	QMargins& _ret = self->operator-=(static_cast<int>(param1));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMargins* QMargins_operatorMultiplyAssign(QMargins* self, int param1) {
+QMargins* QMargins_operatorMultiplyAssign_int(QMargins* self, int param1) {
 	QMargins& _ret = self->operator*=(static_cast<int>(param1));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMargins* QMargins_operatorDivideAssign(QMargins* self, int param1) {
+QMargins* QMargins_operatorDivideAssign_int(QMargins* self, int param1) {
 	QMargins& _ret = self->operator/=(static_cast<int>(param1));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMargins* QMargins_operatorMultiplyAssignWithQreal(QMargins* self, double param1) {
+QMargins* QMargins_operatorMultiplyAssign_qreal(QMargins* self, double param1) {
 	QMargins& _ret = self->operator*=(static_cast<qreal>(param1));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMargins* QMargins_operatorDivideAssignWithQreal(QMargins* self, double param1) {
+QMargins* QMargins_operatorDivideAssign_qreal(QMargins* self, double param1) {
 	QMargins& _ret = self->operator/=(static_cast<qreal>(param1));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-void QMargins_operatorAssign(QMargins* self, QMargins* param1) {
-	self->operator=(*param1);
+void QMargins_operatorAssign(QMargins* self, QMargins* from) {
+	self->operator=(*from);
 }
 
 void QMargins_delete(QMargins* self) {
@@ -121,16 +121,16 @@ QMarginsF* QMarginsF_new() {
 	return new (std::nothrow) QMarginsF();
 }
 
-QMarginsF* QMarginsF_new2(double left, double top, double right, double bottom) {
+QMarginsF* QMarginsF_new_left_top_right_bottom(double left, double top, double right, double bottom) {
 	return new (std::nothrow) QMarginsF(static_cast<qreal>(left), static_cast<qreal>(top), static_cast<qreal>(right), static_cast<qreal>(bottom));
 }
 
-QMarginsF* QMarginsF_new3(QMargins* margins) {
+QMarginsF* QMarginsF_new_margins(QMargins* margins) {
 	return new (std::nothrow) QMarginsF(*margins);
 }
 
-QMarginsF* QMarginsF_new4(QMarginsF* param1) {
-	return new (std::nothrow) QMarginsF(*param1);
+QMarginsF* QMarginsF_new_from(QMarginsF* from) {
+	return new (std::nothrow) QMarginsF(*from);
 }
 
 bool QMarginsF_isNull(const QMarginsF* self) {
@@ -173,25 +173,25 @@ void QMarginsF_setBottom(QMarginsF* self, double bottom) {
 	self->setBottom(static_cast<qreal>(bottom));
 }
 
-QMarginsF* QMarginsF_operatorPlusAssign(QMarginsF* self, QMarginsF* margins) {
+QMarginsF* QMarginsF_operatorPlusAssign_margins(QMarginsF* self, QMarginsF* margins) {
 	QMarginsF& _ret = self->operator+=(*margins);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMarginsF* QMarginsF_operatorMinusAssign(QMarginsF* self, QMarginsF* margins) {
+QMarginsF* QMarginsF_operatorMinusAssign_margins(QMarginsF* self, QMarginsF* margins) {
 	QMarginsF& _ret = self->operator-=(*margins);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMarginsF* QMarginsF_operatorPlusAssignWithAddend(QMarginsF* self, double addend) {
+QMarginsF* QMarginsF_operatorPlusAssign_addend(QMarginsF* self, double addend) {
 	QMarginsF& _ret = self->operator+=(static_cast<qreal>(addend));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMarginsF* QMarginsF_operatorMinusAssignWithSubtrahend(QMarginsF* self, double subtrahend) {
+QMarginsF* QMarginsF_operatorMinusAssign_subtrahend(QMarginsF* self, double subtrahend) {
 	QMarginsF& _ret = self->operator-=(static_cast<qreal>(subtrahend));
 	// Cast returned reference into pointer
 	return &_ret;
@@ -213,8 +213,8 @@ QMargins* QMarginsF_toMargins(const QMarginsF* self) {
 	return new QMargins(self->toMargins());
 }
 
-void QMarginsF_operatorAssign(QMarginsF* self, QMarginsF* param1) {
-	self->operator=(*param1);
+void QMarginsF_operatorAssign(QMarginsF* self, QMarginsF* from) {
+	self->operator=(*from);
 }
 
 void QMarginsF_delete(QMarginsF* self) {

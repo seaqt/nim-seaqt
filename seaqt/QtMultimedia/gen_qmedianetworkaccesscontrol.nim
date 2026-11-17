@@ -57,16 +57,16 @@ type cQMediaNetworkAccessControl*{.exportc: "QMediaNetworkAccessControl", incomp
 proc fcQMediaNetworkAccessControl_metaObject(self: pointer): pointer {.importc: "QMediaNetworkAccessControl_metaObject".}
 proc fcQMediaNetworkAccessControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaNetworkAccessControl_metacast".}
 proc fcQMediaNetworkAccessControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaNetworkAccessControl_metacall".}
-proc fcQMediaNetworkAccessControl_tr(s: cstring): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_tr".}
-proc fcQMediaNetworkAccessControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_trUtf8".}
+proc fcQMediaNetworkAccessControl_trS(s: cstring): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_tr_s".}
+proc fcQMediaNetworkAccessControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_trUtf8_s".}
 proc fcQMediaNetworkAccessControl_setConfigurations(self: pointer, configuration: struct_seaqt_array): void {.importc: "QMediaNetworkAccessControl_setConfigurations".}
 proc fcQMediaNetworkAccessControl_currentConfiguration(self: pointer): pointer {.importc: "QMediaNetworkAccessControl_currentConfiguration".}
 proc fcQMediaNetworkAccessControl_configurationChanged(self: pointer, configuration: pointer): void {.importc: "QMediaNetworkAccessControl_configurationChanged".}
 proc fcQMediaNetworkAccessControl_connect_configurationChanged(self: pointer, slot: int, callback: proc (slot: int, configuration: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaNetworkAccessControl_connect_configurationChanged".}
-proc fcQMediaNetworkAccessControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_tr2".}
-proc fcQMediaNetworkAccessControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_tr3".}
-proc fcQMediaNetworkAccessControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_trUtf82".}
-proc fcQMediaNetworkAccessControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_trUtf83".}
+proc fcQMediaNetworkAccessControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_tr_s_c".}
+proc fcQMediaNetworkAccessControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_tr_s_c_n".}
+proc fcQMediaNetworkAccessControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_trUtf8_s_c".}
+proc fcQMediaNetworkAccessControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaNetworkAccessControl_trUtf8_s_c_n".}
 proc fcQMediaNetworkAccessControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaNetworkAccessControl_protectedbase_sender".}
 proc fcQMediaNetworkAccessControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaNetworkAccessControl_protectedbase_senderSignalIndex".}
 proc fcQMediaNetworkAccessControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaNetworkAccessControl_protectedbase_receivers".}
@@ -83,13 +83,13 @@ proc metacall*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessCon
   fcQMediaNetworkAccessControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, s: cstring): string =
-  let v_ms = fcQMediaNetworkAccessControl_tr(s)
+  let v_ms = fcQMediaNetworkAccessControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, s: cstring): string =
-  let v_ms = fcQMediaNetworkAccessControl_trUtf8(s)
+  let v_ms = fcQMediaNetworkAccessControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -125,25 +125,25 @@ proc onConfigurationChanged*(self: gen_qmedianetworkaccesscontrol_types.QMediaNe
   fcQMediaNetworkAccessControl_connect_configurationChanged(self.h, cast[int](addr tmp[]), fcQMediaNetworkAccessControl_slot_callback_configurationChanged, fcQMediaNetworkAccessControl_slot_callback_configurationChanged_release)
 
 proc tr*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaNetworkAccessControl_tr2(s, c)
+  let v_ms = fcQMediaNetworkAccessControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaNetworkAccessControl_tr3(s, c, n)
+  let v_ms = fcQMediaNetworkAccessControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaNetworkAccessControl_trUtf82(s, c)
+  let v_ms = fcQMediaNetworkAccessControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaNetworkAccessControl_trUtf83(s, c, n)
+  let v_ms = fcQMediaNetworkAccessControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

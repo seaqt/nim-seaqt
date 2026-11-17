@@ -175,7 +175,7 @@ VirtualQVideoProbe* QVideoProbe_new(const QVideoProbe_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQVideoProbe(vtbl) : nullptr;
 }
 
-VirtualQVideoProbe* QVideoProbe_new2(const QVideoProbe_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQVideoProbe* QVideoProbe_new_parent(const QVideoProbe_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQVideoProbe>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQVideoProbe(vtbl, parent) : nullptr;
 }
@@ -196,7 +196,7 @@ int QVideoProbe_metacall(QVideoProbe* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QVideoProbe_tr(const char* s) {
+struct seaqt_string QVideoProbe_tr_s(const char* s) {
 	QString _ret = QVideoProbe::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -207,7 +207,7 @@ struct seaqt_string QVideoProbe_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QVideoProbe_trUtf8(const char* s) {
+struct seaqt_string QVideoProbe_trUtf8_s(const char* s) {
 	QString _ret = QVideoProbe::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -218,11 +218,11 @@ struct seaqt_string QVideoProbe_trUtf8(const char* s) {
 	return _ms;
 }
 
-bool QVideoProbe_setSource(QVideoProbe* self, QMediaObject* source) {
+bool QVideoProbe_setSource_QMediaObject(QVideoProbe* self, QMediaObject* source) {
 	return self->setSource(source);
 }
 
-bool QVideoProbe_setSourceWithSource(QVideoProbe* self, QMediaRecorder* source) {
+bool QVideoProbe_setSource_QMediaRecorder(QVideoProbe* self, QMediaRecorder* source) {
 	return self->setSource(source);
 }
 
@@ -263,7 +263,7 @@ void QVideoProbe_connect_flush(QVideoProbe* self, intptr_t slot, void (*callback
 	QVideoProbe::connect(self, static_cast<void (QVideoProbe::*)()>(&QVideoProbe::flush), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QVideoProbe_tr2(const char* s, const char* c) {
+struct seaqt_string QVideoProbe_tr_s_c(const char* s, const char* c) {
 	QString _ret = QVideoProbe::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -274,7 +274,7 @@ struct seaqt_string QVideoProbe_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QVideoProbe_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QVideoProbe_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QVideoProbe::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -285,7 +285,7 @@ struct seaqt_string QVideoProbe_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QVideoProbe_trUtf82(const char* s, const char* c) {
+struct seaqt_string QVideoProbe_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QVideoProbe::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -296,7 +296,7 @@ struct seaqt_string QVideoProbe_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QVideoProbe_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QVideoProbe_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QVideoProbe::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

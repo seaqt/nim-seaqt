@@ -68,9 +68,9 @@ export
 type cQCryptographicHash*{.exportc: "QCryptographicHash", incompleteStruct.} = object
 
 proc fcQCryptographicHash_reset(self: pointer): void {.importc: "QCryptographicHash_reset".}
-proc fcQCryptographicHash_addData(self: pointer, data: cstring, length: cint): void {.importc: "QCryptographicHash_addData".}
-proc fcQCryptographicHash_addDataWithData(self: pointer, data: struct_seaqt_string): void {.importc: "QCryptographicHash_addDataWithData".}
-proc fcQCryptographicHash_addDataWithDevice(self: pointer, device: pointer): bool {.importc: "QCryptographicHash_addDataWithDevice".}
+proc fcQCryptographicHash_addDataDataLength(self: pointer, data: cstring, length: cint): void {.importc: "QCryptographicHash_addData_data_length".}
+proc fcQCryptographicHash_addDataData(self: pointer, data: struct_seaqt_string): void {.importc: "QCryptographicHash_addData_data".}
+proc fcQCryptographicHash_addDataDevice(self: pointer, device: pointer): bool {.importc: "QCryptographicHash_addData_device".}
 proc fcQCryptographicHash_resultX(self: pointer): struct_seaqt_string {.importc: "QCryptographicHash_result".}
 proc fcQCryptographicHash_hash(data: struct_seaqt_string, methodVal: cint): struct_seaqt_string {.importc: "QCryptographicHash_hash".}
 proc fcQCryptographicHash_hashLength(methodVal: cint): cint {.importc: "QCryptographicHash_hashLength".}
@@ -81,13 +81,13 @@ proc reset*(self: gen_qcryptographichash_types.QCryptographicHash): void =
   fcQCryptographicHash_reset(self.h)
 
 proc addData*(self: gen_qcryptographichash_types.QCryptographicHash, data: cstring, length: cint): void =
-  fcQCryptographicHash_addData(self.h, data, length)
+  fcQCryptographicHash_addDataDataLength(self.h, data, length)
 
 proc addData*(self: gen_qcryptographichash_types.QCryptographicHash, data: openArray[byte]): void =
-  fcQCryptographicHash_addDataWithData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQCryptographicHash_addDataData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc addData*(self: gen_qcryptographichash_types.QCryptographicHash, device: gen_qiodevice_types.QIODevice): bool =
-  fcQCryptographicHash_addDataWithDevice(self.h, device.h)
+  fcQCryptographicHash_addDataDevice(self.h, device.h)
 
 proc resultX*(self: gen_qcryptographichash_types.QCryptographicHash): seq[byte] =
   var v_bytearray = fcQCryptographicHash_resultX(self.h)

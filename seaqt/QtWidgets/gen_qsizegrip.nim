@@ -71,14 +71,14 @@ type cQSizeGrip*{.exportc: "QSizeGrip", incompleteStruct.} = object
 proc fcQSizeGrip_metaObject(self: pointer): pointer {.importc: "QSizeGrip_metaObject".}
 proc fcQSizeGrip_metacast(self: pointer, param1: cstring): pointer {.importc: "QSizeGrip_metacast".}
 proc fcQSizeGrip_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSizeGrip_metacall".}
-proc fcQSizeGrip_tr(s: cstring): struct_seaqt_string {.importc: "QSizeGrip_tr".}
-proc fcQSizeGrip_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSizeGrip_trUtf8".}
+proc fcQSizeGrip_trS(s: cstring): struct_seaqt_string {.importc: "QSizeGrip_tr_s".}
+proc fcQSizeGrip_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSizeGrip_trUtf8_s".}
 proc fcQSizeGrip_sizeHint(self: pointer): pointer {.importc: "QSizeGrip_sizeHint".}
 proc fcQSizeGrip_setVisible(self: pointer, visible: bool): void {.importc: "QSizeGrip_setVisible".}
-proc fcQSizeGrip_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSizeGrip_tr2".}
-proc fcQSizeGrip_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSizeGrip_tr3".}
-proc fcQSizeGrip_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSizeGrip_trUtf82".}
-proc fcQSizeGrip_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSizeGrip_trUtf83".}
+proc fcQSizeGrip_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSizeGrip_tr_s_c".}
+proc fcQSizeGrip_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSizeGrip_tr_s_c_n".}
+proc fcQSizeGrip_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSizeGrip_trUtf8_s_c".}
+proc fcQSizeGrip_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSizeGrip_trUtf8_s_c_n".}
 proc fcQSizeGrip_vdata(self: pointer): ptr pointer {.importc: "QSizeGrip_vdata".}
 proc fvdata_cQSizeGrip(self: pointer): pointer {.importc: "vdata_QSizeGrip".}
 
@@ -206,13 +206,13 @@ proc metacall*(self: gen_qsizegrip_types.QSizeGrip, param1: cint, param2: cint, 
   fcQSizeGrip_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsizegrip_types.QSizeGrip, s: cstring): string =
-  let v_ms = fcQSizeGrip_tr(s)
+  let v_ms = fcQSizeGrip_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsizegrip_types.QSizeGrip, s: cstring): string =
-  let v_ms = fcQSizeGrip_trUtf8(s)
+  let v_ms = fcQSizeGrip_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -224,25 +224,25 @@ proc setVisible*(self: gen_qsizegrip_types.QSizeGrip, visible: bool): void =
   fcQSizeGrip_setVisible(self.h, visible)
 
 proc tr*(_: type gen_qsizegrip_types.QSizeGrip, s: cstring, c: cstring): string =
-  let v_ms = fcQSizeGrip_tr2(s, c)
+  let v_ms = fcQSizeGrip_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsizegrip_types.QSizeGrip, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSizeGrip_tr3(s, c, n)
+  let v_ms = fcQSizeGrip_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsizegrip_types.QSizeGrip, s: cstring, c: cstring): string =
-  let v_ms = fcQSizeGrip_trUtf82(s, c)
+  let v_ms = fcQSizeGrip_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsizegrip_types.QSizeGrip, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSizeGrip_trUtf83(s, c, n)
+  let v_ms = fcQSizeGrip_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

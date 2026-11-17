@@ -57,13 +57,13 @@ type cQParallelAnimationGroup*{.exportc: "QParallelAnimationGroup", incompleteSt
 proc fcQParallelAnimationGroup_metaObject(self: pointer): pointer {.importc: "QParallelAnimationGroup_metaObject".}
 proc fcQParallelAnimationGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QParallelAnimationGroup_metacast".}
 proc fcQParallelAnimationGroup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QParallelAnimationGroup_metacall".}
-proc fcQParallelAnimationGroup_tr(s: cstring): struct_seaqt_string {.importc: "QParallelAnimationGroup_tr".}
-proc fcQParallelAnimationGroup_trUtf8(s: cstring): struct_seaqt_string {.importc: "QParallelAnimationGroup_trUtf8".}
+proc fcQParallelAnimationGroup_trS(s: cstring): struct_seaqt_string {.importc: "QParallelAnimationGroup_tr_s".}
+proc fcQParallelAnimationGroup_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QParallelAnimationGroup_trUtf8_s".}
 proc fcQParallelAnimationGroup_duration(self: pointer): cint {.importc: "QParallelAnimationGroup_duration".}
-proc fcQParallelAnimationGroup_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QParallelAnimationGroup_tr2".}
-proc fcQParallelAnimationGroup_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QParallelAnimationGroup_tr3".}
-proc fcQParallelAnimationGroup_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QParallelAnimationGroup_trUtf82".}
-proc fcQParallelAnimationGroup_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QParallelAnimationGroup_trUtf83".}
+proc fcQParallelAnimationGroup_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QParallelAnimationGroup_tr_s_c".}
+proc fcQParallelAnimationGroup_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QParallelAnimationGroup_tr_s_c_n".}
+proc fcQParallelAnimationGroup_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QParallelAnimationGroup_trUtf8_s_c".}
+proc fcQParallelAnimationGroup_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QParallelAnimationGroup_trUtf8_s_c_n".}
 proc fcQParallelAnimationGroup_vdata(self: pointer): ptr pointer {.importc: "QParallelAnimationGroup_vdata".}
 proc fvdata_cQParallelAnimationGroup(self: pointer): pointer {.importc: "vdata_QParallelAnimationGroup".}
 
@@ -102,7 +102,7 @@ proc fcQParallelAnimationGroup_protectedbase_senderSignalIndex(self: pointer): c
 proc fcQParallelAnimationGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QParallelAnimationGroup_protectedbase_receivers".}
 proc fcQParallelAnimationGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QParallelAnimationGroup_protectedbase_isSignalConnected".}
 proc fcQParallelAnimationGroup_new(vtbl: pointer, vdata: csize_t): ptr cQParallelAnimationGroup {.importc: "QParallelAnimationGroup_new".}
-proc fcQParallelAnimationGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQParallelAnimationGroup {.importc: "QParallelAnimationGroup_new2".}
+proc fcQParallelAnimationGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQParallelAnimationGroup {.importc: "QParallelAnimationGroup_new_parent".}
 proc fcQParallelAnimationGroup_staticMetaObject(): pointer {.importc: "QParallelAnimationGroup_staticMetaObject".}
 
 proc metaObject*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup): gen_qobjectdefs_types.QMetaObject =
@@ -115,13 +115,13 @@ proc metacall*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, 
   fcQParallelAnimationGroup_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qparallelanimationgroup_types.QParallelAnimationGroup, s: cstring): string =
-  let v_ms = fcQParallelAnimationGroup_tr(s)
+  let v_ms = fcQParallelAnimationGroup_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qparallelanimationgroup_types.QParallelAnimationGroup, s: cstring): string =
-  let v_ms = fcQParallelAnimationGroup_trUtf8(s)
+  let v_ms = fcQParallelAnimationGroup_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -130,25 +130,25 @@ proc duration*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup):
   fcQParallelAnimationGroup_duration(self.h)
 
 proc tr*(_: type gen_qparallelanimationgroup_types.QParallelAnimationGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQParallelAnimationGroup_tr2(s, c)
+  let v_ms = fcQParallelAnimationGroup_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qparallelanimationgroup_types.QParallelAnimationGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQParallelAnimationGroup_tr3(s, c, n)
+  let v_ms = fcQParallelAnimationGroup_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qparallelanimationgroup_types.QParallelAnimationGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQParallelAnimationGroup_trUtf82(s, c)
+  let v_ms = fcQParallelAnimationGroup_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qparallelanimationgroup_types.QParallelAnimationGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQParallelAnimationGroup_trUtf83(s, c, n)
+  let v_ms = fcQParallelAnimationGroup_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

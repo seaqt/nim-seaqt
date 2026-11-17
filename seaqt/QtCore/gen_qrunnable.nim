@@ -42,7 +42,7 @@ type cQRunnable*{.exportc: "QRunnable", incompleteStruct.} = object
 proc fcQRunnable_run(self: pointer): void {.importc: "QRunnable_run".}
 proc fcQRunnable_autoDelete(self: pointer): bool {.importc: "QRunnable_autoDelete".}
 proc fcQRunnable_setAutoDelete(self: pointer, x_autoDelete: bool): void {.importc: "QRunnable_setAutoDelete".}
-proc fcQRunnable_operatorAssign(self: pointer, param1: pointer): void {.importc: "QRunnable_operatorAssign".}
+proc fcQRunnable_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QRunnable_operatorAssign".}
 proc fcQRunnable_vdata(self: pointer): ptr pointer {.importc: "QRunnable_vdata".}
 proc fvdata_cQRunnable(self: pointer): pointer {.importc: "vdata_QRunnable".}
 
@@ -60,8 +60,8 @@ proc autoDelete*(self: gen_qrunnable_types.QRunnable): bool =
 proc setAutoDelete*(self: gen_qrunnable_types.QRunnable, x_autoDelete: bool): void =
   fcQRunnable_setAutoDelete(self.h, x_autoDelete)
 
-proc operatorAssign*(self: gen_qrunnable_types.QRunnable, param1: gen_qrunnable_types.QRunnable): void =
-  fcQRunnable_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qrunnable_types.QRunnable, fromVal: gen_qrunnable_types.QRunnable): void =
+  fcQRunnable_operatorAssign(self.h, fromVal.h)
 
 type QRunnablerunProc* = proc(self: QRunnable): void {.raises: [], gcsafe.}
 

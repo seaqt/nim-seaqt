@@ -40,12 +40,12 @@ export gen_qshareddata_types
 type cQSharedData*{.exportc: "QSharedData", incompleteStruct.} = object
 
 proc fcQSharedData_new(): ptr cQSharedData {.importc: "QSharedData_new".}
-proc fcQSharedData_new2(param1: pointer): ptr cQSharedData {.importc: "QSharedData_new2".}
+proc fcQSharedData_new2(fromVal: pointer): ptr cQSharedData {.importc: "QSharedData_new_from".}
 
 proc create*(T: type gen_qshareddata_types.QSharedData): gen_qshareddata_types.QSharedData =
   let tmp = gen_qshareddata_types.QSharedData(h: fcQSharedData_new(), owned: true)
   tmp
 proc create*(T: type gen_qshareddata_types.QSharedData,
-    param1: gen_qshareddata_types.QSharedData): gen_qshareddata_types.QSharedData =
-  let tmp = gen_qshareddata_types.QSharedData(h: fcQSharedData_new2(param1.h), owned: true)
+    fromVal: gen_qshareddata_types.QSharedData): gen_qshareddata_types.QSharedData =
+  let tmp = gen_qshareddata_types.QSharedData(h: fcQSharedData_new2(fromVal.h), owned: true)
   tmp

@@ -57,21 +57,21 @@ type cQMetaDataReaderControl*{.exportc: "QMetaDataReaderControl", incompleteStru
 proc fcQMetaDataReaderControl_metaObject(self: pointer): pointer {.importc: "QMetaDataReaderControl_metaObject".}
 proc fcQMetaDataReaderControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMetaDataReaderControl_metacast".}
 proc fcQMetaDataReaderControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMetaDataReaderControl_metacall".}
-proc fcQMetaDataReaderControl_tr(s: cstring): struct_seaqt_string {.importc: "QMetaDataReaderControl_tr".}
-proc fcQMetaDataReaderControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMetaDataReaderControl_trUtf8".}
+proc fcQMetaDataReaderControl_trS(s: cstring): struct_seaqt_string {.importc: "QMetaDataReaderControl_tr_s".}
+proc fcQMetaDataReaderControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMetaDataReaderControl_trUtf8_s".}
 proc fcQMetaDataReaderControl_isMetaDataAvailable(self: pointer): bool {.importc: "QMetaDataReaderControl_isMetaDataAvailable".}
 proc fcQMetaDataReaderControl_metaData(self: pointer, key: struct_seaqt_string): pointer {.importc: "QMetaDataReaderControl_metaData".}
 proc fcQMetaDataReaderControl_availableMetaData(self: pointer): struct_seaqt_array {.importc: "QMetaDataReaderControl_availableMetaData".}
 proc fcQMetaDataReaderControl_metaDataChanged(self: pointer): void {.importc: "QMetaDataReaderControl_metaDataChanged".}
 proc fcQMetaDataReaderControl_connect_metaDataChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMetaDataReaderControl_connect_metaDataChanged".}
-proc fcQMetaDataReaderControl_metaDataChanged2(self: pointer, key: struct_seaqt_string, value: pointer): void {.importc: "QMetaDataReaderControl_metaDataChanged2".}
-proc fcQMetaDataReaderControl_connect_metaDataChanged2(self: pointer, slot: int, callback: proc (slot: int, key: struct_seaqt_string, value: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMetaDataReaderControl_connect_metaDataChanged2".}
+proc fcQMetaDataReaderControl_metaDataChangedKeyValue(self: pointer, key: struct_seaqt_string, value: pointer): void {.importc: "QMetaDataReaderControl_metaDataChanged_key_value".}
+proc fcQMetaDataReaderControl_connect_metaDataChangedKeyValue(self: pointer, slot: int, callback: proc (slot: int, key: struct_seaqt_string, value: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMetaDataReaderControl_connect_metaDataChanged_key_value".}
 proc fcQMetaDataReaderControl_metaDataAvailableChanged(self: pointer, available: bool): void {.importc: "QMetaDataReaderControl_metaDataAvailableChanged".}
 proc fcQMetaDataReaderControl_connect_metaDataAvailableChanged(self: pointer, slot: int, callback: proc (slot: int, available: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMetaDataReaderControl_connect_metaDataAvailableChanged".}
-proc fcQMetaDataReaderControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMetaDataReaderControl_tr2".}
-proc fcQMetaDataReaderControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMetaDataReaderControl_tr3".}
-proc fcQMetaDataReaderControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMetaDataReaderControl_trUtf82".}
-proc fcQMetaDataReaderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMetaDataReaderControl_trUtf83".}
+proc fcQMetaDataReaderControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMetaDataReaderControl_tr_s_c".}
+proc fcQMetaDataReaderControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMetaDataReaderControl_tr_s_c_n".}
+proc fcQMetaDataReaderControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMetaDataReaderControl_trUtf8_s_c".}
+proc fcQMetaDataReaderControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMetaDataReaderControl_trUtf8_s_c_n".}
 proc fcQMetaDataReaderControl_protectedbase_sender(self: pointer): pointer {.importc: "QMetaDataReaderControl_protectedbase_sender".}
 proc fcQMetaDataReaderControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMetaDataReaderControl_protectedbase_senderSignalIndex".}
 proc fcQMetaDataReaderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMetaDataReaderControl_protectedbase_receivers".}
@@ -88,13 +88,13 @@ proc metacall*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, pa
   fcQMetaDataReaderControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring): string =
-  let v_ms = fcQMetaDataReaderControl_tr(s)
+  let v_ms = fcQMetaDataReaderControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring): string =
-  let v_ms = fcQMetaDataReaderControl_trUtf8(s)
+  let v_ms = fcQMetaDataReaderControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -136,11 +136,11 @@ proc onMetaDataChanged*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderCo
   fcQMetaDataReaderControl_connect_metaDataChanged(self.h, cast[int](addr tmp[]), fcQMetaDataReaderControl_slot_callback_metaDataChanged, fcQMetaDataReaderControl_slot_callback_metaDataChanged_release)
 
 proc metaDataChanged*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, key: openArray[char], value: gen_qvariant_types.QVariant): void =
-  fcQMetaDataReaderControl_metaDataChanged2(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
+  fcQMetaDataReaderControl_metaDataChangedKeyValue(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
-type QMetaDataReaderControlmetaDataChanged2Slot* = proc(key: openArray[char], value: gen_qvariant_types.QVariant)
-proc fcQMetaDataReaderControl_slot_callback_metaDataChanged2(slot: int, key: struct_seaqt_string, value: pointer) {.cdecl.} =
-  let nimfunc = cast[ptr QMetaDataReaderControlmetaDataChanged2Slot](cast[pointer](slot))
+type QMetaDataReaderControlmetaDataChangedKeyValueSlot* = proc(key: openArray[char], value: gen_qvariant_types.QVariant)
+proc fcQMetaDataReaderControl_slot_callback_metaDataChangedKeyValue(slot: int, key: struct_seaqt_string, value: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QMetaDataReaderControlmetaDataChangedKeyValueSlot](cast[pointer](slot))
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
@@ -150,15 +150,15 @@ proc fcQMetaDataReaderControl_slot_callback_metaDataChanged2(slot: int, key: str
 
   nimfunc[](slotval1, slotval2)
 
-proc fcQMetaDataReaderControl_slot_callback_metaDataChanged2_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QMetaDataReaderControlmetaDataChanged2Slot](cast[pointer](slot))
+proc fcQMetaDataReaderControl_slot_callback_metaDataChangedKeyValue_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMetaDataReaderControlmetaDataChangedKeyValueSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onMetaDataChanged*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, slot: QMetaDataReaderControlmetaDataChanged2Slot) =
-  var tmp = new QMetaDataReaderControlmetaDataChanged2Slot
+proc onMetaDataChanged*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, slot: QMetaDataReaderControlmetaDataChangedKeyValueSlot) =
+  var tmp = new QMetaDataReaderControlmetaDataChangedKeyValueSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMetaDataReaderControl_connect_metaDataChanged2(self.h, cast[int](addr tmp[]), fcQMetaDataReaderControl_slot_callback_metaDataChanged2, fcQMetaDataReaderControl_slot_callback_metaDataChanged2_release)
+  fcQMetaDataReaderControl_connect_metaDataChangedKeyValue(self.h, cast[int](addr tmp[]), fcQMetaDataReaderControl_slot_callback_metaDataChangedKeyValue, fcQMetaDataReaderControl_slot_callback_metaDataChangedKeyValue_release)
 
 proc metaDataAvailableChanged*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, available: bool): void =
   fcQMetaDataReaderControl_metaDataAvailableChanged(self.h, available)
@@ -181,25 +181,25 @@ proc onMetaDataAvailableChanged*(self: gen_qmetadatareadercontrol_types.QMetaDat
   fcQMetaDataReaderControl_connect_metaDataAvailableChanged(self.h, cast[int](addr tmp[]), fcQMetaDataReaderControl_slot_callback_metaDataAvailableChanged, fcQMetaDataReaderControl_slot_callback_metaDataAvailableChanged_release)
 
 proc tr*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMetaDataReaderControl_tr2(s, c)
+  let v_ms = fcQMetaDataReaderControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMetaDataReaderControl_tr3(s, c, n)
+  let v_ms = fcQMetaDataReaderControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMetaDataReaderControl_trUtf82(s, c)
+  let v_ms = fcQMetaDataReaderControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMetaDataReaderControl_trUtf83(s, c, n)
+  let v_ms = fcQMetaDataReaderControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -92,8 +92,8 @@ type cQPdfView*{.exportc: "QPdfView", incompleteStruct.} = object
 proc fcQPdfView_metaObject(self: pointer): pointer {.importc: "QPdfView_metaObject".}
 proc fcQPdfView_metacast(self: pointer, param1: cstring): pointer {.importc: "QPdfView_metacast".}
 proc fcQPdfView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPdfView_metacall".}
-proc fcQPdfView_tr(s: cstring): struct_seaqt_string {.importc: "QPdfView_tr".}
-proc fcQPdfView_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPdfView_trUtf8".}
+proc fcQPdfView_trS(s: cstring): struct_seaqt_string {.importc: "QPdfView_tr_s".}
+proc fcQPdfView_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPdfView_trUtf8_s".}
 proc fcQPdfView_setDocument(self: pointer, document: pointer): void {.importc: "QPdfView_setDocument".}
 proc fcQPdfView_document(self: pointer): pointer {.importc: "QPdfView_document".}
 proc fcQPdfView_pageNavigation(self: pointer): pointer {.importc: "QPdfView_pageNavigation".}
@@ -119,10 +119,10 @@ proc fcQPdfView_pageSpacingChanged(self: pointer, pageSpacing: cint): void {.imp
 proc fcQPdfView_connect_pageSpacingChanged(self: pointer, slot: int, callback: proc (slot: int, pageSpacing: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfView_connect_pageSpacingChanged".}
 proc fcQPdfView_documentMarginsChanged(self: pointer, documentMargins: pointer): void {.importc: "QPdfView_documentMarginsChanged".}
 proc fcQPdfView_connect_documentMarginsChanged(self: pointer, slot: int, callback: proc (slot: int, documentMargins: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfView_connect_documentMarginsChanged".}
-proc fcQPdfView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfView_tr2".}
-proc fcQPdfView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfView_tr3".}
-proc fcQPdfView_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfView_trUtf82".}
-proc fcQPdfView_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfView_trUtf83".}
+proc fcQPdfView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfView_tr_s_c".}
+proc fcQPdfView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfView_tr_s_c_n".}
+proc fcQPdfView_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfView_trUtf8_s_c".}
+proc fcQPdfView_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfView_trUtf8_s_c_n".}
 proc fcQPdfView_vdata(self: pointer): ptr pointer {.importc: "QPdfView_vdata".}
 proc fvdata_cQPdfView(self: pointer): pointer {.importc: "vdata_QPdfView".}
 
@@ -236,7 +236,7 @@ proc fcQPdfView_virtualbase_childEvent(self: pointer, event: pointer): void {.im
 proc fcQPdfView_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPdfView_virtualbase_customEvent".}
 proc fcQPdfView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPdfView_virtualbase_connectNotify".}
 proc fcQPdfView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPdfView_virtualbase_disconnectNotify".}
-proc fcQPdfView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QPdfView_protectedbase_setViewportMargins".}
+proc fcQPdfView_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QPdfView_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQPdfView_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QPdfView_protectedbase_viewportMargins".}
 proc fcQPdfView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QPdfView_protectedbase_drawFrame".}
 proc fcQPdfView_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QPdfView_protectedbase_initStyleOption".}
@@ -250,7 +250,7 @@ proc fcQPdfView_protectedbase_senderSignalIndex(self: pointer): cint {.importc: 
 proc fcQPdfView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPdfView_protectedbase_receivers".}
 proc fcQPdfView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPdfView_protectedbase_isSignalConnected".}
 proc fcQPdfView_new(vtbl: pointer, vdata: csize_t): ptr cQPdfView {.importc: "QPdfView_new".}
-proc fcQPdfView_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfView {.importc: "QPdfView_new2".}
+proc fcQPdfView_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfView {.importc: "QPdfView_new_parent".}
 proc fcQPdfView_staticMetaObject(): pointer {.importc: "QPdfView_staticMetaObject".}
 
 proc metaObject*(self: gen_qpdfview_types.QPdfView): gen_qobjectdefs_types.QMetaObject =
@@ -263,13 +263,13 @@ proc metacall*(self: gen_qpdfview_types.QPdfView, param1: cint, param2: cint, pa
   fcQPdfView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpdfview_types.QPdfView, s: cstring): string =
-  let v_ms = fcQPdfView_tr(s)
+  let v_ms = fcQPdfView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfview_types.QPdfView, s: cstring): string =
-  let v_ms = fcQPdfView_trUtf8(s)
+  let v_ms = fcQPdfView_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -434,25 +434,25 @@ proc onDocumentMarginsChanged*(self: gen_qpdfview_types.QPdfView, slot: QPdfView
   fcQPdfView_connect_documentMarginsChanged(self.h, cast[int](addr tmp[]), fcQPdfView_slot_callback_documentMarginsChanged, fcQPdfView_slot_callback_documentMarginsChanged_release)
 
 proc tr*(_: type gen_qpdfview_types.QPdfView, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfView_tr2(s, c)
+  let v_ms = fcQPdfView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpdfview_types.QPdfView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfView_tr3(s, c, n)
+  let v_ms = fcQPdfView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfview_types.QPdfView, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfView_trUtf82(s, c)
+  let v_ms = fcQPdfView_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfview_types.QPdfView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfView_trUtf83(s, c, n)
+  let v_ms = fcQPdfView_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1528,7 +1528,7 @@ proc fcQPdfView_method_callback_disconnectNotify(self: pointer, signal: pointer)
 
 
 proc setViewportMargins*(self: gen_qpdfview_types.QPdfView, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQPdfView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQPdfView_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qpdfview_types.QPdfView): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQPdfView_protectedbase_viewportMargins(self.h), owned: true)

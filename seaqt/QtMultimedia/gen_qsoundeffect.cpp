@@ -177,17 +177,17 @@ VirtualQSoundEffect* QSoundEffect_new(const QSoundEffect_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQSoundEffect(vtbl) : nullptr;
 }
 
-VirtualQSoundEffect* QSoundEffect_new2(const QSoundEffect_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDevice) {
+VirtualQSoundEffect* QSoundEffect_new_audioDevice(const QSoundEffect_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDevice) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSoundEffect>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSoundEffect(vtbl, *audioDevice) : nullptr;
 }
 
-VirtualQSoundEffect* QSoundEffect_new3(const QSoundEffect_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSoundEffect* QSoundEffect_new_parent(const QSoundEffect_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSoundEffect>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSoundEffect(vtbl, parent) : nullptr;
 }
 
-VirtualQSoundEffect* QSoundEffect_new4(const QSoundEffect_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDevice, QObject* parent) {
+VirtualQSoundEffect* QSoundEffect_new_audioDevice_parent(const QSoundEffect_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDevice, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSoundEffect>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSoundEffect(vtbl, *audioDevice, parent) : nullptr;
 }
@@ -208,7 +208,7 @@ int QSoundEffect_metacall(QSoundEffect* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSoundEffect_tr(const char* s) {
+struct seaqt_string QSoundEffect_tr_s(const char* s) {
 	QString _ret = QSoundEffect::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -219,7 +219,7 @@ struct seaqt_string QSoundEffect_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QSoundEffect_trUtf8(const char* s) {
+struct seaqt_string QSoundEffect_trUtf8_s(const char* s) {
 	QString _ret = QSoundEffect::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -459,7 +459,7 @@ void QSoundEffect_stop(QSoundEffect* self) {
 	self->stop();
 }
 
-struct seaqt_string QSoundEffect_tr2(const char* s, const char* c) {
+struct seaqt_string QSoundEffect_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSoundEffect::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -470,7 +470,7 @@ struct seaqt_string QSoundEffect_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSoundEffect_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSoundEffect_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSoundEffect::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -481,7 +481,7 @@ struct seaqt_string QSoundEffect_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QSoundEffect_trUtf82(const char* s, const char* c) {
+struct seaqt_string QSoundEffect_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QSoundEffect::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -492,7 +492,7 @@ struct seaqt_string QSoundEffect_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSoundEffect_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QSoundEffect_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSoundEffect::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

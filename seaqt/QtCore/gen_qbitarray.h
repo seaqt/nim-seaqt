@@ -23,15 +23,15 @@ typedef struct QBitRef QBitRef;
 #endif
 
 QBitArray* QBitArray_new();
-QBitArray* QBitArray_new2(int size);
-QBitArray* QBitArray_new3(QBitArray* other);
-QBitArray* QBitArray_new4(int size, bool val);
+QBitArray* QBitArray_new_size(int size);
+QBitArray* QBitArray_new_from(QBitArray* from);
+QBitArray* QBitArray_new_size_val(int size, bool val);
 
-void QBitArray_operatorAssign(QBitArray* self, QBitArray* other);
+void QBitArray_operatorAssign(QBitArray* self, QBitArray* from);
 void QBitArray_swap(QBitArray* self, QBitArray* other);
 int QBitArray_size(const QBitArray* self);
 int QBitArray_count(const QBitArray* self);
-int QBitArray_countWithOn(const QBitArray* self, bool on);
+int QBitArray_count_on(const QBitArray* self, bool on);
 bool QBitArray_isEmpty(const QBitArray* self);
 bool QBitArray_isNull(const QBitArray* self);
 void QBitArray_resize(QBitArray* self, int size);
@@ -39,35 +39,35 @@ void QBitArray_detach(QBitArray* self);
 bool QBitArray_isDetached(const QBitArray* self);
 void QBitArray_clear(QBitArray* self);
 bool QBitArray_testBit(const QBitArray* self, int i);
-void QBitArray_setBit(QBitArray* self, int i);
-void QBitArray_setBit2(QBitArray* self, int i, bool val);
+void QBitArray_setBit_i(QBitArray* self, int i);
+void QBitArray_setBit_i_val(QBitArray* self, int i, bool val);
 void QBitArray_clearBit(QBitArray* self, int i);
 bool QBitArray_toggleBit(QBitArray* self, int i);
 bool QBitArray_at(const QBitArray* self, int i);
-QBitRef* QBitArray_operatorSubscript(QBitArray* self, int i);
-bool QBitArray_operatorSubscriptWithInt(const QBitArray* self, int i);
-QBitRef* QBitArray_operatorSubscriptWithUint(QBitArray* self, unsigned int i);
-bool QBitArray_operatorSubscript2(const QBitArray* self, unsigned int i);
+QBitRef* QBitArray_operatorSubscript_int(QBitArray* self, int i);
+bool QBitArray_operatorSubscript_const_int(const QBitArray* self, int i);
+QBitRef* QBitArray_operatorSubscript_uint(QBitArray* self, unsigned int i);
+bool QBitArray_operatorSubscript_const_uint(const QBitArray* self, unsigned int i);
 void QBitArray_operatorBitwiseAndAssign(QBitArray* self, QBitArray* param1);
 void QBitArray_operatorBitwiseOrAssign(QBitArray* self, QBitArray* param1);
 void QBitArray_operatorBitwiseNotAssign(QBitArray* self, QBitArray* param1);
 bool QBitArray_operatorEqual(const QBitArray* self, QBitArray* other);
 bool QBitArray_operatorNotEqual(const QBitArray* self, QBitArray* other);
-bool QBitArray_fill(QBitArray* self, bool val);
-void QBitArray_fill2(QBitArray* self, bool val, int first, int last);
+bool QBitArray_fill_val(QBitArray* self, bool val);
+void QBitArray_fill_val_first_last(QBitArray* self, bool val, int first, int last);
 void QBitArray_truncate(QBitArray* self, int pos);
 const char* QBitArray_bits(const QBitArray* self);
 QBitArray* QBitArray_fromBits(const char* data, ptrdiff_t len);
-bool QBitArray_fill3(QBitArray* self, bool val, int size);
+bool QBitArray_fill_val_size(QBitArray* self, bool val, int size);
 
 void QBitArray_delete(QBitArray* self);
 
-QBitRef* QBitRef_new(QBitRef* param1);
+QBitRef* QBitRef_new(QBitRef* from);
 
 bool QBitRef_ToBool(const QBitRef* self);
 bool QBitRef_operatorNot(const QBitRef* self);
-void QBitRef_operatorAssign(QBitRef* self, QBitRef* val);
-void QBitRef_operatorAssignWithVal(QBitRef* self, bool val);
+void QBitRef_operatorAssign_from(QBitRef* self, QBitRef* from);
+void QBitRef_operatorAssign_val(QBitRef* self, bool val);
 
 void QBitRef_delete(QBitRef* self);
 

@@ -509,16 +509,16 @@ proc fcQStyleOption_styleObject(self: pointer): pointer {.importc: "QStyleOption
 proc fcQStyleOption_setStyleObject(self: pointer, styleObject: pointer): void {.importc: "QStyleOption_setStyleObject".}
 proc fcQStyleOption_init(self: pointer, w: pointer): void {.importc: "QStyleOption_init".}
 proc fcQStyleOption_initFrom(self: pointer, w: pointer): void {.importc: "QStyleOption_initFrom".}
-proc fcQStyleOption_operatorAssign(self: pointer, other: pointer): void {.importc: "QStyleOption_operatorAssign".}
+proc fcQStyleOption_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOption_operatorAssign".}
 proc fcQStyleOption_new(): ptr cQStyleOption {.importc: "QStyleOption_new".}
-proc fcQStyleOption_new2(other: pointer): ptr cQStyleOption {.importc: "QStyleOption_new2".}
-proc fcQStyleOption_new3(version: cint): ptr cQStyleOption {.importc: "QStyleOption_new3".}
-proc fcQStyleOption_new4(version: cint, typeVal: cint): ptr cQStyleOption {.importc: "QStyleOption_new4".}
+proc fcQStyleOption_new2(fromVal: pointer): ptr cQStyleOption {.importc: "QStyleOption_new_from".}
+proc fcQStyleOption_new3(version: cint): ptr cQStyleOption {.importc: "QStyleOption_new_version".}
+proc fcQStyleOption_new4(version: cint, typeVal: cint): ptr cQStyleOption {.importc: "QStyleOption_new_version_type".}
 proc fcQStyleOptionFocusRect_backgroundColor(self: pointer): pointer {.importc: "QStyleOptionFocusRect_backgroundColor".}
 proc fcQStyleOptionFocusRect_setBackgroundColor(self: pointer, backgroundColor: pointer): void {.importc: "QStyleOptionFocusRect_setBackgroundColor".}
-proc fcQStyleOptionFocusRect_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionFocusRect_operatorAssign".}
+proc fcQStyleOptionFocusRect_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionFocusRect_operatorAssign".}
 proc fcQStyleOptionFocusRect_new(): ptr cQStyleOptionFocusRect {.importc: "QStyleOptionFocusRect_new".}
-proc fcQStyleOptionFocusRect_new2(other: pointer): ptr cQStyleOptionFocusRect {.importc: "QStyleOptionFocusRect_new2".}
+proc fcQStyleOptionFocusRect_new2(fromVal: pointer): ptr cQStyleOptionFocusRect {.importc: "QStyleOptionFocusRect_new_from".}
 proc fcQStyleOptionFrame_lineWidth(self: pointer): cint {.importc: "QStyleOptionFrame_lineWidth".}
 proc fcQStyleOptionFrame_setLineWidth(self: pointer, lineWidth: cint): void {.importc: "QStyleOptionFrame_setLineWidth".}
 proc fcQStyleOptionFrame_midLineWidth(self: pointer): cint {.importc: "QStyleOptionFrame_midLineWidth".}
@@ -527,9 +527,9 @@ proc fcQStyleOptionFrame_features(self: pointer): cint {.importc: "QStyleOptionF
 proc fcQStyleOptionFrame_setFeatures(self: pointer, features: cint): void {.importc: "QStyleOptionFrame_setFeatures".}
 proc fcQStyleOptionFrame_frameShape(self: pointer): cint {.importc: "QStyleOptionFrame_frameShape".}
 proc fcQStyleOptionFrame_setFrameShape(self: pointer, frameShape: cint): void {.importc: "QStyleOptionFrame_setFrameShape".}
-proc fcQStyleOptionFrame_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionFrame_operatorAssign".}
+proc fcQStyleOptionFrame_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionFrame_operatorAssign".}
 proc fcQStyleOptionFrame_new(): ptr cQStyleOptionFrame {.importc: "QStyleOptionFrame_new".}
-proc fcQStyleOptionFrame_new2(other: pointer): ptr cQStyleOptionFrame {.importc: "QStyleOptionFrame_new2".}
+proc fcQStyleOptionFrame_new2(fromVal: pointer): ptr cQStyleOptionFrame {.importc: "QStyleOptionFrame_new_from".}
 proc fcQStyleOptionTabWidgetFrame_lineWidth(self: pointer): cint {.importc: "QStyleOptionTabWidgetFrame_lineWidth".}
 proc fcQStyleOptionTabWidgetFrame_setLineWidth(self: pointer, lineWidth: cint): void {.importc: "QStyleOptionTabWidgetFrame_setLineWidth".}
 proc fcQStyleOptionTabWidgetFrame_midLineWidth(self: pointer): cint {.importc: "QStyleOptionTabWidgetFrame_midLineWidth".}
@@ -546,9 +546,9 @@ proc fcQStyleOptionTabWidgetFrame_tabBarRect(self: pointer): pointer {.importc: 
 proc fcQStyleOptionTabWidgetFrame_setTabBarRect(self: pointer, tabBarRect: pointer): void {.importc: "QStyleOptionTabWidgetFrame_setTabBarRect".}
 proc fcQStyleOptionTabWidgetFrame_selectedTabRect(self: pointer): pointer {.importc: "QStyleOptionTabWidgetFrame_selectedTabRect".}
 proc fcQStyleOptionTabWidgetFrame_setSelectedTabRect(self: pointer, selectedTabRect: pointer): void {.importc: "QStyleOptionTabWidgetFrame_setSelectedTabRect".}
-proc fcQStyleOptionTabWidgetFrame_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionTabWidgetFrame_operatorAssign".}
+proc fcQStyleOptionTabWidgetFrame_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionTabWidgetFrame_operatorAssign".}
 proc fcQStyleOptionTabWidgetFrame_new(): ptr cQStyleOptionTabWidgetFrame {.importc: "QStyleOptionTabWidgetFrame_new".}
-proc fcQStyleOptionTabWidgetFrame_new2(other: pointer): ptr cQStyleOptionTabWidgetFrame {.importc: "QStyleOptionTabWidgetFrame_new2".}
+proc fcQStyleOptionTabWidgetFrame_new2(fromVal: pointer): ptr cQStyleOptionTabWidgetFrame {.importc: "QStyleOptionTabWidgetFrame_new_from".}
 proc fcQStyleOptionTabBarBase_shape(self: pointer): cint {.importc: "QStyleOptionTabBarBase_shape".}
 proc fcQStyleOptionTabBarBase_setShape(self: pointer, shape: cint): void {.importc: "QStyleOptionTabBarBase_setShape".}
 proc fcQStyleOptionTabBarBase_tabBarRect(self: pointer): pointer {.importc: "QStyleOptionTabBarBase_tabBarRect".}
@@ -557,9 +557,9 @@ proc fcQStyleOptionTabBarBase_selectedTabRect(self: pointer): pointer {.importc:
 proc fcQStyleOptionTabBarBase_setSelectedTabRect(self: pointer, selectedTabRect: pointer): void {.importc: "QStyleOptionTabBarBase_setSelectedTabRect".}
 proc fcQStyleOptionTabBarBase_documentMode(self: pointer): bool {.importc: "QStyleOptionTabBarBase_documentMode".}
 proc fcQStyleOptionTabBarBase_setDocumentMode(self: pointer, documentMode: bool): void {.importc: "QStyleOptionTabBarBase_setDocumentMode".}
-proc fcQStyleOptionTabBarBase_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionTabBarBase_operatorAssign".}
+proc fcQStyleOptionTabBarBase_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionTabBarBase_operatorAssign".}
 proc fcQStyleOptionTabBarBase_new(): ptr cQStyleOptionTabBarBase {.importc: "QStyleOptionTabBarBase_new".}
-proc fcQStyleOptionTabBarBase_new2(other: pointer): ptr cQStyleOptionTabBarBase {.importc: "QStyleOptionTabBarBase_new2".}
+proc fcQStyleOptionTabBarBase_new2(fromVal: pointer): ptr cQStyleOptionTabBarBase {.importc: "QStyleOptionTabBarBase_new_from".}
 proc fcQStyleOptionHeader_section(self: pointer): cint {.importc: "QStyleOptionHeader_section".}
 proc fcQStyleOptionHeader_setSection(self: pointer, section: cint): void {.importc: "QStyleOptionHeader_setSection".}
 proc fcQStyleOptionHeader_text(self: pointer): struct_seaqt_string {.importc: "QStyleOptionHeader_text".}
@@ -578,9 +578,9 @@ proc fcQStyleOptionHeader_sortIndicator(self: pointer): cint {.importc: "QStyleO
 proc fcQStyleOptionHeader_setSortIndicator(self: pointer, sortIndicator: cint): void {.importc: "QStyleOptionHeader_setSortIndicator".}
 proc fcQStyleOptionHeader_orientation(self: pointer): cint {.importc: "QStyleOptionHeader_orientation".}
 proc fcQStyleOptionHeader_setOrientation(self: pointer, orientation: cint): void {.importc: "QStyleOptionHeader_setOrientation".}
-proc fcQStyleOptionHeader_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionHeader_operatorAssign".}
+proc fcQStyleOptionHeader_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionHeader_operatorAssign".}
 proc fcQStyleOptionHeader_new(): ptr cQStyleOptionHeader {.importc: "QStyleOptionHeader_new".}
-proc fcQStyleOptionHeader_new2(other: pointer): ptr cQStyleOptionHeader {.importc: "QStyleOptionHeader_new2".}
+proc fcQStyleOptionHeader_new2(fromVal: pointer): ptr cQStyleOptionHeader {.importc: "QStyleOptionHeader_new_from".}
 proc fcQStyleOptionButton_features(self: pointer): cint {.importc: "QStyleOptionButton_features".}
 proc fcQStyleOptionButton_setFeatures(self: pointer, features: cint): void {.importc: "QStyleOptionButton_setFeatures".}
 proc fcQStyleOptionButton_text(self: pointer): struct_seaqt_string {.importc: "QStyleOptionButton_text".}
@@ -589,9 +589,9 @@ proc fcQStyleOptionButton_icon(self: pointer): pointer {.importc: "QStyleOptionB
 proc fcQStyleOptionButton_setIcon(self: pointer, icon: pointer): void {.importc: "QStyleOptionButton_setIcon".}
 proc fcQStyleOptionButton_iconSize(self: pointer): pointer {.importc: "QStyleOptionButton_iconSize".}
 proc fcQStyleOptionButton_setIconSize(self: pointer, iconSize: pointer): void {.importc: "QStyleOptionButton_setIconSize".}
-proc fcQStyleOptionButton_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionButton_operatorAssign".}
+proc fcQStyleOptionButton_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionButton_operatorAssign".}
 proc fcQStyleOptionButton_new(): ptr cQStyleOptionButton {.importc: "QStyleOptionButton_new".}
-proc fcQStyleOptionButton_new2(other: pointer): ptr cQStyleOptionButton {.importc: "QStyleOptionButton_new2".}
+proc fcQStyleOptionButton_new2(fromVal: pointer): ptr cQStyleOptionButton {.importc: "QStyleOptionButton_new_from".}
 proc fcQStyleOptionTab_shape(self: pointer): cint {.importc: "QStyleOptionTab_shape".}
 proc fcQStyleOptionTab_setShape(self: pointer, shape: cint): void {.importc: "QStyleOptionTab_setShape".}
 proc fcQStyleOptionTab_text(self: pointer): struct_seaqt_string {.importc: "QStyleOptionTab_text".}
@@ -616,14 +616,14 @@ proc fcQStyleOptionTab_rightButtonSize(self: pointer): pointer {.importc: "QStyl
 proc fcQStyleOptionTab_setRightButtonSize(self: pointer, rightButtonSize: pointer): void {.importc: "QStyleOptionTab_setRightButtonSize".}
 proc fcQStyleOptionTab_features(self: pointer): cint {.importc: "QStyleOptionTab_features".}
 proc fcQStyleOptionTab_setFeatures(self: pointer, features: cint): void {.importc: "QStyleOptionTab_setFeatures".}
-proc fcQStyleOptionTab_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionTab_operatorAssign".}
+proc fcQStyleOptionTab_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionTab_operatorAssign".}
 proc fcQStyleOptionTab_new(): ptr cQStyleOptionTab {.importc: "QStyleOptionTab_new".}
-proc fcQStyleOptionTab_new2(other: pointer): ptr cQStyleOptionTab {.importc: "QStyleOptionTab_new2".}
+proc fcQStyleOptionTab_new2(fromVal: pointer): ptr cQStyleOptionTab {.importc: "QStyleOptionTab_new_from".}
 proc fcQStyleOptionTabV4_tabIndex(self: pointer): cint {.importc: "QStyleOptionTabV4_tabIndex".}
 proc fcQStyleOptionTabV4_setTabIndex(self: pointer, tabIndex: cint): void {.importc: "QStyleOptionTabV4_setTabIndex".}
-proc fcQStyleOptionTabV4_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionTabV4_operatorAssign".}
+proc fcQStyleOptionTabV4_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionTabV4_operatorAssign".}
 proc fcQStyleOptionTabV4_new(): ptr cQStyleOptionTabV4 {.importc: "QStyleOptionTabV4_new".}
-proc fcQStyleOptionTabV4_new2(param1: pointer): ptr cQStyleOptionTabV4 {.importc: "QStyleOptionTabV4_new2".}
+proc fcQStyleOptionTabV4_new2(fromVal: pointer): ptr cQStyleOptionTabV4 {.importc: "QStyleOptionTabV4_new_from".}
 proc fcQStyleOptionToolBar_positionOfLine(self: pointer): cint {.importc: "QStyleOptionToolBar_positionOfLine".}
 proc fcQStyleOptionToolBar_setPositionOfLine(self: pointer, positionOfLine: cint): void {.importc: "QStyleOptionToolBar_setPositionOfLine".}
 proc fcQStyleOptionToolBar_positionWithinLine(self: pointer): cint {.importc: "QStyleOptionToolBar_positionWithinLine".}
@@ -636,9 +636,9 @@ proc fcQStyleOptionToolBar_lineWidth(self: pointer): cint {.importc: "QStyleOpti
 proc fcQStyleOptionToolBar_setLineWidth(self: pointer, lineWidth: cint): void {.importc: "QStyleOptionToolBar_setLineWidth".}
 proc fcQStyleOptionToolBar_midLineWidth(self: pointer): cint {.importc: "QStyleOptionToolBar_midLineWidth".}
 proc fcQStyleOptionToolBar_setMidLineWidth(self: pointer, midLineWidth: cint): void {.importc: "QStyleOptionToolBar_setMidLineWidth".}
-proc fcQStyleOptionToolBar_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionToolBar_operatorAssign".}
+proc fcQStyleOptionToolBar_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionToolBar_operatorAssign".}
 proc fcQStyleOptionToolBar_new(): ptr cQStyleOptionToolBar {.importc: "QStyleOptionToolBar_new".}
-proc fcQStyleOptionToolBar_new2(other: pointer): ptr cQStyleOptionToolBar {.importc: "QStyleOptionToolBar_new2".}
+proc fcQStyleOptionToolBar_new2(fromVal: pointer): ptr cQStyleOptionToolBar {.importc: "QStyleOptionToolBar_new_from".}
 proc fcQStyleOptionProgressBar_minimum(self: pointer): cint {.importc: "QStyleOptionProgressBar_minimum".}
 proc fcQStyleOptionProgressBar_setMinimum(self: pointer, minimum: cint): void {.importc: "QStyleOptionProgressBar_setMinimum".}
 proc fcQStyleOptionProgressBar_maximum(self: pointer): cint {.importc: "QStyleOptionProgressBar_maximum".}
@@ -657,9 +657,9 @@ proc fcQStyleOptionProgressBar_invertedAppearance(self: pointer): bool {.importc
 proc fcQStyleOptionProgressBar_setInvertedAppearance(self: pointer, invertedAppearance: bool): void {.importc: "QStyleOptionProgressBar_setInvertedAppearance".}
 proc fcQStyleOptionProgressBar_bottomToTop(self: pointer): bool {.importc: "QStyleOptionProgressBar_bottomToTop".}
 proc fcQStyleOptionProgressBar_setBottomToTop(self: pointer, bottomToTop: bool): void {.importc: "QStyleOptionProgressBar_setBottomToTop".}
-proc fcQStyleOptionProgressBar_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionProgressBar_operatorAssign".}
+proc fcQStyleOptionProgressBar_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionProgressBar_operatorAssign".}
 proc fcQStyleOptionProgressBar_new(): ptr cQStyleOptionProgressBar {.importc: "QStyleOptionProgressBar_new".}
-proc fcQStyleOptionProgressBar_new2(other: pointer): ptr cQStyleOptionProgressBar {.importc: "QStyleOptionProgressBar_new2".}
+proc fcQStyleOptionProgressBar_new2(fromVal: pointer): ptr cQStyleOptionProgressBar {.importc: "QStyleOptionProgressBar_new_from".}
 proc fcQStyleOptionMenuItem_menuItemType(self: pointer): cint {.importc: "QStyleOptionMenuItem_menuItemType".}
 proc fcQStyleOptionMenuItem_setMenuItemType(self: pointer, menuItemType: cint): void {.importc: "QStyleOptionMenuItem_setMenuItemType".}
 proc fcQStyleOptionMenuItem_checkType(self: pointer): cint {.importc: "QStyleOptionMenuItem_checkType".}
@@ -680,9 +680,9 @@ proc fcQStyleOptionMenuItem_tabWidth(self: pointer): cint {.importc: "QStyleOpti
 proc fcQStyleOptionMenuItem_setTabWidth(self: pointer, tabWidth: cint): void {.importc: "QStyleOptionMenuItem_setTabWidth".}
 proc fcQStyleOptionMenuItem_font(self: pointer): pointer {.importc: "QStyleOptionMenuItem_font".}
 proc fcQStyleOptionMenuItem_setFont(self: pointer, font: pointer): void {.importc: "QStyleOptionMenuItem_setFont".}
-proc fcQStyleOptionMenuItem_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionMenuItem_operatorAssign".}
+proc fcQStyleOptionMenuItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionMenuItem_operatorAssign".}
 proc fcQStyleOptionMenuItem_new(): ptr cQStyleOptionMenuItem {.importc: "QStyleOptionMenuItem_new".}
-proc fcQStyleOptionMenuItem_new2(other: pointer): ptr cQStyleOptionMenuItem {.importc: "QStyleOptionMenuItem_new2".}
+proc fcQStyleOptionMenuItem_new2(fromVal: pointer): ptr cQStyleOptionMenuItem {.importc: "QStyleOptionMenuItem_new_from".}
 proc fcQStyleOptionDockWidget_title(self: pointer): struct_seaqt_string {.importc: "QStyleOptionDockWidget_title".}
 proc fcQStyleOptionDockWidget_setTitle(self: pointer, title: struct_seaqt_string): void {.importc: "QStyleOptionDockWidget_setTitle".}
 proc fcQStyleOptionDockWidget_closable(self: pointer): bool {.importc: "QStyleOptionDockWidget_closable".}
@@ -693,9 +693,9 @@ proc fcQStyleOptionDockWidget_floatable(self: pointer): bool {.importc: "QStyleO
 proc fcQStyleOptionDockWidget_setFloatable(self: pointer, floatable: bool): void {.importc: "QStyleOptionDockWidget_setFloatable".}
 proc fcQStyleOptionDockWidget_verticalTitleBar(self: pointer): bool {.importc: "QStyleOptionDockWidget_verticalTitleBar".}
 proc fcQStyleOptionDockWidget_setVerticalTitleBar(self: pointer, verticalTitleBar: bool): void {.importc: "QStyleOptionDockWidget_setVerticalTitleBar".}
-proc fcQStyleOptionDockWidget_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionDockWidget_operatorAssign".}
+proc fcQStyleOptionDockWidget_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionDockWidget_operatorAssign".}
 proc fcQStyleOptionDockWidget_new(): ptr cQStyleOptionDockWidget {.importc: "QStyleOptionDockWidget_new".}
-proc fcQStyleOptionDockWidget_new2(other: pointer): ptr cQStyleOptionDockWidget {.importc: "QStyleOptionDockWidget_new2".}
+proc fcQStyleOptionDockWidget_new2(fromVal: pointer): ptr cQStyleOptionDockWidget {.importc: "QStyleOptionDockWidget_new_from".}
 proc fcQStyleOptionViewItem_displayAlignment(self: pointer): cint {.importc: "QStyleOptionViewItem_displayAlignment".}
 proc fcQStyleOptionViewItem_setDisplayAlignment(self: pointer, displayAlignment: cint): void {.importc: "QStyleOptionViewItem_setDisplayAlignment".}
 proc fcQStyleOptionViewItem_decorationAlignment(self: pointer): cint {.importc: "QStyleOptionViewItem_decorationAlignment".}
@@ -728,9 +728,9 @@ proc fcQStyleOptionViewItem_viewItemPosition(self: pointer): cint {.importc: "QS
 proc fcQStyleOptionViewItem_setViewItemPosition(self: pointer, viewItemPosition: cint): void {.importc: "QStyleOptionViewItem_setViewItemPosition".}
 proc fcQStyleOptionViewItem_backgroundBrush(self: pointer): pointer {.importc: "QStyleOptionViewItem_backgroundBrush".}
 proc fcQStyleOptionViewItem_setBackgroundBrush(self: pointer, backgroundBrush: pointer): void {.importc: "QStyleOptionViewItem_setBackgroundBrush".}
-proc fcQStyleOptionViewItem_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionViewItem_operatorAssign".}
+proc fcQStyleOptionViewItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionViewItem_operatorAssign".}
 proc fcQStyleOptionViewItem_new(): ptr cQStyleOptionViewItem {.importc: "QStyleOptionViewItem_new".}
-proc fcQStyleOptionViewItem_new2(other: pointer): ptr cQStyleOptionViewItem {.importc: "QStyleOptionViewItem_new2".}
+proc fcQStyleOptionViewItem_new2(fromVal: pointer): ptr cQStyleOptionViewItem {.importc: "QStyleOptionViewItem_new_from".}
 proc fcQStyleOptionToolBox_text(self: pointer): struct_seaqt_string {.importc: "QStyleOptionToolBox_text".}
 proc fcQStyleOptionToolBox_setText(self: pointer, text: struct_seaqt_string): void {.importc: "QStyleOptionToolBox_setText".}
 proc fcQStyleOptionToolBox_icon(self: pointer): pointer {.importc: "QStyleOptionToolBox_icon".}
@@ -739,25 +739,25 @@ proc fcQStyleOptionToolBox_position(self: pointer): cint {.importc: "QStyleOptio
 proc fcQStyleOptionToolBox_setPosition(self: pointer, position: cint): void {.importc: "QStyleOptionToolBox_setPosition".}
 proc fcQStyleOptionToolBox_selectedPosition(self: pointer): cint {.importc: "QStyleOptionToolBox_selectedPosition".}
 proc fcQStyleOptionToolBox_setSelectedPosition(self: pointer, selectedPosition: cint): void {.importc: "QStyleOptionToolBox_setSelectedPosition".}
-proc fcQStyleOptionToolBox_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionToolBox_operatorAssign".}
+proc fcQStyleOptionToolBox_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionToolBox_operatorAssign".}
 proc fcQStyleOptionToolBox_new(): ptr cQStyleOptionToolBox {.importc: "QStyleOptionToolBox_new".}
-proc fcQStyleOptionToolBox_new2(other: pointer): ptr cQStyleOptionToolBox {.importc: "QStyleOptionToolBox_new2".}
+proc fcQStyleOptionToolBox_new2(fromVal: pointer): ptr cQStyleOptionToolBox {.importc: "QStyleOptionToolBox_new_from".}
 proc fcQStyleOptionRubberBand_shape(self: pointer): cint {.importc: "QStyleOptionRubberBand_shape".}
 proc fcQStyleOptionRubberBand_setShape(self: pointer, shape: cint): void {.importc: "QStyleOptionRubberBand_setShape".}
 proc fcQStyleOptionRubberBand_opaque(self: pointer): bool {.importc: "QStyleOptionRubberBand_opaque".}
 proc fcQStyleOptionRubberBand_setOpaque(self: pointer, opaque: bool): void {.importc: "QStyleOptionRubberBand_setOpaque".}
-proc fcQStyleOptionRubberBand_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionRubberBand_operatorAssign".}
+proc fcQStyleOptionRubberBand_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionRubberBand_operatorAssign".}
 proc fcQStyleOptionRubberBand_new(): ptr cQStyleOptionRubberBand {.importc: "QStyleOptionRubberBand_new".}
-proc fcQStyleOptionRubberBand_new2(other: pointer): ptr cQStyleOptionRubberBand {.importc: "QStyleOptionRubberBand_new2".}
+proc fcQStyleOptionRubberBand_new2(fromVal: pointer): ptr cQStyleOptionRubberBand {.importc: "QStyleOptionRubberBand_new_from".}
 proc fcQStyleOptionComplex_subControls(self: pointer): cint {.importc: "QStyleOptionComplex_subControls".}
 proc fcQStyleOptionComplex_setSubControls(self: pointer, subControls: cint): void {.importc: "QStyleOptionComplex_setSubControls".}
 proc fcQStyleOptionComplex_activeSubControls(self: pointer): cint {.importc: "QStyleOptionComplex_activeSubControls".}
 proc fcQStyleOptionComplex_setActiveSubControls(self: pointer, activeSubControls: cint): void {.importc: "QStyleOptionComplex_setActiveSubControls".}
-proc fcQStyleOptionComplex_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionComplex_operatorAssign".}
+proc fcQStyleOptionComplex_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionComplex_operatorAssign".}
 proc fcQStyleOptionComplex_new(): ptr cQStyleOptionComplex {.importc: "QStyleOptionComplex_new".}
-proc fcQStyleOptionComplex_new2(other: pointer): ptr cQStyleOptionComplex {.importc: "QStyleOptionComplex_new2".}
-proc fcQStyleOptionComplex_new3(version: cint): ptr cQStyleOptionComplex {.importc: "QStyleOptionComplex_new3".}
-proc fcQStyleOptionComplex_new4(version: cint, typeVal: cint): ptr cQStyleOptionComplex {.importc: "QStyleOptionComplex_new4".}
+proc fcQStyleOptionComplex_new2(fromVal: pointer): ptr cQStyleOptionComplex {.importc: "QStyleOptionComplex_new_from".}
+proc fcQStyleOptionComplex_new3(version: cint): ptr cQStyleOptionComplex {.importc: "QStyleOptionComplex_new_version".}
+proc fcQStyleOptionComplex_new4(version: cint, typeVal: cint): ptr cQStyleOptionComplex {.importc: "QStyleOptionComplex_new_version_type".}
 proc fcQStyleOptionSlider_orientation(self: pointer): cint {.importc: "QStyleOptionSlider_orientation".}
 proc fcQStyleOptionSlider_setOrientation(self: pointer, orientation: cint): void {.importc: "QStyleOptionSlider_setOrientation".}
 proc fcQStyleOptionSlider_minimum(self: pointer): cint {.importc: "QStyleOptionSlider_minimum".}
@@ -782,18 +782,18 @@ proc fcQStyleOptionSlider_notchTarget(self: pointer): float64 {.importc: "QStyle
 proc fcQStyleOptionSlider_setNotchTarget(self: pointer, notchTarget: float64): void {.importc: "QStyleOptionSlider_setNotchTarget".}
 proc fcQStyleOptionSlider_dialWrapping(self: pointer): bool {.importc: "QStyleOptionSlider_dialWrapping".}
 proc fcQStyleOptionSlider_setDialWrapping(self: pointer, dialWrapping: bool): void {.importc: "QStyleOptionSlider_setDialWrapping".}
-proc fcQStyleOptionSlider_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionSlider_operatorAssign".}
+proc fcQStyleOptionSlider_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionSlider_operatorAssign".}
 proc fcQStyleOptionSlider_new(): ptr cQStyleOptionSlider {.importc: "QStyleOptionSlider_new".}
-proc fcQStyleOptionSlider_new2(other: pointer): ptr cQStyleOptionSlider {.importc: "QStyleOptionSlider_new2".}
+proc fcQStyleOptionSlider_new2(fromVal: pointer): ptr cQStyleOptionSlider {.importc: "QStyleOptionSlider_new_from".}
 proc fcQStyleOptionSpinBox_buttonSymbols(self: pointer): cint {.importc: "QStyleOptionSpinBox_buttonSymbols".}
 proc fcQStyleOptionSpinBox_setButtonSymbols(self: pointer, buttonSymbols: cint): void {.importc: "QStyleOptionSpinBox_setButtonSymbols".}
 proc fcQStyleOptionSpinBox_stepEnabled(self: pointer): cint {.importc: "QStyleOptionSpinBox_stepEnabled".}
 proc fcQStyleOptionSpinBox_setStepEnabled(self: pointer, stepEnabled: cint): void {.importc: "QStyleOptionSpinBox_setStepEnabled".}
 proc fcQStyleOptionSpinBox_frame(self: pointer): bool {.importc: "QStyleOptionSpinBox_frame".}
 proc fcQStyleOptionSpinBox_setFrame(self: pointer, frame: bool): void {.importc: "QStyleOptionSpinBox_setFrame".}
-proc fcQStyleOptionSpinBox_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionSpinBox_operatorAssign".}
+proc fcQStyleOptionSpinBox_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionSpinBox_operatorAssign".}
 proc fcQStyleOptionSpinBox_new(): ptr cQStyleOptionSpinBox {.importc: "QStyleOptionSpinBox_new".}
-proc fcQStyleOptionSpinBox_new2(other: pointer): ptr cQStyleOptionSpinBox {.importc: "QStyleOptionSpinBox_new2".}
+proc fcQStyleOptionSpinBox_new2(fromVal: pointer): ptr cQStyleOptionSpinBox {.importc: "QStyleOptionSpinBox_new_from".}
 proc fcQStyleOptionToolButton_features(self: pointer): cint {.importc: "QStyleOptionToolButton_features".}
 proc fcQStyleOptionToolButton_setFeatures(self: pointer, features: cint): void {.importc: "QStyleOptionToolButton_setFeatures".}
 proc fcQStyleOptionToolButton_icon(self: pointer): pointer {.importc: "QStyleOptionToolButton_icon".}
@@ -810,9 +810,9 @@ proc fcQStyleOptionToolButton_pos(self: pointer): pointer {.importc: "QStyleOpti
 proc fcQStyleOptionToolButton_setPos(self: pointer, pos: pointer): void {.importc: "QStyleOptionToolButton_setPos".}
 proc fcQStyleOptionToolButton_font(self: pointer): pointer {.importc: "QStyleOptionToolButton_font".}
 proc fcQStyleOptionToolButton_setFont(self: pointer, font: pointer): void {.importc: "QStyleOptionToolButton_setFont".}
-proc fcQStyleOptionToolButton_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionToolButton_operatorAssign".}
+proc fcQStyleOptionToolButton_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionToolButton_operatorAssign".}
 proc fcQStyleOptionToolButton_new(): ptr cQStyleOptionToolButton {.importc: "QStyleOptionToolButton_new".}
-proc fcQStyleOptionToolButton_new2(other: pointer): ptr cQStyleOptionToolButton {.importc: "QStyleOptionToolButton_new2".}
+proc fcQStyleOptionToolButton_new2(fromVal: pointer): ptr cQStyleOptionToolButton {.importc: "QStyleOptionToolButton_new_from".}
 proc fcQStyleOptionComboBox_editable(self: pointer): bool {.importc: "QStyleOptionComboBox_editable".}
 proc fcQStyleOptionComboBox_setEditable(self: pointer, editable: bool): void {.importc: "QStyleOptionComboBox_setEditable".}
 proc fcQStyleOptionComboBox_popupRect(self: pointer): pointer {.importc: "QStyleOptionComboBox_popupRect".}
@@ -825,9 +825,9 @@ proc fcQStyleOptionComboBox_currentIcon(self: pointer): pointer {.importc: "QSty
 proc fcQStyleOptionComboBox_setCurrentIcon(self: pointer, currentIcon: pointer): void {.importc: "QStyleOptionComboBox_setCurrentIcon".}
 proc fcQStyleOptionComboBox_iconSize(self: pointer): pointer {.importc: "QStyleOptionComboBox_iconSize".}
 proc fcQStyleOptionComboBox_setIconSize(self: pointer, iconSize: pointer): void {.importc: "QStyleOptionComboBox_setIconSize".}
-proc fcQStyleOptionComboBox_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionComboBox_operatorAssign".}
+proc fcQStyleOptionComboBox_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionComboBox_operatorAssign".}
 proc fcQStyleOptionComboBox_new(): ptr cQStyleOptionComboBox {.importc: "QStyleOptionComboBox_new".}
-proc fcQStyleOptionComboBox_new2(other: pointer): ptr cQStyleOptionComboBox {.importc: "QStyleOptionComboBox_new2".}
+proc fcQStyleOptionComboBox_new2(fromVal: pointer): ptr cQStyleOptionComboBox {.importc: "QStyleOptionComboBox_new_from".}
 proc fcQStyleOptionTitleBar_text(self: pointer): struct_seaqt_string {.importc: "QStyleOptionTitleBar_text".}
 proc fcQStyleOptionTitleBar_setText(self: pointer, text: struct_seaqt_string): void {.importc: "QStyleOptionTitleBar_setText".}
 proc fcQStyleOptionTitleBar_icon(self: pointer): pointer {.importc: "QStyleOptionTitleBar_icon".}
@@ -836,9 +836,9 @@ proc fcQStyleOptionTitleBar_titleBarState(self: pointer): cint {.importc: "QStyl
 proc fcQStyleOptionTitleBar_setTitleBarState(self: pointer, titleBarState: cint): void {.importc: "QStyleOptionTitleBar_setTitleBarState".}
 proc fcQStyleOptionTitleBar_titleBarFlags(self: pointer): cint {.importc: "QStyleOptionTitleBar_titleBarFlags".}
 proc fcQStyleOptionTitleBar_setTitleBarFlags(self: pointer, titleBarFlags: cint): void {.importc: "QStyleOptionTitleBar_setTitleBarFlags".}
-proc fcQStyleOptionTitleBar_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionTitleBar_operatorAssign".}
+proc fcQStyleOptionTitleBar_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionTitleBar_operatorAssign".}
 proc fcQStyleOptionTitleBar_new(): ptr cQStyleOptionTitleBar {.importc: "QStyleOptionTitleBar_new".}
-proc fcQStyleOptionTitleBar_new2(other: pointer): ptr cQStyleOptionTitleBar {.importc: "QStyleOptionTitleBar_new2".}
+proc fcQStyleOptionTitleBar_new2(fromVal: pointer): ptr cQStyleOptionTitleBar {.importc: "QStyleOptionTitleBar_new_from".}
 proc fcQStyleOptionGroupBox_features(self: pointer): cint {.importc: "QStyleOptionGroupBox_features".}
 proc fcQStyleOptionGroupBox_setFeatures(self: pointer, features: cint): void {.importc: "QStyleOptionGroupBox_setFeatures".}
 proc fcQStyleOptionGroupBox_text(self: pointer): struct_seaqt_string {.importc: "QStyleOptionGroupBox_text".}
@@ -851,43 +851,43 @@ proc fcQStyleOptionGroupBox_lineWidth(self: pointer): cint {.importc: "QStyleOpt
 proc fcQStyleOptionGroupBox_setLineWidth(self: pointer, lineWidth: cint): void {.importc: "QStyleOptionGroupBox_setLineWidth".}
 proc fcQStyleOptionGroupBox_midLineWidth(self: pointer): cint {.importc: "QStyleOptionGroupBox_midLineWidth".}
 proc fcQStyleOptionGroupBox_setMidLineWidth(self: pointer, midLineWidth: cint): void {.importc: "QStyleOptionGroupBox_setMidLineWidth".}
-proc fcQStyleOptionGroupBox_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionGroupBox_operatorAssign".}
+proc fcQStyleOptionGroupBox_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionGroupBox_operatorAssign".}
 proc fcQStyleOptionGroupBox_new(): ptr cQStyleOptionGroupBox {.importc: "QStyleOptionGroupBox_new".}
-proc fcQStyleOptionGroupBox_new2(other: pointer): ptr cQStyleOptionGroupBox {.importc: "QStyleOptionGroupBox_new2".}
+proc fcQStyleOptionGroupBox_new2(fromVal: pointer): ptr cQStyleOptionGroupBox {.importc: "QStyleOptionGroupBox_new_from".}
 proc fcQStyleOptionSizeGrip_corner(self: pointer): cint {.importc: "QStyleOptionSizeGrip_corner".}
 proc fcQStyleOptionSizeGrip_setCorner(self: pointer, corner: cint): void {.importc: "QStyleOptionSizeGrip_setCorner".}
-proc fcQStyleOptionSizeGrip_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionSizeGrip_operatorAssign".}
+proc fcQStyleOptionSizeGrip_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionSizeGrip_operatorAssign".}
 proc fcQStyleOptionSizeGrip_new(): ptr cQStyleOptionSizeGrip {.importc: "QStyleOptionSizeGrip_new".}
-proc fcQStyleOptionSizeGrip_new2(other: pointer): ptr cQStyleOptionSizeGrip {.importc: "QStyleOptionSizeGrip_new2".}
+proc fcQStyleOptionSizeGrip_new2(fromVal: pointer): ptr cQStyleOptionSizeGrip {.importc: "QStyleOptionSizeGrip_new_from".}
 proc fcQStyleOptionGraphicsItem_exposedRect(self: pointer): pointer {.importc: "QStyleOptionGraphicsItem_exposedRect".}
 proc fcQStyleOptionGraphicsItem_setExposedRect(self: pointer, exposedRect: pointer): void {.importc: "QStyleOptionGraphicsItem_setExposedRect".}
 proc fcQStyleOptionGraphicsItem_matrix(self: pointer): pointer {.importc: "QStyleOptionGraphicsItem_matrix".}
 proc fcQStyleOptionGraphicsItem_setMatrix(self: pointer, matrix: pointer): void {.importc: "QStyleOptionGraphicsItem_setMatrix".}
 proc fcQStyleOptionGraphicsItem_levelOfDetail(self: pointer): float64 {.importc: "QStyleOptionGraphicsItem_levelOfDetail".}
 proc fcQStyleOptionGraphicsItem_setLevelOfDetail(self: pointer, levelOfDetail: float64): void {.importc: "QStyleOptionGraphicsItem_setLevelOfDetail".}
-proc fcQStyleOptionGraphicsItem_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionGraphicsItem_operatorAssign".}
+proc fcQStyleOptionGraphicsItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleOptionGraphicsItem_operatorAssign".}
 proc fcQStyleOptionGraphicsItem_levelOfDetailFromTransform(worldTransform: pointer): float64 {.importc: "QStyleOptionGraphicsItem_levelOfDetailFromTransform".}
 proc fcQStyleOptionGraphicsItem_new(): ptr cQStyleOptionGraphicsItem {.importc: "QStyleOptionGraphicsItem_new".}
-proc fcQStyleOptionGraphicsItem_new2(other: pointer): ptr cQStyleOptionGraphicsItem {.importc: "QStyleOptionGraphicsItem_new2".}
+proc fcQStyleOptionGraphicsItem_new2(fromVal: pointer): ptr cQStyleOptionGraphicsItem {.importc: "QStyleOptionGraphicsItem_new_from".}
 proc fcQStyleHintReturn_version(self: pointer): cint {.importc: "QStyleHintReturn_version".}
 proc fcQStyleHintReturn_setVersion(self: pointer, version: cint): void {.importc: "QStyleHintReturn_setVersion".}
 proc fcQStyleHintReturn_typeX(self: pointer): cint {.importc: "QStyleHintReturn_type".}
 proc fcQStyleHintReturn_setType(self: pointer, typeVal: cint): void {.importc: "QStyleHintReturn_setType".}
-proc fcQStyleHintReturn_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleHintReturn_operatorAssign".}
+proc fcQStyleHintReturn_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleHintReturn_operatorAssign".}
 proc fcQStyleHintReturn_new(): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new".}
-proc fcQStyleHintReturn_new2(param1: pointer): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new2".}
-proc fcQStyleHintReturn_new3(version: cint): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new3".}
-proc fcQStyleHintReturn_new4(version: cint, typeVal: cint): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new4".}
+proc fcQStyleHintReturn_new2(fromVal: pointer): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new_from".}
+proc fcQStyleHintReturn_new3(version: cint): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new_version".}
+proc fcQStyleHintReturn_new4(version: cint, typeVal: cint): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new_version_type".}
 proc fcQStyleHintReturnMask_region(self: pointer): pointer {.importc: "QStyleHintReturnMask_region".}
 proc fcQStyleHintReturnMask_setRegion(self: pointer, region: pointer): void {.importc: "QStyleHintReturnMask_setRegion".}
-proc fcQStyleHintReturnMask_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleHintReturnMask_operatorAssign".}
+proc fcQStyleHintReturnMask_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleHintReturnMask_operatorAssign".}
 proc fcQStyleHintReturnMask_new(): ptr cQStyleHintReturnMask {.importc: "QStyleHintReturnMask_new".}
-proc fcQStyleHintReturnMask_new2(param1: pointer): ptr cQStyleHintReturnMask {.importc: "QStyleHintReturnMask_new2".}
+proc fcQStyleHintReturnMask_new2(fromVal: pointer): ptr cQStyleHintReturnMask {.importc: "QStyleHintReturnMask_new_from".}
 proc fcQStyleHintReturnVariant_variant(self: pointer): pointer {.importc: "QStyleHintReturnVariant_variant".}
 proc fcQStyleHintReturnVariant_setVariant(self: pointer, variant: pointer): void {.importc: "QStyleHintReturnVariant_setVariant".}
-proc fcQStyleHintReturnVariant_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleHintReturnVariant_operatorAssign".}
+proc fcQStyleHintReturnVariant_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStyleHintReturnVariant_operatorAssign".}
 proc fcQStyleHintReturnVariant_new(): ptr cQStyleHintReturnVariant {.importc: "QStyleHintReturnVariant_new".}
-proc fcQStyleHintReturnVariant_new2(param1: pointer): ptr cQStyleHintReturnVariant {.importc: "QStyleHintReturnVariant_new2".}
+proc fcQStyleHintReturnVariant_new2(fromVal: pointer): ptr cQStyleHintReturnVariant {.importc: "QStyleHintReturnVariant_new_from".}
 
 proc version*(self: gen_qstyleoption_types.QStyleOption): cint =
   fcQStyleOption_version(self.h)
@@ -943,15 +943,15 @@ proc init*(self: gen_qstyleoption_types.QStyleOption, w: gen_qwidget_types.QWidg
 proc initFrom*(self: gen_qstyleoption_types.QStyleOption, w: gen_qwidget_types.QWidget): void =
   fcQStyleOption_initFrom(self.h, w.h)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOption, other: gen_qstyleoption_types.QStyleOption): void =
-  fcQStyleOption_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOption, fromVal: gen_qstyleoption_types.QStyleOption): void =
+  fcQStyleOption_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOption): gen_qstyleoption_types.QStyleOption =
   let tmp = gen_qstyleoption_types.QStyleOption(h: fcQStyleOption_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOption,
-    other: gen_qstyleoption_types.QStyleOption): gen_qstyleoption_types.QStyleOption =
-  let tmp = gen_qstyleoption_types.QStyleOption(h: fcQStyleOption_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOption): gen_qstyleoption_types.QStyleOption =
+  let tmp = gen_qstyleoption_types.QStyleOption(h: fcQStyleOption_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOption,
     version: cint): gen_qstyleoption_types.QStyleOption =
@@ -967,15 +967,15 @@ proc backgroundColor*(self: gen_qstyleoption_types.QStyleOptionFocusRect): gen_q
 proc setBackgroundColor*(self: gen_qstyleoption_types.QStyleOptionFocusRect, backgroundColor: gen_qcolor_types.QColor): void =
   fcQStyleOptionFocusRect_setBackgroundColor(self.h, backgroundColor.h)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionFocusRect, param1: gen_qstyleoption_types.QStyleOptionFocusRect): void =
-  fcQStyleOptionFocusRect_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionFocusRect, fromVal: gen_qstyleoption_types.QStyleOptionFocusRect): void =
+  fcQStyleOptionFocusRect_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionFocusRect): gen_qstyleoption_types.QStyleOptionFocusRect =
   let tmp = gen_qstyleoption_types.QStyleOptionFocusRect(h: fcQStyleOptionFocusRect_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionFocusRect,
-    other: gen_qstyleoption_types.QStyleOptionFocusRect): gen_qstyleoption_types.QStyleOptionFocusRect =
-  let tmp = gen_qstyleoption_types.QStyleOptionFocusRect(h: fcQStyleOptionFocusRect_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionFocusRect): gen_qstyleoption_types.QStyleOptionFocusRect =
+  let tmp = gen_qstyleoption_types.QStyleOptionFocusRect(h: fcQStyleOptionFocusRect_new2(fromVal.h), owned: true)
   tmp
 proc lineWidth*(self: gen_qstyleoption_types.QStyleOptionFrame): cint =
   fcQStyleOptionFrame_lineWidth(self.h)
@@ -1001,15 +1001,15 @@ proc frameShape*(self: gen_qstyleoption_types.QStyleOptionFrame): cint =
 proc setFrameShape*(self: gen_qstyleoption_types.QStyleOptionFrame, frameShape: cint): void =
   fcQStyleOptionFrame_setFrameShape(self.h, cint(frameShape))
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionFrame, param1: gen_qstyleoption_types.QStyleOptionFrame): void =
-  fcQStyleOptionFrame_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionFrame, fromVal: gen_qstyleoption_types.QStyleOptionFrame): void =
+  fcQStyleOptionFrame_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionFrame): gen_qstyleoption_types.QStyleOptionFrame =
   let tmp = gen_qstyleoption_types.QStyleOptionFrame(h: fcQStyleOptionFrame_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionFrame,
-    other: gen_qstyleoption_types.QStyleOptionFrame): gen_qstyleoption_types.QStyleOptionFrame =
-  let tmp = gen_qstyleoption_types.QStyleOptionFrame(h: fcQStyleOptionFrame_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionFrame): gen_qstyleoption_types.QStyleOptionFrame =
+  let tmp = gen_qstyleoption_types.QStyleOptionFrame(h: fcQStyleOptionFrame_new2(fromVal.h), owned: true)
   tmp
 proc lineWidth*(self: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): cint =
   fcQStyleOptionTabWidgetFrame_lineWidth(self.h)
@@ -1059,15 +1059,15 @@ proc selectedTabRect*(self: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): 
 proc setSelectedTabRect*(self: gen_qstyleoption_types.QStyleOptionTabWidgetFrame, selectedTabRect: gen_qrect_types.QRect): void =
   fcQStyleOptionTabWidgetFrame_setSelectedTabRect(self.h, selectedTabRect.h)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTabWidgetFrame, param1: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): void =
-  fcQStyleOptionTabWidgetFrame_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTabWidgetFrame, fromVal: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): void =
+  fcQStyleOptionTabWidgetFrame_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionTabWidgetFrame): gen_qstyleoption_types.QStyleOptionTabWidgetFrame =
   let tmp = gen_qstyleoption_types.QStyleOptionTabWidgetFrame(h: fcQStyleOptionTabWidgetFrame_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionTabWidgetFrame,
-    other: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): gen_qstyleoption_types.QStyleOptionTabWidgetFrame =
-  let tmp = gen_qstyleoption_types.QStyleOptionTabWidgetFrame(h: fcQStyleOptionTabWidgetFrame_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): gen_qstyleoption_types.QStyleOptionTabWidgetFrame =
+  let tmp = gen_qstyleoption_types.QStyleOptionTabWidgetFrame(h: fcQStyleOptionTabWidgetFrame_new2(fromVal.h), owned: true)
   tmp
 proc shape*(self: gen_qstyleoption_types.QStyleOptionTabBarBase): cint =
   cint(fcQStyleOptionTabBarBase_shape(self.h))
@@ -1093,15 +1093,15 @@ proc documentMode*(self: gen_qstyleoption_types.QStyleOptionTabBarBase): bool =
 proc setDocumentMode*(self: gen_qstyleoption_types.QStyleOptionTabBarBase, documentMode: bool): void =
   fcQStyleOptionTabBarBase_setDocumentMode(self.h, documentMode)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTabBarBase, param1: gen_qstyleoption_types.QStyleOptionTabBarBase): void =
-  fcQStyleOptionTabBarBase_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTabBarBase, fromVal: gen_qstyleoption_types.QStyleOptionTabBarBase): void =
+  fcQStyleOptionTabBarBase_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionTabBarBase): gen_qstyleoption_types.QStyleOptionTabBarBase =
   let tmp = gen_qstyleoption_types.QStyleOptionTabBarBase(h: fcQStyleOptionTabBarBase_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionTabBarBase,
-    other: gen_qstyleoption_types.QStyleOptionTabBarBase): gen_qstyleoption_types.QStyleOptionTabBarBase =
-  let tmp = gen_qstyleoption_types.QStyleOptionTabBarBase(h: fcQStyleOptionTabBarBase_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionTabBarBase): gen_qstyleoption_types.QStyleOptionTabBarBase =
+  let tmp = gen_qstyleoption_types.QStyleOptionTabBarBase(h: fcQStyleOptionTabBarBase_new2(fromVal.h), owned: true)
   tmp
 proc section*(self: gen_qstyleoption_types.QStyleOptionHeader): cint =
   fcQStyleOptionHeader_section(self.h)
@@ -1160,15 +1160,15 @@ proc orientation*(self: gen_qstyleoption_types.QStyleOptionHeader): cint =
 proc setOrientation*(self: gen_qstyleoption_types.QStyleOptionHeader, orientation: cint): void =
   fcQStyleOptionHeader_setOrientation(self.h, cint(orientation))
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionHeader, param1: gen_qstyleoption_types.QStyleOptionHeader): void =
-  fcQStyleOptionHeader_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionHeader, fromVal: gen_qstyleoption_types.QStyleOptionHeader): void =
+  fcQStyleOptionHeader_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionHeader): gen_qstyleoption_types.QStyleOptionHeader =
   let tmp = gen_qstyleoption_types.QStyleOptionHeader(h: fcQStyleOptionHeader_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionHeader,
-    other: gen_qstyleoption_types.QStyleOptionHeader): gen_qstyleoption_types.QStyleOptionHeader =
-  let tmp = gen_qstyleoption_types.QStyleOptionHeader(h: fcQStyleOptionHeader_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionHeader): gen_qstyleoption_types.QStyleOptionHeader =
+  let tmp = gen_qstyleoption_types.QStyleOptionHeader(h: fcQStyleOptionHeader_new2(fromVal.h), owned: true)
   tmp
 proc features*(self: gen_qstyleoption_types.QStyleOptionButton): cint =
   cint(fcQStyleOptionButton_features(self.h))
@@ -1197,15 +1197,15 @@ proc iconSize*(self: gen_qstyleoption_types.QStyleOptionButton): gen_qsize_types
 proc setIconSize*(self: gen_qstyleoption_types.QStyleOptionButton, iconSize: gen_qsize_types.QSize): void =
   fcQStyleOptionButton_setIconSize(self.h, iconSize.h)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionButton, param1: gen_qstyleoption_types.QStyleOptionButton): void =
-  fcQStyleOptionButton_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionButton, fromVal: gen_qstyleoption_types.QStyleOptionButton): void =
+  fcQStyleOptionButton_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionButton): gen_qstyleoption_types.QStyleOptionButton =
   let tmp = gen_qstyleoption_types.QStyleOptionButton(h: fcQStyleOptionButton_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionButton,
-    other: gen_qstyleoption_types.QStyleOptionButton): gen_qstyleoption_types.QStyleOptionButton =
-  let tmp = gen_qstyleoption_types.QStyleOptionButton(h: fcQStyleOptionButton_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionButton): gen_qstyleoption_types.QStyleOptionButton =
+  let tmp = gen_qstyleoption_types.QStyleOptionButton(h: fcQStyleOptionButton_new2(fromVal.h), owned: true)
   tmp
 proc shape*(self: gen_qstyleoption_types.QStyleOptionTab): cint =
   cint(fcQStyleOptionTab_shape(self.h))
@@ -1282,15 +1282,15 @@ proc features*(self: gen_qstyleoption_types.QStyleOptionTab): cint =
 proc setFeatures*(self: gen_qstyleoption_types.QStyleOptionTab, features: cint): void =
   fcQStyleOptionTab_setFeatures(self.h, cint(features))
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTab, param1: gen_qstyleoption_types.QStyleOptionTab): void =
-  fcQStyleOptionTab_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTab, fromVal: gen_qstyleoption_types.QStyleOptionTab): void =
+  fcQStyleOptionTab_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionTab): gen_qstyleoption_types.QStyleOptionTab =
   let tmp = gen_qstyleoption_types.QStyleOptionTab(h: fcQStyleOptionTab_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionTab,
-    other: gen_qstyleoption_types.QStyleOptionTab): gen_qstyleoption_types.QStyleOptionTab =
-  let tmp = gen_qstyleoption_types.QStyleOptionTab(h: fcQStyleOptionTab_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionTab): gen_qstyleoption_types.QStyleOptionTab =
+  let tmp = gen_qstyleoption_types.QStyleOptionTab(h: fcQStyleOptionTab_new2(fromVal.h), owned: true)
   tmp
 proc tabIndex*(self: gen_qstyleoption_types.QStyleOptionTabV4): cint =
   fcQStyleOptionTabV4_tabIndex(self.h)
@@ -1298,15 +1298,15 @@ proc tabIndex*(self: gen_qstyleoption_types.QStyleOptionTabV4): cint =
 proc setTabIndex*(self: gen_qstyleoption_types.QStyleOptionTabV4, tabIndex: cint): void =
   fcQStyleOptionTabV4_setTabIndex(self.h, tabIndex)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTabV4, param1: gen_qstyleoption_types.QStyleOptionTabV4): void =
-  fcQStyleOptionTabV4_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTabV4, fromVal: gen_qstyleoption_types.QStyleOptionTabV4): void =
+  fcQStyleOptionTabV4_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionTabV4): gen_qstyleoption_types.QStyleOptionTabV4 =
   let tmp = gen_qstyleoption_types.QStyleOptionTabV4(h: fcQStyleOptionTabV4_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionTabV4,
-    param1: gen_qstyleoption_types.QStyleOptionTabV4): gen_qstyleoption_types.QStyleOptionTabV4 =
-  let tmp = gen_qstyleoption_types.QStyleOptionTabV4(h: fcQStyleOptionTabV4_new2(param1.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionTabV4): gen_qstyleoption_types.QStyleOptionTabV4 =
+  let tmp = gen_qstyleoption_types.QStyleOptionTabV4(h: fcQStyleOptionTabV4_new2(fromVal.h), owned: true)
   tmp
 proc positionOfLine*(self: gen_qstyleoption_types.QStyleOptionToolBar): cint =
   cint(fcQStyleOptionToolBar_positionOfLine(self.h))
@@ -1344,15 +1344,15 @@ proc midLineWidth*(self: gen_qstyleoption_types.QStyleOptionToolBar): cint =
 proc setMidLineWidth*(self: gen_qstyleoption_types.QStyleOptionToolBar, midLineWidth: cint): void =
   fcQStyleOptionToolBar_setMidLineWidth(self.h, midLineWidth)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionToolBar, param1: gen_qstyleoption_types.QStyleOptionToolBar): void =
-  fcQStyleOptionToolBar_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionToolBar, fromVal: gen_qstyleoption_types.QStyleOptionToolBar): void =
+  fcQStyleOptionToolBar_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBar): gen_qstyleoption_types.QStyleOptionToolBar =
   let tmp = gen_qstyleoption_types.QStyleOptionToolBar(h: fcQStyleOptionToolBar_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBar,
-    other: gen_qstyleoption_types.QStyleOptionToolBar): gen_qstyleoption_types.QStyleOptionToolBar =
-  let tmp = gen_qstyleoption_types.QStyleOptionToolBar(h: fcQStyleOptionToolBar_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionToolBar): gen_qstyleoption_types.QStyleOptionToolBar =
+  let tmp = gen_qstyleoption_types.QStyleOptionToolBar(h: fcQStyleOptionToolBar_new2(fromVal.h), owned: true)
   tmp
 proc minimum*(self: gen_qstyleoption_types.QStyleOptionProgressBar): cint =
   fcQStyleOptionProgressBar_minimum(self.h)
@@ -1411,15 +1411,15 @@ proc bottomToTop*(self: gen_qstyleoption_types.QStyleOptionProgressBar): bool =
 proc setBottomToTop*(self: gen_qstyleoption_types.QStyleOptionProgressBar, bottomToTop: bool): void =
   fcQStyleOptionProgressBar_setBottomToTop(self.h, bottomToTop)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionProgressBar, param1: gen_qstyleoption_types.QStyleOptionProgressBar): void =
-  fcQStyleOptionProgressBar_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionProgressBar, fromVal: gen_qstyleoption_types.QStyleOptionProgressBar): void =
+  fcQStyleOptionProgressBar_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionProgressBar): gen_qstyleoption_types.QStyleOptionProgressBar =
   let tmp = gen_qstyleoption_types.QStyleOptionProgressBar(h: fcQStyleOptionProgressBar_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionProgressBar,
-    other: gen_qstyleoption_types.QStyleOptionProgressBar): gen_qstyleoption_types.QStyleOptionProgressBar =
-  let tmp = gen_qstyleoption_types.QStyleOptionProgressBar(h: fcQStyleOptionProgressBar_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionProgressBar): gen_qstyleoption_types.QStyleOptionProgressBar =
+  let tmp = gen_qstyleoption_types.QStyleOptionProgressBar(h: fcQStyleOptionProgressBar_new2(fromVal.h), owned: true)
   tmp
 proc menuItemType*(self: gen_qstyleoption_types.QStyleOptionMenuItem): cint =
   cint(fcQStyleOptionMenuItem_menuItemType(self.h))
@@ -1484,15 +1484,15 @@ proc font*(self: gen_qstyleoption_types.QStyleOptionMenuItem): gen_qfont_types.Q
 proc setFont*(self: gen_qstyleoption_types.QStyleOptionMenuItem, font: gen_qfont_types.QFont): void =
   fcQStyleOptionMenuItem_setFont(self.h, font.h)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionMenuItem, param1: gen_qstyleoption_types.QStyleOptionMenuItem): void =
-  fcQStyleOptionMenuItem_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionMenuItem, fromVal: gen_qstyleoption_types.QStyleOptionMenuItem): void =
+  fcQStyleOptionMenuItem_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionMenuItem): gen_qstyleoption_types.QStyleOptionMenuItem =
   let tmp = gen_qstyleoption_types.QStyleOptionMenuItem(h: fcQStyleOptionMenuItem_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionMenuItem,
-    other: gen_qstyleoption_types.QStyleOptionMenuItem): gen_qstyleoption_types.QStyleOptionMenuItem =
-  let tmp = gen_qstyleoption_types.QStyleOptionMenuItem(h: fcQStyleOptionMenuItem_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionMenuItem): gen_qstyleoption_types.QStyleOptionMenuItem =
+  let tmp = gen_qstyleoption_types.QStyleOptionMenuItem(h: fcQStyleOptionMenuItem_new2(fromVal.h), owned: true)
   tmp
 proc title*(self: gen_qstyleoption_types.QStyleOptionDockWidget): string =
   let vtitle_ms = fcQStyleOptionDockWidget_title(self.h)
@@ -1527,15 +1527,15 @@ proc verticalTitleBar*(self: gen_qstyleoption_types.QStyleOptionDockWidget): boo
 proc setVerticalTitleBar*(self: gen_qstyleoption_types.QStyleOptionDockWidget, verticalTitleBar: bool): void =
   fcQStyleOptionDockWidget_setVerticalTitleBar(self.h, verticalTitleBar)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionDockWidget, param1: gen_qstyleoption_types.QStyleOptionDockWidget): void =
-  fcQStyleOptionDockWidget_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionDockWidget, fromVal: gen_qstyleoption_types.QStyleOptionDockWidget): void =
+  fcQStyleOptionDockWidget_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionDockWidget): gen_qstyleoption_types.QStyleOptionDockWidget =
   let tmp = gen_qstyleoption_types.QStyleOptionDockWidget(h: fcQStyleOptionDockWidget_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionDockWidget,
-    other: gen_qstyleoption_types.QStyleOptionDockWidget): gen_qstyleoption_types.QStyleOptionDockWidget =
-  let tmp = gen_qstyleoption_types.QStyleOptionDockWidget(h: fcQStyleOptionDockWidget_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionDockWidget): gen_qstyleoption_types.QStyleOptionDockWidget =
+  let tmp = gen_qstyleoption_types.QStyleOptionDockWidget(h: fcQStyleOptionDockWidget_new2(fromVal.h), owned: true)
   tmp
 proc displayAlignment*(self: gen_qstyleoption_types.QStyleOptionViewItem): cint =
   cint(fcQStyleOptionViewItem_displayAlignment(self.h))
@@ -1636,15 +1636,15 @@ proc backgroundBrush*(self: gen_qstyleoption_types.QStyleOptionViewItem): gen_qb
 proc setBackgroundBrush*(self: gen_qstyleoption_types.QStyleOptionViewItem, backgroundBrush: gen_qbrush_types.QBrush): void =
   fcQStyleOptionViewItem_setBackgroundBrush(self.h, backgroundBrush.h)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionViewItem, param1: gen_qstyleoption_types.QStyleOptionViewItem): void =
-  fcQStyleOptionViewItem_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionViewItem, fromVal: gen_qstyleoption_types.QStyleOptionViewItem): void =
+  fcQStyleOptionViewItem_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionViewItem): gen_qstyleoption_types.QStyleOptionViewItem =
   let tmp = gen_qstyleoption_types.QStyleOptionViewItem(h: fcQStyleOptionViewItem_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionViewItem,
-    other: gen_qstyleoption_types.QStyleOptionViewItem): gen_qstyleoption_types.QStyleOptionViewItem =
-  let tmp = gen_qstyleoption_types.QStyleOptionViewItem(h: fcQStyleOptionViewItem_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionViewItem): gen_qstyleoption_types.QStyleOptionViewItem =
+  let tmp = gen_qstyleoption_types.QStyleOptionViewItem(h: fcQStyleOptionViewItem_new2(fromVal.h), owned: true)
   tmp
 proc text*(self: gen_qstyleoption_types.QStyleOptionToolBox): string =
   let vtext_ms = fcQStyleOptionToolBox_text(self.h)
@@ -1673,15 +1673,15 @@ proc selectedPosition*(self: gen_qstyleoption_types.QStyleOptionToolBox): cint =
 proc setSelectedPosition*(self: gen_qstyleoption_types.QStyleOptionToolBox, selectedPosition: cint): void =
   fcQStyleOptionToolBox_setSelectedPosition(self.h, cint(selectedPosition))
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionToolBox, param1: gen_qstyleoption_types.QStyleOptionToolBox): void =
-  fcQStyleOptionToolBox_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionToolBox, fromVal: gen_qstyleoption_types.QStyleOptionToolBox): void =
+  fcQStyleOptionToolBox_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBox): gen_qstyleoption_types.QStyleOptionToolBox =
   let tmp = gen_qstyleoption_types.QStyleOptionToolBox(h: fcQStyleOptionToolBox_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBox,
-    other: gen_qstyleoption_types.QStyleOptionToolBox): gen_qstyleoption_types.QStyleOptionToolBox =
-  let tmp = gen_qstyleoption_types.QStyleOptionToolBox(h: fcQStyleOptionToolBox_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionToolBox): gen_qstyleoption_types.QStyleOptionToolBox =
+  let tmp = gen_qstyleoption_types.QStyleOptionToolBox(h: fcQStyleOptionToolBox_new2(fromVal.h), owned: true)
   tmp
 proc shape*(self: gen_qstyleoption_types.QStyleOptionRubberBand): cint =
   cint(fcQStyleOptionRubberBand_shape(self.h))
@@ -1695,15 +1695,15 @@ proc opaque*(self: gen_qstyleoption_types.QStyleOptionRubberBand): bool =
 proc setOpaque*(self: gen_qstyleoption_types.QStyleOptionRubberBand, opaque: bool): void =
   fcQStyleOptionRubberBand_setOpaque(self.h, opaque)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionRubberBand, param1: gen_qstyleoption_types.QStyleOptionRubberBand): void =
-  fcQStyleOptionRubberBand_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionRubberBand, fromVal: gen_qstyleoption_types.QStyleOptionRubberBand): void =
+  fcQStyleOptionRubberBand_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionRubberBand): gen_qstyleoption_types.QStyleOptionRubberBand =
   let tmp = gen_qstyleoption_types.QStyleOptionRubberBand(h: fcQStyleOptionRubberBand_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionRubberBand,
-    other: gen_qstyleoption_types.QStyleOptionRubberBand): gen_qstyleoption_types.QStyleOptionRubberBand =
-  let tmp = gen_qstyleoption_types.QStyleOptionRubberBand(h: fcQStyleOptionRubberBand_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionRubberBand): gen_qstyleoption_types.QStyleOptionRubberBand =
+  let tmp = gen_qstyleoption_types.QStyleOptionRubberBand(h: fcQStyleOptionRubberBand_new2(fromVal.h), owned: true)
   tmp
 proc subControls*(self: gen_qstyleoption_types.QStyleOptionComplex): cint =
   cint(fcQStyleOptionComplex_subControls(self.h))
@@ -1717,15 +1717,15 @@ proc activeSubControls*(self: gen_qstyleoption_types.QStyleOptionComplex): cint 
 proc setActiveSubControls*(self: gen_qstyleoption_types.QStyleOptionComplex, activeSubControls: cint): void =
   fcQStyleOptionComplex_setActiveSubControls(self.h, cint(activeSubControls))
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionComplex, param1: gen_qstyleoption_types.QStyleOptionComplex): void =
-  fcQStyleOptionComplex_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionComplex, fromVal: gen_qstyleoption_types.QStyleOptionComplex): void =
+  fcQStyleOptionComplex_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex): gen_qstyleoption_types.QStyleOptionComplex =
   let tmp = gen_qstyleoption_types.QStyleOptionComplex(h: fcQStyleOptionComplex_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex,
-    other: gen_qstyleoption_types.QStyleOptionComplex): gen_qstyleoption_types.QStyleOptionComplex =
-  let tmp = gen_qstyleoption_types.QStyleOptionComplex(h: fcQStyleOptionComplex_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionComplex): gen_qstyleoption_types.QStyleOptionComplex =
+  let tmp = gen_qstyleoption_types.QStyleOptionComplex(h: fcQStyleOptionComplex_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex,
     version: cint): gen_qstyleoption_types.QStyleOptionComplex =
@@ -1807,15 +1807,15 @@ proc dialWrapping*(self: gen_qstyleoption_types.QStyleOptionSlider): bool =
 proc setDialWrapping*(self: gen_qstyleoption_types.QStyleOptionSlider, dialWrapping: bool): void =
   fcQStyleOptionSlider_setDialWrapping(self.h, dialWrapping)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionSlider, param1: gen_qstyleoption_types.QStyleOptionSlider): void =
-  fcQStyleOptionSlider_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionSlider, fromVal: gen_qstyleoption_types.QStyleOptionSlider): void =
+  fcQStyleOptionSlider_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionSlider): gen_qstyleoption_types.QStyleOptionSlider =
   let tmp = gen_qstyleoption_types.QStyleOptionSlider(h: fcQStyleOptionSlider_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionSlider,
-    other: gen_qstyleoption_types.QStyleOptionSlider): gen_qstyleoption_types.QStyleOptionSlider =
-  let tmp = gen_qstyleoption_types.QStyleOptionSlider(h: fcQStyleOptionSlider_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionSlider): gen_qstyleoption_types.QStyleOptionSlider =
+  let tmp = gen_qstyleoption_types.QStyleOptionSlider(h: fcQStyleOptionSlider_new2(fromVal.h), owned: true)
   tmp
 proc buttonSymbols*(self: gen_qstyleoption_types.QStyleOptionSpinBox): cint =
   cint(fcQStyleOptionSpinBox_buttonSymbols(self.h))
@@ -1835,15 +1835,15 @@ proc frame*(self: gen_qstyleoption_types.QStyleOptionSpinBox): bool =
 proc setFrame*(self: gen_qstyleoption_types.QStyleOptionSpinBox, frame: bool): void =
   fcQStyleOptionSpinBox_setFrame(self.h, frame)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionSpinBox, param1: gen_qstyleoption_types.QStyleOptionSpinBox): void =
-  fcQStyleOptionSpinBox_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionSpinBox, fromVal: gen_qstyleoption_types.QStyleOptionSpinBox): void =
+  fcQStyleOptionSpinBox_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionSpinBox): gen_qstyleoption_types.QStyleOptionSpinBox =
   let tmp = gen_qstyleoption_types.QStyleOptionSpinBox(h: fcQStyleOptionSpinBox_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionSpinBox,
-    other: gen_qstyleoption_types.QStyleOptionSpinBox): gen_qstyleoption_types.QStyleOptionSpinBox =
-  let tmp = gen_qstyleoption_types.QStyleOptionSpinBox(h: fcQStyleOptionSpinBox_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionSpinBox): gen_qstyleoption_types.QStyleOptionSpinBox =
+  let tmp = gen_qstyleoption_types.QStyleOptionSpinBox(h: fcQStyleOptionSpinBox_new2(fromVal.h), owned: true)
   tmp
 proc features*(self: gen_qstyleoption_types.QStyleOptionToolButton): cint =
   cint(fcQStyleOptionToolButton_features(self.h))
@@ -1896,15 +1896,15 @@ proc font*(self: gen_qstyleoption_types.QStyleOptionToolButton): gen_qfont_types
 proc setFont*(self: gen_qstyleoption_types.QStyleOptionToolButton, font: gen_qfont_types.QFont): void =
   fcQStyleOptionToolButton_setFont(self.h, font.h)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionToolButton, param1: gen_qstyleoption_types.QStyleOptionToolButton): void =
-  fcQStyleOptionToolButton_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionToolButton, fromVal: gen_qstyleoption_types.QStyleOptionToolButton): void =
+  fcQStyleOptionToolButton_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionToolButton): gen_qstyleoption_types.QStyleOptionToolButton =
   let tmp = gen_qstyleoption_types.QStyleOptionToolButton(h: fcQStyleOptionToolButton_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionToolButton,
-    other: gen_qstyleoption_types.QStyleOptionToolButton): gen_qstyleoption_types.QStyleOptionToolButton =
-  let tmp = gen_qstyleoption_types.QStyleOptionToolButton(h: fcQStyleOptionToolButton_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionToolButton): gen_qstyleoption_types.QStyleOptionToolButton =
+  let tmp = gen_qstyleoption_types.QStyleOptionToolButton(h: fcQStyleOptionToolButton_new2(fromVal.h), owned: true)
   tmp
 proc editable*(self: gen_qstyleoption_types.QStyleOptionComboBox): bool =
   fcQStyleOptionComboBox_editable(self.h)
@@ -1945,15 +1945,15 @@ proc iconSize*(self: gen_qstyleoption_types.QStyleOptionComboBox): gen_qsize_typ
 proc setIconSize*(self: gen_qstyleoption_types.QStyleOptionComboBox, iconSize: gen_qsize_types.QSize): void =
   fcQStyleOptionComboBox_setIconSize(self.h, iconSize.h)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionComboBox, param1: gen_qstyleoption_types.QStyleOptionComboBox): void =
-  fcQStyleOptionComboBox_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionComboBox, fromVal: gen_qstyleoption_types.QStyleOptionComboBox): void =
+  fcQStyleOptionComboBox_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionComboBox): gen_qstyleoption_types.QStyleOptionComboBox =
   let tmp = gen_qstyleoption_types.QStyleOptionComboBox(h: fcQStyleOptionComboBox_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionComboBox,
-    other: gen_qstyleoption_types.QStyleOptionComboBox): gen_qstyleoption_types.QStyleOptionComboBox =
-  let tmp = gen_qstyleoption_types.QStyleOptionComboBox(h: fcQStyleOptionComboBox_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionComboBox): gen_qstyleoption_types.QStyleOptionComboBox =
+  let tmp = gen_qstyleoption_types.QStyleOptionComboBox(h: fcQStyleOptionComboBox_new2(fromVal.h), owned: true)
   tmp
 proc text*(self: gen_qstyleoption_types.QStyleOptionTitleBar): string =
   let vtext_ms = fcQStyleOptionTitleBar_text(self.h)
@@ -1982,15 +1982,15 @@ proc titleBarFlags*(self: gen_qstyleoption_types.QStyleOptionTitleBar): cint =
 proc setTitleBarFlags*(self: gen_qstyleoption_types.QStyleOptionTitleBar, titleBarFlags: cint): void =
   fcQStyleOptionTitleBar_setTitleBarFlags(self.h, cint(titleBarFlags))
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTitleBar, param1: gen_qstyleoption_types.QStyleOptionTitleBar): void =
-  fcQStyleOptionTitleBar_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTitleBar, fromVal: gen_qstyleoption_types.QStyleOptionTitleBar): void =
+  fcQStyleOptionTitleBar_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionTitleBar): gen_qstyleoption_types.QStyleOptionTitleBar =
   let tmp = gen_qstyleoption_types.QStyleOptionTitleBar(h: fcQStyleOptionTitleBar_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionTitleBar,
-    other: gen_qstyleoption_types.QStyleOptionTitleBar): gen_qstyleoption_types.QStyleOptionTitleBar =
-  let tmp = gen_qstyleoption_types.QStyleOptionTitleBar(h: fcQStyleOptionTitleBar_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionTitleBar): gen_qstyleoption_types.QStyleOptionTitleBar =
+  let tmp = gen_qstyleoption_types.QStyleOptionTitleBar(h: fcQStyleOptionTitleBar_new2(fromVal.h), owned: true)
   tmp
 proc features*(self: gen_qstyleoption_types.QStyleOptionGroupBox): cint =
   cint(fcQStyleOptionGroupBox_features(self.h))
@@ -2031,15 +2031,15 @@ proc midLineWidth*(self: gen_qstyleoption_types.QStyleOptionGroupBox): cint =
 proc setMidLineWidth*(self: gen_qstyleoption_types.QStyleOptionGroupBox, midLineWidth: cint): void =
   fcQStyleOptionGroupBox_setMidLineWidth(self.h, midLineWidth)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionGroupBox, param1: gen_qstyleoption_types.QStyleOptionGroupBox): void =
-  fcQStyleOptionGroupBox_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionGroupBox, fromVal: gen_qstyleoption_types.QStyleOptionGroupBox): void =
+  fcQStyleOptionGroupBox_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionGroupBox): gen_qstyleoption_types.QStyleOptionGroupBox =
   let tmp = gen_qstyleoption_types.QStyleOptionGroupBox(h: fcQStyleOptionGroupBox_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionGroupBox,
-    other: gen_qstyleoption_types.QStyleOptionGroupBox): gen_qstyleoption_types.QStyleOptionGroupBox =
-  let tmp = gen_qstyleoption_types.QStyleOptionGroupBox(h: fcQStyleOptionGroupBox_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionGroupBox): gen_qstyleoption_types.QStyleOptionGroupBox =
+  let tmp = gen_qstyleoption_types.QStyleOptionGroupBox(h: fcQStyleOptionGroupBox_new2(fromVal.h), owned: true)
   tmp
 proc corner*(self: gen_qstyleoption_types.QStyleOptionSizeGrip): cint =
   cint(fcQStyleOptionSizeGrip_corner(self.h))
@@ -2047,15 +2047,15 @@ proc corner*(self: gen_qstyleoption_types.QStyleOptionSizeGrip): cint =
 proc setCorner*(self: gen_qstyleoption_types.QStyleOptionSizeGrip, corner: cint): void =
   fcQStyleOptionSizeGrip_setCorner(self.h, cint(corner))
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionSizeGrip, param1: gen_qstyleoption_types.QStyleOptionSizeGrip): void =
-  fcQStyleOptionSizeGrip_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionSizeGrip, fromVal: gen_qstyleoption_types.QStyleOptionSizeGrip): void =
+  fcQStyleOptionSizeGrip_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleOptionSizeGrip): gen_qstyleoption_types.QStyleOptionSizeGrip =
   let tmp = gen_qstyleoption_types.QStyleOptionSizeGrip(h: fcQStyleOptionSizeGrip_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionSizeGrip,
-    other: gen_qstyleoption_types.QStyleOptionSizeGrip): gen_qstyleoption_types.QStyleOptionSizeGrip =
-  let tmp = gen_qstyleoption_types.QStyleOptionSizeGrip(h: fcQStyleOptionSizeGrip_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionSizeGrip): gen_qstyleoption_types.QStyleOptionSizeGrip =
+  let tmp = gen_qstyleoption_types.QStyleOptionSizeGrip(h: fcQStyleOptionSizeGrip_new2(fromVal.h), owned: true)
   tmp
 proc exposedRect*(self: gen_qstyleoption_types.QStyleOptionGraphicsItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQStyleOptionGraphicsItem_exposedRect(self.h), owned: true)
@@ -2075,8 +2075,8 @@ proc levelOfDetail*(self: gen_qstyleoption_types.QStyleOptionGraphicsItem): floa
 proc setLevelOfDetail*(self: gen_qstyleoption_types.QStyleOptionGraphicsItem, levelOfDetail: float64): void =
   fcQStyleOptionGraphicsItem_setLevelOfDetail(self.h, levelOfDetail)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionGraphicsItem, param1: gen_qstyleoption_types.QStyleOptionGraphicsItem): void =
-  fcQStyleOptionGraphicsItem_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionGraphicsItem, fromVal: gen_qstyleoption_types.QStyleOptionGraphicsItem): void =
+  fcQStyleOptionGraphicsItem_operatorAssign(self.h, fromVal.h)
 
 proc levelOfDetailFromTransform*(_: type gen_qstyleoption_types.QStyleOptionGraphicsItem, worldTransform: gen_qtransform_types.QTransform): float64 =
   fcQStyleOptionGraphicsItem_levelOfDetailFromTransform(worldTransform.h)
@@ -2085,8 +2085,8 @@ proc create*(T: type gen_qstyleoption_types.QStyleOptionGraphicsItem): gen_qstyl
   let tmp = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: fcQStyleOptionGraphicsItem_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleOptionGraphicsItem,
-    other: gen_qstyleoption_types.QStyleOptionGraphicsItem): gen_qstyleoption_types.QStyleOptionGraphicsItem =
-  let tmp = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: fcQStyleOptionGraphicsItem_new2(other.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleOptionGraphicsItem): gen_qstyleoption_types.QStyleOptionGraphicsItem =
+  let tmp = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: fcQStyleOptionGraphicsItem_new2(fromVal.h), owned: true)
   tmp
 proc version*(self: gen_qstyleoption_types.QStyleHintReturn): cint =
   fcQStyleHintReturn_version(self.h)
@@ -2100,15 +2100,15 @@ proc typeX*(self: gen_qstyleoption_types.QStyleHintReturn): cint =
 proc setType*(self: gen_qstyleoption_types.QStyleHintReturn, typeVal: cint): void =
   fcQStyleHintReturn_setType(self.h, typeVal)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleHintReturn, param1: gen_qstyleoption_types.QStyleHintReturn): void =
-  fcQStyleHintReturn_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleHintReturn, fromVal: gen_qstyleoption_types.QStyleHintReturn): void =
+  fcQStyleHintReturn_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleHintReturn): gen_qstyleoption_types.QStyleHintReturn =
   let tmp = gen_qstyleoption_types.QStyleHintReturn(h: fcQStyleHintReturn_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleHintReturn,
-    param1: gen_qstyleoption_types.QStyleHintReturn): gen_qstyleoption_types.QStyleHintReturn =
-  let tmp = gen_qstyleoption_types.QStyleHintReturn(h: fcQStyleHintReturn_new2(param1.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleHintReturn): gen_qstyleoption_types.QStyleHintReturn =
+  let tmp = gen_qstyleoption_types.QStyleHintReturn(h: fcQStyleHintReturn_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleHintReturn,
     version: cint): gen_qstyleoption_types.QStyleHintReturn =
@@ -2124,15 +2124,15 @@ proc region*(self: gen_qstyleoption_types.QStyleHintReturnMask): gen_qregion_typ
 proc setRegion*(self: gen_qstyleoption_types.QStyleHintReturnMask, region: gen_qregion_types.QRegion): void =
   fcQStyleHintReturnMask_setRegion(self.h, region.h)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleHintReturnMask, param1: gen_qstyleoption_types.QStyleHintReturnMask): void =
-  fcQStyleHintReturnMask_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleHintReturnMask, fromVal: gen_qstyleoption_types.QStyleHintReturnMask): void =
+  fcQStyleHintReturnMask_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleHintReturnMask): gen_qstyleoption_types.QStyleHintReturnMask =
   let tmp = gen_qstyleoption_types.QStyleHintReturnMask(h: fcQStyleHintReturnMask_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleHintReturnMask,
-    param1: gen_qstyleoption_types.QStyleHintReturnMask): gen_qstyleoption_types.QStyleHintReturnMask =
-  let tmp = gen_qstyleoption_types.QStyleHintReturnMask(h: fcQStyleHintReturnMask_new2(param1.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleHintReturnMask): gen_qstyleoption_types.QStyleHintReturnMask =
+  let tmp = gen_qstyleoption_types.QStyleHintReturnMask(h: fcQStyleHintReturnMask_new2(fromVal.h), owned: true)
   tmp
 proc variant*(self: gen_qstyleoption_types.QStyleHintReturnVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQStyleHintReturnVariant_variant(self.h), owned: true)
@@ -2140,13 +2140,13 @@ proc variant*(self: gen_qstyleoption_types.QStyleHintReturnVariant): gen_qvarian
 proc setVariant*(self: gen_qstyleoption_types.QStyleHintReturnVariant, variant: gen_qvariant_types.QVariant): void =
   fcQStyleHintReturnVariant_setVariant(self.h, variant.h)
 
-proc operatorAssign*(self: gen_qstyleoption_types.QStyleHintReturnVariant, param1: gen_qstyleoption_types.QStyleHintReturnVariant): void =
-  fcQStyleHintReturnVariant_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstyleoption_types.QStyleHintReturnVariant, fromVal: gen_qstyleoption_types.QStyleHintReturnVariant): void =
+  fcQStyleHintReturnVariant_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qstyleoption_types.QStyleHintReturnVariant): gen_qstyleoption_types.QStyleHintReturnVariant =
   let tmp = gen_qstyleoption_types.QStyleHintReturnVariant(h: fcQStyleHintReturnVariant_new(), owned: true)
   tmp
 proc create*(T: type gen_qstyleoption_types.QStyleHintReturnVariant,
-    param1: gen_qstyleoption_types.QStyleHintReturnVariant): gen_qstyleoption_types.QStyleHintReturnVariant =
-  let tmp = gen_qstyleoption_types.QStyleHintReturnVariant(h: fcQStyleHintReturnVariant_new2(param1.h), owned: true)
+    fromVal: gen_qstyleoption_types.QStyleHintReturnVariant): gen_qstyleoption_types.QStyleHintReturnVariant =
+  let tmp = gen_qstyleoption_types.QStyleHintReturnVariant(h: fcQStyleHintReturnVariant_new2(fromVal.h), owned: true)
   tmp

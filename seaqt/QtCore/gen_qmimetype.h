@@ -23,9 +23,9 @@ typedef struct QMimeType QMimeType;
 #endif
 
 QMimeType* QMimeType_new();
-QMimeType* QMimeType_new2(QMimeType* other);
+QMimeType* QMimeType_new_from(QMimeType* from);
 
-void QMimeType_operatorAssign(QMimeType* self, QMimeType* other);
+void QMimeType_operatorAssign(QMimeType* self, QMimeType* from);
 void QMimeType_swap(QMimeType* self, QMimeType* other);
 bool QMimeType_operatorEqual(const QMimeType* self, QMimeType* other);
 bool QMimeType_operatorNotEqual(const QMimeType* self, QMimeType* other);

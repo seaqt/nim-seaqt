@@ -59,21 +59,21 @@ type cQVideoFilterRunnable*{.exportc: "QVideoFilterRunnable", incompleteStruct.}
 type cQAbstractVideoFilter*{.exportc: "QAbstractVideoFilter", incompleteStruct.} = object
 
 proc fcQVideoFilterRunnable_run(self: pointer, input: pointer, surfaceFormat: pointer, flags: cint): pointer {.importc: "QVideoFilterRunnable_run".}
-proc fcQVideoFilterRunnable_operatorAssign(self: pointer, param1: pointer): void {.importc: "QVideoFilterRunnable_operatorAssign".}
+proc fcQVideoFilterRunnable_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QVideoFilterRunnable_operatorAssign".}
 proc fcQAbstractVideoFilter_metaObject(self: pointer): pointer {.importc: "QAbstractVideoFilter_metaObject".}
 proc fcQAbstractVideoFilter_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractVideoFilter_metacast".}
 proc fcQAbstractVideoFilter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractVideoFilter_metacall".}
-proc fcQAbstractVideoFilter_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractVideoFilter_tr".}
-proc fcQAbstractVideoFilter_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAbstractVideoFilter_trUtf8".}
+proc fcQAbstractVideoFilter_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractVideoFilter_tr_s".}
+proc fcQAbstractVideoFilter_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAbstractVideoFilter_trUtf8_s".}
 proc fcQAbstractVideoFilter_isActive(self: pointer): bool {.importc: "QAbstractVideoFilter_isActive".}
 proc fcQAbstractVideoFilter_setActive(self: pointer, v: bool): void {.importc: "QAbstractVideoFilter_setActive".}
 proc fcQAbstractVideoFilter_createFilterRunnable(self: pointer): pointer {.importc: "QAbstractVideoFilter_createFilterRunnable".}
 proc fcQAbstractVideoFilter_activeChanged(self: pointer): void {.importc: "QAbstractVideoFilter_activeChanged".}
 proc fcQAbstractVideoFilter_connect_activeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractVideoFilter_connect_activeChanged".}
-proc fcQAbstractVideoFilter_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractVideoFilter_tr2".}
-proc fcQAbstractVideoFilter_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractVideoFilter_tr3".}
-proc fcQAbstractVideoFilter_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractVideoFilter_trUtf82".}
-proc fcQAbstractVideoFilter_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractVideoFilter_trUtf83".}
+proc fcQAbstractVideoFilter_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractVideoFilter_tr_s_c".}
+proc fcQAbstractVideoFilter_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractVideoFilter_tr_s_c_n".}
+proc fcQAbstractVideoFilter_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractVideoFilter_trUtf8_s_c".}
+proc fcQAbstractVideoFilter_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractVideoFilter_trUtf8_s_c_n".}
 proc fcQAbstractVideoFilter_vdata(self: pointer): ptr pointer {.importc: "QAbstractVideoFilter_vdata".}
 proc fvdata_cQAbstractVideoFilter(self: pointer): pointer {.importc: "vdata_QAbstractVideoFilter".}
 
@@ -105,14 +105,14 @@ proc fcQAbstractVideoFilter_protectedbase_senderSignalIndex(self: pointer): cint
 proc fcQAbstractVideoFilter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractVideoFilter_protectedbase_receivers".}
 proc fcQAbstractVideoFilter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractVideoFilter_protectedbase_isSignalConnected".}
 proc fcQAbstractVideoFilter_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractVideoFilter {.importc: "QAbstractVideoFilter_new".}
-proc fcQAbstractVideoFilter_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractVideoFilter {.importc: "QAbstractVideoFilter_new2".}
+proc fcQAbstractVideoFilter_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractVideoFilter {.importc: "QAbstractVideoFilter_new_parent".}
 proc fcQAbstractVideoFilter_staticMetaObject(): pointer {.importc: "QAbstractVideoFilter_staticMetaObject".}
 
 proc run*(self: gen_qabstractvideofilter_types.QVideoFilterRunnable, input: gen_qvideoframe_types.QVideoFrame, surfaceFormat: gen_qvideosurfaceformat_types.QVideoSurfaceFormat, flags: cint): gen_qvideoframe_types.QVideoFrame =
   gen_qvideoframe_types.QVideoFrame(h: fcQVideoFilterRunnable_run(self.h, input.h, surfaceFormat.h, cint(flags)), owned: true)
 
-proc operatorAssign*(self: gen_qabstractvideofilter_types.QVideoFilterRunnable, param1: gen_qabstractvideofilter_types.QVideoFilterRunnable): void =
-  fcQVideoFilterRunnable_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qabstractvideofilter_types.QVideoFilterRunnable, fromVal: gen_qabstractvideofilter_types.QVideoFilterRunnable): void =
+  fcQVideoFilterRunnable_operatorAssign(self.h, fromVal.h)
 
 proc metaObject*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractVideoFilter_metaObject(self.h), owned: false)
@@ -124,13 +124,13 @@ proc metacall*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, param1
   fcQAbstractVideoFilter_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cstring): string =
-  let v_ms = fcQAbstractVideoFilter_tr(s)
+  let v_ms = fcQAbstractVideoFilter_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cstring): string =
-  let v_ms = fcQAbstractVideoFilter_trUtf8(s)
+  let v_ms = fcQAbstractVideoFilter_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -163,25 +163,25 @@ proc onActiveChanged*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter,
   fcQAbstractVideoFilter_connect_activeChanged(self.h, cast[int](addr tmp[]), fcQAbstractVideoFilter_slot_callback_activeChanged, fcQAbstractVideoFilter_slot_callback_activeChanged_release)
 
 proc tr*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractVideoFilter_tr2(s, c)
+  let v_ms = fcQAbstractVideoFilter_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractVideoFilter_tr3(s, c, n)
+  let v_ms = fcQAbstractVideoFilter_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractVideoFilter_trUtf82(s, c)
+  let v_ms = fcQAbstractVideoFilter_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractVideoFilter_trUtf83(s, c, n)
+  let v_ms = fcQAbstractVideoFilter_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

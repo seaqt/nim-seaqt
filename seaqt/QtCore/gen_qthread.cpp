@@ -186,7 +186,7 @@ VirtualQThread* QThread_new(const QThread_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQThread(vtbl) : nullptr;
 }
 
-VirtualQThread* QThread_new2(const QThread_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQThread* QThread_new_parent(const QThread_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQThread>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQThread(vtbl, parent) : nullptr;
 }
@@ -207,7 +207,7 @@ int QThread_metacall(QThread* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QThread_tr(const char* s) {
+struct seaqt_string QThread_tr_s(const char* s) {
 	QString _ret = QThread::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -218,7 +218,7 @@ struct seaqt_string QThread_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QThread_trUtf8(const char* s) {
+struct seaqt_string QThread_trUtf8_s(const char* s) {
 	QString _ret = QThread::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -316,7 +316,7 @@ bool QThread_wait(QThread* self) {
 	return self->wait();
 }
 
-bool QThread_waitWithTime(QThread* self, unsigned long time) {
+bool QThread_wait_time(QThread* self, unsigned long time) {
 	return self->wait(static_cast<unsigned long>(time));
 }
 
@@ -332,7 +332,7 @@ void QThread_usleep(unsigned long param1) {
 	QThread::usleep(static_cast<unsigned long>(param1));
 }
 
-struct seaqt_string QThread_tr2(const char* s, const char* c) {
+struct seaqt_string QThread_tr_s_c(const char* s, const char* c) {
 	QString _ret = QThread::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -343,7 +343,7 @@ struct seaqt_string QThread_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QThread_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QThread_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QThread::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -354,7 +354,7 @@ struct seaqt_string QThread_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QThread_trUtf82(const char* s, const char* c) {
+struct seaqt_string QThread_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QThread::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -365,7 +365,7 @@ struct seaqt_string QThread_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QThread_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QThread_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QThread::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -376,15 +376,15 @@ struct seaqt_string QThread_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QThread_exitWithRetcode(QThread* self, int retcode) {
+void QThread_exit_retcode(QThread* self, int retcode) {
 	self->exit(static_cast<int>(retcode));
 }
 
-void QThread_startWithQThreadPriority(QThread* self, int param1) {
+void QThread_start_QThread_Priority(QThread* self, int param1) {
 	self->start(static_cast<QThread::Priority>(param1));
 }
 
-bool QThread_waitWithDeadline(QThread* self, QDeadlineTimer* deadline) {
+bool QThread_wait_deadline(QThread* self, QDeadlineTimer* deadline) {
 	return self->wait(*deadline);
 }
 

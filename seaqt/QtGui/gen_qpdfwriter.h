@@ -82,15 +82,15 @@ typedef struct QPdfWriter_VTable{
 void* QPdfWriter_vdata(VirtualQPdfWriter* self);
 VirtualQPdfWriter* vdata_QPdfWriter(void* vdata);
 
-VirtualQPdfWriter* QPdfWriter_new(const QPdfWriter_VTable* vtbl, size_t vdata, struct seaqt_string filename);
-VirtualQPdfWriter* QPdfWriter_new2(const QPdfWriter_VTable* vtbl, size_t vdata, QIODevice* device);
+VirtualQPdfWriter* QPdfWriter_new_filename(const QPdfWriter_VTable* vtbl, size_t vdata, struct seaqt_string filename);
+VirtualQPdfWriter* QPdfWriter_new_device(const QPdfWriter_VTable* vtbl, size_t vdata, QIODevice* device);
 
 void QPdfWriter_virtbase(QPdfWriter* src, QObject** outptr_QObject, QPagedPaintDevice** outptr_QPagedPaintDevice);
 QMetaObject* QPdfWriter_metaObject(const QPdfWriter* self);
 void* QPdfWriter_metacast(QPdfWriter* self, const char* param1);
 int QPdfWriter_metacall(QPdfWriter* self, int param1, int param2, void** param3);
-struct seaqt_string QPdfWriter_tr(const char* s);
-struct seaqt_string QPdfWriter_trUtf8(const char* s);
+struct seaqt_string QPdfWriter_tr_s(const char* s);
+struct seaqt_string QPdfWriter_trUtf8_s(const char* s);
 void QPdfWriter_setPdfVersion(QPdfWriter* self, int version);
 int QPdfWriter_pdfVersion(const QPdfWriter* self);
 struct seaqt_string QPdfWriter_title(const QPdfWriter* self);
@@ -102,17 +102,17 @@ void QPdfWriter_setResolution(QPdfWriter* self, int resolution);
 int QPdfWriter_resolution(const QPdfWriter* self);
 void QPdfWriter_setDocumentXmpMetadata(QPdfWriter* self, struct seaqt_string xmpMetadata);
 struct seaqt_string QPdfWriter_documentXmpMetadata(const QPdfWriter* self);
-void QPdfWriter_addFileAttachment(QPdfWriter* self, struct seaqt_string fileName, struct seaqt_string data);
+void QPdfWriter_addFileAttachment_fileName_data(QPdfWriter* self, struct seaqt_string fileName, struct seaqt_string data);
 void QPdfWriter_setPageSize(QPdfWriter* self, int size);
 void QPdfWriter_setPageSizeMM(QPdfWriter* self, QSizeF* size);
 void QPdfWriter_setMargins(QPdfWriter* self, QPagedPaintDevice__Margins* m);
 QPaintEngine* QPdfWriter_paintEngine(const QPdfWriter* self);
 int QPdfWriter_metric(const QPdfWriter* self, int id);
-struct seaqt_string QPdfWriter_tr2(const char* s, const char* c);
-struct seaqt_string QPdfWriter_tr3(const char* s, const char* c, int n);
-struct seaqt_string QPdfWriter_trUtf82(const char* s, const char* c);
-struct seaqt_string QPdfWriter_trUtf83(const char* s, const char* c, int n);
-void QPdfWriter_addFileAttachment2(QPdfWriter* self, struct seaqt_string fileName, struct seaqt_string data, struct seaqt_string mimeType);
+struct seaqt_string QPdfWriter_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPdfWriter_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QPdfWriter_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QPdfWriter_trUtf8_s_c_n(const char* s, const char* c, int n);
+void QPdfWriter_addFileAttachment_fileName_data_mimeType(QPdfWriter* self, struct seaqt_string fileName, struct seaqt_string data, struct seaqt_string mimeType);
 
 QMetaObject* QPdfWriter_virtualbase_metaObject(const VirtualQPdfWriter* self);
 void* QPdfWriter_virtualbase_metacast(VirtualQPdfWriter* self, const char* param1);
@@ -139,7 +139,7 @@ QObject* QPdfWriter_protectedbase_sender(const VirtualQPdfWriter* self);
 int QPdfWriter_protectedbase_senderSignalIndex(const VirtualQPdfWriter* self);
 int QPdfWriter_protectedbase_receivers(const VirtualQPdfWriter* self, const char* signal);
 bool QPdfWriter_protectedbase_isSignalConnected(const VirtualQPdfWriter* self, QMetaMethod* signal);
-QPageLayout* QPdfWriter_protectedbase_devicePageLayout(const VirtualQPdfWriter* self);
+QPageLayout* QPdfWriter_protectedbase_devicePageLayout_const(const VirtualQPdfWriter* self);
 
 const QMetaObject* QPdfWriter_staticMetaObject();
 void QPdfWriter_delete(QPdfWriter* self);

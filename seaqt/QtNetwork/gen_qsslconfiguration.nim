@@ -59,7 +59,7 @@ export
 
 type cQSslConfiguration*{.exportc: "QSslConfiguration", incompleteStruct.} = object
 
-proc fcQSslConfiguration_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslConfiguration_operatorAssign".}
+proc fcQSslConfiguration_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSslConfiguration_operatorAssign".}
 proc fcQSslConfiguration_swap(self: pointer, other: pointer): void {.importc: "QSslConfiguration_swap".}
 proc fcQSslConfiguration_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSslConfiguration_operatorEqual".}
 proc fcQSslConfiguration_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QSslConfiguration_operatorNotEqual".}
@@ -85,9 +85,9 @@ proc fcQSslConfiguration_setCiphers(self: pointer, ciphers: struct_seaqt_array):
 proc fcQSslConfiguration_supportedCiphers(): struct_seaqt_array {.importc: "QSslConfiguration_supportedCiphers".}
 proc fcQSslConfiguration_caCertificates(self: pointer): struct_seaqt_array {.importc: "QSslConfiguration_caCertificates".}
 proc fcQSslConfiguration_setCaCertificates(self: pointer, certificates: struct_seaqt_array): void {.importc: "QSslConfiguration_setCaCertificates".}
-proc fcQSslConfiguration_addCaCertificates(self: pointer, path: struct_seaqt_string): bool {.importc: "QSslConfiguration_addCaCertificates".}
+proc fcQSslConfiguration_addCaCertificatesPath(self: pointer, path: struct_seaqt_string): bool {.importc: "QSslConfiguration_addCaCertificates_path".}
 proc fcQSslConfiguration_addCaCertificate(self: pointer, certificate: pointer): void {.importc: "QSslConfiguration_addCaCertificate".}
-proc fcQSslConfiguration_addCaCertificatesWithCertificates(self: pointer, certificates: struct_seaqt_array): void {.importc: "QSslConfiguration_addCaCertificatesWithCertificates".}
+proc fcQSslConfiguration_addCaCertificatesCertificates(self: pointer, certificates: struct_seaqt_array): void {.importc: "QSslConfiguration_addCaCertificates_certificates".}
 proc fcQSslConfiguration_systemCaCertificates(): struct_seaqt_array {.importc: "QSslConfiguration_systemCaCertificates".}
 proc fcQSslConfiguration_setSslOption(self: pointer, option: cint, on: bool): void {.importc: "QSslConfiguration_setSslOption".}
 proc fcQSslConfiguration_testSslOption(self: pointer, option: cint): bool {.importc: "QSslConfiguration_testSslOption".}
@@ -116,13 +116,13 @@ proc fcQSslConfiguration_setAllowedNextProtocols(self: pointer, protocols: struc
 proc fcQSslConfiguration_allowedNextProtocols(self: pointer): struct_seaqt_array {.importc: "QSslConfiguration_allowedNextProtocols".}
 proc fcQSslConfiguration_nextNegotiatedProtocol(self: pointer): struct_seaqt_string {.importc: "QSslConfiguration_nextNegotiatedProtocol".}
 proc fcQSslConfiguration_nextProtocolNegotiationStatus(self: pointer): cint {.importc: "QSslConfiguration_nextProtocolNegotiationStatus".}
-proc fcQSslConfiguration_addCaCertificates2(self: pointer, path: struct_seaqt_string, format: cint): bool {.importc: "QSslConfiguration_addCaCertificates2".}
-proc fcQSslConfiguration_addCaCertificates3(self: pointer, path: struct_seaqt_string, format: cint, syntax: cint): bool {.importc: "QSslConfiguration_addCaCertificates3".}
+proc fcQSslConfiguration_addCaCertificatesPathFormat(self: pointer, path: struct_seaqt_string, format: cint): bool {.importc: "QSslConfiguration_addCaCertificates_path_format".}
+proc fcQSslConfiguration_addCaCertificatesPathFormatSyntax(self: pointer, path: struct_seaqt_string, format: cint, syntax: cint): bool {.importc: "QSslConfiguration_addCaCertificates_path_format_syntax".}
 proc fcQSslConfiguration_new(): ptr cQSslConfiguration {.importc: "QSslConfiguration_new".}
-proc fcQSslConfiguration_new2(other: pointer): ptr cQSslConfiguration {.importc: "QSslConfiguration_new2".}
+proc fcQSslConfiguration_new2(fromVal: pointer): ptr cQSslConfiguration {.importc: "QSslConfiguration_new_from".}
 
-proc operatorAssign*(self: gen_qsslconfiguration_types.QSslConfiguration, other: gen_qsslconfiguration_types.QSslConfiguration): void =
-  fcQSslConfiguration_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qsslconfiguration_types.QSslConfiguration, fromVal: gen_qsslconfiguration_types.QSslConfiguration): void =
+  fcQSslConfiguration_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qsslconfiguration_types.QSslConfiguration, other: gen_qsslconfiguration_types.QSslConfiguration): void =
   fcQSslConfiguration_swap(self.h, other.h)
@@ -242,7 +242,7 @@ proc setCaCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, cer
   fcQSslConfiguration_setCaCertificates(self.h, struct_seaqt_array(len: csize_t(len(certificates)), data: if len(certificates) == 0: nil else: addr(certificates_CArray[0])))
 
 proc addCaCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, path: openArray[char]): bool =
-  fcQSslConfiguration_addCaCertificates(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
+  fcQSslConfiguration_addCaCertificatesPath(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc addCaCertificate*(self: gen_qsslconfiguration_types.QSslConfiguration, certificate: gen_qsslcertificate_types.QSslCertificate): void =
   fcQSslConfiguration_addCaCertificate(self.h, certificate.h)
@@ -252,7 +252,7 @@ proc addCaCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, cer
   for i in 0..<len(certificates):
     certificates_CArray[i] = certificates[i].h
 
-  fcQSslConfiguration_addCaCertificatesWithCertificates(self.h, struct_seaqt_array(len: csize_t(len(certificates)), data: if len(certificates) == 0: nil else: addr(certificates_CArray[0])))
+  fcQSslConfiguration_addCaCertificatesCertificates(self.h, struct_seaqt_array(len: csize_t(len(certificates)), data: if len(certificates) == 0: nil else: addr(certificates_CArray[0])))
 
 proc systemCaCertificates*(_: type gen_qsslconfiguration_types.QSslConfiguration): seq[gen_qsslcertificate_types.QSslCertificate] =
   var v_ma = fcQSslConfiguration_systemCaCertificates()
@@ -383,15 +383,15 @@ proc nextProtocolNegotiationStatus*(self: gen_qsslconfiguration_types.QSslConfig
   cint(fcQSslConfiguration_nextProtocolNegotiationStatus(self.h))
 
 proc addCaCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, path: openArray[char], format: cint): bool =
-  fcQSslConfiguration_addCaCertificates2(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(format))
+  fcQSslConfiguration_addCaCertificatesPathFormat(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(format))
 
 proc addCaCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, path: openArray[char], format: cint, syntax: cint): bool =
-  fcQSslConfiguration_addCaCertificates3(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(format), cint(syntax))
+  fcQSslConfiguration_addCaCertificatesPathFormatSyntax(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(format), cint(syntax))
 
 proc create*(T: type gen_qsslconfiguration_types.QSslConfiguration): gen_qsslconfiguration_types.QSslConfiguration =
   let tmp = gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_new(), owned: true)
   tmp
 proc create*(T: type gen_qsslconfiguration_types.QSslConfiguration,
-    other: gen_qsslconfiguration_types.QSslConfiguration): gen_qsslconfiguration_types.QSslConfiguration =
-  let tmp = gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_new2(other.h), owned: true)
+    fromVal: gen_qsslconfiguration_types.QSslConfiguration): gen_qsslconfiguration_types.QSslConfiguration =
+  let tmp = gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_new2(fromVal.h), owned: true)
   tmp

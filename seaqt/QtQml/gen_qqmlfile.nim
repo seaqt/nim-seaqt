@@ -64,23 +64,23 @@ proc fcQQmlFile_error(self: pointer): struct_seaqt_string {.importc: "QQmlFile_e
 proc fcQQmlFile_size(self: pointer): clonglong {.importc: "QQmlFile_size".}
 proc fcQQmlFile_data(self: pointer): cstring {.importc: "QQmlFile_data".}
 proc fcQQmlFile_dataByteArray(self: pointer): struct_seaqt_string {.importc: "QQmlFile_dataByteArray".}
-proc fcQQmlFile_load(self: pointer, param1: pointer, param2: pointer): void {.importc: "QQmlFile_load".}
-proc fcQQmlFile_load2(self: pointer, param1: pointer, param2: struct_seaqt_string): void {.importc: "QQmlFile_load2".}
+proc fcQQmlFile_load_QQmlEngine_QUrl(self: pointer, param1: pointer, param2: pointer): void {.importc: "QQmlFile_load_QQmlEngine_QUrl".}
+proc fcQQmlFile_load_QQmlEngine_QString(self: pointer, param1: pointer, param2: struct_seaqt_string): void {.importc: "QQmlFile_load_QQmlEngine_QString".}
 proc fcQQmlFile_clear(self: pointer): void {.importc: "QQmlFile_clear".}
-proc fcQQmlFile_clearWithQObject(self: pointer, param1: pointer): void {.importc: "QQmlFile_clearWithQObject".}
-proc fcQQmlFile_connectFinished(self: pointer, param1: pointer, param2: cstring): bool {.importc: "QQmlFile_connectFinished".}
-proc fcQQmlFile_connectFinished2(self: pointer, param1: pointer, param2: cint): bool {.importc: "QQmlFile_connectFinished2".}
-proc fcQQmlFile_connectDownloadProgress(self: pointer, param1: pointer, param2: cstring): bool {.importc: "QQmlFile_connectDownloadProgress".}
-proc fcQQmlFile_connectDownloadProgress2(self: pointer, param1: pointer, param2: cint): bool {.importc: "QQmlFile_connectDownloadProgress2".}
-proc fcQQmlFile_isSynchronous(url: struct_seaqt_string): bool {.importc: "QQmlFile_isSynchronous".}
-proc fcQQmlFile_isSynchronousWithUrl(url: pointer): bool {.importc: "QQmlFile_isSynchronousWithUrl".}
-proc fcQQmlFile_isLocalFile(url: struct_seaqt_string): bool {.importc: "QQmlFile_isLocalFile".}
-proc fcQQmlFile_isLocalFileWithUrl(url: pointer): bool {.importc: "QQmlFile_isLocalFileWithUrl".}
-proc fcQQmlFile_urlToLocalFileOrQrc(param1: struct_seaqt_string): struct_seaqt_string {.importc: "QQmlFile_urlToLocalFileOrQrc".}
-proc fcQQmlFile_urlToLocalFileOrQrcWithQUrl(param1: pointer): struct_seaqt_string {.importc: "QQmlFile_urlToLocalFileOrQrcWithQUrl".}
+proc fcQQmlFile_clear_QObject(self: pointer, param1: pointer): void {.importc: "QQmlFile_clear_QObject".}
+proc fcQQmlFile_connectFinished_QObjectChar(self: pointer, param1: pointer, param2: cstring): bool {.importc: "QQmlFile_connectFinished_QObject_char".}
+proc fcQQmlFile_connectFinished_QObjectInt(self: pointer, param1: pointer, param2: cint): bool {.importc: "QQmlFile_connectFinished_QObject_int".}
+proc fcQQmlFile_connectDownloadProgress_QObjectChar(self: pointer, param1: pointer, param2: cstring): bool {.importc: "QQmlFile_connectDownloadProgress_QObject_char".}
+proc fcQQmlFile_connectDownloadProgress_QObjectInt(self: pointer, param1: pointer, param2: cint): bool {.importc: "QQmlFile_connectDownloadProgress_QObject_int".}
+proc fcQQmlFile_isSynchronous_QString(url: struct_seaqt_string): bool {.importc: "QQmlFile_isSynchronous_QString".}
+proc fcQQmlFile_isSynchronous_QUrl(url: pointer): bool {.importc: "QQmlFile_isSynchronous_QUrl".}
+proc fcQQmlFile_isLocalFile_QString(url: struct_seaqt_string): bool {.importc: "QQmlFile_isLocalFile_QString".}
+proc fcQQmlFile_isLocalFile_QUrl(url: pointer): bool {.importc: "QQmlFile_isLocalFile_QUrl".}
+proc fcQQmlFile_urlToLocalFileOrQrc_QString(param1: struct_seaqt_string): struct_seaqt_string {.importc: "QQmlFile_urlToLocalFileOrQrc_QString".}
+proc fcQQmlFile_urlToLocalFileOrQrc_QUrl(param1: pointer): struct_seaqt_string {.importc: "QQmlFile_urlToLocalFileOrQrc_QUrl".}
 proc fcQQmlFile_new(): ptr cQQmlFile {.importc: "QQmlFile_new".}
-proc fcQQmlFile_new2(param1: pointer, param2: pointer): ptr cQQmlFile {.importc: "QQmlFile_new2".}
-proc fcQQmlFile_new3(param1: pointer, param2: struct_seaqt_string): ptr cQQmlFile {.importc: "QQmlFile_new3".}
+proc fcQQmlFile_new2(param1: pointer, param2: pointer): ptr cQQmlFile {.importc: "QQmlFile_new_QQmlEngine_QUrl".}
+proc fcQQmlFile_new3(param1: pointer, param2: struct_seaqt_string): ptr cQQmlFile {.importc: "QQmlFile_new_QQmlEngine_QString".}
 
 proc isNull*(self: gen_qqmlfile_types.QQmlFile): bool =
   fcQQmlFile_isNull(self.h)
@@ -119,49 +119,49 @@ proc dataByteArray*(self: gen_qqmlfile_types.QQmlFile): seq[byte] =
   vx_ret
 
 proc load*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qqmlengine_types.QQmlEngine, param2: gen_qurl_types.QUrl): void =
-  fcQQmlFile_load(self.h, param1.h, param2.h)
+  fcQQmlFile_load_QQmlEngine_QUrl(self.h, param1.h, param2.h)
 
 proc load*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qqmlengine_types.QQmlEngine, param2: openArray[char]): void =
-  fcQQmlFile_load2(self.h, param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))))
+  fcQQmlFile_load_QQmlEngine_QString(self.h, param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))))
 
 proc clear*(self: gen_qqmlfile_types.QQmlFile): void =
   fcQQmlFile_clear(self.h)
 
 proc clear*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qobject_types.QObject): void =
-  fcQQmlFile_clearWithQObject(self.h, param1.h)
+  fcQQmlFile_clear_QObject(self.h, param1.h)
 
 proc connectFinished*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qobject_types.QObject, param2: cstring): bool =
-  fcQQmlFile_connectFinished(self.h, param1.h, param2)
+  fcQQmlFile_connectFinished_QObjectChar(self.h, param1.h, param2)
 
 proc connectFinished*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qobject_types.QObject, param2: cint): bool =
-  fcQQmlFile_connectFinished2(self.h, param1.h, param2)
+  fcQQmlFile_connectFinished_QObjectInt(self.h, param1.h, param2)
 
 proc connectDownloadProgress*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qobject_types.QObject, param2: cstring): bool =
-  fcQQmlFile_connectDownloadProgress(self.h, param1.h, param2)
+  fcQQmlFile_connectDownloadProgress_QObjectChar(self.h, param1.h, param2)
 
 proc connectDownloadProgress*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qobject_types.QObject, param2: cint): bool =
-  fcQQmlFile_connectDownloadProgress2(self.h, param1.h, param2)
+  fcQQmlFile_connectDownloadProgress_QObjectInt(self.h, param1.h, param2)
 
 proc isSynchronous*(_: type gen_qqmlfile_types.QQmlFile, url: openArray[char]): bool =
-  fcQQmlFile_isSynchronous(struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
+  fcQQmlFile_isSynchronous_QString(struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
 proc isSynchronous*(_: type gen_qqmlfile_types.QQmlFile, url: gen_qurl_types.QUrl): bool =
-  fcQQmlFile_isSynchronousWithUrl(url.h)
+  fcQQmlFile_isSynchronous_QUrl(url.h)
 
 proc isLocalFile*(_: type gen_qqmlfile_types.QQmlFile, url: openArray[char]): bool =
-  fcQQmlFile_isLocalFile(struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
+  fcQQmlFile_isLocalFile_QString(struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
 proc isLocalFile*(_: type gen_qqmlfile_types.QQmlFile, url: gen_qurl_types.QUrl): bool =
-  fcQQmlFile_isLocalFileWithUrl(url.h)
+  fcQQmlFile_isLocalFile_QUrl(url.h)
 
 proc urlToLocalFileOrQrc*(_: type gen_qqmlfile_types.QQmlFile, param1: openArray[char]): string =
-  let v_ms = fcQQmlFile_urlToLocalFileOrQrc(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
+  let v_ms = fcQQmlFile_urlToLocalFileOrQrc_QString(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc urlToLocalFileOrQrc*(_: type gen_qqmlfile_types.QQmlFile, param1: gen_qurl_types.QUrl): string =
-  let v_ms = fcQQmlFile_urlToLocalFileOrQrcWithQUrl(param1.h)
+  let v_ms = fcQQmlFile_urlToLocalFileOrQrc_QUrl(param1.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

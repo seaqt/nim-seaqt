@@ -59,8 +59,8 @@ type cQAudioRecorder*{.exportc: "QAudioRecorder", incompleteStruct.} = object
 proc fcQAudioRecorder_metaObject(self: pointer): pointer {.importc: "QAudioRecorder_metaObject".}
 proc fcQAudioRecorder_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioRecorder_metacast".}
 proc fcQAudioRecorder_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioRecorder_metacall".}
-proc fcQAudioRecorder_tr(s: cstring): struct_seaqt_string {.importc: "QAudioRecorder_tr".}
-proc fcQAudioRecorder_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAudioRecorder_trUtf8".}
+proc fcQAudioRecorder_trS(s: cstring): struct_seaqt_string {.importc: "QAudioRecorder_tr_s".}
+proc fcQAudioRecorder_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAudioRecorder_trUtf8_s".}
 proc fcQAudioRecorder_audioInputs(self: pointer): struct_seaqt_array {.importc: "QAudioRecorder_audioInputs".}
 proc fcQAudioRecorder_defaultAudioInput(self: pointer): struct_seaqt_string {.importc: "QAudioRecorder_defaultAudioInput".}
 proc fcQAudioRecorder_audioInputDescription(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.importc: "QAudioRecorder_audioInputDescription".}
@@ -70,10 +70,10 @@ proc fcQAudioRecorder_audioInputChanged(self: pointer, name: struct_seaqt_string
 proc fcQAudioRecorder_connect_audioInputChanged(self: pointer, slot: int, callback: proc (slot: int, name: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRecorder_connect_audioInputChanged".}
 proc fcQAudioRecorder_availableAudioInputsChanged(self: pointer): void {.importc: "QAudioRecorder_availableAudioInputsChanged".}
 proc fcQAudioRecorder_connect_availableAudioInputsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRecorder_connect_availableAudioInputsChanged".}
-proc fcQAudioRecorder_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioRecorder_tr2".}
-proc fcQAudioRecorder_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioRecorder_tr3".}
-proc fcQAudioRecorder_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioRecorder_trUtf82".}
-proc fcQAudioRecorder_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioRecorder_trUtf83".}
+proc fcQAudioRecorder_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioRecorder_tr_s_c".}
+proc fcQAudioRecorder_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioRecorder_tr_s_c_n".}
+proc fcQAudioRecorder_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioRecorder_trUtf8_s_c".}
+proc fcQAudioRecorder_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioRecorder_trUtf8_s_c_n".}
 proc fcQAudioRecorder_vdata(self: pointer): ptr pointer {.importc: "QAudioRecorder_vdata".}
 proc fvdata_cQAudioRecorder(self: pointer): pointer {.importc: "vdata_QAudioRecorder".}
 
@@ -108,7 +108,7 @@ proc fcQAudioRecorder_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQAudioRecorder_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioRecorder_protectedbase_receivers".}
 proc fcQAudioRecorder_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioRecorder_protectedbase_isSignalConnected".}
 proc fcQAudioRecorder_new(vtbl: pointer, vdata: csize_t): ptr cQAudioRecorder {.importc: "QAudioRecorder_new".}
-proc fcQAudioRecorder_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioRecorder {.importc: "QAudioRecorder_new2".}
+proc fcQAudioRecorder_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioRecorder {.importc: "QAudioRecorder_new_parent".}
 proc fcQAudioRecorder_staticMetaObject(): pointer {.importc: "QAudioRecorder_staticMetaObject".}
 
 proc metaObject*(self: gen_qaudiorecorder_types.QAudioRecorder): gen_qobjectdefs_types.QMetaObject =
@@ -121,13 +121,13 @@ proc metacall*(self: gen_qaudiorecorder_types.QAudioRecorder, param1: cint, para
   fcQAudioRecorder_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudiorecorder_types.QAudioRecorder, s: cstring): string =
-  let v_ms = fcQAudioRecorder_tr(s)
+  let v_ms = fcQAudioRecorder_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiorecorder_types.QAudioRecorder, s: cstring): string =
-  let v_ms = fcQAudioRecorder_trUtf8(s)
+  let v_ms = fcQAudioRecorder_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -207,25 +207,25 @@ proc onAvailableAudioInputsChanged*(self: gen_qaudiorecorder_types.QAudioRecorde
   fcQAudioRecorder_connect_availableAudioInputsChanged(self.h, cast[int](addr tmp[]), fcQAudioRecorder_slot_callback_availableAudioInputsChanged, fcQAudioRecorder_slot_callback_availableAudioInputsChanged_release)
 
 proc tr*(_: type gen_qaudiorecorder_types.QAudioRecorder, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioRecorder_tr2(s, c)
+  let v_ms = fcQAudioRecorder_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudiorecorder_types.QAudioRecorder, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioRecorder_tr3(s, c, n)
+  let v_ms = fcQAudioRecorder_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiorecorder_types.QAudioRecorder, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioRecorder_trUtf82(s, c)
+  let v_ms = fcQAudioRecorder_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiorecorder_types.QAudioRecorder, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioRecorder_trUtf83(s, c, n)
+  let v_ms = fcQAudioRecorder_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

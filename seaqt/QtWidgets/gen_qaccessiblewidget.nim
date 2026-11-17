@@ -72,16 +72,16 @@ proc fcQAccessibleWidget_role(self: pointer): cint {.importc: "QAccessibleWidget
 proc fcQAccessibleWidget_state(self: pointer): pointer {.importc: "QAccessibleWidget_state".}
 proc fcQAccessibleWidget_foregroundColor(self: pointer): pointer {.importc: "QAccessibleWidget_foregroundColor".}
 proc fcQAccessibleWidget_backgroundColor(self: pointer): pointer {.importc: "QAccessibleWidget_backgroundColor".}
-proc fcQAccessibleWidget_interfaceCast(self: pointer, t: cint): pointer {.importc: "QAccessibleWidget_interfaceCast".}
+proc fcQAccessibleWidget_interfaceCast(self: pointer, t: cint): pointer {.importc: "QAccessibleWidget_interface_cast".}
 proc fcQAccessibleWidget_actionNames(self: pointer): struct_seaqt_array {.importc: "QAccessibleWidget_actionNames".}
 proc fcQAccessibleWidget_doAction(self: pointer, actionName: struct_seaqt_string): void {.importc: "QAccessibleWidget_doAction".}
 proc fcQAccessibleWidget_keyBindingsForAction(self: pointer, actionName: struct_seaqt_string): struct_seaqt_array {.importc: "QAccessibleWidget_keyBindingsForAction".}
 proc fcQAccessibleWidget_protectedbase_widget(self: pointer): pointer {.importc: "QAccessibleWidget_protectedbase_widget".}
 proc fcQAccessibleWidget_protectedbase_parentObject(self: pointer): pointer {.importc: "QAccessibleWidget_protectedbase_parentObject".}
 proc fcQAccessibleWidget_protectedbase_addControllingSignal(self: pointer, signal: struct_seaqt_string): void {.importc: "QAccessibleWidget_protectedbase_addControllingSignal".}
-proc fcQAccessibleWidget_new(o: pointer): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new".}
-proc fcQAccessibleWidget_new2(o: pointer, r: cint): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new2".}
-proc fcQAccessibleWidget_new3(o: pointer, r: cint, name: struct_seaqt_string): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new3".}
+proc fcQAccessibleWidget_new(o: pointer): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new_o".}
+proc fcQAccessibleWidget_new2(o: pointer, r: cint): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new_o_r".}
+proc fcQAccessibleWidget_new3(o: pointer, r: cint, name: struct_seaqt_string): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new_o_r_name".}
 
 proc isValid*(self: gen_qaccessiblewidget_types.QAccessibleWidget): bool =
   fcQAccessibleWidget_isValid(self.h)

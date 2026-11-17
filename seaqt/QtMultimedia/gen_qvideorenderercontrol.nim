@@ -57,14 +57,14 @@ type cQVideoRendererControl*{.exportc: "QVideoRendererControl", incompleteStruct
 proc fcQVideoRendererControl_metaObject(self: pointer): pointer {.importc: "QVideoRendererControl_metaObject".}
 proc fcQVideoRendererControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoRendererControl_metacast".}
 proc fcQVideoRendererControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoRendererControl_metacall".}
-proc fcQVideoRendererControl_tr(s: cstring): struct_seaqt_string {.importc: "QVideoRendererControl_tr".}
-proc fcQVideoRendererControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QVideoRendererControl_trUtf8".}
+proc fcQVideoRendererControl_trS(s: cstring): struct_seaqt_string {.importc: "QVideoRendererControl_tr_s".}
+proc fcQVideoRendererControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QVideoRendererControl_trUtf8_s".}
 proc fcQVideoRendererControl_surface(self: pointer): pointer {.importc: "QVideoRendererControl_surface".}
 proc fcQVideoRendererControl_setSurface(self: pointer, surface: pointer): void {.importc: "QVideoRendererControl_setSurface".}
-proc fcQVideoRendererControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoRendererControl_tr2".}
-proc fcQVideoRendererControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoRendererControl_tr3".}
-proc fcQVideoRendererControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoRendererControl_trUtf82".}
-proc fcQVideoRendererControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoRendererControl_trUtf83".}
+proc fcQVideoRendererControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoRendererControl_tr_s_c".}
+proc fcQVideoRendererControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoRendererControl_tr_s_c_n".}
+proc fcQVideoRendererControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoRendererControl_trUtf8_s_c".}
+proc fcQVideoRendererControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoRendererControl_trUtf8_s_c_n".}
 proc fcQVideoRendererControl_protectedbase_sender(self: pointer): pointer {.importc: "QVideoRendererControl_protectedbase_sender".}
 proc fcQVideoRendererControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QVideoRendererControl_protectedbase_senderSignalIndex".}
 proc fcQVideoRendererControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoRendererControl_protectedbase_receivers".}
@@ -81,13 +81,13 @@ proc metacall*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, para
   fcQVideoRendererControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: cstring): string =
-  let v_ms = fcQVideoRendererControl_tr(s)
+  let v_ms = fcQVideoRendererControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: cstring): string =
-  let v_ms = fcQVideoRendererControl_trUtf8(s)
+  let v_ms = fcQVideoRendererControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -99,25 +99,25 @@ proc setSurface*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, su
   fcQVideoRendererControl_setSurface(self.h, surface.h)
 
 proc tr*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: cstring, c: cstring): string =
-  let v_ms = fcQVideoRendererControl_tr2(s, c)
+  let v_ms = fcQVideoRendererControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVideoRendererControl_tr3(s, c, n)
+  let v_ms = fcQVideoRendererControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: cstring, c: cstring): string =
-  let v_ms = fcQVideoRendererControl_trUtf82(s, c)
+  let v_ms = fcQVideoRendererControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVideoRendererControl_trUtf83(s, c, n)
+  let v_ms = fcQVideoRendererControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

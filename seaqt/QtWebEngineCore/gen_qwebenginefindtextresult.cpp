@@ -17,8 +17,8 @@ QWebEngineFindTextResult* QWebEngineFindTextResult_new() {
 	return new (std::nothrow) QWebEngineFindTextResult();
 }
 
-QWebEngineFindTextResult* QWebEngineFindTextResult_new2(QWebEngineFindTextResult* other) {
-	return new (std::nothrow) QWebEngineFindTextResult(*other);
+QWebEngineFindTextResult* QWebEngineFindTextResult_new_from(QWebEngineFindTextResult* from) {
+	return new (std::nothrow) QWebEngineFindTextResult(*from);
 }
 
 int QWebEngineFindTextResult_numberOfMatches(const QWebEngineFindTextResult* self) {
@@ -29,8 +29,8 @@ int QWebEngineFindTextResult_activeMatch(const QWebEngineFindTextResult* self) {
 	return self->activeMatch();
 }
 
-void QWebEngineFindTextResult_operatorAssign(QWebEngineFindTextResult* self, QWebEngineFindTextResult* other) {
-	self->operator=(*other);
+void QWebEngineFindTextResult_operatorAssign(QWebEngineFindTextResult* self, QWebEngineFindTextResult* from) {
+	self->operator=(*from);
 }
 
 const QMetaObject* QWebEngineFindTextResult_staticMetaObject() { return &QWebEngineFindTextResult::staticMetaObject; }

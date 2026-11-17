@@ -25,12 +25,12 @@ typedef struct QSslError QSslError;
 #endif
 
 QSslError* QSslError_new();
-QSslError* QSslError_new2(int error);
-QSslError* QSslError_new3(int error, QSslCertificate* certificate);
-QSslError* QSslError_new4(QSslError* other);
+QSslError* QSslError_new_error(int error);
+QSslError* QSslError_new_error_certificate(int error, QSslCertificate* certificate);
+QSslError* QSslError_new_from(QSslError* from);
 
 void QSslError_swap(QSslError* self, QSslError* other);
-void QSslError_operatorAssign(QSslError* self, QSslError* other);
+void QSslError_operatorAssign(QSslError* self, QSslError* from);
 bool QSslError_operatorEqual(const QSslError* self, QSslError* other);
 bool QSslError_operatorNotEqual(const QSslError* self, QSslError* other);
 int QSslError_error(const QSslError* self);

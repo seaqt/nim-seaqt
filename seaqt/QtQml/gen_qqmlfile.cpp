@@ -23,11 +23,11 @@ QQmlFile* QQmlFile_new() {
 	return new (std::nothrow) QQmlFile();
 }
 
-QQmlFile* QQmlFile_new2(QQmlEngine* param1, QUrl* param2) {
+QQmlFile* QQmlFile_new_QQmlEngine_QUrl(QQmlEngine* param1, QUrl* param2) {
 	return new (std::nothrow) QQmlFile(param1, *param2);
 }
 
-QQmlFile* QQmlFile_new3(QQmlEngine* param1, struct seaqt_string param2) {
+QQmlFile* QQmlFile_new_QQmlEngine_QString(QQmlEngine* param1, struct seaqt_string param2) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	return new (std::nothrow) QQmlFile(param1, param2_QString);
 }
@@ -86,11 +86,11 @@ struct seaqt_string QQmlFile_dataByteArray(const QQmlFile* self) {
 	return _ms;
 }
 
-void QQmlFile_load(QQmlFile* self, QQmlEngine* param1, QUrl* param2) {
+void QQmlFile_load_QQmlEngine_QUrl(QQmlFile* self, QQmlEngine* param1, QUrl* param2) {
 	self->load(param1, *param2);
 }
 
-void QQmlFile_load2(QQmlFile* self, QQmlEngine* param1, struct seaqt_string param2) {
+void QQmlFile_load_QQmlEngine_QString(QQmlFile* self, QQmlEngine* param1, struct seaqt_string param2) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	self->load(param1, param2_QString);
 }
@@ -99,45 +99,45 @@ void QQmlFile_clear(QQmlFile* self) {
 	self->clear();
 }
 
-void QQmlFile_clearWithQObject(QQmlFile* self, QObject* param1) {
+void QQmlFile_clear_QObject(QQmlFile* self, QObject* param1) {
 	self->clear(param1);
 }
 
-bool QQmlFile_connectFinished(QQmlFile* self, QObject* param1, const char* param2) {
+bool QQmlFile_connectFinished_QObject_char(QQmlFile* self, QObject* param1, const char* param2) {
 	return self->connectFinished(param1, param2);
 }
 
-bool QQmlFile_connectFinished2(QQmlFile* self, QObject* param1, int param2) {
+bool QQmlFile_connectFinished_QObject_int(QQmlFile* self, QObject* param1, int param2) {
 	return self->connectFinished(param1, static_cast<int>(param2));
 }
 
-bool QQmlFile_connectDownloadProgress(QQmlFile* self, QObject* param1, const char* param2) {
+bool QQmlFile_connectDownloadProgress_QObject_char(QQmlFile* self, QObject* param1, const char* param2) {
 	return self->connectDownloadProgress(param1, param2);
 }
 
-bool QQmlFile_connectDownloadProgress2(QQmlFile* self, QObject* param1, int param2) {
+bool QQmlFile_connectDownloadProgress_QObject_int(QQmlFile* self, QObject* param1, int param2) {
 	return self->connectDownloadProgress(param1, static_cast<int>(param2));
 }
 
-bool QQmlFile_isSynchronous(struct seaqt_string url) {
+bool QQmlFile_isSynchronous_QString(struct seaqt_string url) {
 	QString url_QString = QString::fromUtf8(url.data, url.len);
 	return QQmlFile::isSynchronous(url_QString);
 }
 
-bool QQmlFile_isSynchronousWithUrl(QUrl* url) {
+bool QQmlFile_isSynchronous_QUrl(QUrl* url) {
 	return QQmlFile::isSynchronous(*url);
 }
 
-bool QQmlFile_isLocalFile(struct seaqt_string url) {
+bool QQmlFile_isLocalFile_QString(struct seaqt_string url) {
 	QString url_QString = QString::fromUtf8(url.data, url.len);
 	return QQmlFile::isLocalFile(url_QString);
 }
 
-bool QQmlFile_isLocalFileWithUrl(QUrl* url) {
+bool QQmlFile_isLocalFile_QUrl(QUrl* url) {
 	return QQmlFile::isLocalFile(*url);
 }
 
-struct seaqt_string QQmlFile_urlToLocalFileOrQrc(struct seaqt_string param1) {
+struct seaqt_string QQmlFile_urlToLocalFileOrQrc_QString(struct seaqt_string param1) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	QString _ret = QQmlFile::urlToLocalFileOrQrc(param1_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -149,7 +149,7 @@ struct seaqt_string QQmlFile_urlToLocalFileOrQrc(struct seaqt_string param1) {
 	return _ms;
 }
 
-struct seaqt_string QQmlFile_urlToLocalFileOrQrcWithQUrl(QUrl* param1) {
+struct seaqt_string QQmlFile_urlToLocalFileOrQrc_QUrl(QUrl* param1) {
 	QString _ret = QQmlFile::urlToLocalFileOrQrc(*param1);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

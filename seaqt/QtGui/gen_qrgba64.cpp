@@ -16,15 +16,15 @@ QRgba64* QRgba64_new() {
 	return new (std::nothrow) QRgba64();
 }
 
-QRgba64* QRgba64_new2(QRgba64* param1) {
-	return new (std::nothrow) QRgba64(*param1);
+QRgba64* QRgba64_new_from(QRgba64* from) {
+	return new (std::nothrow) QRgba64(*from);
 }
 
-QRgba64* QRgba64_fromRgba64(unsigned long long c) {
+QRgba64* QRgba64_fromRgba64_c(unsigned long long c) {
 	return new QRgba64(QRgba64::fromRgba64(static_cast<quint64>(c)));
 }
 
-QRgba64* QRgba64_fromRgba642(unsigned short red, unsigned short green, unsigned short blue, unsigned short alpha) {
+QRgba64* QRgba64_fromRgba64_red_green_blue_alpha(unsigned short red, unsigned short green, unsigned short blue, unsigned short alpha) {
 	return new QRgba64(QRgba64::fromRgba64(static_cast<quint16>(red), static_cast<quint16>(green), static_cast<quint16>(blue), static_cast<quint16>(alpha)));
 }
 

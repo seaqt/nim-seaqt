@@ -144,19 +144,19 @@ typedef struct QDockWidget_VTable{
 void* QDockWidget_vdata(VirtualQDockWidget* self);
 VirtualQDockWidget* vdata_QDockWidget(void* vdata);
 
-VirtualQDockWidget* QDockWidget_new(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title);
-VirtualQDockWidget* QDockWidget_new2(const QDockWidget_VTable* vtbl, size_t vdata);
-VirtualQDockWidget* QDockWidget_new3(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent);
-VirtualQDockWidget* QDockWidget_new4(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent, int flags);
-VirtualQDockWidget* QDockWidget_new5(const QDockWidget_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQDockWidget* QDockWidget_new6(const QDockWidget_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
+VirtualQDockWidget* QDockWidget_new_title(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title);
+VirtualQDockWidget* QDockWidget_new(const QDockWidget_VTable* vtbl, size_t vdata);
+VirtualQDockWidget* QDockWidget_new_title_parent(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent);
+VirtualQDockWidget* QDockWidget_new_title_parent_flags(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent, int flags);
+VirtualQDockWidget* QDockWidget_new_parent(const QDockWidget_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDockWidget* QDockWidget_new_parent_flags(const QDockWidget_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
 
 void QDockWidget_virtbase(QDockWidget* src, QWidget** outptr_QWidget);
 QMetaObject* QDockWidget_metaObject(const QDockWidget* self);
 void* QDockWidget_metacast(QDockWidget* self, const char* param1);
 int QDockWidget_metacall(QDockWidget* self, int param1, int param2, void** param3);
-struct seaqt_string QDockWidget_tr(const char* s);
-struct seaqt_string QDockWidget_trUtf8(const char* s);
+struct seaqt_string QDockWidget_tr_s(const char* s);
+struct seaqt_string QDockWidget_trUtf8_s(const char* s);
 QWidget* QDockWidget_widget(const QDockWidget* self);
 void QDockWidget_setWidget(QDockWidget* self, QWidget* widget);
 void QDockWidget_setFeatures(QDockWidget* self, int features);
@@ -183,10 +183,10 @@ void QDockWidget_changeEvent(QDockWidget* self, QEvent* event);
 void QDockWidget_closeEvent(QDockWidget* self, QCloseEvent* event);
 void QDockWidget_paintEvent(QDockWidget* self, QPaintEvent* event);
 bool QDockWidget_event(QDockWidget* self, QEvent* event);
-struct seaqt_string QDockWidget_tr2(const char* s, const char* c);
-struct seaqt_string QDockWidget_tr3(const char* s, const char* c, int n);
-struct seaqt_string QDockWidget_trUtf82(const char* s, const char* c);
-struct seaqt_string QDockWidget_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QDockWidget_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDockWidget_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QDockWidget_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QDockWidget_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDockWidget_virtualbase_metaObject(const VirtualQDockWidget* self);
 void* QDockWidget_virtualbase_metacast(VirtualQDockWidget* self, const char* param1);

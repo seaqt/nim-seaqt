@@ -61,16 +61,16 @@ void* QMouseEventTransition_vdata(VirtualQMouseEventTransition* self);
 VirtualQMouseEventTransition* vdata_QMouseEventTransition(void* vdata);
 
 VirtualQMouseEventTransition* QMouseEventTransition_new(const QMouseEventTransition_VTable* vtbl, size_t vdata);
-VirtualQMouseEventTransition* QMouseEventTransition_new2(const QMouseEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int button);
-VirtualQMouseEventTransition* QMouseEventTransition_new3(const QMouseEventTransition_VTable* vtbl, size_t vdata, QState* sourceState);
-VirtualQMouseEventTransition* QMouseEventTransition_new4(const QMouseEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int button, QState* sourceState);
+VirtualQMouseEventTransition* QMouseEventTransition_new_object_type_button(const QMouseEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int button);
+VirtualQMouseEventTransition* QMouseEventTransition_new_sourceState(const QMouseEventTransition_VTable* vtbl, size_t vdata, QState* sourceState);
+VirtualQMouseEventTransition* QMouseEventTransition_new_object_type_button_sourceState(const QMouseEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int button, QState* sourceState);
 
 void QMouseEventTransition_virtbase(QMouseEventTransition* src, QEventTransition** outptr_QEventTransition);
 QMetaObject* QMouseEventTransition_metaObject(const QMouseEventTransition* self);
 void* QMouseEventTransition_metacast(QMouseEventTransition* self, const char* param1);
 int QMouseEventTransition_metacall(QMouseEventTransition* self, int param1, int param2, void** param3);
-struct seaqt_string QMouseEventTransition_tr(const char* s);
-struct seaqt_string QMouseEventTransition_trUtf8(const char* s);
+struct seaqt_string QMouseEventTransition_tr_s(const char* s);
+struct seaqt_string QMouseEventTransition_trUtf8_s(const char* s);
 int QMouseEventTransition_button(const QMouseEventTransition* self);
 void QMouseEventTransition_setButton(QMouseEventTransition* self, int button);
 int QMouseEventTransition_modifierMask(const QMouseEventTransition* self);
@@ -79,10 +79,10 @@ QPainterPath* QMouseEventTransition_hitTestPath(const QMouseEventTransition* sel
 void QMouseEventTransition_setHitTestPath(QMouseEventTransition* self, QPainterPath* path);
 void QMouseEventTransition_onTransition(QMouseEventTransition* self, QEvent* event);
 bool QMouseEventTransition_eventTest(QMouseEventTransition* self, QEvent* event);
-struct seaqt_string QMouseEventTransition_tr2(const char* s, const char* c);
-struct seaqt_string QMouseEventTransition_tr3(const char* s, const char* c, int n);
-struct seaqt_string QMouseEventTransition_trUtf82(const char* s, const char* c);
-struct seaqt_string QMouseEventTransition_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QMouseEventTransition_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMouseEventTransition_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QMouseEventTransition_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QMouseEventTransition_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QMouseEventTransition_virtualbase_metaObject(const VirtualQMouseEventTransition* self);
 void* QMouseEventTransition_virtualbase_metacast(VirtualQMouseEventTransition* self, const char* param1);

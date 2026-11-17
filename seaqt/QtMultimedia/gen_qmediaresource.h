@@ -27,13 +27,13 @@ typedef struct QUrl QUrl;
 #endif
 
 QMediaResource* QMediaResource_new();
-QMediaResource* QMediaResource_new2(QUrl* url);
-QMediaResource* QMediaResource_new3(QNetworkRequest* request);
-QMediaResource* QMediaResource_new4(QMediaResource* other);
-QMediaResource* QMediaResource_new5(QUrl* url, struct seaqt_string mimeType);
-QMediaResource* QMediaResource_new6(QNetworkRequest* request, struct seaqt_string mimeType);
+QMediaResource* QMediaResource_new_url(QUrl* url);
+QMediaResource* QMediaResource_new_request(QNetworkRequest* request);
+QMediaResource* QMediaResource_new_from(QMediaResource* from);
+QMediaResource* QMediaResource_new_url_mimeType(QUrl* url, struct seaqt_string mimeType);
+QMediaResource* QMediaResource_new_request_mimeType(QNetworkRequest* request, struct seaqt_string mimeType);
 
-void QMediaResource_operatorAssign(QMediaResource* self, QMediaResource* other);
+void QMediaResource_operatorAssign(QMediaResource* self, QMediaResource* from);
 bool QMediaResource_isNull(const QMediaResource* self);
 bool QMediaResource_operatorEqual(const QMediaResource* self, QMediaResource* other);
 bool QMediaResource_operatorNotEqual(const QMediaResource* self, QMediaResource* other);
@@ -57,8 +57,8 @@ void QMediaResource_setChannelCount(QMediaResource* self, int channels);
 int QMediaResource_videoBitRate(const QMediaResource* self);
 void QMediaResource_setVideoBitRate(QMediaResource* self, int rate);
 QSize* QMediaResource_resolution(const QMediaResource* self);
-void QMediaResource_setResolution(QMediaResource* self, QSize* resolution);
-void QMediaResource_setResolution2(QMediaResource* self, int width, int height);
+void QMediaResource_setResolution_resolution(QMediaResource* self, QSize* resolution);
+void QMediaResource_setResolution_width_height(QMediaResource* self, int width, int height);
 
 void QMediaResource_delete(QMediaResource* self);
 

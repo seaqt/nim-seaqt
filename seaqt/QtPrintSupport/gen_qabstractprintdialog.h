@@ -149,15 +149,15 @@ typedef struct QAbstractPrintDialog_VTable{
 void* QAbstractPrintDialog_vdata(VirtualQAbstractPrintDialog* self);
 VirtualQAbstractPrintDialog* vdata_QAbstractPrintDialog(void* vdata);
 
-VirtualQAbstractPrintDialog* QAbstractPrintDialog_new(const QAbstractPrintDialog_VTable* vtbl, size_t vdata, QPrinter* printer);
-VirtualQAbstractPrintDialog* QAbstractPrintDialog_new2(const QAbstractPrintDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent);
+VirtualQAbstractPrintDialog* QAbstractPrintDialog_new_printer(const QAbstractPrintDialog_VTable* vtbl, size_t vdata, QPrinter* printer);
+VirtualQAbstractPrintDialog* QAbstractPrintDialog_new_printer_parent(const QAbstractPrintDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent);
 
 void QAbstractPrintDialog_virtbase(QAbstractPrintDialog* src, QDialog** outptr_QDialog);
 QMetaObject* QAbstractPrintDialog_metaObject(const QAbstractPrintDialog* self);
 void* QAbstractPrintDialog_metacast(QAbstractPrintDialog* self, const char* param1);
 int QAbstractPrintDialog_metacall(QAbstractPrintDialog* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractPrintDialog_tr(const char* s);
-struct seaqt_string QAbstractPrintDialog_trUtf8(const char* s);
+struct seaqt_string QAbstractPrintDialog_tr_s(const char* s);
+struct seaqt_string QAbstractPrintDialog_trUtf8_s(const char* s);
 void QAbstractPrintDialog_addEnabledOption(QAbstractPrintDialog* self, int option);
 void QAbstractPrintDialog_setEnabledOptions(QAbstractPrintDialog* self, int options);
 int QAbstractPrintDialog_enabledOptions(const QAbstractPrintDialog* self);
@@ -172,10 +172,10 @@ void QAbstractPrintDialog_setFromTo(QAbstractPrintDialog* self, int fromPage, in
 int QAbstractPrintDialog_fromPage(const QAbstractPrintDialog* self);
 int QAbstractPrintDialog_toPage(const QAbstractPrintDialog* self);
 QPrinter* QAbstractPrintDialog_printer(const QAbstractPrintDialog* self);
-struct seaqt_string QAbstractPrintDialog_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractPrintDialog_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractPrintDialog_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractPrintDialog_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAbstractPrintDialog_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractPrintDialog_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractPrintDialog_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractPrintDialog_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractPrintDialog_virtualbase_metaObject(const VirtualQAbstractPrintDialog* self);
 void* QAbstractPrintDialog_virtualbase_metacast(VirtualQAbstractPrintDialog* self, const char* param1);

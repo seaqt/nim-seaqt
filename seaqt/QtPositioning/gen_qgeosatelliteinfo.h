@@ -21,9 +21,9 @@ typedef struct QGeoSatelliteInfo QGeoSatelliteInfo;
 #endif
 
 QGeoSatelliteInfo* QGeoSatelliteInfo_new();
-QGeoSatelliteInfo* QGeoSatelliteInfo_new2(QGeoSatelliteInfo* other);
+QGeoSatelliteInfo* QGeoSatelliteInfo_new_from(QGeoSatelliteInfo* from);
 
-void QGeoSatelliteInfo_operatorAssign(QGeoSatelliteInfo* self, QGeoSatelliteInfo* other);
+void QGeoSatelliteInfo_operatorAssign(QGeoSatelliteInfo* self, QGeoSatelliteInfo* from);
 bool QGeoSatelliteInfo_operatorEqual(const QGeoSatelliteInfo* self, QGeoSatelliteInfo* other);
 bool QGeoSatelliteInfo_operatorNotEqual(const QGeoSatelliteInfo* self, QGeoSatelliteInfo* other);
 void QGeoSatelliteInfo_setSatelliteSystem(QGeoSatelliteInfo* self, int system);

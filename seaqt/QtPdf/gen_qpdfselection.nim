@@ -45,7 +45,7 @@ export
 
 type cQPdfSelection*{.exportc: "QPdfSelection", incompleteStruct.} = object
 
-proc fcQPdfSelection_operatorAssign(self: pointer, other: pointer): void {.importc: "QPdfSelection_operatorAssign".}
+proc fcQPdfSelection_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QPdfSelection_operatorAssign".}
 proc fcQPdfSelection_swap(self: pointer, other: pointer): void {.importc: "QPdfSelection_swap".}
 proc fcQPdfSelection_isValid(self: pointer): bool {.importc: "QPdfSelection_isValid".}
 proc fcQPdfSelection_text(self: pointer): struct_seaqt_string {.importc: "QPdfSelection_text".}
@@ -53,12 +53,12 @@ proc fcQPdfSelection_boundingRectangle(self: pointer): pointer {.importc: "QPdfS
 proc fcQPdfSelection_startIndex(self: pointer): cint {.importc: "QPdfSelection_startIndex".}
 proc fcQPdfSelection_endIndex(self: pointer): cint {.importc: "QPdfSelection_endIndex".}
 proc fcQPdfSelection_copyToClipboard(self: pointer): void {.importc: "QPdfSelection_copyToClipboard".}
-proc fcQPdfSelection_copyToClipboardWithMode(self: pointer, mode: cint): void {.importc: "QPdfSelection_copyToClipboardWithMode".}
-proc fcQPdfSelection_new(other: pointer): ptr cQPdfSelection {.importc: "QPdfSelection_new".}
+proc fcQPdfSelection_copyToClipboardMode(self: pointer, mode: cint): void {.importc: "QPdfSelection_copyToClipboard_mode".}
+proc fcQPdfSelection_new(fromVal: pointer): ptr cQPdfSelection {.importc: "QPdfSelection_new".}
 proc fcQPdfSelection_staticMetaObject(): pointer {.importc: "QPdfSelection_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qpdfselection_types.QPdfSelection, other: gen_qpdfselection_types.QPdfSelection): void =
-  fcQPdfSelection_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qpdfselection_types.QPdfSelection, fromVal: gen_qpdfselection_types.QPdfSelection): void =
+  fcQPdfSelection_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qpdfselection_types.QPdfSelection, other: gen_qpdfselection_types.QPdfSelection): void =
   fcQPdfSelection_swap(self.h, other.h)
@@ -85,11 +85,11 @@ proc copyToClipboard*(self: gen_qpdfselection_types.QPdfSelection): void =
   fcQPdfSelection_copyToClipboard(self.h)
 
 proc copyToClipboard*(self: gen_qpdfselection_types.QPdfSelection, mode: cint): void =
-  fcQPdfSelection_copyToClipboardWithMode(self.h, cint(mode))
+  fcQPdfSelection_copyToClipboardMode(self.h, cint(mode))
 
 proc create*(T: type gen_qpdfselection_types.QPdfSelection,
-    other: gen_qpdfselection_types.QPdfSelection): gen_qpdfselection_types.QPdfSelection =
-  let tmp = gen_qpdfselection_types.QPdfSelection(h: fcQPdfSelection_new(other.h), owned: true)
+    fromVal: gen_qpdfselection_types.QPdfSelection): gen_qpdfselection_types.QPdfSelection =
+  let tmp = gen_qpdfselection_types.QPdfSelection(h: fcQPdfSelection_new(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qpdfselection_types.QPdfSelection): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfSelection_staticMetaObject())

@@ -41,7 +41,7 @@ void* QQmlIncubator_vdata(VirtualQQmlIncubator* self);
 VirtualQQmlIncubator* vdata_QQmlIncubator(void* vdata);
 
 VirtualQQmlIncubator* QQmlIncubator_new(const QQmlIncubator_VTable* vtbl, size_t vdata);
-VirtualQQmlIncubator* QQmlIncubator_new2(const QQmlIncubator_VTable* vtbl, size_t vdata, int param1);
+VirtualQQmlIncubator* QQmlIncubator_new_QQmlIncubator_IncubationMode(const QQmlIncubator_VTable* vtbl, size_t vdata, int param1);
 
 void QQmlIncubator_clear(QQmlIncubator* self);
 void QQmlIncubator_forceCompletion(QQmlIncubator* self);
@@ -76,9 +76,9 @@ VirtualQQmlIncubationController* QQmlIncubationController_new(const QQmlIncubati
 QQmlEngine* QQmlIncubationController_engine(const QQmlIncubationController* self);
 int QQmlIncubationController_incubatingObjectCount(const QQmlIncubationController* self);
 void QQmlIncubationController_incubateFor(QQmlIncubationController* self, int msecs);
-void QQmlIncubationController_incubateWhile(QQmlIncubationController* self, volatile bool* flag);
+void QQmlIncubationController_incubateWhile_volatilebool(QQmlIncubationController* self, volatile bool* flag);
 void QQmlIncubationController_incubatingObjectCountChanged(QQmlIncubationController* self, int param1);
-void QQmlIncubationController_incubateWhile2(QQmlIncubationController* self, volatile bool* flag, int msecs);
+void QQmlIncubationController_incubateWhile_volatilebool_int(QQmlIncubationController* self, volatile bool* flag, int msecs);
 
 void QQmlIncubationController_virtualbase_incubatingObjectCountChanged(VirtualQQmlIncubationController* self, int param1);
 

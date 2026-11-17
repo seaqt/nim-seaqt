@@ -639,7 +639,7 @@ VirtualQQuickPaintedItem* QQuickPaintedItem_new(const QQuickPaintedItem_VTable* 
 	return _mem_ ? new (_mem_)VirtualQQuickPaintedItem(vtbl) : nullptr;
 }
 
-VirtualQQuickPaintedItem* QQuickPaintedItem_new2(const QQuickPaintedItem_VTable* vtbl, size_t vdata, QQuickItem* parent) {
+VirtualQQuickPaintedItem* QQuickPaintedItem_new_parent(const QQuickPaintedItem_VTable* vtbl, size_t vdata, QQuickItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickPaintedItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickPaintedItem(vtbl, parent) : nullptr;
 }
@@ -660,7 +660,7 @@ int QQuickPaintedItem_metacall(QQuickPaintedItem* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickPaintedItem_tr(const char* s) {
+struct seaqt_string QQuickPaintedItem_tr_s(const char* s) {
 	QString _ret = QQuickPaintedItem::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -671,7 +671,7 @@ struct seaqt_string QQuickPaintedItem_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QQuickPaintedItem_trUtf8(const char* s) {
+struct seaqt_string QQuickPaintedItem_trUtf8_s(const char* s) {
 	QString _ret = QQuickPaintedItem::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -715,7 +715,7 @@ int QQuickPaintedItem_performanceHints(const QQuickPaintedItem* self) {
 	return static_cast<int>(_ret);
 }
 
-void QQuickPaintedItem_setPerformanceHint(QQuickPaintedItem* self, int hint) {
+void QQuickPaintedItem_setPerformanceHint_hint(QQuickPaintedItem* self, int hint) {
 	self->setPerformanceHint(static_cast<QQuickPaintedItem::PerformanceHint>(hint));
 }
 
@@ -860,7 +860,7 @@ void QQuickPaintedItem_connect_textureSizeChanged(QQuickPaintedItem* self, intpt
 	QQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::textureSizeChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQuickPaintedItem_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickPaintedItem_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickPaintedItem::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -871,7 +871,7 @@ struct seaqt_string QQuickPaintedItem_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickPaintedItem_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickPaintedItem_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickPaintedItem::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -882,7 +882,7 @@ struct seaqt_string QQuickPaintedItem_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QQuickPaintedItem_trUtf82(const char* s, const char* c) {
+struct seaqt_string QQuickPaintedItem_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QQuickPaintedItem::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -893,7 +893,7 @@ struct seaqt_string QQuickPaintedItem_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickPaintedItem_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QQuickPaintedItem_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickPaintedItem::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -904,11 +904,11 @@ struct seaqt_string QQuickPaintedItem_trUtf83(const char* s, const char* c, int 
 	return _ms;
 }
 
-void QQuickPaintedItem_updateWithRect(QQuickPaintedItem* self, QRect* rect) {
+void QQuickPaintedItem_update_rect(QQuickPaintedItem* self, QRect* rect) {
 	self->update(*rect);
 }
 
-void QQuickPaintedItem_setPerformanceHint2(QQuickPaintedItem* self, int hint, bool enabled) {
+void QQuickPaintedItem_setPerformanceHint_hint_enabled(QQuickPaintedItem* self, int hint, bool enabled) {
 	self->setPerformanceHint(static_cast<QQuickPaintedItem::PerformanceHint>(hint), enabled);
 }
 

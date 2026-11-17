@@ -170,14 +170,14 @@ public:
 	}
 
 	virtual QList<QGeoAreaMonitorInfo> activeMonitors(const QGeoShape& lookupArea) const override {
-		if (vtbl->activeMonitorsWithLookupArea == 0) {
+		if (vtbl->activeMonitors_lookupArea == 0) {
 			return QList<QGeoAreaMonitorInfo>(); // Pure virtual, there is no base we can call
 		}
 
 		const QGeoShape& lookupArea_ret = lookupArea;
 		// Cast returned reference into pointer
 		QGeoShape* sigval1 = const_cast<QGeoShape*>(&lookupArea_ret);
-		struct seaqt_array /* of QGeoAreaMonitorInfo* */  callback_return_value = vtbl->activeMonitorsWithLookupArea(this, sigval1);
+		struct seaqt_array /* of QGeoAreaMonitorInfo* */  callback_return_value = vtbl->activeMonitors_lookupArea(this, sigval1);
 		QList<QGeoAreaMonitorInfo> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QGeoAreaMonitorInfo** callback_return_value_arr = static_cast<QGeoAreaMonitorInfo**>(callback_return_value.data);
@@ -305,7 +305,7 @@ int QGeoAreaMonitorSource_metacall(QGeoAreaMonitorSource* self, int param1, int 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGeoAreaMonitorSource_tr(const char* s) {
+struct seaqt_string QGeoAreaMonitorSource_tr_s(const char* s) {
 	QString _ret = QGeoAreaMonitorSource::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -316,7 +316,7 @@ struct seaqt_string QGeoAreaMonitorSource_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGeoAreaMonitorSource_trUtf8(const char* s) {
+struct seaqt_string QGeoAreaMonitorSource_trUtf8_s(const char* s) {
 	QString _ret = QGeoAreaMonitorSource::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -410,7 +410,7 @@ struct seaqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_activeMo
 	return _out;
 }
 
-struct seaqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_activeMonitorsWithLookupArea(const QGeoAreaMonitorSource* self, QGeoShape* lookupArea) {
+struct seaqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_activeMonitors_lookupArea(const QGeoAreaMonitorSource* self, QGeoShape* lookupArea) {
 	QList<QGeoAreaMonitorInfo> _ret = self->activeMonitors(*lookupArea);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGeoAreaMonitorInfo** _arr = static_cast<QGeoAreaMonitorInfo**>(malloc(sizeof(QGeoAreaMonitorInfo*) * _ret.length()));
@@ -483,11 +483,11 @@ void QGeoAreaMonitorSource_connect_monitorExpired(QGeoAreaMonitorSource* self, i
 	QGeoAreaMonitorSource::connect(self, static_cast<void (QGeoAreaMonitorSource::*)(const QGeoAreaMonitorInfo&)>(&QGeoAreaMonitorSource::monitorExpired), self, local_caller{slot, callback, release});
 }
 
-void QGeoAreaMonitorSource_errorWithError(QGeoAreaMonitorSource* self, int error) {
+void QGeoAreaMonitorSource_error_error(QGeoAreaMonitorSource* self, int error) {
 	self->error(static_cast<QGeoAreaMonitorSource::Error>(error));
 }
 
-void QGeoAreaMonitorSource_connect_errorWithError(QGeoAreaMonitorSource* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QGeoAreaMonitorSource_connect_error_error(QGeoAreaMonitorSource* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -500,7 +500,7 @@ void QGeoAreaMonitorSource_connect_errorWithError(QGeoAreaMonitorSource* self, i
 	QGeoAreaMonitorSource::connect(self, static_cast<void (QGeoAreaMonitorSource::*)(QGeoAreaMonitorSource::Error)>(&QGeoAreaMonitorSource::error), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGeoAreaMonitorSource_tr2(const char* s, const char* c) {
+struct seaqt_string QGeoAreaMonitorSource_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGeoAreaMonitorSource::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -511,7 +511,7 @@ struct seaqt_string QGeoAreaMonitorSource_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGeoAreaMonitorSource_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGeoAreaMonitorSource_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGeoAreaMonitorSource::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -522,7 +522,7 @@ struct seaqt_string QGeoAreaMonitorSource_tr3(const char* s, const char* c, int 
 	return _ms;
 }
 
-struct seaqt_string QGeoAreaMonitorSource_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGeoAreaMonitorSource_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGeoAreaMonitorSource::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -533,7 +533,7 @@ struct seaqt_string QGeoAreaMonitorSource_trUtf82(const char* s, const char* c) 
 	return _ms;
 }
 
-struct seaqt_string QGeoAreaMonitorSource_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGeoAreaMonitorSource_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGeoAreaMonitorSource::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

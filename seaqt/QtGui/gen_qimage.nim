@@ -113,7 +113,7 @@ export
 
 type cQImage*{.exportc: "QImage", incompleteStruct.} = object
 
-proc fcQImage_operatorAssign(self: pointer, param1: pointer): void {.importc: "QImage_operatorAssign".}
+proc fcQImage_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QImage_operatorAssign".}
 proc fcQImage_swap(self: pointer, other: pointer): void {.importc: "QImage_swap".}
 proc fcQImage_isNull(self: pointer): bool {.importc: "QImage_isNull".}
 proc fcQImage_devType(self: pointer): cint {.importc: "QImage_devType".}
@@ -123,12 +123,12 @@ proc fcQImage_ToQVariant(self: pointer): pointer {.importc: "QImage_ToQVariant".
 proc fcQImage_detach(self: pointer): void {.importc: "QImage_detach".}
 proc fcQImage_isDetached(self: pointer): bool {.importc: "QImage_isDetached".}
 proc fcQImage_copy(self: pointer): pointer {.importc: "QImage_copy".}
-proc fcQImage_copy2(self: pointer, x: cint, y: cint, w: cint, h: cint): pointer {.importc: "QImage_copy2".}
+proc fcQImage_copyXYWH(self: pointer, x: cint, y: cint, w: cint, h: cint): pointer {.importc: "QImage_copy_x_y_w_h".}
 proc fcQImage_format(self: pointer): cint {.importc: "QImage_format".}
-proc fcQImage_convertToFormat(self: pointer, f: cint): pointer {.importc: "QImage_convertToFormat".}
-proc fcQImage_convertToFormat2(self: pointer, f: cint, colorTable: struct_seaqt_array): pointer {.importc: "QImage_convertToFormat2".}
+proc fcQImage_convertToFormatF(self: pointer, f: cint): pointer {.importc: "QImage_convertToFormat_f".}
+proc fcQImage_convertToFormatFColorTable(self: pointer, f: cint, colorTable: struct_seaqt_array): pointer {.importc: "QImage_convertToFormat_f_colorTable".}
 proc fcQImage_reinterpretAsFormat(self: pointer, f: cint): bool {.importc: "QImage_reinterpretAsFormat".}
-proc fcQImage_convertTo(self: pointer, f: cint): void {.importc: "QImage_convertTo".}
+proc fcQImage_convertToF(self: pointer, f: cint): void {.importc: "QImage_convertTo_f".}
 proc fcQImage_width(self: pointer): cint {.importc: "QImage_width".}
 proc fcQImage_height(self: pointer): cint {.importc: "QImage_height".}
 proc fcQImage_size(self: pointer): pointer {.importc: "QImage_size".}
@@ -142,47 +142,47 @@ proc fcQImage_setColorCount(self: pointer, colorCount: cint): void {.importc: "Q
 proc fcQImage_allGray(self: pointer): bool {.importc: "QImage_allGray".}
 proc fcQImage_isGrayscale(self: pointer): bool {.importc: "QImage_isGrayscale".}
 proc fcQImage_bits(self: pointer): ptr uint8 {.importc: "QImage_bits".}
-proc fcQImage_bits2(self: pointer): ptr uint8 {.importc: "QImage_bits2".}
+proc fcQImage_bitsConst(self: pointer): ptr uint8 {.importc: "QImage_bits_const".}
 proc fcQImage_constBits(self: pointer): ptr uint8 {.importc: "QImage_constBits".}
 proc fcQImage_byteCount(self: pointer): cint {.importc: "QImage_byteCount".}
 proc fcQImage_sizeInBytes(self: pointer): int64 {.importc: "QImage_sizeInBytes".}
-proc fcQImage_scanLine(self: pointer, param1: cint): ptr uint8 {.importc: "QImage_scanLine".}
-proc fcQImage_scanLineWithInt(self: pointer, param1: cint): ptr uint8 {.importc: "QImage_scanLineWithInt".}
+proc fcQImage_scanLineInt(self: pointer, param1: cint): ptr uint8 {.importc: "QImage_scanLine_int".}
+proc fcQImage_scanLineConstInt(self: pointer, param1: cint): ptr uint8 {.importc: "QImage_scanLine_const_int".}
 proc fcQImage_constScanLine(self: pointer, param1: cint): ptr uint8 {.importc: "QImage_constScanLine".}
 proc fcQImage_bytesPerLine(self: pointer): cint {.importc: "QImage_bytesPerLine".}
-proc fcQImage_valid(self: pointer, x: cint, y: cint): bool {.importc: "QImage_valid".}
-proc fcQImage_validWithPt(self: pointer, pt: pointer): bool {.importc: "QImage_validWithPt".}
-proc fcQImage_pixelIndex(self: pointer, x: cint, y: cint): cint {.importc: "QImage_pixelIndex".}
-proc fcQImage_pixelIndexWithPt(self: pointer, pt: pointer): cint {.importc: "QImage_pixelIndexWithPt".}
-proc fcQImage_pixel(self: pointer, x: cint, y: cint): cuint {.importc: "QImage_pixel".}
-proc fcQImage_pixelWithPt(self: pointer, pt: pointer): cuint {.importc: "QImage_pixelWithPt".}
-proc fcQImage_setPixel(self: pointer, x: cint, y: cint, index_or_rgb: cuint): void {.importc: "QImage_setPixel".}
-proc fcQImage_setPixel2(self: pointer, pt: pointer, index_or_rgb: cuint): void {.importc: "QImage_setPixel2".}
-proc fcQImage_pixelColor(self: pointer, x: cint, y: cint): pointer {.importc: "QImage_pixelColor".}
-proc fcQImage_pixelColorWithPt(self: pointer, pt: pointer): pointer {.importc: "QImage_pixelColorWithPt".}
-proc fcQImage_setPixelColor(self: pointer, x: cint, y: cint, c: pointer): void {.importc: "QImage_setPixelColor".}
-proc fcQImage_setPixelColor2(self: pointer, pt: pointer, c: pointer): void {.importc: "QImage_setPixelColor2".}
+proc fcQImage_validXY(self: pointer, x: cint, y: cint): bool {.importc: "QImage_valid_x_y".}
+proc fcQImage_validPt(self: pointer, pt: pointer): bool {.importc: "QImage_valid_pt".}
+proc fcQImage_pixelIndexXY(self: pointer, x: cint, y: cint): cint {.importc: "QImage_pixelIndex_x_y".}
+proc fcQImage_pixelIndexPt(self: pointer, pt: pointer): cint {.importc: "QImage_pixelIndex_pt".}
+proc fcQImage_pixelXY(self: pointer, x: cint, y: cint): cuint {.importc: "QImage_pixel_x_y".}
+proc fcQImage_pixelPt(self: pointer, pt: pointer): cuint {.importc: "QImage_pixel_pt".}
+proc fcQImage_setPixelXYIndexOrRgb(self: pointer, x: cint, y: cint, index_or_rgb: cuint): void {.importc: "QImage_setPixel_x_y_index_or_rgb".}
+proc fcQImage_setPixelPtIndexOrRgb(self: pointer, pt: pointer, index_or_rgb: cuint): void {.importc: "QImage_setPixel_pt_index_or_rgb".}
+proc fcQImage_pixelColorXY(self: pointer, x: cint, y: cint): pointer {.importc: "QImage_pixelColor_x_y".}
+proc fcQImage_pixelColorPt(self: pointer, pt: pointer): pointer {.importc: "QImage_pixelColor_pt".}
+proc fcQImage_setPixelColorXYC(self: pointer, x: cint, y: cint, c: pointer): void {.importc: "QImage_setPixelColor_x_y_c".}
+proc fcQImage_setPixelColorPtC(self: pointer, pt: pointer, c: pointer): void {.importc: "QImage_setPixelColor_pt_c".}
 proc fcQImage_colorTable(self: pointer): struct_seaqt_array {.importc: "QImage_colorTable".}
 proc fcQImage_setColorTable(self: pointer, colors: struct_seaqt_array): void {.importc: "QImage_setColorTable".}
 proc fcQImage_devicePixelRatio(self: pointer): float64 {.importc: "QImage_devicePixelRatio".}
 proc fcQImage_setDevicePixelRatio(self: pointer, scaleFactor: float64): void {.importc: "QImage_setDevicePixelRatio".}
-proc fcQImage_fill(self: pointer, pixel: cuint): void {.importc: "QImage_fill".}
-proc fcQImage_fillWithColor(self: pointer, color: pointer): void {.importc: "QImage_fillWithColor".}
-proc fcQImage_fill2(self: pointer, color: cint): void {.importc: "QImage_fill2".}
+proc fcQImage_fillUint(self: pointer, pixel: cuint): void {.importc: "QImage_fill_uint".}
+proc fcQImage_fill_QColor(self: pointer, color: pointer): void {.importc: "QImage_fill_QColor".}
+proc fcQImage_fill_Qt_GlobalColor(self: pointer, color: cint): void {.importc: "QImage_fill_Qt_GlobalColor".}
 proc fcQImage_hasAlphaChannel(self: pointer): bool {.importc: "QImage_hasAlphaChannel".}
 proc fcQImage_setAlphaChannel(self: pointer, alphaChannel: pointer): void {.importc: "QImage_setAlphaChannel".}
 proc fcQImage_alphaChannel(self: pointer): pointer {.importc: "QImage_alphaChannel".}
 proc fcQImage_createAlphaMask(self: pointer): pointer {.importc: "QImage_createAlphaMask".}
 proc fcQImage_createHeuristicMask(self: pointer): pointer {.importc: "QImage_createHeuristicMask".}
-proc fcQImage_createMaskFromColor(self: pointer, color: cuint): pointer {.importc: "QImage_createMaskFromColor".}
-proc fcQImage_scaled(self: pointer, w: cint, h: cint): pointer {.importc: "QImage_scaled".}
-proc fcQImage_scaledWithQSize(self: pointer, s: pointer): pointer {.importc: "QImage_scaledWithQSize".}
-proc fcQImage_scaledToWidth(self: pointer, w: cint): pointer {.importc: "QImage_scaledToWidth".}
-proc fcQImage_scaledToHeight(self: pointer, h: cint): pointer {.importc: "QImage_scaledToHeight".}
-proc fcQImage_transformed(self: pointer, matrix: pointer): pointer {.importc: "QImage_transformed".}
-proc fcQImage_trueMatrix(param1: pointer, w: cint, h: cint): pointer {.importc: "QImage_trueMatrix".}
-proc fcQImage_transformedWithMatrix(self: pointer, matrix: pointer): pointer {.importc: "QImage_transformedWithMatrix".}
-proc fcQImage_trueMatrix2(param1: pointer, w: cint, h: cint): pointer {.importc: "QImage_trueMatrix2".}
+proc fcQImage_createMaskFromColorColor(self: pointer, color: cuint): pointer {.importc: "QImage_createMaskFromColor_color".}
+proc fcQImage_scaledWH(self: pointer, w: cint, h: cint): pointer {.importc: "QImage_scaled_w_h".}
+proc fcQImage_scaledS(self: pointer, s: pointer): pointer {.importc: "QImage_scaled_s".}
+proc fcQImage_scaledToWidthW(self: pointer, w: cint): pointer {.importc: "QImage_scaledToWidth_w".}
+proc fcQImage_scaledToHeightH(self: pointer, h: cint): pointer {.importc: "QImage_scaledToHeight_h".}
+proc fcQImage_transformed_QMatrix(self: pointer, matrix: pointer): pointer {.importc: "QImage_transformed_QMatrix".}
+proc fcQImage_trueMatrix_QMatrixIntInt(param1: pointer, w: cint, h: cint): pointer {.importc: "QImage_trueMatrix_QMatrix_int_int".}
+proc fcQImage_transformed_QTransform(self: pointer, matrix: pointer): pointer {.importc: "QImage_transformed_QTransform".}
+proc fcQImage_trueMatrix_QTransformIntInt(param1: pointer, w: cint, h: cint): pointer {.importc: "QImage_trueMatrix_QTransform_int_int".}
 proc fcQImage_mirrored(self: pointer): pointer {.importc: "QImage_mirrored".}
 proc fcQImage_rgbSwapped(self: pointer): pointer {.importc: "QImage_rgbSwapped".}
 proc fcQImage_invertPixels(self: pointer): void {.importc: "QImage_invertPixels".}
@@ -191,14 +191,14 @@ proc fcQImage_convertedToColorSpace(self: pointer, param1: pointer): pointer {.i
 proc fcQImage_convertToColorSpace(self: pointer, param1: pointer): void {.importc: "QImage_convertToColorSpace".}
 proc fcQImage_setColorSpace(self: pointer, colorSpace: pointer): void {.importc: "QImage_setColorSpace".}
 proc fcQImage_applyColorTransform(self: pointer, transform: pointer): void {.importc: "QImage_applyColorTransform".}
-proc fcQImage_load(self: pointer, device: pointer, format: cstring): bool {.importc: "QImage_load".}
-proc fcQImage_loadWithFileName(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QImage_loadWithFileName".}
-proc fcQImage_loadFromData(self: pointer, buf: ptr uint8, len: cint): bool {.importc: "QImage_loadFromData".}
-proc fcQImage_loadFromDataWithData(self: pointer, data: struct_seaqt_string): bool {.importc: "QImage_loadFromDataWithData".}
-proc fcQImage_save(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QImage_save".}
-proc fcQImage_saveWithDevice(self: pointer, device: pointer): bool {.importc: "QImage_saveWithDevice".}
-proc fcQImage_fromData(data: ptr uint8, size: cint): pointer {.importc: "QImage_fromData".}
-proc fcQImage_fromDataWithData(data: struct_seaqt_string): pointer {.importc: "QImage_fromDataWithData".}
+proc fcQImage_loadDeviceFormat(self: pointer, device: pointer, format: cstring): bool {.importc: "QImage_load_device_format".}
+proc fcQImage_loadFileName(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QImage_load_fileName".}
+proc fcQImage_loadFromDataBufLen(self: pointer, buf: ptr uint8, len: cint): bool {.importc: "QImage_loadFromData_buf_len".}
+proc fcQImage_loadFromDataData(self: pointer, data: struct_seaqt_string): bool {.importc: "QImage_loadFromData_data".}
+proc fcQImage_saveFileName(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QImage_save_fileName".}
+proc fcQImage_saveDevice(self: pointer, device: pointer): bool {.importc: "QImage_save_device".}
+proc fcQImage_fromDataDataSize(data: ptr uint8, size: cint): pointer {.importc: "QImage_fromData_data_size".}
+proc fcQImage_fromDataData(data: struct_seaqt_string): pointer {.importc: "QImage_fromData_data".}
 proc fcQImage_cacheKey(self: pointer): clonglong {.importc: "QImage_cacheKey".}
 proc fcQImage_paintEngine(self: pointer): pointer {.importc: "QImage_paintEngine".}
 proc fcQImage_dotsPerMeterX(self: pointer): cint {.importc: "QImage_dotsPerMeterX".}
@@ -213,34 +213,34 @@ proc fcQImage_setText(self: pointer, key: struct_seaqt_string, value: struct_sea
 proc fcQImage_pixelFormat(self: pointer): pointer {.importc: "QImage_pixelFormat".}
 proc fcQImage_toPixelFormat(format: cint): pointer {.importc: "QImage_toPixelFormat".}
 proc fcQImage_toImageFormat(format: pointer): cint {.importc: "QImage_toImageFormat".}
-proc fcQImage_copyWithRect(self: pointer, rect: pointer): pointer {.importc: "QImage_copyWithRect".}
-proc fcQImage_convertToFormat3(self: pointer, f: cint, flags: cint): pointer {.importc: "QImage_convertToFormat3".}
-proc fcQImage_convertToFormat4(self: pointer, f: cint, colorTable: struct_seaqt_array, flags: cint): pointer {.importc: "QImage_convertToFormat4".}
-proc fcQImage_convertTo2(self: pointer, f: cint, flags: cint): void {.importc: "QImage_convertTo2".}
-proc fcQImage_createAlphaMaskWithFlags(self: pointer, flags: cint): pointer {.importc: "QImage_createAlphaMaskWithFlags".}
-proc fcQImage_createHeuristicMaskWithClipTight(self: pointer, clipTight: bool): pointer {.importc: "QImage_createHeuristicMaskWithClipTight".}
-proc fcQImage_createMaskFromColor2(self: pointer, color: cuint, mode: cint): pointer {.importc: "QImage_createMaskFromColor2".}
-proc fcQImage_scaled2(self: pointer, w: cint, h: cint, aspectMode: cint): pointer {.importc: "QImage_scaled2".}
-proc fcQImage_scaled3(self: pointer, w: cint, h: cint, aspectMode: cint, mode: cint): pointer {.importc: "QImage_scaled3".}
-proc fcQImage_scaled4(self: pointer, s: pointer, aspectMode: cint): pointer {.importc: "QImage_scaled4".}
-proc fcQImage_scaled5(self: pointer, s: pointer, aspectMode: cint, mode: cint): pointer {.importc: "QImage_scaled5".}
-proc fcQImage_scaledToWidth2(self: pointer, w: cint, mode: cint): pointer {.importc: "QImage_scaledToWidth2".}
-proc fcQImage_scaledToHeight2(self: pointer, h: cint, mode: cint): pointer {.importc: "QImage_scaledToHeight2".}
-proc fcQImage_transformed2(self: pointer, matrix: pointer, mode: cint): pointer {.importc: "QImage_transformed2".}
-proc fcQImage_transformed3(self: pointer, matrix: pointer, mode: cint): pointer {.importc: "QImage_transformed3".}
-proc fcQImage_mirroredWithHorizontally(self: pointer, horizontally: bool): pointer {.importc: "QImage_mirroredWithHorizontally".}
-proc fcQImage_mirrored2(self: pointer, horizontally: bool, vertically: bool): pointer {.importc: "QImage_mirrored2".}
-proc fcQImage_invertPixelsWithQImageInvertMode(self: pointer, param1: cint): void {.importc: "QImage_invertPixelsWithQImageInvertMode".}
-proc fcQImage_load2(self: pointer, fileName: struct_seaqt_string, format: cstring): bool {.importc: "QImage_load2".}
-proc fcQImage_loadFromData2(self: pointer, buf: ptr uint8, len: cint, format: cstring): bool {.importc: "QImage_loadFromData2".}
-proc fcQImage_loadFromData3(self: pointer, data: struct_seaqt_string, aformat: cstring): bool {.importc: "QImage_loadFromData3".}
-proc fcQImage_save2(self: pointer, fileName: struct_seaqt_string, format: cstring): bool {.importc: "QImage_save2".}
-proc fcQImage_save3(self: pointer, fileName: struct_seaqt_string, format: cstring, quality: cint): bool {.importc: "QImage_save3".}
-proc fcQImage_save4(self: pointer, device: pointer, format: cstring): bool {.importc: "QImage_save4".}
-proc fcQImage_save5(self: pointer, device: pointer, format: cstring, quality: cint): bool {.importc: "QImage_save5".}
-proc fcQImage_fromData2(data: ptr uint8, size: cint, format: cstring): pointer {.importc: "QImage_fromData2".}
-proc fcQImage_fromData3(data: struct_seaqt_string, format: cstring): pointer {.importc: "QImage_fromData3".}
-proc fcQImage_textWithKey(self: pointer, key: struct_seaqt_string): struct_seaqt_string {.importc: "QImage_textWithKey".}
+proc fcQImage_copyRect(self: pointer, rect: pointer): pointer {.importc: "QImage_copy_rect".}
+proc fcQImage_convertToFormatFFlags(self: pointer, f: cint, flags: cint): pointer {.importc: "QImage_convertToFormat_f_flags".}
+proc fcQImage_convertToFormatFColorTableFlags(self: pointer, f: cint, colorTable: struct_seaqt_array, flags: cint): pointer {.importc: "QImage_convertToFormat_f_colorTable_flags".}
+proc fcQImage_convertToFFlags(self: pointer, f: cint, flags: cint): void {.importc: "QImage_convertTo_f_flags".}
+proc fcQImage_createAlphaMaskFlags(self: pointer, flags: cint): pointer {.importc: "QImage_createAlphaMask_flags".}
+proc fcQImage_createHeuristicMaskClipTight(self: pointer, clipTight: bool): pointer {.importc: "QImage_createHeuristicMask_clipTight".}
+proc fcQImage_createMaskFromColorColorMode(self: pointer, color: cuint, mode: cint): pointer {.importc: "QImage_createMaskFromColor_color_mode".}
+proc fcQImage_scaledWHAspectMode(self: pointer, w: cint, h: cint, aspectMode: cint): pointer {.importc: "QImage_scaled_w_h_aspectMode".}
+proc fcQImage_scaledWHAspectModeMode(self: pointer, w: cint, h: cint, aspectMode: cint, mode: cint): pointer {.importc: "QImage_scaled_w_h_aspectMode_mode".}
+proc fcQImage_scaledSAspectMode(self: pointer, s: pointer, aspectMode: cint): pointer {.importc: "QImage_scaled_s_aspectMode".}
+proc fcQImage_scaledSAspectModeMode(self: pointer, s: pointer, aspectMode: cint, mode: cint): pointer {.importc: "QImage_scaled_s_aspectMode_mode".}
+proc fcQImage_scaledToWidthWMode(self: pointer, w: cint, mode: cint): pointer {.importc: "QImage_scaledToWidth_w_mode".}
+proc fcQImage_scaledToHeightHMode(self: pointer, h: cint, mode: cint): pointer {.importc: "QImage_scaledToHeight_h_mode".}
+proc fcQImage_transformed_QMatrix_Qt_TransformationMode(self: pointer, matrix: pointer, mode: cint): pointer {.importc: "QImage_transformed_QMatrix_Qt_TransformationMode".}
+proc fcQImage_transformed_QTransform_Qt_TransformationMode(self: pointer, matrix: pointer, mode: cint): pointer {.importc: "QImage_transformed_QTransform_Qt_TransformationMode".}
+proc fcQImage_mirroredHorizontally(self: pointer, horizontally: bool): pointer {.importc: "QImage_mirrored_horizontally".}
+proc fcQImage_mirroredHorizontallyVertically(self: pointer, horizontally: bool, vertically: bool): pointer {.importc: "QImage_mirrored_horizontally_vertically".}
+proc fcQImage_invertPixels_QImage_InvertMode(self: pointer, param1: cint): void {.importc: "QImage_invertPixels_QImage_InvertMode".}
+proc fcQImage_loadFileNameFormat(self: pointer, fileName: struct_seaqt_string, format: cstring): bool {.importc: "QImage_load_fileName_format".}
+proc fcQImage_loadFromDataBufLenFormat(self: pointer, buf: ptr uint8, len: cint, format: cstring): bool {.importc: "QImage_loadFromData_buf_len_format".}
+proc fcQImage_loadFromDataDataAformat(self: pointer, data: struct_seaqt_string, aformat: cstring): bool {.importc: "QImage_loadFromData_data_aformat".}
+proc fcQImage_saveFileNameFormat(self: pointer, fileName: struct_seaqt_string, format: cstring): bool {.importc: "QImage_save_fileName_format".}
+proc fcQImage_saveFileNameFormatQuality(self: pointer, fileName: struct_seaqt_string, format: cstring, quality: cint): bool {.importc: "QImage_save_fileName_format_quality".}
+proc fcQImage_saveDeviceFormat(self: pointer, device: pointer, format: cstring): bool {.importc: "QImage_save_device_format".}
+proc fcQImage_saveDeviceFormatQuality(self: pointer, device: pointer, format: cstring, quality: cint): bool {.importc: "QImage_save_device_format_quality".}
+proc fcQImage_fromDataDataSizeFormat(data: ptr uint8, size: cint, format: cstring): pointer {.importc: "QImage_fromData_data_size_format".}
+proc fcQImage_fromDataDataFormat(data: struct_seaqt_string, format: cstring): pointer {.importc: "QImage_fromData_data_format".}
+proc fcQImage_textKey(self: pointer, key: struct_seaqt_string): struct_seaqt_string {.importc: "QImage_text_key".}
 proc fcQImage_vdata(self: pointer): ptr pointer {.importc: "QImage_vdata".}
 proc fvdata_cQImage(self: pointer): pointer {.importc: "vdata_QImage".}
 
@@ -258,27 +258,27 @@ proc fcQImage_virtualbase_metric(self: pointer, metric: cint): cint {.importc: "
 proc fcQImage_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QImage_virtualbase_initPainter".}
 proc fcQImage_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QImage_virtualbase_redirected".}
 proc fcQImage_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QImage_virtualbase_sharedPainter".}
-proc fcQImage_protectedbase_mirroredHelper(self: pointer, horizontal: bool, vertical: bool): pointer {.importc: "QImage_protectedbase_mirroredHelper".}
-proc fcQImage_protectedbase_rgbSwappedHelper(self: pointer): pointer {.importc: "QImage_protectedbase_rgbSwappedHelper".}
-proc fcQImage_protectedbase_mirroredInplace(self: pointer, horizontal: bool, vertical: bool): void {.importc: "QImage_protectedbase_mirroredInplace".}
-proc fcQImage_protectedbase_rgbSwappedInplace(self: pointer): void {.importc: "QImage_protectedbase_rgbSwappedInplace".}
-proc fcQImage_protectedbase_convertToFormatHelper(self: pointer, format: cint, flags: cint): pointer {.importc: "QImage_protectedbase_convertToFormatHelper".}
-proc fcQImage_protectedbase_convertToFormatInplace(self: pointer, format: cint, flags: cint): bool {.importc: "QImage_protectedbase_convertToFormatInplace".}
+proc fcQImage_protectedbase_mirrored_helper(self: pointer, horizontal: bool, vertical: bool): pointer {.importc: "QImage_protectedbase_mirrored_helper".}
+proc fcQImage_protectedbase_rgbSwapped_helper(self: pointer): pointer {.importc: "QImage_protectedbase_rgbSwapped_helper".}
+proc fcQImage_protectedbase_mirrored_inplace(self: pointer, horizontal: bool, vertical: bool): void {.importc: "QImage_protectedbase_mirrored_inplace".}
+proc fcQImage_protectedbase_rgbSwapped_inplace(self: pointer): void {.importc: "QImage_protectedbase_rgbSwapped_inplace".}
+proc fcQImage_protectedbase_convertToFormat_helper(self: pointer, format: cint, flags: cint): pointer {.importc: "QImage_protectedbase_convertToFormat_helper".}
+proc fcQImage_protectedbase_convertToFormat_inplace(self: pointer, format: cint, flags: cint): bool {.importc: "QImage_protectedbase_convertToFormat_inplace".}
 proc fcQImage_protectedbase_smoothScaled(self: pointer, w: cint, h: cint): pointer {.importc: "QImage_protectedbase_smoothScaled".}
 proc fcQImage_new(vtbl: pointer, vdata: csize_t): ptr cQImage {.importc: "QImage_new".}
-proc fcQImage_new2(vtbl: pointer, vdata: csize_t, size: pointer, format: cint): ptr cQImage {.importc: "QImage_new2".}
-proc fcQImage_new3(vtbl: pointer, vdata: csize_t, width: cint, height: cint, format: cint): ptr cQImage {.importc: "QImage_new3".}
-proc fcQImage_new4(vtbl: pointer, vdata: csize_t, data: ptr uint8, width: cint, height: cint, format: cint): ptr cQImage {.importc: "QImage_new4".}
-proc fcQImage_new5(vtbl: pointer, vdata: csize_t, data: ptr uint8, width: cint, height: cint, format: cint): ptr cQImage {.importc: "QImage_new5".}
-proc fcQImage_new6(vtbl: pointer, vdata: csize_t, data: ptr uint8, width: cint, height: cint, bytesPerLine: cint, format: cint): ptr cQImage {.importc: "QImage_new6".}
-proc fcQImage_new7(vtbl: pointer, vdata: csize_t, data: ptr uint8, width: cint, height: cint, bytesPerLine: cint, format: cint): ptr cQImage {.importc: "QImage_new7".}
-proc fcQImage_new8(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQImage {.importc: "QImage_new8".}
-proc fcQImage_new9(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQImage {.importc: "QImage_new9".}
-proc fcQImage_new10(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: cstring): ptr cQImage {.importc: "QImage_new10".}
+proc fcQImage_new2(vtbl: pointer, vdata: csize_t, size: pointer, format: cint): ptr cQImage {.importc: "QImage_new_cQSize_QImage_Format".}
+proc fcQImage_new3(vtbl: pointer, vdata: csize_t, width: cint, height: cint, format: cint): ptr cQImage {.importc: "QImage_new_int_int_QImage_Format".}
+proc fcQImage_new4(vtbl: pointer, vdata: csize_t, data: ptr uint8, width: cint, height: cint, format: cint): ptr cQImage {.importc: "QImage_new_puchar_int_int_QImage_Format".}
+proc fcQImage_new5(vtbl: pointer, vdata: csize_t, data: ptr uint8, width: cint, height: cint, format: cint): ptr cQImage {.importc: "QImage_new_pcuchar_int_int_QImage_Format".}
+proc fcQImage_new6(vtbl: pointer, vdata: csize_t, data: ptr uint8, width: cint, height: cint, bytesPerLine: cint, format: cint): ptr cQImage {.importc: "QImage_new_puchar_int_int_int_QImage_Format".}
+proc fcQImage_new7(vtbl: pointer, vdata: csize_t, data: ptr uint8, width: cint, height: cint, bytesPerLine: cint, format: cint): ptr cQImage {.importc: "QImage_new_pcuchar_int_int_int_QImage_Format".}
+proc fcQImage_new8(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQImage {.importc: "QImage_new_cQString".}
+proc fcQImage_new9(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQImage {.importc: "QImage_new_cQImage".}
+proc fcQImage_new10(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: cstring): ptr cQImage {.importc: "QImage_new_cQString_pcchar".}
 proc fcQImage_staticMetaObject(): pointer {.importc: "QImage_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qimage_types.QImage, param1: gen_qimage_types.QImage): void =
-  fcQImage_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qimage_types.QImage, fromVal: gen_qimage_types.QImage): void =
+  fcQImage_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qimage_types.QImage, other: gen_qimage_types.QImage): void =
   fcQImage_swap(self.h, other.h)
@@ -308,26 +308,26 @@ proc copy*(self: gen_qimage_types.QImage): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQImage_copy(self.h), owned: true)
 
 proc copy*(self: gen_qimage_types.QImage, x: cint, y: cint, w: cint, h: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_copy2(self.h, x, y, w, h), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_copyXYWH(self.h, x, y, w, h), owned: true)
 
 proc format*(self: gen_qimage_types.QImage): cint =
   cint(fcQImage_format(self.h))
 
 proc convertToFormat*(self: gen_qimage_types.QImage, f: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_convertToFormat(self.h, cint(f)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_convertToFormatF(self.h, cint(f)), owned: true)
 
 proc convertToFormat*(self: gen_qimage_types.QImage, f: cint, colorTable: openArray[cuint]): gen_qimage_types.QImage =
   var colorTable_CArray = newSeq[cuint](len(colorTable))
   for i in 0..<len(colorTable):
     colorTable_CArray[i] = colorTable[i]
 
-  gen_qimage_types.QImage(h: fcQImage_convertToFormat2(self.h, cint(f), struct_seaqt_array(len: csize_t(len(colorTable)), data: if len(colorTable) == 0: nil else: addr(colorTable_CArray[0]))), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_convertToFormatFColorTable(self.h, cint(f), struct_seaqt_array(len: csize_t(len(colorTable)), data: if len(colorTable) == 0: nil else: addr(colorTable_CArray[0]))), owned: true)
 
 proc reinterpretAsFormat*(self: gen_qimage_types.QImage, f: cint): bool =
   fcQImage_reinterpretAsFormat(self.h, cint(f))
 
 proc convertTo*(self: gen_qimage_types.QImage, f: cint): void =
-  fcQImage_convertTo(self.h, cint(f))
+  fcQImage_convertToF(self.h, cint(f))
 
 proc width*(self: gen_qimage_types.QImage): cint =
   fcQImage_width(self.h)
@@ -369,7 +369,7 @@ proc bits*(self: gen_qimage_types.QImage): ptr uint8 =
   fcQImage_bits(self.h)
 
 proc bits2*(self: gen_qimage_types.QImage): ptr uint8 =
-  fcQImage_bits2(self.h)
+  fcQImage_bitsConst(self.h)
 
 proc constBits*(self: gen_qimage_types.QImage): ptr uint8 =
   fcQImage_constBits(self.h)
@@ -381,10 +381,10 @@ proc sizeInBytes*(self: gen_qimage_types.QImage): int64 =
   fcQImage_sizeInBytes(self.h)
 
 proc scanLine*(self: gen_qimage_types.QImage, param1: cint): ptr uint8 =
-  fcQImage_scanLine(self.h, param1)
+  fcQImage_scanLineInt(self.h, param1)
 
 proc scanLine2*(self: gen_qimage_types.QImage, param1: cint): ptr uint8 =
-  fcQImage_scanLineWithInt(self.h, param1)
+  fcQImage_scanLineConstInt(self.h, param1)
 
 proc constScanLine*(self: gen_qimage_types.QImage, param1: cint): ptr uint8 =
   fcQImage_constScanLine(self.h, param1)
@@ -393,40 +393,40 @@ proc bytesPerLine*(self: gen_qimage_types.QImage): cint =
   fcQImage_bytesPerLine(self.h)
 
 proc valid*(self: gen_qimage_types.QImage, x: cint, y: cint): bool =
-  fcQImage_valid(self.h, x, y)
+  fcQImage_validXY(self.h, x, y)
 
 proc valid*(self: gen_qimage_types.QImage, pt: gen_qpoint_types.QPoint): bool =
-  fcQImage_validWithPt(self.h, pt.h)
+  fcQImage_validPt(self.h, pt.h)
 
 proc pixelIndex*(self: gen_qimage_types.QImage, x: cint, y: cint): cint =
-  fcQImage_pixelIndex(self.h, x, y)
+  fcQImage_pixelIndexXY(self.h, x, y)
 
 proc pixelIndex*(self: gen_qimage_types.QImage, pt: gen_qpoint_types.QPoint): cint =
-  fcQImage_pixelIndexWithPt(self.h, pt.h)
+  fcQImage_pixelIndexPt(self.h, pt.h)
 
 proc pixel*(self: gen_qimage_types.QImage, x: cint, y: cint): cuint =
-  fcQImage_pixel(self.h, x, y)
+  fcQImage_pixelXY(self.h, x, y)
 
 proc pixel*(self: gen_qimage_types.QImage, pt: gen_qpoint_types.QPoint): cuint =
-  fcQImage_pixelWithPt(self.h, pt.h)
+  fcQImage_pixelPt(self.h, pt.h)
 
 proc setPixel*(self: gen_qimage_types.QImage, x: cint, y: cint, index_or_rgb: cuint): void =
-  fcQImage_setPixel(self.h, x, y, index_or_rgb)
+  fcQImage_setPixelXYIndexOrRgb(self.h, x, y, index_or_rgb)
 
 proc setPixel*(self: gen_qimage_types.QImage, pt: gen_qpoint_types.QPoint, index_or_rgb: cuint): void =
-  fcQImage_setPixel2(self.h, pt.h, index_or_rgb)
+  fcQImage_setPixelPtIndexOrRgb(self.h, pt.h, index_or_rgb)
 
 proc pixelColor*(self: gen_qimage_types.QImage, x: cint, y: cint): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQImage_pixelColor(self.h, x, y), owned: true)
+  gen_qcolor_types.QColor(h: fcQImage_pixelColorXY(self.h, x, y), owned: true)
 
 proc pixelColor*(self: gen_qimage_types.QImage, pt: gen_qpoint_types.QPoint): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQImage_pixelColorWithPt(self.h, pt.h), owned: true)
+  gen_qcolor_types.QColor(h: fcQImage_pixelColorPt(self.h, pt.h), owned: true)
 
 proc setPixelColor*(self: gen_qimage_types.QImage, x: cint, y: cint, c: gen_qcolor_types.QColor): void =
-  fcQImage_setPixelColor(self.h, x, y, c.h)
+  fcQImage_setPixelColorXYC(self.h, x, y, c.h)
 
 proc setPixelColor*(self: gen_qimage_types.QImage, pt: gen_qpoint_types.QPoint, c: gen_qcolor_types.QColor): void =
-  fcQImage_setPixelColor2(self.h, pt.h, c.h)
+  fcQImage_setPixelColorPtC(self.h, pt.h, c.h)
 
 proc colorTable*(self: gen_qimage_types.QImage): seq[cuint] =
   var v_ma = fcQImage_colorTable(self.h)
@@ -451,13 +451,13 @@ proc setDevicePixelRatio*(self: gen_qimage_types.QImage, scaleFactor: float64): 
   fcQImage_setDevicePixelRatio(self.h, scaleFactor)
 
 proc fill*(self: gen_qimage_types.QImage, pixel: cuint): void =
-  fcQImage_fill(self.h, pixel)
+  fcQImage_fillUint(self.h, pixel)
 
 proc fill*(self: gen_qimage_types.QImage, color: gen_qcolor_types.QColor): void =
-  fcQImage_fillWithColor(self.h, color.h)
+  fcQImage_fill_QColor(self.h, color.h)
 
 proc fill*(self: gen_qimage_types.QImage, color: cint): void =
-  fcQImage_fill2(self.h, cint(color))
+  fcQImage_fill_Qt_GlobalColor(self.h, cint(color))
 
 proc hasAlphaChannel*(self: gen_qimage_types.QImage): bool =
   fcQImage_hasAlphaChannel(self.h)
@@ -475,31 +475,31 @@ proc createHeuristicMask*(self: gen_qimage_types.QImage): gen_qimage_types.QImag
   gen_qimage_types.QImage(h: fcQImage_createHeuristicMask(self.h), owned: true)
 
 proc createMaskFromColor*(self: gen_qimage_types.QImage, color: cuint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_createMaskFromColor(self.h, color), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_createMaskFromColorColor(self.h, color), owned: true)
 
 proc scaled*(self: gen_qimage_types.QImage, w: cint, h: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_scaled(self.h, w, h), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_scaledWH(self.h, w, h), owned: true)
 
 proc scaled*(self: gen_qimage_types.QImage, s: gen_qsize_types.QSize): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_scaledWithQSize(self.h, s.h), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_scaledS(self.h, s.h), owned: true)
 
 proc scaledToWidth*(self: gen_qimage_types.QImage, w: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_scaledToWidth(self.h, w), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_scaledToWidthW(self.h, w), owned: true)
 
 proc scaledToHeight*(self: gen_qimage_types.QImage, h: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_scaledToHeight(self.h, h), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_scaledToHeightH(self.h, h), owned: true)
 
 proc transformed*(self: gen_qimage_types.QImage, matrix: gen_qmatrix_types.QMatrix): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_transformed(self.h, matrix.h), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_transformed_QMatrix(self.h, matrix.h), owned: true)
 
 proc trueMatrix*(_: type gen_qimage_types.QImage, param1: gen_qmatrix_types.QMatrix, w: cint, h: cint): gen_qmatrix_types.QMatrix =
-  gen_qmatrix_types.QMatrix(h: fcQImage_trueMatrix(param1.h, w, h), owned: true)
+  gen_qmatrix_types.QMatrix(h: fcQImage_trueMatrix_QMatrixIntInt(param1.h, w, h), owned: true)
 
 proc transformed*(self: gen_qimage_types.QImage, matrix: gen_qtransform_types.QTransform): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_transformedWithMatrix(self.h, matrix.h), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_transformed_QTransform(self.h, matrix.h), owned: true)
 
 proc trueMatrix*(_: type gen_qimage_types.QImage, param1: gen_qtransform_types.QTransform, w: cint, h: cint): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQImage_trueMatrix2(param1.h, w, h), owned: true)
+  gen_qtransform_types.QTransform(h: fcQImage_trueMatrix_QTransformIntInt(param1.h, w, h), owned: true)
 
 proc mirrored*(self: gen_qimage_types.QImage): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQImage_mirrored(self.h), owned: true)
@@ -526,28 +526,28 @@ proc applyColorTransform*(self: gen_qimage_types.QImage, transform: gen_qcolortr
   fcQImage_applyColorTransform(self.h, transform.h)
 
 proc load*(self: gen_qimage_types.QImage, device: gen_qiodevice_types.QIODevice, format: cstring): bool =
-  fcQImage_load(self.h, device.h, format)
+  fcQImage_loadDeviceFormat(self.h, device.h, format)
 
 proc load*(self: gen_qimage_types.QImage, fileName: openArray[char]): bool =
-  fcQImage_loadWithFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQImage_loadFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc loadFromData*(self: gen_qimage_types.QImage, buf: ptr uint8, len: cint): bool =
-  fcQImage_loadFromData(self.h, buf, len)
+  fcQImage_loadFromDataBufLen(self.h, buf, len)
 
 proc loadFromData*(self: gen_qimage_types.QImage, data: openArray[byte]): bool =
-  fcQImage_loadFromDataWithData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQImage_loadFromDataData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc save*(self: gen_qimage_types.QImage, fileName: openArray[char]): bool =
-  fcQImage_save(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQImage_saveFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc save*(self: gen_qimage_types.QImage, device: gen_qiodevice_types.QIODevice): bool =
-  fcQImage_saveWithDevice(self.h, device.h)
+  fcQImage_saveDevice(self.h, device.h)
 
 proc fromData*(_: type gen_qimage_types.QImage, data: ptr uint8, size: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_fromData(data, size), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_fromDataDataSize(data, size), owned: true)
 
 proc fromData*(_: type gen_qimage_types.QImage, data: openArray[byte]): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_fromDataWithData(struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_fromDataData(struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: true)
 
 proc cacheKey*(self: gen_qimage_types.QImage): clonglong =
   fcQImage_cacheKey(self.h)
@@ -604,92 +604,92 @@ proc toImageFormat*(_: type gen_qimage_types.QImage, format: gen_qpixelformat_ty
   cint(fcQImage_toImageFormat(format.h))
 
 proc copy*(self: gen_qimage_types.QImage, rect: gen_qrect_types.QRect): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_copyWithRect(self.h, rect.h), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_copyRect(self.h, rect.h), owned: true)
 
 proc convertToFormat*(self: gen_qimage_types.QImage, f: cint, flags: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_convertToFormat3(self.h, cint(f), cint(flags)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_convertToFormatFFlags(self.h, cint(f), cint(flags)), owned: true)
 
 proc convertToFormat*(self: gen_qimage_types.QImage, f: cint, colorTable: openArray[cuint], flags: cint): gen_qimage_types.QImage =
   var colorTable_CArray = newSeq[cuint](len(colorTable))
   for i in 0..<len(colorTable):
     colorTable_CArray[i] = colorTable[i]
 
-  gen_qimage_types.QImage(h: fcQImage_convertToFormat4(self.h, cint(f), struct_seaqt_array(len: csize_t(len(colorTable)), data: if len(colorTable) == 0: nil else: addr(colorTable_CArray[0])), cint(flags)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_convertToFormatFColorTableFlags(self.h, cint(f), struct_seaqt_array(len: csize_t(len(colorTable)), data: if len(colorTable) == 0: nil else: addr(colorTable_CArray[0])), cint(flags)), owned: true)
 
 proc convertTo*(self: gen_qimage_types.QImage, f: cint, flags: cint): void =
-  fcQImage_convertTo2(self.h, cint(f), cint(flags))
+  fcQImage_convertToFFlags(self.h, cint(f), cint(flags))
 
 proc createAlphaMask*(self: gen_qimage_types.QImage, flags: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_createAlphaMaskWithFlags(self.h, cint(flags)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_createAlphaMaskFlags(self.h, cint(flags)), owned: true)
 
 proc createHeuristicMask*(self: gen_qimage_types.QImage, clipTight: bool): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_createHeuristicMaskWithClipTight(self.h, clipTight), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_createHeuristicMaskClipTight(self.h, clipTight), owned: true)
 
 proc createMaskFromColor*(self: gen_qimage_types.QImage, color: cuint, mode: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_createMaskFromColor2(self.h, color, cint(mode)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_createMaskFromColorColorMode(self.h, color, cint(mode)), owned: true)
 
 proc scaled*(self: gen_qimage_types.QImage, w: cint, h: cint, aspectMode: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_scaled2(self.h, w, h, cint(aspectMode)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_scaledWHAspectMode(self.h, w, h, cint(aspectMode)), owned: true)
 
 proc scaled*(self: gen_qimage_types.QImage, w: cint, h: cint, aspectMode: cint, mode: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_scaled3(self.h, w, h, cint(aspectMode), cint(mode)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_scaledWHAspectModeMode(self.h, w, h, cint(aspectMode), cint(mode)), owned: true)
 
 proc scaled*(self: gen_qimage_types.QImage, s: gen_qsize_types.QSize, aspectMode: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_scaled4(self.h, s.h, cint(aspectMode)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_scaledSAspectMode(self.h, s.h, cint(aspectMode)), owned: true)
 
 proc scaled*(self: gen_qimage_types.QImage, s: gen_qsize_types.QSize, aspectMode: cint, mode: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_scaled5(self.h, s.h, cint(aspectMode), cint(mode)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_scaledSAspectModeMode(self.h, s.h, cint(aspectMode), cint(mode)), owned: true)
 
 proc scaledToWidth*(self: gen_qimage_types.QImage, w: cint, mode: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_scaledToWidth2(self.h, w, cint(mode)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_scaledToWidthWMode(self.h, w, cint(mode)), owned: true)
 
 proc scaledToHeight*(self: gen_qimage_types.QImage, h: cint, mode: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_scaledToHeight2(self.h, h, cint(mode)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_scaledToHeightHMode(self.h, h, cint(mode)), owned: true)
 
 proc transformed*(self: gen_qimage_types.QImage, matrix: gen_qmatrix_types.QMatrix, mode: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_transformed2(self.h, matrix.h, cint(mode)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_transformed_QMatrix_Qt_TransformationMode(self.h, matrix.h, cint(mode)), owned: true)
 
 proc transformed*(self: gen_qimage_types.QImage, matrix: gen_qtransform_types.QTransform, mode: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_transformed3(self.h, matrix.h, cint(mode)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_transformed_QTransform_Qt_TransformationMode(self.h, matrix.h, cint(mode)), owned: true)
 
 proc mirrored*(self: gen_qimage_types.QImage, horizontally: bool): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_mirroredWithHorizontally(self.h, horizontally), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_mirroredHorizontally(self.h, horizontally), owned: true)
 
 proc mirrored*(self: gen_qimage_types.QImage, horizontally: bool, vertically: bool): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_mirrored2(self.h, horizontally, vertically), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_mirroredHorizontallyVertically(self.h, horizontally, vertically), owned: true)
 
 proc invertPixels*(self: gen_qimage_types.QImage, param1: cint): void =
-  fcQImage_invertPixelsWithQImageInvertMode(self.h, cint(param1))
+  fcQImage_invertPixels_QImage_InvertMode(self.h, cint(param1))
 
 proc load*(self: gen_qimage_types.QImage, fileName: openArray[char], format: cstring): bool =
-  fcQImage_load2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
+  fcQImage_loadFileNameFormat(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
 
 proc loadFromData*(self: gen_qimage_types.QImage, buf: ptr uint8, len: cint, format: cstring): bool =
-  fcQImage_loadFromData2(self.h, buf, len, format)
+  fcQImage_loadFromDataBufLenFormat(self.h, buf, len, format)
 
 proc loadFromData*(self: gen_qimage_types.QImage, data: openArray[byte], aformat: cstring): bool =
-  fcQImage_loadFromData3(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), aformat)
+  fcQImage_loadFromDataDataAformat(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), aformat)
 
 proc save*(self: gen_qimage_types.QImage, fileName: openArray[char], format: cstring): bool =
-  fcQImage_save2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
+  fcQImage_saveFileNameFormat(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
 
 proc save*(self: gen_qimage_types.QImage, fileName: openArray[char], format: cstring, quality: cint): bool =
-  fcQImage_save3(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format, quality)
+  fcQImage_saveFileNameFormatQuality(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format, quality)
 
 proc save*(self: gen_qimage_types.QImage, device: gen_qiodevice_types.QIODevice, format: cstring): bool =
-  fcQImage_save4(self.h, device.h, format)
+  fcQImage_saveDeviceFormat(self.h, device.h, format)
 
 proc save*(self: gen_qimage_types.QImage, device: gen_qiodevice_types.QIODevice, format: cstring, quality: cint): bool =
-  fcQImage_save5(self.h, device.h, format, quality)
+  fcQImage_saveDeviceFormatQuality(self.h, device.h, format, quality)
 
 proc fromData*(_: type gen_qimage_types.QImage, data: ptr uint8, size: cint, format: cstring): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_fromData2(data, size, format), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_fromDataDataSizeFormat(data, size, format), owned: true)
 
 proc fromData*(_: type gen_qimage_types.QImage, data: openArray[byte], format: cstring): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_fromData3(struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), format), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_fromDataDataFormat(struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), format), owned: true)
 
 proc text*(self: gen_qimage_types.QImage, key: openArray[char]): string =
-  let v_ms = fcQImage_textWithKey(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
+  let v_ms = fcQImage_textKey(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -835,22 +835,22 @@ proc fcQImage_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
 
 
 proc mirroredHelper*(self: gen_qimage_types.QImage, horizontal: bool, vertical: bool): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_protectedbase_mirroredHelper(self.h, horizontal, vertical), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_protectedbase_mirrored_helper(self.h, horizontal, vertical), owned: true)
 
 proc rgbSwappedHelper*(self: gen_qimage_types.QImage): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_protectedbase_rgbSwappedHelper(self.h), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_protectedbase_rgbSwapped_helper(self.h), owned: true)
 
 proc mirroredInplace*(self: gen_qimage_types.QImage, horizontal: bool, vertical: bool): void =
-  fcQImage_protectedbase_mirroredInplace(self.h, horizontal, vertical)
+  fcQImage_protectedbase_mirrored_inplace(self.h, horizontal, vertical)
 
 proc rgbSwappedInplace*(self: gen_qimage_types.QImage): void =
-  fcQImage_protectedbase_rgbSwappedInplace(self.h)
+  fcQImage_protectedbase_rgbSwapped_inplace(self.h)
 
 proc convertToFormatHelper*(self: gen_qimage_types.QImage, format: cint, flags: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQImage_protectedbase_convertToFormatHelper(self.h, cint(format), cint(flags)), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_protectedbase_convertToFormat_helper(self.h, cint(format), cint(flags)), owned: true)
 
 proc convertToFormatInplace*(self: gen_qimage_types.QImage, format: cint, flags: cint): bool =
-  fcQImage_protectedbase_convertToFormatInplace(self.h, cint(format), cint(flags))
+  fcQImage_protectedbase_convertToFormat_inplace(self.h, cint(format), cint(flags))
 
 proc smoothScaled*(self: gen_qimage_types.QImage, w: cint, h: cint): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQImage_protectedbase_smoothScaled(self.h, w, h), owned: true)
@@ -1039,7 +1039,7 @@ proc create*(T: type gen_qimage_types.QImage,
   fcQImage_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qimage_types.QImage,
-    param1: gen_qimage_types.QImage,
+    fromVal: gen_qimage_types.QImage,
     vtbl: ref QImageVTable = nil): gen_qimage_types.QImage =
   let vtbl = if vtbl == nil: new QImageVTable else: vtbl
   GC_ref(vtbl)
@@ -1058,7 +1058,7 @@ proc create*(T: type gen_qimage_types.QImage,
     vtbl[].vtbl.redirected = fcQImage_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = fcQImage_vtable_callback_sharedPainter
-  let tmp = gen_qimage_types.QImage(h: fcQImage_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qimage_types.QImage(h: fcQImage_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQImage_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qimage_types.QImage,
@@ -1161,10 +1161,10 @@ proc create*(T: type gen_qimage_types.QImage,
   inst[].owned = true
 
 proc create*(T: type gen_qimage_types.QImage,
-    param1: gen_qimage_types.QImage,
+    fromVal: gen_qimage_types.QImage,
     inst: VirtualQImage) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQImage_new9(addr(cQImage_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQImage_new9(addr(cQImage_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQImage_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 

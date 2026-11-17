@@ -25,41 +25,41 @@ QJSValue* QJSValue_new() {
 	return new (std::nothrow) QJSValue();
 }
 
-QJSValue* QJSValue_new2(QJSValue* other) {
-	return new (std::nothrow) QJSValue(*other);
+QJSValue* QJSValue_new_QJSValue(QJSValue* from) {
+	return new (std::nothrow) QJSValue(*from);
 }
 
-QJSValue* QJSValue_new3(bool value) {
+QJSValue* QJSValue_new_bool(bool value) {
 	return new (std::nothrow) QJSValue(value);
 }
 
-QJSValue* QJSValue_new4(int value) {
+QJSValue* QJSValue_new_int(int value) {
 	return new (std::nothrow) QJSValue(static_cast<int>(value));
 }
 
-QJSValue* QJSValue_new5(unsigned int value) {
+QJSValue* QJSValue_new_uint(unsigned int value) {
 	return new (std::nothrow) QJSValue(static_cast<uint>(value));
 }
 
-QJSValue* QJSValue_new6(double value) {
+QJSValue* QJSValue_new_double(double value) {
 	return new (std::nothrow) QJSValue(static_cast<double>(value));
 }
 
-QJSValue* QJSValue_new7(struct seaqt_string value) {
+QJSValue* QJSValue_new_QString(struct seaqt_string value) {
 	QString value_QString = QString::fromUtf8(value.data, value.len);
 	return new (std::nothrow) QJSValue(value_QString);
 }
 
-QJSValue* QJSValue_new8(const char* str) {
+QJSValue* QJSValue_new_char(const char* str) {
 	return new (std::nothrow) QJSValue(str);
 }
 
-QJSValue* QJSValue_new9(int value) {
+QJSValue* QJSValue_new_QJSValue_SpecialValue(int value) {
 	return new (std::nothrow) QJSValue(static_cast<QJSValue::SpecialValue>(value));
 }
 
-void QJSValue_operatorAssign(QJSValue* self, QJSValue* other) {
-	self->operator=(*other);
+void QJSValue_operatorAssign(QJSValue* self, QJSValue* from) {
+	self->operator=(*from);
 }
 
 bool QJSValue_isBool(const QJSValue* self) {
@@ -175,12 +175,12 @@ void QJSValue_setPrototype(QJSValue* self, QJSValue* prototype) {
 	self->setPrototype(*prototype);
 }
 
-QJSValue* QJSValue_property(const QJSValue* self, struct seaqt_string name) {
+QJSValue* QJSValue_property_name(const QJSValue* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return new QJSValue(self->property(name_QString));
 }
 
-void QJSValue_setProperty(QJSValue* self, struct seaqt_string name, QJSValue* value) {
+void QJSValue_setProperty_name_value(QJSValue* self, struct seaqt_string name, QJSValue* value) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	self->setProperty(name_QString, *value);
 }
@@ -195,11 +195,11 @@ bool QJSValue_hasOwnProperty(const QJSValue* self, struct seaqt_string name) {
 	return self->hasOwnProperty(name_QString);
 }
 
-QJSValue* QJSValue_propertyWithArrayIndex(const QJSValue* self, unsigned int arrayIndex) {
+QJSValue* QJSValue_property_arrayIndex(const QJSValue* self, unsigned int arrayIndex) {
 	return new QJSValue(self->property(static_cast<quint32>(arrayIndex)));
 }
 
-void QJSValue_setProperty2(QJSValue* self, unsigned int arrayIndex, QJSValue* value) {
+void QJSValue_setProperty_arrayIndex_value(QJSValue* self, unsigned int arrayIndex, QJSValue* value) {
 	self->setProperty(static_cast<quint32>(arrayIndex), *value);
 }
 
@@ -216,7 +216,7 @@ QJSValue* QJSValue_call(QJSValue* self) {
 	return new QJSValue(self->call());
 }
 
-QJSValue* QJSValue_callWithInstance(QJSValue* self, QJSValue* instance) {
+QJSValue* QJSValue_callWithInstance_instance(QJSValue* self, QJSValue* instance) {
 	return new QJSValue(self->callWithInstance(*instance));
 }
 
@@ -233,7 +233,7 @@ QJSEngine* QJSValue_engine(const QJSValue* self) {
 	return self->engine();
 }
 
-QJSValue* QJSValue_callWithArgs(QJSValue* self, struct seaqt_array /* of QJSValue* */  args) {
+QJSValue* QJSValue_call_args(QJSValue* self, struct seaqt_array /* of QJSValue* */  args) {
 	QJSValueList args_QList;
 	args_QList.reserve(args.len);
 	QJSValue** args_arr = static_cast<QJSValue**>(args.data);
@@ -243,7 +243,7 @@ QJSValue* QJSValue_callWithArgs(QJSValue* self, struct seaqt_array /* of QJSValu
 	return new QJSValue(self->call(args_QList));
 }
 
-QJSValue* QJSValue_callWithInstance2(QJSValue* self, QJSValue* instance, struct seaqt_array /* of QJSValue* */  args) {
+QJSValue* QJSValue_callWithInstance_instance_args(QJSValue* self, QJSValue* instance, struct seaqt_array /* of QJSValue* */  args) {
 	QJSValueList args_QList;
 	args_QList.reserve(args.len);
 	QJSValue** args_arr = static_cast<QJSValue**>(args.data);
@@ -253,7 +253,7 @@ QJSValue* QJSValue_callWithInstance2(QJSValue* self, QJSValue* instance, struct 
 	return new QJSValue(self->callWithInstance(*instance, args_QList));
 }
 
-QJSValue* QJSValue_callAsConstructorWithArgs(QJSValue* self, struct seaqt_array /* of QJSValue* */  args) {
+QJSValue* QJSValue_callAsConstructor_args(QJSValue* self, struct seaqt_array /* of QJSValue* */  args) {
 	QJSValueList args_QList;
 	args_QList.reserve(args.len);
 	QJSValue** args_arr = static_cast<QJSValue**>(args.data);

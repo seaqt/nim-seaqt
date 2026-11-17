@@ -182,7 +182,7 @@ VirtualQWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new(const QWebEngi
 	return _mem_ ? new (_mem_)VirtualQWebEngineUrlSchemeHandler(vtbl) : nullptr;
 }
 
-VirtualQWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new2(const QWebEngineUrlSchemeHandler_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new_parent(const QWebEngineUrlSchemeHandler_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEngineUrlSchemeHandler>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEngineUrlSchemeHandler(vtbl, parent) : nullptr;
 }
@@ -203,7 +203,7 @@ int QWebEngineUrlSchemeHandler_metacall(QWebEngineUrlSchemeHandler* self, int pa
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebEngineUrlSchemeHandler_tr(const char* s) {
+struct seaqt_string QWebEngineUrlSchemeHandler_tr_s(const char* s) {
 	QString _ret = QWebEngineUrlSchemeHandler::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -214,7 +214,7 @@ struct seaqt_string QWebEngineUrlSchemeHandler_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebEngineUrlSchemeHandler_trUtf8(const char* s) {
+struct seaqt_string QWebEngineUrlSchemeHandler_trUtf8_s(const char* s) {
 	QString _ret = QWebEngineUrlSchemeHandler::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -229,7 +229,7 @@ void QWebEngineUrlSchemeHandler_requestStarted(QWebEngineUrlSchemeHandler* self,
 	self->requestStarted(param1);
 }
 
-struct seaqt_string QWebEngineUrlSchemeHandler_tr2(const char* s, const char* c) {
+struct seaqt_string QWebEngineUrlSchemeHandler_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebEngineUrlSchemeHandler::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -240,7 +240,7 @@ struct seaqt_string QWebEngineUrlSchemeHandler_tr2(const char* s, const char* c)
 	return _ms;
 }
 
-struct seaqt_string QWebEngineUrlSchemeHandler_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebEngineUrlSchemeHandler_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebEngineUrlSchemeHandler::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -251,7 +251,7 @@ struct seaqt_string QWebEngineUrlSchemeHandler_tr3(const char* s, const char* c,
 	return _ms;
 }
 
-struct seaqt_string QWebEngineUrlSchemeHandler_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebEngineUrlSchemeHandler_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebEngineUrlSchemeHandler::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -262,7 +262,7 @@ struct seaqt_string QWebEngineUrlSchemeHandler_trUtf82(const char* s, const char
 	return _ms;
 }
 
-struct seaqt_string QWebEngineUrlSchemeHandler_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebEngineUrlSchemeHandler_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebEngineUrlSchemeHandler::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

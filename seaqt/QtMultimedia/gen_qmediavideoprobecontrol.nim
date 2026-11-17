@@ -57,16 +57,16 @@ type cQMediaVideoProbeControl*{.exportc: "QMediaVideoProbeControl", incompleteSt
 proc fcQMediaVideoProbeControl_metaObject(self: pointer): pointer {.importc: "QMediaVideoProbeControl_metaObject".}
 proc fcQMediaVideoProbeControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaVideoProbeControl_metacast".}
 proc fcQMediaVideoProbeControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaVideoProbeControl_metacall".}
-proc fcQMediaVideoProbeControl_tr(s: cstring): struct_seaqt_string {.importc: "QMediaVideoProbeControl_tr".}
-proc fcQMediaVideoProbeControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaVideoProbeControl_trUtf8".}
+proc fcQMediaVideoProbeControl_trS(s: cstring): struct_seaqt_string {.importc: "QMediaVideoProbeControl_tr_s".}
+proc fcQMediaVideoProbeControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaVideoProbeControl_trUtf8_s".}
 proc fcQMediaVideoProbeControl_videoFrameProbed(self: pointer, frame: pointer): void {.importc: "QMediaVideoProbeControl_videoFrameProbed".}
 proc fcQMediaVideoProbeControl_connect_videoFrameProbed(self: pointer, slot: int, callback: proc (slot: int, frame: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaVideoProbeControl_connect_videoFrameProbed".}
 proc fcQMediaVideoProbeControl_flush(self: pointer): void {.importc: "QMediaVideoProbeControl_flush".}
 proc fcQMediaVideoProbeControl_connect_flush(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaVideoProbeControl_connect_flush".}
-proc fcQMediaVideoProbeControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaVideoProbeControl_tr2".}
-proc fcQMediaVideoProbeControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaVideoProbeControl_tr3".}
-proc fcQMediaVideoProbeControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaVideoProbeControl_trUtf82".}
-proc fcQMediaVideoProbeControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaVideoProbeControl_trUtf83".}
+proc fcQMediaVideoProbeControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaVideoProbeControl_tr_s_c".}
+proc fcQMediaVideoProbeControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaVideoProbeControl_tr_s_c_n".}
+proc fcQMediaVideoProbeControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaVideoProbeControl_trUtf8_s_c".}
+proc fcQMediaVideoProbeControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaVideoProbeControl_trUtf8_s_c_n".}
 proc fcQMediaVideoProbeControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaVideoProbeControl_protectedbase_sender".}
 proc fcQMediaVideoProbeControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaVideoProbeControl_protectedbase_senderSignalIndex".}
 proc fcQMediaVideoProbeControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaVideoProbeControl_protectedbase_receivers".}
@@ -83,13 +83,13 @@ proc metacall*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, 
   fcQMediaVideoProbeControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, s: cstring): string =
-  let v_ms = fcQMediaVideoProbeControl_tr(s)
+  let v_ms = fcQMediaVideoProbeControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, s: cstring): string =
-  let v_ms = fcQMediaVideoProbeControl_trUtf8(s)
+  let v_ms = fcQMediaVideoProbeControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -133,25 +133,25 @@ proc onFlush*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, s
   fcQMediaVideoProbeControl_connect_flush(self.h, cast[int](addr tmp[]), fcQMediaVideoProbeControl_slot_callback_flush, fcQMediaVideoProbeControl_slot_callback_flush_release)
 
 proc tr*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaVideoProbeControl_tr2(s, c)
+  let v_ms = fcQMediaVideoProbeControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaVideoProbeControl_tr3(s, c, n)
+  let v_ms = fcQMediaVideoProbeControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaVideoProbeControl_trUtf82(s, c)
+  let v_ms = fcQMediaVideoProbeControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaVideoProbeControl_trUtf83(s, c, n)
+  let v_ms = fcQMediaVideoProbeControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

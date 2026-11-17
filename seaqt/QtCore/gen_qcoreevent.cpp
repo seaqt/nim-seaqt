@@ -18,16 +18,16 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QEvent* QEvent_new(int type) {
+QEvent* QEvent_new_type(int type) {
 	return new (std::nothrow) QEvent(static_cast<QEvent::Type>(type));
 }
 
-QEvent* QEvent_new2(QEvent* other) {
-	return new (std::nothrow) QEvent(*other);
+QEvent* QEvent_new_from(QEvent* from) {
+	return new (std::nothrow) QEvent(*from);
 }
 
-void QEvent_operatorAssign(QEvent* self, QEvent* other) {
-	self->operator=(*other);
+void QEvent_operatorAssign(QEvent* self, QEvent* from) {
+	self->operator=(*from);
 }
 
 int QEvent_type(const QEvent* self) {
@@ -59,7 +59,7 @@ int QEvent_registerEventType() {
 	return QEvent::registerEventType();
 }
 
-int QEvent_registerEventTypeWithHint(int hint) {
+int QEvent_registerEventType_hint(int hint) {
 	return QEvent::registerEventType(static_cast<int>(hint));
 }
 
@@ -68,12 +68,12 @@ void QEvent_delete(QEvent* self) {
 	delete self;
 }
 
-QTimerEvent* QTimerEvent_new(int timerId) {
+QTimerEvent* QTimerEvent_new_timerId(int timerId) {
 	return new (std::nothrow) QTimerEvent(static_cast<int>(timerId));
 }
 
-QTimerEvent* QTimerEvent_new2(QTimerEvent* param1) {
-	return new (std::nothrow) QTimerEvent(*param1);
+QTimerEvent* QTimerEvent_new_from(QTimerEvent* from) {
+	return new (std::nothrow) QTimerEvent(*from);
 }
 
 void QTimerEvent_virtbase(QTimerEvent* src, QEvent** outptr_QEvent) {
@@ -84,20 +84,20 @@ int QTimerEvent_timerId(const QTimerEvent* self) {
 	return self->timerId();
 }
 
-void QTimerEvent_operatorAssign(QTimerEvent* self, QTimerEvent* param1) {
-	self->operator=(*param1);
+void QTimerEvent_operatorAssign(QTimerEvent* self, QTimerEvent* from) {
+	self->operator=(*from);
 }
 
 void QTimerEvent_delete(QTimerEvent* self) {
 	delete self;
 }
 
-QChildEvent* QChildEvent_new(int type, QObject* child) {
+QChildEvent* QChildEvent_new_type_child(int type, QObject* child) {
 	return new (std::nothrow) QChildEvent(static_cast<QEvent::Type>(type), child);
 }
 
-QChildEvent* QChildEvent_new2(QChildEvent* param1) {
-	return new (std::nothrow) QChildEvent(*param1);
+QChildEvent* QChildEvent_new_from(QChildEvent* from) {
+	return new (std::nothrow) QChildEvent(*from);
 }
 
 void QChildEvent_virtbase(QChildEvent* src, QEvent** outptr_QEvent) {
@@ -120,21 +120,21 @@ bool QChildEvent_removed(const QChildEvent* self) {
 	return self->removed();
 }
 
-void QChildEvent_operatorAssign(QChildEvent* self, QChildEvent* param1) {
-	self->operator=(*param1);
+void QChildEvent_operatorAssign(QChildEvent* self, QChildEvent* from) {
+	self->operator=(*from);
 }
 
 void QChildEvent_delete(QChildEvent* self) {
 	delete self;
 }
 
-QDynamicPropertyChangeEvent* QDynamicPropertyChangeEvent_new(struct seaqt_string name) {
+QDynamicPropertyChangeEvent* QDynamicPropertyChangeEvent_new_name(struct seaqt_string name) {
 	QByteArray name_QByteArray(name.data, name.len);
 	return new (std::nothrow) QDynamicPropertyChangeEvent(name_QByteArray);
 }
 
-QDynamicPropertyChangeEvent* QDynamicPropertyChangeEvent_new2(QDynamicPropertyChangeEvent* param1) {
-	return new (std::nothrow) QDynamicPropertyChangeEvent(*param1);
+QDynamicPropertyChangeEvent* QDynamicPropertyChangeEvent_new_from(QDynamicPropertyChangeEvent* from) {
+	return new (std::nothrow) QDynamicPropertyChangeEvent(*from);
 }
 
 void QDynamicPropertyChangeEvent_virtbase(QDynamicPropertyChangeEvent* src, QEvent** outptr_QEvent) {
@@ -150,8 +150,8 @@ struct seaqt_string QDynamicPropertyChangeEvent_propertyName(const QDynamicPrope
 	return _ms;
 }
 
-void QDynamicPropertyChangeEvent_operatorAssign(QDynamicPropertyChangeEvent* self, QDynamicPropertyChangeEvent* param1) {
-	self->operator=(*param1);
+void QDynamicPropertyChangeEvent_operatorAssign(QDynamicPropertyChangeEvent* self, QDynamicPropertyChangeEvent* from) {
+	self->operator=(*from);
 }
 
 void QDynamicPropertyChangeEvent_delete(QDynamicPropertyChangeEvent* self) {

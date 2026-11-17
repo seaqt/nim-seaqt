@@ -65,10 +65,10 @@ proc fcQVector4D_normalized(self: pointer): pointer {.importc: "QVector4D_normal
 proc fcQVector4D_normalize(self: pointer): void {.importc: "QVector4D_normalize".}
 proc fcQVector4D_operatorPlusAssign(self: pointer, vector: pointer): pointer {.importc: "QVector4D_operatorPlusAssign".}
 proc fcQVector4D_operatorMinusAssign(self: pointer, vector: pointer): pointer {.importc: "QVector4D_operatorMinusAssign".}
-proc fcQVector4D_operatorMultiplyAssign(self: pointer, factor: float32): pointer {.importc: "QVector4D_operatorMultiplyAssign".}
-proc fcQVector4D_operatorMultiplyAssignWithVector(self: pointer, vector: pointer): pointer {.importc: "QVector4D_operatorMultiplyAssignWithVector".}
-proc fcQVector4D_operatorDivideAssign(self: pointer, divisor: float32): pointer {.importc: "QVector4D_operatorDivideAssign".}
-proc fcQVector4D_operatorDivideAssignWithVector(self: pointer, vector: pointer): pointer {.importc: "QVector4D_operatorDivideAssignWithVector".}
+proc fcQVector4D_operatorMultiplyAssignFactor(self: pointer, factor: float32): pointer {.importc: "QVector4D_operatorMultiplyAssign_factor".}
+proc fcQVector4D_operatorMultiplyAssignVector(self: pointer, vector: pointer): pointer {.importc: "QVector4D_operatorMultiplyAssign_vector".}
+proc fcQVector4D_operatorDivideAssignDivisor(self: pointer, divisor: float32): pointer {.importc: "QVector4D_operatorDivideAssign_divisor".}
+proc fcQVector4D_operatorDivideAssignVector(self: pointer, vector: pointer): pointer {.importc: "QVector4D_operatorDivideAssign_vector".}
 proc fcQVector4D_dotProduct(v1: pointer, v2: pointer): float32 {.importc: "QVector4D_dotProduct".}
 proc fcQVector4D_toVector2D(self: pointer): pointer {.importc: "QVector4D_toVector2D".}
 proc fcQVector4D_toVector2DAffine(self: pointer): pointer {.importc: "QVector4D_toVector2DAffine".}
@@ -78,15 +78,15 @@ proc fcQVector4D_toPoint(self: pointer): pointer {.importc: "QVector4D_toPoint".
 proc fcQVector4D_toPointF(self: pointer): pointer {.importc: "QVector4D_toPointF".}
 proc fcQVector4D_ToQVariant(self: pointer): pointer {.importc: "QVector4D_ToQVariant".}
 proc fcQVector4D_new(): ptr cQVector4D {.importc: "QVector4D_new".}
-proc fcQVector4D_new2(param1: cint): ptr cQVector4D {.importc: "QVector4D_new2".}
-proc fcQVector4D_new3(xpos: float32, ypos: float32, zpos: float32, wpos: float32): ptr cQVector4D {.importc: "QVector4D_new3".}
-proc fcQVector4D_new4(point: pointer): ptr cQVector4D {.importc: "QVector4D_new4".}
-proc fcQVector4D_new5(point: pointer): ptr cQVector4D {.importc: "QVector4D_new5".}
-proc fcQVector4D_new6(vector: pointer): ptr cQVector4D {.importc: "QVector4D_new6".}
-proc fcQVector4D_new7(vector: pointer, zpos: float32, wpos: float32): ptr cQVector4D {.importc: "QVector4D_new7".}
-proc fcQVector4D_new8(vector: pointer): ptr cQVector4D {.importc: "QVector4D_new8".}
-proc fcQVector4D_new9(vector: pointer, wpos: float32): ptr cQVector4D {.importc: "QVector4D_new9".}
-proc fcQVector4D_new10(param1: pointer): ptr cQVector4D {.importc: "QVector4D_new10".}
+proc fcQVector4D_new2(param1: cint): ptr cQVector4D {.importc: "QVector4D_new_Qt_Initialization".}
+proc fcQVector4D_new3(xpos: float32, ypos: float32, zpos: float32, wpos: float32): ptr cQVector4D {.importc: "QVector4D_new_float_float_float_float".}
+proc fcQVector4D_new4(point: pointer): ptr cQVector4D {.importc: "QVector4D_new_QPoint".}
+proc fcQVector4D_new5(point: pointer): ptr cQVector4D {.importc: "QVector4D_new_QPointF".}
+proc fcQVector4D_new6(vector: pointer): ptr cQVector4D {.importc: "QVector4D_new_QVector2D".}
+proc fcQVector4D_new7(vector: pointer, zpos: float32, wpos: float32): ptr cQVector4D {.importc: "QVector4D_new_QVector2D_float_float".}
+proc fcQVector4D_new8(vector: pointer): ptr cQVector4D {.importc: "QVector4D_new_QVector3D".}
+proc fcQVector4D_new9(vector: pointer, wpos: float32): ptr cQVector4D {.importc: "QVector4D_new_QVector3D_float".}
+proc fcQVector4D_new10(fromVal: pointer): ptr cQVector4D {.importc: "QVector4D_new_QVector4D".}
 
 proc isNull*(self: gen_qvector4d_types.QVector4D): bool =
   fcQVector4D_isNull(self.h)
@@ -137,16 +137,16 @@ proc operatorMinusAssign*(self: gen_qvector4d_types.QVector4D, vector: gen_qvect
   gen_qvector4d_types.QVector4D(h: fcQVector4D_operatorMinusAssign(self.h, vector.h), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qvector4d_types.QVector4D, factor: float32): gen_qvector4d_types.QVector4D =
-  gen_qvector4d_types.QVector4D(h: fcQVector4D_operatorMultiplyAssign(self.h, factor), owned: false)
+  gen_qvector4d_types.QVector4D(h: fcQVector4D_operatorMultiplyAssignFactor(self.h, factor), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qvector4d_types.QVector4D, vector: gen_qvector4d_types.QVector4D): gen_qvector4d_types.QVector4D =
-  gen_qvector4d_types.QVector4D(h: fcQVector4D_operatorMultiplyAssignWithVector(self.h, vector.h), owned: false)
+  gen_qvector4d_types.QVector4D(h: fcQVector4D_operatorMultiplyAssignVector(self.h, vector.h), owned: false)
 
 proc operatorDivideAssign*(self: gen_qvector4d_types.QVector4D, divisor: float32): gen_qvector4d_types.QVector4D =
-  gen_qvector4d_types.QVector4D(h: fcQVector4D_operatorDivideAssign(self.h, divisor), owned: false)
+  gen_qvector4d_types.QVector4D(h: fcQVector4D_operatorDivideAssignDivisor(self.h, divisor), owned: false)
 
 proc operatorDivideAssign*(self: gen_qvector4d_types.QVector4D, vector: gen_qvector4d_types.QVector4D): gen_qvector4d_types.QVector4D =
-  gen_qvector4d_types.QVector4D(h: fcQVector4D_operatorDivideAssignWithVector(self.h, vector.h), owned: false)
+  gen_qvector4d_types.QVector4D(h: fcQVector4D_operatorDivideAssignVector(self.h, vector.h), owned: false)
 
 proc dotProduct*(_: type gen_qvector4d_types.QVector4D, v1: gen_qvector4d_types.QVector4D, v2: gen_qvector4d_types.QVector4D): float32 =
   fcQVector4D_dotProduct(v1.h, v2.h)
@@ -208,6 +208,6 @@ proc create*(T: type gen_qvector4d_types.QVector4D,
   let tmp = gen_qvector4d_types.QVector4D(h: fcQVector4D_new9(vector.h, wpos), owned: true)
   tmp
 proc create*(T: type gen_qvector4d_types.QVector4D,
-    param1: gen_qvector4d_types.QVector4D): gen_qvector4d_types.QVector4D =
-  let tmp = gen_qvector4d_types.QVector4D(h: fcQVector4D_new10(param1.h), owned: true)
+    fromVal: gen_qvector4d_types.QVector4D): gen_qvector4d_types.QVector4D =
+  let tmp = gen_qvector4d_types.QVector4D(h: fcQVector4D_new10(fromVal.h), owned: true)
   tmp

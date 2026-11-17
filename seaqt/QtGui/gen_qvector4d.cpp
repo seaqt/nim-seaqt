@@ -21,40 +21,40 @@ QVector4D* QVector4D_new() {
 	return new (std::nothrow) QVector4D();
 }
 
-QVector4D* QVector4D_new2(int param1) {
+QVector4D* QVector4D_new_Qt_Initialization(int param1) {
 	return new (std::nothrow) QVector4D(static_cast<Qt::Initialization>(param1));
 }
 
-QVector4D* QVector4D_new3(float xpos, float ypos, float zpos, float wpos) {
+QVector4D* QVector4D_new_float_float_float_float(float xpos, float ypos, float zpos, float wpos) {
 	return new (std::nothrow) QVector4D(static_cast<float>(xpos), static_cast<float>(ypos), static_cast<float>(zpos), static_cast<float>(wpos));
 }
 
-QVector4D* QVector4D_new4(QPoint* point) {
+QVector4D* QVector4D_new_QPoint(QPoint* point) {
 	return new (std::nothrow) QVector4D(*point);
 }
 
-QVector4D* QVector4D_new5(QPointF* point) {
+QVector4D* QVector4D_new_QPointF(QPointF* point) {
 	return new (std::nothrow) QVector4D(*point);
 }
 
-QVector4D* QVector4D_new6(QVector2D* vector) {
+QVector4D* QVector4D_new_QVector2D(QVector2D* vector) {
 	return new (std::nothrow) QVector4D(*vector);
 }
 
-QVector4D* QVector4D_new7(QVector2D* vector, float zpos, float wpos) {
+QVector4D* QVector4D_new_QVector2D_float_float(QVector2D* vector, float zpos, float wpos) {
 	return new (std::nothrow) QVector4D(*vector, static_cast<float>(zpos), static_cast<float>(wpos));
 }
 
-QVector4D* QVector4D_new8(QVector3D* vector) {
+QVector4D* QVector4D_new_QVector3D(QVector3D* vector) {
 	return new (std::nothrow) QVector4D(*vector);
 }
 
-QVector4D* QVector4D_new9(QVector3D* vector, float wpos) {
+QVector4D* QVector4D_new_QVector3D_float(QVector3D* vector, float wpos) {
 	return new (std::nothrow) QVector4D(*vector, static_cast<float>(wpos));
 }
 
-QVector4D* QVector4D_new10(QVector4D* param1) {
-	return new (std::nothrow) QVector4D(*param1);
+QVector4D* QVector4D_new_QVector4D(QVector4D* from) {
+	return new (std::nothrow) QVector4D(*from);
 }
 
 bool QVector4D_isNull(const QVector4D* self) {
@@ -125,25 +125,25 @@ QVector4D* QVector4D_operatorMinusAssign(QVector4D* self, QVector4D* vector) {
 	return &_ret;
 }
 
-QVector4D* QVector4D_operatorMultiplyAssign(QVector4D* self, float factor) {
+QVector4D* QVector4D_operatorMultiplyAssign_factor(QVector4D* self, float factor) {
 	QVector4D& _ret = self->operator*=(static_cast<float>(factor));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QVector4D* QVector4D_operatorMultiplyAssignWithVector(QVector4D* self, QVector4D* vector) {
+QVector4D* QVector4D_operatorMultiplyAssign_vector(QVector4D* self, QVector4D* vector) {
 	QVector4D& _ret = self->operator*=(*vector);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QVector4D* QVector4D_operatorDivideAssign(QVector4D* self, float divisor) {
+QVector4D* QVector4D_operatorDivideAssign_divisor(QVector4D* self, float divisor) {
 	QVector4D& _ret = self->operator/=(static_cast<float>(divisor));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QVector4D* QVector4D_operatorDivideAssignWithVector(QVector4D* self, QVector4D* vector) {
+QVector4D* QVector4D_operatorDivideAssign_vector(QVector4D* self, QVector4D* vector) {
 	QVector4D& _ret = self->operator/=(*vector);
 	// Cast returned reference into pointer
 	return &_ret;

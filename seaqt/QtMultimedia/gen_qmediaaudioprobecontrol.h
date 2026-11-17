@@ -34,16 +34,16 @@ void QMediaAudioProbeControl_virtbase(QMediaAudioProbeControl* src, QMediaContro
 QMetaObject* QMediaAudioProbeControl_metaObject(const QMediaAudioProbeControl* self);
 void* QMediaAudioProbeControl_metacast(QMediaAudioProbeControl* self, const char* param1);
 int QMediaAudioProbeControl_metacall(QMediaAudioProbeControl* self, int param1, int param2, void** param3);
-struct seaqt_string QMediaAudioProbeControl_tr(const char* s);
-struct seaqt_string QMediaAudioProbeControl_trUtf8(const char* s);
+struct seaqt_string QMediaAudioProbeControl_tr_s(const char* s);
+struct seaqt_string QMediaAudioProbeControl_trUtf8_s(const char* s);
 void QMediaAudioProbeControl_audioBufferProbed(QMediaAudioProbeControl* self, QAudioBuffer* buffer);
 void QMediaAudioProbeControl_connect_audioBufferProbed(QMediaAudioProbeControl* self, intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t));
 void QMediaAudioProbeControl_flush(QMediaAudioProbeControl* self);
 void QMediaAudioProbeControl_connect_flush(QMediaAudioProbeControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QMediaAudioProbeControl_tr2(const char* s, const char* c);
-struct seaqt_string QMediaAudioProbeControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QMediaAudioProbeControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QMediaAudioProbeControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QMediaAudioProbeControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMediaAudioProbeControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QMediaAudioProbeControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QMediaAudioProbeControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QMediaAudioProbeControl_staticMetaObject();
 void QMediaAudioProbeControl_delete(QMediaAudioProbeControl* self);

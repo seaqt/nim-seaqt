@@ -27,7 +27,7 @@ public:
 	friend VirtualQLayoutItem* vdata_QLayoutItem(void* vdata);
 
 	VirtualQLayoutItem(const QLayoutItem_VTable* vtbl): QLayoutItem(), vtbl(vtbl) {}
-	VirtualQLayoutItem(const QLayoutItem_VTable* vtbl, const QLayoutItem& param1): QLayoutItem(param1), vtbl(vtbl) {}
+	VirtualQLayoutItem(const QLayoutItem_VTable* vtbl, const QLayoutItem& from): QLayoutItem(from), vtbl(vtbl) {}
 	VirtualQLayoutItem(const QLayoutItem_VTable* vtbl, Qt::Alignment alignment): QLayoutItem(alignment), vtbl(vtbl) {}
 
 	virtual ~VirtualQLayoutItem() override { if(vtbl->destructor) vtbl->destructor(this); }
@@ -203,12 +203,12 @@ VirtualQLayoutItem* QLayoutItem_new(const QLayoutItem_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQLayoutItem(vtbl) : nullptr;
 }
 
-VirtualQLayoutItem* QLayoutItem_new2(const QLayoutItem_VTable* vtbl, size_t vdata, QLayoutItem* param1) {
+VirtualQLayoutItem* QLayoutItem_new_from(const QLayoutItem_VTable* vtbl, size_t vdata, QLayoutItem* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLayoutItem>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQLayoutItem(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQLayoutItem(vtbl, *from) : nullptr;
 }
 
-VirtualQLayoutItem* QLayoutItem_new3(const QLayoutItem_VTable* vtbl, size_t vdata, int alignment) {
+VirtualQLayoutItem* QLayoutItem_new_alignment(const QLayoutItem_VTable* vtbl, size_t vdata, int alignment) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLayoutItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLayoutItem(vtbl, static_cast<Qt::Alignment>(alignment)) : nullptr;
 }
@@ -284,8 +284,8 @@ int QLayoutItem_controlTypes(const QLayoutItem* self) {
 	return static_cast<int>(_ret);
 }
 
-void QLayoutItem_operatorAssign(QLayoutItem* self, QLayoutItem* param1) {
-	self->operator=(*param1);
+void QLayoutItem_operatorAssign(QLayoutItem* self, QLayoutItem* from) {
+	self->operator=(*from);
 }
 
 void* QLayoutItem_vdata(VirtualQLayoutItem* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQLayoutItem>()); }
@@ -343,7 +343,7 @@ public:
 	friend VirtualQSpacerItem* vdata_QSpacerItem(void* vdata);
 
 	VirtualQSpacerItem(const QSpacerItem_VTable* vtbl, int w, int h): QSpacerItem(w, h), vtbl(vtbl) {}
-	VirtualQSpacerItem(const QSpacerItem_VTable* vtbl, const QSpacerItem& param1): QSpacerItem(param1), vtbl(vtbl) {}
+	VirtualQSpacerItem(const QSpacerItem_VTable* vtbl, const QSpacerItem& from): QSpacerItem(from), vtbl(vtbl) {}
 	VirtualQSpacerItem(const QSpacerItem_VTable* vtbl, int w, int h, QSizePolicy::Policy hData): QSpacerItem(w, h, hData), vtbl(vtbl) {}
 	VirtualQSpacerItem(const QSpacerItem_VTable* vtbl, int w, int h, QSizePolicy::Policy hData, QSizePolicy::Policy vData): QSpacerItem(w, h, hData, vData), vtbl(vtbl) {}
 
@@ -530,22 +530,22 @@ public:
 
 };
 
-VirtualQSpacerItem* QSpacerItem_new(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h) {
+VirtualQSpacerItem* QSpacerItem_new_w_h(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSpacerItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSpacerItem(vtbl, static_cast<int>(w), static_cast<int>(h)) : nullptr;
 }
 
-VirtualQSpacerItem* QSpacerItem_new2(const QSpacerItem_VTable* vtbl, size_t vdata, QSpacerItem* param1) {
+VirtualQSpacerItem* QSpacerItem_new_from(const QSpacerItem_VTable* vtbl, size_t vdata, QSpacerItem* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSpacerItem>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQSpacerItem(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQSpacerItem(vtbl, *from) : nullptr;
 }
 
-VirtualQSpacerItem* QSpacerItem_new3(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h, int hData) {
+VirtualQSpacerItem* QSpacerItem_new_w_h_hData(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h, int hData) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSpacerItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSpacerItem(vtbl, static_cast<int>(w), static_cast<int>(h), static_cast<QSizePolicy::Policy>(hData)) : nullptr;
 }
 
-VirtualQSpacerItem* QSpacerItem_new4(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h, int hData, int vData) {
+VirtualQSpacerItem* QSpacerItem_new_w_h_hData_vData(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h, int hData, int vData) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSpacerItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSpacerItem(vtbl, static_cast<int>(w), static_cast<int>(h), static_cast<QSizePolicy::Policy>(hData), static_cast<QSizePolicy::Policy>(vData)) : nullptr;
 }
@@ -554,7 +554,7 @@ void QSpacerItem_virtbase(QSpacerItem* src, QLayoutItem** outptr_QLayoutItem) {
 	*outptr_QLayoutItem = static_cast<QLayoutItem*>(src);
 }
 
-void QSpacerItem_changeSize(QSpacerItem* self, int w, int h) {
+void QSpacerItem_changeSize_w_h(QSpacerItem* self, int w, int h) {
 	self->changeSize(static_cast<int>(w), static_cast<int>(h));
 }
 
@@ -595,15 +595,15 @@ QSizePolicy* QSpacerItem_sizePolicy(const QSpacerItem* self) {
 	return new QSizePolicy(self->sizePolicy());
 }
 
-void QSpacerItem_operatorAssign(QSpacerItem* self, QSpacerItem* param1) {
-	self->operator=(*param1);
+void QSpacerItem_operatorAssign(QSpacerItem* self, QSpacerItem* from) {
+	self->operator=(*from);
 }
 
-void QSpacerItem_changeSize2(QSpacerItem* self, int w, int h, int hData) {
+void QSpacerItem_changeSize_w_h_hData(QSpacerItem* self, int w, int h, int hData) {
 	self->changeSize(static_cast<int>(w), static_cast<int>(h), static_cast<QSizePolicy::Policy>(hData));
 }
 
-void QSpacerItem_changeSize3(QSpacerItem* self, int w, int h, int hData, int vData) {
+void QSpacerItem_changeSize_w_h_hData_vData(QSpacerItem* self, int w, int h, int hData, int vData) {
 	self->changeSize(static_cast<int>(w), static_cast<int>(h), static_cast<QSizePolicy::Policy>(hData), static_cast<QSizePolicy::Policy>(vData));
 }
 

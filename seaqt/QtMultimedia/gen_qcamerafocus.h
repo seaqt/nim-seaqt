@@ -33,11 +33,11 @@ typedef struct QRectF QRectF;
 #endif
 
 QCameraFocusZone* QCameraFocusZone_new();
-QCameraFocusZone* QCameraFocusZone_new2(QRectF* area);
-QCameraFocusZone* QCameraFocusZone_new3(QCameraFocusZone* other);
-QCameraFocusZone* QCameraFocusZone_new4(QRectF* area, int status);
+QCameraFocusZone* QCameraFocusZone_new_area(QRectF* area);
+QCameraFocusZone* QCameraFocusZone_new_from(QCameraFocusZone* from);
+QCameraFocusZone* QCameraFocusZone_new_area_status(QRectF* area, int status);
 
-void QCameraFocusZone_operatorAssign(QCameraFocusZone* self, QCameraFocusZone* other);
+void QCameraFocusZone_operatorAssign(QCameraFocusZone* self, QCameraFocusZone* from);
 bool QCameraFocusZone_operatorEqual(const QCameraFocusZone* self, QCameraFocusZone* other);
 bool QCameraFocusZone_operatorNotEqual(const QCameraFocusZone* self, QCameraFocusZone* other);
 bool QCameraFocusZone_isValid(const QCameraFocusZone* self);
@@ -51,8 +51,8 @@ void QCameraFocus_virtbase(QCameraFocus* src, QObject** outptr_QObject);
 QMetaObject* QCameraFocus_metaObject(const QCameraFocus* self);
 void* QCameraFocus_metacast(QCameraFocus* self, const char* param1);
 int QCameraFocus_metacall(QCameraFocus* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraFocus_tr(const char* s);
-struct seaqt_string QCameraFocus_trUtf8(const char* s);
+struct seaqt_string QCameraFocus_tr_s(const char* s);
+struct seaqt_string QCameraFocus_trUtf8_s(const char* s);
 bool QCameraFocus_isAvailable(const QCameraFocus* self);
 int QCameraFocus_focusMode(const QCameraFocus* self);
 void QCameraFocus_setFocusMode(QCameraFocus* self, int mode);
@@ -78,10 +78,10 @@ void QCameraFocus_maximumOpticalZoomChanged(QCameraFocus* self, double param1);
 void QCameraFocus_connect_maximumOpticalZoomChanged(QCameraFocus* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t));
 void QCameraFocus_maximumDigitalZoomChanged(QCameraFocus* self, double param1);
 void QCameraFocus_connect_maximumDigitalZoomChanged(QCameraFocus* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t));
-struct seaqt_string QCameraFocus_tr2(const char* s, const char* c);
-struct seaqt_string QCameraFocus_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraFocus_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraFocus_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraFocus_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraFocus_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraFocus_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraFocus_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraFocus_staticMetaObject();
 

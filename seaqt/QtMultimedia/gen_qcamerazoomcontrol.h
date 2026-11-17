@@ -32,8 +32,8 @@ void QCameraZoomControl_virtbase(QCameraZoomControl* src, QMediaControl** outptr
 QMetaObject* QCameraZoomControl_metaObject(const QCameraZoomControl* self);
 void* QCameraZoomControl_metacast(QCameraZoomControl* self, const char* param1);
 int QCameraZoomControl_metacall(QCameraZoomControl* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraZoomControl_tr(const char* s);
-struct seaqt_string QCameraZoomControl_trUtf8(const char* s);
+struct seaqt_string QCameraZoomControl_tr_s(const char* s);
+struct seaqt_string QCameraZoomControl_trUtf8_s(const char* s);
 double QCameraZoomControl_maximumOpticalZoom(const QCameraZoomControl* self);
 double QCameraZoomControl_maximumDigitalZoom(const QCameraZoomControl* self);
 double QCameraZoomControl_requestedOpticalZoom(const QCameraZoomControl* self);
@@ -53,10 +53,10 @@ void QCameraZoomControl_currentOpticalZoomChanged(QCameraZoomControl* self, doub
 void QCameraZoomControl_connect_currentOpticalZoomChanged(QCameraZoomControl* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t));
 void QCameraZoomControl_currentDigitalZoomChanged(QCameraZoomControl* self, double digitalZoom);
 void QCameraZoomControl_connect_currentDigitalZoomChanged(QCameraZoomControl* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t));
-struct seaqt_string QCameraZoomControl_tr2(const char* s, const char* c);
-struct seaqt_string QCameraZoomControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraZoomControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraZoomControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraZoomControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraZoomControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraZoomControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraZoomControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraZoomControl_staticMetaObject();
 void QCameraZoomControl_delete(QCameraZoomControl* self);

@@ -178,43 +178,43 @@ VirtualQLibrary* QLibrary_new(const QLibrary_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQLibrary(vtbl) : nullptr;
 }
 
-VirtualQLibrary* QLibrary_new2(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName) {
+VirtualQLibrary* QLibrary_new_fileName(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLibrary>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLibrary(vtbl, fileName_QString) : nullptr;
 }
 
-VirtualQLibrary* QLibrary_new3(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName, int verNum) {
+VirtualQLibrary* QLibrary_new_fileName_verNum(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName, int verNum) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLibrary>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLibrary(vtbl, fileName_QString, static_cast<int>(verNum)) : nullptr;
 }
 
-VirtualQLibrary* QLibrary_new4(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName, struct seaqt_string version) {
+VirtualQLibrary* QLibrary_new_fileName_version(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName, struct seaqt_string version) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QString version_QString = QString::fromUtf8(version.data, version.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLibrary>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLibrary(vtbl, fileName_QString, version_QString) : nullptr;
 }
 
-VirtualQLibrary* QLibrary_new5(const QLibrary_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQLibrary* QLibrary_new_parent(const QLibrary_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLibrary>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLibrary(vtbl, parent) : nullptr;
 }
 
-VirtualQLibrary* QLibrary_new6(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName, QObject* parent) {
+VirtualQLibrary* QLibrary_new_fileName_parent(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName, QObject* parent) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLibrary>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLibrary(vtbl, fileName_QString, parent) : nullptr;
 }
 
-VirtualQLibrary* QLibrary_new7(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName, int verNum, QObject* parent) {
+VirtualQLibrary* QLibrary_new_fileName_verNum_parent(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName, int verNum, QObject* parent) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLibrary>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLibrary(vtbl, fileName_QString, static_cast<int>(verNum), parent) : nullptr;
 }
 
-VirtualQLibrary* QLibrary_new8(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName, struct seaqt_string version, QObject* parent) {
+VirtualQLibrary* QLibrary_new_fileName_version_parent(const QLibrary_VTable* vtbl, size_t vdata, struct seaqt_string fileName, struct seaqt_string version, QObject* parent) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QString version_QString = QString::fromUtf8(version.data, version.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLibrary>() + vdata, std::nothrow);
@@ -237,7 +237,7 @@ int QLibrary_metacall(QLibrary* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QLibrary_tr(const char* s) {
+struct seaqt_string QLibrary_tr_s(const char* s) {
 	QString _ret = QLibrary::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -248,7 +248,7 @@ struct seaqt_string QLibrary_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QLibrary_trUtf8(const char* s) {
+struct seaqt_string QLibrary_trUtf8_s(const char* s) {
 	QString _ret = QLibrary::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -292,12 +292,12 @@ struct seaqt_string QLibrary_fileName(const QLibrary* self) {
 	return _ms;
 }
 
-void QLibrary_setFileNameAndVersion(QLibrary* self, struct seaqt_string fileName, int verNum) {
+void QLibrary_setFileNameAndVersion_fileName_verNum(QLibrary* self, struct seaqt_string fileName, int verNum) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	self->setFileNameAndVersion(fileName_QString, static_cast<int>(verNum));
 }
 
-void QLibrary_setFileNameAndVersion2(QLibrary* self, struct seaqt_string fileName, struct seaqt_string version) {
+void QLibrary_setFileNameAndVersion_fileName_version(QLibrary* self, struct seaqt_string fileName, struct seaqt_string version) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QString version_QString = QString::fromUtf8(version.data, version.len);
 	self->setFileNameAndVersion(fileName_QString, version_QString);
@@ -323,7 +323,7 @@ int QLibrary_loadHints(const QLibrary* self) {
 	return static_cast<int>(_ret);
 }
 
-struct seaqt_string QLibrary_tr2(const char* s, const char* c) {
+struct seaqt_string QLibrary_tr_s_c(const char* s, const char* c) {
 	QString _ret = QLibrary::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -334,7 +334,7 @@ struct seaqt_string QLibrary_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QLibrary_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QLibrary_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QLibrary::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -345,7 +345,7 @@ struct seaqt_string QLibrary_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QLibrary_trUtf82(const char* s, const char* c) {
+struct seaqt_string QLibrary_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QLibrary::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -356,7 +356,7 @@ struct seaqt_string QLibrary_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QLibrary_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QLibrary_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QLibrary::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

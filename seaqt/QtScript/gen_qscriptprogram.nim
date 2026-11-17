@@ -39,7 +39,7 @@ export gen_qscriptprogram_types
 
 type cQScriptProgram*{.exportc: "QScriptProgram", incompleteStruct.} = object
 
-proc fcQScriptProgram_operatorAssign(self: pointer, other: pointer): void {.importc: "QScriptProgram_operatorAssign".}
+proc fcQScriptProgram_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QScriptProgram_operatorAssign".}
 proc fcQScriptProgram_isNull(self: pointer): bool {.importc: "QScriptProgram_isNull".}
 proc fcQScriptProgram_sourceCode(self: pointer): struct_seaqt_string {.importc: "QScriptProgram_sourceCode".}
 proc fcQScriptProgram_fileName(self: pointer): struct_seaqt_string {.importc: "QScriptProgram_fileName".}
@@ -47,13 +47,13 @@ proc fcQScriptProgram_firstLineNumber(self: pointer): cint {.importc: "QScriptPr
 proc fcQScriptProgram_operatorEqual(self: pointer, other: pointer): bool {.importc: "QScriptProgram_operatorEqual".}
 proc fcQScriptProgram_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QScriptProgram_operatorNotEqual".}
 proc fcQScriptProgram_new(): ptr cQScriptProgram {.importc: "QScriptProgram_new".}
-proc fcQScriptProgram_new2(sourceCode: struct_seaqt_string): ptr cQScriptProgram {.importc: "QScriptProgram_new2".}
-proc fcQScriptProgram_new3(other: pointer): ptr cQScriptProgram {.importc: "QScriptProgram_new3".}
-proc fcQScriptProgram_new4(sourceCode: struct_seaqt_string, fileName: struct_seaqt_string): ptr cQScriptProgram {.importc: "QScriptProgram_new4".}
-proc fcQScriptProgram_new5(sourceCode: struct_seaqt_string, fileName: struct_seaqt_string, firstLineNumber: cint): ptr cQScriptProgram {.importc: "QScriptProgram_new5".}
+proc fcQScriptProgram_new2(sourceCode: struct_seaqt_string): ptr cQScriptProgram {.importc: "QScriptProgram_new_sourceCode".}
+proc fcQScriptProgram_new3(fromVal: pointer): ptr cQScriptProgram {.importc: "QScriptProgram_new_from".}
+proc fcQScriptProgram_new4(sourceCode: struct_seaqt_string, fileName: struct_seaqt_string): ptr cQScriptProgram {.importc: "QScriptProgram_new_sourceCode_fileName".}
+proc fcQScriptProgram_new5(sourceCode: struct_seaqt_string, fileName: struct_seaqt_string, firstLineNumber: cint): ptr cQScriptProgram {.importc: "QScriptProgram_new_sourceCode_fileName_firstLineNumber".}
 
-proc operatorAssign*(self: gen_qscriptprogram_types.QScriptProgram, other: gen_qscriptprogram_types.QScriptProgram): void =
-  fcQScriptProgram_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qscriptprogram_types.QScriptProgram, fromVal: gen_qscriptprogram_types.QScriptProgram): void =
+  fcQScriptProgram_operatorAssign(self.h, fromVal.h)
 
 proc isNull*(self: gen_qscriptprogram_types.QScriptProgram): bool =
   fcQScriptProgram_isNull(self.h)
@@ -87,8 +87,8 @@ proc create*(T: type gen_qscriptprogram_types.QScriptProgram,
   let tmp = gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new2(struct_seaqt_string(data: if len(sourceCode) > 0: addr sourceCode[0] else: nil, len: csize_t(len(sourceCode)))), owned: true)
   tmp
 proc create*(T: type gen_qscriptprogram_types.QScriptProgram,
-    other: gen_qscriptprogram_types.QScriptProgram): gen_qscriptprogram_types.QScriptProgram =
-  let tmp = gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new3(other.h), owned: true)
+    fromVal: gen_qscriptprogram_types.QScriptProgram): gen_qscriptprogram_types.QScriptProgram =
+  let tmp = gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qscriptprogram_types.QScriptProgram,
     sourceCode: openArray[char], fileName: openArray[char]): gen_qscriptprogram_types.QScriptProgram =

@@ -366,8 +366,8 @@ type cQChar*{.exportc: "QChar", incompleteStruct.} = object
 
 proc fcQLatin1Char_toLatin1(self: pointer): cchar {.importc: "QLatin1Char_toLatin1".}
 proc fcQLatin1Char_unicode(self: pointer): cushort {.importc: "QLatin1Char_unicode".}
-proc fcQLatin1Char_new(c: cchar): ptr cQLatin1Char {.importc: "QLatin1Char_new".}
-proc fcQLatin1Char_new2(param1: pointer): ptr cQLatin1Char {.importc: "QLatin1Char_new2".}
+proc fcQLatin1Char_new(c: cchar): ptr cQLatin1Char {.importc: "QLatin1Char_new_c".}
+proc fcQLatin1Char_new2(fromVal: pointer): ptr cQLatin1Char {.importc: "QLatin1Char_new_from".}
 proc fcQChar_category(self: pointer): cint {.importc: "QChar_category".}
 proc fcQChar_direction(self: pointer): cint {.importc: "QChar_direction".}
 proc fcQChar_joiningType(self: pointer): cint {.importc: "QChar_joiningType".}
@@ -408,55 +408,55 @@ proc fcQChar_cell(self: pointer): uint8 {.importc: "QChar_cell".}
 proc fcQChar_row(self: pointer): uint8 {.importc: "QChar_row".}
 proc fcQChar_setCell(self: pointer, acell: uint8): void {.importc: "QChar_setCell".}
 proc fcQChar_setRow(self: pointer, arow: uint8): void {.importc: "QChar_setRow".}
-proc fcQChar_isNonCharacterWithUcs4(ucs4: cuint): bool {.importc: "QChar_isNonCharacterWithUcs4".}
-proc fcQChar_isHighSurrogateWithUcs4(ucs4: cuint): bool {.importc: "QChar_isHighSurrogateWithUcs4".}
-proc fcQChar_isLowSurrogateWithUcs4(ucs4: cuint): bool {.importc: "QChar_isLowSurrogateWithUcs4".}
-proc fcQChar_isSurrogateWithUcs4(ucs4: cuint): bool {.importc: "QChar_isSurrogateWithUcs4".}
+proc fcQChar_isNonCharacterUcs4(ucs4: cuint): bool {.importc: "QChar_isNonCharacter_ucs4".}
+proc fcQChar_isHighSurrogateUcs4(ucs4: cuint): bool {.importc: "QChar_isHighSurrogate_ucs4".}
+proc fcQChar_isLowSurrogateUcs4(ucs4: cuint): bool {.importc: "QChar_isLowSurrogate_ucs4".}
+proc fcQChar_isSurrogateUcs4(ucs4: cuint): bool {.importc: "QChar_isSurrogate_ucs4".}
 proc fcQChar_requiresSurrogates(ucs4: cuint): bool {.importc: "QChar_requiresSurrogates".}
-proc fcQChar_surrogateToUcs4(high: cushort, low: cushort): cuint {.importc: "QChar_surrogateToUcs4".}
-proc fcQChar_surrogateToUcs42(high: pointer, low: pointer): cuint {.importc: "QChar_surrogateToUcs42".}
+proc fcQChar_surrogateToUcs4UshortUshort(high: cushort, low: cushort): cuint {.importc: "QChar_surrogateToUcs4_ushort_ushort".}
+proc fcQChar_surrogateToUcs4_QChar_QChar(high: pointer, low: pointer): cuint {.importc: "QChar_surrogateToUcs4_QChar_QChar".}
 proc fcQChar_highSurrogate(ucs4: cuint): cushort {.importc: "QChar_highSurrogate".}
 proc fcQChar_lowSurrogate(ucs4: cuint): cushort {.importc: "QChar_lowSurrogate".}
-proc fcQChar_categoryWithUcs4(ucs4: cuint): cint {.importc: "QChar_categoryWithUcs4".}
-proc fcQChar_directionWithUcs4(ucs4: cuint): cint {.importc: "QChar_directionWithUcs4".}
-proc fcQChar_joiningTypeWithUcs4(ucs4: cuint): cint {.importc: "QChar_joiningTypeWithUcs4".}
-proc fcQChar_joiningWithUcs4(ucs4: cuint): cint {.importc: "QChar_joiningWithUcs4".}
-proc fcQChar_combiningClassWithUcs4(ucs4: cuint): uint8 {.importc: "QChar_combiningClassWithUcs4".}
-proc fcQChar_mirroredCharWithUcs4(ucs4: cuint): cuint {.importc: "QChar_mirroredCharWithUcs4".}
-proc fcQChar_hasMirroredWithUcs4(ucs4: cuint): bool {.importc: "QChar_hasMirroredWithUcs4".}
-proc fcQChar_decompositionWithUcs4(ucs4: cuint): struct_seaqt_string {.importc: "QChar_decompositionWithUcs4".}
-proc fcQChar_decompositionTagWithUcs4(ucs4: cuint): cint {.importc: "QChar_decompositionTagWithUcs4".}
-proc fcQChar_digitValueWithUcs4(ucs4: cuint): cint {.importc: "QChar_digitValueWithUcs4".}
-proc fcQChar_toLowerWithUcs4(ucs4: cuint): cuint {.importc: "QChar_toLowerWithUcs4".}
-proc fcQChar_toUpperWithUcs4(ucs4: cuint): cuint {.importc: "QChar_toUpperWithUcs4".}
-proc fcQChar_toTitleCaseWithUcs4(ucs4: cuint): cuint {.importc: "QChar_toTitleCaseWithUcs4".}
-proc fcQChar_toCaseFoldedWithUcs4(ucs4: cuint): cuint {.importc: "QChar_toCaseFoldedWithUcs4".}
-proc fcQChar_scriptWithUcs4(ucs4: cuint): cint {.importc: "QChar_scriptWithUcs4".}
-proc fcQChar_unicodeVersionWithUcs4(ucs4: cuint): cint {.importc: "QChar_unicodeVersionWithUcs4".}
+proc fcQChar_categoryUcs4(ucs4: cuint): cint {.importc: "QChar_category_ucs4".}
+proc fcQChar_directionUcs4(ucs4: cuint): cint {.importc: "QChar_direction_ucs4".}
+proc fcQChar_joiningTypeUcs4(ucs4: cuint): cint {.importc: "QChar_joiningType_ucs4".}
+proc fcQChar_joiningUcs4(ucs4: cuint): cint {.importc: "QChar_joining_ucs4".}
+proc fcQChar_combiningClassUcs4(ucs4: cuint): uint8 {.importc: "QChar_combiningClass_ucs4".}
+proc fcQChar_mirroredCharUcs4(ucs4: cuint): cuint {.importc: "QChar_mirroredChar_ucs4".}
+proc fcQChar_hasMirroredUcs4(ucs4: cuint): bool {.importc: "QChar_hasMirrored_ucs4".}
+proc fcQChar_decompositionUcs4(ucs4: cuint): struct_seaqt_string {.importc: "QChar_decomposition_ucs4".}
+proc fcQChar_decompositionTagUcs4(ucs4: cuint): cint {.importc: "QChar_decompositionTag_ucs4".}
+proc fcQChar_digitValueUcs4(ucs4: cuint): cint {.importc: "QChar_digitValue_ucs4".}
+proc fcQChar_toLowerUcs4(ucs4: cuint): cuint {.importc: "QChar_toLower_ucs4".}
+proc fcQChar_toUpperUcs4(ucs4: cuint): cuint {.importc: "QChar_toUpper_ucs4".}
+proc fcQChar_toTitleCaseUcs4(ucs4: cuint): cuint {.importc: "QChar_toTitleCase_ucs4".}
+proc fcQChar_toCaseFoldedUcs4(ucs4: cuint): cuint {.importc: "QChar_toCaseFolded_ucs4".}
+proc fcQChar_scriptUcs4(ucs4: cuint): cint {.importc: "QChar_script_ucs4".}
+proc fcQChar_unicodeVersionUcs4(ucs4: cuint): cint {.importc: "QChar_unicodeVersion_ucs4".}
 proc fcQChar_currentUnicodeVersion(): cint {.importc: "QChar_currentUnicodeVersion".}
-proc fcQChar_isPrintWithUcs4(ucs4: cuint): bool {.importc: "QChar_isPrintWithUcs4".}
-proc fcQChar_isSpaceWithUcs4(ucs4: cuint): bool {.importc: "QChar_isSpaceWithUcs4".}
-proc fcQChar_isMarkWithUcs4(ucs4: cuint): bool {.importc: "QChar_isMarkWithUcs4".}
-proc fcQChar_isPunctWithUcs4(ucs4: cuint): bool {.importc: "QChar_isPunctWithUcs4".}
-proc fcQChar_isSymbolWithUcs4(ucs4: cuint): bool {.importc: "QChar_isSymbolWithUcs4".}
-proc fcQChar_isLetterWithUcs4(ucs4: cuint): bool {.importc: "QChar_isLetterWithUcs4".}
-proc fcQChar_isNumberWithUcs4(ucs4: cuint): bool {.importc: "QChar_isNumberWithUcs4".}
-proc fcQChar_isLetterOrNumberWithUcs4(ucs4: cuint): bool {.importc: "QChar_isLetterOrNumberWithUcs4".}
-proc fcQChar_isDigitWithUcs4(ucs4: cuint): bool {.importc: "QChar_isDigitWithUcs4".}
-proc fcQChar_isLowerWithUcs4(ucs4: cuint): bool {.importc: "QChar_isLowerWithUcs4".}
-proc fcQChar_isUpperWithUcs4(ucs4: cuint): bool {.importc: "QChar_isUpperWithUcs4".}
-proc fcQChar_isTitleCaseWithUcs4(ucs4: cuint): bool {.importc: "QChar_isTitleCaseWithUcs4".}
+proc fcQChar_isPrintUcs4(ucs4: cuint): bool {.importc: "QChar_isPrint_ucs4".}
+proc fcQChar_isSpaceUcs4(ucs4: cuint): bool {.importc: "QChar_isSpace_ucs4".}
+proc fcQChar_isMarkUcs4(ucs4: cuint): bool {.importc: "QChar_isMark_ucs4".}
+proc fcQChar_isPunctUcs4(ucs4: cuint): bool {.importc: "QChar_isPunct_ucs4".}
+proc fcQChar_isSymbolUcs4(ucs4: cuint): bool {.importc: "QChar_isSymbol_ucs4".}
+proc fcQChar_isLetterUcs4(ucs4: cuint): bool {.importc: "QChar_isLetter_ucs4".}
+proc fcQChar_isNumberUcs4(ucs4: cuint): bool {.importc: "QChar_isNumber_ucs4".}
+proc fcQChar_isLetterOrNumberUcs4(ucs4: cuint): bool {.importc: "QChar_isLetterOrNumber_ucs4".}
+proc fcQChar_isDigitUcs4(ucs4: cuint): bool {.importc: "QChar_isDigit_ucs4".}
+proc fcQChar_isLowerUcs4(ucs4: cuint): bool {.importc: "QChar_isLower_ucs4".}
+proc fcQChar_isUpperUcs4(ucs4: cuint): bool {.importc: "QChar_isUpper_ucs4".}
+proc fcQChar_isTitleCaseUcs4(ucs4: cuint): bool {.importc: "QChar_isTitleCase_ucs4".}
 proc fcQChar_new(): ptr cQChar {.importc: "QChar_new".}
-proc fcQChar_new2(rc: cushort): ptr cQChar {.importc: "QChar_new2".}
-proc fcQChar_new3(c: uint8, r: uint8): ptr cQChar {.importc: "QChar_new3".}
-proc fcQChar_new4(rc: cshort): ptr cQChar {.importc: "QChar_new4".}
-proc fcQChar_new5(rc: cuint): ptr cQChar {.importc: "QChar_new5".}
-proc fcQChar_new6(rc: cint): ptr cQChar {.importc: "QChar_new6".}
-proc fcQChar_new7(s: cint): ptr cQChar {.importc: "QChar_new7".}
-proc fcQChar_new8(ch: pointer): ptr cQChar {.importc: "QChar_new8".}
-proc fcQChar_new9(c: cchar): ptr cQChar {.importc: "QChar_new9".}
-proc fcQChar_new10(c: uint8): ptr cQChar {.importc: "QChar_new10".}
-proc fcQChar_new11(param1: pointer): ptr cQChar {.importc: "QChar_new11".}
+proc fcQChar_new2(rc: cushort): ptr cQChar {.importc: "QChar_new_ushort".}
+proc fcQChar_new3(c: uint8, r: uint8): ptr cQChar {.importc: "QChar_new_uchar_uchar".}
+proc fcQChar_new4(rc: cshort): ptr cQChar {.importc: "QChar_new_short".}
+proc fcQChar_new5(rc: cuint): ptr cQChar {.importc: "QChar_new_uint".}
+proc fcQChar_new6(rc: cint): ptr cQChar {.importc: "QChar_new_int".}
+proc fcQChar_new7(s: cint): ptr cQChar {.importc: "QChar_new_QChar_SpecialCharacter".}
+proc fcQChar_new8(ch: pointer): ptr cQChar {.importc: "QChar_new_QLatin1Char".}
+proc fcQChar_new9(c: cchar): ptr cQChar {.importc: "QChar_new_char".}
+proc fcQChar_new10(c: uint8): ptr cQChar {.importc: "QChar_new_uchar".}
+proc fcQChar_new11(fromVal: pointer): ptr cQChar {.importc: "QChar_new_QChar".}
 
 proc toLatin1*(self: gen_qchar_types.QLatin1Char): cchar =
   fcQLatin1Char_toLatin1(self.h)
@@ -469,8 +469,8 @@ proc create*(T: type gen_qchar_types.QLatin1Char,
   let tmp = gen_qchar_types.QLatin1Char(h: fcQLatin1Char_new(c), owned: true)
   tmp
 proc create*(T: type gen_qchar_types.QLatin1Char,
-    param1: gen_qchar_types.QLatin1Char): gen_qchar_types.QLatin1Char =
-  let tmp = gen_qchar_types.QLatin1Char(h: fcQLatin1Char_new2(param1.h), owned: true)
+    fromVal: gen_qchar_types.QLatin1Char): gen_qchar_types.QLatin1Char =
+  let tmp = gen_qchar_types.QLatin1Char(h: fcQLatin1Char_new2(fromVal.h), owned: true)
   tmp
 proc category*(self: gen_qchar_types.QChar): cint =
   cint(fcQChar_category(self.h))
@@ -596,25 +596,25 @@ proc setRow*(self: gen_qchar_types.QChar, arow: uint8): void =
   fcQChar_setRow(self.h, arow)
 
 proc isNonCharacter*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isNonCharacterWithUcs4(ucs4)
+  fcQChar_isNonCharacterUcs4(ucs4)
 
 proc isHighSurrogate*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isHighSurrogateWithUcs4(ucs4)
+  fcQChar_isHighSurrogateUcs4(ucs4)
 
 proc isLowSurrogate*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isLowSurrogateWithUcs4(ucs4)
+  fcQChar_isLowSurrogateUcs4(ucs4)
 
 proc isSurrogate*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isSurrogateWithUcs4(ucs4)
+  fcQChar_isSurrogateUcs4(ucs4)
 
 proc requiresSurrogates*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
   fcQChar_requiresSurrogates(ucs4)
 
 proc surrogateToUcs4*(_: type gen_qchar_types.QChar, high: cushort, low: cushort): cuint =
-  fcQChar_surrogateToUcs4(high, low)
+  fcQChar_surrogateToUcs4UshortUshort(high, low)
 
 proc surrogateToUcs4*(_: type gen_qchar_types.QChar, high: gen_qchar_types.QChar, low: gen_qchar_types.QChar): cuint =
-  fcQChar_surrogateToUcs42(high.h, low.h)
+  fcQChar_surrogateToUcs4_QChar_QChar(high.h, low.h)
 
 proc highSurrogate*(_: type gen_qchar_types.QChar, ucs4: cuint): cushort =
   fcQChar_highSurrogate(ucs4)
@@ -623,94 +623,94 @@ proc lowSurrogate*(_: type gen_qchar_types.QChar, ucs4: cuint): cushort =
   fcQChar_lowSurrogate(ucs4)
 
 proc category*(_: type gen_qchar_types.QChar, ucs4: cuint): cint =
-  cint(fcQChar_categoryWithUcs4(ucs4))
+  cint(fcQChar_categoryUcs4(ucs4))
 
 proc direction*(_: type gen_qchar_types.QChar, ucs4: cuint): cint =
-  cint(fcQChar_directionWithUcs4(ucs4))
+  cint(fcQChar_directionUcs4(ucs4))
 
 proc joiningType*(_: type gen_qchar_types.QChar, ucs4: cuint): cint =
-  cint(fcQChar_joiningTypeWithUcs4(ucs4))
+  cint(fcQChar_joiningTypeUcs4(ucs4))
 
 proc joining*(_: type gen_qchar_types.QChar, ucs4: cuint): cint =
-  cint(fcQChar_joiningWithUcs4(ucs4))
+  cint(fcQChar_joiningUcs4(ucs4))
 
 proc combiningClass*(_: type gen_qchar_types.QChar, ucs4: cuint): uint8 =
-  fcQChar_combiningClassWithUcs4(ucs4)
+  fcQChar_combiningClassUcs4(ucs4)
 
 proc mirroredChar*(_: type gen_qchar_types.QChar, ucs4: cuint): cuint =
-  fcQChar_mirroredCharWithUcs4(ucs4)
+  fcQChar_mirroredCharUcs4(ucs4)
 
 proc hasMirrored*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_hasMirroredWithUcs4(ucs4)
+  fcQChar_hasMirroredUcs4(ucs4)
 
 proc decomposition*(_: type gen_qchar_types.QChar, ucs4: cuint): string =
-  let v_ms = fcQChar_decompositionWithUcs4(ucs4)
+  let v_ms = fcQChar_decompositionUcs4(ucs4)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc decompositionTag*(_: type gen_qchar_types.QChar, ucs4: cuint): cint =
-  cint(fcQChar_decompositionTagWithUcs4(ucs4))
+  cint(fcQChar_decompositionTagUcs4(ucs4))
 
 proc digitValue*(_: type gen_qchar_types.QChar, ucs4: cuint): cint =
-  fcQChar_digitValueWithUcs4(ucs4)
+  fcQChar_digitValueUcs4(ucs4)
 
 proc toLower*(_: type gen_qchar_types.QChar, ucs4: cuint): cuint =
-  fcQChar_toLowerWithUcs4(ucs4)
+  fcQChar_toLowerUcs4(ucs4)
 
 proc toUpper*(_: type gen_qchar_types.QChar, ucs4: cuint): cuint =
-  fcQChar_toUpperWithUcs4(ucs4)
+  fcQChar_toUpperUcs4(ucs4)
 
 proc toTitleCase*(_: type gen_qchar_types.QChar, ucs4: cuint): cuint =
-  fcQChar_toTitleCaseWithUcs4(ucs4)
+  fcQChar_toTitleCaseUcs4(ucs4)
 
 proc toCaseFolded*(_: type gen_qchar_types.QChar, ucs4: cuint): cuint =
-  fcQChar_toCaseFoldedWithUcs4(ucs4)
+  fcQChar_toCaseFoldedUcs4(ucs4)
 
 proc script*(_: type gen_qchar_types.QChar, ucs4: cuint): cint =
-  cint(fcQChar_scriptWithUcs4(ucs4))
+  cint(fcQChar_scriptUcs4(ucs4))
 
 proc unicodeVersion*(_: type gen_qchar_types.QChar, ucs4: cuint): cint =
-  cint(fcQChar_unicodeVersionWithUcs4(ucs4))
+  cint(fcQChar_unicodeVersionUcs4(ucs4))
 
 proc currentUnicodeVersion*(_: type gen_qchar_types.QChar): cint =
   cint(fcQChar_currentUnicodeVersion())
 
 proc isPrint*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isPrintWithUcs4(ucs4)
+  fcQChar_isPrintUcs4(ucs4)
 
 proc isSpace*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isSpaceWithUcs4(ucs4)
+  fcQChar_isSpaceUcs4(ucs4)
 
 proc isMark*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isMarkWithUcs4(ucs4)
+  fcQChar_isMarkUcs4(ucs4)
 
 proc isPunct*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isPunctWithUcs4(ucs4)
+  fcQChar_isPunctUcs4(ucs4)
 
 proc isSymbol*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isSymbolWithUcs4(ucs4)
+  fcQChar_isSymbolUcs4(ucs4)
 
 proc isLetter*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isLetterWithUcs4(ucs4)
+  fcQChar_isLetterUcs4(ucs4)
 
 proc isNumber*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isNumberWithUcs4(ucs4)
+  fcQChar_isNumberUcs4(ucs4)
 
 proc isLetterOrNumber*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isLetterOrNumberWithUcs4(ucs4)
+  fcQChar_isLetterOrNumberUcs4(ucs4)
 
 proc isDigit*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isDigitWithUcs4(ucs4)
+  fcQChar_isDigitUcs4(ucs4)
 
 proc isLower*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isLowerWithUcs4(ucs4)
+  fcQChar_isLowerUcs4(ucs4)
 
 proc isUpper*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isUpperWithUcs4(ucs4)
+  fcQChar_isUpperUcs4(ucs4)
 
 proc isTitleCase*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =
-  fcQChar_isTitleCaseWithUcs4(ucs4)
+  fcQChar_isTitleCaseUcs4(ucs4)
 
 proc create*(T: type gen_qchar_types.QChar): gen_qchar_types.QChar =
   let tmp = gen_qchar_types.QChar(h: fcQChar_new(), owned: true)
@@ -752,6 +752,6 @@ proc create*(T: type gen_qchar_types.QChar,
   let tmp = gen_qchar_types.QChar(h: fcQChar_new10(c), owned: true)
   tmp
 proc create*(T: type gen_qchar_types.QChar,
-    param1: gen_qchar_types.QChar): gen_qchar_types.QChar =
-  let tmp = gen_qchar_types.QChar(h: fcQChar_new11(param1.h), owned: true)
+    fromVal: gen_qchar_types.QChar): gen_qchar_types.QChar =
+  let tmp = gen_qchar_types.QChar(h: fcQChar_new11(fromVal.h), owned: true)
   tmp

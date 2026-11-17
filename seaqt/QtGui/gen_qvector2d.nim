@@ -63,10 +63,10 @@ proc fcQVector2D_distanceToPoint(self: pointer, point: pointer): float32 {.impor
 proc fcQVector2D_distanceToLine(self: pointer, point: pointer, direction: pointer): float32 {.importc: "QVector2D_distanceToLine".}
 proc fcQVector2D_operatorPlusAssign(self: pointer, vector: pointer): pointer {.importc: "QVector2D_operatorPlusAssign".}
 proc fcQVector2D_operatorMinusAssign(self: pointer, vector: pointer): pointer {.importc: "QVector2D_operatorMinusAssign".}
-proc fcQVector2D_operatorMultiplyAssign(self: pointer, factor: float32): pointer {.importc: "QVector2D_operatorMultiplyAssign".}
-proc fcQVector2D_operatorMultiplyAssignWithVector(self: pointer, vector: pointer): pointer {.importc: "QVector2D_operatorMultiplyAssignWithVector".}
-proc fcQVector2D_operatorDivideAssign(self: pointer, divisor: float32): pointer {.importc: "QVector2D_operatorDivideAssign".}
-proc fcQVector2D_operatorDivideAssignWithVector(self: pointer, vector: pointer): pointer {.importc: "QVector2D_operatorDivideAssignWithVector".}
+proc fcQVector2D_operatorMultiplyAssignFactor(self: pointer, factor: float32): pointer {.importc: "QVector2D_operatorMultiplyAssign_factor".}
+proc fcQVector2D_operatorMultiplyAssignVector(self: pointer, vector: pointer): pointer {.importc: "QVector2D_operatorMultiplyAssign_vector".}
+proc fcQVector2D_operatorDivideAssignDivisor(self: pointer, divisor: float32): pointer {.importc: "QVector2D_operatorDivideAssign_divisor".}
+proc fcQVector2D_operatorDivideAssignVector(self: pointer, vector: pointer): pointer {.importc: "QVector2D_operatorDivideAssign_vector".}
 proc fcQVector2D_dotProduct(v1: pointer, v2: pointer): float32 {.importc: "QVector2D_dotProduct".}
 proc fcQVector2D_toVector3D(self: pointer): pointer {.importc: "QVector2D_toVector3D".}
 proc fcQVector2D_toVector4D(self: pointer): pointer {.importc: "QVector2D_toVector4D".}
@@ -74,13 +74,13 @@ proc fcQVector2D_toPoint(self: pointer): pointer {.importc: "QVector2D_toPoint".
 proc fcQVector2D_toPointF(self: pointer): pointer {.importc: "QVector2D_toPointF".}
 proc fcQVector2D_ToQVariant(self: pointer): pointer {.importc: "QVector2D_ToQVariant".}
 proc fcQVector2D_new(): ptr cQVector2D {.importc: "QVector2D_new".}
-proc fcQVector2D_new2(param1: cint): ptr cQVector2D {.importc: "QVector2D_new2".}
-proc fcQVector2D_new3(xpos: float32, ypos: float32): ptr cQVector2D {.importc: "QVector2D_new3".}
-proc fcQVector2D_new4(point: pointer): ptr cQVector2D {.importc: "QVector2D_new4".}
-proc fcQVector2D_new5(point: pointer): ptr cQVector2D {.importc: "QVector2D_new5".}
-proc fcQVector2D_new6(vector: pointer): ptr cQVector2D {.importc: "QVector2D_new6".}
-proc fcQVector2D_new7(vector: pointer): ptr cQVector2D {.importc: "QVector2D_new7".}
-proc fcQVector2D_new8(param1: pointer): ptr cQVector2D {.importc: "QVector2D_new8".}
+proc fcQVector2D_new2(param1: cint): ptr cQVector2D {.importc: "QVector2D_new_Qt_Initialization".}
+proc fcQVector2D_new3(xpos: float32, ypos: float32): ptr cQVector2D {.importc: "QVector2D_new_float_float".}
+proc fcQVector2D_new4(point: pointer): ptr cQVector2D {.importc: "QVector2D_new_QPoint".}
+proc fcQVector2D_new5(point: pointer): ptr cQVector2D {.importc: "QVector2D_new_QPointF".}
+proc fcQVector2D_new6(vector: pointer): ptr cQVector2D {.importc: "QVector2D_new_QVector3D".}
+proc fcQVector2D_new7(vector: pointer): ptr cQVector2D {.importc: "QVector2D_new_QVector4D".}
+proc fcQVector2D_new8(fromVal: pointer): ptr cQVector2D {.importc: "QVector2D_new_QVector2D".}
 
 proc isNull*(self: gen_qvector2d_types.QVector2D): bool =
   fcQVector2D_isNull(self.h)
@@ -125,16 +125,16 @@ proc operatorMinusAssign*(self: gen_qvector2d_types.QVector2D, vector: gen_qvect
   gen_qvector2d_types.QVector2D(h: fcQVector2D_operatorMinusAssign(self.h, vector.h), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qvector2d_types.QVector2D, factor: float32): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D(h: fcQVector2D_operatorMultiplyAssign(self.h, factor), owned: false)
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_operatorMultiplyAssignFactor(self.h, factor), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qvector2d_types.QVector2D, vector: gen_qvector2d_types.QVector2D): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D(h: fcQVector2D_operatorMultiplyAssignWithVector(self.h, vector.h), owned: false)
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_operatorMultiplyAssignVector(self.h, vector.h), owned: false)
 
 proc operatorDivideAssign*(self: gen_qvector2d_types.QVector2D, divisor: float32): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D(h: fcQVector2D_operatorDivideAssign(self.h, divisor), owned: false)
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_operatorDivideAssignDivisor(self.h, divisor), owned: false)
 
 proc operatorDivideAssign*(self: gen_qvector2d_types.QVector2D, vector: gen_qvector2d_types.QVector2D): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D(h: fcQVector2D_operatorDivideAssignWithVector(self.h, vector.h), owned: false)
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_operatorDivideAssignVector(self.h, vector.h), owned: false)
 
 proc dotProduct*(_: type gen_qvector2d_types.QVector2D, v1: gen_qvector2d_types.QVector2D, v2: gen_qvector2d_types.QVector2D): float32 =
   fcQVector2D_dotProduct(v1.h, v2.h)
@@ -182,6 +182,6 @@ proc create*(T: type gen_qvector2d_types.QVector2D,
   let tmp = gen_qvector2d_types.QVector2D(h: fcQVector2D_new7(vector.h), owned: true)
   tmp
 proc create*(T: type gen_qvector2d_types.QVector2D,
-    param1: gen_qvector2d_types.QVector2D): gen_qvector2d_types.QVector2D =
-  let tmp = gen_qvector2d_types.QVector2D(h: fcQVector2D_new8(param1.h), owned: true)
+    fromVal: gen_qvector2d_types.QVector2D): gen_qvector2d_types.QVector2D =
+  let tmp = gen_qvector2d_types.QVector2D(h: fcQVector2D_new8(fromVal.h), owned: true)
   tmp

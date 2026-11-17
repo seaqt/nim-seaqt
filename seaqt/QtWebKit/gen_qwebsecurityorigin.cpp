@@ -18,12 +18,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QWebSecurityOrigin* QWebSecurityOrigin_new(QUrl* url) {
+QWebSecurityOrigin* QWebSecurityOrigin_new_url(QUrl* url) {
 	return new (std::nothrow) QWebSecurityOrigin(*url);
 }
 
-QWebSecurityOrigin* QWebSecurityOrigin_new2(QWebSecurityOrigin* other) {
-	return new (std::nothrow) QWebSecurityOrigin(*other);
+QWebSecurityOrigin* QWebSecurityOrigin_new_from(QWebSecurityOrigin* from) {
+	return new (std::nothrow) QWebSecurityOrigin(*from);
 }
 
 struct seaqt_array /* of QWebSecurityOrigin* */  QWebSecurityOrigin_allOrigins() {
@@ -138,8 +138,8 @@ struct seaqt_array /* of QWebDatabase* */  QWebSecurityOrigin_databases(const QW
 	return _out;
 }
 
-void QWebSecurityOrigin_operatorAssign(QWebSecurityOrigin* self, QWebSecurityOrigin* other) {
-	self->operator=(*other);
+void QWebSecurityOrigin_operatorAssign(QWebSecurityOrigin* self, QWebSecurityOrigin* from) {
+	self->operator=(*from);
 }
 
 void QWebSecurityOrigin_delete(QWebSecurityOrigin* self) {

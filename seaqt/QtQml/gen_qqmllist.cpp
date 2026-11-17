@@ -19,20 +19,20 @@ QQmlListReference* QQmlListReference_new() {
 	return new (std::nothrow) QQmlListReference();
 }
 
-QQmlListReference* QQmlListReference_new2(QObject* param1, const char* property) {
+QQmlListReference* QQmlListReference_new_QObject_char(QObject* param1, const char* property) {
 	return new (std::nothrow) QQmlListReference(param1, property);
 }
 
-QQmlListReference* QQmlListReference_new3(QQmlListReference* param1) {
-	return new (std::nothrow) QQmlListReference(*param1);
+QQmlListReference* QQmlListReference_new_QQmlListReference(QQmlListReference* from) {
+	return new (std::nothrow) QQmlListReference(*from);
 }
 
-QQmlListReference* QQmlListReference_new4(QObject* param1, const char* property, QQmlEngine* param3) {
+QQmlListReference* QQmlListReference_new_QObject_char_QQmlEngine(QObject* param1, const char* property, QQmlEngine* param3) {
 	return new (std::nothrow) QQmlListReference(param1, property, param3);
 }
 
-void QQmlListReference_operatorAssign(QQmlListReference* self, QQmlListReference* param1) {
-	self->operator=(*param1);
+void QQmlListReference_operatorAssign(QQmlListReference* self, QQmlListReference* from) {
+	self->operator=(*from);
 }
 
 bool QQmlListReference_isValid(const QQmlListReference* self) {

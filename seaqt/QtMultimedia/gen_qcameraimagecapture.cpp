@@ -198,12 +198,12 @@ public:
 	friend bool QCameraImageCapture_protectedbase_isSignalConnected(const VirtualQCameraImageCapture* self, QMetaMethod* signal);
 };
 
-VirtualQCameraImageCapture* QCameraImageCapture_new(const QCameraImageCapture_VTable* vtbl, size_t vdata, QMediaObject* mediaObject) {
+VirtualQCameraImageCapture* QCameraImageCapture_new_mediaObject(const QCameraImageCapture_VTable* vtbl, size_t vdata, QMediaObject* mediaObject) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCameraImageCapture>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCameraImageCapture(vtbl, mediaObject) : nullptr;
 }
 
-VirtualQCameraImageCapture* QCameraImageCapture_new2(const QCameraImageCapture_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent) {
+VirtualQCameraImageCapture* QCameraImageCapture_new_mediaObject_parent(const QCameraImageCapture_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCameraImageCapture>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCameraImageCapture(vtbl, mediaObject, parent) : nullptr;
 }
@@ -225,7 +225,7 @@ int QCameraImageCapture_metacall(QCameraImageCapture* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCameraImageCapture_tr(const char* s) {
+struct seaqt_string QCameraImageCapture_tr_s(const char* s) {
 	QString _ret = QCameraImageCapture::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -236,7 +236,7 @@ struct seaqt_string QCameraImageCapture_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QCameraImageCapture_trUtf8(const char* s) {
+struct seaqt_string QCameraImageCapture_trUtf8_s(const char* s) {
 	QString _ret = QCameraImageCapture::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -377,12 +377,12 @@ void QCameraImageCapture_cancelCapture(QCameraImageCapture* self) {
 	self->cancelCapture();
 }
 
-void QCameraImageCapture_error2(QCameraImageCapture* self, int id, int error, struct seaqt_string errorString) {
+void QCameraImageCapture_error_id_error_errorString(QCameraImageCapture* self, int id, int error, struct seaqt_string errorString) {
 	QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
 	self->error(static_cast<int>(id), static_cast<QCameraImageCapture::Error>(error), errorString_QString);
 }
 
-void QCameraImageCapture_connect_error2(QCameraImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t)) {
+void QCameraImageCapture_connect_error_id_error_errorString(QCameraImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int, struct seaqt_string);
@@ -561,7 +561,7 @@ void QCameraImageCapture_connect_imageSaved(QCameraImageCapture* self, intptr_t 
 	QCameraImageCapture::connect(self, static_cast<void (QCameraImageCapture::*)(int, const QString&)>(&QCameraImageCapture::imageSaved), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QCameraImageCapture_tr2(const char* s, const char* c) {
+struct seaqt_string QCameraImageCapture_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCameraImageCapture::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -572,7 +572,7 @@ struct seaqt_string QCameraImageCapture_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCameraImageCapture_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCameraImageCapture_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCameraImageCapture::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -583,7 +583,7 @@ struct seaqt_string QCameraImageCapture_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-struct seaqt_string QCameraImageCapture_trUtf82(const char* s, const char* c) {
+struct seaqt_string QCameraImageCapture_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QCameraImageCapture::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -594,7 +594,7 @@ struct seaqt_string QCameraImageCapture_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCameraImageCapture_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QCameraImageCapture_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCameraImageCapture::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -605,7 +605,7 @@ struct seaqt_string QCameraImageCapture_trUtf83(const char* s, const char* c, in
 	return _ms;
 }
 
-struct seaqt_array /* of QSize* */  QCameraImageCapture_supportedResolutionsWithSettings(const QCameraImageCapture* self, QImageEncoderSettings* settings) {
+struct seaqt_array /* of QSize* */  QCameraImageCapture_supportedResolutions_settings(const QCameraImageCapture* self, QImageEncoderSettings* settings) {
 	QList<QSize> _ret = self->supportedResolutions(*settings);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QSize** _arr = static_cast<QSize**>(malloc(sizeof(QSize*) * _ret.length()));
@@ -618,7 +618,7 @@ struct seaqt_array /* of QSize* */  QCameraImageCapture_supportedResolutionsWith
 	return _out;
 }
 
-struct seaqt_array /* of QSize* */  QCameraImageCapture_supportedResolutions2(const QCameraImageCapture* self, QImageEncoderSettings* settings, bool* continuous) {
+struct seaqt_array /* of QSize* */  QCameraImageCapture_supportedResolutions_settings_continuous(const QCameraImageCapture* self, QImageEncoderSettings* settings, bool* continuous) {
 	QList<QSize> _ret = self->supportedResolutions(*settings, continuous);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QSize** _arr = static_cast<QSize**>(malloc(sizeof(QSize*) * _ret.length()));
@@ -631,7 +631,7 @@ struct seaqt_array /* of QSize* */  QCameraImageCapture_supportedResolutions2(co
 	return _out;
 }
 
-int QCameraImageCapture_captureWithLocation(QCameraImageCapture* self, struct seaqt_string location) {
+int QCameraImageCapture_capture_location(QCameraImageCapture* self, struct seaqt_string location) {
 	QString location_QString = QString::fromUtf8(location.data, location.len);
 	return self->capture(location_QString);
 }

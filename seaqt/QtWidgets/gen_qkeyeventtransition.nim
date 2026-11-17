@@ -59,16 +59,16 @@ type cQKeyEventTransition*{.exportc: "QKeyEventTransition", incompleteStruct.} =
 proc fcQKeyEventTransition_metaObject(self: pointer): pointer {.importc: "QKeyEventTransition_metaObject".}
 proc fcQKeyEventTransition_metacast(self: pointer, param1: cstring): pointer {.importc: "QKeyEventTransition_metacast".}
 proc fcQKeyEventTransition_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QKeyEventTransition_metacall".}
-proc fcQKeyEventTransition_tr(s: cstring): struct_seaqt_string {.importc: "QKeyEventTransition_tr".}
-proc fcQKeyEventTransition_trUtf8(s: cstring): struct_seaqt_string {.importc: "QKeyEventTransition_trUtf8".}
+proc fcQKeyEventTransition_trS(s: cstring): struct_seaqt_string {.importc: "QKeyEventTransition_tr_s".}
+proc fcQKeyEventTransition_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QKeyEventTransition_trUtf8_s".}
 proc fcQKeyEventTransition_key(self: pointer): cint {.importc: "QKeyEventTransition_key".}
 proc fcQKeyEventTransition_setKey(self: pointer, key: cint): void {.importc: "QKeyEventTransition_setKey".}
 proc fcQKeyEventTransition_modifierMask(self: pointer): cint {.importc: "QKeyEventTransition_modifierMask".}
 proc fcQKeyEventTransition_setModifierMask(self: pointer, modifiers: cint): void {.importc: "QKeyEventTransition_setModifierMask".}
-proc fcQKeyEventTransition_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QKeyEventTransition_tr2".}
-proc fcQKeyEventTransition_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QKeyEventTransition_tr3".}
-proc fcQKeyEventTransition_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QKeyEventTransition_trUtf82".}
-proc fcQKeyEventTransition_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QKeyEventTransition_trUtf83".}
+proc fcQKeyEventTransition_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QKeyEventTransition_tr_s_c".}
+proc fcQKeyEventTransition_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QKeyEventTransition_tr_s_c_n".}
+proc fcQKeyEventTransition_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QKeyEventTransition_trUtf8_s_c".}
+proc fcQKeyEventTransition_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QKeyEventTransition_trUtf8_s_c_n".}
 proc fcQKeyEventTransition_vdata(self: pointer): ptr pointer {.importc: "QKeyEventTransition_vdata".}
 proc fvdata_cQKeyEventTransition(self: pointer): pointer {.importc: "vdata_QKeyEventTransition".}
 
@@ -103,9 +103,9 @@ proc fcQKeyEventTransition_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQKeyEventTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QKeyEventTransition_protectedbase_receivers".}
 proc fcQKeyEventTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QKeyEventTransition_protectedbase_isSignalConnected".}
 proc fcQKeyEventTransition_new(vtbl: pointer, vdata: csize_t): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new".}
-proc fcQKeyEventTransition_new2(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, key: cint): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new2".}
-proc fcQKeyEventTransition_new3(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new3".}
-proc fcQKeyEventTransition_new4(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, key: cint, sourceState: pointer): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new4".}
+proc fcQKeyEventTransition_new2(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, key: cint): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new_object_type_key".}
+proc fcQKeyEventTransition_new3(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new_sourceState".}
+proc fcQKeyEventTransition_new4(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, key: cint, sourceState: pointer): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new_object_type_key_sourceState".}
 proc fcQKeyEventTransition_staticMetaObject(): pointer {.importc: "QKeyEventTransition_staticMetaObject".}
 
 proc metaObject*(self: gen_qkeyeventtransition_types.QKeyEventTransition): gen_qobjectdefs_types.QMetaObject =
@@ -118,13 +118,13 @@ proc metacall*(self: gen_qkeyeventtransition_types.QKeyEventTransition, param1: 
   fcQKeyEventTransition_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qkeyeventtransition_types.QKeyEventTransition, s: cstring): string =
-  let v_ms = fcQKeyEventTransition_tr(s)
+  let v_ms = fcQKeyEventTransition_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qkeyeventtransition_types.QKeyEventTransition, s: cstring): string =
-  let v_ms = fcQKeyEventTransition_trUtf8(s)
+  let v_ms = fcQKeyEventTransition_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -142,25 +142,25 @@ proc setModifierMask*(self: gen_qkeyeventtransition_types.QKeyEventTransition, m
   fcQKeyEventTransition_setModifierMask(self.h, cint(modifiers))
 
 proc tr*(_: type gen_qkeyeventtransition_types.QKeyEventTransition, s: cstring, c: cstring): string =
-  let v_ms = fcQKeyEventTransition_tr2(s, c)
+  let v_ms = fcQKeyEventTransition_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qkeyeventtransition_types.QKeyEventTransition, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQKeyEventTransition_tr3(s, c, n)
+  let v_ms = fcQKeyEventTransition_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qkeyeventtransition_types.QKeyEventTransition, s: cstring, c: cstring): string =
-  let v_ms = fcQKeyEventTransition_trUtf82(s, c)
+  let v_ms = fcQKeyEventTransition_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qkeyeventtransition_types.QKeyEventTransition, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQKeyEventTransition_trUtf83(s, c, n)
+  let v_ms = fcQKeyEventTransition_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

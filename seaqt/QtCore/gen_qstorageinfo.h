@@ -23,11 +23,11 @@ typedef struct QStorageInfo QStorageInfo;
 #endif
 
 QStorageInfo* QStorageInfo_new();
-QStorageInfo* QStorageInfo_new2(struct seaqt_string path);
-QStorageInfo* QStorageInfo_new3(QDir* dir);
-QStorageInfo* QStorageInfo_new4(QStorageInfo* other);
+QStorageInfo* QStorageInfo_new_path(struct seaqt_string path);
+QStorageInfo* QStorageInfo_new_dir(QDir* dir);
+QStorageInfo* QStorageInfo_new_from(QStorageInfo* from);
 
-void QStorageInfo_operatorAssign(QStorageInfo* self, QStorageInfo* other);
+void QStorageInfo_operatorAssign(QStorageInfo* self, QStorageInfo* from);
 void QStorageInfo_swap(QStorageInfo* self, QStorageInfo* other);
 void QStorageInfo_setPath(QStorageInfo* self, struct seaqt_string path);
 struct seaqt_string QStorageInfo_rootPath(const QStorageInfo* self);

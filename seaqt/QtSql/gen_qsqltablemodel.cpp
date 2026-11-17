@@ -949,7 +949,7 @@ public:
 	friend void QSqlTableModel_protectedbase_endResetModel(VirtualQSqlTableModel* self);
 	friend void QSqlTableModel_protectedbase_setLastError(VirtualQSqlTableModel* self, QSqlError* error);
 	friend void QSqlTableModel_protectedbase_resetInternalData(VirtualQSqlTableModel* self);
-	friend QModelIndex* QSqlTableModel_protectedbase_createIndex(const VirtualQSqlTableModel* self, int row, int column);
+	friend QModelIndex* QSqlTableModel_protectedbase_createIndex_row_column(const VirtualQSqlTableModel* self, int row, int column);
 	friend void QSqlTableModel_protectedbase_encodeData(const VirtualQSqlTableModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QSqlTableModel_protectedbase_decodeData(VirtualQSqlTableModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend bool QSqlTableModel_protectedbase_beginMoveRows(VirtualQSqlTableModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
@@ -970,12 +970,12 @@ VirtualQSqlTableModel* QSqlTableModel_new(const QSqlTableModel_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQSqlTableModel(vtbl) : nullptr;
 }
 
-VirtualQSqlTableModel* QSqlTableModel_new2(const QSqlTableModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSqlTableModel* QSqlTableModel_new_parent(const QSqlTableModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSqlTableModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSqlTableModel(vtbl, parent) : nullptr;
 }
 
-VirtualQSqlTableModel* QSqlTableModel_new3(const QSqlTableModel_VTable* vtbl, size_t vdata, QObject* parent, QSqlDatabase* db) {
+VirtualQSqlTableModel* QSqlTableModel_new_parent_db(const QSqlTableModel_VTable* vtbl, size_t vdata, QObject* parent, QSqlDatabase* db) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSqlTableModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSqlTableModel(vtbl, parent, *db) : nullptr;
 }
@@ -996,7 +996,7 @@ int QSqlTableModel_metacall(QSqlTableModel* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSqlTableModel_tr(const char* s) {
+struct seaqt_string QSqlTableModel_tr_s(const char* s) {
 	QString _ret = QSqlTableModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1007,7 +1007,7 @@ struct seaqt_string QSqlTableModel_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QSqlTableModel_trUtf8(const char* s) {
+struct seaqt_string QSqlTableModel_trUtf8_s(const char* s) {
 	QString _ret = QSqlTableModel::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1043,7 +1043,7 @@ QSqlRecord* QSqlTableModel_record(const QSqlTableModel* self) {
 	return new QSqlRecord(self->record());
 }
 
-QSqlRecord* QSqlTableModel_recordWithRow(const QSqlTableModel* self, int row) {
+QSqlRecord* QSqlTableModel_record_row(const QSqlTableModel* self, int row) {
 	return new QSqlRecord(self->record(static_cast<int>(row)));
 }
 
@@ -1063,7 +1063,7 @@ bool QSqlTableModel_isDirty(const QSqlTableModel* self) {
 	return self->isDirty();
 }
 
-bool QSqlTableModel_isDirtyWithIndex(const QSqlTableModel* self, QModelIndex* index) {
+bool QSqlTableModel_isDirty_index(const QSqlTableModel* self, QModelIndex* index) {
 	return self->isDirty(*index);
 }
 
@@ -1241,7 +1241,7 @@ void QSqlTableModel_connect_beforeDelete(QSqlTableModel* self, intptr_t slot, vo
 	QSqlTableModel::connect(self, static_cast<void (QSqlTableModel::*)(int)>(&QSqlTableModel::beforeDelete), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QSqlTableModel_tr2(const char* s, const char* c) {
+struct seaqt_string QSqlTableModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSqlTableModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1252,7 +1252,7 @@ struct seaqt_string QSqlTableModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSqlTableModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSqlTableModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSqlTableModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1263,7 +1263,7 @@ struct seaqt_string QSqlTableModel_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QSqlTableModel_trUtf82(const char* s, const char* c) {
+struct seaqt_string QSqlTableModel_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QSqlTableModel::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1274,7 +1274,7 @@ struct seaqt_string QSqlTableModel_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSqlTableModel_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QSqlTableModel_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSqlTableModel::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1723,7 +1723,7 @@ void QSqlTableModel_protectedbase_resetInternalData(VirtualQSqlTableModel* self)
 	self->resetInternalData();
 }
 
-QModelIndex* QSqlTableModel_protectedbase_createIndex(const VirtualQSqlTableModel* self, int row, int column) {
+QModelIndex* QSqlTableModel_protectedbase_createIndex_row_column(const VirtualQSqlTableModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

@@ -162,10 +162,10 @@ proc fcQPrinter_orientation(self: pointer): cint {.importc: "QPrinter_orientatio
 proc fcQPrinter_setPageSize(self: pointer, pageSize: cint): void {.importc: "QPrinter_setPageSize".}
 proc fcQPrinter_pageSize(self: pointer): cint {.importc: "QPrinter_pageSize".}
 proc fcQPrinter_setPageSizeMM(self: pointer, size: pointer): void {.importc: "QPrinter_setPageSizeMM".}
-proc fcQPrinter_setPaperSize(self: pointer, paperSize: cint): void {.importc: "QPrinter_setPaperSize".}
+proc fcQPrinter_setPaperSizePaperSize(self: pointer, paperSize: cint): void {.importc: "QPrinter_setPaperSize_paperSize".}
 proc fcQPrinter_paperSize(self: pointer): cint {.importc: "QPrinter_paperSize".}
-proc fcQPrinter_setPaperSize2(self: pointer, paperSize: pointer, unit: cint): void {.importc: "QPrinter_setPaperSize2".}
-proc fcQPrinter_paperSizeWithUnit(self: pointer, unit: cint): pointer {.importc: "QPrinter_paperSizeWithUnit".}
+proc fcQPrinter_setPaperSizePaperSizeUnit(self: pointer, paperSize: pointer, unit: cint): void {.importc: "QPrinter_setPaperSize_paperSize_unit".}
+proc fcQPrinter_paperSizeUnit(self: pointer, unit: cint): pointer {.importc: "QPrinter_paperSize_unit".}
 proc fcQPrinter_setPaperName(self: pointer, paperName: struct_seaqt_string): void {.importc: "QPrinter_setPaperName".}
 proc fcQPrinter_paperName(self: pointer): struct_seaqt_string {.importc: "QPrinter_paperName".}
 proc fcQPrinter_setPageOrder(self: pointer, pageOrder: cint): void {.importc: "QPrinter_setPageOrder".}
@@ -197,8 +197,8 @@ proc fcQPrinter_setWinPageSize(self: pointer, winPageSize: cint): void {.importc
 proc fcQPrinter_winPageSize(self: pointer): cint {.importc: "QPrinter_winPageSize".}
 proc fcQPrinter_paperRect(self: pointer): pointer {.importc: "QPrinter_paperRect".}
 proc fcQPrinter_pageRect(self: pointer): pointer {.importc: "QPrinter_pageRect".}
-proc fcQPrinter_paperRectWithQPrinterUnit(self: pointer, param1: cint): pointer {.importc: "QPrinter_paperRectWithQPrinterUnit".}
-proc fcQPrinter_pageRectWithQPrinterUnit(self: pointer, param1: cint): pointer {.importc: "QPrinter_pageRectWithQPrinterUnit".}
+proc fcQPrinter_paperRect_QPrinter_Unit(self: pointer, param1: cint): pointer {.importc: "QPrinter_paperRect_QPrinter_Unit".}
+proc fcQPrinter_pageRect_QPrinter_Unit(self: pointer, param1: cint): pointer {.importc: "QPrinter_pageRect_QPrinter_Unit".}
 proc fcQPrinter_printerSelectionOption(self: pointer): struct_seaqt_string {.importc: "QPrinter_printerSelectionOption".}
 proc fcQPrinter_setPrinterSelectionOption(self: pointer, printerSelectionOption: struct_seaqt_string): void {.importc: "QPrinter_setPrinterSelectionOption".}
 proc fcQPrinter_newPage(self: pointer): bool {.importc: "QPrinter_newPage".}
@@ -240,11 +240,11 @@ proc fcQPrinter_virtualbase_initPainter(self: pointer, painter: pointer): void {
 proc fcQPrinter_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QPrinter_virtualbase_redirected".}
 proc fcQPrinter_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QPrinter_virtualbase_sharedPainter".}
 proc fcQPrinter_protectedbase_setEngines(self: pointer, printEngine: pointer, paintEngine: pointer): void {.importc: "QPrinter_protectedbase_setEngines".}
-proc fcQPrinter_protectedbase_devicePageLayout(self: pointer): pointer {.importc: "QPrinter_protectedbase_devicePageLayout".}
+proc fcQPrinter_protectedbase_devicePageLayout_const(self: pointer): pointer {.importc: "QPrinter_protectedbase_devicePageLayout_const".}
 proc fcQPrinter_new(vtbl: pointer, vdata: csize_t): ptr cQPrinter {.importc: "QPrinter_new".}
-proc fcQPrinter_new2(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPrinter {.importc: "QPrinter_new2".}
-proc fcQPrinter_new3(vtbl: pointer, vdata: csize_t, mode: cint): ptr cQPrinter {.importc: "QPrinter_new3".}
-proc fcQPrinter_new4(vtbl: pointer, vdata: csize_t, printer: pointer, mode: cint): ptr cQPrinter {.importc: "QPrinter_new4".}
+proc fcQPrinter_new2(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPrinter {.importc: "QPrinter_new_printer".}
+proc fcQPrinter_new3(vtbl: pointer, vdata: csize_t, mode: cint): ptr cQPrinter {.importc: "QPrinter_new_mode".}
+proc fcQPrinter_new4(vtbl: pointer, vdata: csize_t, printer: pointer, mode: cint): ptr cQPrinter {.importc: "QPrinter_new_printer_mode".}
 
 proc devType*(self: gen_qprinter_types.QPrinter): cint =
   fcQPrinter_devType(self.h)
@@ -325,16 +325,16 @@ proc setPageSizeMM*(self: gen_qprinter_types.QPrinter, size: gen_qsize_types.QSi
   fcQPrinter_setPageSizeMM(self.h, size.h)
 
 proc setPaperSize*(self: gen_qprinter_types.QPrinter, paperSize: cint): void =
-  fcQPrinter_setPaperSize(self.h, cint(paperSize))
+  fcQPrinter_setPaperSizePaperSize(self.h, cint(paperSize))
 
 proc paperSize*(self: gen_qprinter_types.QPrinter): cint =
   cint(fcQPrinter_paperSize(self.h))
 
 proc setPaperSize*(self: gen_qprinter_types.QPrinter, paperSize: gen_qsize_types.QSizeF, unit: cint): void =
-  fcQPrinter_setPaperSize2(self.h, paperSize.h, cint(unit))
+  fcQPrinter_setPaperSizePaperSizeUnit(self.h, paperSize.h, cint(unit))
 
 proc paperSize*(self: gen_qprinter_types.QPrinter, unit: cint): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQPrinter_paperSizeWithUnit(self.h, cint(unit)), owned: true)
+  gen_qsize_types.QSizeF(h: fcQPrinter_paperSizeUnit(self.h, cint(unit)), owned: true)
 
 proc setPaperName*(self: gen_qprinter_types.QPrinter, paperName: openArray[char]): void =
   fcQPrinter_setPaperName(self.h, struct_seaqt_string(data: if len(paperName) > 0: addr paperName[0] else: nil, len: csize_t(len(paperName))))
@@ -439,10 +439,10 @@ proc pageRect*(self: gen_qprinter_types.QPrinter): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQPrinter_pageRect(self.h), owned: true)
 
 proc paperRect*(self: gen_qprinter_types.QPrinter, param1: cint): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPrinter_paperRectWithQPrinterUnit(self.h, cint(param1)), owned: true)
+  gen_qrect_types.QRectF(h: fcQPrinter_paperRect_QPrinter_Unit(self.h, cint(param1)), owned: true)
 
 proc pageRect*(self: gen_qprinter_types.QPrinter, param1: cint): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPrinter_pageRectWithQPrinterUnit(self.h, cint(param1)), owned: true)
+  gen_qrect_types.QRectF(h: fcQPrinter_pageRect_QPrinter_Unit(self.h, cint(param1)), owned: true)
 
 proc printerSelectionOption*(self: gen_qprinter_types.QPrinter): string =
   let v_ms = fcQPrinter_printerSelectionOption(self.h)
@@ -708,7 +708,7 @@ proc setEngines*(self: gen_qprinter_types.QPrinter, printEngine: gen_qprintengin
   fcQPrinter_protectedbase_setEngines(self.h, printEngine.h, paintEngine.h)
 
 proc devicePageLayout*(self: gen_qprinter_types.QPrinter): gen_qpagelayout_types.QPageLayout =
-  gen_qpagelayout_types.QPageLayout(h: fcQPrinter_protectedbase_devicePageLayout(self.h), owned: true)
+  gen_qpagelayout_types.QPageLayout(h: fcQPrinter_protectedbase_devicePageLayout_const(self.h), owned: true)
 
 proc create*(T: type gen_qprinter_types.QPrinter,
     vtbl: ref QPrinterVTable = nil): gen_qprinter_types.QPrinter =

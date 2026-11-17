@@ -46,7 +46,7 @@ proc fcQSslEllipticCurve_longName(self: pointer): struct_seaqt_string {.importc:
 proc fcQSslEllipticCurve_isValid(self: pointer): bool {.importc: "QSslEllipticCurve_isValid".}
 proc fcQSslEllipticCurve_isTlsNamedCurve(self: pointer): bool {.importc: "QSslEllipticCurve_isTlsNamedCurve".}
 proc fcQSslEllipticCurve_new(): ptr cQSslEllipticCurve {.importc: "QSslEllipticCurve_new".}
-proc fcQSslEllipticCurve_new2(param1: pointer): ptr cQSslEllipticCurve {.importc: "QSslEllipticCurve_new2".}
+proc fcQSslEllipticCurve_new2(fromVal: pointer): ptr cQSslEllipticCurve {.importc: "QSslEllipticCurve_new_from".}
 
 proc fromShortName*(_: type gen_qsslellipticcurve_types.QSslEllipticCurve, name: openArray[char]): gen_qsslellipticcurve_types.QSslEllipticCurve =
   gen_qsslellipticcurve_types.QSslEllipticCurve(h: fcQSslEllipticCurve_fromShortName(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
@@ -76,6 +76,6 @@ proc create*(T: type gen_qsslellipticcurve_types.QSslEllipticCurve): gen_qsslell
   let tmp = gen_qsslellipticcurve_types.QSslEllipticCurve(h: fcQSslEllipticCurve_new(), owned: true)
   tmp
 proc create*(T: type gen_qsslellipticcurve_types.QSslEllipticCurve,
-    param1: gen_qsslellipticcurve_types.QSslEllipticCurve): gen_qsslellipticcurve_types.QSslEllipticCurve =
-  let tmp = gen_qsslellipticcurve_types.QSslEllipticCurve(h: fcQSslEllipticCurve_new2(param1.h), owned: true)
+    fromVal: gen_qsslellipticcurve_types.QSslEllipticCurve): gen_qsslellipticcurve_types.QSslEllipticCurve =
+  let tmp = gen_qsslellipticcurve_types.QSslEllipticCurve(h: fcQSslEllipticCurve_new2(fromVal.h), owned: true)
   tmp

@@ -18,16 +18,16 @@ QSurfaceFormat* QSurfaceFormat_new() {
 	return new (std::nothrow) QSurfaceFormat();
 }
 
-QSurfaceFormat* QSurfaceFormat_new2(int options) {
+QSurfaceFormat* QSurfaceFormat_new_options(int options) {
 	return new (std::nothrow) QSurfaceFormat(static_cast<QSurfaceFormat::FormatOptions>(options));
 }
 
-QSurfaceFormat* QSurfaceFormat_new3(QSurfaceFormat* other) {
-	return new (std::nothrow) QSurfaceFormat(*other);
+QSurfaceFormat* QSurfaceFormat_new_from(QSurfaceFormat* from) {
+	return new (std::nothrow) QSurfaceFormat(*from);
 }
 
-void QSurfaceFormat_operatorAssign(QSurfaceFormat* self, QSurfaceFormat* other) {
-	self->operator=(*other);
+void QSurfaceFormat_operatorAssign(QSurfaceFormat* self, QSurfaceFormat* from) {
+	self->operator=(*from);
 }
 
 void QSurfaceFormat_setDepthBufferSize(QSurfaceFormat* self, int size) {
@@ -159,11 +159,11 @@ void QSurfaceFormat_setStereo(QSurfaceFormat* self, bool enable) {
 	self->setStereo(enable);
 }
 
-void QSurfaceFormat_setOption(QSurfaceFormat* self, int opt) {
+void QSurfaceFormat_setOption_opt(QSurfaceFormat* self, int opt) {
 	self->setOption(static_cast<QSurfaceFormat::FormatOptions>(opt));
 }
 
-bool QSurfaceFormat_testOption(const QSurfaceFormat* self, int opt) {
+bool QSurfaceFormat_testOption_opt(const QSurfaceFormat* self, int opt) {
 	return self->testOption(static_cast<QSurfaceFormat::FormatOptions>(opt));
 }
 
@@ -171,11 +171,11 @@ void QSurfaceFormat_setOptions(QSurfaceFormat* self, int options) {
 	self->setOptions(static_cast<QSurfaceFormat::FormatOptions>(options));
 }
 
-void QSurfaceFormat_setOptionWithOption(QSurfaceFormat* self, int option) {
+void QSurfaceFormat_setOption_option(QSurfaceFormat* self, int option) {
 	self->setOption(static_cast<QSurfaceFormat::FormatOption>(option));
 }
 
-bool QSurfaceFormat_testOptionWithOption(const QSurfaceFormat* self, int option) {
+bool QSurfaceFormat_testOption_option(const QSurfaceFormat* self, int option) {
 	return self->testOption(static_cast<QSurfaceFormat::FormatOption>(option));
 }
 
@@ -209,7 +209,7 @@ QSurfaceFormat* QSurfaceFormat_defaultFormat() {
 	return new QSurfaceFormat(QSurfaceFormat::defaultFormat());
 }
 
-void QSurfaceFormat_setOption2(QSurfaceFormat* self, int option, bool on) {
+void QSurfaceFormat_setOption_option_on(QSurfaceFormat* self, int option, bool on) {
 	self->setOption(static_cast<QSurfaceFormat::FormatOption>(option), on);
 }
 

@@ -60,8 +60,8 @@ type cQSessionManager*{.exportc: "QSessionManager", incompleteStruct.} = object
 proc fcQSessionManager_metaObject(self: pointer): pointer {.importc: "QSessionManager_metaObject".}
 proc fcQSessionManager_metacast(self: pointer, param1: cstring): pointer {.importc: "QSessionManager_metacast".}
 proc fcQSessionManager_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSessionManager_metacall".}
-proc fcQSessionManager_tr(s: cstring): struct_seaqt_string {.importc: "QSessionManager_tr".}
-proc fcQSessionManager_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSessionManager_trUtf8".}
+proc fcQSessionManager_trS(s: cstring): struct_seaqt_string {.importc: "QSessionManager_tr_s".}
+proc fcQSessionManager_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSessionManager_trUtf8_s".}
 proc fcQSessionManager_sessionId(self: pointer): struct_seaqt_string {.importc: "QSessionManager_sessionId".}
 proc fcQSessionManager_sessionKey(self: pointer): struct_seaqt_string {.importc: "QSessionManager_sessionKey".}
 proc fcQSessionManager_allowsInteraction(self: pointer): bool {.importc: "QSessionManager_allowsInteraction".}
@@ -74,14 +74,14 @@ proc fcQSessionManager_setRestartCommand(self: pointer, restartCommand: struct_s
 proc fcQSessionManager_restartCommand(self: pointer): struct_seaqt_array {.importc: "QSessionManager_restartCommand".}
 proc fcQSessionManager_setDiscardCommand(self: pointer, discardCommand: struct_seaqt_array): void {.importc: "QSessionManager_setDiscardCommand".}
 proc fcQSessionManager_discardCommand(self: pointer): struct_seaqt_array {.importc: "QSessionManager_discardCommand".}
-proc fcQSessionManager_setManagerProperty(self: pointer, name: struct_seaqt_string, value: struct_seaqt_string): void {.importc: "QSessionManager_setManagerProperty".}
-proc fcQSessionManager_setManagerProperty2(self: pointer, name: struct_seaqt_string, value: struct_seaqt_array): void {.importc: "QSessionManager_setManagerProperty2".}
+proc fcQSessionManager_setManagerProperty_QString_QString(self: pointer, name: struct_seaqt_string, value: struct_seaqt_string): void {.importc: "QSessionManager_setManagerProperty_QString_QString".}
+proc fcQSessionManager_setManagerProperty_QString_QStringList(self: pointer, name: struct_seaqt_string, value: struct_seaqt_array): void {.importc: "QSessionManager_setManagerProperty_QString_QStringList".}
 proc fcQSessionManager_isPhase2(self: pointer): bool {.importc: "QSessionManager_isPhase2".}
 proc fcQSessionManager_requestPhase2(self: pointer): void {.importc: "QSessionManager_requestPhase2".}
-proc fcQSessionManager_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSessionManager_tr2".}
-proc fcQSessionManager_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSessionManager_tr3".}
-proc fcQSessionManager_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSessionManager_trUtf82".}
-proc fcQSessionManager_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSessionManager_trUtf83".}
+proc fcQSessionManager_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSessionManager_tr_s_c".}
+proc fcQSessionManager_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSessionManager_tr_s_c_n".}
+proc fcQSessionManager_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSessionManager_trUtf8_s_c".}
+proc fcQSessionManager_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSessionManager_trUtf8_s_c_n".}
 proc fcQSessionManager_protectedbase_sender(self: pointer): pointer {.importc: "QSessionManager_protectedbase_sender".}
 proc fcQSessionManager_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSessionManager_protectedbase_senderSignalIndex".}
 proc fcQSessionManager_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSessionManager_protectedbase_receivers".}
@@ -98,13 +98,13 @@ proc metacall*(self: gen_qsessionmanager_types.QSessionManager, param1: cint, pa
   fcQSessionManager_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring): string =
-  let v_ms = fcQSessionManager_tr(s)
+  let v_ms = fcQSessionManager_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring): string =
-  let v_ms = fcQSessionManager_trUtf8(s)
+  let v_ms = fcQSessionManager_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -178,14 +178,14 @@ proc discardCommand*(self: gen_qsessionmanager_types.QSessionManager): seq[strin
   vx_ret
 
 proc setManagerProperty*(self: gen_qsessionmanager_types.QSessionManager, name: openArray[char], value: openArray[char]): void =
-  fcQSessionManager_setManagerProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
+  fcQSessionManager_setManagerProperty_QString_QString(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
 proc setManagerProperty*(self: gen_qsessionmanager_types.QSessionManager, name: openArray[char], value: openArray[string]): void =
   var value_CArray = newSeq[struct_seaqt_string](len(value))
   for i in 0..<len(value):
     value_CArray[i] = struct_seaqt_string(data: if len(value[i]) > 0: addr value[i][0] else: nil, len: csize_t(len(value[i])))
 
-  fcQSessionManager_setManagerProperty2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_array(len: csize_t(len(value)), data: if len(value) == 0: nil else: addr(value_CArray[0])))
+  fcQSessionManager_setManagerProperty_QString_QStringList(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_array(len: csize_t(len(value)), data: if len(value) == 0: nil else: addr(value_CArray[0])))
 
 proc isPhase2*(self: gen_qsessionmanager_types.QSessionManager): bool =
   fcQSessionManager_isPhase2(self.h)
@@ -194,25 +194,25 @@ proc requestPhase2*(self: gen_qsessionmanager_types.QSessionManager): void =
   fcQSessionManager_requestPhase2(self.h)
 
 proc tr*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring, c: cstring): string =
-  let v_ms = fcQSessionManager_tr2(s, c)
+  let v_ms = fcQSessionManager_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSessionManager_tr3(s, c, n)
+  let v_ms = fcQSessionManager_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring, c: cstring): string =
-  let v_ms = fcQSessionManager_trUtf82(s, c)
+  let v_ms = fcQSessionManager_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSessionManager_trUtf83(s, c, n)
+  let v_ms = fcQSessionManager_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

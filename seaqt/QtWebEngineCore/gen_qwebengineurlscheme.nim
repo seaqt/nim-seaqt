@@ -65,7 +65,7 @@ export
 
 type cQWebEngineUrlScheme*{.exportc: "QWebEngineUrlScheme", incompleteStruct.} = object
 
-proc fcQWebEngineUrlScheme_operatorAssign(self: pointer, that: pointer): void {.importc: "QWebEngineUrlScheme_operatorAssign".}
+proc fcQWebEngineUrlScheme_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineUrlScheme_operatorAssign".}
 proc fcQWebEngineUrlScheme_operatorEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineUrlScheme_operatorEqual".}
 proc fcQWebEngineUrlScheme_operatorNotEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineUrlScheme_operatorNotEqual".}
 proc fcQWebEngineUrlScheme_name(self: pointer): struct_seaqt_string {.importc: "QWebEngineUrlScheme_name".}
@@ -79,12 +79,12 @@ proc fcQWebEngineUrlScheme_setFlags(self: pointer, newValue: cint): void {.impor
 proc fcQWebEngineUrlScheme_registerScheme(scheme: pointer): void {.importc: "QWebEngineUrlScheme_registerScheme".}
 proc fcQWebEngineUrlScheme_schemeByName(name: struct_seaqt_string): pointer {.importc: "QWebEngineUrlScheme_schemeByName".}
 proc fcQWebEngineUrlScheme_new(): ptr cQWebEngineUrlScheme {.importc: "QWebEngineUrlScheme_new".}
-proc fcQWebEngineUrlScheme_new2(name: struct_seaqt_string): ptr cQWebEngineUrlScheme {.importc: "QWebEngineUrlScheme_new2".}
-proc fcQWebEngineUrlScheme_new3(that: pointer): ptr cQWebEngineUrlScheme {.importc: "QWebEngineUrlScheme_new3".}
+proc fcQWebEngineUrlScheme_new2(name: struct_seaqt_string): ptr cQWebEngineUrlScheme {.importc: "QWebEngineUrlScheme_new_name".}
+proc fcQWebEngineUrlScheme_new3(fromVal: pointer): ptr cQWebEngineUrlScheme {.importc: "QWebEngineUrlScheme_new_from".}
 proc fcQWebEngineUrlScheme_staticMetaObject(): pointer {.importc: "QWebEngineUrlScheme_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, that: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): void =
-  fcQWebEngineUrlScheme_operatorAssign(self.h, that.h)
+proc operatorAssign*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, fromVal: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): void =
+  fcQWebEngineUrlScheme_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, that: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): bool =
   fcQWebEngineUrlScheme_operatorEqual(self.h, that.h)
@@ -133,8 +133,8 @@ proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme,
   let tmp = gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new2(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
 proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme,
-    that: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
-  let tmp = gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new3(that.h), owned: true)
+    fromVal: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
+  let tmp = gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new3(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlScheme_staticMetaObject())

@@ -66,8 +66,8 @@ type cQDataWidgetMapper*{.exportc: "QDataWidgetMapper", incompleteStruct.} = obj
 proc fcQDataWidgetMapper_metaObject(self: pointer): pointer {.importc: "QDataWidgetMapper_metaObject".}
 proc fcQDataWidgetMapper_metacast(self: pointer, param1: cstring): pointer {.importc: "QDataWidgetMapper_metacast".}
 proc fcQDataWidgetMapper_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDataWidgetMapper_metacall".}
-proc fcQDataWidgetMapper_tr(s: cstring): struct_seaqt_string {.importc: "QDataWidgetMapper_tr".}
-proc fcQDataWidgetMapper_trUtf8(s: cstring): struct_seaqt_string {.importc: "QDataWidgetMapper_trUtf8".}
+proc fcQDataWidgetMapper_trS(s: cstring): struct_seaqt_string {.importc: "QDataWidgetMapper_tr_s".}
+proc fcQDataWidgetMapper_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QDataWidgetMapper_trUtf8_s".}
 proc fcQDataWidgetMapper_setModel(self: pointer, model: pointer): void {.importc: "QDataWidgetMapper_setModel".}
 proc fcQDataWidgetMapper_model(self: pointer): pointer {.importc: "QDataWidgetMapper_model".}
 proc fcQDataWidgetMapper_setItemDelegate(self: pointer, delegate: pointer): void {.importc: "QDataWidgetMapper_setItemDelegate".}
@@ -78,8 +78,8 @@ proc fcQDataWidgetMapper_setOrientation(self: pointer, aOrientation: cint): void
 proc fcQDataWidgetMapper_orientation(self: pointer): cint {.importc: "QDataWidgetMapper_orientation".}
 proc fcQDataWidgetMapper_setSubmitPolicy(self: pointer, policy: cint): void {.importc: "QDataWidgetMapper_setSubmitPolicy".}
 proc fcQDataWidgetMapper_submitPolicy(self: pointer): cint {.importc: "QDataWidgetMapper_submitPolicy".}
-proc fcQDataWidgetMapper_addMapping(self: pointer, widget: pointer, section: cint): void {.importc: "QDataWidgetMapper_addMapping".}
-proc fcQDataWidgetMapper_addMapping2(self: pointer, widget: pointer, section: cint, propertyName: struct_seaqt_string): void {.importc: "QDataWidgetMapper_addMapping2".}
+proc fcQDataWidgetMapper_addMappingWidgetSection(self: pointer, widget: pointer, section: cint): void {.importc: "QDataWidgetMapper_addMapping_widget_section".}
+proc fcQDataWidgetMapper_addMappingWidgetSectionPropertyName(self: pointer, widget: pointer, section: cint, propertyName: struct_seaqt_string): void {.importc: "QDataWidgetMapper_addMapping_widget_section_propertyName".}
 proc fcQDataWidgetMapper_removeMapping(self: pointer, widget: pointer): void {.importc: "QDataWidgetMapper_removeMapping".}
 proc fcQDataWidgetMapper_mappedSection(self: pointer, widget: pointer): cint {.importc: "QDataWidgetMapper_mappedSection".}
 proc fcQDataWidgetMapper_mappedPropertyName(self: pointer, widget: pointer): struct_seaqt_string {.importc: "QDataWidgetMapper_mappedPropertyName".}
@@ -96,10 +96,10 @@ proc fcQDataWidgetMapper_setCurrentIndex(self: pointer, index: cint): void {.imp
 proc fcQDataWidgetMapper_setCurrentModelIndex(self: pointer, index: pointer): void {.importc: "QDataWidgetMapper_setCurrentModelIndex".}
 proc fcQDataWidgetMapper_currentIndexChanged(self: pointer, index: cint): void {.importc: "QDataWidgetMapper_currentIndexChanged".}
 proc fcQDataWidgetMapper_connect_currentIndexChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDataWidgetMapper_connect_currentIndexChanged".}
-proc fcQDataWidgetMapper_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDataWidgetMapper_tr2".}
-proc fcQDataWidgetMapper_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDataWidgetMapper_tr3".}
-proc fcQDataWidgetMapper_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDataWidgetMapper_trUtf82".}
-proc fcQDataWidgetMapper_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDataWidgetMapper_trUtf83".}
+proc fcQDataWidgetMapper_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDataWidgetMapper_tr_s_c".}
+proc fcQDataWidgetMapper_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDataWidgetMapper_tr_s_c_n".}
+proc fcQDataWidgetMapper_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDataWidgetMapper_trUtf8_s_c".}
+proc fcQDataWidgetMapper_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDataWidgetMapper_trUtf8_s_c_n".}
 proc fcQDataWidgetMapper_vdata(self: pointer): ptr pointer {.importc: "QDataWidgetMapper_vdata".}
 proc fvdata_cQDataWidgetMapper(self: pointer): pointer {.importc: "vdata_QDataWidgetMapper".}
 
@@ -132,7 +132,7 @@ proc fcQDataWidgetMapper_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQDataWidgetMapper_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDataWidgetMapper_protectedbase_receivers".}
 proc fcQDataWidgetMapper_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDataWidgetMapper_protectedbase_isSignalConnected".}
 proc fcQDataWidgetMapper_new(vtbl: pointer, vdata: csize_t): ptr cQDataWidgetMapper {.importc: "QDataWidgetMapper_new".}
-proc fcQDataWidgetMapper_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDataWidgetMapper {.importc: "QDataWidgetMapper_new2".}
+proc fcQDataWidgetMapper_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDataWidgetMapper {.importc: "QDataWidgetMapper_new_parent".}
 proc fcQDataWidgetMapper_staticMetaObject(): pointer {.importc: "QDataWidgetMapper_staticMetaObject".}
 
 proc metaObject*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): gen_qobjectdefs_types.QMetaObject =
@@ -145,13 +145,13 @@ proc metacall*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, param1: cint
   fcQDataWidgetMapper_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdatawidgetmapper_types.QDataWidgetMapper, s: cstring): string =
-  let v_ms = fcQDataWidgetMapper_tr(s)
+  let v_ms = fcQDataWidgetMapper_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatawidgetmapper_types.QDataWidgetMapper, s: cstring): string =
-  let v_ms = fcQDataWidgetMapper_trUtf8(s)
+  let v_ms = fcQDataWidgetMapper_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -187,10 +187,10 @@ proc submitPolicy*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): cint =
   cint(fcQDataWidgetMapper_submitPolicy(self.h))
 
 proc addMapping*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, widget: gen_qwidget_types.QWidget, section: cint): void =
-  fcQDataWidgetMapper_addMapping(self.h, widget.h, section)
+  fcQDataWidgetMapper_addMappingWidgetSection(self.h, widget.h, section)
 
 proc addMapping*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, widget: gen_qwidget_types.QWidget, section: cint, propertyName: openArray[byte]): void =
-  fcQDataWidgetMapper_addMapping2(self.h, widget.h, section, struct_seaqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))))
+  fcQDataWidgetMapper_addMappingWidgetSectionPropertyName(self.h, widget.h, section, struct_seaqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))))
 
 proc removeMapping*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, widget: gen_qwidget_types.QWidget): void =
   fcQDataWidgetMapper_removeMapping(self.h, widget.h)
@@ -258,25 +258,25 @@ proc onCurrentIndexChanged*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper,
   fcQDataWidgetMapper_connect_currentIndexChanged(self.h, cast[int](addr tmp[]), fcQDataWidgetMapper_slot_callback_currentIndexChanged, fcQDataWidgetMapper_slot_callback_currentIndexChanged_release)
 
 proc tr*(_: type gen_qdatawidgetmapper_types.QDataWidgetMapper, s: cstring, c: cstring): string =
-  let v_ms = fcQDataWidgetMapper_tr2(s, c)
+  let v_ms = fcQDataWidgetMapper_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdatawidgetmapper_types.QDataWidgetMapper, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDataWidgetMapper_tr3(s, c, n)
+  let v_ms = fcQDataWidgetMapper_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatawidgetmapper_types.QDataWidgetMapper, s: cstring, c: cstring): string =
-  let v_ms = fcQDataWidgetMapper_trUtf82(s, c)
+  let v_ms = fcQDataWidgetMapper_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatawidgetmapper_types.QDataWidgetMapper, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDataWidgetMapper_trUtf83(s, c, n)
+  let v_ms = fcQDataWidgetMapper_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

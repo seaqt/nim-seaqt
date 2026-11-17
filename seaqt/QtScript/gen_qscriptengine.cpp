@@ -32,8 +32,8 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QScriptSyntaxCheckResult* QScriptSyntaxCheckResult_new(QScriptSyntaxCheckResult* other) {
-	return new (std::nothrow) QScriptSyntaxCheckResult(*other);
+QScriptSyntaxCheckResult* QScriptSyntaxCheckResult_new(QScriptSyntaxCheckResult* from) {
+	return new (std::nothrow) QScriptSyntaxCheckResult(*from);
 }
 
 int QScriptSyntaxCheckResult_state(const QScriptSyntaxCheckResult* self) {
@@ -60,8 +60,8 @@ struct seaqt_string QScriptSyntaxCheckResult_errorMessage(const QScriptSyntaxChe
 	return _ms;
 }
 
-void QScriptSyntaxCheckResult_operatorAssign(QScriptSyntaxCheckResult* self, QScriptSyntaxCheckResult* other) {
-	self->operator=(*other);
+void QScriptSyntaxCheckResult_operatorAssign(QScriptSyntaxCheckResult* self, QScriptSyntaxCheckResult* from) {
+	self->operator=(*from);
 }
 
 void QScriptSyntaxCheckResult_delete(QScriptSyntaxCheckResult* self) {
@@ -219,7 +219,7 @@ VirtualQScriptEngine* QScriptEngine_new(const QScriptEngine_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQScriptEngine(vtbl) : nullptr;
 }
 
-VirtualQScriptEngine* QScriptEngine_new2(const QScriptEngine_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQScriptEngine* QScriptEngine_new_parent(const QScriptEngine_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQScriptEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQScriptEngine(vtbl, parent) : nullptr;
 }
@@ -240,7 +240,7 @@ int QScriptEngine_metacall(QScriptEngine* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QScriptEngine_tr(const char* s) {
+struct seaqt_string QScriptEngine_tr_s(const char* s) {
 	QString _ret = QScriptEngine::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -251,7 +251,7 @@ struct seaqt_string QScriptEngine_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QScriptEngine_trUtf8(const char* s) {
+struct seaqt_string QScriptEngine_trUtf8_s(const char* s) {
 	QString _ret = QScriptEngine::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -292,12 +292,12 @@ QScriptSyntaxCheckResult* QScriptEngine_checkSyntax(struct seaqt_string program)
 	return new QScriptSyntaxCheckResult(QScriptEngine::checkSyntax(program_QString));
 }
 
-QScriptValue* QScriptEngine_evaluate(QScriptEngine* self, struct seaqt_string program) {
+QScriptValue* QScriptEngine_evaluate_QString(QScriptEngine* self, struct seaqt_string program) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	return new QScriptValue(self->evaluate(program_QString));
 }
 
-QScriptValue* QScriptEngine_evaluateWithProgram(QScriptEngine* self, QScriptProgram* program) {
+QScriptValue* QScriptEngine_evaluate_QScriptProgram(QScriptEngine* self, QScriptProgram* program) {
 	return new QScriptValue(self->evaluate(*program));
 }
 
@@ -353,15 +353,15 @@ QScriptValue* QScriptEngine_undefinedValue(QScriptEngine* self) {
 	return new QScriptValue(self->undefinedValue());
 }
 
-QScriptValue* QScriptEngine_newVariant(QScriptEngine* self, QVariant* value) {
+QScriptValue* QScriptEngine_newVariant_value(QScriptEngine* self, QVariant* value) {
 	return new QScriptValue(self->newVariant(*value));
 }
 
-QScriptValue* QScriptEngine_newVariant2(QScriptEngine* self, QScriptValue* object, QVariant* value) {
+QScriptValue* QScriptEngine_newVariant_object_value(QScriptEngine* self, QScriptValue* object, QVariant* value) {
 	return new QScriptValue(self->newVariant(*object, *value));
 }
 
-QScriptValue* QScriptEngine_newRegExp(QScriptEngine* self, QRegExp* regexp) {
+QScriptValue* QScriptEngine_newRegExp_regexp(QScriptEngine* self, QRegExp* regexp) {
 	return new QScriptValue(self->newRegExp(*regexp));
 }
 
@@ -369,7 +369,7 @@ QScriptValue* QScriptEngine_newObject(QScriptEngine* self) {
 	return new QScriptValue(self->newObject());
 }
 
-QScriptValue* QScriptEngine_newObjectWithScriptClass(QScriptEngine* self, QScriptClass* scriptClass) {
+QScriptValue* QScriptEngine_newObject_scriptClass(QScriptEngine* self, QScriptClass* scriptClass) {
 	return new QScriptValue(self->newObject(scriptClass));
 }
 
@@ -377,17 +377,17 @@ QScriptValue* QScriptEngine_newArray(QScriptEngine* self) {
 	return new QScriptValue(self->newArray());
 }
 
-QScriptValue* QScriptEngine_newRegExp2(QScriptEngine* self, struct seaqt_string pattern, struct seaqt_string flags) {
+QScriptValue* QScriptEngine_newRegExp_pattern_flags(QScriptEngine* self, struct seaqt_string pattern, struct seaqt_string flags) {
 	QString pattern_QString = QString::fromUtf8(pattern.data, pattern.len);
 	QString flags_QString = QString::fromUtf8(flags.data, flags.len);
 	return new QScriptValue(self->newRegExp(pattern_QString, flags_QString));
 }
 
-QScriptValue* QScriptEngine_newDate(QScriptEngine* self, double value) {
+QScriptValue* QScriptEngine_newDate_qsreal(QScriptEngine* self, double value) {
 	return new QScriptValue(self->newDate(static_cast<qsreal>(value)));
 }
 
-QScriptValue* QScriptEngine_newDateWithValue(QScriptEngine* self, QDateTime* value) {
+QScriptValue* QScriptEngine_newDate_QDateTime(QScriptEngine* self, QDateTime* value) {
 	return new QScriptValue(self->newDate(*value));
 }
 
@@ -395,15 +395,15 @@ QScriptValue* QScriptEngine_newActivationObject(QScriptEngine* self) {
 	return new QScriptValue(self->newActivationObject());
 }
 
-QScriptValue* QScriptEngine_newQObject(QScriptEngine* self, QObject* object) {
+QScriptValue* QScriptEngine_newQObject_object(QScriptEngine* self, QObject* object) {
 	return new QScriptValue(self->newQObject(object));
 }
 
-QScriptValue* QScriptEngine_newQObject2(QScriptEngine* self, QScriptValue* scriptObject, QObject* qtObject) {
+QScriptValue* QScriptEngine_newQObject_scriptObject_qtObject(QScriptEngine* self, QScriptValue* scriptObject, QObject* qtObject) {
 	return new QScriptValue(self->newQObject(*scriptObject, qtObject));
 }
 
-QScriptValue* QScriptEngine_newQMetaObject(QScriptEngine* self, QMetaObject* metaObject) {
+QScriptValue* QScriptEngine_newQMetaObject_metaObject(QScriptEngine* self, QMetaObject* metaObject) {
 	return new QScriptValue(self->newQMetaObject(metaObject));
 }
 
@@ -519,7 +519,7 @@ void QScriptEngine_connect_signalHandlerException(QScriptEngine* self, intptr_t 
 	QScriptEngine::connect(self, static_cast<void (QScriptEngine::*)(const QScriptValue&)>(&QScriptEngine::signalHandlerException), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QScriptEngine_tr2(const char* s, const char* c) {
+struct seaqt_string QScriptEngine_tr_s_c(const char* s, const char* c) {
 	QString _ret = QScriptEngine::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -530,7 +530,7 @@ struct seaqt_string QScriptEngine_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QScriptEngine_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QScriptEngine_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QScriptEngine::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -541,7 +541,7 @@ struct seaqt_string QScriptEngine_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QScriptEngine_trUtf82(const char* s, const char* c) {
+struct seaqt_string QScriptEngine_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QScriptEngine::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -552,7 +552,7 @@ struct seaqt_string QScriptEngine_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QScriptEngine_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QScriptEngine_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QScriptEngine::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -563,51 +563,51 @@ struct seaqt_string QScriptEngine_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QScriptValue* QScriptEngine_evaluate2(QScriptEngine* self, struct seaqt_string program, struct seaqt_string fileName) {
+QScriptValue* QScriptEngine_evaluate_QString_QString(QScriptEngine* self, struct seaqt_string program, struct seaqt_string fileName) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new QScriptValue(self->evaluate(program_QString, fileName_QString));
 }
 
-QScriptValue* QScriptEngine_evaluate3(QScriptEngine* self, struct seaqt_string program, struct seaqt_string fileName, int lineNumber) {
+QScriptValue* QScriptEngine_evaluate_QString_QString_int(QScriptEngine* self, struct seaqt_string program, struct seaqt_string fileName, int lineNumber) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new QScriptValue(self->evaluate(program_QString, fileName_QString, static_cast<int>(lineNumber)));
 }
 
-void QScriptEngine_abortEvaluationWithResult(QScriptEngine* self, QScriptValue* result) {
+void QScriptEngine_abortEvaluation_result(QScriptEngine* self, QScriptValue* result) {
 	self->abortEvaluation(*result);
 }
 
-QScriptValue* QScriptEngine_newObject2(QScriptEngine* self, QScriptClass* scriptClass, QScriptValue* data) {
+QScriptValue* QScriptEngine_newObject_scriptClass_data(QScriptEngine* self, QScriptClass* scriptClass, QScriptValue* data) {
 	return new QScriptValue(self->newObject(scriptClass, *data));
 }
 
-QScriptValue* QScriptEngine_newArrayWithLength(QScriptEngine* self, unsigned int length) {
+QScriptValue* QScriptEngine_newArray_length(QScriptEngine* self, unsigned int length) {
 	return new QScriptValue(self->newArray(static_cast<uint>(length)));
 }
 
-QScriptValue* QScriptEngine_newQObject3(QScriptEngine* self, QObject* object, int ownership) {
+QScriptValue* QScriptEngine_newQObject_object_ownership(QScriptEngine* self, QObject* object, int ownership) {
 	return new QScriptValue(self->newQObject(object, static_cast<QScriptEngine::ValueOwnership>(ownership)));
 }
 
-QScriptValue* QScriptEngine_newQObject4(QScriptEngine* self, QObject* object, int ownership, int* options) {
+QScriptValue* QScriptEngine_newQObject_object_ownership_options(QScriptEngine* self, QObject* object, int ownership, int* options) {
 	return new QScriptValue(self->newQObject(object, static_cast<QScriptEngine::ValueOwnership>(ownership), (const QScriptEngine::QObjectWrapOptions&)(*options)));
 }
 
-QScriptValue* QScriptEngine_newQObject5(QScriptEngine* self, QScriptValue* scriptObject, QObject* qtObject, int ownership) {
+QScriptValue* QScriptEngine_newQObject_scriptObject_qtObject_ownership(QScriptEngine* self, QScriptValue* scriptObject, QObject* qtObject, int ownership) {
 	return new QScriptValue(self->newQObject(*scriptObject, qtObject, static_cast<QScriptEngine::ValueOwnership>(ownership)));
 }
 
-QScriptValue* QScriptEngine_newQObject6(QScriptEngine* self, QScriptValue* scriptObject, QObject* qtObject, int ownership, int* options) {
+QScriptValue* QScriptEngine_newQObject_scriptObject_qtObject_ownership_options(QScriptEngine* self, QScriptValue* scriptObject, QObject* qtObject, int ownership, int* options) {
 	return new QScriptValue(self->newQObject(*scriptObject, qtObject, static_cast<QScriptEngine::ValueOwnership>(ownership), (const QScriptEngine::QObjectWrapOptions&)(*options)));
 }
 
-QScriptValue* QScriptEngine_newQMetaObject2(QScriptEngine* self, QMetaObject* metaObject, QScriptValue* ctor) {
+QScriptValue* QScriptEngine_newQMetaObject_metaObject_ctor(QScriptEngine* self, QMetaObject* metaObject, QScriptValue* ctor) {
 	return new QScriptValue(self->newQMetaObject(metaObject, *ctor));
 }
 
-void QScriptEngine_installTranslatorFunctionsWithObject(QScriptEngine* self, QScriptValue* object) {
+void QScriptEngine_installTranslatorFunctions_object(QScriptEngine* self, QScriptValue* object) {
 	self->installTranslatorFunctions(*object);
 }
 

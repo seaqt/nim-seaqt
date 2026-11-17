@@ -47,7 +47,7 @@ export
 
 type cQQmlListReference*{.exportc: "QQmlListReference", incompleteStruct.} = object
 
-proc fcQQmlListReference_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlListReference_operatorAssign".}
+proc fcQQmlListReference_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlListReference_operatorAssign".}
 proc fcQQmlListReference_isValid(self: pointer): bool {.importc: "QQmlListReference_isValid".}
 proc fcQQmlListReference_objectX(self: pointer): pointer {.importc: "QQmlListReference_object".}
 proc fcQQmlListReference_listElementType(self: pointer): pointer {.importc: "QQmlListReference_listElementType".}
@@ -66,12 +66,12 @@ proc fcQQmlListReference_count(self: pointer): cint {.importc: "QQmlListReferenc
 proc fcQQmlListReference_replace(self: pointer, param1: cint, param2: pointer): bool {.importc: "QQmlListReference_replace".}
 proc fcQQmlListReference_removeLast(self: pointer): bool {.importc: "QQmlListReference_removeLast".}
 proc fcQQmlListReference_new(): ptr cQQmlListReference {.importc: "QQmlListReference_new".}
-proc fcQQmlListReference_new2(param1: pointer, property: cstring): ptr cQQmlListReference {.importc: "QQmlListReference_new2".}
-proc fcQQmlListReference_new3(param1: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new3".}
-proc fcQQmlListReference_new4(param1: pointer, property: cstring, param3: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new4".}
+proc fcQQmlListReference_new2(param1: pointer, property: cstring): ptr cQQmlListReference {.importc: "QQmlListReference_new_QObject_char".}
+proc fcQQmlListReference_new3(fromVal: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new_QQmlListReference".}
+proc fcQQmlListReference_new4(param1: pointer, property: cstring, param3: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new_QObject_char_QQmlEngine".}
 
-proc operatorAssign*(self: gen_qqmllist_types.QQmlListReference, param1: gen_qqmllist_types.QQmlListReference): void =
-  fcQQmlListReference_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmllist_types.QQmlListReference, fromVal: gen_qqmllist_types.QQmlListReference): void =
+  fcQQmlListReference_operatorAssign(self.h, fromVal.h)
 
 proc isValid*(self: gen_qqmllist_types.QQmlListReference): bool =
   fcQQmlListReference_isValid(self.h)
@@ -132,8 +132,8 @@ proc create*(T: type gen_qqmllist_types.QQmlListReference,
   let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new2(param1.h, property), owned: true)
   tmp
 proc create*(T: type gen_qqmllist_types.QQmlListReference,
-    param1: gen_qqmllist_types.QQmlListReference): gen_qqmllist_types.QQmlListReference =
-  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new3(param1.h), owned: true)
+    fromVal: gen_qqmllist_types.QQmlListReference): gen_qqmllist_types.QQmlListReference =
+  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qqmllist_types.QQmlListReference,
     param1: gen_qobject_types.QObject, property: cstring, param3: gen_qqmlengine_types.QQmlEngine): gen_qqmllist_types.QQmlListReference =

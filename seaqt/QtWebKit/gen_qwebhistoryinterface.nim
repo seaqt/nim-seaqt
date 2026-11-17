@@ -55,16 +55,16 @@ type cQWebHistoryInterface*{.exportc: "QWebHistoryInterface", incompleteStruct.}
 proc fcQWebHistoryInterface_metaObject(self: pointer): pointer {.importc: "QWebHistoryInterface_metaObject".}
 proc fcQWebHistoryInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebHistoryInterface_metacast".}
 proc fcQWebHistoryInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebHistoryInterface_metacall".}
-proc fcQWebHistoryInterface_tr(s: cstring): struct_seaqt_string {.importc: "QWebHistoryInterface_tr".}
-proc fcQWebHistoryInterface_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebHistoryInterface_trUtf8".}
+proc fcQWebHistoryInterface_trS(s: cstring): struct_seaqt_string {.importc: "QWebHistoryInterface_tr_s".}
+proc fcQWebHistoryInterface_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebHistoryInterface_trUtf8_s".}
 proc fcQWebHistoryInterface_setDefaultInterface(defaultInterface: pointer): void {.importc: "QWebHistoryInterface_setDefaultInterface".}
 proc fcQWebHistoryInterface_defaultInterface(): pointer {.importc: "QWebHistoryInterface_defaultInterface".}
 proc fcQWebHistoryInterface_historyContains(self: pointer, url: struct_seaqt_string): bool {.importc: "QWebHistoryInterface_historyContains".}
 proc fcQWebHistoryInterface_addHistoryEntry(self: pointer, url: struct_seaqt_string): void {.importc: "QWebHistoryInterface_addHistoryEntry".}
-proc fcQWebHistoryInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebHistoryInterface_tr2".}
-proc fcQWebHistoryInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebHistoryInterface_tr3".}
-proc fcQWebHistoryInterface_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebHistoryInterface_trUtf82".}
-proc fcQWebHistoryInterface_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebHistoryInterface_trUtf83".}
+proc fcQWebHistoryInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebHistoryInterface_tr_s_c".}
+proc fcQWebHistoryInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebHistoryInterface_tr_s_c_n".}
+proc fcQWebHistoryInterface_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebHistoryInterface_trUtf8_s_c".}
+proc fcQWebHistoryInterface_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebHistoryInterface_trUtf8_s_c_n".}
 proc fcQWebHistoryInterface_vdata(self: pointer): ptr pointer {.importc: "QWebHistoryInterface_vdata".}
 proc fvdata_cQWebHistoryInterface(self: pointer): pointer {.importc: "vdata_QWebHistoryInterface".}
 
@@ -97,7 +97,7 @@ proc fcQWebHistoryInterface_protectedbase_senderSignalIndex(self: pointer): cint
 proc fcQWebHistoryInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebHistoryInterface_protectedbase_receivers".}
 proc fcQWebHistoryInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebHistoryInterface_protectedbase_isSignalConnected".}
 proc fcQWebHistoryInterface_new(vtbl: pointer, vdata: csize_t): ptr cQWebHistoryInterface {.importc: "QWebHistoryInterface_new".}
-proc fcQWebHistoryInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebHistoryInterface {.importc: "QWebHistoryInterface_new2".}
+proc fcQWebHistoryInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebHistoryInterface {.importc: "QWebHistoryInterface_new_parent".}
 proc fcQWebHistoryInterface_staticMetaObject(): pointer {.importc: "QWebHistoryInterface_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface): gen_qobjectdefs_types.QMetaObject =
@@ -110,13 +110,13 @@ proc metacall*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, param1
   fcQWebHistoryInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring): string =
-  let v_ms = fcQWebHistoryInterface_tr(s)
+  let v_ms = fcQWebHistoryInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring): string =
-  let v_ms = fcQWebHistoryInterface_trUtf8(s)
+  let v_ms = fcQWebHistoryInterface_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -134,25 +134,25 @@ proc addHistoryEntry*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface,
   fcQWebHistoryInterface_addHistoryEntry(self.h, struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
 proc tr*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQWebHistoryInterface_tr2(s, c)
+  let v_ms = fcQWebHistoryInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebHistoryInterface_tr3(s, c, n)
+  let v_ms = fcQWebHistoryInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQWebHistoryInterface_trUtf82(s, c)
+  let v_ms = fcQWebHistoryInterface_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebHistoryInterface_trUtf83(s, c, n)
+  let v_ms = fcQWebHistoryInterface_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

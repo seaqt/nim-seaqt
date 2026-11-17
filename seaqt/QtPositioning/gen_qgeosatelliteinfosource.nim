@@ -67,12 +67,12 @@ type cQGeoSatelliteInfoSource*{.exportc: "QGeoSatelliteInfoSource", incompleteSt
 proc fcQGeoSatelliteInfoSource_metaObject(self: pointer): pointer {.importc: "QGeoSatelliteInfoSource_metaObject".}
 proc fcQGeoSatelliteInfoSource_metacast(self: pointer, param1: cstring): pointer {.importc: "QGeoSatelliteInfoSource_metacast".}
 proc fcQGeoSatelliteInfoSource_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGeoSatelliteInfoSource_metacall".}
-proc fcQGeoSatelliteInfoSource_tr(s: cstring): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_tr".}
-proc fcQGeoSatelliteInfoSource_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_trUtf8".}
-proc fcQGeoSatelliteInfoSource_createDefaultSource(parent: pointer): pointer {.importc: "QGeoSatelliteInfoSource_createDefaultSource".}
-proc fcQGeoSatelliteInfoSource_createSource(sourceName: struct_seaqt_string, parent: pointer): pointer {.importc: "QGeoSatelliteInfoSource_createSource".}
-proc fcQGeoSatelliteInfoSource_createDefaultSource2(parameters: struct_seaqt_map, parent: pointer): pointer {.importc: "QGeoSatelliteInfoSource_createDefaultSource2".}
-proc fcQGeoSatelliteInfoSource_createSource2(sourceName: struct_seaqt_string, parameters: struct_seaqt_map, parent: pointer): pointer {.importc: "QGeoSatelliteInfoSource_createSource2".}
+proc fcQGeoSatelliteInfoSource_trS(s: cstring): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_tr_s".}
+proc fcQGeoSatelliteInfoSource_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_trUtf8_s".}
+proc fcQGeoSatelliteInfoSource_createDefaultSource_QObject(parent: pointer): pointer {.importc: "QGeoSatelliteInfoSource_createDefaultSource_QObject".}
+proc fcQGeoSatelliteInfoSource_createSource_QString_QObject(sourceName: struct_seaqt_string, parent: pointer): pointer {.importc: "QGeoSatelliteInfoSource_createSource_QString_QObject".}
+proc fcQGeoSatelliteInfoSource_createDefaultSource_QVariantMap_QObject(parameters: struct_seaqt_map, parent: pointer): pointer {.importc: "QGeoSatelliteInfoSource_createDefaultSource_QVariantMap_QObject".}
+proc fcQGeoSatelliteInfoSource_createSource_QString_QVariantMap_QObject(sourceName: struct_seaqt_string, parameters: struct_seaqt_map, parent: pointer): pointer {.importc: "QGeoSatelliteInfoSource_createSource_QString_QVariantMap_QObject".}
 proc fcQGeoSatelliteInfoSource_availableSources(): struct_seaqt_array {.importc: "QGeoSatelliteInfoSource_availableSources".}
 proc fcQGeoSatelliteInfoSource_sourceName(self: pointer): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_sourceName".}
 proc fcQGeoSatelliteInfoSource_setUpdateInterval(self: pointer, msec: cint): void {.importc: "QGeoSatelliteInfoSource_setUpdateInterval".}
@@ -88,12 +88,12 @@ proc fcQGeoSatelliteInfoSource_satellitesInUseUpdated(self: pointer, satellites:
 proc fcQGeoSatelliteInfoSource_connect_satellitesInUseUpdated(self: pointer, slot: int, callback: proc (slot: int, satellites: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoSatelliteInfoSource_connect_satellitesInUseUpdated".}
 proc fcQGeoSatelliteInfoSource_requestTimeout(self: pointer): void {.importc: "QGeoSatelliteInfoSource_requestTimeout".}
 proc fcQGeoSatelliteInfoSource_connect_requestTimeout(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoSatelliteInfoSource_connect_requestTimeout".}
-proc fcQGeoSatelliteInfoSource_errorWithQGeoSatelliteInfoSourceError(self: pointer, param1: cint): void {.importc: "QGeoSatelliteInfoSource_errorWithQGeoSatelliteInfoSourceError".}
-proc fcQGeoSatelliteInfoSource_connect_errorWithQGeoSatelliteInfoSourceError(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoSatelliteInfoSource_connect_errorWithQGeoSatelliteInfoSourceError".}
-proc fcQGeoSatelliteInfoSource_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_tr2".}
-proc fcQGeoSatelliteInfoSource_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_tr3".}
-proc fcQGeoSatelliteInfoSource_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_trUtf82".}
-proc fcQGeoSatelliteInfoSource_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_trUtf83".}
+proc fcQGeoSatelliteInfoSource_error_QGeoSatelliteInfoSource_Error(self: pointer, param1: cint): void {.importc: "QGeoSatelliteInfoSource_error_QGeoSatelliteInfoSource_Error".}
+proc fcQGeoSatelliteInfoSource_connect_error_QGeoSatelliteInfoSource_Error(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoSatelliteInfoSource_connect_error_QGeoSatelliteInfoSource_Error".}
+proc fcQGeoSatelliteInfoSource_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_tr_s_c".}
+proc fcQGeoSatelliteInfoSource_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_tr_s_c_n".}
+proc fcQGeoSatelliteInfoSource_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_trUtf8_s_c".}
+proc fcQGeoSatelliteInfoSource_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGeoSatelliteInfoSource_trUtf8_s_c_n".}
 proc fcQGeoSatelliteInfoSource_vdata(self: pointer): ptr pointer {.importc: "QGeoSatelliteInfoSource_vdata".}
 proc fvdata_cQGeoSatelliteInfoSource(self: pointer): pointer {.importc: "vdata_QGeoSatelliteInfoSource".}
 
@@ -143,22 +143,22 @@ proc metacall*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, 
   fcQGeoSatelliteInfoSource_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, s: cstring): string =
-  let v_ms = fcQGeoSatelliteInfoSource_tr(s)
+  let v_ms = fcQGeoSatelliteInfoSource_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, s: cstring): string =
-  let v_ms = fcQGeoSatelliteInfoSource_trUtf8(s)
+  let v_ms = fcQGeoSatelliteInfoSource_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc createDefaultSource*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource =
-  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createDefaultSource(parent.h), owned: false)
+  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createDefaultSource_QObject(parent.h), owned: false)
 
 proc createSource*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, sourceName: openArray[char], parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource =
-  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createSource(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), parent.h), owned: false)
+  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createSource_QString_QObject(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), parent.h), owned: false)
 
 proc createDefaultSource*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, parameters: Table[string,gen_qvariant_types.QVariant], parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
@@ -172,7 +172,7 @@ proc createDefaultSource*(_: type gen_qgeosatelliteinfosource_types.QGeoSatellit
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createDefaultSource2(struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
+  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createDefaultSource_QVariantMap_QObject(struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
 
 proc createSource*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, sourceName: openArray[char], parameters: Table[string,gen_qvariant_types.QVariant], parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
@@ -186,7 +186,7 @@ proc createSource*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSo
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createSource2(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
+  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createSource_QString_QVariantMap_QObject(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
 
 proc availableSources*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource): seq[string] =
   var v_ma = fcQGeoSatelliteInfoSource_availableSources()
@@ -306,45 +306,45 @@ proc onRequestTimeout*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfo
   fcQGeoSatelliteInfoSource_connect_requestTimeout(self.h, cast[int](addr tmp[]), fcQGeoSatelliteInfoSource_slot_callback_requestTimeout, fcQGeoSatelliteInfoSource_slot_callback_requestTimeout_release)
 
 proc error*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, param1: cint): void =
-  fcQGeoSatelliteInfoSource_errorWithQGeoSatelliteInfoSourceError(self.h, cint(param1))
+  fcQGeoSatelliteInfoSource_error_QGeoSatelliteInfoSource_Error(self.h, cint(param1))
 
-type QGeoSatelliteInfoSourceerrorWithQGeoSatelliteInfoSourceErrorSlot* = proc(param1: cint)
-proc fcQGeoSatelliteInfoSource_slot_callback_errorWithQGeoSatelliteInfoSourceError(slot: int, param1: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QGeoSatelliteInfoSourceerrorWithQGeoSatelliteInfoSourceErrorSlot](cast[pointer](slot))
+type QGeoSatelliteInfoSourceerror_QGeoSatelliteInfoSource_ErrorSlot* = proc(param1: cint)
+proc fcQGeoSatelliteInfoSource_slot_callback_error_QGeoSatelliteInfoSource_Error(slot: int, param1: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QGeoSatelliteInfoSourceerror_QGeoSatelliteInfoSource_ErrorSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
-proc fcQGeoSatelliteInfoSource_slot_callback_errorWithQGeoSatelliteInfoSourceError_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QGeoSatelliteInfoSourceerrorWithQGeoSatelliteInfoSourceErrorSlot](cast[pointer](slot))
+proc fcQGeoSatelliteInfoSource_slot_callback_error_QGeoSatelliteInfoSource_Error_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGeoSatelliteInfoSourceerror_QGeoSatelliteInfoSource_ErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onError*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, slot: QGeoSatelliteInfoSourceerrorWithQGeoSatelliteInfoSourceErrorSlot) =
-  var tmp = new QGeoSatelliteInfoSourceerrorWithQGeoSatelliteInfoSourceErrorSlot
+proc onError*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, slot: QGeoSatelliteInfoSourceerror_QGeoSatelliteInfoSource_ErrorSlot) =
+  var tmp = new QGeoSatelliteInfoSourceerror_QGeoSatelliteInfoSource_ErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGeoSatelliteInfoSource_connect_errorWithQGeoSatelliteInfoSourceError(self.h, cast[int](addr tmp[]), fcQGeoSatelliteInfoSource_slot_callback_errorWithQGeoSatelliteInfoSourceError, fcQGeoSatelliteInfoSource_slot_callback_errorWithQGeoSatelliteInfoSourceError_release)
+  fcQGeoSatelliteInfoSource_connect_error_QGeoSatelliteInfoSource_Error(self.h, cast[int](addr tmp[]), fcQGeoSatelliteInfoSource_slot_callback_error_QGeoSatelliteInfoSource_Error, fcQGeoSatelliteInfoSource_slot_callback_error_QGeoSatelliteInfoSource_Error_release)
 
 proc tr*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, s: cstring, c: cstring): string =
-  let v_ms = fcQGeoSatelliteInfoSource_tr2(s, c)
+  let v_ms = fcQGeoSatelliteInfoSource_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGeoSatelliteInfoSource_tr3(s, c, n)
+  let v_ms = fcQGeoSatelliteInfoSource_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, s: cstring, c: cstring): string =
-  let v_ms = fcQGeoSatelliteInfoSource_trUtf82(s, c)
+  let v_ms = fcQGeoSatelliteInfoSource_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGeoSatelliteInfoSource_trUtf83(s, c, n)
+  let v_ms = fcQGeoSatelliteInfoSource_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -37,7 +37,7 @@ int QMetaDataWriterControl_metacall(QMetaDataWriterControl* self, int param1, in
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMetaDataWriterControl_tr(const char* s) {
+struct seaqt_string QMetaDataWriterControl_tr_s(const char* s) {
 	QString _ret = QMetaDataWriterControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -48,7 +48,7 @@ struct seaqt_string QMetaDataWriterControl_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QMetaDataWriterControl_trUtf8(const char* s) {
+struct seaqt_string QMetaDataWriterControl_trUtf8_s(const char* s) {
 	QString _ret = QMetaDataWriterControl::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -112,12 +112,12 @@ void QMetaDataWriterControl_connect_metaDataChanged(QMetaDataWriterControl* self
 	QMetaDataWriterControl::connect(self, static_cast<void (QMetaDataWriterControl::*)()>(&QMetaDataWriterControl::metaDataChanged), self, local_caller{slot, callback, release});
 }
 
-void QMetaDataWriterControl_metaDataChanged2(QMetaDataWriterControl* self, struct seaqt_string key, QVariant* value) {
+void QMetaDataWriterControl_metaDataChanged_key_value(QMetaDataWriterControl* self, struct seaqt_string key, QVariant* value) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	self->metaDataChanged(key_QString, *value);
 }
 
-void QMetaDataWriterControl_connect_metaDataChanged2(QMetaDataWriterControl* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t)) {
+void QMetaDataWriterControl_connect_metaDataChanged_key_value(QMetaDataWriterControl* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_string, QVariant*);
@@ -171,7 +171,7 @@ void QMetaDataWriterControl_connect_metaDataAvailableChanged(QMetaDataWriterCont
 	QMetaDataWriterControl::connect(self, static_cast<void (QMetaDataWriterControl::*)(bool)>(&QMetaDataWriterControl::metaDataAvailableChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QMetaDataWriterControl_tr2(const char* s, const char* c) {
+struct seaqt_string QMetaDataWriterControl_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMetaDataWriterControl::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -182,7 +182,7 @@ struct seaqt_string QMetaDataWriterControl_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMetaDataWriterControl_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMetaDataWriterControl_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMetaDataWriterControl::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -193,7 +193,7 @@ struct seaqt_string QMetaDataWriterControl_tr3(const char* s, const char* c, int
 	return _ms;
 }
 
-struct seaqt_string QMetaDataWriterControl_trUtf82(const char* s, const char* c) {
+struct seaqt_string QMetaDataWriterControl_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QMetaDataWriterControl::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -204,7 +204,7 @@ struct seaqt_string QMetaDataWriterControl_trUtf82(const char* s, const char* c)
 	return _ms;
 }
 
-struct seaqt_string QMetaDataWriterControl_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QMetaDataWriterControl_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMetaDataWriterControl::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

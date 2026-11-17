@@ -40,30 +40,30 @@ export gen_qbytearraymatcher_types
 type cQByteArrayMatcher*{.exportc: "QByteArrayMatcher", incompleteStruct.} = object
 type cQStaticByteArrayMatcherBase*{.exportc: "QStaticByteArrayMatcherBase", incompleteStruct.} = object
 
-proc fcQByteArrayMatcher_operatorAssign(self: pointer, other: pointer): void {.importc: "QByteArrayMatcher_operatorAssign".}
+proc fcQByteArrayMatcher_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QByteArrayMatcher_operatorAssign".}
 proc fcQByteArrayMatcher_setPattern(self: pointer, pattern: struct_seaqt_string): void {.importc: "QByteArrayMatcher_setPattern".}
-proc fcQByteArrayMatcher_indexIn(self: pointer, ba: struct_seaqt_string): cint {.importc: "QByteArrayMatcher_indexIn".}
-proc fcQByteArrayMatcher_indexIn2(self: pointer, str: cstring, len: cint): cint {.importc: "QByteArrayMatcher_indexIn2".}
+proc fcQByteArrayMatcher_indexInBa(self: pointer, ba: struct_seaqt_string): cint {.importc: "QByteArrayMatcher_indexIn_ba".}
+proc fcQByteArrayMatcher_indexInStrLen(self: pointer, str: cstring, len: cint): cint {.importc: "QByteArrayMatcher_indexIn_str_len".}
 proc fcQByteArrayMatcher_pattern(self: pointer): struct_seaqt_string {.importc: "QByteArrayMatcher_pattern".}
-proc fcQByteArrayMatcher_indexIn3(self: pointer, ba: struct_seaqt_string, fromVal: cint): cint {.importc: "QByteArrayMatcher_indexIn3".}
-proc fcQByteArrayMatcher_indexIn4(self: pointer, str: cstring, len: cint, fromVal: cint): cint {.importc: "QByteArrayMatcher_indexIn4".}
+proc fcQByteArrayMatcher_indexInBaFrom(self: pointer, ba: struct_seaqt_string, fromVal: cint): cint {.importc: "QByteArrayMatcher_indexIn_ba_from".}
+proc fcQByteArrayMatcher_indexInStrLenFrom(self: pointer, str: cstring, len: cint, fromVal: cint): cint {.importc: "QByteArrayMatcher_indexIn_str_len_from".}
 proc fcQByteArrayMatcher_new(): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new".}
-proc fcQByteArrayMatcher_new2(pattern: struct_seaqt_string): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new2".}
-proc fcQByteArrayMatcher_new3(pattern: cstring, length: cint): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new3".}
-proc fcQByteArrayMatcher_new4(other: pointer): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new4".}
+proc fcQByteArrayMatcher_new2(pattern: struct_seaqt_string): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new_pattern".}
+proc fcQByteArrayMatcher_new3(pattern: cstring, length: cint): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new_pattern_length".}
+proc fcQByteArrayMatcher_new4(fromVal: pointer): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new_from".}
 proc fcQStaticByteArrayMatcherBase_protectedbase_indexOfIn(self: pointer, needle: cstring, nlen: cuint, haystack: cstring, hlen: cint, fromVal: cint): cint {.importc: "QStaticByteArrayMatcherBase_protectedbase_indexOfIn".}
 
-proc operatorAssign*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, other: gen_qbytearraymatcher_types.QByteArrayMatcher): void =
-  fcQByteArrayMatcher_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, fromVal: gen_qbytearraymatcher_types.QByteArrayMatcher): void =
+  fcQByteArrayMatcher_operatorAssign(self.h, fromVal.h)
 
 proc setPattern*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, pattern: openArray[byte]): void =
   fcQByteArrayMatcher_setPattern(self.h, struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))))
 
 proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, ba: openArray[byte]): cint =
-  fcQByteArrayMatcher_indexIn(self.h, struct_seaqt_string(data: if len(ba) > 0: addr ba[0] else: nil, len: csize_t(len(ba))))
+  fcQByteArrayMatcher_indexInBa(self.h, struct_seaqt_string(data: if len(ba) > 0: addr ba[0] else: nil, len: csize_t(len(ba))))
 
 proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, str: cstring, len: cint): cint =
-  fcQByteArrayMatcher_indexIn2(self.h, str, len)
+  fcQByteArrayMatcher_indexInStrLen(self.h, str, len)
 
 proc pattern*(self: gen_qbytearraymatcher_types.QByteArrayMatcher): seq[byte] =
   var v_bytearray = fcQByteArrayMatcher_pattern(self.h)
@@ -72,10 +72,10 @@ proc pattern*(self: gen_qbytearraymatcher_types.QByteArrayMatcher): seq[byte] =
   vx_ret
 
 proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, ba: openArray[byte], fromVal: cint): cint =
-  fcQByteArrayMatcher_indexIn3(self.h, struct_seaqt_string(data: if len(ba) > 0: addr ba[0] else: nil, len: csize_t(len(ba))), fromVal)
+  fcQByteArrayMatcher_indexInBaFrom(self.h, struct_seaqt_string(data: if len(ba) > 0: addr ba[0] else: nil, len: csize_t(len(ba))), fromVal)
 
 proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, str: cstring, len: cint, fromVal: cint): cint =
-  fcQByteArrayMatcher_indexIn4(self.h, str, len, fromVal)
+  fcQByteArrayMatcher_indexInStrLenFrom(self.h, str, len, fromVal)
 
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher): gen_qbytearraymatcher_types.QByteArrayMatcher =
   let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new(), owned: true)
@@ -89,8 +89,8 @@ proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
   let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new3(pattern, length), owned: true)
   tmp
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
-    other: gen_qbytearraymatcher_types.QByteArrayMatcher): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new4(other.h), owned: true)
+    fromVal: gen_qbytearraymatcher_types.QByteArrayMatcher): gen_qbytearraymatcher_types.QByteArrayMatcher =
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new4(fromVal.h), owned: true)
   tmp
 proc indexOfIn*(self: gen_qbytearraymatcher_types.QStaticByteArrayMatcherBase, needle: cstring, nlen: cuint, haystack: cstring, hlen: cint, fromVal: cint): cint =
   fcQStaticByteArrayMatcherBase_protectedbase_indexOfIn(self.h, needle, nlen, haystack, hlen, fromVal)

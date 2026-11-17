@@ -205,7 +205,7 @@ VirtualQWebHistoryInterface* QWebHistoryInterface_new(const QWebHistoryInterface
 	return _mem_ ? new (_mem_)VirtualQWebHistoryInterface(vtbl) : nullptr;
 }
 
-VirtualQWebHistoryInterface* QWebHistoryInterface_new2(const QWebHistoryInterface_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQWebHistoryInterface* QWebHistoryInterface_new_parent(const QWebHistoryInterface_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebHistoryInterface>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebHistoryInterface(vtbl, parent) : nullptr;
 }
@@ -226,7 +226,7 @@ int QWebHistoryInterface_metacall(QWebHistoryInterface* self, int param1, int pa
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebHistoryInterface_tr(const char* s) {
+struct seaqt_string QWebHistoryInterface_tr_s(const char* s) {
 	QString _ret = QWebHistoryInterface::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -237,7 +237,7 @@ struct seaqt_string QWebHistoryInterface_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebHistoryInterface_trUtf8(const char* s) {
+struct seaqt_string QWebHistoryInterface_trUtf8_s(const char* s) {
 	QString _ret = QWebHistoryInterface::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -266,7 +266,7 @@ void QWebHistoryInterface_addHistoryEntry(QWebHistoryInterface* self, struct sea
 	self->addHistoryEntry(url_QString);
 }
 
-struct seaqt_string QWebHistoryInterface_tr2(const char* s, const char* c) {
+struct seaqt_string QWebHistoryInterface_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebHistoryInterface::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -277,7 +277,7 @@ struct seaqt_string QWebHistoryInterface_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebHistoryInterface_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebHistoryInterface_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebHistoryInterface::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -288,7 +288,7 @@ struct seaqt_string QWebHistoryInterface_tr3(const char* s, const char* c, int n
 	return _ms;
 }
 
-struct seaqt_string QWebHistoryInterface_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebHistoryInterface_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebHistoryInterface::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -299,7 +299,7 @@ struct seaqt_string QWebHistoryInterface_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebHistoryInterface_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebHistoryInterface_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebHistoryInterface::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

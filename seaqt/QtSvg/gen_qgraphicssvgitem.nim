@@ -83,8 +83,8 @@ type cQGraphicsSvgItem*{.exportc: "QGraphicsSvgItem", incompleteStruct.} = objec
 proc fcQGraphicsSvgItem_metaObject(self: pointer): pointer {.importc: "QGraphicsSvgItem_metaObject".}
 proc fcQGraphicsSvgItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsSvgItem_metacast".}
 proc fcQGraphicsSvgItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsSvgItem_metacall".}
-proc fcQGraphicsSvgItem_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsSvgItem_tr".}
-proc fcQGraphicsSvgItem_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGraphicsSvgItem_trUtf8".}
+proc fcQGraphicsSvgItem_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsSvgItem_tr_s".}
+proc fcQGraphicsSvgItem_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGraphicsSvgItem_trUtf8_s".}
 proc fcQGraphicsSvgItem_setSharedRenderer(self: pointer, renderer: pointer): void {.importc: "QGraphicsSvgItem_setSharedRenderer".}
 proc fcQGraphicsSvgItem_renderer(self: pointer): pointer {.importc: "QGraphicsSvgItem_renderer".}
 proc fcQGraphicsSvgItem_setElementId(self: pointer, id: struct_seaqt_string): void {.importc: "QGraphicsSvgItem_setElementId".}
@@ -96,10 +96,10 @@ proc fcQGraphicsSvgItem_maximumCacheSize(self: pointer): pointer {.importc: "QGr
 proc fcQGraphicsSvgItem_boundingRect(self: pointer): pointer {.importc: "QGraphicsSvgItem_boundingRect".}
 proc fcQGraphicsSvgItem_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.importc: "QGraphicsSvgItem_paint".}
 proc fcQGraphicsSvgItem_typeX(self: pointer): cint {.importc: "QGraphicsSvgItem_type".}
-proc fcQGraphicsSvgItem_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsSvgItem_tr2".}
-proc fcQGraphicsSvgItem_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsSvgItem_tr3".}
-proc fcQGraphicsSvgItem_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsSvgItem_trUtf82".}
-proc fcQGraphicsSvgItem_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsSvgItem_trUtf83".}
+proc fcQGraphicsSvgItem_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsSvgItem_tr_s_c".}
+proc fcQGraphicsSvgItem_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsSvgItem_tr_s_c_n".}
+proc fcQGraphicsSvgItem_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsSvgItem_trUtf8_s_c".}
+proc fcQGraphicsSvgItem_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsSvgItem_trUtf8_s_c_n".}
 proc fcQGraphicsSvgItem_vdata(self: pointer): ptr pointer {.importc: "QGraphicsSvgItem_vdata".}
 proc fvdata_cQGraphicsSvgItem(self: pointer): pointer {.importc: "vdata_QGraphicsSvgItem".}
 
@@ -204,9 +204,9 @@ proc fcQGraphicsSvgItem_protectedbase_addToIndex(self: pointer): void {.importc:
 proc fcQGraphicsSvgItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsSvgItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsSvgItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsSvgItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsSvgItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new".}
-proc fcQGraphicsSvgItem_new2(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new2".}
-proc fcQGraphicsSvgItem_new3(vtbl: pointer, vdata: csize_t, parentItem: pointer): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new3".}
-proc fcQGraphicsSvgItem_new4(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, parentItem: pointer): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new4".}
+proc fcQGraphicsSvgItem_new2(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new_fileName".}
+proc fcQGraphicsSvgItem_new3(vtbl: pointer, vdata: csize_t, parentItem: pointer): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new_parentItem".}
+proc fcQGraphicsSvgItem_new4(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, parentItem: pointer): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new_fileName_parentItem".}
 proc fcQGraphicsSvgItem_staticMetaObject(): pointer {.importc: "QGraphicsSvgItem_staticMetaObject".}
 
 proc metaObject*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem): gen_qobjectdefs_types.QMetaObject =
@@ -219,13 +219,13 @@ proc metacall*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, param1: cint, 
   fcQGraphicsSvgItem_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring): string =
-  let v_ms = fcQGraphicsSvgItem_tr(s)
+  let v_ms = fcQGraphicsSvgItem_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring): string =
-  let v_ms = fcQGraphicsSvgItem_trUtf8(s)
+  let v_ms = fcQGraphicsSvgItem_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -267,25 +267,25 @@ proc typeX*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem): cint =
   fcQGraphicsSvgItem_typeX(self.h)
 
 proc tr*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsSvgItem_tr2(s, c)
+  let v_ms = fcQGraphicsSvgItem_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsSvgItem_tr3(s, c, n)
+  let v_ms = fcQGraphicsSvgItem_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsSvgItem_trUtf82(s, c)
+  let v_ms = fcQGraphicsSvgItem_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsSvgItem_trUtf83(s, c, n)
+  let v_ms = fcQGraphicsSvgItem_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

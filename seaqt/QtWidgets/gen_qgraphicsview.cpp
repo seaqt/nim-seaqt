@@ -772,7 +772,7 @@ public:
 	friend void QGraphicsView_virtualbase_disconnectNotify(VirtualQGraphicsView* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsView_protectedbase_setViewportMargins(VirtualQGraphicsView* self, int left, int top, int right, int bottom);
+	friend void QGraphicsView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQGraphicsView* self, int left, int top, int right, int bottom);
 	friend QMargins* QGraphicsView_protectedbase_viewportMargins(const VirtualQGraphicsView* self);
 	friend void QGraphicsView_protectedbase_drawFrame(VirtualQGraphicsView* self, QPainter* param1);
 	friend void QGraphicsView_protectedbase_initStyleOption(const VirtualQGraphicsView* self, QStyleOptionFrame* option);
@@ -792,17 +792,17 @@ VirtualQGraphicsView* QGraphicsView_new(const QGraphicsView_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQGraphicsView(vtbl) : nullptr;
 }
 
-VirtualQGraphicsView* QGraphicsView_new2(const QGraphicsView_VTable* vtbl, size_t vdata, QGraphicsScene* scene) {
+VirtualQGraphicsView* QGraphicsView_new_scene(const QGraphicsView_VTable* vtbl, size_t vdata, QGraphicsScene* scene) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsView(vtbl, scene) : nullptr;
 }
 
-VirtualQGraphicsView* QGraphicsView_new3(const QGraphicsView_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQGraphicsView* QGraphicsView_new_parent(const QGraphicsView_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsView(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsView* QGraphicsView_new4(const QGraphicsView_VTable* vtbl, size_t vdata, QGraphicsScene* scene, QWidget* parent) {
+VirtualQGraphicsView* QGraphicsView_new_scene_parent(const QGraphicsView_VTable* vtbl, size_t vdata, QGraphicsScene* scene, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsView(vtbl, scene, parent) : nullptr;
 }
@@ -823,7 +823,7 @@ int QGraphicsView_metacall(QGraphicsView* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsView_tr(const char* s) {
+struct seaqt_string QGraphicsView_tr_s(const char* s) {
 	QString _ret = QGraphicsView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -834,7 +834,7 @@ struct seaqt_string QGraphicsView_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsView_trUtf8(const char* s) {
+struct seaqt_string QGraphicsView_trUtf8_s(const char* s) {
 	QString _ret = QGraphicsView::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -854,7 +854,7 @@ int QGraphicsView_renderHints(const QGraphicsView* self) {
 	return static_cast<int>(_ret);
 }
 
-void QGraphicsView_setRenderHint(QGraphicsView* self, int hint) {
+void QGraphicsView_setRenderHint_hint(QGraphicsView* self, int hint) {
 	self->setRenderHint(static_cast<QPainter::RenderHint>(hint));
 }
 
@@ -903,7 +903,7 @@ int QGraphicsView_optimizationFlags(const QGraphicsView* self) {
 	return static_cast<int>(_ret);
 }
 
-void QGraphicsView_setOptimizationFlag(QGraphicsView* self, int flag) {
+void QGraphicsView_setOptimizationFlag_flag(QGraphicsView* self, int flag) {
 	self->setOptimizationFlag(static_cast<QGraphicsView::OptimizationFlag>(flag));
 }
 
@@ -966,11 +966,11 @@ QRectF* QGraphicsView_sceneRect(const QGraphicsView* self) {
 	return new QRectF(self->sceneRect());
 }
 
-void QGraphicsView_setSceneRect(QGraphicsView* self, QRectF* rect) {
+void QGraphicsView_setSceneRect_rect(QGraphicsView* self, QRectF* rect) {
 	self->setSceneRect(*rect);
 }
 
-void QGraphicsView_setSceneRect2(QGraphicsView* self, double x, double y, double w, double h) {
+void QGraphicsView_setSceneRect_x_y_w_h(QGraphicsView* self, double x, double y, double w, double h) {
 	self->setSceneRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
@@ -978,7 +978,7 @@ QMatrix* QGraphicsView_matrix(const QGraphicsView* self) {
 	return new QMatrix(self->matrix());
 }
 
-void QGraphicsView_setMatrix(QGraphicsView* self, QMatrix* matrix) {
+void QGraphicsView_setMatrix_matrix(QGraphicsView* self, QMatrix* matrix) {
 	self->setMatrix(*matrix);
 }
 
@@ -998,7 +998,7 @@ bool QGraphicsView_isTransformed(const QGraphicsView* self) {
 	return self->isTransformed();
 }
 
-void QGraphicsView_setTransform(QGraphicsView* self, QTransform* matrix) {
+void QGraphicsView_setTransform_matrix(QGraphicsView* self, QTransform* matrix) {
 	self->setTransform(*matrix);
 }
 
@@ -1022,43 +1022,43 @@ void QGraphicsView_translate(QGraphicsView* self, double dx, double dy) {
 	self->translate(static_cast<qreal>(dx), static_cast<qreal>(dy));
 }
 
-void QGraphicsView_centerOn(QGraphicsView* self, QPointF* pos) {
+void QGraphicsView_centerOn_pos(QGraphicsView* self, QPointF* pos) {
 	self->centerOn(*pos);
 }
 
-void QGraphicsView_centerOn2(QGraphicsView* self, double x, double y) {
+void QGraphicsView_centerOn_x_y(QGraphicsView* self, double x, double y) {
 	self->centerOn(static_cast<qreal>(x), static_cast<qreal>(y));
 }
 
-void QGraphicsView_centerOnWithItem(QGraphicsView* self, QGraphicsItem* item) {
+void QGraphicsView_centerOn_item(QGraphicsView* self, QGraphicsItem* item) {
 	self->centerOn(item);
 }
 
-void QGraphicsView_ensureVisible(QGraphicsView* self, QRectF* rect) {
+void QGraphicsView_ensureVisible_rect(QGraphicsView* self, QRectF* rect) {
 	self->ensureVisible(*rect);
 }
 
-void QGraphicsView_ensureVisible2(QGraphicsView* self, double x, double y, double w, double h) {
+void QGraphicsView_ensureVisible_x_y_w_h(QGraphicsView* self, double x, double y, double w, double h) {
 	self->ensureVisible(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
-void QGraphicsView_ensureVisibleWithItem(QGraphicsView* self, QGraphicsItem* item) {
+void QGraphicsView_ensureVisible_item(QGraphicsView* self, QGraphicsItem* item) {
 	self->ensureVisible(item);
 }
 
-void QGraphicsView_fitInView(QGraphicsView* self, QRectF* rect) {
+void QGraphicsView_fitInView_rect(QGraphicsView* self, QRectF* rect) {
 	self->fitInView(*rect);
 }
 
-void QGraphicsView_fitInView2(QGraphicsView* self, double x, double y, double w, double h) {
+void QGraphicsView_fitInView_x_y_w_h(QGraphicsView* self, double x, double y, double w, double h) {
 	self->fitInView(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
-void QGraphicsView_fitInViewWithItem(QGraphicsView* self, QGraphicsItem* item) {
+void QGraphicsView_fitInView_item(QGraphicsView* self, QGraphicsItem* item) {
 	self->fitInView(item);
 }
 
-void QGraphicsView_render(QGraphicsView* self, QPainter* painter) {
+void QGraphicsView_render_painter(QGraphicsView* self, QPainter* painter) {
 	self->render(painter);
 }
 
@@ -1075,7 +1075,7 @@ struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items(const QGraphicsV
 	return _out;
 }
 
-struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_itemsWithPos(const QGraphicsView* self, QPoint* pos) {
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items_pos(const QGraphicsView* self, QPoint* pos) {
 	QList<QGraphicsItem *> _ret = self->items(*pos);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
@@ -1088,7 +1088,7 @@ struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_itemsWithPos(const QGr
 	return _out;
 }
 
-struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items2(const QGraphicsView* self, int x, int y) {
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items_x_y(const QGraphicsView* self, int x, int y) {
 	QList<QGraphicsItem *> _ret = self->items(static_cast<int>(x), static_cast<int>(y));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
@@ -1101,7 +1101,7 @@ struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items2(const QGraphics
 	return _out;
 }
 
-struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_itemsWithRect(const QGraphicsView* self, QRect* rect) {
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items_rect(const QGraphicsView* self, QRect* rect) {
 	QList<QGraphicsItem *> _ret = self->items(*rect);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
@@ -1114,7 +1114,7 @@ struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_itemsWithRect(const QG
 	return _out;
 }
 
-struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items3(const QGraphicsView* self, int x, int y, int w, int h) {
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items_x_y_w_h(const QGraphicsView* self, int x, int y, int w, int h) {
 	QList<QGraphicsItem *> _ret = self->items(static_cast<int>(x), static_cast<int>(y), static_cast<int>(w), static_cast<int>(h));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
@@ -1127,7 +1127,7 @@ struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items3(const QGraphics
 	return _out;
 }
 
-struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_itemsWithPath(const QGraphicsView* self, QPainterPath* path) {
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items_path(const QGraphicsView* self, QPainterPath* path) {
 	QList<QGraphicsItem *> _ret = self->items(*path);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
@@ -1140,35 +1140,35 @@ struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_itemsWithPath(const QG
 	return _out;
 }
 
-QGraphicsItem* QGraphicsView_itemAt(const QGraphicsView* self, QPoint* pos) {
+QGraphicsItem* QGraphicsView_itemAt_pos(const QGraphicsView* self, QPoint* pos) {
 	return self->itemAt(*pos);
 }
 
-QGraphicsItem* QGraphicsView_itemAt2(const QGraphicsView* self, int x, int y) {
+QGraphicsItem* QGraphicsView_itemAt_x_y(const QGraphicsView* self, int x, int y) {
 	return self->itemAt(static_cast<int>(x), static_cast<int>(y));
 }
 
-QPointF* QGraphicsView_mapToScene(const QGraphicsView* self, QPoint* point) {
+QPointF* QGraphicsView_mapToScene_point(const QGraphicsView* self, QPoint* point) {
 	return new QPointF(self->mapToScene(*point));
 }
 
-QPainterPath* QGraphicsView_mapToSceneWithPath(const QGraphicsView* self, QPainterPath* path) {
+QPainterPath* QGraphicsView_mapToScene_path(const QGraphicsView* self, QPainterPath* path) {
 	return new QPainterPath(self->mapToScene(*path));
 }
 
-QPoint* QGraphicsView_mapFromScene(const QGraphicsView* self, QPointF* point) {
+QPoint* QGraphicsView_mapFromScene_point(const QGraphicsView* self, QPointF* point) {
 	return new QPoint(self->mapFromScene(*point));
 }
 
-QPainterPath* QGraphicsView_mapFromSceneWithPath(const QGraphicsView* self, QPainterPath* path) {
+QPainterPath* QGraphicsView_mapFromScene_path(const QGraphicsView* self, QPainterPath* path) {
 	return new QPainterPath(self->mapFromScene(*path));
 }
 
-QPointF* QGraphicsView_mapToScene2(const QGraphicsView* self, int x, int y) {
+QPointF* QGraphicsView_mapToScene_x_y(const QGraphicsView* self, int x, int y) {
 	return new QPointF(self->mapToScene(static_cast<int>(x), static_cast<int>(y)));
 }
 
-QPoint* QGraphicsView_mapFromScene2(const QGraphicsView* self, double x, double y) {
+QPoint* QGraphicsView_mapFromScene_x_y(const QGraphicsView* self, double x, double y) {
 	return new QPoint(self->mapFromScene(static_cast<qreal>(x), static_cast<qreal>(y)));
 }
 
@@ -1228,7 +1228,7 @@ void QGraphicsView_connect_rubberBandChanged(QGraphicsView* self, intptr_t slot,
 	QGraphicsView::connect(self, static_cast<void (QGraphicsView::*)(QRect, QPointF, QPointF)>(&QGraphicsView::rubberBandChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGraphicsView_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1239,7 +1239,7 @@ struct seaqt_string QGraphicsView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1250,7 +1250,7 @@ struct seaqt_string QGraphicsView_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsView_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGraphicsView_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsView::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1261,7 +1261,7 @@ struct seaqt_string QGraphicsView_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsView_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsView_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsView::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1272,71 +1272,71 @@ struct seaqt_string QGraphicsView_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QGraphicsView_setRenderHint2(QGraphicsView* self, int hint, bool enabled) {
+void QGraphicsView_setRenderHint_hint_enabled(QGraphicsView* self, int hint, bool enabled) {
 	self->setRenderHint(static_cast<QPainter::RenderHint>(hint), enabled);
 }
 
-void QGraphicsView_setOptimizationFlag2(QGraphicsView* self, int flag, bool enabled) {
+void QGraphicsView_setOptimizationFlag_flag_enabled(QGraphicsView* self, int flag, bool enabled) {
 	self->setOptimizationFlag(static_cast<QGraphicsView::OptimizationFlag>(flag), enabled);
 }
 
-void QGraphicsView_setMatrix2(QGraphicsView* self, QMatrix* matrix, bool combine) {
+void QGraphicsView_setMatrix_matrix_combine(QGraphicsView* self, QMatrix* matrix, bool combine) {
 	self->setMatrix(*matrix, combine);
 }
 
-void QGraphicsView_setTransform2(QGraphicsView* self, QTransform* matrix, bool combine) {
+void QGraphicsView_setTransform_matrix_combine(QGraphicsView* self, QTransform* matrix, bool combine) {
 	self->setTransform(*matrix, combine);
 }
 
-void QGraphicsView_ensureVisible3(QGraphicsView* self, QRectF* rect, int xmargin) {
+void QGraphicsView_ensureVisible_rect_xmargin(QGraphicsView* self, QRectF* rect, int xmargin) {
 	self->ensureVisible(*rect, static_cast<int>(xmargin));
 }
 
-void QGraphicsView_ensureVisible4(QGraphicsView* self, QRectF* rect, int xmargin, int ymargin) {
+void QGraphicsView_ensureVisible_rect_xmargin_ymargin(QGraphicsView* self, QRectF* rect, int xmargin, int ymargin) {
 	self->ensureVisible(*rect, static_cast<int>(xmargin), static_cast<int>(ymargin));
 }
 
-void QGraphicsView_ensureVisible5(QGraphicsView* self, double x, double y, double w, double h, int xmargin) {
+void QGraphicsView_ensureVisible_x_y_w_h_xmargin(QGraphicsView* self, double x, double y, double w, double h, int xmargin) {
 	self->ensureVisible(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<int>(xmargin));
 }
 
-void QGraphicsView_ensureVisible6(QGraphicsView* self, double x, double y, double w, double h, int xmargin, int ymargin) {
+void QGraphicsView_ensureVisible_x_y_w_h_xmargin_ymargin(QGraphicsView* self, double x, double y, double w, double h, int xmargin, int ymargin) {
 	self->ensureVisible(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<int>(xmargin), static_cast<int>(ymargin));
 }
 
-void QGraphicsView_ensureVisible7(QGraphicsView* self, QGraphicsItem* item, int xmargin) {
+void QGraphicsView_ensureVisible_item_xmargin(QGraphicsView* self, QGraphicsItem* item, int xmargin) {
 	self->ensureVisible(item, static_cast<int>(xmargin));
 }
 
-void QGraphicsView_ensureVisible8(QGraphicsView* self, QGraphicsItem* item, int xmargin, int ymargin) {
+void QGraphicsView_ensureVisible_item_xmargin_ymargin(QGraphicsView* self, QGraphicsItem* item, int xmargin, int ymargin) {
 	self->ensureVisible(item, static_cast<int>(xmargin), static_cast<int>(ymargin));
 }
 
-void QGraphicsView_fitInView3(QGraphicsView* self, QRectF* rect, int aspectRadioMode) {
+void QGraphicsView_fitInView_rect_aspectRadioMode(QGraphicsView* self, QRectF* rect, int aspectRadioMode) {
 	self->fitInView(*rect, static_cast<Qt::AspectRatioMode>(aspectRadioMode));
 }
 
-void QGraphicsView_fitInView4(QGraphicsView* self, double x, double y, double w, double h, int aspectRadioMode) {
+void QGraphicsView_fitInView_x_y_w_h_aspectRadioMode(QGraphicsView* self, double x, double y, double w, double h, int aspectRadioMode) {
 	self->fitInView(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<Qt::AspectRatioMode>(aspectRadioMode));
 }
 
-void QGraphicsView_fitInView5(QGraphicsView* self, QGraphicsItem* item, int aspectRadioMode) {
+void QGraphicsView_fitInView_item_aspectRadioMode(QGraphicsView* self, QGraphicsItem* item, int aspectRadioMode) {
 	self->fitInView(item, static_cast<Qt::AspectRatioMode>(aspectRadioMode));
 }
 
-void QGraphicsView_render2(QGraphicsView* self, QPainter* painter, QRectF* target) {
+void QGraphicsView_render_painter_target(QGraphicsView* self, QPainter* painter, QRectF* target) {
 	self->render(painter, *target);
 }
 
-void QGraphicsView_render3(QGraphicsView* self, QPainter* painter, QRectF* target, QRect* source) {
+void QGraphicsView_render_painter_target_source(QGraphicsView* self, QPainter* painter, QRectF* target, QRect* source) {
 	self->render(painter, *target, *source);
 }
 
-void QGraphicsView_render4(QGraphicsView* self, QPainter* painter, QRectF* target, QRect* source, int aspectRatioMode) {
+void QGraphicsView_render_painter_target_source_aspectRatioMode(QGraphicsView* self, QPainter* painter, QRectF* target, QRect* source, int aspectRatioMode) {
 	self->render(painter, *target, *source, static_cast<Qt::AspectRatioMode>(aspectRatioMode));
 }
 
-struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items4(const QGraphicsView* self, QRect* rect, int mode) {
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items_rect_mode(const QGraphicsView* self, QRect* rect, int mode) {
 	QList<QGraphicsItem *> _ret = self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
@@ -1349,7 +1349,7 @@ struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items4(const QGraphics
 	return _out;
 }
 
-struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items5(const QGraphicsView* self, int x, int y, int w, int h, int mode) {
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items_x_y_w_h_mode(const QGraphicsView* self, int x, int y, int w, int h, int mode) {
 	QList<QGraphicsItem *> _ret = self->items(static_cast<int>(x), static_cast<int>(y), static_cast<int>(w), static_cast<int>(h), static_cast<Qt::ItemSelectionMode>(mode));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
@@ -1362,7 +1362,7 @@ struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items5(const QGraphics
 	return _out;
 }
 
-struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items7(const QGraphicsView* self, QPainterPath* path, int mode) {
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items_path_mode(const QGraphicsView* self, QPainterPath* path, int mode) {
 	QList<QGraphicsItem *> _ret = self->items(*path, static_cast<Qt::ItemSelectionMode>(mode));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
@@ -1375,11 +1375,11 @@ struct seaqt_array /* of QGraphicsItem* */  QGraphicsView_items7(const QGraphics
 	return _out;
 }
 
-void QGraphicsView_invalidateSceneWithRect(QGraphicsView* self, QRectF* rect) {
+void QGraphicsView_invalidateScene_rect(QGraphicsView* self, QRectF* rect) {
 	self->invalidateScene(*rect);
 }
 
-void QGraphicsView_invalidateScene2(QGraphicsView* self, QRectF* rect, int layers) {
+void QGraphicsView_invalidateScene_rect_layers(QGraphicsView* self, QRectF* rect, int layers) {
 	self->invalidateScene(*rect, static_cast<QGraphicsScene::SceneLayers>(layers));
 }
 
@@ -1668,7 +1668,7 @@ void QGraphicsView_virtualbase_disconnectNotify(VirtualQGraphicsView* self, QMet
 	self->QGraphicsView::disconnectNotify(*signal);
 }
 
-void QGraphicsView_protectedbase_setViewportMargins(VirtualQGraphicsView* self, int left, int top, int right, int bottom) {
+void QGraphicsView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQGraphicsView* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

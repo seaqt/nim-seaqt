@@ -61,7 +61,7 @@ export
 type cQHttpPart*{.exportc: "QHttpPart", incompleteStruct.} = object
 type cQHttpMultiPart*{.exportc: "QHttpMultiPart", incompleteStruct.} = object
 
-proc fcQHttpPart_operatorAssign(self: pointer, other: pointer): void {.importc: "QHttpPart_operatorAssign".}
+proc fcQHttpPart_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QHttpPart_operatorAssign".}
 proc fcQHttpPart_swap(self: pointer, other: pointer): void {.importc: "QHttpPart_swap".}
 proc fcQHttpPart_operatorEqual(self: pointer, other: pointer): bool {.importc: "QHttpPart_operatorEqual".}
 proc fcQHttpPart_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QHttpPart_operatorNotEqual".}
@@ -70,20 +70,20 @@ proc fcQHttpPart_setRawHeader(self: pointer, headerName: struct_seaqt_string, he
 proc fcQHttpPart_setBody(self: pointer, body: struct_seaqt_string): void {.importc: "QHttpPart_setBody".}
 proc fcQHttpPart_setBodyDevice(self: pointer, device: pointer): void {.importc: "QHttpPart_setBodyDevice".}
 proc fcQHttpPart_new(): ptr cQHttpPart {.importc: "QHttpPart_new".}
-proc fcQHttpPart_new2(other: pointer): ptr cQHttpPart {.importc: "QHttpPart_new2".}
+proc fcQHttpPart_new2(fromVal: pointer): ptr cQHttpPart {.importc: "QHttpPart_new_from".}
 proc fcQHttpMultiPart_metaObject(self: pointer): pointer {.importc: "QHttpMultiPart_metaObject".}
 proc fcQHttpMultiPart_metacast(self: pointer, param1: cstring): pointer {.importc: "QHttpMultiPart_metacast".}
 proc fcQHttpMultiPart_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QHttpMultiPart_metacall".}
-proc fcQHttpMultiPart_tr(s: cstring): struct_seaqt_string {.importc: "QHttpMultiPart_tr".}
-proc fcQHttpMultiPart_trUtf8(s: cstring): struct_seaqt_string {.importc: "QHttpMultiPart_trUtf8".}
+proc fcQHttpMultiPart_trS(s: cstring): struct_seaqt_string {.importc: "QHttpMultiPart_tr_s".}
+proc fcQHttpMultiPart_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QHttpMultiPart_trUtf8_s".}
 proc fcQHttpMultiPart_append(self: pointer, httpPart: pointer): void {.importc: "QHttpMultiPart_append".}
 proc fcQHttpMultiPart_setContentType(self: pointer, contentType: cint): void {.importc: "QHttpMultiPart_setContentType".}
 proc fcQHttpMultiPart_boundary(self: pointer): struct_seaqt_string {.importc: "QHttpMultiPart_boundary".}
 proc fcQHttpMultiPart_setBoundary(self: pointer, boundary: struct_seaqt_string): void {.importc: "QHttpMultiPart_setBoundary".}
-proc fcQHttpMultiPart_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHttpMultiPart_tr2".}
-proc fcQHttpMultiPart_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHttpMultiPart_tr3".}
-proc fcQHttpMultiPart_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHttpMultiPart_trUtf82".}
-proc fcQHttpMultiPart_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHttpMultiPart_trUtf83".}
+proc fcQHttpMultiPart_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHttpMultiPart_tr_s_c".}
+proc fcQHttpMultiPart_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHttpMultiPart_tr_s_c_n".}
+proc fcQHttpMultiPart_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHttpMultiPart_trUtf8_s_c".}
+proc fcQHttpMultiPart_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHttpMultiPart_trUtf8_s_c_n".}
 proc fcQHttpMultiPart_vdata(self: pointer): ptr pointer {.importc: "QHttpMultiPart_vdata".}
 proc fvdata_cQHttpMultiPart(self: pointer): pointer {.importc: "vdata_QHttpMultiPart".}
 
@@ -114,13 +114,13 @@ proc fcQHttpMultiPart_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQHttpMultiPart_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QHttpMultiPart_protectedbase_receivers".}
 proc fcQHttpMultiPart_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QHttpMultiPart_protectedbase_isSignalConnected".}
 proc fcQHttpMultiPart_new(vtbl: pointer, vdata: csize_t): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new".}
-proc fcQHttpMultiPart_new2(vtbl: pointer, vdata: csize_t, contentType: cint): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new2".}
-proc fcQHttpMultiPart_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new3".}
-proc fcQHttpMultiPart_new4(vtbl: pointer, vdata: csize_t, contentType: cint, parent: pointer): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new4".}
+proc fcQHttpMultiPart_new2(vtbl: pointer, vdata: csize_t, contentType: cint): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new_contentType".}
+proc fcQHttpMultiPart_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new_parent".}
+proc fcQHttpMultiPart_new4(vtbl: pointer, vdata: csize_t, contentType: cint, parent: pointer): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new_contentType_parent".}
 proc fcQHttpMultiPart_staticMetaObject(): pointer {.importc: "QHttpMultiPart_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qhttpmultipart_types.QHttpPart, other: gen_qhttpmultipart_types.QHttpPart): void =
-  fcQHttpPart_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qhttpmultipart_types.QHttpPart, fromVal: gen_qhttpmultipart_types.QHttpPart): void =
+  fcQHttpPart_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qhttpmultipart_types.QHttpPart, other: gen_qhttpmultipart_types.QHttpPart): void =
   fcQHttpPart_swap(self.h, other.h)
@@ -147,8 +147,8 @@ proc create*(T: type gen_qhttpmultipart_types.QHttpPart): gen_qhttpmultipart_typ
   let tmp = gen_qhttpmultipart_types.QHttpPart(h: fcQHttpPart_new(), owned: true)
   tmp
 proc create*(T: type gen_qhttpmultipart_types.QHttpPart,
-    other: gen_qhttpmultipart_types.QHttpPart): gen_qhttpmultipart_types.QHttpPart =
-  let tmp = gen_qhttpmultipart_types.QHttpPart(h: fcQHttpPart_new2(other.h), owned: true)
+    fromVal: gen_qhttpmultipart_types.QHttpPart): gen_qhttpmultipart_types.QHttpPart =
+  let tmp = gen_qhttpmultipart_types.QHttpPart(h: fcQHttpPart_new2(fromVal.h), owned: true)
   tmp
 proc metaObject*(self: gen_qhttpmultipart_types.QHttpMultiPart): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQHttpMultiPart_metaObject(self.h), owned: false)
@@ -160,13 +160,13 @@ proc metacall*(self: gen_qhttpmultipart_types.QHttpMultiPart, param1: cint, para
   fcQHttpMultiPart_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring): string =
-  let v_ms = fcQHttpMultiPart_tr(s)
+  let v_ms = fcQHttpMultiPart_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring): string =
-  let v_ms = fcQHttpMultiPart_trUtf8(s)
+  let v_ms = fcQHttpMultiPart_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -187,25 +187,25 @@ proc setBoundary*(self: gen_qhttpmultipart_types.QHttpMultiPart, boundary: openA
   fcQHttpMultiPart_setBoundary(self.h, struct_seaqt_string(data: if len(boundary) > 0: addr boundary[0] else: nil, len: csize_t(len(boundary))))
 
 proc tr*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring, c: cstring): string =
-  let v_ms = fcQHttpMultiPart_tr2(s, c)
+  let v_ms = fcQHttpMultiPart_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQHttpMultiPart_tr3(s, c, n)
+  let v_ms = fcQHttpMultiPart_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring, c: cstring): string =
-  let v_ms = fcQHttpMultiPart_trUtf82(s, c)
+  let v_ms = fcQHttpMultiPart_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQHttpMultiPart_trUtf83(s, c, n)
+  let v_ms = fcQHttpMultiPart_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

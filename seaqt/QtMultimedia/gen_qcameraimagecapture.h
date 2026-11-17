@@ -66,15 +66,15 @@ typedef struct QCameraImageCapture_VTable{
 void* QCameraImageCapture_vdata(VirtualQCameraImageCapture* self);
 VirtualQCameraImageCapture* vdata_QCameraImageCapture(void* vdata);
 
-VirtualQCameraImageCapture* QCameraImageCapture_new(const QCameraImageCapture_VTable* vtbl, size_t vdata, QMediaObject* mediaObject);
-VirtualQCameraImageCapture* QCameraImageCapture_new2(const QCameraImageCapture_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent);
+VirtualQCameraImageCapture* QCameraImageCapture_new_mediaObject(const QCameraImageCapture_VTable* vtbl, size_t vdata, QMediaObject* mediaObject);
+VirtualQCameraImageCapture* QCameraImageCapture_new_mediaObject_parent(const QCameraImageCapture_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent);
 
 void QCameraImageCapture_virtbase(QCameraImageCapture* src, QObject** outptr_QObject, QMediaBindableInterface** outptr_QMediaBindableInterface);
 QMetaObject* QCameraImageCapture_metaObject(const QCameraImageCapture* self);
 void* QCameraImageCapture_metacast(QCameraImageCapture* self, const char* param1);
 int QCameraImageCapture_metacall(QCameraImageCapture* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraImageCapture_tr(const char* s);
-struct seaqt_string QCameraImageCapture_trUtf8(const char* s);
+struct seaqt_string QCameraImageCapture_tr_s(const char* s);
+struct seaqt_string QCameraImageCapture_trUtf8_s(const char* s);
 bool QCameraImageCapture_isAvailable(const QCameraImageCapture* self);
 int QCameraImageCapture_availability(const QCameraImageCapture* self);
 QMediaObject* QCameraImageCapture_mediaObject(const QCameraImageCapture* self);
@@ -94,8 +94,8 @@ int QCameraImageCapture_captureDestination(const QCameraImageCapture* self);
 void QCameraImageCapture_setCaptureDestination(QCameraImageCapture* self, int destination);
 int QCameraImageCapture_capture(QCameraImageCapture* self);
 void QCameraImageCapture_cancelCapture(QCameraImageCapture* self);
-void QCameraImageCapture_error2(QCameraImageCapture* self, int id, int error, struct seaqt_string errorString);
-void QCameraImageCapture_connect_error2(QCameraImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t));
+void QCameraImageCapture_error_id_error_errorString(QCameraImageCapture* self, int id, int error, struct seaqt_string errorString);
+void QCameraImageCapture_connect_error_id_error_errorString(QCameraImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t));
 void QCameraImageCapture_readyForCaptureChanged(QCameraImageCapture* self, bool ready);
 void QCameraImageCapture_connect_readyForCaptureChanged(QCameraImageCapture* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QCameraImageCapture_bufferFormatChanged(QCameraImageCapture* self, int format);
@@ -113,13 +113,13 @@ void QCameraImageCapture_connect_imageAvailable(QCameraImageCapture* self, intpt
 void QCameraImageCapture_imageSaved(QCameraImageCapture* self, int id, struct seaqt_string fileName);
 void QCameraImageCapture_connect_imageSaved(QCameraImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t));
 bool QCameraImageCapture_setMediaObject(QCameraImageCapture* self, QMediaObject* mediaObject);
-struct seaqt_string QCameraImageCapture_tr2(const char* s, const char* c);
-struct seaqt_string QCameraImageCapture_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraImageCapture_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraImageCapture_trUtf83(const char* s, const char* c, int n);
-struct seaqt_array /* of QSize* */  QCameraImageCapture_supportedResolutionsWithSettings(const QCameraImageCapture* self, QImageEncoderSettings* settings);
-struct seaqt_array /* of QSize* */  QCameraImageCapture_supportedResolutions2(const QCameraImageCapture* self, QImageEncoderSettings* settings, bool* continuous);
-int QCameraImageCapture_captureWithLocation(QCameraImageCapture* self, struct seaqt_string location);
+struct seaqt_string QCameraImageCapture_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraImageCapture_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraImageCapture_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraImageCapture_trUtf8_s_c_n(const char* s, const char* c, int n);
+struct seaqt_array /* of QSize* */  QCameraImageCapture_supportedResolutions_settings(const QCameraImageCapture* self, QImageEncoderSettings* settings);
+struct seaqt_array /* of QSize* */  QCameraImageCapture_supportedResolutions_settings_continuous(const QCameraImageCapture* self, QImageEncoderSettings* settings, bool* continuous);
+int QCameraImageCapture_capture_location(QCameraImageCapture* self, struct seaqt_string location);
 
 QMetaObject* QCameraImageCapture_virtualbase_metaObject(const VirtualQCameraImageCapture* self);
 void* QCameraImageCapture_virtualbase_metacast(VirtualQCameraImageCapture* self, const char* param1);

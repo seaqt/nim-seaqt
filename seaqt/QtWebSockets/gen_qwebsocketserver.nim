@@ -78,14 +78,14 @@ type cQWebSocketServer*{.exportc: "QWebSocketServer", incompleteStruct.} = objec
 proc fcQWebSocketServer_metaObject(self: pointer): pointer {.importc: "QWebSocketServer_metaObject".}
 proc fcQWebSocketServer_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebSocketServer_metacast".}
 proc fcQWebSocketServer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebSocketServer_metacall".}
-proc fcQWebSocketServer_tr(s: cstring): struct_seaqt_string {.importc: "QWebSocketServer_tr".}
-proc fcQWebSocketServer_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebSocketServer_trUtf8".}
+proc fcQWebSocketServer_trS(s: cstring): struct_seaqt_string {.importc: "QWebSocketServer_tr_s".}
+proc fcQWebSocketServer_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebSocketServer_trUtf8_s".}
 proc fcQWebSocketServer_listen(self: pointer): bool {.importc: "QWebSocketServer_listen".}
 proc fcQWebSocketServer_close(self: pointer): void {.importc: "QWebSocketServer_close".}
 proc fcQWebSocketServer_isListening(self: pointer): bool {.importc: "QWebSocketServer_isListening".}
 proc fcQWebSocketServer_setMaxPendingConnections(self: pointer, numConnections: cint): void {.importc: "QWebSocketServer_setMaxPendingConnections".}
 proc fcQWebSocketServer_maxPendingConnections(self: pointer): cint {.importc: "QWebSocketServer_maxPendingConnections".}
-proc fcQWebSocketServer_setHandshakeTimeoutWithMsec(self: pointer, msec: cint): void {.importc: "QWebSocketServer_setHandshakeTimeoutWithMsec".}
+proc fcQWebSocketServer_setHandshakeTimeoutInt(self: pointer, msec: cint): void {.importc: "QWebSocketServer_setHandshakeTimeout_int".}
 proc fcQWebSocketServer_handshakeTimeoutMS(self: pointer): cint {.importc: "QWebSocketServer_handshakeTimeoutMS".}
 proc fcQWebSocketServer_serverPort(self: pointer): cushort {.importc: "QWebSocketServer_serverPort".}
 proc fcQWebSocketServer_serverAddress(self: pointer): pointer {.importc: "QWebSocketServer_serverAddress".}
@@ -125,12 +125,12 @@ proc fcQWebSocketServer_preSharedKeyAuthenticationRequired(self: pointer, authen
 proc fcQWebSocketServer_connect_preSharedKeyAuthenticationRequired(self: pointer, slot: int, callback: proc (slot: int, authenticator: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebSocketServer_connect_preSharedKeyAuthenticationRequired".}
 proc fcQWebSocketServer_closed(self: pointer): void {.importc: "QWebSocketServer_closed".}
 proc fcQWebSocketServer_connect_closed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebSocketServer_connect_closed".}
-proc fcQWebSocketServer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebSocketServer_tr2".}
-proc fcQWebSocketServer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebSocketServer_tr3".}
-proc fcQWebSocketServer_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebSocketServer_trUtf82".}
-proc fcQWebSocketServer_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebSocketServer_trUtf83".}
-proc fcQWebSocketServer_listenWithAddress(self: pointer, address: pointer): bool {.importc: "QWebSocketServer_listenWithAddress".}
-proc fcQWebSocketServer_listen2(self: pointer, address: pointer, port: cushort): bool {.importc: "QWebSocketServer_listen2".}
+proc fcQWebSocketServer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebSocketServer_tr_s_c".}
+proc fcQWebSocketServer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebSocketServer_tr_s_c_n".}
+proc fcQWebSocketServer_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebSocketServer_trUtf8_s_c".}
+proc fcQWebSocketServer_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebSocketServer_trUtf8_s_c_n".}
+proc fcQWebSocketServer_listenAddress(self: pointer, address: pointer): bool {.importc: "QWebSocketServer_listen_address".}
+proc fcQWebSocketServer_listenAddressPort(self: pointer, address: pointer, port: cushort): bool {.importc: "QWebSocketServer_listen_address_port".}
 proc fcQWebSocketServer_vdata(self: pointer): ptr pointer {.importc: "QWebSocketServer_vdata".}
 proc fvdata_cQWebSocketServer(self: pointer): pointer {.importc: "vdata_QWebSocketServer".}
 
@@ -162,8 +162,8 @@ proc fcQWebSocketServer_protectedbase_sender(self: pointer): pointer {.importc: 
 proc fcQWebSocketServer_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebSocketServer_protectedbase_senderSignalIndex".}
 proc fcQWebSocketServer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebSocketServer_protectedbase_receivers".}
 proc fcQWebSocketServer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebSocketServer_protectedbase_isSignalConnected".}
-proc fcQWebSocketServer_new(vtbl: pointer, vdata: csize_t, serverName: struct_seaqt_string, secureMode: cint): ptr cQWebSocketServer {.importc: "QWebSocketServer_new".}
-proc fcQWebSocketServer_new2(vtbl: pointer, vdata: csize_t, serverName: struct_seaqt_string, secureMode: cint, parent: pointer): ptr cQWebSocketServer {.importc: "QWebSocketServer_new2".}
+proc fcQWebSocketServer_new(vtbl: pointer, vdata: csize_t, serverName: struct_seaqt_string, secureMode: cint): ptr cQWebSocketServer {.importc: "QWebSocketServer_new_serverName_secureMode".}
+proc fcQWebSocketServer_new2(vtbl: pointer, vdata: csize_t, serverName: struct_seaqt_string, secureMode: cint, parent: pointer): ptr cQWebSocketServer {.importc: "QWebSocketServer_new_serverName_secureMode_parent".}
 proc fcQWebSocketServer_staticMetaObject(): pointer {.importc: "QWebSocketServer_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebsocketserver_types.QWebSocketServer): gen_qobjectdefs_types.QMetaObject =
@@ -176,13 +176,13 @@ proc metacall*(self: gen_qwebsocketserver_types.QWebSocketServer, param1: cint, 
   fcQWebSocketServer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebsocketserver_types.QWebSocketServer, s: cstring): string =
-  let v_ms = fcQWebSocketServer_tr(s)
+  let v_ms = fcQWebSocketServer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebsocketserver_types.QWebSocketServer, s: cstring): string =
-  let v_ms = fcQWebSocketServer_trUtf8(s)
+  let v_ms = fcQWebSocketServer_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -203,7 +203,7 @@ proc maxPendingConnections*(self: gen_qwebsocketserver_types.QWebSocketServer): 
   fcQWebSocketServer_maxPendingConnections(self.h)
 
 proc setHandshakeTimeout*(self: gen_qwebsocketserver_types.QWebSocketServer, msec: cint): void =
-  fcQWebSocketServer_setHandshakeTimeoutWithMsec(self.h, msec)
+  fcQWebSocketServer_setHandshakeTimeoutInt(self.h, msec)
 
 proc handshakeTimeoutMS*(self: gen_qwebsocketserver_types.QWebSocketServer): cint =
   fcQWebSocketServer_handshakeTimeoutMS(self.h)
@@ -453,34 +453,34 @@ proc onClosed*(self: gen_qwebsocketserver_types.QWebSocketServer, slot: QWebSock
   fcQWebSocketServer_connect_closed(self.h, cast[int](addr tmp[]), fcQWebSocketServer_slot_callback_closed, fcQWebSocketServer_slot_callback_closed_release)
 
 proc tr*(_: type gen_qwebsocketserver_types.QWebSocketServer, s: cstring, c: cstring): string =
-  let v_ms = fcQWebSocketServer_tr2(s, c)
+  let v_ms = fcQWebSocketServer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebsocketserver_types.QWebSocketServer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebSocketServer_tr3(s, c, n)
+  let v_ms = fcQWebSocketServer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebsocketserver_types.QWebSocketServer, s: cstring, c: cstring): string =
-  let v_ms = fcQWebSocketServer_trUtf82(s, c)
+  let v_ms = fcQWebSocketServer_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebsocketserver_types.QWebSocketServer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebSocketServer_trUtf83(s, c, n)
+  let v_ms = fcQWebSocketServer_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc listen*(self: gen_qwebsocketserver_types.QWebSocketServer, address: gen_qhostaddress_types.QHostAddress): bool =
-  fcQWebSocketServer_listenWithAddress(self.h, address.h)
+  fcQWebSocketServer_listenAddress(self.h, address.h)
 
 proc listen*(self: gen_qwebsocketserver_types.QWebSocketServer, address: gen_qhostaddress_types.QHostAddress, port: cushort): bool =
-  fcQWebSocketServer_listen2(self.h, address.h, port)
+  fcQWebSocketServer_listenAddressPort(self.h, address.h, port)
 
 type QWebSocketServermetaObjectProc* = proc(self: QWebSocketServer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebSocketServermetacastProc* = proc(self: QWebSocketServer, param1: cstring): pointer {.raises: [], gcsafe.}

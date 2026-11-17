@@ -208,7 +208,7 @@ VirtualQLocalServer* QLocalServer_new(const QLocalServer_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQLocalServer(vtbl) : nullptr;
 }
 
-VirtualQLocalServer* QLocalServer_new2(const QLocalServer_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQLocalServer* QLocalServer_new_parent(const QLocalServer_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLocalServer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLocalServer(vtbl, parent) : nullptr;
 }
@@ -229,7 +229,7 @@ int QLocalServer_metacall(QLocalServer* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QLocalServer_tr(const char* s) {
+struct seaqt_string QLocalServer_tr_s(const char* s) {
 	QString _ret = QLocalServer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -240,7 +240,7 @@ struct seaqt_string QLocalServer_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QLocalServer_trUtf8(const char* s) {
+struct seaqt_string QLocalServer_trUtf8_s(const char* s) {
 	QString _ret = QLocalServer::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -289,12 +289,12 @@ bool QLocalServer_isListening(const QLocalServer* self) {
 	return self->isListening();
 }
 
-bool QLocalServer_listen(QLocalServer* self, struct seaqt_string name) {
+bool QLocalServer_listen_name(QLocalServer* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return self->listen(name_QString);
 }
 
-bool QLocalServer_listenWithSocketDescriptor(QLocalServer* self, intptr_t socketDescriptor) {
+bool QLocalServer_listen_socketDescriptor(QLocalServer* self, intptr_t socketDescriptor) {
 	return self->listen((qintptr)(socketDescriptor));
 }
 
@@ -360,7 +360,7 @@ intptr_t QLocalServer_socketDescriptor(const QLocalServer* self) {
 	return (intptr_t)(_ret);
 }
 
-struct seaqt_string QLocalServer_tr2(const char* s, const char* c) {
+struct seaqt_string QLocalServer_tr_s_c(const char* s, const char* c) {
 	QString _ret = QLocalServer::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -371,7 +371,7 @@ struct seaqt_string QLocalServer_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QLocalServer_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QLocalServer_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QLocalServer::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -382,7 +382,7 @@ struct seaqt_string QLocalServer_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QLocalServer_trUtf82(const char* s, const char* c) {
+struct seaqt_string QLocalServer_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QLocalServer::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -393,7 +393,7 @@ struct seaqt_string QLocalServer_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QLocalServer_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QLocalServer_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QLocalServer::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -404,11 +404,11 @@ struct seaqt_string QLocalServer_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QLocalServer_waitForNewConnectionWithMsec(QLocalServer* self, int msec) {
+bool QLocalServer_waitForNewConnection_msec(QLocalServer* self, int msec) {
 	return self->waitForNewConnection(static_cast<int>(msec));
 }
 
-bool QLocalServer_waitForNewConnection2(QLocalServer* self, int msec, bool* timedOut) {
+bool QLocalServer_waitForNewConnection_msec_timedOut(QLocalServer* self, int msec, bool* timedOut) {
 	return self->waitForNewConnection(static_cast<int>(msec), timedOut);
 }
 

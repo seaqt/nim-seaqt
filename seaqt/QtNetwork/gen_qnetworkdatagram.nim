@@ -43,7 +43,7 @@ export
 
 type cQNetworkDatagram*{.exportc: "QNetworkDatagram", incompleteStruct.} = object
 
-proc fcQNetworkDatagram_operatorAssign(self: pointer, other: pointer): void {.importc: "QNetworkDatagram_operatorAssign".}
+proc fcQNetworkDatagram_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QNetworkDatagram_operatorAssign".}
 proc fcQNetworkDatagram_swap(self: pointer, other: pointer): void {.importc: "QNetworkDatagram_swap".}
 proc fcQNetworkDatagram_clear(self: pointer): void {.importc: "QNetworkDatagram_clear".}
 proc fcQNetworkDatagram_isValid(self: pointer): bool {.importc: "QNetworkDatagram_isValid".}
@@ -54,22 +54,22 @@ proc fcQNetworkDatagram_senderAddress(self: pointer): pointer {.importc: "QNetwo
 proc fcQNetworkDatagram_destinationAddress(self: pointer): pointer {.importc: "QNetworkDatagram_destinationAddress".}
 proc fcQNetworkDatagram_senderPort(self: pointer): cint {.importc: "QNetworkDatagram_senderPort".}
 proc fcQNetworkDatagram_destinationPort(self: pointer): cint {.importc: "QNetworkDatagram_destinationPort".}
-proc fcQNetworkDatagram_setSender(self: pointer, address: pointer): void {.importc: "QNetworkDatagram_setSender".}
+proc fcQNetworkDatagram_setSenderAddress(self: pointer, address: pointer): void {.importc: "QNetworkDatagram_setSender_address".}
 proc fcQNetworkDatagram_setDestination(self: pointer, address: pointer, port: cushort): void {.importc: "QNetworkDatagram_setDestination".}
 proc fcQNetworkDatagram_hopLimit(self: pointer): cint {.importc: "QNetworkDatagram_hopLimit".}
 proc fcQNetworkDatagram_setHopLimit(self: pointer, count: cint): void {.importc: "QNetworkDatagram_setHopLimit".}
 proc fcQNetworkDatagram_data(self: pointer): struct_seaqt_string {.importc: "QNetworkDatagram_data".}
 proc fcQNetworkDatagram_setData(self: pointer, data: struct_seaqt_string): void {.importc: "QNetworkDatagram_setData".}
 proc fcQNetworkDatagram_makeReply(self: pointer, payload: struct_seaqt_string): pointer {.importc: "QNetworkDatagram_makeReply".}
-proc fcQNetworkDatagram_setSender2(self: pointer, address: pointer, port: cushort): void {.importc: "QNetworkDatagram_setSender2".}
+proc fcQNetworkDatagram_setSenderAddressPort(self: pointer, address: pointer, port: cushort): void {.importc: "QNetworkDatagram_setSender_address_port".}
 proc fcQNetworkDatagram_new(): ptr cQNetworkDatagram {.importc: "QNetworkDatagram_new".}
-proc fcQNetworkDatagram_new2(data: struct_seaqt_string): ptr cQNetworkDatagram {.importc: "QNetworkDatagram_new2".}
-proc fcQNetworkDatagram_new3(other: pointer): ptr cQNetworkDatagram {.importc: "QNetworkDatagram_new3".}
-proc fcQNetworkDatagram_new4(data: struct_seaqt_string, destinationAddress: pointer): ptr cQNetworkDatagram {.importc: "QNetworkDatagram_new4".}
-proc fcQNetworkDatagram_new5(data: struct_seaqt_string, destinationAddress: pointer, port: cushort): ptr cQNetworkDatagram {.importc: "QNetworkDatagram_new5".}
+proc fcQNetworkDatagram_new2(data: struct_seaqt_string): ptr cQNetworkDatagram {.importc: "QNetworkDatagram_new_data".}
+proc fcQNetworkDatagram_new3(fromVal: pointer): ptr cQNetworkDatagram {.importc: "QNetworkDatagram_new_from".}
+proc fcQNetworkDatagram_new4(data: struct_seaqt_string, destinationAddress: pointer): ptr cQNetworkDatagram {.importc: "QNetworkDatagram_new_data_destinationAddress".}
+proc fcQNetworkDatagram_new5(data: struct_seaqt_string, destinationAddress: pointer, port: cushort): ptr cQNetworkDatagram {.importc: "QNetworkDatagram_new_data_destinationAddress_port".}
 
-proc operatorAssign*(self: gen_qnetworkdatagram_types.QNetworkDatagram, other: gen_qnetworkdatagram_types.QNetworkDatagram): void =
-  fcQNetworkDatagram_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qnetworkdatagram_types.QNetworkDatagram, fromVal: gen_qnetworkdatagram_types.QNetworkDatagram): void =
+  fcQNetworkDatagram_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qnetworkdatagram_types.QNetworkDatagram, other: gen_qnetworkdatagram_types.QNetworkDatagram): void =
   fcQNetworkDatagram_swap(self.h, other.h)
@@ -102,7 +102,7 @@ proc destinationPort*(self: gen_qnetworkdatagram_types.QNetworkDatagram): cint =
   fcQNetworkDatagram_destinationPort(self.h)
 
 proc setSender*(self: gen_qnetworkdatagram_types.QNetworkDatagram, address: gen_qhostaddress_types.QHostAddress): void =
-  fcQNetworkDatagram_setSender(self.h, address.h)
+  fcQNetworkDatagram_setSenderAddress(self.h, address.h)
 
 proc setDestination*(self: gen_qnetworkdatagram_types.QNetworkDatagram, address: gen_qhostaddress_types.QHostAddress, port: cushort): void =
   fcQNetworkDatagram_setDestination(self.h, address.h, port)
@@ -126,7 +126,7 @@ proc makeReply*(self: gen_qnetworkdatagram_types.QNetworkDatagram, payload: open
   gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_makeReply(self.h, struct_seaqt_string(data: if len(payload) > 0: addr payload[0] else: nil, len: csize_t(len(payload)))), owned: true)
 
 proc setSender*(self: gen_qnetworkdatagram_types.QNetworkDatagram, address: gen_qhostaddress_types.QHostAddress, port: cushort): void =
-  fcQNetworkDatagram_setSender2(self.h, address.h, port)
+  fcQNetworkDatagram_setSenderAddressPort(self.h, address.h, port)
 
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram): gen_qnetworkdatagram_types.QNetworkDatagram =
   let tmp = gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new(), owned: true)
@@ -136,8 +136,8 @@ proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
   let tmp = gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new2(struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: true)
   tmp
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
-    other: gen_qnetworkdatagram_types.QNetworkDatagram): gen_qnetworkdatagram_types.QNetworkDatagram =
-  let tmp = gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new3(other.h), owned: true)
+    fromVal: gen_qnetworkdatagram_types.QNetworkDatagram): gen_qnetworkdatagram_types.QNetworkDatagram =
+  let tmp = gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
     data: openArray[byte], destinationAddress: gen_qhostaddress_types.QHostAddress): gen_qnetworkdatagram_types.QNetworkDatagram =

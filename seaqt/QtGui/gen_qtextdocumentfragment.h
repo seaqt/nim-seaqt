@@ -25,18 +25,18 @@ typedef struct QTextDocumentFragment QTextDocumentFragment;
 #endif
 
 QTextDocumentFragment* QTextDocumentFragment_new();
-QTextDocumentFragment* QTextDocumentFragment_new2(QTextDocument* document);
-QTextDocumentFragment* QTextDocumentFragment_new3(QTextCursor* range);
-QTextDocumentFragment* QTextDocumentFragment_new4(QTextDocumentFragment* rhs);
+QTextDocumentFragment* QTextDocumentFragment_new_document(QTextDocument* document);
+QTextDocumentFragment* QTextDocumentFragment_new_range(QTextCursor* range);
+QTextDocumentFragment* QTextDocumentFragment_new_from(QTextDocumentFragment* from);
 
-void QTextDocumentFragment_operatorAssign(QTextDocumentFragment* self, QTextDocumentFragment* rhs);
+void QTextDocumentFragment_operatorAssign(QTextDocumentFragment* self, QTextDocumentFragment* from);
 bool QTextDocumentFragment_isEmpty(const QTextDocumentFragment* self);
 struct seaqt_string QTextDocumentFragment_toPlainText(const QTextDocumentFragment* self);
 struct seaqt_string QTextDocumentFragment_toHtml(const QTextDocumentFragment* self);
 QTextDocumentFragment* QTextDocumentFragment_fromPlainText(struct seaqt_string plainText);
-QTextDocumentFragment* QTextDocumentFragment_fromHtml(struct seaqt_string html);
-QTextDocumentFragment* QTextDocumentFragment_fromHtml2(struct seaqt_string html, QTextDocument* resourceProvider);
-struct seaqt_string QTextDocumentFragment_toHtmlWithEncoding(const QTextDocumentFragment* self, struct seaqt_string encoding);
+QTextDocumentFragment* QTextDocumentFragment_fromHtml_html(struct seaqt_string html);
+QTextDocumentFragment* QTextDocumentFragment_fromHtml_html_resourceProvider(struct seaqt_string html, QTextDocument* resourceProvider);
+struct seaqt_string QTextDocumentFragment_toHtml_encoding(const QTextDocumentFragment* self, struct seaqt_string encoding);
 
 void QTextDocumentFragment_delete(QTextDocumentFragment* self);
 

@@ -48,7 +48,7 @@ type cQAudioEncoderSettings*{.exportc: "QAudioEncoderSettings", incompleteStruct
 type cQVideoEncoderSettings*{.exportc: "QVideoEncoderSettings", incompleteStruct.} = object
 type cQImageEncoderSettings*{.exportc: "QImageEncoderSettings", incompleteStruct.} = object
 
-proc fcQAudioEncoderSettings_operatorAssign(self: pointer, other: pointer): void {.importc: "QAudioEncoderSettings_operatorAssign".}
+proc fcQAudioEncoderSettings_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAudioEncoderSettings_operatorAssign".}
 proc fcQAudioEncoderSettings_operatorEqual(self: pointer, other: pointer): bool {.importc: "QAudioEncoderSettings_operatorEqual".}
 proc fcQAudioEncoderSettings_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QAudioEncoderSettings_operatorNotEqual".}
 proc fcQAudioEncoderSettings_isNull(self: pointer): bool {.importc: "QAudioEncoderSettings_isNull".}
@@ -69,8 +69,8 @@ proc fcQAudioEncoderSettings_encodingOptions(self: pointer): struct_seaqt_map {.
 proc fcQAudioEncoderSettings_setEncodingOption(self: pointer, option: struct_seaqt_string, value: pointer): void {.importc: "QAudioEncoderSettings_setEncodingOption".}
 proc fcQAudioEncoderSettings_setEncodingOptions(self: pointer, options: struct_seaqt_map): void {.importc: "QAudioEncoderSettings_setEncodingOptions".}
 proc fcQAudioEncoderSettings_new(): ptr cQAudioEncoderSettings {.importc: "QAudioEncoderSettings_new".}
-proc fcQAudioEncoderSettings_new2(other: pointer): ptr cQAudioEncoderSettings {.importc: "QAudioEncoderSettings_new2".}
-proc fcQVideoEncoderSettings_operatorAssign(self: pointer, other: pointer): void {.importc: "QVideoEncoderSettings_operatorAssign".}
+proc fcQAudioEncoderSettings_new2(fromVal: pointer): ptr cQAudioEncoderSettings {.importc: "QAudioEncoderSettings_new_from".}
+proc fcQVideoEncoderSettings_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QVideoEncoderSettings_operatorAssign".}
 proc fcQVideoEncoderSettings_operatorEqual(self: pointer, other: pointer): bool {.importc: "QVideoEncoderSettings_operatorEqual".}
 proc fcQVideoEncoderSettings_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QVideoEncoderSettings_operatorNotEqual".}
 proc fcQVideoEncoderSettings_isNull(self: pointer): bool {.importc: "QVideoEncoderSettings_isNull".}
@@ -79,8 +79,8 @@ proc fcQVideoEncoderSettings_setEncodingMode(self: pointer, encodingMode: cint):
 proc fcQVideoEncoderSettings_codec(self: pointer): struct_seaqt_string {.importc: "QVideoEncoderSettings_codec".}
 proc fcQVideoEncoderSettings_setCodec(self: pointer, codec: struct_seaqt_string): void {.importc: "QVideoEncoderSettings_setCodec".}
 proc fcQVideoEncoderSettings_resolution(self: pointer): pointer {.importc: "QVideoEncoderSettings_resolution".}
-proc fcQVideoEncoderSettings_setResolution(self: pointer, resolution: pointer): void {.importc: "QVideoEncoderSettings_setResolution".}
-proc fcQVideoEncoderSettings_setResolution2(self: pointer, width: cint, height: cint): void {.importc: "QVideoEncoderSettings_setResolution2".}
+proc fcQVideoEncoderSettings_setResolutionResolution(self: pointer, resolution: pointer): void {.importc: "QVideoEncoderSettings_setResolution_resolution".}
+proc fcQVideoEncoderSettings_setResolutionWidthHeight(self: pointer, width: cint, height: cint): void {.importc: "QVideoEncoderSettings_setResolution_width_height".}
 proc fcQVideoEncoderSettings_frameRate(self: pointer): float64 {.importc: "QVideoEncoderSettings_frameRate".}
 proc fcQVideoEncoderSettings_setFrameRate(self: pointer, rate: float64): void {.importc: "QVideoEncoderSettings_setFrameRate".}
 proc fcQVideoEncoderSettings_bitRate(self: pointer): cint {.importc: "QVideoEncoderSettings_bitRate".}
@@ -92,16 +92,16 @@ proc fcQVideoEncoderSettings_encodingOptions(self: pointer): struct_seaqt_map {.
 proc fcQVideoEncoderSettings_setEncodingOption(self: pointer, option: struct_seaqt_string, value: pointer): void {.importc: "QVideoEncoderSettings_setEncodingOption".}
 proc fcQVideoEncoderSettings_setEncodingOptions(self: pointer, options: struct_seaqt_map): void {.importc: "QVideoEncoderSettings_setEncodingOptions".}
 proc fcQVideoEncoderSettings_new(): ptr cQVideoEncoderSettings {.importc: "QVideoEncoderSettings_new".}
-proc fcQVideoEncoderSettings_new2(other: pointer): ptr cQVideoEncoderSettings {.importc: "QVideoEncoderSettings_new2".}
-proc fcQImageEncoderSettings_operatorAssign(self: pointer, other: pointer): void {.importc: "QImageEncoderSettings_operatorAssign".}
+proc fcQVideoEncoderSettings_new2(fromVal: pointer): ptr cQVideoEncoderSettings {.importc: "QVideoEncoderSettings_new_from".}
+proc fcQImageEncoderSettings_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QImageEncoderSettings_operatorAssign".}
 proc fcQImageEncoderSettings_operatorEqual(self: pointer, other: pointer): bool {.importc: "QImageEncoderSettings_operatorEqual".}
 proc fcQImageEncoderSettings_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QImageEncoderSettings_operatorNotEqual".}
 proc fcQImageEncoderSettings_isNull(self: pointer): bool {.importc: "QImageEncoderSettings_isNull".}
 proc fcQImageEncoderSettings_codec(self: pointer): struct_seaqt_string {.importc: "QImageEncoderSettings_codec".}
 proc fcQImageEncoderSettings_setCodec(self: pointer, codec: struct_seaqt_string): void {.importc: "QImageEncoderSettings_setCodec".}
 proc fcQImageEncoderSettings_resolution(self: pointer): pointer {.importc: "QImageEncoderSettings_resolution".}
-proc fcQImageEncoderSettings_setResolution(self: pointer, resolution: pointer): void {.importc: "QImageEncoderSettings_setResolution".}
-proc fcQImageEncoderSettings_setResolution2(self: pointer, width: cint, height: cint): void {.importc: "QImageEncoderSettings_setResolution2".}
+proc fcQImageEncoderSettings_setResolutionResolution(self: pointer, resolution: pointer): void {.importc: "QImageEncoderSettings_setResolution_resolution".}
+proc fcQImageEncoderSettings_setResolutionWidthHeight(self: pointer, width: cint, height: cint): void {.importc: "QImageEncoderSettings_setResolution_width_height".}
 proc fcQImageEncoderSettings_quality(self: pointer): cint {.importc: "QImageEncoderSettings_quality".}
 proc fcQImageEncoderSettings_setQuality(self: pointer, quality: cint): void {.importc: "QImageEncoderSettings_setQuality".}
 proc fcQImageEncoderSettings_encodingOption(self: pointer, option: struct_seaqt_string): pointer {.importc: "QImageEncoderSettings_encodingOption".}
@@ -109,10 +109,10 @@ proc fcQImageEncoderSettings_encodingOptions(self: pointer): struct_seaqt_map {.
 proc fcQImageEncoderSettings_setEncodingOption(self: pointer, option: struct_seaqt_string, value: pointer): void {.importc: "QImageEncoderSettings_setEncodingOption".}
 proc fcQImageEncoderSettings_setEncodingOptions(self: pointer, options: struct_seaqt_map): void {.importc: "QImageEncoderSettings_setEncodingOptions".}
 proc fcQImageEncoderSettings_new(): ptr cQImageEncoderSettings {.importc: "QImageEncoderSettings_new".}
-proc fcQImageEncoderSettings_new2(other: pointer): ptr cQImageEncoderSettings {.importc: "QImageEncoderSettings_new2".}
+proc fcQImageEncoderSettings_new2(fromVal: pointer): ptr cQImageEncoderSettings {.importc: "QImageEncoderSettings_new_from".}
 
-proc operatorAssign*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, other: gen_qmediaencodersettings_types.QAudioEncoderSettings): void =
-  fcQAudioEncoderSettings_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, fromVal: gen_qmediaencodersettings_types.QAudioEncoderSettings): void =
+  fcQAudioEncoderSettings_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, other: gen_qmediaencodersettings_types.QAudioEncoderSettings): bool =
   fcQAudioEncoderSettings_operatorEqual(self.h, other.h)
@@ -204,11 +204,11 @@ proc create*(T: type gen_qmediaencodersettings_types.QAudioEncoderSettings): gen
   let tmp = gen_qmediaencodersettings_types.QAudioEncoderSettings(h: fcQAudioEncoderSettings_new(), owned: true)
   tmp
 proc create*(T: type gen_qmediaencodersettings_types.QAudioEncoderSettings,
-    other: gen_qmediaencodersettings_types.QAudioEncoderSettings): gen_qmediaencodersettings_types.QAudioEncoderSettings =
-  let tmp = gen_qmediaencodersettings_types.QAudioEncoderSettings(h: fcQAudioEncoderSettings_new2(other.h), owned: true)
+    fromVal: gen_qmediaencodersettings_types.QAudioEncoderSettings): gen_qmediaencodersettings_types.QAudioEncoderSettings =
+  let tmp = gen_qmediaencodersettings_types.QAudioEncoderSettings(h: fcQAudioEncoderSettings_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, other: gen_qmediaencodersettings_types.QVideoEncoderSettings): void =
-  fcQVideoEncoderSettings_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, fromVal: gen_qmediaencodersettings_types.QVideoEncoderSettings): void =
+  fcQVideoEncoderSettings_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, other: gen_qmediaencodersettings_types.QVideoEncoderSettings): bool =
   fcQVideoEncoderSettings_operatorEqual(self.h, other.h)
@@ -238,10 +238,10 @@ proc resolution*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings): g
   gen_qsize_types.QSize(h: fcQVideoEncoderSettings_resolution(self.h), owned: true)
 
 proc setResolution*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, resolution: gen_qsize_types.QSize): void =
-  fcQVideoEncoderSettings_setResolution(self.h, resolution.h)
+  fcQVideoEncoderSettings_setResolutionResolution(self.h, resolution.h)
 
 proc setResolution*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, width: cint, height: cint): void =
-  fcQVideoEncoderSettings_setResolution2(self.h, width, height)
+  fcQVideoEncoderSettings_setResolutionWidthHeight(self.h, width, height)
 
 proc frameRate*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings): float64 =
   fcQVideoEncoderSettings_frameRate(self.h)
@@ -303,11 +303,11 @@ proc create*(T: type gen_qmediaencodersettings_types.QVideoEncoderSettings): gen
   let tmp = gen_qmediaencodersettings_types.QVideoEncoderSettings(h: fcQVideoEncoderSettings_new(), owned: true)
   tmp
 proc create*(T: type gen_qmediaencodersettings_types.QVideoEncoderSettings,
-    other: gen_qmediaencodersettings_types.QVideoEncoderSettings): gen_qmediaencodersettings_types.QVideoEncoderSettings =
-  let tmp = gen_qmediaencodersettings_types.QVideoEncoderSettings(h: fcQVideoEncoderSettings_new2(other.h), owned: true)
+    fromVal: gen_qmediaencodersettings_types.QVideoEncoderSettings): gen_qmediaencodersettings_types.QVideoEncoderSettings =
+  let tmp = gen_qmediaencodersettings_types.QVideoEncoderSettings(h: fcQVideoEncoderSettings_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, other: gen_qmediaencodersettings_types.QImageEncoderSettings): void =
-  fcQImageEncoderSettings_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, fromVal: gen_qmediaencodersettings_types.QImageEncoderSettings): void =
+  fcQImageEncoderSettings_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, other: gen_qmediaencodersettings_types.QImageEncoderSettings): bool =
   fcQImageEncoderSettings_operatorEqual(self.h, other.h)
@@ -331,10 +331,10 @@ proc resolution*(self: gen_qmediaencodersettings_types.QImageEncoderSettings): g
   gen_qsize_types.QSize(h: fcQImageEncoderSettings_resolution(self.h), owned: true)
 
 proc setResolution*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, resolution: gen_qsize_types.QSize): void =
-  fcQImageEncoderSettings_setResolution(self.h, resolution.h)
+  fcQImageEncoderSettings_setResolutionResolution(self.h, resolution.h)
 
 proc setResolution*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, width: cint, height: cint): void =
-  fcQImageEncoderSettings_setResolution2(self.h, width, height)
+  fcQImageEncoderSettings_setResolutionWidthHeight(self.h, width, height)
 
 proc quality*(self: gen_qmediaencodersettings_types.QImageEncoderSettings): cint =
   cint(fcQImageEncoderSettings_quality(self.h))
@@ -384,6 +384,6 @@ proc create*(T: type gen_qmediaencodersettings_types.QImageEncoderSettings): gen
   let tmp = gen_qmediaencodersettings_types.QImageEncoderSettings(h: fcQImageEncoderSettings_new(), owned: true)
   tmp
 proc create*(T: type gen_qmediaencodersettings_types.QImageEncoderSettings,
-    other: gen_qmediaencodersettings_types.QImageEncoderSettings): gen_qmediaencodersettings_types.QImageEncoderSettings =
-  let tmp = gen_qmediaencodersettings_types.QImageEncoderSettings(h: fcQImageEncoderSettings_new2(other.h), owned: true)
+    fromVal: gen_qmediaencodersettings_types.QImageEncoderSettings): gen_qmediaencodersettings_types.QImageEncoderSettings =
+  let tmp = gen_qmediaencodersettings_types.QImageEncoderSettings(h: fcQImageEncoderSettings_new2(fromVal.h), owned: true)
   tmp

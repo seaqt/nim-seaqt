@@ -15,7 +15,7 @@ qfloat16* qfloat16_new() {
 	return new (std::nothrow) qfloat16();
 }
 
-qfloat16* qfloat16_new2(float f) {
+qfloat16* qfloat16_new_f(float f) {
 	return new (std::nothrow) qfloat16(static_cast<float>(f));
 }
 

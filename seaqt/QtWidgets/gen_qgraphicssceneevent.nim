@@ -100,7 +100,7 @@ proc fcQGraphicsSceneMouseEvent_setSource(self: pointer, source: cint): void {.i
 proc fcQGraphicsSceneMouseEvent_flags(self: pointer): cint {.importc: "QGraphicsSceneMouseEvent_flags".}
 proc fcQGraphicsSceneMouseEvent_setFlags(self: pointer, flags: cint): void {.importc: "QGraphicsSceneMouseEvent_setFlags".}
 proc fcQGraphicsSceneMouseEvent_new(): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new".}
-proc fcQGraphicsSceneMouseEvent_new2(typeVal: cint): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new2".}
+proc fcQGraphicsSceneMouseEvent_new2(typeVal: cint): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new_type".}
 proc fcQGraphicsSceneWheelEvent_pos(self: pointer): pointer {.importc: "QGraphicsSceneWheelEvent_pos".}
 proc fcQGraphicsSceneWheelEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneWheelEvent_setPos".}
 proc fcQGraphicsSceneWheelEvent_scenePos(self: pointer): pointer {.importc: "QGraphicsSceneWheelEvent_scenePos".}
@@ -116,7 +116,7 @@ proc fcQGraphicsSceneWheelEvent_setDelta(self: pointer, delta: cint): void {.imp
 proc fcQGraphicsSceneWheelEvent_orientation(self: pointer): cint {.importc: "QGraphicsSceneWheelEvent_orientation".}
 proc fcQGraphicsSceneWheelEvent_setOrientation(self: pointer, orientation: cint): void {.importc: "QGraphicsSceneWheelEvent_setOrientation".}
 proc fcQGraphicsSceneWheelEvent_new(): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new".}
-proc fcQGraphicsSceneWheelEvent_new2(typeVal: cint): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new2".}
+proc fcQGraphicsSceneWheelEvent_new2(typeVal: cint): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new_type".}
 proc fcQGraphicsSceneContextMenuEvent_pos(self: pointer): pointer {.importc: "QGraphicsSceneContextMenuEvent_pos".}
 proc fcQGraphicsSceneContextMenuEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneContextMenuEvent_setPos".}
 proc fcQGraphicsSceneContextMenuEvent_scenePos(self: pointer): pointer {.importc: "QGraphicsSceneContextMenuEvent_scenePos".}
@@ -128,7 +128,7 @@ proc fcQGraphicsSceneContextMenuEvent_setModifiers(self: pointer, modifiers: cin
 proc fcQGraphicsSceneContextMenuEvent_reason(self: pointer): cint {.importc: "QGraphicsSceneContextMenuEvent_reason".}
 proc fcQGraphicsSceneContextMenuEvent_setReason(self: pointer, reason: cint): void {.importc: "QGraphicsSceneContextMenuEvent_setReason".}
 proc fcQGraphicsSceneContextMenuEvent_new(): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new".}
-proc fcQGraphicsSceneContextMenuEvent_new2(typeVal: cint): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new2".}
+proc fcQGraphicsSceneContextMenuEvent_new2(typeVal: cint): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new_type".}
 proc fcQGraphicsSceneHoverEvent_pos(self: pointer): pointer {.importc: "QGraphicsSceneHoverEvent_pos".}
 proc fcQGraphicsSceneHoverEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHoverEvent_setPos".}
 proc fcQGraphicsSceneHoverEvent_scenePos(self: pointer): pointer {.importc: "QGraphicsSceneHoverEvent_scenePos".}
@@ -144,13 +144,13 @@ proc fcQGraphicsSceneHoverEvent_setLastScreenPos(self: pointer, pos: pointer): v
 proc fcQGraphicsSceneHoverEvent_modifiers(self: pointer): cint {.importc: "QGraphicsSceneHoverEvent_modifiers".}
 proc fcQGraphicsSceneHoverEvent_setModifiers(self: pointer, modifiers: cint): void {.importc: "QGraphicsSceneHoverEvent_setModifiers".}
 proc fcQGraphicsSceneHoverEvent_new(): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new".}
-proc fcQGraphicsSceneHoverEvent_new2(typeVal: cint): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new2".}
+proc fcQGraphicsSceneHoverEvent_new2(typeVal: cint): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new_type".}
 proc fcQGraphicsSceneHelpEvent_scenePos(self: pointer): pointer {.importc: "QGraphicsSceneHelpEvent_scenePos".}
 proc fcQGraphicsSceneHelpEvent_setScenePos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHelpEvent_setScenePos".}
 proc fcQGraphicsSceneHelpEvent_screenPos(self: pointer): pointer {.importc: "QGraphicsSceneHelpEvent_screenPos".}
 proc fcQGraphicsSceneHelpEvent_setScreenPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHelpEvent_setScreenPos".}
 proc fcQGraphicsSceneHelpEvent_new(): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new".}
-proc fcQGraphicsSceneHelpEvent_new2(typeVal: cint): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new2".}
+proc fcQGraphicsSceneHelpEvent_new2(typeVal: cint): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new_type".}
 proc fcQGraphicsSceneDragDropEvent_pos(self: pointer): pointer {.importc: "QGraphicsSceneDragDropEvent_pos".}
 proc fcQGraphicsSceneDragDropEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneDragDropEvent_setPos".}
 proc fcQGraphicsSceneDragDropEvent_scenePos(self: pointer): pointer {.importc: "QGraphicsSceneDragDropEvent_scenePos".}
@@ -173,7 +173,7 @@ proc fcQGraphicsSceneDragDropEvent_setSource(self: pointer, source: pointer): vo
 proc fcQGraphicsSceneDragDropEvent_mimeData(self: pointer): pointer {.importc: "QGraphicsSceneDragDropEvent_mimeData".}
 proc fcQGraphicsSceneDragDropEvent_setMimeData(self: pointer, data: pointer): void {.importc: "QGraphicsSceneDragDropEvent_setMimeData".}
 proc fcQGraphicsSceneDragDropEvent_new(): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new".}
-proc fcQGraphicsSceneDragDropEvent_new2(typeVal: cint): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new2".}
+proc fcQGraphicsSceneDragDropEvent_new2(typeVal: cint): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new_type".}
 proc fcQGraphicsSceneResizeEvent_oldSize(self: pointer): pointer {.importc: "QGraphicsSceneResizeEvent_oldSize".}
 proc fcQGraphicsSceneResizeEvent_setOldSize(self: pointer, size: pointer): void {.importc: "QGraphicsSceneResizeEvent_setOldSize".}
 proc fcQGraphicsSceneResizeEvent_newSize(self: pointer): pointer {.importc: "QGraphicsSceneResizeEvent_newSize".}

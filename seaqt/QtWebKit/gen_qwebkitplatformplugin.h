@@ -65,7 +65,7 @@ QColor* QWebSelectData_backgroundColor(const QWebSelectData* self);
 QColor* QWebSelectData_foregroundColor(const QWebSelectData* self);
 QColor* QWebSelectData_itemBackgroundColor(const QWebSelectData* self, int index);
 QColor* QWebSelectData_itemForegroundColor(const QWebSelectData* self, int index);
-void QWebSelectData_operatorAssign(QWebSelectData* self, QWebSelectData* param1);
+void QWebSelectData_operatorAssign(QWebSelectData* self, QWebSelectData* from);
 
 void QWebSelectData_delete(QWebSelectData* self);
 
@@ -73,8 +73,8 @@ void QWebSelectMethod_virtbase(QWebSelectMethod* src, QObject** outptr_QObject);
 QMetaObject* QWebSelectMethod_metaObject(const QWebSelectMethod* self);
 void* QWebSelectMethod_metacast(QWebSelectMethod* self, const char* param1);
 int QWebSelectMethod_metacall(QWebSelectMethod* self, int param1, int param2, void** param3);
-struct seaqt_string QWebSelectMethod_tr(const char* s);
-struct seaqt_string QWebSelectMethod_trUtf8(const char* s);
+struct seaqt_string QWebSelectMethod_tr_s(const char* s);
+struct seaqt_string QWebSelectMethod_trUtf8_s(const char* s);
 void QWebSelectMethod_show(QWebSelectMethod* self, QWebSelectData* param1);
 void QWebSelectMethod_hide(QWebSelectMethod* self);
 void QWebSelectMethod_setGeometry(QWebSelectMethod* self, QRect* geometry);
@@ -83,10 +83,10 @@ void QWebSelectMethod_selectItem(QWebSelectMethod* self, int index, bool allowMu
 void QWebSelectMethod_connect_selectItem(QWebSelectMethod* self, intptr_t slot, void (*callback)(intptr_t, int, bool, bool), void (*release)(intptr_t));
 void QWebSelectMethod_didHide(QWebSelectMethod* self);
 void QWebSelectMethod_connect_didHide(QWebSelectMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QWebSelectMethod_tr2(const char* s, const char* c);
-struct seaqt_string QWebSelectMethod_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebSelectMethod_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebSelectMethod_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebSelectMethod_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebSelectMethod_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebSelectMethod_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebSelectMethod_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebSelectMethod_staticMetaObject();
 void QWebSelectMethod_delete(QWebSelectMethod* self);
@@ -95,7 +95,7 @@ struct seaqt_string QWebNotificationData_title(const QWebNotificationData* self)
 struct seaqt_string QWebNotificationData_message(const QWebNotificationData* self);
 QUrl* QWebNotificationData_iconUrl(const QWebNotificationData* self);
 QUrl* QWebNotificationData_openerPageUrl(const QWebNotificationData* self);
-void QWebNotificationData_operatorAssign(QWebNotificationData* self, QWebNotificationData* param1);
+void QWebNotificationData_operatorAssign(QWebNotificationData* self, QWebNotificationData* from);
 
 void QWebNotificationData_delete(QWebNotificationData* self);
 
@@ -103,17 +103,17 @@ void QWebNotificationPresenter_virtbase(QWebNotificationPresenter* src, QObject*
 QMetaObject* QWebNotificationPresenter_metaObject(const QWebNotificationPresenter* self);
 void* QWebNotificationPresenter_metacast(QWebNotificationPresenter* self, const char* param1);
 int QWebNotificationPresenter_metacall(QWebNotificationPresenter* self, int param1, int param2, void** param3);
-struct seaqt_string QWebNotificationPresenter_tr(const char* s);
-struct seaqt_string QWebNotificationPresenter_trUtf8(const char* s);
+struct seaqt_string QWebNotificationPresenter_tr_s(const char* s);
+struct seaqt_string QWebNotificationPresenter_trUtf8_s(const char* s);
 void QWebNotificationPresenter_showNotification(QWebNotificationPresenter* self, QWebNotificationData* param1);
 void QWebNotificationPresenter_notificationClosed(QWebNotificationPresenter* self);
 void QWebNotificationPresenter_connect_notificationClosed(QWebNotificationPresenter* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QWebNotificationPresenter_notificationClicked(QWebNotificationPresenter* self);
 void QWebNotificationPresenter_connect_notificationClicked(QWebNotificationPresenter* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QWebNotificationPresenter_tr2(const char* s, const char* c);
-struct seaqt_string QWebNotificationPresenter_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebNotificationPresenter_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebNotificationPresenter_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebNotificationPresenter_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebNotificationPresenter_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebNotificationPresenter_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebNotificationPresenter_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebNotificationPresenter_staticMetaObject();
 void QWebNotificationPresenter_delete(QWebNotificationPresenter* self);
@@ -122,13 +122,13 @@ void QWebHapticFeedbackPlayer_virtbase(QWebHapticFeedbackPlayer* src, QObject** 
 QMetaObject* QWebHapticFeedbackPlayer_metaObject(const QWebHapticFeedbackPlayer* self);
 void* QWebHapticFeedbackPlayer_metacast(QWebHapticFeedbackPlayer* self, const char* param1);
 int QWebHapticFeedbackPlayer_metacall(QWebHapticFeedbackPlayer* self, int param1, int param2, void** param3);
-struct seaqt_string QWebHapticFeedbackPlayer_tr(const char* s);
-struct seaqt_string QWebHapticFeedbackPlayer_trUtf8(const char* s);
+struct seaqt_string QWebHapticFeedbackPlayer_tr_s(const char* s);
+struct seaqt_string QWebHapticFeedbackPlayer_trUtf8_s(const char* s);
 void QWebHapticFeedbackPlayer_playHapticFeedback(QWebHapticFeedbackPlayer* self, int param1, struct seaqt_string hapticType, int param3);
-struct seaqt_string QWebHapticFeedbackPlayer_tr2(const char* s, const char* c);
-struct seaqt_string QWebHapticFeedbackPlayer_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebHapticFeedbackPlayer_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebHapticFeedbackPlayer_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebHapticFeedbackPlayer_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebHapticFeedbackPlayer_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebHapticFeedbackPlayer_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebHapticFeedbackPlayer_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebHapticFeedbackPlayer_staticMetaObject();
 void QWebHapticFeedbackPlayer_delete(QWebHapticFeedbackPlayer* self);
@@ -137,13 +137,13 @@ void QWebTouchModifier_virtbase(QWebTouchModifier* src, QObject** outptr_QObject
 QMetaObject* QWebTouchModifier_metaObject(const QWebTouchModifier* self);
 void* QWebTouchModifier_metacast(QWebTouchModifier* self, const char* param1);
 int QWebTouchModifier_metacall(QWebTouchModifier* self, int param1, int param2, void** param3);
-struct seaqt_string QWebTouchModifier_tr(const char* s);
-struct seaqt_string QWebTouchModifier_trUtf8(const char* s);
+struct seaqt_string QWebTouchModifier_tr_s(const char* s);
+struct seaqt_string QWebTouchModifier_trUtf8_s(const char* s);
 unsigned int QWebTouchModifier_hitTestPaddingForTouch(const QWebTouchModifier* self, int param1);
-struct seaqt_string QWebTouchModifier_tr2(const char* s, const char* c);
-struct seaqt_string QWebTouchModifier_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebTouchModifier_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebTouchModifier_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebTouchModifier_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebTouchModifier_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebTouchModifier_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebTouchModifier_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebTouchModifier_staticMetaObject();
 void QWebTouchModifier_delete(QWebTouchModifier* self);
@@ -152,8 +152,8 @@ void QWebSpellChecker_virtbase(QWebSpellChecker* src, QObject** outptr_QObject);
 QMetaObject* QWebSpellChecker_metaObject(const QWebSpellChecker* self);
 void* QWebSpellChecker_metacast(QWebSpellChecker* self, const char* param1);
 int QWebSpellChecker_metacall(QWebSpellChecker* self, int param1, int param2, void** param3);
-struct seaqt_string QWebSpellChecker_tr(const char* s);
-struct seaqt_string QWebSpellChecker_trUtf8(const char* s);
+struct seaqt_string QWebSpellChecker_tr_s(const char* s);
+struct seaqt_string QWebSpellChecker_trUtf8_s(const char* s);
 bool QWebSpellChecker_isContinousSpellCheckingEnabled(const QWebSpellChecker* self);
 void QWebSpellChecker_toggleContinousSpellChecking(QWebSpellChecker* self);
 void QWebSpellChecker_learnWord(QWebSpellChecker* self, struct seaqt_string word);
@@ -164,21 +164,21 @@ void QWebSpellChecker_guessesForWord(QWebSpellChecker* self, struct seaqt_string
 bool QWebSpellChecker_isGrammarCheckingEnabled(QWebSpellChecker* self);
 void QWebSpellChecker_toggleGrammarChecking(QWebSpellChecker* self);
 void QWebSpellChecker_checkGrammarOfString(QWebSpellChecker* self, struct seaqt_string param1, struct seaqt_array /* of QWebSpellChecker__GrammarDetail* */  param2, int* badGrammarLocation, int* badGrammarLength);
-struct seaqt_string QWebSpellChecker_tr2(const char* s, const char* c);
-struct seaqt_string QWebSpellChecker_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebSpellChecker_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebSpellChecker_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebSpellChecker_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebSpellChecker_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebSpellChecker_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebSpellChecker_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebSpellChecker_staticMetaObject();
 void QWebSpellChecker_delete(QWebSpellChecker* self);
 
 bool QWebKitPlatformPlugin_supportsExtension(const QWebKitPlatformPlugin* self, int param1);
 QObject* QWebKitPlatformPlugin_createExtension(const QWebKitPlatformPlugin* self, int param1);
-void QWebKitPlatformPlugin_operatorAssign(QWebKitPlatformPlugin* self, QWebKitPlatformPlugin* param1);
+void QWebKitPlatformPlugin_operatorAssign(QWebKitPlatformPlugin* self, QWebKitPlatformPlugin* from);
 
 void QWebKitPlatformPlugin_delete(QWebKitPlatformPlugin* self);
 
-QWebSpellChecker__GrammarDetail* QWebSpellChecker__GrammarDetail_new(QWebSpellChecker__GrammarDetail* param1);
+QWebSpellChecker__GrammarDetail* QWebSpellChecker__GrammarDetail_new(QWebSpellChecker__GrammarDetail* from);
 
 int QWebSpellChecker__GrammarDetail_location(const QWebSpellChecker__GrammarDetail* self);
 void QWebSpellChecker__GrammarDetail_setLocation(QWebSpellChecker__GrammarDetail* self, int location);
@@ -188,7 +188,7 @@ struct seaqt_array /* of struct seaqt_string */  QWebSpellChecker__GrammarDetail
 void QWebSpellChecker__GrammarDetail_setGuesses(QWebSpellChecker__GrammarDetail* self, struct seaqt_array /* of struct seaqt_string */  guesses);
 struct seaqt_string QWebSpellChecker__GrammarDetail_userDescription(const QWebSpellChecker__GrammarDetail* self);
 void QWebSpellChecker__GrammarDetail_setUserDescription(QWebSpellChecker__GrammarDetail* self, struct seaqt_string userDescription);
-void QWebSpellChecker__GrammarDetail_operatorAssign(QWebSpellChecker__GrammarDetail* self, QWebSpellChecker__GrammarDetail* param1);
+void QWebSpellChecker__GrammarDetail_operatorAssign(QWebSpellChecker__GrammarDetail* self, QWebSpellChecker__GrammarDetail* from);
 
 void QWebSpellChecker__GrammarDetail_delete(QWebSpellChecker__GrammarDetail* self);
 

@@ -64,14 +64,14 @@ export
 type cQTimeZone*{.exportc: "QTimeZone", incompleteStruct.} = object
 type cQTimeZoneOffsetData*{.exportc: "QTimeZone__OffsetData", incompleteStruct.} = object
 
-proc fcQTimeZone_operatorAssign(self: pointer, other: pointer): void {.importc: "QTimeZone_operatorAssign".}
+proc fcQTimeZone_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTimeZone_operatorAssign".}
 proc fcQTimeZone_swap(self: pointer, other: pointer): void {.importc: "QTimeZone_swap".}
 proc fcQTimeZone_isValid(self: pointer): bool {.importc: "QTimeZone_isValid".}
 proc fcQTimeZone_id(self: pointer): struct_seaqt_string {.importc: "QTimeZone_id".}
 proc fcQTimeZone_country(self: pointer): cint {.importc: "QTimeZone_country".}
 proc fcQTimeZone_comment(self: pointer): struct_seaqt_string {.importc: "QTimeZone_comment".}
-proc fcQTimeZone_displayName(self: pointer, atDateTime: pointer): struct_seaqt_string {.importc: "QTimeZone_displayName".}
-proc fcQTimeZone_displayNameWithTimeType(self: pointer, timeType: cint): struct_seaqt_string {.importc: "QTimeZone_displayNameWithTimeType".}
+proc fcQTimeZone_displayNameAtDateTime(self: pointer, atDateTime: pointer): struct_seaqt_string {.importc: "QTimeZone_displayName_atDateTime".}
+proc fcQTimeZone_displayNameTimeType(self: pointer, timeType: cint): struct_seaqt_string {.importc: "QTimeZone_displayName_timeType".}
 proc fcQTimeZone_abbreviation(self: pointer, atDateTime: pointer): struct_seaqt_string {.importc: "QTimeZone_abbreviation".}
 proc fcQTimeZone_offsetFromUtc(self: pointer, atDateTime: pointer): cint {.importc: "QTimeZone_offsetFromUtc".}
 proc fcQTimeZone_standardTimeOffset(self: pointer, atDateTime: pointer): cint {.importc: "QTimeZone_standardTimeOffset".}
@@ -88,24 +88,24 @@ proc fcQTimeZone_systemTimeZone(): pointer {.importc: "QTimeZone_systemTimeZone"
 proc fcQTimeZone_utc(): pointer {.importc: "QTimeZone_utc".}
 proc fcQTimeZone_isTimeZoneIdAvailable(ianaId: struct_seaqt_string): bool {.importc: "QTimeZone_isTimeZoneIdAvailable".}
 proc fcQTimeZone_availableTimeZoneIds(): struct_seaqt_array {.importc: "QTimeZone_availableTimeZoneIds".}
-proc fcQTimeZone_availableTimeZoneIdsWithCountry(country: cint): struct_seaqt_array {.importc: "QTimeZone_availableTimeZoneIdsWithCountry".}
-proc fcQTimeZone_availableTimeZoneIdsWithOffsetSeconds(offsetSeconds: cint): struct_seaqt_array {.importc: "QTimeZone_availableTimeZoneIdsWithOffsetSeconds".}
+proc fcQTimeZone_availableTimeZoneIdsCountry(country: cint): struct_seaqt_array {.importc: "QTimeZone_availableTimeZoneIds_country".}
+proc fcQTimeZone_availableTimeZoneIdsOffsetSeconds(offsetSeconds: cint): struct_seaqt_array {.importc: "QTimeZone_availableTimeZoneIds_offsetSeconds".}
 proc fcQTimeZone_ianaIdToWindowsId(ianaId: struct_seaqt_string): struct_seaqt_string {.importc: "QTimeZone_ianaIdToWindowsId".}
-proc fcQTimeZone_windowsIdToDefaultIanaId(windowsId: struct_seaqt_string): struct_seaqt_string {.importc: "QTimeZone_windowsIdToDefaultIanaId".}
-proc fcQTimeZone_windowsIdToDefaultIanaId2(windowsId: struct_seaqt_string, country: cint): struct_seaqt_string {.importc: "QTimeZone_windowsIdToDefaultIanaId2".}
-proc fcQTimeZone_windowsIdToIanaIds(windowsId: struct_seaqt_string): struct_seaqt_array {.importc: "QTimeZone_windowsIdToIanaIds".}
-proc fcQTimeZone_windowsIdToIanaIds2(windowsId: struct_seaqt_string, country: cint): struct_seaqt_array {.importc: "QTimeZone_windowsIdToIanaIds2".}
-proc fcQTimeZone_displayName2(self: pointer, atDateTime: pointer, nameType: cint): struct_seaqt_string {.importc: "QTimeZone_displayName2".}
-proc fcQTimeZone_displayName3(self: pointer, atDateTime: pointer, nameType: cint, locale: pointer): struct_seaqt_string {.importc: "QTimeZone_displayName3".}
-proc fcQTimeZone_displayName4(self: pointer, timeType: cint, nameType: cint): struct_seaqt_string {.importc: "QTimeZone_displayName4".}
-proc fcQTimeZone_displayName5(self: pointer, timeType: cint, nameType: cint, locale: pointer): struct_seaqt_string {.importc: "QTimeZone_displayName5".}
+proc fcQTimeZone_windowsIdToDefaultIanaIdWindowsId(windowsId: struct_seaqt_string): struct_seaqt_string {.importc: "QTimeZone_windowsIdToDefaultIanaId_windowsId".}
+proc fcQTimeZone_windowsIdToDefaultIanaIdWindowsIdCountry(windowsId: struct_seaqt_string, country: cint): struct_seaqt_string {.importc: "QTimeZone_windowsIdToDefaultIanaId_windowsId_country".}
+proc fcQTimeZone_windowsIdToIanaIdsWindowsId(windowsId: struct_seaqt_string): struct_seaqt_array {.importc: "QTimeZone_windowsIdToIanaIds_windowsId".}
+proc fcQTimeZone_windowsIdToIanaIdsWindowsIdCountry(windowsId: struct_seaqt_string, country: cint): struct_seaqt_array {.importc: "QTimeZone_windowsIdToIanaIds_windowsId_country".}
+proc fcQTimeZone_displayNameAtDateTimeNameType(self: pointer, atDateTime: pointer, nameType: cint): struct_seaqt_string {.importc: "QTimeZone_displayName_atDateTime_nameType".}
+proc fcQTimeZone_displayNameAtDateTimeNameTypeLocale(self: pointer, atDateTime: pointer, nameType: cint, locale: pointer): struct_seaqt_string {.importc: "QTimeZone_displayName_atDateTime_nameType_locale".}
+proc fcQTimeZone_displayNameTimeTypeNameType(self: pointer, timeType: cint, nameType: cint): struct_seaqt_string {.importc: "QTimeZone_displayName_timeType_nameType".}
+proc fcQTimeZone_displayNameTimeTypeNameTypeLocale(self: pointer, timeType: cint, nameType: cint, locale: pointer): struct_seaqt_string {.importc: "QTimeZone_displayName_timeType_nameType_locale".}
 proc fcQTimeZone_new(): ptr cQTimeZone {.importc: "QTimeZone_new".}
-proc fcQTimeZone_new2(ianaId: struct_seaqt_string): ptr cQTimeZone {.importc: "QTimeZone_new2".}
-proc fcQTimeZone_new3(offsetSeconds: cint): ptr cQTimeZone {.importc: "QTimeZone_new3".}
-proc fcQTimeZone_new4(zoneId: struct_seaqt_string, offsetSeconds: cint, name: struct_seaqt_string, abbreviation: struct_seaqt_string): ptr cQTimeZone {.importc: "QTimeZone_new4".}
-proc fcQTimeZone_new5(other: pointer): ptr cQTimeZone {.importc: "QTimeZone_new5".}
-proc fcQTimeZone_new6(zoneId: struct_seaqt_string, offsetSeconds: cint, name: struct_seaqt_string, abbreviation: struct_seaqt_string, country: cint): ptr cQTimeZone {.importc: "QTimeZone_new6".}
-proc fcQTimeZone_new7(zoneId: struct_seaqt_string, offsetSeconds: cint, name: struct_seaqt_string, abbreviation: struct_seaqt_string, country: cint, comment: struct_seaqt_string): ptr cQTimeZone {.importc: "QTimeZone_new7".}
+proc fcQTimeZone_new2(ianaId: struct_seaqt_string): ptr cQTimeZone {.importc: "QTimeZone_new_ianaId".}
+proc fcQTimeZone_new3(offsetSeconds: cint): ptr cQTimeZone {.importc: "QTimeZone_new_offsetSeconds".}
+proc fcQTimeZone_new4(zoneId: struct_seaqt_string, offsetSeconds: cint, name: struct_seaqt_string, abbreviation: struct_seaqt_string): ptr cQTimeZone {.importc: "QTimeZone_new_zoneId_offsetSeconds_name_abbreviation".}
+proc fcQTimeZone_new5(fromVal: pointer): ptr cQTimeZone {.importc: "QTimeZone_new_from".}
+proc fcQTimeZone_new6(zoneId: struct_seaqt_string, offsetSeconds: cint, name: struct_seaqt_string, abbreviation: struct_seaqt_string, country: cint): ptr cQTimeZone {.importc: "QTimeZone_new_zoneId_offsetSeconds_name_abbreviation_country".}
+proc fcQTimeZone_new7(zoneId: struct_seaqt_string, offsetSeconds: cint, name: struct_seaqt_string, abbreviation: struct_seaqt_string, country: cint, comment: struct_seaqt_string): ptr cQTimeZone {.importc: "QTimeZone_new_zoneId_offsetSeconds_name_abbreviation_country_comment".}
 proc fcQTimeZoneOffsetData_abbreviation(self: pointer): struct_seaqt_string {.importc: "QTimeZone__OffsetData_abbreviation".}
 proc fcQTimeZoneOffsetData_setAbbreviation(self: pointer, abbreviation: struct_seaqt_string): void {.importc: "QTimeZone__OffsetData_setAbbreviation".}
 proc fcQTimeZoneOffsetData_atUtc(self: pointer): pointer {.importc: "QTimeZone__OffsetData_atUtc".}
@@ -116,11 +116,11 @@ proc fcQTimeZoneOffsetData_standardTimeOffset(self: pointer): cint {.importc: "Q
 proc fcQTimeZoneOffsetData_setStandardTimeOffset(self: pointer, standardTimeOffset: cint): void {.importc: "QTimeZone__OffsetData_setStandardTimeOffset".}
 proc fcQTimeZoneOffsetData_daylightTimeOffset(self: pointer): cint {.importc: "QTimeZone__OffsetData_daylightTimeOffset".}
 proc fcQTimeZoneOffsetData_setDaylightTimeOffset(self: pointer, daylightTimeOffset: cint): void {.importc: "QTimeZone__OffsetData_setDaylightTimeOffset".}
-proc fcQTimeZoneOffsetData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QTimeZone__OffsetData_operatorAssign".}
-proc fcQTimeZoneOffsetData_new(param1: pointer): ptr cQTimeZoneOffsetData {.importc: "QTimeZone__OffsetData_new".}
+proc fcQTimeZoneOffsetData_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTimeZone__OffsetData_operatorAssign".}
+proc fcQTimeZoneOffsetData_new(fromVal: pointer): ptr cQTimeZoneOffsetData {.importc: "QTimeZone__OffsetData_new".}
 
-proc operatorAssign*(self: gen_qtimezone_types.QTimeZone, other: gen_qtimezone_types.QTimeZone): void =
-  fcQTimeZone_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qtimezone_types.QTimeZone, fromVal: gen_qtimezone_types.QTimeZone): void =
+  fcQTimeZone_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qtimezone_types.QTimeZone, other: gen_qtimezone_types.QTimeZone): void =
   fcQTimeZone_swap(self.h, other.h)
@@ -144,13 +144,13 @@ proc comment*(self: gen_qtimezone_types.QTimeZone): string =
   vx_ret
 
 proc displayName*(self: gen_qtimezone_types.QTimeZone, atDateTime: gen_qdatetime_types.QDateTime): string =
-  let v_ms = fcQTimeZone_displayName(self.h, atDateTime.h)
+  let v_ms = fcQTimeZone_displayNameAtDateTime(self.h, atDateTime.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc displayName*(self: gen_qtimezone_types.QTimeZone, timeType: cint): string =
-  let v_ms = fcQTimeZone_displayNameWithTimeType(self.h, cint(timeType))
+  let v_ms = fcQTimeZone_displayNameTimeType(self.h, cint(timeType))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -225,7 +225,7 @@ proc availableTimeZoneIds*(_: type gen_qtimezone_types.QTimeZone): seq[seq[byte]
   vx_ret
 
 proc availableTimeZoneIds*(_: type gen_qtimezone_types.QTimeZone, country: cint): seq[seq[byte]] =
-  var v_ma = fcQTimeZone_availableTimeZoneIdsWithCountry(cint(country))
+  var v_ma = fcQTimeZone_availableTimeZoneIdsCountry(cint(country))
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -237,7 +237,7 @@ proc availableTimeZoneIds*(_: type gen_qtimezone_types.QTimeZone, country: cint)
   vx_ret
 
 proc availableTimeZoneIds2*(_: type gen_qtimezone_types.QTimeZone, offsetSeconds: cint): seq[seq[byte]] =
-  var v_ma = fcQTimeZone_availableTimeZoneIdsWithOffsetSeconds(offsetSeconds)
+  var v_ma = fcQTimeZone_availableTimeZoneIdsOffsetSeconds(offsetSeconds)
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -255,19 +255,19 @@ proc ianaIdToWindowsId*(_: type gen_qtimezone_types.QTimeZone, ianaId: openArray
   vx_ret
 
 proc windowsIdToDefaultIanaId*(_: type gen_qtimezone_types.QTimeZone, windowsId: openArray[byte]): seq[byte] =
-  var v_bytearray = fcQTimeZone_windowsIdToDefaultIanaId(struct_seaqt_string(data: if len(windowsId) > 0: addr windowsId[0] else: nil, len: csize_t(len(windowsId))))
+  var v_bytearray = fcQTimeZone_windowsIdToDefaultIanaIdWindowsId(struct_seaqt_string(data: if len(windowsId) > 0: addr windowsId[0] else: nil, len: csize_t(len(windowsId))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc windowsIdToDefaultIanaId*(_: type gen_qtimezone_types.QTimeZone, windowsId: openArray[byte], country: cint): seq[byte] =
-  var v_bytearray = fcQTimeZone_windowsIdToDefaultIanaId2(struct_seaqt_string(data: if len(windowsId) > 0: addr windowsId[0] else: nil, len: csize_t(len(windowsId))), cint(country))
+  var v_bytearray = fcQTimeZone_windowsIdToDefaultIanaIdWindowsIdCountry(struct_seaqt_string(data: if len(windowsId) > 0: addr windowsId[0] else: nil, len: csize_t(len(windowsId))), cint(country))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc windowsIdToIanaIds*(_: type gen_qtimezone_types.QTimeZone, windowsId: openArray[byte]): seq[seq[byte]] =
-  var v_ma = fcQTimeZone_windowsIdToIanaIds(struct_seaqt_string(data: if len(windowsId) > 0: addr windowsId[0] else: nil, len: csize_t(len(windowsId))))
+  var v_ma = fcQTimeZone_windowsIdToIanaIdsWindowsId(struct_seaqt_string(data: if len(windowsId) > 0: addr windowsId[0] else: nil, len: csize_t(len(windowsId))))
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -279,7 +279,7 @@ proc windowsIdToIanaIds*(_: type gen_qtimezone_types.QTimeZone, windowsId: openA
   vx_ret
 
 proc windowsIdToIanaIds*(_: type gen_qtimezone_types.QTimeZone, windowsId: openArray[byte], country: cint): seq[seq[byte]] =
-  var v_ma = fcQTimeZone_windowsIdToIanaIds2(struct_seaqt_string(data: if len(windowsId) > 0: addr windowsId[0] else: nil, len: csize_t(len(windowsId))), cint(country))
+  var v_ma = fcQTimeZone_windowsIdToIanaIdsWindowsIdCountry(struct_seaqt_string(data: if len(windowsId) > 0: addr windowsId[0] else: nil, len: csize_t(len(windowsId))), cint(country))
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -291,25 +291,25 @@ proc windowsIdToIanaIds*(_: type gen_qtimezone_types.QTimeZone, windowsId: openA
   vx_ret
 
 proc displayName*(self: gen_qtimezone_types.QTimeZone, atDateTime: gen_qdatetime_types.QDateTime, nameType: cint): string =
-  let v_ms = fcQTimeZone_displayName2(self.h, atDateTime.h, cint(nameType))
+  let v_ms = fcQTimeZone_displayNameAtDateTimeNameType(self.h, atDateTime.h, cint(nameType))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc displayName*(self: gen_qtimezone_types.QTimeZone, atDateTime: gen_qdatetime_types.QDateTime, nameType: cint, locale: gen_qlocale_types.QLocale): string =
-  let v_ms = fcQTimeZone_displayName3(self.h, atDateTime.h, cint(nameType), locale.h)
+  let v_ms = fcQTimeZone_displayNameAtDateTimeNameTypeLocale(self.h, atDateTime.h, cint(nameType), locale.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc displayName*(self: gen_qtimezone_types.QTimeZone, timeType: cint, nameType: cint): string =
-  let v_ms = fcQTimeZone_displayName4(self.h, cint(timeType), cint(nameType))
+  let v_ms = fcQTimeZone_displayNameTimeTypeNameType(self.h, cint(timeType), cint(nameType))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc displayName*(self: gen_qtimezone_types.QTimeZone, timeType: cint, nameType: cint, locale: gen_qlocale_types.QLocale): string =
-  let v_ms = fcQTimeZone_displayName5(self.h, cint(timeType), cint(nameType), locale.h)
+  let v_ms = fcQTimeZone_displayNameTimeTypeNameTypeLocale(self.h, cint(timeType), cint(nameType), locale.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -330,8 +330,8 @@ proc create*(T: type gen_qtimezone_types.QTimeZone,
   let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new4(struct_seaqt_string(data: if len(zoneId) > 0: addr zoneId[0] else: nil, len: csize_t(len(zoneId))), offsetSeconds, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(abbreviation) > 0: addr abbreviation[0] else: nil, len: csize_t(len(abbreviation)))), owned: true)
   tmp
 proc create*(T: type gen_qtimezone_types.QTimeZone,
-    other: gen_qtimezone_types.QTimeZone): gen_qtimezone_types.QTimeZone =
-  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new5(other.h), owned: true)
+    fromVal: gen_qtimezone_types.QTimeZone): gen_qtimezone_types.QTimeZone =
+  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new5(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qtimezone_types.QTimeZone,
     zoneId: openArray[byte], offsetSeconds: cint, name: openArray[char], abbreviation: openArray[char], country: cint): gen_qtimezone_types.QTimeZone =
@@ -374,10 +374,10 @@ proc daylightTimeOffset*(self: gen_qtimezone_types.QTimeZoneOffsetData): cint =
 proc setDaylightTimeOffset*(self: gen_qtimezone_types.QTimeZoneOffsetData, daylightTimeOffset: cint): void =
   fcQTimeZoneOffsetData_setDaylightTimeOffset(self.h, daylightTimeOffset)
 
-proc operatorAssign*(self: gen_qtimezone_types.QTimeZoneOffsetData, param1: gen_qtimezone_types.QTimeZoneOffsetData): void =
-  fcQTimeZoneOffsetData_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qtimezone_types.QTimeZoneOffsetData, fromVal: gen_qtimezone_types.QTimeZoneOffsetData): void =
+  fcQTimeZoneOffsetData_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qtimezone_types.QTimeZoneOffsetData,
-    param1: gen_qtimezone_types.QTimeZoneOffsetData): gen_qtimezone_types.QTimeZoneOffsetData =
-  let tmp = gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZoneOffsetData_new(param1.h), owned: true)
+    fromVal: gen_qtimezone_types.QTimeZoneOffsetData): gen_qtimezone_types.QTimeZoneOffsetData =
+  let tmp = gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZoneOffsetData_new(fromVal.h), owned: true)
   tmp

@@ -63,15 +63,15 @@ typedef struct QVariant QVariant;
 #endif
 
 QSqlRelation* QSqlRelation_new();
-QSqlRelation* QSqlRelation_new2(struct seaqt_string aTableName, struct seaqt_string indexCol, struct seaqt_string displayCol);
-QSqlRelation* QSqlRelation_new3(QSqlRelation* param1);
+QSqlRelation* QSqlRelation_new_aTableName_indexCol_displayCol(struct seaqt_string aTableName, struct seaqt_string indexCol, struct seaqt_string displayCol);
+QSqlRelation* QSqlRelation_new_from(QSqlRelation* from);
 
 void QSqlRelation_swap(QSqlRelation* self, QSqlRelation* other);
 struct seaqt_string QSqlRelation_tableName(const QSqlRelation* self);
 struct seaqt_string QSqlRelation_indexColumn(const QSqlRelation* self);
 struct seaqt_string QSqlRelation_displayColumn(const QSqlRelation* self);
 bool QSqlRelation_isValid(const QSqlRelation* self);
-void QSqlRelation_operatorAssign(QSqlRelation* self, QSqlRelation* param1);
+void QSqlRelation_operatorAssign(QSqlRelation* self, QSqlRelation* from);
 
 void QSqlRelation_delete(QSqlRelation* self);
 
@@ -143,15 +143,15 @@ void* QSqlRelationalTableModel_vdata(VirtualQSqlRelationalTableModel* self);
 VirtualQSqlRelationalTableModel* vdata_QSqlRelationalTableModel(void* vdata);
 
 VirtualQSqlRelationalTableModel* QSqlRelationalTableModel_new(const QSqlRelationalTableModel_VTable* vtbl, size_t vdata);
-VirtualQSqlRelationalTableModel* QSqlRelationalTableModel_new2(const QSqlRelationalTableModel_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQSqlRelationalTableModel* QSqlRelationalTableModel_new3(const QSqlRelationalTableModel_VTable* vtbl, size_t vdata, QObject* parent, QSqlDatabase* db);
+VirtualQSqlRelationalTableModel* QSqlRelationalTableModel_new_parent(const QSqlRelationalTableModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSqlRelationalTableModel* QSqlRelationalTableModel_new_parent_db(const QSqlRelationalTableModel_VTable* vtbl, size_t vdata, QObject* parent, QSqlDatabase* db);
 
 void QSqlRelationalTableModel_virtbase(QSqlRelationalTableModel* src, QSqlTableModel** outptr_QSqlTableModel);
 QMetaObject* QSqlRelationalTableModel_metaObject(const QSqlRelationalTableModel* self);
 void* QSqlRelationalTableModel_metacast(QSqlRelationalTableModel* self, const char* param1);
 int QSqlRelationalTableModel_metacall(QSqlRelationalTableModel* self, int param1, int param2, void** param3);
-struct seaqt_string QSqlRelationalTableModel_tr(const char* s);
-struct seaqt_string QSqlRelationalTableModel_trUtf8(const char* s);
+struct seaqt_string QSqlRelationalTableModel_tr_s(const char* s);
+struct seaqt_string QSqlRelationalTableModel_trUtf8_s(const char* s);
 QVariant* QSqlRelationalTableModel_data(const QSqlRelationalTableModel* self, QModelIndex* item, int role);
 bool QSqlRelationalTableModel_setData(QSqlRelationalTableModel* self, QModelIndex* item, QVariant* value, int role);
 bool QSqlRelationalTableModel_removeColumns(QSqlRelationalTableModel* self, int column, int count, QModelIndex* parent);
@@ -167,10 +167,10 @@ struct seaqt_string QSqlRelationalTableModel_selectStatement(const QSqlRelationa
 bool QSqlRelationalTableModel_updateRowInTable(QSqlRelationalTableModel* self, int row, QSqlRecord* values);
 bool QSqlRelationalTableModel_insertRowIntoTable(QSqlRelationalTableModel* self, QSqlRecord* values);
 struct seaqt_string QSqlRelationalTableModel_orderByClause(const QSqlRelationalTableModel* self);
-struct seaqt_string QSqlRelationalTableModel_tr2(const char* s, const char* c);
-struct seaqt_string QSqlRelationalTableModel_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSqlRelationalTableModel_trUtf82(const char* s, const char* c);
-struct seaqt_string QSqlRelationalTableModel_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QSqlRelationalTableModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSqlRelationalTableModel_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSqlRelationalTableModel_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSqlRelationalTableModel_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSqlRelationalTableModel_virtualbase_metaObject(const VirtualQSqlRelationalTableModel* self);
 void* QSqlRelationalTableModel_virtualbase_metacast(VirtualQSqlRelationalTableModel* self, const char* param1);
@@ -247,7 +247,7 @@ void QSqlRelationalTableModel_protectedbase_beginResetModel(VirtualQSqlRelationa
 void QSqlRelationalTableModel_protectedbase_endResetModel(VirtualQSqlRelationalTableModel* self);
 void QSqlRelationalTableModel_protectedbase_setLastError(VirtualQSqlRelationalTableModel* self, QSqlError* error);
 void QSqlRelationalTableModel_protectedbase_resetInternalData(VirtualQSqlRelationalTableModel* self);
-QModelIndex* QSqlRelationalTableModel_protectedbase_createIndex(const VirtualQSqlRelationalTableModel* self, int row, int column);
+QModelIndex* QSqlRelationalTableModel_protectedbase_createIndex_row_column(const VirtualQSqlRelationalTableModel* self, int row, int column);
 void QSqlRelationalTableModel_protectedbase_encodeData(const VirtualQSqlRelationalTableModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QSqlRelationalTableModel_protectedbase_decodeData(VirtualQSqlRelationalTableModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 bool QSqlRelationalTableModel_protectedbase_beginMoveRows(VirtualQSqlRelationalTableModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);

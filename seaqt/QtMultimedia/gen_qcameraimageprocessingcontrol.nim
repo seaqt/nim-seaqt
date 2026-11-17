@@ -74,16 +74,16 @@ type cQCameraImageProcessingControl*{.exportc: "QCameraImageProcessingControl", 
 proc fcQCameraImageProcessingControl_metaObject(self: pointer): pointer {.importc: "QCameraImageProcessingControl_metaObject".}
 proc fcQCameraImageProcessingControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraImageProcessingControl_metacast".}
 proc fcQCameraImageProcessingControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraImageProcessingControl_metacall".}
-proc fcQCameraImageProcessingControl_tr(s: cstring): struct_seaqt_string {.importc: "QCameraImageProcessingControl_tr".}
-proc fcQCameraImageProcessingControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraImageProcessingControl_trUtf8".}
+proc fcQCameraImageProcessingControl_trS(s: cstring): struct_seaqt_string {.importc: "QCameraImageProcessingControl_tr_s".}
+proc fcQCameraImageProcessingControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraImageProcessingControl_trUtf8_s".}
 proc fcQCameraImageProcessingControl_isParameterSupported(self: pointer, param1: cint): bool {.importc: "QCameraImageProcessingControl_isParameterSupported".}
 proc fcQCameraImageProcessingControl_isParameterValueSupported(self: pointer, parameter: cint, value: pointer): bool {.importc: "QCameraImageProcessingControl_isParameterValueSupported".}
 proc fcQCameraImageProcessingControl_parameter(self: pointer, parameter: cint): pointer {.importc: "QCameraImageProcessingControl_parameter".}
 proc fcQCameraImageProcessingControl_setParameter(self: pointer, parameter: cint, value: pointer): void {.importc: "QCameraImageProcessingControl_setParameter".}
-proc fcQCameraImageProcessingControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageProcessingControl_tr2".}
-proc fcQCameraImageProcessingControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageProcessingControl_tr3".}
-proc fcQCameraImageProcessingControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageProcessingControl_trUtf82".}
-proc fcQCameraImageProcessingControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageProcessingControl_trUtf83".}
+proc fcQCameraImageProcessingControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageProcessingControl_tr_s_c".}
+proc fcQCameraImageProcessingControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageProcessingControl_tr_s_c_n".}
+proc fcQCameraImageProcessingControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageProcessingControl_trUtf8_s_c".}
+proc fcQCameraImageProcessingControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageProcessingControl_trUtf8_s_c_n".}
 proc fcQCameraImageProcessingControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraImageProcessingControl_protectedbase_sender".}
 proc fcQCameraImageProcessingControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraImageProcessingControl_protectedbase_senderSignalIndex".}
 proc fcQCameraImageProcessingControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraImageProcessingControl_protectedbase_receivers".}
@@ -100,13 +100,13 @@ proc metacall*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcess
   fcQCameraImageProcessingControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, s: cstring): string =
-  let v_ms = fcQCameraImageProcessingControl_tr(s)
+  let v_ms = fcQCameraImageProcessingControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, s: cstring): string =
-  let v_ms = fcQCameraImageProcessingControl_trUtf8(s)
+  let v_ms = fcQCameraImageProcessingControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -124,25 +124,25 @@ proc setParameter*(self: gen_qcameraimageprocessingcontrol_types.QCameraImagePro
   fcQCameraImageProcessingControl_setParameter(self.h, cint(parameter), value.h)
 
 proc tr*(_: type gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraImageProcessingControl_tr2(s, c)
+  let v_ms = fcQCameraImageProcessingControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraImageProcessingControl_tr3(s, c, n)
+  let v_ms = fcQCameraImageProcessingControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraImageProcessingControl_trUtf82(s, c)
+  let v_ms = fcQCameraImageProcessingControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraImageProcessingControl_trUtf83(s, c, n)
+  let v_ms = fcQCameraImageProcessingControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

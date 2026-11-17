@@ -65,23 +65,23 @@ type cQEventLoopLocker*{.exportc: "QEventLoopLocker", incompleteStruct.} = objec
 proc fcQEventLoop_metaObject(self: pointer): pointer {.importc: "QEventLoop_metaObject".}
 proc fcQEventLoop_metacast(self: pointer, param1: cstring): pointer {.importc: "QEventLoop_metacast".}
 proc fcQEventLoop_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QEventLoop_metacall".}
-proc fcQEventLoop_tr(s: cstring): struct_seaqt_string {.importc: "QEventLoop_tr".}
-proc fcQEventLoop_trUtf8(s: cstring): struct_seaqt_string {.importc: "QEventLoop_trUtf8".}
+proc fcQEventLoop_trS(s: cstring): struct_seaqt_string {.importc: "QEventLoop_tr_s".}
+proc fcQEventLoop_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QEventLoop_trUtf8_s".}
 proc fcQEventLoop_processEvents(self: pointer): bool {.importc: "QEventLoop_processEvents".}
-proc fcQEventLoop_processEvents2(self: pointer, flags: cint, maximumTime: cint): void {.importc: "QEventLoop_processEvents2".}
+proc fcQEventLoop_processEventsFlagsMaximumTime(self: pointer, flags: cint, maximumTime: cint): void {.importc: "QEventLoop_processEvents_flags_maximumTime".}
 proc fcQEventLoop_exec(self: pointer): cint {.importc: "QEventLoop_exec".}
 proc fcQEventLoop_exit(self: pointer): void {.importc: "QEventLoop_exit".}
 proc fcQEventLoop_isRunning(self: pointer): bool {.importc: "QEventLoop_isRunning".}
 proc fcQEventLoop_wakeUp(self: pointer): void {.importc: "QEventLoop_wakeUp".}
 proc fcQEventLoop_event(self: pointer, event: pointer): bool {.importc: "QEventLoop_event".}
 proc fcQEventLoop_quit(self: pointer): void {.importc: "QEventLoop_quit".}
-proc fcQEventLoop_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QEventLoop_tr2".}
-proc fcQEventLoop_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QEventLoop_tr3".}
-proc fcQEventLoop_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QEventLoop_trUtf82".}
-proc fcQEventLoop_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QEventLoop_trUtf83".}
-proc fcQEventLoop_processEventsWithFlags(self: pointer, flags: cint): bool {.importc: "QEventLoop_processEventsWithFlags".}
-proc fcQEventLoop_execWithFlags(self: pointer, flags: cint): cint {.importc: "QEventLoop_execWithFlags".}
-proc fcQEventLoop_exitWithReturnCode(self: pointer, returnCode: cint): void {.importc: "QEventLoop_exitWithReturnCode".}
+proc fcQEventLoop_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QEventLoop_tr_s_c".}
+proc fcQEventLoop_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QEventLoop_tr_s_c_n".}
+proc fcQEventLoop_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QEventLoop_trUtf8_s_c".}
+proc fcQEventLoop_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QEventLoop_trUtf8_s_c_n".}
+proc fcQEventLoop_processEventsFlags(self: pointer, flags: cint): bool {.importc: "QEventLoop_processEvents_flags".}
+proc fcQEventLoop_execFlags(self: pointer, flags: cint): cint {.importc: "QEventLoop_exec_flags".}
+proc fcQEventLoop_exitReturnCode(self: pointer, returnCode: cint): void {.importc: "QEventLoop_exit_returnCode".}
 proc fcQEventLoop_vdata(self: pointer): ptr pointer {.importc: "QEventLoop_vdata".}
 proc fvdata_cQEventLoop(self: pointer): pointer {.importc: "vdata_QEventLoop".}
 
@@ -112,11 +112,11 @@ proc fcQEventLoop_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQEventLoop_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QEventLoop_protectedbase_receivers".}
 proc fcQEventLoop_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QEventLoop_protectedbase_isSignalConnected".}
 proc fcQEventLoop_new(vtbl: pointer, vdata: csize_t): ptr cQEventLoop {.importc: "QEventLoop_new".}
-proc fcQEventLoop_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQEventLoop {.importc: "QEventLoop_new2".}
+proc fcQEventLoop_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQEventLoop {.importc: "QEventLoop_new_parent".}
 proc fcQEventLoop_staticMetaObject(): pointer {.importc: "QEventLoop_staticMetaObject".}
 proc fcQEventLoopLocker_new(): ptr cQEventLoopLocker {.importc: "QEventLoopLocker_new".}
-proc fcQEventLoopLocker_new2(loop: pointer): ptr cQEventLoopLocker {.importc: "QEventLoopLocker_new2".}
-proc fcQEventLoopLocker_new3(thread: pointer): ptr cQEventLoopLocker {.importc: "QEventLoopLocker_new3".}
+proc fcQEventLoopLocker_new2(loop: pointer): ptr cQEventLoopLocker {.importc: "QEventLoopLocker_new_loop".}
+proc fcQEventLoopLocker_new3(thread: pointer): ptr cQEventLoopLocker {.importc: "QEventLoopLocker_new_thread".}
 
 proc metaObject*(self: gen_qeventloop_types.QEventLoop): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQEventLoop_metaObject(self.h), owned: false)
@@ -128,13 +128,13 @@ proc metacall*(self: gen_qeventloop_types.QEventLoop, param1: cint, param2: cint
   fcQEventLoop_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qeventloop_types.QEventLoop, s: cstring): string =
-  let v_ms = fcQEventLoop_tr(s)
+  let v_ms = fcQEventLoop_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qeventloop_types.QEventLoop, s: cstring): string =
-  let v_ms = fcQEventLoop_trUtf8(s)
+  let v_ms = fcQEventLoop_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -143,7 +143,7 @@ proc processEvents*(self: gen_qeventloop_types.QEventLoop): bool =
   fcQEventLoop_processEvents(self.h)
 
 proc processEvents*(self: gen_qeventloop_types.QEventLoop, flags: cint, maximumTime: cint): void =
-  fcQEventLoop_processEvents2(self.h, cint(flags), maximumTime)
+  fcQEventLoop_processEventsFlagsMaximumTime(self.h, cint(flags), maximumTime)
 
 proc exec*(self: gen_qeventloop_types.QEventLoop): cint =
   fcQEventLoop_exec(self.h)
@@ -164,37 +164,37 @@ proc quit*(self: gen_qeventloop_types.QEventLoop): void =
   fcQEventLoop_quit(self.h)
 
 proc tr*(_: type gen_qeventloop_types.QEventLoop, s: cstring, c: cstring): string =
-  let v_ms = fcQEventLoop_tr2(s, c)
+  let v_ms = fcQEventLoop_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qeventloop_types.QEventLoop, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQEventLoop_tr3(s, c, n)
+  let v_ms = fcQEventLoop_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qeventloop_types.QEventLoop, s: cstring, c: cstring): string =
-  let v_ms = fcQEventLoop_trUtf82(s, c)
+  let v_ms = fcQEventLoop_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qeventloop_types.QEventLoop, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQEventLoop_trUtf83(s, c, n)
+  let v_ms = fcQEventLoop_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc processEvents*(self: gen_qeventloop_types.QEventLoop, flags: cint): bool =
-  fcQEventLoop_processEventsWithFlags(self.h, cint(flags))
+  fcQEventLoop_processEventsFlags(self.h, cint(flags))
 
 proc exec*(self: gen_qeventloop_types.QEventLoop, flags: cint): cint =
-  fcQEventLoop_execWithFlags(self.h, cint(flags))
+  fcQEventLoop_execFlags(self.h, cint(flags))
 
 proc exit*(self: gen_qeventloop_types.QEventLoop, returnCode: cint): void =
-  fcQEventLoop_exitWithReturnCode(self.h, returnCode)
+  fcQEventLoop_exitReturnCode(self.h, returnCode)
 
 type QEventLoopmetaObjectProc* = proc(self: QEventLoop): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QEventLoopmetacastProc* = proc(self: QEventLoop, param1: cstring): pointer {.raises: [], gcsafe.}

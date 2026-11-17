@@ -31,7 +31,7 @@ QSurfaceFormat* QSurface_format(const QSurface* self);
 int QSurface_surfaceType(const QSurface* self);
 bool QSurface_supportsOpenGL(const QSurface* self);
 QSize* QSurface_size(const QSurface* self);
-void QSurface_operatorAssign(QSurface* self, QSurface* param1);
+void QSurface_operatorAssign(QSurface* self, QSurface* from);
 
 const QMetaObject* QSurface_staticMetaObject();
 void QSurface_delete(QSurface* self);

@@ -46,8 +46,8 @@ void QQmlPropertyValueSource_setTarget(QQmlPropertyValueSource* self, QQmlProper
 	self->setTarget(*target);
 }
 
-void QQmlPropertyValueSource_operatorAssign(QQmlPropertyValueSource* self, QQmlPropertyValueSource* param1) {
-	self->operator=(*param1);
+void QQmlPropertyValueSource_operatorAssign(QQmlPropertyValueSource* self, QQmlPropertyValueSource* from) {
+	self->operator=(*from);
 }
 
 void* QQmlPropertyValueSource_vdata(VirtualQQmlPropertyValueSource* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQQmlPropertyValueSource>()); }

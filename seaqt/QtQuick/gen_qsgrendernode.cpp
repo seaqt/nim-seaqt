@@ -220,8 +220,8 @@ void* QSGRenderNode__RenderState_get(const QSGRenderNode__RenderState* self, con
 	return self->get(state);
 }
 
-void QSGRenderNode__RenderState_operatorAssign(QSGRenderNode__RenderState* self, QSGRenderNode__RenderState* param1) {
-	self->operator=(*param1);
+void QSGRenderNode__RenderState_operatorAssign(QSGRenderNode__RenderState* self, QSGRenderNode__RenderState* from) {
+	self->operator=(*from);
 }
 
 void QSGRenderNode__RenderState_delete(QSGRenderNode__RenderState* self) {

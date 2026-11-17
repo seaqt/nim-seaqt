@@ -20,12 +20,12 @@ QGlyphRun* QGlyphRun_new() {
 	return new (std::nothrow) QGlyphRun();
 }
 
-QGlyphRun* QGlyphRun_new2(QGlyphRun* other) {
-	return new (std::nothrow) QGlyphRun(*other);
+QGlyphRun* QGlyphRun_new_from(QGlyphRun* from) {
+	return new (std::nothrow) QGlyphRun(*from);
 }
 
-void QGlyphRun_operatorAssign(QGlyphRun* self, QGlyphRun* other) {
-	self->operator=(*other);
+void QGlyphRun_operatorAssign(QGlyphRun* self, QGlyphRun* from) {
+	self->operator=(*from);
 }
 
 void QGlyphRun_swap(QGlyphRun* self, QGlyphRun* other) {
@@ -134,7 +134,7 @@ bool QGlyphRun_isRightToLeft(const QGlyphRun* self) {
 	return self->isRightToLeft();
 }
 
-void QGlyphRun_setFlag(QGlyphRun* self, int flag) {
+void QGlyphRun_setFlag_flag(QGlyphRun* self, int flag) {
 	self->setFlag(static_cast<QGlyphRun::GlyphRunFlag>(flag));
 }
 
@@ -159,7 +159,7 @@ bool QGlyphRun_isEmpty(const QGlyphRun* self) {
 	return self->isEmpty();
 }
 
-void QGlyphRun_setFlag2(QGlyphRun* self, int flag, bool enabled) {
+void QGlyphRun_setFlag_flag_enabled(QGlyphRun* self, int flag, bool enabled) {
 	self->setFlag(static_cast<QGlyphRun::GlyphRunFlag>(flag), enabled);
 }
 

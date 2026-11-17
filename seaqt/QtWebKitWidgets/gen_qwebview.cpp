@@ -713,7 +713,7 @@ VirtualQWebView* QWebView_new(const QWebView_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQWebView(vtbl) : nullptr;
 }
 
-VirtualQWebView* QWebView_new2(const QWebView_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQWebView* QWebView_new_parent(const QWebView_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebView(vtbl, parent) : nullptr;
 }
@@ -734,7 +734,7 @@ int QWebView_metacall(QWebView* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebView_tr(const char* s) {
+struct seaqt_string QWebView_tr_s(const char* s) {
 	QString _ret = QWebView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -745,7 +745,7 @@ struct seaqt_string QWebView_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebView_trUtf8(const char* s) {
+struct seaqt_string QWebView_trUtf8_s(const char* s) {
 	QString _ret = QWebView::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -764,20 +764,20 @@ void QWebView_setPage(QWebView* self, QWebPage* page) {
 	self->setPage(page);
 }
 
-void QWebView_load(QWebView* self, QUrl* url) {
+void QWebView_load_url(QWebView* self, QUrl* url) {
 	self->load(*url);
 }
 
-void QWebView_loadWithRequest(QWebView* self, QNetworkRequest* request) {
+void QWebView_load_request(QWebView* self, QNetworkRequest* request) {
 	self->load(*request);
 }
 
-void QWebView_setHtml(QWebView* self, struct seaqt_string html) {
+void QWebView_setHtml_html(QWebView* self, struct seaqt_string html) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	self->setHtml(html_QString);
 }
 
-void QWebView_setContent(QWebView* self, struct seaqt_string data) {
+void QWebView_setContent_data(QWebView* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->setContent(data_QByteArray);
 }
@@ -843,7 +843,7 @@ QAction* QWebView_pageAction(const QWebView* self, int action) {
 	return self->pageAction(static_cast<QWebPage::WebAction>(action));
 }
 
-void QWebView_triggerPageAction(QWebView* self, int action) {
+void QWebView_triggerPageAction_action(QWebView* self, int action) {
 	self->triggerPageAction(static_cast<QWebPage::WebAction>(action));
 }
 
@@ -886,11 +886,11 @@ void QWebView_setRenderHints(QWebView* self, int hints) {
 	self->setRenderHints(static_cast<QPainter::RenderHints>(hints));
 }
 
-void QWebView_setRenderHint(QWebView* self, int hint) {
+void QWebView_setRenderHint_hint(QWebView* self, int hint) {
 	self->setRenderHint(static_cast<QPainter::RenderHint>(hint));
 }
 
-bool QWebView_findText(QWebView* self, struct seaqt_string subString) {
+bool QWebView_findText_subString(QWebView* self, struct seaqt_string subString) {
 	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
 	return self->findText(subString_QString);
 }
@@ -1080,7 +1080,7 @@ void QWebView_connect_urlChanged(QWebView* self, intptr_t slot, void (*callback)
 	QWebView::connect(self, static_cast<void (QWebView::*)(const QUrl&)>(&QWebView::urlChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebView_tr2(const char* s, const char* c) {
+struct seaqt_string QWebView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1091,7 +1091,7 @@ struct seaqt_string QWebView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1102,7 +1102,7 @@ struct seaqt_string QWebView_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWebView_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebView_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebView::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1113,7 +1113,7 @@ struct seaqt_string QWebView_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebView_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebView_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebView::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1124,41 +1124,41 @@ struct seaqt_string QWebView_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QWebView_load2(QWebView* self, QNetworkRequest* request, int operation) {
+void QWebView_load_request_operation(QWebView* self, QNetworkRequest* request, int operation) {
 	self->load(*request, static_cast<QNetworkAccessManager::Operation>(operation));
 }
 
-void QWebView_load3(QWebView* self, QNetworkRequest* request, int operation, struct seaqt_string body) {
+void QWebView_load_request_operation_body(QWebView* self, QNetworkRequest* request, int operation, struct seaqt_string body) {
 	QByteArray body_QByteArray(body.data, body.len);
 	self->load(*request, static_cast<QNetworkAccessManager::Operation>(operation), body_QByteArray);
 }
 
-void QWebView_setHtml2(QWebView* self, struct seaqt_string html, QUrl* baseUrl) {
+void QWebView_setHtml_html_baseUrl(QWebView* self, struct seaqt_string html, QUrl* baseUrl) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	self->setHtml(html_QString, *baseUrl);
 }
 
-void QWebView_setContent2(QWebView* self, struct seaqt_string data, struct seaqt_string mimeType) {
+void QWebView_setContent_data_mimeType(QWebView* self, struct seaqt_string data, struct seaqt_string mimeType) {
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	self->setContent(data_QByteArray, mimeType_QString);
 }
 
-void QWebView_setContent3(QWebView* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
+void QWebView_setContent_data_mimeType_baseUrl(QWebView* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	self->setContent(data_QByteArray, mimeType_QString, *baseUrl);
 }
 
-void QWebView_triggerPageAction2(QWebView* self, int action, bool checked) {
+void QWebView_triggerPageAction_action_checked(QWebView* self, int action, bool checked) {
 	self->triggerPageAction(static_cast<QWebPage::WebAction>(action), checked);
 }
 
-void QWebView_setRenderHint2(QWebView* self, int hint, bool enabled) {
+void QWebView_setRenderHint_hint_enabled(QWebView* self, int hint, bool enabled) {
 	self->setRenderHint(static_cast<QPainter::RenderHint>(hint), enabled);
 }
 
-bool QWebView_findText2(QWebView* self, struct seaqt_string subString, int options) {
+bool QWebView_findText_subString_options(QWebView* self, struct seaqt_string subString, int options) {
 	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
 	return self->findText(subString_QString, static_cast<QWebPage::FindFlags>(options));
 }

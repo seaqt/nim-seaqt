@@ -79,36 +79,36 @@ type cQMenu*{.exportc: "QMenu", incompleteStruct.} = object
 proc fcQMenu_metaObject(self: pointer): pointer {.importc: "QMenu_metaObject".}
 proc fcQMenu_metacast(self: pointer, param1: cstring): pointer {.importc: "QMenu_metacast".}
 proc fcQMenu_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMenu_metacall".}
-proc fcQMenu_tr(s: cstring): struct_seaqt_string {.importc: "QMenu_tr".}
-proc fcQMenu_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMenu_trUtf8".}
-proc fcQMenu_addAction(self: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_addAction".}
-proc fcQMenu_addAction2(self: pointer, icon: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_addAction2".}
-proc fcQMenu_addMenu(self: pointer, menu: pointer): pointer {.importc: "QMenu_addMenu".}
-proc fcQMenu_addMenuWithTitle(self: pointer, title: struct_seaqt_string): pointer {.importc: "QMenu_addMenuWithTitle".}
-proc fcQMenu_addMenu2(self: pointer, icon: pointer, title: struct_seaqt_string): pointer {.importc: "QMenu_addMenu2".}
+proc fcQMenu_trS(s: cstring): struct_seaqt_string {.importc: "QMenu_tr_s".}
+proc fcQMenu_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMenu_trUtf8_s".}
+proc fcQMenu_addActionText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_addAction_text".}
+proc fcQMenu_addActionIconText(self: pointer, icon: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_addAction_icon_text".}
+proc fcQMenu_addMenuMenu(self: pointer, menu: pointer): pointer {.importc: "QMenu_addMenu_menu".}
+proc fcQMenu_addMenuTitle(self: pointer, title: struct_seaqt_string): pointer {.importc: "QMenu_addMenu_title".}
+proc fcQMenu_addMenuIconTitle(self: pointer, icon: pointer, title: struct_seaqt_string): pointer {.importc: "QMenu_addMenu_icon_title".}
 proc fcQMenu_addSeparator(self: pointer): pointer {.importc: "QMenu_addSeparator".}
-proc fcQMenu_addSection(self: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_addSection".}
-proc fcQMenu_addSection2(self: pointer, icon: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_addSection2".}
+proc fcQMenu_addSectionText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_addSection_text".}
+proc fcQMenu_addSectionIconText(self: pointer, icon: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_addSection_icon_text".}
 proc fcQMenu_insertMenu(self: pointer, before: pointer, menu: pointer): pointer {.importc: "QMenu_insertMenu".}
 proc fcQMenu_insertSeparator(self: pointer, before: pointer): pointer {.importc: "QMenu_insertSeparator".}
-proc fcQMenu_insertSection(self: pointer, before: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_insertSection".}
-proc fcQMenu_insertSection2(self: pointer, before: pointer, icon: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_insertSection2".}
+proc fcQMenu_insertSectionBeforeText(self: pointer, before: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_insertSection_before_text".}
+proc fcQMenu_insertSectionBeforeIconText(self: pointer, before: pointer, icon: pointer, text: struct_seaqt_string): pointer {.importc: "QMenu_insertSection_before_icon_text".}
 proc fcQMenu_isEmpty(self: pointer): bool {.importc: "QMenu_isEmpty".}
 proc fcQMenu_clear(self: pointer): void {.importc: "QMenu_clear".}
 proc fcQMenu_setTearOffEnabled(self: pointer, tearOffEnabled: bool): void {.importc: "QMenu_setTearOffEnabled".}
 proc fcQMenu_isTearOffEnabled(self: pointer): bool {.importc: "QMenu_isTearOffEnabled".}
 proc fcQMenu_isTearOffMenuVisible(self: pointer): bool {.importc: "QMenu_isTearOffMenuVisible".}
 proc fcQMenu_showTearOffMenu(self: pointer): void {.importc: "QMenu_showTearOffMenu".}
-proc fcQMenu_showTearOffMenuWithPos(self: pointer, pos: pointer): void {.importc: "QMenu_showTearOffMenuWithPos".}
+proc fcQMenu_showTearOffMenuPos(self: pointer, pos: pointer): void {.importc: "QMenu_showTearOffMenu_pos".}
 proc fcQMenu_hideTearOffMenu(self: pointer): void {.importc: "QMenu_hideTearOffMenu".}
 proc fcQMenu_setDefaultAction(self: pointer, defaultAction: pointer): void {.importc: "QMenu_setDefaultAction".}
 proc fcQMenu_defaultAction(self: pointer): pointer {.importc: "QMenu_defaultAction".}
 proc fcQMenu_setActiveAction(self: pointer, act: pointer): void {.importc: "QMenu_setActiveAction".}
 proc fcQMenu_activeAction(self: pointer): pointer {.importc: "QMenu_activeAction".}
-proc fcQMenu_popup(self: pointer, pos: pointer): void {.importc: "QMenu_popup".}
+proc fcQMenu_popupPos(self: pointer, pos: pointer): void {.importc: "QMenu_popup_pos".}
 proc fcQMenu_exec(self: pointer): pointer {.importc: "QMenu_exec".}
-proc fcQMenu_execWithPos(self: pointer, pos: pointer): pointer {.importc: "QMenu_execWithPos".}
-proc fcQMenu_exec2(actions: struct_seaqt_array, pos: pointer): pointer {.importc: "QMenu_exec2".}
+proc fcQMenu_execPos(self: pointer, pos: pointer): pointer {.importc: "QMenu_exec_pos".}
+proc fcQMenu_execActionsPos(actions: struct_seaqt_array, pos: pointer): pointer {.importc: "QMenu_exec_actions_pos".}
 proc fcQMenu_sizeHint(self: pointer): pointer {.importc: "QMenu_sizeHint".}
 proc fcQMenu_actionGeometry(self: pointer, param1: pointer): pointer {.importc: "QMenu_actionGeometry".}
 proc fcQMenu_actionAt(self: pointer, param1: pointer): pointer {.importc: "QMenu_actionAt".}
@@ -130,14 +130,14 @@ proc fcQMenu_triggered(self: pointer, action: pointer): void {.importc: "QMenu_t
 proc fcQMenu_connect_triggered(self: pointer, slot: int, callback: proc (slot: int, action: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMenu_connect_triggered".}
 proc fcQMenu_hovered(self: pointer, action: pointer): void {.importc: "QMenu_hovered".}
 proc fcQMenu_connect_hovered(self: pointer, slot: int, callback: proc (slot: int, action: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMenu_connect_hovered".}
-proc fcQMenu_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMenu_tr2".}
-proc fcQMenu_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMenu_tr3".}
-proc fcQMenu_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMenu_trUtf82".}
-proc fcQMenu_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMenu_trUtf83".}
-proc fcQMenu_popup2(self: pointer, pos: pointer, at: pointer): void {.importc: "QMenu_popup2".}
-proc fcQMenu_exec3(self: pointer, pos: pointer, at: pointer): pointer {.importc: "QMenu_exec3".}
-proc fcQMenu_exec4(actions: struct_seaqt_array, pos: pointer, at: pointer): pointer {.importc: "QMenu_exec4".}
-proc fcQMenu_exec5(actions: struct_seaqt_array, pos: pointer, at: pointer, parent: pointer): pointer {.importc: "QMenu_exec5".}
+proc fcQMenu_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMenu_tr_s_c".}
+proc fcQMenu_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMenu_tr_s_c_n".}
+proc fcQMenu_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMenu_trUtf8_s_c".}
+proc fcQMenu_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMenu_trUtf8_s_c_n".}
+proc fcQMenu_popupPosAt(self: pointer, pos: pointer, at: pointer): void {.importc: "QMenu_popup_pos_at".}
+proc fcQMenu_execPosAt(self: pointer, pos: pointer, at: pointer): pointer {.importc: "QMenu_exec_pos_at".}
+proc fcQMenu_execActionsPosAt(actions: struct_seaqt_array, pos: pointer, at: pointer): pointer {.importc: "QMenu_exec_actions_pos_at".}
+proc fcQMenu_execActionsPosAtParent(actions: struct_seaqt_array, pos: pointer, at: pointer, parent: pointer): pointer {.importc: "QMenu_exec_actions_pos_at_parent".}
 proc fcQMenu_vdata(self: pointer): ptr pointer {.importc: "QMenu_vdata".}
 proc fvdata_cQMenu(self: pointer): pointer {.importc: "vdata_QMenu".}
 
@@ -255,9 +255,9 @@ proc fcQMenu_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QM
 proc fcQMenu_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMenu_protectedbase_receivers".}
 proc fcQMenu_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMenu_protectedbase_isSignalConnected".}
 proc fcQMenu_new(vtbl: pointer, vdata: csize_t): ptr cQMenu {.importc: "QMenu_new".}
-proc fcQMenu_new2(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string): ptr cQMenu {.importc: "QMenu_new2".}
-proc fcQMenu_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMenu {.importc: "QMenu_new3".}
-proc fcQMenu_new4(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer): ptr cQMenu {.importc: "QMenu_new4".}
+proc fcQMenu_new2(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string): ptr cQMenu {.importc: "QMenu_new_title".}
+proc fcQMenu_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMenu {.importc: "QMenu_new_parent".}
+proc fcQMenu_new4(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer): ptr cQMenu {.importc: "QMenu_new_title_parent".}
 proc fcQMenu_staticMetaObject(): pointer {.importc: "QMenu_staticMetaObject".}
 
 proc metaObject*(self: gen_qmenu_types.QMenu): gen_qobjectdefs_types.QMetaObject =
@@ -270,40 +270,40 @@ proc metacall*(self: gen_qmenu_types.QMenu, param1: cint, param2: cint, param3: 
   fcQMenu_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmenu_types.QMenu, s: cstring): string =
-  let v_ms = fcQMenu_tr(s)
+  let v_ms = fcQMenu_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmenu_types.QMenu, s: cstring): string =
-  let v_ms = fcQMenu_trUtf8(s)
+  let v_ms = fcQMenu_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc addAction*(self: gen_qmenu_types.QMenu, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addAction(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_addActionText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addAction*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addAction2(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_addActionIconText(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addMenu*(self: gen_qmenu_types.QMenu, menu: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addMenu(self.h, menu.h), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_addMenuMenu(self.h, menu.h), owned: false)
 
 proc addMenu*(self: gen_qmenu_types.QMenu, title: openArray[char]): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQMenu_addMenuWithTitle(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
+  gen_qmenu_types.QMenu(h: fcQMenu_addMenuTitle(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc addMenu*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon, title: openArray[char]): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQMenu_addMenu2(self.h, icon.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
+  gen_qmenu_types.QMenu(h: fcQMenu_addMenuIconTitle(self.h, icon.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc addSeparator*(self: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_addSeparator(self.h), owned: false)
 
 proc addSection*(self: gen_qmenu_types.QMenu, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addSection(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_addSectionText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addSection*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addSection2(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_addSectionIconText(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc insertMenu*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, menu: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_insertMenu(self.h, before.h, menu.h), owned: false)
@@ -312,10 +312,10 @@ proc insertSeparator*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAc
   gen_qaction_types.QAction(h: fcQMenu_insertSeparator(self.h, before.h), owned: false)
 
 proc insertSection*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_insertSection(self.h, before.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_insertSectionBeforeText(self.h, before.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc insertSection*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_insertSection2(self.h, before.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_insertSectionBeforeIconText(self.h, before.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc isEmpty*(self: gen_qmenu_types.QMenu): bool =
   fcQMenu_isEmpty(self.h)
@@ -336,7 +336,7 @@ proc showTearOffMenu*(self: gen_qmenu_types.QMenu): void =
   fcQMenu_showTearOffMenu(self.h)
 
 proc showTearOffMenu*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint): void =
-  fcQMenu_showTearOffMenuWithPos(self.h, pos.h)
+  fcQMenu_showTearOffMenuPos(self.h, pos.h)
 
 proc hideTearOffMenu*(self: gen_qmenu_types.QMenu): void =
   fcQMenu_hideTearOffMenu(self.h)
@@ -354,20 +354,20 @@ proc activeAction*(self: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_activeAction(self.h), owned: false)
 
 proc popup*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint): void =
-  fcQMenu_popup(self.h, pos.h)
+  fcQMenu_popupPos(self.h, pos.h)
 
 proc exec*(self: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_exec(self.h), owned: false)
 
 proc exec*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_execWithPos(self.h, pos.h), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_execPos(self.h, pos.h), owned: false)
 
 proc exec*(_: type gen_qmenu_types.QMenu, actions: openArray[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint): gen_qaction_types.QAction =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
 
-  gen_qaction_types.QAction(h: fcQMenu_exec2(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_execActionsPos(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h), owned: false)
 
 proc sizeHint*(self: gen_qmenu_types.QMenu): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQMenu_sizeHint(self.h), owned: true)
@@ -488,48 +488,48 @@ proc onHovered*(self: gen_qmenu_types.QMenu, slot: QMenuhoveredSlot) =
   fcQMenu_connect_hovered(self.h, cast[int](addr tmp[]), fcQMenu_slot_callback_hovered, fcQMenu_slot_callback_hovered_release)
 
 proc tr*(_: type gen_qmenu_types.QMenu, s: cstring, c: cstring): string =
-  let v_ms = fcQMenu_tr2(s, c)
+  let v_ms = fcQMenu_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmenu_types.QMenu, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMenu_tr3(s, c, n)
+  let v_ms = fcQMenu_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmenu_types.QMenu, s: cstring, c: cstring): string =
-  let v_ms = fcQMenu_trUtf82(s, c)
+  let v_ms = fcQMenu_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmenu_types.QMenu, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMenu_trUtf83(s, c, n)
+  let v_ms = fcQMenu_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc popup*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction): void =
-  fcQMenu_popup2(self.h, pos.h, at.h)
+  fcQMenu_popupPosAt(self.h, pos.h, at.h)
 
 proc exec*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_exec3(self.h, pos.h, at.h), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_execPosAt(self.h, pos.h, at.h), owned: false)
 
 proc exec*(_: type gen_qmenu_types.QMenu, actions: openArray[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction): gen_qaction_types.QAction =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
 
-  gen_qaction_types.QAction(h: fcQMenu_exec4(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h, at.h), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_execActionsPosAt(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h, at.h), owned: false)
 
 proc exec*(_: type gen_qmenu_types.QMenu, actions: openArray[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction, parent: gen_qwidget_types.QWidget): gen_qaction_types.QAction =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
 
-  gen_qaction_types.QAction(h: fcQMenu_exec5(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h, at.h, parent.h), owned: false)
+  gen_qaction_types.QAction(h: fcQMenu_execActionsPosAtParent(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h, at.h, parent.h), owned: false)
 
 type QMenumetaObjectProc* = proc(self: QMenu): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMenumetacastProc* = proc(self: QMenu, param1: cstring): pointer {.raises: [], gcsafe.}

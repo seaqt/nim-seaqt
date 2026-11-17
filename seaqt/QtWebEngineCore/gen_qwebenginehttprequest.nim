@@ -49,7 +49,7 @@ export
 
 type cQWebEngineHttpRequest*{.exportc: "QWebEngineHttpRequest", incompleteStruct.} = object
 
-proc fcQWebEngineHttpRequest_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineHttpRequest_operatorAssign".}
+proc fcQWebEngineHttpRequest_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineHttpRequest_operatorAssign".}
 proc fcQWebEngineHttpRequest_postRequest(url: pointer, postData: struct_seaqt_map): pointer {.importc: "QWebEngineHttpRequest_postRequest".}
 proc fcQWebEngineHttpRequest_swap(self: pointer, other: pointer): void {.importc: "QWebEngineHttpRequest_swap".}
 proc fcQWebEngineHttpRequest_operatorEqual(self: pointer, other: pointer): bool {.importc: "QWebEngineHttpRequest_operatorEqual".}
@@ -66,12 +66,12 @@ proc fcQWebEngineHttpRequest_header(self: pointer, headerName: struct_seaqt_stri
 proc fcQWebEngineHttpRequest_setHeader(self: pointer, headerName: struct_seaqt_string, value: struct_seaqt_string): void {.importc: "QWebEngineHttpRequest_setHeader".}
 proc fcQWebEngineHttpRequest_unsetHeader(self: pointer, headerName: struct_seaqt_string): void {.importc: "QWebEngineHttpRequest_unsetHeader".}
 proc fcQWebEngineHttpRequest_new(): ptr cQWebEngineHttpRequest {.importc: "QWebEngineHttpRequest_new".}
-proc fcQWebEngineHttpRequest_new2(other: pointer): ptr cQWebEngineHttpRequest {.importc: "QWebEngineHttpRequest_new2".}
-proc fcQWebEngineHttpRequest_new3(url: pointer): ptr cQWebEngineHttpRequest {.importc: "QWebEngineHttpRequest_new3".}
-proc fcQWebEngineHttpRequest_new4(url: pointer, methodVal: ptr cint): ptr cQWebEngineHttpRequest {.importc: "QWebEngineHttpRequest_new4".}
+proc fcQWebEngineHttpRequest_new2(fromVal: pointer): ptr cQWebEngineHttpRequest {.importc: "QWebEngineHttpRequest_new_from".}
+proc fcQWebEngineHttpRequest_new3(url: pointer): ptr cQWebEngineHttpRequest {.importc: "QWebEngineHttpRequest_new_url".}
+proc fcQWebEngineHttpRequest_new4(url: pointer, methodVal: ptr cint): ptr cQWebEngineHttpRequest {.importc: "QWebEngineHttpRequest_new_url_method".}
 
-proc operatorAssign*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, other: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): void =
-  fcQWebEngineHttpRequest_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, fromVal: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): void =
+  fcQWebEngineHttpRequest_operatorAssign(self.h, fromVal.h)
 
 proc postRequest*(_: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest, url: gen_qurl_types.QUrl, postData: Table[string,string]): gen_qwebenginehttprequest_types.QWebEngineHttpRequest =
   var postData_Keys_CArray = newSeq[struct_seaqt_string](len(postData))
@@ -148,8 +148,8 @@ proc create*(T: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest): gen
   let tmp = gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest,
-    other: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): gen_qwebenginehttprequest_types.QWebEngineHttpRequest =
-  let tmp = gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new2(other.h), owned: true)
+    fromVal: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): gen_qwebenginehttprequest_types.QWebEngineHttpRequest =
+  let tmp = gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest,
     url: gen_qurl_types.QUrl): gen_qwebenginehttprequest_types.QWebEngineHttpRequest =

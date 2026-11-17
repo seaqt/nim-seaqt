@@ -143,25 +143,25 @@ void* QSvgWidget_vdata(VirtualQSvgWidget* self);
 VirtualQSvgWidget* vdata_QSvgWidget(void* vdata);
 
 VirtualQSvgWidget* QSvgWidget_new(const QSvgWidget_VTable* vtbl, size_t vdata);
-VirtualQSvgWidget* QSvgWidget_new2(const QSvgWidget_VTable* vtbl, size_t vdata, struct seaqt_string file);
-VirtualQSvgWidget* QSvgWidget_new3(const QSvgWidget_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQSvgWidget* QSvgWidget_new4(const QSvgWidget_VTable* vtbl, size_t vdata, struct seaqt_string file, QWidget* parent);
+VirtualQSvgWidget* QSvgWidget_new_file(const QSvgWidget_VTable* vtbl, size_t vdata, struct seaqt_string file);
+VirtualQSvgWidget* QSvgWidget_new_parent(const QSvgWidget_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQSvgWidget* QSvgWidget_new_file_parent(const QSvgWidget_VTable* vtbl, size_t vdata, struct seaqt_string file, QWidget* parent);
 
 void QSvgWidget_virtbase(QSvgWidget* src, QWidget** outptr_QWidget);
 QMetaObject* QSvgWidget_metaObject(const QSvgWidget* self);
 void* QSvgWidget_metacast(QSvgWidget* self, const char* param1);
 int QSvgWidget_metacall(QSvgWidget* self, int param1, int param2, void** param3);
-struct seaqt_string QSvgWidget_tr(const char* s);
-struct seaqt_string QSvgWidget_trUtf8(const char* s);
+struct seaqt_string QSvgWidget_tr_s(const char* s);
+struct seaqt_string QSvgWidget_trUtf8_s(const char* s);
 QSvgRenderer* QSvgWidget_renderer(const QSvgWidget* self);
 QSize* QSvgWidget_sizeHint(const QSvgWidget* self);
-void QSvgWidget_load(QSvgWidget* self, struct seaqt_string file);
-void QSvgWidget_loadWithContents(QSvgWidget* self, struct seaqt_string contents);
+void QSvgWidget_load_file(QSvgWidget* self, struct seaqt_string file);
+void QSvgWidget_load_contents(QSvgWidget* self, struct seaqt_string contents);
 void QSvgWidget_paintEvent(QSvgWidget* self, QPaintEvent* event);
-struct seaqt_string QSvgWidget_tr2(const char* s, const char* c);
-struct seaqt_string QSvgWidget_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSvgWidget_trUtf82(const char* s, const char* c);
-struct seaqt_string QSvgWidget_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QSvgWidget_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSvgWidget_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSvgWidget_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSvgWidget_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSvgWidget_virtualbase_metaObject(const VirtualQSvgWidget* self);
 void* QSvgWidget_virtualbase_metacast(VirtualQSvgWidget* self, const char* param1);

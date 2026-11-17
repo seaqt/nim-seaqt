@@ -149,20 +149,20 @@ void* QCameraViewfinder_vdata(VirtualQCameraViewfinder* self);
 VirtualQCameraViewfinder* vdata_QCameraViewfinder(void* vdata);
 
 VirtualQCameraViewfinder* QCameraViewfinder_new(const QCameraViewfinder_VTable* vtbl, size_t vdata);
-VirtualQCameraViewfinder* QCameraViewfinder_new2(const QCameraViewfinder_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQCameraViewfinder* QCameraViewfinder_new_parent(const QCameraViewfinder_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QCameraViewfinder_virtbase(QCameraViewfinder* src, QVideoWidget** outptr_QVideoWidget);
 QMetaObject* QCameraViewfinder_metaObject(const QCameraViewfinder* self);
 void* QCameraViewfinder_metacast(QCameraViewfinder* self, const char* param1);
 int QCameraViewfinder_metacall(QCameraViewfinder* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraViewfinder_tr(const char* s);
-struct seaqt_string QCameraViewfinder_trUtf8(const char* s);
+struct seaqt_string QCameraViewfinder_tr_s(const char* s);
+struct seaqt_string QCameraViewfinder_trUtf8_s(const char* s);
 QMediaObject* QCameraViewfinder_mediaObject(const QCameraViewfinder* self);
 bool QCameraViewfinder_setMediaObject(QCameraViewfinder* self, QMediaObject* object);
-struct seaqt_string QCameraViewfinder_tr2(const char* s, const char* c);
-struct seaqt_string QCameraViewfinder_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraViewfinder_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraViewfinder_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraViewfinder_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraViewfinder_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraViewfinder_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraViewfinder_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QCameraViewfinder_virtualbase_metaObject(const VirtualQCameraViewfinder* self);
 void* QCameraViewfinder_virtualbase_metacast(VirtualQCameraViewfinder* self, const char* param1);

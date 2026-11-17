@@ -27,11 +27,11 @@ typedef struct QQmlListReference QQmlListReference;
 #endif
 
 QQmlListReference* QQmlListReference_new();
-QQmlListReference* QQmlListReference_new2(QObject* param1, const char* property);
-QQmlListReference* QQmlListReference_new3(QQmlListReference* param1);
-QQmlListReference* QQmlListReference_new4(QObject* param1, const char* property, QQmlEngine* param3);
+QQmlListReference* QQmlListReference_new_QObject_char(QObject* param1, const char* property);
+QQmlListReference* QQmlListReference_new_QQmlListReference(QQmlListReference* from);
+QQmlListReference* QQmlListReference_new_QObject_char_QQmlEngine(QObject* param1, const char* property, QQmlEngine* param3);
 
-void QQmlListReference_operatorAssign(QQmlListReference* self, QQmlListReference* param1);
+void QQmlListReference_operatorAssign(QQmlListReference* self, QQmlListReference* from);
 bool QQmlListReference_isValid(const QQmlListReference* self);
 QObject* QQmlListReference_object(const QQmlListReference* self);
 QMetaObject* QQmlListReference_listElementType(const QQmlListReference* self);

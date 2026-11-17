@@ -19,16 +19,16 @@ QTextOption* QTextOption_new() {
 	return new (std::nothrow) QTextOption();
 }
 
-QTextOption* QTextOption_new2(int alignment) {
+QTextOption* QTextOption_new_alignment(int alignment) {
 	return new (std::nothrow) QTextOption(static_cast<Qt::Alignment>(alignment));
 }
 
-QTextOption* QTextOption_new3(QTextOption* o) {
-	return new (std::nothrow) QTextOption(*o);
+QTextOption* QTextOption_new_from(QTextOption* from) {
+	return new (std::nothrow) QTextOption(*from);
 }
 
-void QTextOption_operatorAssign(QTextOption* self, QTextOption* o) {
-	self->operator=(*o);
+void QTextOption_operatorAssign(QTextOption* self, QTextOption* from) {
+	self->operator=(*from);
 }
 
 void QTextOption_setAlignment(QTextOption* self, int alignment) {
@@ -147,15 +147,15 @@ QTextOption__Tab* QTextOption__Tab_new() {
 	return new (std::nothrow) QTextOption__Tab();
 }
 
-QTextOption__Tab* QTextOption__Tab_new2(double pos, int tabType) {
+QTextOption__Tab* QTextOption__Tab_new_pos_tabType(double pos, int tabType) {
 	return new (std::nothrow) QTextOption__Tab(static_cast<qreal>(pos), static_cast<QTextOption::TabType>(tabType));
 }
 
-QTextOption__Tab* QTextOption__Tab_new3(QTextOption__Tab* param1) {
-	return new (std::nothrow) QTextOption__Tab(*param1);
+QTextOption__Tab* QTextOption__Tab_new_from(QTextOption__Tab* from) {
+	return new (std::nothrow) QTextOption__Tab(*from);
 }
 
-QTextOption__Tab* QTextOption__Tab_new4(double pos, int tabType, QChar* delim) {
+QTextOption__Tab* QTextOption__Tab_new_pos_tabType_delim(double pos, int tabType, QChar* delim) {
 	return new (std::nothrow) QTextOption__Tab(static_cast<qreal>(pos), static_cast<QTextOption::TabType>(tabType), *delim);
 }
 

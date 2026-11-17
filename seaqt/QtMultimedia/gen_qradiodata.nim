@@ -115,8 +115,8 @@ type cQRadioData*{.exportc: "QRadioData", incompleteStruct.} = object
 proc fcQRadioData_metaObject(self: pointer): pointer {.importc: "QRadioData_metaObject".}
 proc fcQRadioData_metacast(self: pointer, param1: cstring): pointer {.importc: "QRadioData_metacast".}
 proc fcQRadioData_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRadioData_metacall".}
-proc fcQRadioData_tr(s: cstring): struct_seaqt_string {.importc: "QRadioData_tr".}
-proc fcQRadioData_trUtf8(s: cstring): struct_seaqt_string {.importc: "QRadioData_trUtf8".}
+proc fcQRadioData_trS(s: cstring): struct_seaqt_string {.importc: "QRadioData_tr_s".}
+proc fcQRadioData_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QRadioData_trUtf8_s".}
 proc fcQRadioData_availability(self: pointer): cint {.importc: "QRadioData_availability".}
 proc fcQRadioData_mediaObject(self: pointer): pointer {.importc: "QRadioData_mediaObject".}
 proc fcQRadioData_stationId(self: pointer): struct_seaqt_string {.importc: "QRadioData_stationId".}
@@ -140,12 +140,12 @@ proc fcQRadioData_radioTextChanged(self: pointer, radioText: struct_seaqt_string
 proc fcQRadioData_connect_radioTextChanged(self: pointer, slot: int, callback: proc (slot: int, radioText: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_radioTextChanged".}
 proc fcQRadioData_alternativeFrequenciesEnabledChanged(self: pointer, enabled: bool): void {.importc: "QRadioData_alternativeFrequenciesEnabledChanged".}
 proc fcQRadioData_connect_alternativeFrequenciesEnabledChanged(self: pointer, slot: int, callback: proc (slot: int, enabled: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_alternativeFrequenciesEnabledChanged".}
-proc fcQRadioData_errorWithError(self: pointer, error: cint): void {.importc: "QRadioData_errorWithError".}
-proc fcQRadioData_connect_errorWithError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_errorWithError".}
-proc fcQRadioData_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRadioData_tr2".}
-proc fcQRadioData_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRadioData_tr3".}
-proc fcQRadioData_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRadioData_trUtf82".}
-proc fcQRadioData_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRadioData_trUtf83".}
+proc fcQRadioData_errorError(self: pointer, error: cint): void {.importc: "QRadioData_error_error".}
+proc fcQRadioData_connect_errorError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_error_error".}
+proc fcQRadioData_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRadioData_tr_s_c".}
+proc fcQRadioData_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRadioData_tr_s_c_n".}
+proc fcQRadioData_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRadioData_trUtf8_s_c".}
+proc fcQRadioData_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRadioData_trUtf8_s_c_n".}
 proc fcQRadioData_vdata(self: pointer): ptr pointer {.importc: "QRadioData_vdata".}
 proc fvdata_cQRadioData(self: pointer): pointer {.importc: "vdata_QRadioData".}
 
@@ -179,8 +179,8 @@ proc fcQRadioData_protectedbase_sender(self: pointer): pointer {.importc: "QRadi
 proc fcQRadioData_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QRadioData_protectedbase_senderSignalIndex".}
 proc fcQRadioData_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRadioData_protectedbase_receivers".}
 proc fcQRadioData_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRadioData_protectedbase_isSignalConnected".}
-proc fcQRadioData_new(vtbl: pointer, vdata: csize_t, mediaObject: pointer): ptr cQRadioData {.importc: "QRadioData_new".}
-proc fcQRadioData_new2(vtbl: pointer, vdata: csize_t, mediaObject: pointer, parent: pointer): ptr cQRadioData {.importc: "QRadioData_new2".}
+proc fcQRadioData_new(vtbl: pointer, vdata: csize_t, mediaObject: pointer): ptr cQRadioData {.importc: "QRadioData_new_mediaObject".}
+proc fcQRadioData_new2(vtbl: pointer, vdata: csize_t, mediaObject: pointer, parent: pointer): ptr cQRadioData {.importc: "QRadioData_new_mediaObject_parent".}
 proc fcQRadioData_staticMetaObject(): pointer {.importc: "QRadioData_staticMetaObject".}
 
 proc metaObject*(self: gen_qradiodata_types.QRadioData): gen_qobjectdefs_types.QMetaObject =
@@ -193,13 +193,13 @@ proc metacall*(self: gen_qradiodata_types.QRadioData, param1: cint, param2: cint
   fcQRadioData_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qradiodata_types.QRadioData, s: cstring): string =
-  let v_ms = fcQRadioData_tr(s)
+  let v_ms = fcQRadioData_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qradiodata_types.QRadioData, s: cstring): string =
-  let v_ms = fcQRadioData_trUtf8(s)
+  let v_ms = fcQRadioData_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -385,45 +385,45 @@ proc onAlternativeFrequenciesEnabledChanged*(self: gen_qradiodata_types.QRadioDa
   fcQRadioData_connect_alternativeFrequenciesEnabledChanged(self.h, cast[int](addr tmp[]), fcQRadioData_slot_callback_alternativeFrequenciesEnabledChanged, fcQRadioData_slot_callback_alternativeFrequenciesEnabledChanged_release)
 
 proc error*(self: gen_qradiodata_types.QRadioData, error: cint): void =
-  fcQRadioData_errorWithError(self.h, cint(error))
+  fcQRadioData_errorError(self.h, cint(error))
 
-type QRadioDataerrorWithErrorSlot* = proc(error: cint)
-proc fcQRadioData_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QRadioDataerrorWithErrorSlot](cast[pointer](slot))
+type QRadioDataerrorErrorSlot* = proc(error: cint)
+proc fcQRadioData_slot_callback_errorError(slot: int, error: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QRadioDataerrorErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
-proc fcQRadioData_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QRadioDataerrorWithErrorSlot](cast[pointer](slot))
+proc fcQRadioData_slot_callback_errorError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioDataerrorErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onError*(self: gen_qradiodata_types.QRadioData, slot: QRadioDataerrorWithErrorSlot) =
-  var tmp = new QRadioDataerrorWithErrorSlot
+proc onError*(self: gen_qradiodata_types.QRadioData, slot: QRadioDataerrorErrorSlot) =
+  var tmp = new QRadioDataerrorErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_errorWithError(self.h, cast[int](addr tmp[]), fcQRadioData_slot_callback_errorWithError, fcQRadioData_slot_callback_errorWithError_release)
+  fcQRadioData_connect_errorError(self.h, cast[int](addr tmp[]), fcQRadioData_slot_callback_errorError, fcQRadioData_slot_callback_errorError_release)
 
 proc tr*(_: type gen_qradiodata_types.QRadioData, s: cstring, c: cstring): string =
-  let v_ms = fcQRadioData_tr2(s, c)
+  let v_ms = fcQRadioData_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qradiodata_types.QRadioData, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRadioData_tr3(s, c, n)
+  let v_ms = fcQRadioData_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qradiodata_types.QRadioData, s: cstring, c: cstring): string =
-  let v_ms = fcQRadioData_trUtf82(s, c)
+  let v_ms = fcQRadioData_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qradiodata_types.QRadioData, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRadioData_trUtf83(s, c, n)
+  let v_ms = fcQRadioData_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

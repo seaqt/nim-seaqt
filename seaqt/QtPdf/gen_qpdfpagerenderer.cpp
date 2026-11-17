@@ -176,7 +176,7 @@ VirtualQPdfPageRenderer* QPdfPageRenderer_new(const QPdfPageRenderer_VTable* vtb
 	return _mem_ ? new (_mem_)VirtualQPdfPageRenderer(vtbl) : nullptr;
 }
 
-VirtualQPdfPageRenderer* QPdfPageRenderer_new2(const QPdfPageRenderer_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQPdfPageRenderer* QPdfPageRenderer_new_parent(const QPdfPageRenderer_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPdfPageRenderer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPdfPageRenderer(vtbl, parent) : nullptr;
 }
@@ -197,7 +197,7 @@ int QPdfPageRenderer_metacall(QPdfPageRenderer* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPdfPageRenderer_tr(const char* s) {
+struct seaqt_string QPdfPageRenderer_tr_s(const char* s) {
 	QString _ret = QPdfPageRenderer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -208,7 +208,7 @@ struct seaqt_string QPdfPageRenderer_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QPdfPageRenderer_trUtf8(const char* s) {
+struct seaqt_string QPdfPageRenderer_trUtf8_s(const char* s) {
 	QString _ret = QPdfPageRenderer::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -236,7 +236,7 @@ void QPdfPageRenderer_setDocument(QPdfPageRenderer* self, QPdfDocument* document
 	self->setDocument(document);
 }
 
-unsigned long long QPdfPageRenderer_requestPage(QPdfPageRenderer* self, int pageNumber, QSize* imageSize) {
+unsigned long long QPdfPageRenderer_requestPage_pageNumber_imageSize(QPdfPageRenderer* self, int pageNumber, QSize* imageSize) {
 	quint64 _ret = self->requestPage(static_cast<int>(pageNumber), *imageSize);
 	return static_cast<unsigned long long>(_ret);
 }
@@ -297,7 +297,7 @@ void QPdfPageRenderer_connect_pageRendered(QPdfPageRenderer* self, intptr_t slot
 	QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(int, QSize, const QImage&, QPdfDocumentRenderOptions, quint64)>(&QPdfPageRenderer::pageRendered), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QPdfPageRenderer_tr2(const char* s, const char* c) {
+struct seaqt_string QPdfPageRenderer_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPdfPageRenderer::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -308,7 +308,7 @@ struct seaqt_string QPdfPageRenderer_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfPageRenderer_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPdfPageRenderer_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfPageRenderer::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -319,7 +319,7 @@ struct seaqt_string QPdfPageRenderer_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QPdfPageRenderer_trUtf82(const char* s, const char* c) {
+struct seaqt_string QPdfPageRenderer_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QPdfPageRenderer::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -330,7 +330,7 @@ struct seaqt_string QPdfPageRenderer_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfPageRenderer_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QPdfPageRenderer_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfPageRenderer::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -341,7 +341,7 @@ struct seaqt_string QPdfPageRenderer_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-unsigned long long QPdfPageRenderer_requestPage2(QPdfPageRenderer* self, int pageNumber, QSize* imageSize, QPdfDocumentRenderOptions* options) {
+unsigned long long QPdfPageRenderer_requestPage_pageNumber_imageSize_options(QPdfPageRenderer* self, int pageNumber, QSize* imageSize, QPdfDocumentRenderOptions* options) {
 	quint64 _ret = self->requestPage(static_cast<int>(pageNumber), *imageSize, *options);
 	return static_cast<unsigned long long>(_ret);
 }

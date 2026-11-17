@@ -37,9 +37,9 @@ typedef struct QVariant QVariant;
 #endif
 
 QNetworkCacheMetaData* QNetworkCacheMetaData_new();
-QNetworkCacheMetaData* QNetworkCacheMetaData_new2(QNetworkCacheMetaData* other);
+QNetworkCacheMetaData* QNetworkCacheMetaData_new_from(QNetworkCacheMetaData* from);
 
-void QNetworkCacheMetaData_operatorAssign(QNetworkCacheMetaData* self, QNetworkCacheMetaData* other);
+void QNetworkCacheMetaData_operatorAssign(QNetworkCacheMetaData* self, QNetworkCacheMetaData* from);
 void QNetworkCacheMetaData_swap(QNetworkCacheMetaData* self, QNetworkCacheMetaData* other);
 bool QNetworkCacheMetaData_operatorEqual(const QNetworkCacheMetaData* self, QNetworkCacheMetaData* other);
 bool QNetworkCacheMetaData_operatorNotEqual(const QNetworkCacheMetaData* self, QNetworkCacheMetaData* other);
@@ -63,8 +63,8 @@ void QAbstractNetworkCache_virtbase(QAbstractNetworkCache* src, QObject** outptr
 QMetaObject* QAbstractNetworkCache_metaObject(const QAbstractNetworkCache* self);
 void* QAbstractNetworkCache_metacast(QAbstractNetworkCache* self, const char* param1);
 int QAbstractNetworkCache_metacall(QAbstractNetworkCache* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractNetworkCache_tr(const char* s);
-struct seaqt_string QAbstractNetworkCache_trUtf8(const char* s);
+struct seaqt_string QAbstractNetworkCache_tr_s(const char* s);
+struct seaqt_string QAbstractNetworkCache_trUtf8_s(const char* s);
 QNetworkCacheMetaData* QAbstractNetworkCache_metaData(QAbstractNetworkCache* self, QUrl* url);
 void QAbstractNetworkCache_updateMetaData(QAbstractNetworkCache* self, QNetworkCacheMetaData* metaData);
 QIODevice* QAbstractNetworkCache_data(QAbstractNetworkCache* self, QUrl* url);
@@ -73,10 +73,10 @@ long long QAbstractNetworkCache_cacheSize(const QAbstractNetworkCache* self);
 QIODevice* QAbstractNetworkCache_prepare(QAbstractNetworkCache* self, QNetworkCacheMetaData* metaData);
 void QAbstractNetworkCache_insert(QAbstractNetworkCache* self, QIODevice* device);
 void QAbstractNetworkCache_clear(QAbstractNetworkCache* self);
-struct seaqt_string QAbstractNetworkCache_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractNetworkCache_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractNetworkCache_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractNetworkCache_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAbstractNetworkCache_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractNetworkCache_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractNetworkCache_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractNetworkCache_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QAbstractNetworkCache_staticMetaObject();
 void QAbstractNetworkCache_delete(QAbstractNetworkCache* self);

@@ -45,7 +45,7 @@ export
 
 type cQQmlError*{.exportc: "QQmlError", incompleteStruct.} = object
 
-proc fcQQmlError_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlError_operatorAssign".}
+proc fcQQmlError_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlError_operatorAssign".}
 proc fcQQmlError_isValid(self: pointer): bool {.importc: "QQmlError_isValid".}
 proc fcQQmlError_url(self: pointer): pointer {.importc: "QQmlError_url".}
 proc fcQQmlError_setUrl(self: pointer, url: pointer): void {.importc: "QQmlError_setUrl".}
@@ -59,10 +59,10 @@ proc fcQQmlError_objectX(self: pointer): pointer {.importc: "QQmlError_object".}
 proc fcQQmlError_setObject(self: pointer, objectVal: pointer): void {.importc: "QQmlError_setObject".}
 proc fcQQmlError_toString(self: pointer): struct_seaqt_string {.importc: "QQmlError_toString".}
 proc fcQQmlError_new(): ptr cQQmlError {.importc: "QQmlError_new".}
-proc fcQQmlError_new2(param1: pointer): ptr cQQmlError {.importc: "QQmlError_new2".}
+proc fcQQmlError_new2(fromVal: pointer): ptr cQQmlError {.importc: "QQmlError_new_from".}
 
-proc operatorAssign*(self: gen_qqmlerror_types.QQmlError, param1: gen_qqmlerror_types.QQmlError): void =
-  fcQQmlError_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlerror_types.QQmlError, fromVal: gen_qqmlerror_types.QQmlError): void =
+  fcQQmlError_operatorAssign(self.h, fromVal.h)
 
 proc isValid*(self: gen_qqmlerror_types.QQmlError): bool =
   fcQQmlError_isValid(self.h)
@@ -110,6 +110,6 @@ proc create*(T: type gen_qqmlerror_types.QQmlError): gen_qqmlerror_types.QQmlErr
   let tmp = gen_qqmlerror_types.QQmlError(h: fcQQmlError_new(), owned: true)
   tmp
 proc create*(T: type gen_qqmlerror_types.QQmlError,
-    param1: gen_qqmlerror_types.QQmlError): gen_qqmlerror_types.QQmlError =
-  let tmp = gen_qqmlerror_types.QQmlError(h: fcQQmlError_new2(param1.h), owned: true)
+    fromVal: gen_qqmlerror_types.QQmlError): gen_qqmlerror_types.QQmlError =
+  let tmp = gen_qqmlerror_types.QQmlError(h: fcQQmlError_new2(fromVal.h), owned: true)
   tmp

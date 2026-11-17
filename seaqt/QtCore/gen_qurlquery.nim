@@ -45,7 +45,7 @@ export
 
 type cQUrlQuery*{.exportc: "QUrlQuery", incompleteStruct.} = object
 
-proc fcQUrlQuery_operatorAssign(self: pointer, other: pointer): void {.importc: "QUrlQuery_operatorAssign".}
+proc fcQUrlQuery_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QUrlQuery_operatorAssign".}
 proc fcQUrlQuery_operatorEqual(self: pointer, other: pointer): bool {.importc: "QUrlQuery_operatorEqual".}
 proc fcQUrlQuery_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QUrlQuery_operatorNotEqual".}
 proc fcQUrlQuery_swap(self: pointer, other: pointer): void {.importc: "QUrlQuery_swap".}
@@ -63,23 +63,23 @@ proc fcQUrlQuery_queryItems(self: pointer): struct_seaqt_array {.importc: "QUrlQ
 proc fcQUrlQuery_hasQueryItem(self: pointer, key: struct_seaqt_string): bool {.importc: "QUrlQuery_hasQueryItem".}
 proc fcQUrlQuery_addQueryItem(self: pointer, key: struct_seaqt_string, value: struct_seaqt_string): void {.importc: "QUrlQuery_addQueryItem".}
 proc fcQUrlQuery_removeQueryItem(self: pointer, key: struct_seaqt_string): void {.importc: "QUrlQuery_removeQueryItem".}
-proc fcQUrlQuery_queryItemValue(self: pointer, key: struct_seaqt_string): struct_seaqt_string {.importc: "QUrlQuery_queryItemValue".}
-proc fcQUrlQuery_allQueryItemValues(self: pointer, key: struct_seaqt_string): struct_seaqt_array {.importc: "QUrlQuery_allQueryItemValues".}
+proc fcQUrlQuery_queryItemValueKey(self: pointer, key: struct_seaqt_string): struct_seaqt_string {.importc: "QUrlQuery_queryItemValue_key".}
+proc fcQUrlQuery_allQueryItemValuesKey(self: pointer, key: struct_seaqt_string): struct_seaqt_array {.importc: "QUrlQuery_allQueryItemValues_key".}
 proc fcQUrlQuery_removeAllQueryItems(self: pointer, key: struct_seaqt_string): void {.importc: "QUrlQuery_removeAllQueryItems".}
 proc fcQUrlQuery_defaultQueryValueDelimiter(): pointer {.importc: "QUrlQuery_defaultQueryValueDelimiter".}
 proc fcQUrlQuery_defaultQueryPairDelimiter(): pointer {.importc: "QUrlQuery_defaultQueryPairDelimiter".}
-proc fcQUrlQuery_queryWithEncoding(self: pointer, encoding: cint): struct_seaqt_string {.importc: "QUrlQuery_queryWithEncoding".}
-proc fcQUrlQuery_toStringWithEncoding(self: pointer, encoding: cint): struct_seaqt_string {.importc: "QUrlQuery_toStringWithEncoding".}
-proc fcQUrlQuery_queryItemsWithEncoding(self: pointer, encoding: cint): struct_seaqt_array {.importc: "QUrlQuery_queryItemsWithEncoding".}
-proc fcQUrlQuery_queryItemValue2(self: pointer, key: struct_seaqt_string, encoding: cint): struct_seaqt_string {.importc: "QUrlQuery_queryItemValue2".}
-proc fcQUrlQuery_allQueryItemValues2(self: pointer, key: struct_seaqt_string, encoding: cint): struct_seaqt_array {.importc: "QUrlQuery_allQueryItemValues2".}
+proc fcQUrlQuery_queryEncoding(self: pointer, encoding: cint): struct_seaqt_string {.importc: "QUrlQuery_query_encoding".}
+proc fcQUrlQuery_toStringEncoding(self: pointer, encoding: cint): struct_seaqt_string {.importc: "QUrlQuery_toString_encoding".}
+proc fcQUrlQuery_queryItemsEncoding(self: pointer, encoding: cint): struct_seaqt_array {.importc: "QUrlQuery_queryItems_encoding".}
+proc fcQUrlQuery_queryItemValueKeyEncoding(self: pointer, key: struct_seaqt_string, encoding: cint): struct_seaqt_string {.importc: "QUrlQuery_queryItemValue_key_encoding".}
+proc fcQUrlQuery_allQueryItemValuesKeyEncoding(self: pointer, key: struct_seaqt_string, encoding: cint): struct_seaqt_array {.importc: "QUrlQuery_allQueryItemValues_key_encoding".}
 proc fcQUrlQuery_new(): ptr cQUrlQuery {.importc: "QUrlQuery_new".}
-proc fcQUrlQuery_new2(url: pointer): ptr cQUrlQuery {.importc: "QUrlQuery_new2".}
-proc fcQUrlQuery_new3(queryString: struct_seaqt_string): ptr cQUrlQuery {.importc: "QUrlQuery_new3".}
-proc fcQUrlQuery_new4(other: pointer): ptr cQUrlQuery {.importc: "QUrlQuery_new4".}
+proc fcQUrlQuery_new2(url: pointer): ptr cQUrlQuery {.importc: "QUrlQuery_new_url".}
+proc fcQUrlQuery_new3(queryString: struct_seaqt_string): ptr cQUrlQuery {.importc: "QUrlQuery_new_queryString".}
+proc fcQUrlQuery_new4(fromVal: pointer): ptr cQUrlQuery {.importc: "QUrlQuery_new_from".}
 
-proc operatorAssign*(self: gen_qurlquery_types.QUrlQuery, other: gen_qurlquery_types.QUrlQuery): void =
-  fcQUrlQuery_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qurlquery_types.QUrlQuery, fromVal: gen_qurlquery_types.QUrlQuery): void =
+  fcQUrlQuery_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qurlquery_types.QUrlQuery, other: gen_qurlquery_types.QUrlQuery): bool =
   fcQUrlQuery_operatorEqual(self.h, other.h)
@@ -168,13 +168,13 @@ proc removeQueryItem*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char])
   fcQUrlQuery_removeQueryItem(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc queryItemValue*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char]): string =
-  let v_ms = fcQUrlQuery_queryItemValue(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
+  let v_ms = fcQUrlQuery_queryItemValueKey(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char]): seq[string] =
-  var v_ma = fcQUrlQuery_allQueryItemValues(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
+  var v_ma = fcQUrlQuery_allQueryItemValuesKey(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -195,19 +195,19 @@ proc defaultQueryPairDelimiter*(_: type gen_qurlquery_types.QUrlQuery): gen_qcha
   gen_qchar_types.QChar(h: fcQUrlQuery_defaultQueryPairDelimiter(), owned: true)
 
 proc query*(self: gen_qurlquery_types.QUrlQuery, encoding: cint): string =
-  let v_ms = fcQUrlQuery_queryWithEncoding(self.h, cint(encoding))
+  let v_ms = fcQUrlQuery_queryEncoding(self.h, cint(encoding))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qurlquery_types.QUrlQuery, encoding: cint): string =
-  let v_ms = fcQUrlQuery_toStringWithEncoding(self.h, cint(encoding))
+  let v_ms = fcQUrlQuery_toStringEncoding(self.h, cint(encoding))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc queryItems*(self: gen_qurlquery_types.QUrlQuery, encoding: cint): seq[tuple[first: string, second: string]] =
-  var v_ma = fcQUrlQuery_queryItemsWithEncoding(self.h, cint(encoding))
+  var v_ma = fcQUrlQuery_queryItemsEncoding(self.h, cint(encoding))
   var vx_ret = newSeq[tuple[first: string, second: string]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_map]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -231,13 +231,13 @@ proc queryItems*(self: gen_qurlquery_types.QUrlQuery, encoding: cint): seq[tuple
   vx_ret
 
 proc queryItemValue*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char], encoding: cint): string =
-  let v_ms = fcQUrlQuery_queryItemValue2(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), cint(encoding))
+  let v_ms = fcQUrlQuery_queryItemValueKeyEncoding(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), cint(encoding))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char], encoding: cint): seq[string] =
-  var v_ma = fcQUrlQuery_allQueryItemValues2(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), cint(encoding))
+  var v_ma = fcQUrlQuery_allQueryItemValuesKeyEncoding(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), cint(encoding))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -260,6 +260,6 @@ proc create*(T: type gen_qurlquery_types.QUrlQuery,
   let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new3(struct_seaqt_string(data: if len(queryString) > 0: addr queryString[0] else: nil, len: csize_t(len(queryString)))), owned: true)
   tmp
 proc create*(T: type gen_qurlquery_types.QUrlQuery,
-    other: gen_qurlquery_types.QUrlQuery): gen_qurlquery_types.QUrlQuery =
-  let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new4(other.h), owned: true)
+    fromVal: gen_qurlquery_types.QUrlQuery): gen_qurlquery_types.QUrlQuery =
+  let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new4(fromVal.h), owned: true)
   tmp

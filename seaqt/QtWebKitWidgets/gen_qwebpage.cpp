@@ -449,7 +449,7 @@ VirtualQWebPage* QWebPage_new(const QWebPage_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQWebPage(vtbl) : nullptr;
 }
 
-VirtualQWebPage* QWebPage_new2(const QWebPage_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQWebPage* QWebPage_new_parent(const QWebPage_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebPage>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebPage(vtbl, parent) : nullptr;
 }
@@ -470,7 +470,7 @@ int QWebPage_metacall(QWebPage* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebPage_tr(const char* s) {
+struct seaqt_string QWebPage_tr_s(const char* s) {
 	QString _ret = QWebPage::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -481,7 +481,7 @@ struct seaqt_string QWebPage_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebPage_trUtf8(const char* s) {
+struct seaqt_string QWebPage_trUtf8_s(const char* s) {
 	QString _ret = QWebPage::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -654,7 +654,7 @@ QVariant* QWebPage_inputMethodQuery(const QWebPage* self, int property) {
 	return new QVariant(self->inputMethodQuery(static_cast<Qt::InputMethodQuery>(property)));
 }
 
-bool QWebPage_findText(QWebPage* self, struct seaqt_string subString) {
+bool QWebPage_findText_subString(QWebPage* self, struct seaqt_string subString) {
 	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
 	return self->findText(subString_QString);
 }
@@ -1323,7 +1323,7 @@ void QWebPage_connect_recentlyAudibleChanged(QWebPage* self, intptr_t slot, void
 	QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::recentlyAudibleChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebPage_tr2(const char* s, const char* c) {
+struct seaqt_string QWebPage_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebPage::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1334,7 +1334,7 @@ struct seaqt_string QWebPage_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebPage_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebPage_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebPage::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1345,7 +1345,7 @@ struct seaqt_string QWebPage_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWebPage_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebPage_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebPage::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1356,7 +1356,7 @@ struct seaqt_string QWebPage_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebPage_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebPage_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebPage::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1367,7 +1367,7 @@ struct seaqt_string QWebPage_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QWebPage_findText2(QWebPage* self, struct seaqt_string subString, int options) {
+bool QWebPage_findText_subString_options(QWebPage* self, struct seaqt_string subString, int options) {
 	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
 	return self->findText(subString_QString, static_cast<QWebPage::FindFlags>(options));
 }
@@ -1544,12 +1544,12 @@ QWebPage__ViewportAttributes* QWebPage__ViewportAttributes_new() {
 	return new (std::nothrow) QWebPage__ViewportAttributes();
 }
 
-QWebPage__ViewportAttributes* QWebPage__ViewportAttributes_new2(QWebPage__ViewportAttributes* other) {
-	return new (std::nothrow) QWebPage__ViewportAttributes(*other);
+QWebPage__ViewportAttributes* QWebPage__ViewportAttributes_new_from(QWebPage__ViewportAttributes* from) {
+	return new (std::nothrow) QWebPage__ViewportAttributes(*from);
 }
 
-void QWebPage__ViewportAttributes_operatorAssign(QWebPage__ViewportAttributes* self, QWebPage__ViewportAttributes* other) {
-	self->operator=(*other);
+void QWebPage__ViewportAttributes_operatorAssign(QWebPage__ViewportAttributes* self, QWebPage__ViewportAttributes* from) {
+	self->operator=(*from);
 }
 
 double QWebPage__ViewportAttributes_initialScaleFactor(const QWebPage__ViewportAttributes* self) {
@@ -1588,28 +1588,28 @@ void QWebPage__ViewportAttributes_delete(QWebPage__ViewportAttributes* self) {
 	delete self;
 }
 
-QWebPage__ExtensionOption* QWebPage__ExtensionOption_new(QWebPage__ExtensionOption* param1) {
-	return new (std::nothrow) QWebPage__ExtensionOption(*param1);
+QWebPage__ExtensionOption* QWebPage__ExtensionOption_new(QWebPage__ExtensionOption* from) {
+	return new (std::nothrow) QWebPage__ExtensionOption(*from);
 }
 
-void QWebPage__ExtensionOption_operatorAssign(QWebPage__ExtensionOption* self, QWebPage__ExtensionOption* param1) {
-	self->operator=(*param1);
+void QWebPage__ExtensionOption_operatorAssign(QWebPage__ExtensionOption* self, QWebPage__ExtensionOption* from) {
+	self->operator=(*from);
 }
 
 void QWebPage__ExtensionOption_delete(QWebPage__ExtensionOption* self) {
 	delete self;
 }
 
-QWebPage__ExtensionReturn* QWebPage__ExtensionReturn_new(QWebPage__ExtensionReturn* param1) {
-	return new (std::nothrow) QWebPage__ExtensionReturn(*param1);
+QWebPage__ExtensionReturn* QWebPage__ExtensionReturn_new_from(QWebPage__ExtensionReturn* from) {
+	return new (std::nothrow) QWebPage__ExtensionReturn(*from);
 }
 
-QWebPage__ExtensionReturn* QWebPage__ExtensionReturn_new2() {
+QWebPage__ExtensionReturn* QWebPage__ExtensionReturn_new() {
 	return new (std::nothrow) QWebPage__ExtensionReturn();
 }
 
-void QWebPage__ExtensionReturn_operatorAssign(QWebPage__ExtensionReturn* self, QWebPage__ExtensionReturn* param1) {
-	self->operator=(*param1);
+void QWebPage__ExtensionReturn_operatorAssign(QWebPage__ExtensionReturn* self, QWebPage__ExtensionReturn* from) {
+	self->operator=(*from);
 }
 
 void QWebPage__ExtensionReturn_delete(QWebPage__ExtensionReturn* self) {
@@ -1702,8 +1702,8 @@ void QWebPage__ChooseMultipleFilesExtensionReturn_delete(QWebPage__ChooseMultipl
 	delete self;
 }
 
-QWebPage__ErrorPageExtensionOption* QWebPage__ErrorPageExtensionOption_new(QWebPage__ErrorPageExtensionOption* param1) {
-	return new (std::nothrow) QWebPage__ErrorPageExtensionOption(*param1);
+QWebPage__ErrorPageExtensionOption* QWebPage__ErrorPageExtensionOption_new(QWebPage__ErrorPageExtensionOption* from) {
+	return new (std::nothrow) QWebPage__ErrorPageExtensionOption(*from);
 }
 
 void QWebPage__ErrorPageExtensionOption_virtbase(QWebPage__ErrorPageExtensionOption* src, QWebPage::ExtensionOption** outptr_QWebPage__ExtensionOption) {
@@ -1759,8 +1759,8 @@ void QWebPage__ErrorPageExtensionOption_setErrorString(QWebPage__ErrorPageExtens
 	self->errorString = errorString_QString;
 }
 
-void QWebPage__ErrorPageExtensionOption_operatorAssign(QWebPage__ErrorPageExtensionOption* self, QWebPage__ErrorPageExtensionOption* param1) {
-	self->operator=(*param1);
+void QWebPage__ErrorPageExtensionOption_operatorAssign(QWebPage__ErrorPageExtensionOption* self, QWebPage__ErrorPageExtensionOption* from) {
+	self->operator=(*from);
 }
 
 void QWebPage__ErrorPageExtensionOption_delete(QWebPage__ErrorPageExtensionOption* self) {
@@ -1771,8 +1771,8 @@ QWebPage__ErrorPageExtensionReturn* QWebPage__ErrorPageExtensionReturn_new() {
 	return new (std::nothrow) QWebPage__ErrorPageExtensionReturn();
 }
 
-QWebPage__ErrorPageExtensionReturn* QWebPage__ErrorPageExtensionReturn_new2(QWebPage__ErrorPageExtensionReturn* param1) {
-	return new (std::nothrow) QWebPage__ErrorPageExtensionReturn(*param1);
+QWebPage__ErrorPageExtensionReturn* QWebPage__ErrorPageExtensionReturn_new_from(QWebPage__ErrorPageExtensionReturn* from) {
+	return new (std::nothrow) QWebPage__ErrorPageExtensionReturn(*from);
 }
 
 void QWebPage__ErrorPageExtensionReturn_virtbase(QWebPage__ErrorPageExtensionReturn* src, QWebPage::ExtensionReturn** outptr_QWebPage__ExtensionReturn) {
@@ -1833,8 +1833,8 @@ void QWebPage__ErrorPageExtensionReturn_setContent(QWebPage__ErrorPageExtensionR
 	self->content = content_QByteArray;
 }
 
-void QWebPage__ErrorPageExtensionReturn_operatorAssign(QWebPage__ErrorPageExtensionReturn* self, QWebPage__ErrorPageExtensionReturn* param1) {
-	self->operator=(*param1);
+void QWebPage__ErrorPageExtensionReturn_operatorAssign(QWebPage__ErrorPageExtensionReturn* self, QWebPage__ErrorPageExtensionReturn* from) {
+	self->operator=(*from);
 }
 
 void QWebPage__ErrorPageExtensionReturn_delete(QWebPage__ErrorPageExtensionReturn* self) {

@@ -17,24 +17,24 @@ QRandomGenerator* QRandomGenerator_new() {
 	return new (std::nothrow) QRandomGenerator();
 }
 
-QRandomGenerator* QRandomGenerator_new2(const unsigned int* seedBuffer, ptrdiff_t len) {
+QRandomGenerator* QRandomGenerator_new_seedBuffer_len(const unsigned int* seedBuffer, ptrdiff_t len) {
 	return new (std::nothrow) QRandomGenerator(static_cast<const quint32*>(seedBuffer), (qsizetype)(len));
 }
 
-QRandomGenerator* QRandomGenerator_new3(const unsigned int* begin, const unsigned int* end) {
+QRandomGenerator* QRandomGenerator_new_begin_end(const unsigned int* begin, const unsigned int* end) {
 	return new (std::nothrow) QRandomGenerator(static_cast<const quint32*>(begin), static_cast<const quint32*>(end));
 }
 
-QRandomGenerator* QRandomGenerator_new4(QRandomGenerator* other) {
-	return new (std::nothrow) QRandomGenerator(*other);
+QRandomGenerator* QRandomGenerator_new_from(QRandomGenerator* from) {
+	return new (std::nothrow) QRandomGenerator(*from);
 }
 
-QRandomGenerator* QRandomGenerator_new5(unsigned int seedValue) {
+QRandomGenerator* QRandomGenerator_new_seedValue(unsigned int seedValue) {
 	return new (std::nothrow) QRandomGenerator(static_cast<quint32>(seedValue));
 }
 
-void QRandomGenerator_operatorAssign(QRandomGenerator* self, QRandomGenerator* other) {
-	self->operator=(*other);
+void QRandomGenerator_operatorAssign(QRandomGenerator* self, QRandomGenerator* from) {
+	self->operator=(*from);
 }
 
 unsigned int QRandomGenerator_generate(QRandomGenerator* self) {
@@ -51,29 +51,29 @@ double QRandomGenerator_generateDouble(QRandomGenerator* self) {
 	return self->generateDouble();
 }
 
-double QRandomGenerator_bounded(QRandomGenerator* self, double highest) {
+double QRandomGenerator_bounded_double(QRandomGenerator* self, double highest) {
 	return self->bounded(static_cast<double>(highest));
 }
 
-unsigned int QRandomGenerator_boundedWithHighest(QRandomGenerator* self, unsigned int highest) {
+unsigned int QRandomGenerator_bounded_quint32(QRandomGenerator* self, unsigned int highest) {
 	quint32 _ret = self->bounded(static_cast<quint32>(highest));
 	return static_cast<unsigned int>(_ret);
 }
 
-unsigned int QRandomGenerator_bounded2(QRandomGenerator* self, unsigned int lowest, unsigned int highest) {
+unsigned int QRandomGenerator_bounded_quint32_quint32(QRandomGenerator* self, unsigned int lowest, unsigned int highest) {
 	quint32 _ret = self->bounded(static_cast<quint32>(lowest), static_cast<quint32>(highest));
 	return static_cast<unsigned int>(_ret);
 }
 
-int QRandomGenerator_bounded3(QRandomGenerator* self, int highest) {
+int QRandomGenerator_bounded_int(QRandomGenerator* self, int highest) {
 	return self->bounded(static_cast<int>(highest));
 }
 
-int QRandomGenerator_bounded4(QRandomGenerator* self, int lowest, int highest) {
+int QRandomGenerator_bounded_int_int(QRandomGenerator* self, int lowest, int highest) {
 	return self->bounded(static_cast<int>(lowest), static_cast<int>(highest));
 }
 
-void QRandomGenerator_generate2(QRandomGenerator* self, unsigned int* begin, unsigned int* end) {
+void QRandomGenerator_generate_begin_end(QRandomGenerator* self, unsigned int* begin, unsigned int* end) {
 	self->generate(static_cast<quint32*>(begin), static_cast<quint32*>(end));
 }
 
@@ -112,7 +112,7 @@ QRandomGenerator* QRandomGenerator_securelySeeded() {
 	return new QRandomGenerator(QRandomGenerator::securelySeeded());
 }
 
-void QRandomGenerator_seedWithQuint32(QRandomGenerator* self, unsigned int s) {
+void QRandomGenerator_seed_s(QRandomGenerator* self, unsigned int s) {
 	self->seed(static_cast<quint32>(s));
 }
 
@@ -124,23 +124,23 @@ QRandomGenerator64* QRandomGenerator64_new() {
 	return new (std::nothrow) QRandomGenerator64();
 }
 
-QRandomGenerator64* QRandomGenerator64_new2(const unsigned int* seedBuffer, ptrdiff_t len) {
+QRandomGenerator64* QRandomGenerator64_new_seedBuffer_len(const unsigned int* seedBuffer, ptrdiff_t len) {
 	return new (std::nothrow) QRandomGenerator64(static_cast<const quint32*>(seedBuffer), (qsizetype)(len));
 }
 
-QRandomGenerator64* QRandomGenerator64_new3(const unsigned int* begin, const unsigned int* end) {
+QRandomGenerator64* QRandomGenerator64_new_begin_end(const unsigned int* begin, const unsigned int* end) {
 	return new (std::nothrow) QRandomGenerator64(static_cast<const quint32*>(begin), static_cast<const quint32*>(end));
 }
 
-QRandomGenerator64* QRandomGenerator64_new4(QRandomGenerator* other) {
+QRandomGenerator64* QRandomGenerator64_new_other(QRandomGenerator* other) {
 	return new (std::nothrow) QRandomGenerator64(*other);
 }
 
-QRandomGenerator64* QRandomGenerator64_new5(QRandomGenerator64* param1) {
-	return new (std::nothrow) QRandomGenerator64(*param1);
+QRandomGenerator64* QRandomGenerator64_new_from(QRandomGenerator64* from) {
+	return new (std::nothrow) QRandomGenerator64(*from);
 }
 
-QRandomGenerator64* QRandomGenerator64_new6(unsigned int seedValue) {
+QRandomGenerator64* QRandomGenerator64_new_seedValue(unsigned int seedValue) {
 	return new (std::nothrow) QRandomGenerator64(static_cast<quint32>(seedValue));
 }
 
@@ -184,8 +184,8 @@ QRandomGenerator64* QRandomGenerator64_securelySeeded() {
 	return new QRandomGenerator64(QRandomGenerator64::securelySeeded());
 }
 
-void QRandomGenerator64_operatorAssign(QRandomGenerator64* self, QRandomGenerator64* param1) {
-	self->operator=(*param1);
+void QRandomGenerator64_operatorAssign(QRandomGenerator64* self, QRandomGenerator64* from) {
+	self->operator=(*from);
 }
 
 void QRandomGenerator64_delete(QRandomGenerator64* self) {

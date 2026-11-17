@@ -70,8 +70,8 @@ type cQStackedLayout*{.exportc: "QStackedLayout", incompleteStruct.} = object
 proc fcQStackedLayout_metaObject(self: pointer): pointer {.importc: "QStackedLayout_metaObject".}
 proc fcQStackedLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QStackedLayout_metacast".}
 proc fcQStackedLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStackedLayout_metacall".}
-proc fcQStackedLayout_tr(s: cstring): struct_seaqt_string {.importc: "QStackedLayout_tr".}
-proc fcQStackedLayout_trUtf8(s: cstring): struct_seaqt_string {.importc: "QStackedLayout_trUtf8".}
+proc fcQStackedLayout_trS(s: cstring): struct_seaqt_string {.importc: "QStackedLayout_tr_s".}
+proc fcQStackedLayout_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QStackedLayout_trUtf8_s".}
 proc fcQStackedLayout_addWidget(self: pointer, w: pointer): cint {.importc: "QStackedLayout_addWidget".}
 proc fcQStackedLayout_insertWidget(self: pointer, index: cint, w: pointer): cint {.importc: "QStackedLayout_insertWidget".}
 proc fcQStackedLayout_currentWidget(self: pointer): pointer {.importc: "QStackedLayout_currentWidget".}
@@ -94,10 +94,10 @@ proc fcQStackedLayout_currentChanged(self: pointer, index: cint): void {.importc
 proc fcQStackedLayout_connect_currentChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStackedLayout_connect_currentChanged".}
 proc fcQStackedLayout_setCurrentIndex(self: pointer, index: cint): void {.importc: "QStackedLayout_setCurrentIndex".}
 proc fcQStackedLayout_setCurrentWidget(self: pointer, w: pointer): void {.importc: "QStackedLayout_setCurrentWidget".}
-proc fcQStackedLayout_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStackedLayout_tr2".}
-proc fcQStackedLayout_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStackedLayout_tr3".}
-proc fcQStackedLayout_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStackedLayout_trUtf82".}
-proc fcQStackedLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStackedLayout_trUtf83".}
+proc fcQStackedLayout_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStackedLayout_tr_s_c".}
+proc fcQStackedLayout_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStackedLayout_tr_s_c_n".}
+proc fcQStackedLayout_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStackedLayout_trUtf8_s_c".}
+proc fcQStackedLayout_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStackedLayout_trUtf8_s_c_n".}
 proc fcQStackedLayout_vdata(self: pointer): ptr pointer {.importc: "QStackedLayout_vdata".}
 proc fvdata_cQStackedLayout(self: pointer): pointer {.importc: "vdata_QStackedLayout".}
 
@@ -119,7 +119,7 @@ type cQStackedLayoutVTable {.pure.} = object
   geometry*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
   expandingDirections*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   maximumSize*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  indexOf*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
+  indexOf_QWidget*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
   isEmpty*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
   controlTypes*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   layout*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -149,7 +149,7 @@ proc fcQStackedLayout_virtualbase_invalidate(self: pointer): void {.importc: "QS
 proc fcQStackedLayout_virtualbase_geometry(self: pointer): pointer {.importc: "QStackedLayout_virtualbase_geometry".}
 proc fcQStackedLayout_virtualbase_expandingDirections(self: pointer): cint {.importc: "QStackedLayout_virtualbase_expandingDirections".}
 proc fcQStackedLayout_virtualbase_maximumSize(self: pointer): pointer {.importc: "QStackedLayout_virtualbase_maximumSize".}
-proc fcQStackedLayout_virtualbase_indexOf(self: pointer, param1: pointer): cint {.importc: "QStackedLayout_virtualbase_indexOf".}
+proc fcQStackedLayout_virtualbase_indexOf_QWidget(self: pointer, param1: pointer): cint {.importc: "QStackedLayout_virtualbase_indexOf_QWidget".}
 proc fcQStackedLayout_virtualbase_isEmpty(self: pointer): bool {.importc: "QStackedLayout_virtualbase_isEmpty".}
 proc fcQStackedLayout_virtualbase_controlTypes(self: pointer): cint {.importc: "QStackedLayout_virtualbase_controlTypes".}
 proc fcQStackedLayout_virtualbase_layout(self: pointer): pointer {.importc: "QStackedLayout_virtualbase_layout".}
@@ -173,8 +173,8 @@ proc fcQStackedLayout_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQStackedLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStackedLayout_protectedbase_receivers".}
 proc fcQStackedLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStackedLayout_protectedbase_isSignalConnected".}
 proc fcQStackedLayout_new(vtbl: pointer, vdata: csize_t): ptr cQStackedLayout {.importc: "QStackedLayout_new".}
-proc fcQStackedLayout_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStackedLayout {.importc: "QStackedLayout_new2".}
-proc fcQStackedLayout_new3(vtbl: pointer, vdata: csize_t, parentLayout: pointer): ptr cQStackedLayout {.importc: "QStackedLayout_new3".}
+proc fcQStackedLayout_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStackedLayout {.importc: "QStackedLayout_new_parent".}
+proc fcQStackedLayout_new3(vtbl: pointer, vdata: csize_t, parentLayout: pointer): ptr cQStackedLayout {.importc: "QStackedLayout_new_parentLayout".}
 proc fcQStackedLayout_staticMetaObject(): pointer {.importc: "QStackedLayout_staticMetaObject".}
 
 proc metaObject*(self: gen_qstackedlayout_types.QStackedLayout): gen_qobjectdefs_types.QMetaObject =
@@ -187,13 +187,13 @@ proc metacall*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint, para
   fcQStackedLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstackedlayout_types.QStackedLayout, s: cstring): string =
-  let v_ms = fcQStackedLayout_tr(s)
+  let v_ms = fcQStackedLayout_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qstackedlayout_types.QStackedLayout, s: cstring): string =
-  let v_ms = fcQStackedLayout_trUtf8(s)
+  let v_ms = fcQStackedLayout_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -293,25 +293,25 @@ proc setCurrentWidget*(self: gen_qstackedlayout_types.QStackedLayout, w: gen_qwi
   fcQStackedLayout_setCurrentWidget(self.h, w.h)
 
 proc tr*(_: type gen_qstackedlayout_types.QStackedLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQStackedLayout_tr2(s, c)
+  let v_ms = fcQStackedLayout_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qstackedlayout_types.QStackedLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQStackedLayout_tr3(s, c, n)
+  let v_ms = fcQStackedLayout_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qstackedlayout_types.QStackedLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQStackedLayout_trUtf82(s, c)
+  let v_ms = fcQStackedLayout_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qstackedlayout_types.QStackedLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQStackedLayout_trUtf83(s, c, n)
+  let v_ms = fcQStackedLayout_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -332,7 +332,7 @@ type QStackedLayoutinvalidateProc* = proc(self: QStackedLayout): void {.raises: 
 type QStackedLayoutgeometryProc* = proc(self: QStackedLayout): gen_qrect_types.QRect {.raises: [], gcsafe.}
 type QStackedLayoutexpandingDirectionsProc* = proc(self: QStackedLayout): cint {.raises: [], gcsafe.}
 type QStackedLayoutmaximumSizeProc* = proc(self: QStackedLayout): gen_qsize_types.QSize {.raises: [], gcsafe.}
-type QStackedLayoutindexOfProc* = proc(self: QStackedLayout, param1: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
+type QStackedLayoutindexOf_QWidgetProc* = proc(self: QStackedLayout, param1: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
 type QStackedLayoutisEmptyProc* = proc(self: QStackedLayout): bool {.raises: [], gcsafe.}
 type QStackedLayoutcontrolTypesProc* = proc(self: QStackedLayout): cint {.raises: [], gcsafe.}
 type QStackedLayoutlayoutProc* = proc(self: QStackedLayout): gen_qlayout_types.QLayout {.raises: [], gcsafe.}
@@ -365,7 +365,7 @@ type QStackedLayoutVTable* {.inheritable, pure.} = object
   geometry*: QStackedLayoutgeometryProc
   expandingDirections*: QStackedLayoutexpandingDirectionsProc
   maximumSize*: QStackedLayoutmaximumSizeProc
-  indexOf*: QStackedLayoutindexOfProc
+  indexOf_QWidget*: QStackedLayoutindexOf_QWidgetProc
   isEmpty*: QStackedLayoutisEmptyProc
   controlTypes*: QStackedLayoutcontrolTypesProc
   layout*: QStackedLayoutlayoutProc
@@ -429,7 +429,7 @@ proc QStackedLayoutmaximumSize*(self: gen_qstackedlayout_types.QStackedLayout): 
   gen_qsize_types.QSize(h: fcQStackedLayout_virtualbase_maximumSize(self.h), owned: true)
 
 proc QStackedLayoutindexOf*(self: gen_qstackedlayout_types.QStackedLayout, param1: gen_qwidget_types.QWidget): cint =
-  fcQStackedLayout_virtualbase_indexOf(self.h, param1.h)
+  fcQStackedLayout_virtualbase_indexOf_QWidget(self.h, param1.h)
 
 proc QStackedLayoutisEmpty*(self: gen_qstackedlayout_types.QStackedLayout): bool =
   fcQStackedLayout_virtualbase_isEmpty(self.h)
@@ -594,11 +594,11 @@ proc fcQStackedLayout_vtable_callback_maximumSize(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQStackedLayout_vtable_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_indexOf_QWidget(self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self)[])
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
-  var virtualReturn = vtbl[].indexOf(self, slotval1)
+  var virtualReturn = vtbl[].indexOf_QWidget(self, slotval1)
   virtualReturn
 
 proc fcQStackedLayout_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
@@ -863,7 +863,7 @@ proc fcQStackedLayout_method_callback_maximumSize(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQStackedLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_method_callback_indexOf_QWidget(self: pointer, param1: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
@@ -1014,8 +1014,8 @@ proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
     vtbl[].vtbl.expandingDirections = fcQStackedLayout_vtable_callback_expandingDirections
   if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = fcQStackedLayout_vtable_callback_maximumSize
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQStackedLayout_vtable_callback_indexOf
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQStackedLayout_vtable_callback_indexOf_QWidget
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQStackedLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
@@ -1085,8 +1085,8 @@ proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
     vtbl[].vtbl.expandingDirections = fcQStackedLayout_vtable_callback_expandingDirections
   if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = fcQStackedLayout_vtable_callback_maximumSize
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQStackedLayout_vtable_callback_indexOf
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQStackedLayout_vtable_callback_indexOf_QWidget
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQStackedLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
@@ -1156,8 +1156,8 @@ proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
     vtbl[].vtbl.expandingDirections = fcQStackedLayout_vtable_callback_expandingDirections
   if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = fcQStackedLayout_vtable_callback_maximumSize
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQStackedLayout_vtable_callback_indexOf
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQStackedLayout_vtable_callback_indexOf_QWidget
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQStackedLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
@@ -1209,7 +1209,7 @@ const cQStackedLayout_mvtbl = cQStackedLayoutVTable(
   geometry: fcQStackedLayout_method_callback_geometry,
   expandingDirections: fcQStackedLayout_method_callback_expandingDirections,
   maximumSize: fcQStackedLayout_method_callback_maximumSize,
-  indexOf: fcQStackedLayout_method_callback_indexOf,
+  indexOf_QWidget: fcQStackedLayout_method_callback_indexOf_QWidget,
   isEmpty: fcQStackedLayout_method_callback_isEmpty,
   controlTypes: fcQStackedLayout_method_callback_controlTypes,
   layout: fcQStackedLayout_method_callback_layout,

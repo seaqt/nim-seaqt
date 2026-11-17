@@ -57,8 +57,8 @@ type cQMediaRecorderControl*{.exportc: "QMediaRecorderControl", incompleteStruct
 proc fcQMediaRecorderControl_metaObject(self: pointer): pointer {.importc: "QMediaRecorderControl_metaObject".}
 proc fcQMediaRecorderControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaRecorderControl_metacast".}
 proc fcQMediaRecorderControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaRecorderControl_metacall".}
-proc fcQMediaRecorderControl_tr(s: cstring): struct_seaqt_string {.importc: "QMediaRecorderControl_tr".}
-proc fcQMediaRecorderControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaRecorderControl_trUtf8".}
+proc fcQMediaRecorderControl_trS(s: cstring): struct_seaqt_string {.importc: "QMediaRecorderControl_tr_s".}
+proc fcQMediaRecorderControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaRecorderControl_trUtf8_s".}
 proc fcQMediaRecorderControl_outputLocation(self: pointer): pointer {.importc: "QMediaRecorderControl_outputLocation".}
 proc fcQMediaRecorderControl_setOutputLocation(self: pointer, location: pointer): bool {.importc: "QMediaRecorderControl_setOutputLocation".}
 proc fcQMediaRecorderControl_state(self: pointer): cint {.importc: "QMediaRecorderControl_state".}
@@ -84,10 +84,10 @@ proc fcQMediaRecorderControl_connect_error(self: pointer, slot: int, callback: p
 proc fcQMediaRecorderControl_setState(self: pointer, state: cint): void {.importc: "QMediaRecorderControl_setState".}
 proc fcQMediaRecorderControl_setMuted(self: pointer, muted: bool): void {.importc: "QMediaRecorderControl_setMuted".}
 proc fcQMediaRecorderControl_setVolume(self: pointer, volume: float64): void {.importc: "QMediaRecorderControl_setVolume".}
-proc fcQMediaRecorderControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaRecorderControl_tr2".}
-proc fcQMediaRecorderControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaRecorderControl_tr3".}
-proc fcQMediaRecorderControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaRecorderControl_trUtf82".}
-proc fcQMediaRecorderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaRecorderControl_trUtf83".}
+proc fcQMediaRecorderControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaRecorderControl_tr_s_c".}
+proc fcQMediaRecorderControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaRecorderControl_tr_s_c_n".}
+proc fcQMediaRecorderControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaRecorderControl_trUtf8_s_c".}
+proc fcQMediaRecorderControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaRecorderControl_trUtf8_s_c_n".}
 proc fcQMediaRecorderControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaRecorderControl_protectedbase_sender".}
 proc fcQMediaRecorderControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaRecorderControl_protectedbase_senderSignalIndex".}
 proc fcQMediaRecorderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaRecorderControl_protectedbase_receivers".}
@@ -104,13 +104,13 @@ proc metacall*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, para
   fcQMediaRecorderControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring): string =
-  let v_ms = fcQMediaRecorderControl_tr(s)
+  let v_ms = fcQMediaRecorderControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring): string =
-  let v_ms = fcQMediaRecorderControl_trUtf8(s)
+  let v_ms = fcQMediaRecorderControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -294,25 +294,25 @@ proc setVolume*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, vol
   fcQMediaRecorderControl_setVolume(self.h, volume)
 
 proc tr*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaRecorderControl_tr2(s, c)
+  let v_ms = fcQMediaRecorderControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaRecorderControl_tr3(s, c, n)
+  let v_ms = fcQMediaRecorderControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaRecorderControl_trUtf82(s, c)
+  let v_ms = fcQMediaRecorderControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaRecorderControl_trUtf83(s, c, n)
+  let v_ms = fcQMediaRecorderControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -61,8 +61,8 @@ type cQTextList*{.exportc: "QTextList", incompleteStruct.} = object
 proc fcQTextList_metaObject(self: pointer): pointer {.importc: "QTextList_metaObject".}
 proc fcQTextList_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextList_metacast".}
 proc fcQTextList_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextList_metacall".}
-proc fcQTextList_tr(s: cstring): struct_seaqt_string {.importc: "QTextList_tr".}
-proc fcQTextList_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTextList_trUtf8".}
+proc fcQTextList_trS(s: cstring): struct_seaqt_string {.importc: "QTextList_tr_s".}
+proc fcQTextList_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTextList_trUtf8_s".}
 proc fcQTextList_count(self: pointer): cint {.importc: "QTextList_count".}
 proc fcQTextList_isEmpty(self: pointer): bool {.importc: "QTextList_isEmpty".}
 proc fcQTextList_item(self: pointer, i: cint): pointer {.importc: "QTextList_item".}
@@ -73,10 +73,10 @@ proc fcQTextList_remove(self: pointer, param1: pointer): void {.importc: "QTextL
 proc fcQTextList_add(self: pointer, blockVal: pointer): void {.importc: "QTextList_add".}
 proc fcQTextList_setFormat(self: pointer, format: pointer): void {.importc: "QTextList_setFormat".}
 proc fcQTextList_format(self: pointer): pointer {.importc: "QTextList_format".}
-proc fcQTextList_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextList_tr2".}
-proc fcQTextList_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextList_tr3".}
-proc fcQTextList_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextList_trUtf82".}
-proc fcQTextList_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextList_trUtf83".}
+proc fcQTextList_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextList_tr_s_c".}
+proc fcQTextList_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextList_tr_s_c_n".}
+proc fcQTextList_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextList_trUtf8_s_c".}
+proc fcQTextList_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextList_trUtf8_s_c_n".}
 proc fcQTextList_vdata(self: pointer): ptr pointer {.importc: "QTextList_vdata".}
 proc fvdata_cQTextList(self: pointer): pointer {.importc: "vdata_QTextList".}
 
@@ -126,13 +126,13 @@ proc metacall*(self: gen_qtextlist_types.QTextList, param1: cint, param2: cint, 
   fcQTextList_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtextlist_types.QTextList, s: cstring): string =
-  let v_ms = fcQTextList_tr(s)
+  let v_ms = fcQTextList_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextlist_types.QTextList, s: cstring): string =
-  let v_ms = fcQTextList_trUtf8(s)
+  let v_ms = fcQTextList_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -171,25 +171,25 @@ proc format*(self: gen_qtextlist_types.QTextList): gen_qtextformat_types.QTextLi
   gen_qtextformat_types.QTextListFormat(h: fcQTextList_format(self.h), owned: true)
 
 proc tr*(_: type gen_qtextlist_types.QTextList, s: cstring, c: cstring): string =
-  let v_ms = fcQTextList_tr2(s, c)
+  let v_ms = fcQTextList_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextlist_types.QTextList, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextList_tr3(s, c, n)
+  let v_ms = fcQTextList_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextlist_types.QTextList, s: cstring, c: cstring): string =
-  let v_ms = fcQTextList_trUtf82(s, c)
+  let v_ms = fcQTextList_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextlist_types.QTextList, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextList_trUtf83(s, c, n)
+  let v_ms = fcQTextList_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

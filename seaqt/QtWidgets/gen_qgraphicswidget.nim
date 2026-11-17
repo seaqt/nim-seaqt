@@ -95,8 +95,8 @@ type cQGraphicsWidget*{.exportc: "QGraphicsWidget", incompleteStruct.} = object
 proc fcQGraphicsWidget_metaObject(self: pointer): pointer {.importc: "QGraphicsWidget_metaObject".}
 proc fcQGraphicsWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsWidget_metacast".}
 proc fcQGraphicsWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsWidget_metacall".}
-proc fcQGraphicsWidget_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsWidget_tr".}
-proc fcQGraphicsWidget_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGraphicsWidget_trUtf8".}
+proc fcQGraphicsWidget_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsWidget_tr_s".}
+proc fcQGraphicsWidget_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGraphicsWidget_trUtf8_s".}
 proc fcQGraphicsWidget_layout(self: pointer): pointer {.importc: "QGraphicsWidget_layout".}
 proc fcQGraphicsWidget_setLayout(self: pointer, layout: pointer): void {.importc: "QGraphicsWidget_setLayout".}
 proc fcQGraphicsWidget_adjustSize(self: pointer): void {.importc: "QGraphicsWidget_adjustSize".}
@@ -111,17 +111,17 @@ proc fcQGraphicsWidget_palette(self: pointer): pointer {.importc: "QGraphicsWidg
 proc fcQGraphicsWidget_setPalette(self: pointer, palette: pointer): void {.importc: "QGraphicsWidget_setPalette".}
 proc fcQGraphicsWidget_autoFillBackground(self: pointer): bool {.importc: "QGraphicsWidget_autoFillBackground".}
 proc fcQGraphicsWidget_setAutoFillBackground(self: pointer, enabled: bool): void {.importc: "QGraphicsWidget_setAutoFillBackground".}
-proc fcQGraphicsWidget_resize(self: pointer, size: pointer): void {.importc: "QGraphicsWidget_resize".}
-proc fcQGraphicsWidget_resize2(self: pointer, w: float64, h: float64): void {.importc: "QGraphicsWidget_resize2".}
+proc fcQGraphicsWidget_resizeSize(self: pointer, size: pointer): void {.importc: "QGraphicsWidget_resize_size".}
+proc fcQGraphicsWidget_resizeWH(self: pointer, w: float64, h: float64): void {.importc: "QGraphicsWidget_resize_w_h".}
 proc fcQGraphicsWidget_size(self: pointer): pointer {.importc: "QGraphicsWidget_size".}
-proc fcQGraphicsWidget_setGeometry(self: pointer, rect: pointer): void {.importc: "QGraphicsWidget_setGeometry".}
-proc fcQGraphicsWidget_setGeometry2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsWidget_setGeometry2".}
+proc fcQGraphicsWidget_setGeometryRect(self: pointer, rect: pointer): void {.importc: "QGraphicsWidget_setGeometry_rect".}
+proc fcQGraphicsWidget_setGeometryXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsWidget_setGeometry_x_y_w_h".}
 proc fcQGraphicsWidget_rect(self: pointer): pointer {.importc: "QGraphicsWidget_rect".}
-proc fcQGraphicsWidget_setContentsMargins(self: pointer, left: float64, top: float64, right: float64, bottom: float64): void {.importc: "QGraphicsWidget_setContentsMargins".}
-proc fcQGraphicsWidget_setContentsMarginsWithMargins(self: pointer, margins: pointer): void {.importc: "QGraphicsWidget_setContentsMarginsWithMargins".}
+proc fcQGraphicsWidget_setContentsMarginsLeftTopRightBottom(self: pointer, left: float64, top: float64, right: float64, bottom: float64): void {.importc: "QGraphicsWidget_setContentsMargins_left_top_right_bottom".}
+proc fcQGraphicsWidget_setContentsMarginsMargins(self: pointer, margins: pointer): void {.importc: "QGraphicsWidget_setContentsMargins_margins".}
 proc fcQGraphicsWidget_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.importc: "QGraphicsWidget_getContentsMargins".}
-proc fcQGraphicsWidget_setWindowFrameMargins(self: pointer, left: float64, top: float64, right: float64, bottom: float64): void {.importc: "QGraphicsWidget_setWindowFrameMargins".}
-proc fcQGraphicsWidget_setWindowFrameMarginsWithMargins(self: pointer, margins: pointer): void {.importc: "QGraphicsWidget_setWindowFrameMarginsWithMargins".}
+proc fcQGraphicsWidget_setWindowFrameMarginsLeftTopRightBottom(self: pointer, left: float64, top: float64, right: float64, bottom: float64): void {.importc: "QGraphicsWidget_setWindowFrameMargins_left_top_right_bottom".}
+proc fcQGraphicsWidget_setWindowFrameMarginsMargins(self: pointer, margins: pointer): void {.importc: "QGraphicsWidget_setWindowFrameMargins_margins".}
 proc fcQGraphicsWidget_getWindowFrameMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.importc: "QGraphicsWidget_getWindowFrameMargins".}
 proc fcQGraphicsWidget_unsetWindowFrameMargins(self: pointer): void {.importc: "QGraphicsWidget_unsetWindowFrameMargins".}
 proc fcQGraphicsWidget_windowFrameGeometry(self: pointer): pointer {.importc: "QGraphicsWidget_windowFrameGeometry".}
@@ -136,17 +136,17 @@ proc fcQGraphicsWidget_focusPolicy(self: pointer): cint {.importc: "QGraphicsWid
 proc fcQGraphicsWidget_setFocusPolicy(self: pointer, policy: cint): void {.importc: "QGraphicsWidget_setFocusPolicy".}
 proc fcQGraphicsWidget_setTabOrder(first: pointer, second: pointer): void {.importc: "QGraphicsWidget_setTabOrder".}
 proc fcQGraphicsWidget_focusWidget(self: pointer): pointer {.importc: "QGraphicsWidget_focusWidget".}
-proc fcQGraphicsWidget_grabShortcut(self: pointer, sequence: pointer): cint {.importc: "QGraphicsWidget_grabShortcut".}
+proc fcQGraphicsWidget_grabShortcutSequence(self: pointer, sequence: pointer): cint {.importc: "QGraphicsWidget_grabShortcut_sequence".}
 proc fcQGraphicsWidget_releaseShortcut(self: pointer, id: cint): void {.importc: "QGraphicsWidget_releaseShortcut".}
-proc fcQGraphicsWidget_setShortcutEnabled(self: pointer, id: cint): void {.importc: "QGraphicsWidget_setShortcutEnabled".}
-proc fcQGraphicsWidget_setShortcutAutoRepeat(self: pointer, id: cint): void {.importc: "QGraphicsWidget_setShortcutAutoRepeat".}
+proc fcQGraphicsWidget_setShortcutEnabledId(self: pointer, id: cint): void {.importc: "QGraphicsWidget_setShortcutEnabled_id".}
+proc fcQGraphicsWidget_setShortcutAutoRepeatId(self: pointer, id: cint): void {.importc: "QGraphicsWidget_setShortcutAutoRepeat_id".}
 proc fcQGraphicsWidget_addAction(self: pointer, action: pointer): void {.importc: "QGraphicsWidget_addAction".}
 proc fcQGraphicsWidget_addActions(self: pointer, actions: struct_seaqt_array): void {.importc: "QGraphicsWidget_addActions".}
 proc fcQGraphicsWidget_insertActions(self: pointer, before: pointer, actions: struct_seaqt_array): void {.importc: "QGraphicsWidget_insertActions".}
 proc fcQGraphicsWidget_insertAction(self: pointer, before: pointer, action: pointer): void {.importc: "QGraphicsWidget_insertAction".}
 proc fcQGraphicsWidget_removeAction(self: pointer, action: pointer): void {.importc: "QGraphicsWidget_removeAction".}
 proc fcQGraphicsWidget_actions(self: pointer): struct_seaqt_array {.importc: "QGraphicsWidget_actions".}
-proc fcQGraphicsWidget_setAttribute(self: pointer, attribute: cint): void {.importc: "QGraphicsWidget_setAttribute".}
+proc fcQGraphicsWidget_setAttributeAttribute(self: pointer, attribute: cint): void {.importc: "QGraphicsWidget_setAttribute_attribute".}
 proc fcQGraphicsWidget_testAttribute(self: pointer, attribute: cint): bool {.importc: "QGraphicsWidget_testAttribute".}
 proc fcQGraphicsWidget_typeX(self: pointer): cint {.importc: "QGraphicsWidget_type".}
 proc fcQGraphicsWidget_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.importc: "QGraphicsWidget_paint".}
@@ -158,14 +158,14 @@ proc fcQGraphicsWidget_connect_geometryChanged(self: pointer, slot: int, callbac
 proc fcQGraphicsWidget_layoutChanged(self: pointer): void {.importc: "QGraphicsWidget_layoutChanged".}
 proc fcQGraphicsWidget_connect_layoutChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWidget_connect_layoutChanged".}
 proc fcQGraphicsWidget_close(self: pointer): bool {.importc: "QGraphicsWidget_close".}
-proc fcQGraphicsWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsWidget_tr2".}
-proc fcQGraphicsWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsWidget_tr3".}
-proc fcQGraphicsWidget_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsWidget_trUtf82".}
-proc fcQGraphicsWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsWidget_trUtf83".}
-proc fcQGraphicsWidget_grabShortcut2(self: pointer, sequence: pointer, context: cint): cint {.importc: "QGraphicsWidget_grabShortcut2".}
-proc fcQGraphicsWidget_setShortcutEnabled2(self: pointer, id: cint, enabled: bool): void {.importc: "QGraphicsWidget_setShortcutEnabled2".}
-proc fcQGraphicsWidget_setShortcutAutoRepeat2(self: pointer, id: cint, enabled: bool): void {.importc: "QGraphicsWidget_setShortcutAutoRepeat2".}
-proc fcQGraphicsWidget_setAttribute2(self: pointer, attribute: cint, on: bool): void {.importc: "QGraphicsWidget_setAttribute2".}
+proc fcQGraphicsWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsWidget_tr_s_c".}
+proc fcQGraphicsWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsWidget_tr_s_c_n".}
+proc fcQGraphicsWidget_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsWidget_trUtf8_s_c".}
+proc fcQGraphicsWidget_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsWidget_trUtf8_s_c_n".}
+proc fcQGraphicsWidget_grabShortcutSequenceContext(self: pointer, sequence: pointer, context: cint): cint {.importc: "QGraphicsWidget_grabShortcut_sequence_context".}
+proc fcQGraphicsWidget_setShortcutEnabledIdEnabled(self: pointer, id: cint, enabled: bool): void {.importc: "QGraphicsWidget_setShortcutEnabled_id_enabled".}
+proc fcQGraphicsWidget_setShortcutAutoRepeatIdEnabled(self: pointer, id: cint, enabled: bool): void {.importc: "QGraphicsWidget_setShortcutAutoRepeat_id_enabled".}
+proc fcQGraphicsWidget_setAttributeAttributeOn(self: pointer, attribute: cint, on: bool): void {.importc: "QGraphicsWidget_setAttribute_attribute_on".}
 proc fcQGraphicsWidget_vdata(self: pointer): ptr pointer {.importc: "QGraphicsWidget_vdata".}
 proc fvdata_cQGraphicsWidget(self: pointer): pointer {.importc: "vdata_QGraphicsWidget".}
 
@@ -174,7 +174,7 @@ type cQGraphicsWidgetVTable {.pure.} = object
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  setGeometry*: proc(self: pointer, rect: pointer): void {.cdecl, raises: [], gcsafe.}
+  setGeometryRect*: proc(self: pointer, rect: pointer): void {.cdecl, raises: [], gcsafe.}
   getContentsMargins*: proc(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl, raises: [], gcsafe.}
   typeX*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   paint*: proc(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -240,7 +240,7 @@ type cQGraphicsWidgetVTable {.pure.} = object
 proc fcQGraphicsWidget_virtualbase_metaObject(self: pointer): pointer {.importc: "QGraphicsWidget_virtualbase_metaObject".}
 proc fcQGraphicsWidget_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsWidget_virtualbase_metacast".}
 proc fcQGraphicsWidget_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsWidget_virtualbase_metacall".}
-proc fcQGraphicsWidget_virtualbase_setGeometry(self: pointer, rect: pointer): void {.importc: "QGraphicsWidget_virtualbase_setGeometry".}
+proc fcQGraphicsWidget_virtualbase_setGeometryRect(self: pointer, rect: pointer): void {.importc: "QGraphicsWidget_virtualbase_setGeometry_rect".}
 proc fcQGraphicsWidget_virtualbase_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.importc: "QGraphicsWidget_virtualbase_getContentsMargins".}
 proc fcQGraphicsWidget_virtualbase_typeX(self: pointer): cint {.importc: "QGraphicsWidget_virtualbase_type".}
 proc fcQGraphicsWidget_virtualbase_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.importc: "QGraphicsWidget_virtualbase_paint".}
@@ -314,8 +314,8 @@ proc fcQGraphicsWidget_protectedbase_prepareGeometryChange(self: pointer): void 
 proc fcQGraphicsWidget_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsWidget_protectedbase_setGraphicsItem".}
 proc fcQGraphicsWidget_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsWidget_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsWidget_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsWidget {.importc: "QGraphicsWidget_new".}
-proc fcQGraphicsWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsWidget {.importc: "QGraphicsWidget_new2".}
-proc fcQGraphicsWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer, wFlags: cint): ptr cQGraphicsWidget {.importc: "QGraphicsWidget_new3".}
+proc fcQGraphicsWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsWidget {.importc: "QGraphicsWidget_new_parent".}
+proc fcQGraphicsWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer, wFlags: cint): ptr cQGraphicsWidget {.importc: "QGraphicsWidget_new_parent_wFlags".}
 proc fcQGraphicsWidget_staticMetaObject(): pointer {.importc: "QGraphicsWidget_staticMetaObject".}
 
 proc metaObject*(self: gen_qgraphicswidget_types.QGraphicsWidget): gen_qobjectdefs_types.QMetaObject =
@@ -328,13 +328,13 @@ proc metacall*(self: gen_qgraphicswidget_types.QGraphicsWidget, param1: cint, pa
   fcQGraphicsWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicswidget_types.QGraphicsWidget, s: cstring): string =
-  let v_ms = fcQGraphicsWidget_tr(s)
+  let v_ms = fcQGraphicsWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicswidget_types.QGraphicsWidget, s: cstring): string =
-  let v_ms = fcQGraphicsWidget_trUtf8(s)
+  let v_ms = fcQGraphicsWidget_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -382,37 +382,37 @@ proc setAutoFillBackground*(self: gen_qgraphicswidget_types.QGraphicsWidget, ena
   fcQGraphicsWidget_setAutoFillBackground(self.h, enabled)
 
 proc resize*(self: gen_qgraphicswidget_types.QGraphicsWidget, size: gen_qsize_types.QSizeF): void =
-  fcQGraphicsWidget_resize(self.h, size.h)
+  fcQGraphicsWidget_resizeSize(self.h, size.h)
 
 proc resize*(self: gen_qgraphicswidget_types.QGraphicsWidget, w: float64, h: float64): void =
-  fcQGraphicsWidget_resize2(self.h, w, h)
+  fcQGraphicsWidget_resizeWH(self.h, w, h)
 
 proc size*(self: gen_qgraphicswidget_types.QGraphicsWidget): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQGraphicsWidget_size(self.h), owned: true)
 
 proc setGeometry*(self: gen_qgraphicswidget_types.QGraphicsWidget, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsWidget_setGeometry(self.h, rect.h)
+  fcQGraphicsWidget_setGeometryRect(self.h, rect.h)
 
 proc setGeometry*(self: gen_qgraphicswidget_types.QGraphicsWidget, x: float64, y: float64, w: float64, h: float64): void =
-  fcQGraphicsWidget_setGeometry2(self.h, x, y, w, h)
+  fcQGraphicsWidget_setGeometryXYWH(self.h, x, y, w, h)
 
 proc rect*(self: gen_qgraphicswidget_types.QGraphicsWidget): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQGraphicsWidget_rect(self.h), owned: true)
 
 proc setContentsMargins*(self: gen_qgraphicswidget_types.QGraphicsWidget, left: float64, top: float64, right: float64, bottom: float64): void =
-  fcQGraphicsWidget_setContentsMargins(self.h, left, top, right, bottom)
+  fcQGraphicsWidget_setContentsMarginsLeftTopRightBottom(self.h, left, top, right, bottom)
 
 proc setContentsMargins*(self: gen_qgraphicswidget_types.QGraphicsWidget, margins: gen_qmargins_types.QMarginsF): void =
-  fcQGraphicsWidget_setContentsMarginsWithMargins(self.h, margins.h)
+  fcQGraphicsWidget_setContentsMarginsMargins(self.h, margins.h)
 
 proc getContentsMargins*(self: gen_qgraphicswidget_types.QGraphicsWidget, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
   fcQGraphicsWidget_getContentsMargins(self.h, left, top, right, bottom)
 
 proc setWindowFrameMargins*(self: gen_qgraphicswidget_types.QGraphicsWidget, left: float64, top: float64, right: float64, bottom: float64): void =
-  fcQGraphicsWidget_setWindowFrameMargins(self.h, left, top, right, bottom)
+  fcQGraphicsWidget_setWindowFrameMarginsLeftTopRightBottom(self.h, left, top, right, bottom)
 
 proc setWindowFrameMargins*(self: gen_qgraphicswidget_types.QGraphicsWidget, margins: gen_qmargins_types.QMarginsF): void =
-  fcQGraphicsWidget_setWindowFrameMarginsWithMargins(self.h, margins.h)
+  fcQGraphicsWidget_setWindowFrameMarginsMargins(self.h, margins.h)
 
 proc getWindowFrameMargins*(self: gen_qgraphicswidget_types.QGraphicsWidget, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
   fcQGraphicsWidget_getWindowFrameMargins(self.h, left, top, right, bottom)
@@ -460,16 +460,16 @@ proc focusWidget*(self: gen_qgraphicswidget_types.QGraphicsWidget): gen_qgraphic
   gen_qgraphicswidget_types.QGraphicsWidget(h: fcQGraphicsWidget_focusWidget(self.h), owned: false)
 
 proc grabShortcut*(self: gen_qgraphicswidget_types.QGraphicsWidget, sequence: gen_qkeysequence_types.QKeySequence): cint =
-  fcQGraphicsWidget_grabShortcut(self.h, sequence.h)
+  fcQGraphicsWidget_grabShortcutSequence(self.h, sequence.h)
 
 proc releaseShortcut*(self: gen_qgraphicswidget_types.QGraphicsWidget, id: cint): void =
   fcQGraphicsWidget_releaseShortcut(self.h, id)
 
 proc setShortcutEnabled*(self: gen_qgraphicswidget_types.QGraphicsWidget, id: cint): void =
-  fcQGraphicsWidget_setShortcutEnabled(self.h, id)
+  fcQGraphicsWidget_setShortcutEnabledId(self.h, id)
 
 proc setShortcutAutoRepeat*(self: gen_qgraphicswidget_types.QGraphicsWidget, id: cint): void =
-  fcQGraphicsWidget_setShortcutAutoRepeat(self.h, id)
+  fcQGraphicsWidget_setShortcutAutoRepeatId(self.h, id)
 
 proc addAction*(self: gen_qgraphicswidget_types.QGraphicsWidget, action: gen_qaction_types.QAction): void =
   fcQGraphicsWidget_addAction(self.h, action.h)
@@ -504,7 +504,7 @@ proc actions*(self: gen_qgraphicswidget_types.QGraphicsWidget): seq[gen_qaction_
   vx_ret
 
 proc setAttribute*(self: gen_qgraphicswidget_types.QGraphicsWidget, attribute: cint): void =
-  fcQGraphicsWidget_setAttribute(self.h, cint(attribute))
+  fcQGraphicsWidget_setAttributeAttribute(self.h, cint(attribute))
 
 proc testAttribute*(self: gen_qgraphicswidget_types.QGraphicsWidget, attribute: cint): bool =
   fcQGraphicsWidget_testAttribute(self.h, cint(attribute))
@@ -564,45 +564,45 @@ proc close*(self: gen_qgraphicswidget_types.QGraphicsWidget): bool =
   fcQGraphicsWidget_close(self.h)
 
 proc tr*(_: type gen_qgraphicswidget_types.QGraphicsWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsWidget_tr2(s, c)
+  let v_ms = fcQGraphicsWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicswidget_types.QGraphicsWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsWidget_tr3(s, c, n)
+  let v_ms = fcQGraphicsWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicswidget_types.QGraphicsWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsWidget_trUtf82(s, c)
+  let v_ms = fcQGraphicsWidget_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicswidget_types.QGraphicsWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsWidget_trUtf83(s, c, n)
+  let v_ms = fcQGraphicsWidget_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc grabShortcut*(self: gen_qgraphicswidget_types.QGraphicsWidget, sequence: gen_qkeysequence_types.QKeySequence, context: cint): cint =
-  fcQGraphicsWidget_grabShortcut2(self.h, sequence.h, cint(context))
+  fcQGraphicsWidget_grabShortcutSequenceContext(self.h, sequence.h, cint(context))
 
 proc setShortcutEnabled*(self: gen_qgraphicswidget_types.QGraphicsWidget, id: cint, enabled: bool): void =
-  fcQGraphicsWidget_setShortcutEnabled2(self.h, id, enabled)
+  fcQGraphicsWidget_setShortcutEnabledIdEnabled(self.h, id, enabled)
 
 proc setShortcutAutoRepeat*(self: gen_qgraphicswidget_types.QGraphicsWidget, id: cint, enabled: bool): void =
-  fcQGraphicsWidget_setShortcutAutoRepeat2(self.h, id, enabled)
+  fcQGraphicsWidget_setShortcutAutoRepeatIdEnabled(self.h, id, enabled)
 
 proc setAttribute*(self: gen_qgraphicswidget_types.QGraphicsWidget, attribute: cint, on: bool): void =
-  fcQGraphicsWidget_setAttribute2(self.h, cint(attribute), on)
+  fcQGraphicsWidget_setAttributeAttributeOn(self.h, cint(attribute), on)
 
 type QGraphicsWidgetmetaObjectProc* = proc(self: QGraphicsWidget): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QGraphicsWidgetmetacastProc* = proc(self: QGraphicsWidget, param1: cstring): pointer {.raises: [], gcsafe.}
 type QGraphicsWidgetmetacallProc* = proc(self: QGraphicsWidget, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QGraphicsWidgetsetGeometryProc* = proc(self: QGraphicsWidget, rect: gen_qrect_types.QRectF): void {.raises: [], gcsafe.}
+type QGraphicsWidgetsetGeometryRectProc* = proc(self: QGraphicsWidget, rect: gen_qrect_types.QRectF): void {.raises: [], gcsafe.}
 type QGraphicsWidgetgetContentsMarginsProc* = proc(self: QGraphicsWidget, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.raises: [], gcsafe.}
 type QGraphicsWidgettypeXProc* = proc(self: QGraphicsWidget): cint {.raises: [], gcsafe.}
 type QGraphicsWidgetpaintProc* = proc(self: QGraphicsWidget, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
@@ -671,7 +671,7 @@ type QGraphicsWidgetVTable* {.inheritable, pure.} = object
   metaObject*: QGraphicsWidgetmetaObjectProc
   metacast*: QGraphicsWidgetmetacastProc
   metacall*: QGraphicsWidgetmetacallProc
-  setGeometry*: QGraphicsWidgetsetGeometryProc
+  setGeometryRect*: QGraphicsWidgetsetGeometryRectProc
   getContentsMargins*: QGraphicsWidgetgetContentsMarginsProc
   typeX*: QGraphicsWidgettypeXProc
   paint*: QGraphicsWidgetpaintProc
@@ -745,7 +745,7 @@ proc QGraphicsWidgetmetacall*(self: gen_qgraphicswidget_types.QGraphicsWidget, p
   fcQGraphicsWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QGraphicsWidgetsetGeometry*(self: gen_qgraphicswidget_types.QGraphicsWidget, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsWidget_virtualbase_setGeometry(self.h, rect.h)
+  fcQGraphicsWidget_virtualbase_setGeometryRect(self.h, rect.h)
 
 proc QGraphicsWidgetgetContentsMargins*(self: gen_qgraphicswidget_types.QGraphicsWidget, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
   fcQGraphicsWidget_virtualbase_getContentsMargins(self.h, left, top, right, bottom)
@@ -959,11 +959,11 @@ proc fcQGraphicsWidget_vtable_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc fcQGraphicsWidget_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
+proc fcQGraphicsWidget_vtable_callback_setGeometryRect(self: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsWidgetVTable](fcQGraphicsWidget_vdata(self)[])
   let self = QGraphicsWidget(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
-  vtbl[].setGeometry(self, slotval1)
+  vtbl[].setGeometryRect(self, slotval1)
 
 proc fcQGraphicsWidget_vtable_callback_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsWidgetVTable](fcQGraphicsWidget_vdata(self)[])
@@ -1552,7 +1552,7 @@ proc fcQGraphicsWidget_method_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-proc fcQGraphicsWidget_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
+proc fcQGraphicsWidget_method_callback_setGeometryRect(self: pointer, rect: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsWidget](fcQGraphicsWidget_vdata(self)[])
   let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   inst.setGeometry(slotval1)
@@ -1968,8 +1968,8 @@ proc create*(T: type gen_qgraphicswidget_types.QGraphicsWidget,
     vtbl[].vtbl.metacast = fcQGraphicsWidget_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = fcQGraphicsWidget_vtable_callback_metacall
-  if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = fcQGraphicsWidget_vtable_callback_setGeometry
+  if not isNil(vtbl[].setGeometryRect):
+    vtbl[].vtbl.setGeometryRect = fcQGraphicsWidget_vtable_callback_setGeometryRect
   if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = fcQGraphicsWidget_vtable_callback_getContentsMargins
   if not isNil(vtbl[].typeX):
@@ -2111,8 +2111,8 @@ proc create*(T: type gen_qgraphicswidget_types.QGraphicsWidget,
     vtbl[].vtbl.metacast = fcQGraphicsWidget_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = fcQGraphicsWidget_vtable_callback_metacall
-  if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = fcQGraphicsWidget_vtable_callback_setGeometry
+  if not isNil(vtbl[].setGeometryRect):
+    vtbl[].vtbl.setGeometryRect = fcQGraphicsWidget_vtable_callback_setGeometryRect
   if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = fcQGraphicsWidget_vtable_callback_getContentsMargins
   if not isNil(vtbl[].typeX):
@@ -2254,8 +2254,8 @@ proc create*(T: type gen_qgraphicswidget_types.QGraphicsWidget,
     vtbl[].vtbl.metacast = fcQGraphicsWidget_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = fcQGraphicsWidget_vtable_callback_metacall
-  if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = fcQGraphicsWidget_vtable_callback_setGeometry
+  if not isNil(vtbl[].setGeometryRect):
+    vtbl[].vtbl.setGeometryRect = fcQGraphicsWidget_vtable_callback_setGeometryRect
   if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = fcQGraphicsWidget_vtable_callback_getContentsMargins
   if not isNil(vtbl[].typeX):
@@ -2392,7 +2392,7 @@ const cQGraphicsWidget_mvtbl = cQGraphicsWidgetVTable(
   metaObject: fcQGraphicsWidget_method_callback_metaObject,
   metacast: fcQGraphicsWidget_method_callback_metacast,
   metacall: fcQGraphicsWidget_method_callback_metacall,
-  setGeometry: fcQGraphicsWidget_method_callback_setGeometry,
+  setGeometryRect: fcQGraphicsWidget_method_callback_setGeometryRect,
   getContentsMargins: fcQGraphicsWidget_method_callback_getContentsMargins,
   typeX: fcQGraphicsWidget_method_callback_typeX,
   paint: fcQGraphicsWidget_method_callback_paint,

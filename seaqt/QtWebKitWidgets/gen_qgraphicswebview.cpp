@@ -944,7 +944,7 @@ VirtualQGraphicsWebView* QGraphicsWebView_new(const QGraphicsWebView_VTable* vtb
 	return _mem_ ? new (_mem_)VirtualQGraphicsWebView(vtbl) : nullptr;
 }
 
-VirtualQGraphicsWebView* QGraphicsWebView_new2(const QGraphicsWebView_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsWebView* QGraphicsWebView_new_parent(const QGraphicsWebView_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsWebView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsWebView(vtbl, parent) : nullptr;
 }
@@ -965,7 +965,7 @@ int QGraphicsWebView_metacall(QGraphicsWebView* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsWebView_tr(const char* s) {
+struct seaqt_string QGraphicsWebView_tr_s(const char* s) {
 	QString _ret = QGraphicsWebView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -976,7 +976,7 @@ struct seaqt_string QGraphicsWebView_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsWebView_trUtf8(const char* s) {
+struct seaqt_string QGraphicsWebView_trUtf8_s(const char* s) {
 	QString _ret = QGraphicsWebView::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1031,20 +1031,20 @@ bool QGraphicsWebView_isModified(const QGraphicsWebView* self) {
 	return self->isModified();
 }
 
-void QGraphicsWebView_load(QGraphicsWebView* self, QUrl* url) {
+void QGraphicsWebView_load_url(QGraphicsWebView* self, QUrl* url) {
 	self->load(*url);
 }
 
-void QGraphicsWebView_loadWithRequest(QGraphicsWebView* self, QNetworkRequest* request) {
+void QGraphicsWebView_load_request(QGraphicsWebView* self, QNetworkRequest* request) {
 	self->load(*request);
 }
 
-void QGraphicsWebView_setHtml(QGraphicsWebView* self, struct seaqt_string html) {
+void QGraphicsWebView_setHtml_html(QGraphicsWebView* self, struct seaqt_string html) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	self->setHtml(html_QString);
 }
 
-void QGraphicsWebView_setContent(QGraphicsWebView* self, struct seaqt_string data) {
+void QGraphicsWebView_setContent_data(QGraphicsWebView* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->setContent(data_QByteArray);
 }
@@ -1061,11 +1061,11 @@ QAction* QGraphicsWebView_pageAction(const QGraphicsWebView* self, int action) {
 	return self->pageAction(static_cast<QWebPage::WebAction>(action));
 }
 
-void QGraphicsWebView_triggerPageAction(QGraphicsWebView* self, int action) {
+void QGraphicsWebView_triggerPageAction_action(QGraphicsWebView* self, int action) {
 	self->triggerPageAction(static_cast<QWebPage::WebAction>(action));
 }
 
-bool QGraphicsWebView_findText(QGraphicsWebView* self, struct seaqt_string subString) {
+bool QGraphicsWebView_findText_subString(QGraphicsWebView* self, struct seaqt_string subString) {
 	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
 	return self->findText(subString_QString);
 }
@@ -1123,7 +1123,7 @@ void QGraphicsWebView_setRenderHints(QGraphicsWebView* self, int renderHints) {
 	self->setRenderHints(static_cast<QPainter::RenderHints>(renderHints));
 }
 
-void QGraphicsWebView_setRenderHint(QGraphicsWebView* self, int param1) {
+void QGraphicsWebView_setRenderHint_QPainter_RenderHint(QGraphicsWebView* self, int param1) {
 	self->setRenderHint(static_cast<QPainter::RenderHint>(param1));
 }
 
@@ -1289,7 +1289,7 @@ void QGraphicsWebView_connect_linkClicked(QGraphicsWebView* self, intptr_t slot,
 	QGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(const QUrl&)>(&QGraphicsWebView::linkClicked), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGraphicsWebView_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsWebView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsWebView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1300,7 +1300,7 @@ struct seaqt_string QGraphicsWebView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsWebView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsWebView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsWebView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1311,7 +1311,7 @@ struct seaqt_string QGraphicsWebView_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsWebView_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGraphicsWebView_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsWebView::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1322,7 +1322,7 @@ struct seaqt_string QGraphicsWebView_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsWebView_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsWebView_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsWebView::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1333,42 +1333,42 @@ struct seaqt_string QGraphicsWebView_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-void QGraphicsWebView_load2(QGraphicsWebView* self, QNetworkRequest* request, int operation) {
+void QGraphicsWebView_load_request_operation(QGraphicsWebView* self, QNetworkRequest* request, int operation) {
 	self->load(*request, static_cast<QNetworkAccessManager::Operation>(operation));
 }
 
-void QGraphicsWebView_load3(QGraphicsWebView* self, QNetworkRequest* request, int operation, struct seaqt_string body) {
+void QGraphicsWebView_load_request_operation_body(QGraphicsWebView* self, QNetworkRequest* request, int operation, struct seaqt_string body) {
 	QByteArray body_QByteArray(body.data, body.len);
 	self->load(*request, static_cast<QNetworkAccessManager::Operation>(operation), body_QByteArray);
 }
 
-void QGraphicsWebView_setHtml2(QGraphicsWebView* self, struct seaqt_string html, QUrl* baseUrl) {
+void QGraphicsWebView_setHtml_html_baseUrl(QGraphicsWebView* self, struct seaqt_string html, QUrl* baseUrl) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	self->setHtml(html_QString, *baseUrl);
 }
 
-void QGraphicsWebView_setContent2(QGraphicsWebView* self, struct seaqt_string data, struct seaqt_string mimeType) {
+void QGraphicsWebView_setContent_data_mimeType(QGraphicsWebView* self, struct seaqt_string data, struct seaqt_string mimeType) {
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	self->setContent(data_QByteArray, mimeType_QString);
 }
 
-void QGraphicsWebView_setContent3(QGraphicsWebView* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
+void QGraphicsWebView_setContent_data_mimeType_baseUrl(QGraphicsWebView* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	self->setContent(data_QByteArray, mimeType_QString, *baseUrl);
 }
 
-void QGraphicsWebView_triggerPageAction2(QGraphicsWebView* self, int action, bool checked) {
+void QGraphicsWebView_triggerPageAction_action_checked(QGraphicsWebView* self, int action, bool checked) {
 	self->triggerPageAction(static_cast<QWebPage::WebAction>(action), checked);
 }
 
-bool QGraphicsWebView_findText2(QGraphicsWebView* self, struct seaqt_string subString, int options) {
+bool QGraphicsWebView_findText_subString_options(QGraphicsWebView* self, struct seaqt_string subString, int options) {
 	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
 	return self->findText(subString_QString, static_cast<QWebPage::FindFlags>(options));
 }
 
-void QGraphicsWebView_setRenderHint2(QGraphicsWebView* self, int param1, bool enabled) {
+void QGraphicsWebView_setRenderHint_QPainter_RenderHint_bool(QGraphicsWebView* self, int param1, bool enabled) {
 	self->setRenderHint(static_cast<QPainter::RenderHint>(param1), enabled);
 }
 

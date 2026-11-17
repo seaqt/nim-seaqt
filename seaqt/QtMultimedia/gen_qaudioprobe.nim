@@ -61,19 +61,19 @@ type cQAudioProbe*{.exportc: "QAudioProbe", incompleteStruct.} = object
 proc fcQAudioProbe_metaObject(self: pointer): pointer {.importc: "QAudioProbe_metaObject".}
 proc fcQAudioProbe_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioProbe_metacast".}
 proc fcQAudioProbe_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioProbe_metacall".}
-proc fcQAudioProbe_tr(s: cstring): struct_seaqt_string {.importc: "QAudioProbe_tr".}
-proc fcQAudioProbe_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAudioProbe_trUtf8".}
-proc fcQAudioProbe_setSource(self: pointer, source: pointer): bool {.importc: "QAudioProbe_setSource".}
-proc fcQAudioProbe_setSourceWithSource(self: pointer, source: pointer): bool {.importc: "QAudioProbe_setSourceWithSource".}
+proc fcQAudioProbe_trS(s: cstring): struct_seaqt_string {.importc: "QAudioProbe_tr_s".}
+proc fcQAudioProbe_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAudioProbe_trUtf8_s".}
+proc fcQAudioProbe_setSource_QMediaObject(self: pointer, source: pointer): bool {.importc: "QAudioProbe_setSource_QMediaObject".}
+proc fcQAudioProbe_setSource_QMediaRecorder(self: pointer, source: pointer): bool {.importc: "QAudioProbe_setSource_QMediaRecorder".}
 proc fcQAudioProbe_isActive(self: pointer): bool {.importc: "QAudioProbe_isActive".}
 proc fcQAudioProbe_audioBufferProbed(self: pointer, buffer: pointer): void {.importc: "QAudioProbe_audioBufferProbed".}
 proc fcQAudioProbe_connect_audioBufferProbed(self: pointer, slot: int, callback: proc (slot: int, buffer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioProbe_connect_audioBufferProbed".}
 proc fcQAudioProbe_flush(self: pointer): void {.importc: "QAudioProbe_flush".}
 proc fcQAudioProbe_connect_flush(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioProbe_connect_flush".}
-proc fcQAudioProbe_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioProbe_tr2".}
-proc fcQAudioProbe_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioProbe_tr3".}
-proc fcQAudioProbe_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioProbe_trUtf82".}
-proc fcQAudioProbe_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioProbe_trUtf83".}
+proc fcQAudioProbe_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioProbe_tr_s_c".}
+proc fcQAudioProbe_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioProbe_tr_s_c_n".}
+proc fcQAudioProbe_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioProbe_trUtf8_s_c".}
+proc fcQAudioProbe_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioProbe_trUtf8_s_c_n".}
 proc fcQAudioProbe_vdata(self: pointer): ptr pointer {.importc: "QAudioProbe_vdata".}
 proc fvdata_cQAudioProbe(self: pointer): pointer {.importc: "vdata_QAudioProbe".}
 
@@ -104,7 +104,7 @@ proc fcQAudioProbe_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQAudioProbe_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioProbe_protectedbase_receivers".}
 proc fcQAudioProbe_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioProbe_protectedbase_isSignalConnected".}
 proc fcQAudioProbe_new(vtbl: pointer, vdata: csize_t): ptr cQAudioProbe {.importc: "QAudioProbe_new".}
-proc fcQAudioProbe_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioProbe {.importc: "QAudioProbe_new2".}
+proc fcQAudioProbe_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioProbe {.importc: "QAudioProbe_new_parent".}
 proc fcQAudioProbe_staticMetaObject(): pointer {.importc: "QAudioProbe_staticMetaObject".}
 
 proc metaObject*(self: gen_qaudioprobe_types.QAudioProbe): gen_qobjectdefs_types.QMetaObject =
@@ -117,22 +117,22 @@ proc metacall*(self: gen_qaudioprobe_types.QAudioProbe, param1: cint, param2: ci
   fcQAudioProbe_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudioprobe_types.QAudioProbe, s: cstring): string =
-  let v_ms = fcQAudioProbe_tr(s)
+  let v_ms = fcQAudioProbe_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioprobe_types.QAudioProbe, s: cstring): string =
-  let v_ms = fcQAudioProbe_trUtf8(s)
+  let v_ms = fcQAudioProbe_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setSource*(self: gen_qaudioprobe_types.QAudioProbe, source: gen_qmediaobject_types.QMediaObject): bool =
-  fcQAudioProbe_setSource(self.h, source.h)
+  fcQAudioProbe_setSource_QMediaObject(self.h, source.h)
 
 proc setSource*(self: gen_qaudioprobe_types.QAudioProbe, source: gen_qmediarecorder_types.QMediaRecorder): bool =
-  fcQAudioProbe_setSourceWithSource(self.h, source.h)
+  fcQAudioProbe_setSource_QMediaRecorder(self.h, source.h)
 
 proc isActive*(self: gen_qaudioprobe_types.QAudioProbe): bool =
   fcQAudioProbe_isActive(self.h)
@@ -176,25 +176,25 @@ proc onFlush*(self: gen_qaudioprobe_types.QAudioProbe, slot: QAudioProbeflushSlo
   fcQAudioProbe_connect_flush(self.h, cast[int](addr tmp[]), fcQAudioProbe_slot_callback_flush, fcQAudioProbe_slot_callback_flush_release)
 
 proc tr*(_: type gen_qaudioprobe_types.QAudioProbe, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioProbe_tr2(s, c)
+  let v_ms = fcQAudioProbe_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudioprobe_types.QAudioProbe, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioProbe_tr3(s, c, n)
+  let v_ms = fcQAudioProbe_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioprobe_types.QAudioProbe, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioProbe_trUtf82(s, c)
+  let v_ms = fcQAudioProbe_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioprobe_types.QAudioProbe, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioProbe_trUtf83(s, c, n)
+  let v_ms = fcQAudioProbe_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

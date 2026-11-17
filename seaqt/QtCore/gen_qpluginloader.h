@@ -55,16 +55,16 @@ void* QPluginLoader_vdata(VirtualQPluginLoader* self);
 VirtualQPluginLoader* vdata_QPluginLoader(void* vdata);
 
 VirtualQPluginLoader* QPluginLoader_new(const QPluginLoader_VTable* vtbl, size_t vdata);
-VirtualQPluginLoader* QPluginLoader_new2(const QPluginLoader_VTable* vtbl, size_t vdata, struct seaqt_string fileName);
-VirtualQPluginLoader* QPluginLoader_new3(const QPluginLoader_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQPluginLoader* QPluginLoader_new4(const QPluginLoader_VTable* vtbl, size_t vdata, struct seaqt_string fileName, QObject* parent);
+VirtualQPluginLoader* QPluginLoader_new_fileName(const QPluginLoader_VTable* vtbl, size_t vdata, struct seaqt_string fileName);
+VirtualQPluginLoader* QPluginLoader_new_parent(const QPluginLoader_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPluginLoader* QPluginLoader_new_fileName_parent(const QPluginLoader_VTable* vtbl, size_t vdata, struct seaqt_string fileName, QObject* parent);
 
 void QPluginLoader_virtbase(QPluginLoader* src, QObject** outptr_QObject);
 QMetaObject* QPluginLoader_metaObject(const QPluginLoader* self);
 void* QPluginLoader_metacast(QPluginLoader* self, const char* param1);
 int QPluginLoader_metacall(QPluginLoader* self, int param1, int param2, void** param3);
-struct seaqt_string QPluginLoader_tr(const char* s);
-struct seaqt_string QPluginLoader_trUtf8(const char* s);
+struct seaqt_string QPluginLoader_tr_s(const char* s);
+struct seaqt_string QPluginLoader_trUtf8_s(const char* s);
 QObject* QPluginLoader_instance(QPluginLoader* self);
 QJsonObject* QPluginLoader_metaData(const QPluginLoader* self);
 struct seaqt_array /* of QObject* */  QPluginLoader_staticInstances();
@@ -77,10 +77,10 @@ struct seaqt_string QPluginLoader_fileName(const QPluginLoader* self);
 struct seaqt_string QPluginLoader_errorString(const QPluginLoader* self);
 void QPluginLoader_setLoadHints(QPluginLoader* self, int loadHints);
 int QPluginLoader_loadHints(const QPluginLoader* self);
-struct seaqt_string QPluginLoader_tr2(const char* s, const char* c);
-struct seaqt_string QPluginLoader_tr3(const char* s, const char* c, int n);
-struct seaqt_string QPluginLoader_trUtf82(const char* s, const char* c);
-struct seaqt_string QPluginLoader_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QPluginLoader_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPluginLoader_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QPluginLoader_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QPluginLoader_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPluginLoader_virtualbase_metaObject(const VirtualQPluginLoader* self);
 void* QPluginLoader_virtualbase_metacast(VirtualQPluginLoader* self, const char* param1);

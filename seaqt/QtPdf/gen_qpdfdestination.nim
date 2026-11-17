@@ -45,17 +45,17 @@ export
 
 type cQPdfDestination*{.exportc: "QPdfDestination", incompleteStruct.} = object
 
-proc fcQPdfDestination_operatorAssign(self: pointer, other: pointer): void {.importc: "QPdfDestination_operatorAssign".}
+proc fcQPdfDestination_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QPdfDestination_operatorAssign".}
 proc fcQPdfDestination_swap(self: pointer, other: pointer): void {.importc: "QPdfDestination_swap".}
 proc fcQPdfDestination_isValid(self: pointer): bool {.importc: "QPdfDestination_isValid".}
 proc fcQPdfDestination_page(self: pointer): cint {.importc: "QPdfDestination_page".}
 proc fcQPdfDestination_location(self: pointer): pointer {.importc: "QPdfDestination_location".}
 proc fcQPdfDestination_zoom(self: pointer): float64 {.importc: "QPdfDestination_zoom".}
-proc fcQPdfDestination_new(other: pointer): ptr cQPdfDestination {.importc: "QPdfDestination_new".}
+proc fcQPdfDestination_new(fromVal: pointer): ptr cQPdfDestination {.importc: "QPdfDestination_new".}
 proc fcQPdfDestination_staticMetaObject(): pointer {.importc: "QPdfDestination_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qpdfdestination_types.QPdfDestination, other: gen_qpdfdestination_types.QPdfDestination): void =
-  fcQPdfDestination_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qpdfdestination_types.QPdfDestination, fromVal: gen_qpdfdestination_types.QPdfDestination): void =
+  fcQPdfDestination_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qpdfdestination_types.QPdfDestination, other: gen_qpdfdestination_types.QPdfDestination): void =
   fcQPdfDestination_swap(self.h, other.h)
@@ -73,8 +73,8 @@ proc zoom*(self: gen_qpdfdestination_types.QPdfDestination): float64 =
   fcQPdfDestination_zoom(self.h)
 
 proc create*(T: type gen_qpdfdestination_types.QPdfDestination,
-    other: gen_qpdfdestination_types.QPdfDestination): gen_qpdfdestination_types.QPdfDestination =
-  let tmp = gen_qpdfdestination_types.QPdfDestination(h: fcQPdfDestination_new(other.h), owned: true)
+    fromVal: gen_qpdfdestination_types.QPdfDestination): gen_qpdfdestination_types.QPdfDestination =
+  let tmp = gen_qpdfdestination_types.QPdfDestination(h: fcQPdfDestination_new(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qpdfdestination_types.QPdfDestination): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfDestination_staticMetaObject())

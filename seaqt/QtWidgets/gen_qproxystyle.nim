@@ -81,8 +81,8 @@ type cQProxyStyle*{.exportc: "QProxyStyle", incompleteStruct.} = object
 proc fcQProxyStyle_metaObject(self: pointer): pointer {.importc: "QProxyStyle_metaObject".}
 proc fcQProxyStyle_metacast(self: pointer, param1: cstring): pointer {.importc: "QProxyStyle_metacast".}
 proc fcQProxyStyle_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProxyStyle_metacall".}
-proc fcQProxyStyle_tr(s: cstring): struct_seaqt_string {.importc: "QProxyStyle_tr".}
-proc fcQProxyStyle_trUtf8(s: cstring): struct_seaqt_string {.importc: "QProxyStyle_trUtf8".}
+proc fcQProxyStyle_trS(s: cstring): struct_seaqt_string {.importc: "QProxyStyle_tr_s".}
+proc fcQProxyStyle_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QProxyStyle_trUtf8_s".}
 proc fcQProxyStyle_baseStyle(self: pointer): pointer {.importc: "QProxyStyle_baseStyle".}
 proc fcQProxyStyle_setBaseStyle(self: pointer, style: pointer): void {.importc: "QProxyStyle_setBaseStyle".}
 proc fcQProxyStyle_drawPrimitive(self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void {.importc: "QProxyStyle_drawPrimitive".}
@@ -103,15 +103,15 @@ proc fcQProxyStyle_standardIcon(self: pointer, standardIcon: cint, option: point
 proc fcQProxyStyle_standardPixmap(self: pointer, standardPixmap: cint, opt: pointer, widget: pointer): pointer {.importc: "QProxyStyle_standardPixmap".}
 proc fcQProxyStyle_generatedIconPixmap(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.importc: "QProxyStyle_generatedIconPixmap".}
 proc fcQProxyStyle_standardPalette(self: pointer): pointer {.importc: "QProxyStyle_standardPalette".}
-proc fcQProxyStyle_polish(self: pointer, widget: pointer): void {.importc: "QProxyStyle_polish".}
-proc fcQProxyStyle_polishWithPal(self: pointer, pal: pointer): void {.importc: "QProxyStyle_polishWithPal".}
-proc fcQProxyStyle_polishWithApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_polishWithApp".}
-proc fcQProxyStyle_unpolish(self: pointer, widget: pointer): void {.importc: "QProxyStyle_unpolish".}
-proc fcQProxyStyle_unpolishWithApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_unpolishWithApp".}
-proc fcQProxyStyle_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProxyStyle_tr2".}
-proc fcQProxyStyle_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProxyStyle_tr3".}
-proc fcQProxyStyle_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProxyStyle_trUtf82".}
-proc fcQProxyStyle_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProxyStyle_trUtf83".}
+proc fcQProxyStyle_polishWidget(self: pointer, widget: pointer): void {.importc: "QProxyStyle_polish_widget".}
+proc fcQProxyStyle_polishPal(self: pointer, pal: pointer): void {.importc: "QProxyStyle_polish_pal".}
+proc fcQProxyStyle_polishApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_polish_app".}
+proc fcQProxyStyle_unpolishWidget(self: pointer, widget: pointer): void {.importc: "QProxyStyle_unpolish_widget".}
+proc fcQProxyStyle_unpolishApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_unpolish_app".}
+proc fcQProxyStyle_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProxyStyle_tr_s_c".}
+proc fcQProxyStyle_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProxyStyle_tr_s_c_n".}
+proc fcQProxyStyle_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProxyStyle_trUtf8_s_c".}
+proc fcQProxyStyle_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProxyStyle_trUtf8_s_c_n".}
 proc fcQProxyStyle_vdata(self: pointer): ptr pointer {.importc: "QProxyStyle_vdata".}
 proc fvdata_cQProxyStyle(self: pointer): pointer {.importc: "vdata_QProxyStyle".}
 
@@ -138,11 +138,11 @@ type cQProxyStyleVTable {.pure.} = object
   standardPixmap*: proc(self: pointer, standardPixmap: cint, opt: pointer, widget: pointer): pointer {.cdecl, raises: [], gcsafe.}
   generatedIconPixmap*: proc(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.cdecl, raises: [], gcsafe.}
   standardPalette*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  polish*: proc(self: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
-  polishWithPal*: proc(self: pointer, pal: pointer): void {.cdecl, raises: [], gcsafe.}
-  polishWithApp*: proc(self: pointer, app: pointer): void {.cdecl, raises: [], gcsafe.}
-  unpolish*: proc(self: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
-  unpolishWithApp*: proc(self: pointer, app: pointer): void {.cdecl, raises: [], gcsafe.}
+  polishWidget*: proc(self: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  polishPal*: proc(self: pointer, pal: pointer): void {.cdecl, raises: [], gcsafe.}
+  polishApp*: proc(self: pointer, app: pointer): void {.cdecl, raises: [], gcsafe.}
+  unpolishWidget*: proc(self: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  unpolishApp*: proc(self: pointer, app: pointer): void {.cdecl, raises: [], gcsafe.}
   event*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
   eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -171,11 +171,11 @@ proc fcQProxyStyle_virtualbase_standardIcon(self: pointer, standardIcon: cint, o
 proc fcQProxyStyle_virtualbase_standardPixmap(self: pointer, standardPixmap: cint, opt: pointer, widget: pointer): pointer {.importc: "QProxyStyle_virtualbase_standardPixmap".}
 proc fcQProxyStyle_virtualbase_generatedIconPixmap(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.importc: "QProxyStyle_virtualbase_generatedIconPixmap".}
 proc fcQProxyStyle_virtualbase_standardPalette(self: pointer): pointer {.importc: "QProxyStyle_virtualbase_standardPalette".}
-proc fcQProxyStyle_virtualbase_polish(self: pointer, widget: pointer): void {.importc: "QProxyStyle_virtualbase_polish".}
-proc fcQProxyStyle_virtualbase_polishWithPal(self: pointer, pal: pointer): void {.importc: "QProxyStyle_virtualbase_polishWithPal".}
-proc fcQProxyStyle_virtualbase_polishWithApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_virtualbase_polishWithApp".}
-proc fcQProxyStyle_virtualbase_unpolish(self: pointer, widget: pointer): void {.importc: "QProxyStyle_virtualbase_unpolish".}
-proc fcQProxyStyle_virtualbase_unpolishWithApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_virtualbase_unpolishWithApp".}
+proc fcQProxyStyle_virtualbase_polishWidget(self: pointer, widget: pointer): void {.importc: "QProxyStyle_virtualbase_polish_widget".}
+proc fcQProxyStyle_virtualbase_polishPal(self: pointer, pal: pointer): void {.importc: "QProxyStyle_virtualbase_polish_pal".}
+proc fcQProxyStyle_virtualbase_polishApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_virtualbase_polish_app".}
+proc fcQProxyStyle_virtualbase_unpolishWidget(self: pointer, widget: pointer): void {.importc: "QProxyStyle_virtualbase_unpolish_widget".}
+proc fcQProxyStyle_virtualbase_unpolishApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_virtualbase_unpolish_app".}
 proc fcQProxyStyle_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QProxyStyle_virtualbase_event".}
 proc fcQProxyStyle_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QProxyStyle_virtualbase_eventFilter".}
 proc fcQProxyStyle_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QProxyStyle_virtualbase_timerEvent".}
@@ -188,8 +188,8 @@ proc fcQProxyStyle_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQProxyStyle_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QProxyStyle_protectedbase_receivers".}
 proc fcQProxyStyle_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QProxyStyle_protectedbase_isSignalConnected".}
 proc fcQProxyStyle_new(vtbl: pointer, vdata: csize_t): ptr cQProxyStyle {.importc: "QProxyStyle_new".}
-proc fcQProxyStyle_new2(vtbl: pointer, vdata: csize_t, key: struct_seaqt_string): ptr cQProxyStyle {.importc: "QProxyStyle_new2".}
-proc fcQProxyStyle_new3(vtbl: pointer, vdata: csize_t, style: pointer): ptr cQProxyStyle {.importc: "QProxyStyle_new3".}
+proc fcQProxyStyle_new2(vtbl: pointer, vdata: csize_t, key: struct_seaqt_string): ptr cQProxyStyle {.importc: "QProxyStyle_new_key".}
+proc fcQProxyStyle_new3(vtbl: pointer, vdata: csize_t, style: pointer): ptr cQProxyStyle {.importc: "QProxyStyle_new_style".}
 proc fcQProxyStyle_staticMetaObject(): pointer {.importc: "QProxyStyle_staticMetaObject".}
 
 proc metaObject*(self: gen_qproxystyle_types.QProxyStyle): gen_qobjectdefs_types.QMetaObject =
@@ -202,13 +202,13 @@ proc metacall*(self: gen_qproxystyle_types.QProxyStyle, param1: cint, param2: ci
   fcQProxyStyle_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qproxystyle_types.QProxyStyle, s: cstring): string =
-  let v_ms = fcQProxyStyle_tr(s)
+  let v_ms = fcQProxyStyle_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qproxystyle_types.QProxyStyle, s: cstring): string =
-  let v_ms = fcQProxyStyle_trUtf8(s)
+  let v_ms = fcQProxyStyle_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -274,40 +274,40 @@ proc standardPalette*(self: gen_qproxystyle_types.QProxyStyle): gen_qpalette_typ
   gen_qpalette_types.QPalette(h: fcQProxyStyle_standardPalette(self.h), owned: true)
 
 proc polish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_qwidget_types.QWidget): void =
-  fcQProxyStyle_polish(self.h, widget.h)
+  fcQProxyStyle_polishWidget(self.h, widget.h)
 
 proc polish*(self: gen_qproxystyle_types.QProxyStyle, pal: gen_qpalette_types.QPalette): void =
-  fcQProxyStyle_polishWithPal(self.h, pal.h)
+  fcQProxyStyle_polishPal(self.h, pal.h)
 
 proc polish*(self: gen_qproxystyle_types.QProxyStyle, app: gen_qapplication_types.QApplication): void =
-  fcQProxyStyle_polishWithApp(self.h, app.h)
+  fcQProxyStyle_polishApp(self.h, app.h)
 
 proc unpolish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_qwidget_types.QWidget): void =
-  fcQProxyStyle_unpolish(self.h, widget.h)
+  fcQProxyStyle_unpolishWidget(self.h, widget.h)
 
 proc unpolish*(self: gen_qproxystyle_types.QProxyStyle, app: gen_qapplication_types.QApplication): void =
-  fcQProxyStyle_unpolishWithApp(self.h, app.h)
+  fcQProxyStyle_unpolishApp(self.h, app.h)
 
 proc tr*(_: type gen_qproxystyle_types.QProxyStyle, s: cstring, c: cstring): string =
-  let v_ms = fcQProxyStyle_tr2(s, c)
+  let v_ms = fcQProxyStyle_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qproxystyle_types.QProxyStyle, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQProxyStyle_tr3(s, c, n)
+  let v_ms = fcQProxyStyle_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qproxystyle_types.QProxyStyle, s: cstring, c: cstring): string =
-  let v_ms = fcQProxyStyle_trUtf82(s, c)
+  let v_ms = fcQProxyStyle_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qproxystyle_types.QProxyStyle, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQProxyStyle_trUtf83(s, c, n)
+  let v_ms = fcQProxyStyle_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -333,11 +333,11 @@ type QProxyStylestandardIconProc* = proc(self: QProxyStyle, standardIcon: cint, 
 type QProxyStylestandardPixmapProc* = proc(self: QProxyStyle, standardPixmap: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap {.raises: [], gcsafe.}
 type QProxyStylegeneratedIconPixmapProc* = proc(self: QProxyStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap {.raises: [], gcsafe.}
 type QProxyStylestandardPaletteProc* = proc(self: QProxyStyle): gen_qpalette_types.QPalette {.raises: [], gcsafe.}
-type QProxyStylepolishProc* = proc(self: QProxyStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
-type QProxyStylepolishWithPalProc* = proc(self: QProxyStyle, pal: gen_qpalette_types.QPalette): void {.raises: [], gcsafe.}
-type QProxyStylepolishWithAppProc* = proc(self: QProxyStyle, app: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
-type QProxyStyleunpolishProc* = proc(self: QProxyStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
-type QProxyStyleunpolishWithAppProc* = proc(self: QProxyStyle, app: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
+type QProxyStylepolishWidgetProc* = proc(self: QProxyStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QProxyStylepolishPalProc* = proc(self: QProxyStyle, pal: gen_qpalette_types.QPalette): void {.raises: [], gcsafe.}
+type QProxyStylepolishAppProc* = proc(self: QProxyStyle, app: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
+type QProxyStyleunpolishWidgetProc* = proc(self: QProxyStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QProxyStyleunpolishAppProc* = proc(self: QProxyStyle, app: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
 type QProxyStyleeventProc* = proc(self: QProxyStyle, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QProxyStyleeventFilterProc* = proc(self: QProxyStyle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QProxyStyletimerEventProc* = proc(self: QProxyStyle, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -369,11 +369,11 @@ type QProxyStyleVTable* {.inheritable, pure.} = object
   standardPixmap*: QProxyStylestandardPixmapProc
   generatedIconPixmap*: QProxyStylegeneratedIconPixmapProc
   standardPalette*: QProxyStylestandardPaletteProc
-  polish*: QProxyStylepolishProc
-  polishWithPal*: QProxyStylepolishWithPalProc
-  polishWithApp*: QProxyStylepolishWithAppProc
-  unpolish*: QProxyStyleunpolishProc
-  unpolishWithApp*: QProxyStyleunpolishWithAppProc
+  polishWidget*: QProxyStylepolishWidgetProc
+  polishPal*: QProxyStylepolishPalProc
+  polishApp*: QProxyStylepolishAppProc
+  unpolishWidget*: QProxyStyleunpolishWidgetProc
+  unpolishApp*: QProxyStyleunpolishAppProc
   event*: QProxyStyleeventProc
   eventFilter*: QProxyStyleeventFilterProc
   timerEvent*: QProxyStyletimerEventProc
@@ -446,19 +446,19 @@ proc QProxyStylestandardPalette*(self: gen_qproxystyle_types.QProxyStyle): gen_q
   gen_qpalette_types.QPalette(h: fcQProxyStyle_virtualbase_standardPalette(self.h), owned: true)
 
 proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_qwidget_types.QWidget): void =
-  fcQProxyStyle_virtualbase_polish(self.h, widget.h)
+  fcQProxyStyle_virtualbase_polishWidget(self.h, widget.h)
 
 proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, pal: gen_qpalette_types.QPalette): void =
-  fcQProxyStyle_virtualbase_polishWithPal(self.h, pal.h)
+  fcQProxyStyle_virtualbase_polishPal(self.h, pal.h)
 
 proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, app: gen_qapplication_types.QApplication): void =
-  fcQProxyStyle_virtualbase_polishWithApp(self.h, app.h)
+  fcQProxyStyle_virtualbase_polishApp(self.h, app.h)
 
 proc QProxyStyleunpolish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_qwidget_types.QWidget): void =
-  fcQProxyStyle_virtualbase_unpolish(self.h, widget.h)
+  fcQProxyStyle_virtualbase_unpolishWidget(self.h, widget.h)
 
 proc QProxyStyleunpolish*(self: gen_qproxystyle_types.QProxyStyle, app: gen_qapplication_types.QApplication): void =
-  fcQProxyStyle_virtualbase_unpolishWithApp(self.h, app.h)
+  fcQProxyStyle_virtualbase_unpolishApp(self.h, app.h)
 
 proc QProxyStyleevent*(self: gen_qproxystyle_types.QProxyStyle, e: gen_qcoreevent_types.QEvent): bool =
   fcQProxyStyle_virtualbase_event(self.h, e.h)
@@ -710,35 +710,35 @@ proc fcQProxyStyle_vtable_callback_standardPalette(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQProxyStyle_vtable_callback_polish(self: pointer, widget: pointer): void {.cdecl.} =
+proc fcQProxyStyle_vtable_callback_polishWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](fcQProxyStyle_vdata(self)[])
   let self = QProxyStyle(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
-  vtbl[].polish(self, slotval1)
+  vtbl[].polishWidget(self, slotval1)
 
-proc fcQProxyStyle_vtable_callback_polishWithPal(self: pointer, pal: pointer): void {.cdecl.} =
+proc fcQProxyStyle_vtable_callback_polishPal(self: pointer, pal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](fcQProxyStyle_vdata(self)[])
   let self = QProxyStyle(h: self)
   let slotval1 = gen_qpalette_types.QPalette(h: pal, owned: false)
-  vtbl[].polishWithPal(self, slotval1)
+  vtbl[].polishPal(self, slotval1)
 
-proc fcQProxyStyle_vtable_callback_polishWithApp(self: pointer, app: pointer): void {.cdecl.} =
+proc fcQProxyStyle_vtable_callback_polishApp(self: pointer, app: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](fcQProxyStyle_vdata(self)[])
   let self = QProxyStyle(h: self)
   let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
-  vtbl[].polishWithApp(self, slotval1)
+  vtbl[].polishApp(self, slotval1)
 
-proc fcQProxyStyle_vtable_callback_unpolish(self: pointer, widget: pointer): void {.cdecl.} =
+proc fcQProxyStyle_vtable_callback_unpolishWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](fcQProxyStyle_vdata(self)[])
   let self = QProxyStyle(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
-  vtbl[].unpolish(self, slotval1)
+  vtbl[].unpolishWidget(self, slotval1)
 
-proc fcQProxyStyle_vtable_callback_unpolishWithApp(self: pointer, app: pointer): void {.cdecl.} =
+proc fcQProxyStyle_vtable_callback_unpolishApp(self: pointer, app: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](fcQProxyStyle_vdata(self)[])
   let self = QProxyStyle(h: self)
   let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
-  vtbl[].unpolishWithApp(self, slotval1)
+  vtbl[].unpolishApp(self, slotval1)
 
 proc fcQProxyStyle_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](fcQProxyStyle_vdata(self)[])
@@ -1062,27 +1062,27 @@ proc fcQProxyStyle_method_callback_standardPalette(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQProxyStyle_method_callback_polish(self: pointer, widget: pointer): void {.cdecl.} =
+proc fcQProxyStyle_method_callback_polishWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProxyStyle](fcQProxyStyle_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.polish(slotval1)
 
-proc fcQProxyStyle_method_callback_polishWithPal(self: pointer, pal: pointer): void {.cdecl.} =
+proc fcQProxyStyle_method_callback_polishPal(self: pointer, pal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProxyStyle](fcQProxyStyle_vdata(self)[])
   let slotval1 = gen_qpalette_types.QPalette(h: pal, owned: false)
   inst.polish(slotval1)
 
-proc fcQProxyStyle_method_callback_polishWithApp(self: pointer, app: pointer): void {.cdecl.} =
+proc fcQProxyStyle_method_callback_polishApp(self: pointer, app: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProxyStyle](fcQProxyStyle_vdata(self)[])
   let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
   inst.polish(slotval1)
 
-proc fcQProxyStyle_method_callback_unpolish(self: pointer, widget: pointer): void {.cdecl.} =
+proc fcQProxyStyle_method_callback_unpolishWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProxyStyle](fcQProxyStyle_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.unpolish(slotval1)
 
-proc fcQProxyStyle_method_callback_unpolishWithApp(self: pointer, app: pointer): void {.cdecl.} =
+proc fcQProxyStyle_method_callback_unpolishApp(self: pointer, app: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProxyStyle](fcQProxyStyle_vdata(self)[])
   let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
   inst.unpolish(slotval1)
@@ -1187,16 +1187,16 @@ proc create*(T: type gen_qproxystyle_types.QProxyStyle,
     vtbl[].vtbl.generatedIconPixmap = fcQProxyStyle_vtable_callback_generatedIconPixmap
   if not isNil(vtbl[].standardPalette):
     vtbl[].vtbl.standardPalette = fcQProxyStyle_vtable_callback_standardPalette
-  if not isNil(vtbl[].polish):
-    vtbl[].vtbl.polish = fcQProxyStyle_vtable_callback_polish
-  if not isNil(vtbl[].polishWithPal):
-    vtbl[].vtbl.polishWithPal = fcQProxyStyle_vtable_callback_polishWithPal
-  if not isNil(vtbl[].polishWithApp):
-    vtbl[].vtbl.polishWithApp = fcQProxyStyle_vtable_callback_polishWithApp
-  if not isNil(vtbl[].unpolish):
-    vtbl[].vtbl.unpolish = fcQProxyStyle_vtable_callback_unpolish
-  if not isNil(vtbl[].unpolishWithApp):
-    vtbl[].vtbl.unpolishWithApp = fcQProxyStyle_vtable_callback_unpolishWithApp
+  if not isNil(vtbl[].polishWidget):
+    vtbl[].vtbl.polishWidget = fcQProxyStyle_vtable_callback_polishWidget
+  if not isNil(vtbl[].polishPal):
+    vtbl[].vtbl.polishPal = fcQProxyStyle_vtable_callback_polishPal
+  if not isNil(vtbl[].polishApp):
+    vtbl[].vtbl.polishApp = fcQProxyStyle_vtable_callback_polishApp
+  if not isNil(vtbl[].unpolishWidget):
+    vtbl[].vtbl.unpolishWidget = fcQProxyStyle_vtable_callback_unpolishWidget
+  if not isNil(vtbl[].unpolishApp):
+    vtbl[].vtbl.unpolishApp = fcQProxyStyle_vtable_callback_unpolishApp
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = fcQProxyStyle_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
@@ -1264,16 +1264,16 @@ proc create*(T: type gen_qproxystyle_types.QProxyStyle,
     vtbl[].vtbl.generatedIconPixmap = fcQProxyStyle_vtable_callback_generatedIconPixmap
   if not isNil(vtbl[].standardPalette):
     vtbl[].vtbl.standardPalette = fcQProxyStyle_vtable_callback_standardPalette
-  if not isNil(vtbl[].polish):
-    vtbl[].vtbl.polish = fcQProxyStyle_vtable_callback_polish
-  if not isNil(vtbl[].polishWithPal):
-    vtbl[].vtbl.polishWithPal = fcQProxyStyle_vtable_callback_polishWithPal
-  if not isNil(vtbl[].polishWithApp):
-    vtbl[].vtbl.polishWithApp = fcQProxyStyle_vtable_callback_polishWithApp
-  if not isNil(vtbl[].unpolish):
-    vtbl[].vtbl.unpolish = fcQProxyStyle_vtable_callback_unpolish
-  if not isNil(vtbl[].unpolishWithApp):
-    vtbl[].vtbl.unpolishWithApp = fcQProxyStyle_vtable_callback_unpolishWithApp
+  if not isNil(vtbl[].polishWidget):
+    vtbl[].vtbl.polishWidget = fcQProxyStyle_vtable_callback_polishWidget
+  if not isNil(vtbl[].polishPal):
+    vtbl[].vtbl.polishPal = fcQProxyStyle_vtable_callback_polishPal
+  if not isNil(vtbl[].polishApp):
+    vtbl[].vtbl.polishApp = fcQProxyStyle_vtable_callback_polishApp
+  if not isNil(vtbl[].unpolishWidget):
+    vtbl[].vtbl.unpolishWidget = fcQProxyStyle_vtable_callback_unpolishWidget
+  if not isNil(vtbl[].unpolishApp):
+    vtbl[].vtbl.unpolishApp = fcQProxyStyle_vtable_callback_unpolishApp
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = fcQProxyStyle_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
@@ -1341,16 +1341,16 @@ proc create*(T: type gen_qproxystyle_types.QProxyStyle,
     vtbl[].vtbl.generatedIconPixmap = fcQProxyStyle_vtable_callback_generatedIconPixmap
   if not isNil(vtbl[].standardPalette):
     vtbl[].vtbl.standardPalette = fcQProxyStyle_vtable_callback_standardPalette
-  if not isNil(vtbl[].polish):
-    vtbl[].vtbl.polish = fcQProxyStyle_vtable_callback_polish
-  if not isNil(vtbl[].polishWithPal):
-    vtbl[].vtbl.polishWithPal = fcQProxyStyle_vtable_callback_polishWithPal
-  if not isNil(vtbl[].polishWithApp):
-    vtbl[].vtbl.polishWithApp = fcQProxyStyle_vtable_callback_polishWithApp
-  if not isNil(vtbl[].unpolish):
-    vtbl[].vtbl.unpolish = fcQProxyStyle_vtable_callback_unpolish
-  if not isNil(vtbl[].unpolishWithApp):
-    vtbl[].vtbl.unpolishWithApp = fcQProxyStyle_vtable_callback_unpolishWithApp
+  if not isNil(vtbl[].polishWidget):
+    vtbl[].vtbl.polishWidget = fcQProxyStyle_vtable_callback_polishWidget
+  if not isNil(vtbl[].polishPal):
+    vtbl[].vtbl.polishPal = fcQProxyStyle_vtable_callback_polishPal
+  if not isNil(vtbl[].polishApp):
+    vtbl[].vtbl.polishApp = fcQProxyStyle_vtable_callback_polishApp
+  if not isNil(vtbl[].unpolishWidget):
+    vtbl[].vtbl.unpolishWidget = fcQProxyStyle_vtable_callback_unpolishWidget
+  if not isNil(vtbl[].unpolishApp):
+    vtbl[].vtbl.unpolishApp = fcQProxyStyle_vtable_callback_unpolishApp
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = fcQProxyStyle_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
@@ -1395,11 +1395,11 @@ const cQProxyStyle_mvtbl = cQProxyStyleVTable(
   standardPixmap: fcQProxyStyle_method_callback_standardPixmap,
   generatedIconPixmap: fcQProxyStyle_method_callback_generatedIconPixmap,
   standardPalette: fcQProxyStyle_method_callback_standardPalette,
-  polish: fcQProxyStyle_method_callback_polish,
-  polishWithPal: fcQProxyStyle_method_callback_polishWithPal,
-  polishWithApp: fcQProxyStyle_method_callback_polishWithApp,
-  unpolish: fcQProxyStyle_method_callback_unpolish,
-  unpolishWithApp: fcQProxyStyle_method_callback_unpolishWithApp,
+  polishWidget: fcQProxyStyle_method_callback_polishWidget,
+  polishPal: fcQProxyStyle_method_callback_polishPal,
+  polishApp: fcQProxyStyle_method_callback_polishApp,
+  unpolishWidget: fcQProxyStyle_method_callback_unpolishWidget,
+  unpolishApp: fcQProxyStyle_method_callback_unpolishApp,
   event: fcQProxyStyle_method_callback_event,
   eventFilter: fcQProxyStyle_method_callback_eventFilter,
   timerEvent: fcQProxyStyle_method_callback_timerEvent,

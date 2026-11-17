@@ -71,8 +71,8 @@ type cQCameraExposureControl*{.exportc: "QCameraExposureControl", incompleteStru
 proc fcQCameraExposureControl_metaObject(self: pointer): pointer {.importc: "QCameraExposureControl_metaObject".}
 proc fcQCameraExposureControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraExposureControl_metacast".}
 proc fcQCameraExposureControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraExposureControl_metacall".}
-proc fcQCameraExposureControl_tr(s: cstring): struct_seaqt_string {.importc: "QCameraExposureControl_tr".}
-proc fcQCameraExposureControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraExposureControl_trUtf8".}
+proc fcQCameraExposureControl_trS(s: cstring): struct_seaqt_string {.importc: "QCameraExposureControl_tr_s".}
+proc fcQCameraExposureControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraExposureControl_trUtf8_s".}
 proc fcQCameraExposureControl_isParameterSupported(self: pointer, parameter: cint): bool {.importc: "QCameraExposureControl_isParameterSupported".}
 proc fcQCameraExposureControl_supportedParameterRange(self: pointer, parameter: cint, continuous: ptr bool): struct_seaqt_array {.importc: "QCameraExposureControl_supportedParameterRange".}
 proc fcQCameraExposureControl_requestedValue(self: pointer, parameter: cint): pointer {.importc: "QCameraExposureControl_requestedValue".}
@@ -84,10 +84,10 @@ proc fcQCameraExposureControl_actualValueChanged(self: pointer, parameter: cint)
 proc fcQCameraExposureControl_connect_actualValueChanged(self: pointer, slot: int, callback: proc (slot: int, parameter: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraExposureControl_connect_actualValueChanged".}
 proc fcQCameraExposureControl_parameterRangeChanged(self: pointer, parameter: cint): void {.importc: "QCameraExposureControl_parameterRangeChanged".}
 proc fcQCameraExposureControl_connect_parameterRangeChanged(self: pointer, slot: int, callback: proc (slot: int, parameter: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraExposureControl_connect_parameterRangeChanged".}
-proc fcQCameraExposureControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraExposureControl_tr2".}
-proc fcQCameraExposureControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraExposureControl_tr3".}
-proc fcQCameraExposureControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraExposureControl_trUtf82".}
-proc fcQCameraExposureControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraExposureControl_trUtf83".}
+proc fcQCameraExposureControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraExposureControl_tr_s_c".}
+proc fcQCameraExposureControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraExposureControl_tr_s_c_n".}
+proc fcQCameraExposureControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraExposureControl_trUtf8_s_c".}
+proc fcQCameraExposureControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraExposureControl_trUtf8_s_c_n".}
 proc fcQCameraExposureControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraExposureControl_protectedbase_sender".}
 proc fcQCameraExposureControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraExposureControl_protectedbase_senderSignalIndex".}
 proc fcQCameraExposureControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraExposureControl_protectedbase_receivers".}
@@ -104,13 +104,13 @@ proc metacall*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, pa
   fcQCameraExposureControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraexposurecontrol_types.QCameraExposureControl, s: cstring): string =
-  let v_ms = fcQCameraExposureControl_tr(s)
+  let v_ms = fcQCameraExposureControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraexposurecontrol_types.QCameraExposureControl, s: cstring): string =
-  let v_ms = fcQCameraExposureControl_trUtf8(s)
+  let v_ms = fcQCameraExposureControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -197,25 +197,25 @@ proc onParameterRangeChanged*(self: gen_qcameraexposurecontrol_types.QCameraExpo
   fcQCameraExposureControl_connect_parameterRangeChanged(self.h, cast[int](addr tmp[]), fcQCameraExposureControl_slot_callback_parameterRangeChanged, fcQCameraExposureControl_slot_callback_parameterRangeChanged_release)
 
 proc tr*(_: type gen_qcameraexposurecontrol_types.QCameraExposureControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraExposureControl_tr2(s, c)
+  let v_ms = fcQCameraExposureControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcameraexposurecontrol_types.QCameraExposureControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraExposureControl_tr3(s, c, n)
+  let v_ms = fcQCameraExposureControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraexposurecontrol_types.QCameraExposureControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraExposureControl_trUtf82(s, c)
+  let v_ms = fcQCameraExposureControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraexposurecontrol_types.QCameraExposureControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraExposureControl_trUtf83(s, c, n)
+  let v_ms = fcQCameraExposureControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

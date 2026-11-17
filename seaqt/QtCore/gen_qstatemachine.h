@@ -77,16 +77,16 @@ void* QStateMachine_vdata(VirtualQStateMachine* self);
 VirtualQStateMachine* vdata_QStateMachine(void* vdata);
 
 VirtualQStateMachine* QStateMachine_new(const QStateMachine_VTable* vtbl, size_t vdata);
-VirtualQStateMachine* QStateMachine_new2(const QStateMachine_VTable* vtbl, size_t vdata, int childMode);
-VirtualQStateMachine* QStateMachine_new3(const QStateMachine_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQStateMachine* QStateMachine_new4(const QStateMachine_VTable* vtbl, size_t vdata, int childMode, QObject* parent);
+VirtualQStateMachine* QStateMachine_new_childMode(const QStateMachine_VTable* vtbl, size_t vdata, int childMode);
+VirtualQStateMachine* QStateMachine_new_parent(const QStateMachine_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQStateMachine* QStateMachine_new_childMode_parent(const QStateMachine_VTable* vtbl, size_t vdata, int childMode, QObject* parent);
 
 void QStateMachine_virtbase(QStateMachine* src, QState** outptr_QState);
 QMetaObject* QStateMachine_metaObject(const QStateMachine* self);
 void* QStateMachine_metacast(QStateMachine* self, const char* param1);
 int QStateMachine_metacall(QStateMachine* self, int param1, int param2, void** param3);
-struct seaqt_string QStateMachine_tr(const char* s);
-struct seaqt_string QStateMachine_trUtf8(const char* s);
+struct seaqt_string QStateMachine_tr_s(const char* s);
+struct seaqt_string QStateMachine_trUtf8_s(const char* s);
 void QStateMachine_addState(QStateMachine* self, QAbstractState* state);
 void QStateMachine_removeState(QStateMachine* self, QAbstractState* state);
 int QStateMachine_error(const QStateMachine* self);
@@ -100,8 +100,8 @@ struct seaqt_array /* of QAbstractAnimation* */  QStateMachine_defaultAnimations
 void QStateMachine_removeDefaultAnimation(QStateMachine* self, QAbstractAnimation* animation);
 int QStateMachine_globalRestorePolicy(const QStateMachine* self);
 void QStateMachine_setGlobalRestorePolicy(QStateMachine* self, int restorePolicy);
-void QStateMachine_postEvent(QStateMachine* self, QEvent* event);
-int QStateMachine_postDelayedEvent(QStateMachine* self, QEvent* event, int delay);
+void QStateMachine_postEvent_event(QStateMachine* self, QEvent* event);
+int QStateMachine_postDelayedEvent_QEvent_int(QStateMachine* self, QEvent* event, int delay);
 bool QStateMachine_cancelDelayedEvent(QStateMachine* self, int id);
 struct seaqt_array /* set of QAbstractState* */  QStateMachine_configuration(const QStateMachine* self);
 bool QStateMachine_eventFilter(QStateMachine* self, QObject* watched, QEvent* event);
@@ -117,11 +117,11 @@ void QStateMachine_endSelectTransitions(QStateMachine* self, QEvent* event);
 void QStateMachine_beginMicrostep(QStateMachine* self, QEvent* event);
 void QStateMachine_endMicrostep(QStateMachine* self, QEvent* event);
 bool QStateMachine_event(QStateMachine* self, QEvent* e);
-struct seaqt_string QStateMachine_tr2(const char* s, const char* c);
-struct seaqt_string QStateMachine_tr3(const char* s, const char* c, int n);
-struct seaqt_string QStateMachine_trUtf82(const char* s, const char* c);
-struct seaqt_string QStateMachine_trUtf83(const char* s, const char* c, int n);
-void QStateMachine_postEvent2(QStateMachine* self, QEvent* event, int priority);
+struct seaqt_string QStateMachine_tr_s_c(const char* s, const char* c);
+struct seaqt_string QStateMachine_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QStateMachine_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QStateMachine_trUtf8_s_c_n(const char* s, const char* c, int n);
+void QStateMachine_postEvent_event_priority(QStateMachine* self, QEvent* event, int priority);
 
 QMetaObject* QStateMachine_virtualbase_metaObject(const VirtualQStateMachine* self);
 void* QStateMachine_virtualbase_metacast(VirtualQStateMachine* self, const char* param1);
@@ -148,24 +148,24 @@ bool QStateMachine_protectedbase_isSignalConnected(const VirtualQStateMachine* s
 const QMetaObject* QStateMachine_staticMetaObject();
 void QStateMachine_delete(QStateMachine* self);
 
-QStateMachine__SignalEvent* QStateMachine__SignalEvent_new(QObject* sender, int signalIndex, struct seaqt_array /* of QVariant* */  arguments);
-QStateMachine__SignalEvent* QStateMachine__SignalEvent_new2(QStateMachine__SignalEvent* param1);
+QStateMachine__SignalEvent* QStateMachine__SignalEvent_new_sender_signalIndex_arguments(QObject* sender, int signalIndex, struct seaqt_array /* of QVariant* */  arguments);
+QStateMachine__SignalEvent* QStateMachine__SignalEvent_new_from(QStateMachine__SignalEvent* from);
 
 void QStateMachine__SignalEvent_virtbase(QStateMachine__SignalEvent* src, QEvent** outptr_QEvent);
 QObject* QStateMachine__SignalEvent_sender(const QStateMachine__SignalEvent* self);
 int QStateMachine__SignalEvent_signalIndex(const QStateMachine__SignalEvent* self);
 struct seaqt_array /* of QVariant* */  QStateMachine__SignalEvent_arguments(const QStateMachine__SignalEvent* self);
-void QStateMachine__SignalEvent_operatorAssign(QStateMachine__SignalEvent* self, QStateMachine__SignalEvent* param1);
+void QStateMachine__SignalEvent_operatorAssign(QStateMachine__SignalEvent* self, QStateMachine__SignalEvent* from);
 
 void QStateMachine__SignalEvent_delete(QStateMachine__SignalEvent* self);
 
-QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new(QObject* object, QEvent* event);
-QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new2(QStateMachine__WrappedEvent* param1);
+QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new_object_event(QObject* object, QEvent* event);
+QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new_from(QStateMachine__WrappedEvent* from);
 
 void QStateMachine__WrappedEvent_virtbase(QStateMachine__WrappedEvent* src, QEvent** outptr_QEvent);
 QObject* QStateMachine__WrappedEvent_object(const QStateMachine__WrappedEvent* self);
 QEvent* QStateMachine__WrappedEvent_event(const QStateMachine__WrappedEvent* self);
-void QStateMachine__WrappedEvent_operatorAssign(QStateMachine__WrappedEvent* self, QStateMachine__WrappedEvent* param1);
+void QStateMachine__WrappedEvent_operatorAssign(QStateMachine__WrappedEvent* self, QStateMachine__WrappedEvent* from);
 
 void QStateMachine__WrappedEvent_delete(QStateMachine__WrappedEvent* self);
 

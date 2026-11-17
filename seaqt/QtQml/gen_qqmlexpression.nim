@@ -65,8 +65,8 @@ type cQQmlExpression*{.exportc: "QQmlExpression", incompleteStruct.} = object
 proc fcQQmlExpression_metaObject(self: pointer): pointer {.importc: "QQmlExpression_metaObject".}
 proc fcQQmlExpression_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlExpression_metacast".}
 proc fcQQmlExpression_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlExpression_metacall".}
-proc fcQQmlExpression_tr(s: cstring): struct_seaqt_string {.importc: "QQmlExpression_tr".}
-proc fcQQmlExpression_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQmlExpression_trUtf8".}
+proc fcQQmlExpression_trS(s: cstring): struct_seaqt_string {.importc: "QQmlExpression_tr_s".}
+proc fcQQmlExpression_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQmlExpression_trUtf8_s".}
 proc fcQQmlExpression_engine(self: pointer): pointer {.importc: "QQmlExpression_engine".}
 proc fcQQmlExpression_context(self: pointer): pointer {.importc: "QQmlExpression_context".}
 proc fcQQmlExpression_expression(self: pointer): struct_seaqt_string {.importc: "QQmlExpression_expression".}
@@ -76,7 +76,7 @@ proc fcQQmlExpression_setNotifyOnValueChanged(self: pointer, notifyOnValueChange
 proc fcQQmlExpression_sourceFile(self: pointer): struct_seaqt_string {.importc: "QQmlExpression_sourceFile".}
 proc fcQQmlExpression_lineNumber(self: pointer): cint {.importc: "QQmlExpression_lineNumber".}
 proc fcQQmlExpression_columnNumber(self: pointer): cint {.importc: "QQmlExpression_columnNumber".}
-proc fcQQmlExpression_setSourceLocation(self: pointer, fileName: struct_seaqt_string, line: cint): void {.importc: "QQmlExpression_setSourceLocation".}
+proc fcQQmlExpression_setSourceLocationFileNameLine(self: pointer, fileName: struct_seaqt_string, line: cint): void {.importc: "QQmlExpression_setSourceLocation_fileName_line".}
 proc fcQQmlExpression_scopeObject(self: pointer): pointer {.importc: "QQmlExpression_scopeObject".}
 proc fcQQmlExpression_hasError(self: pointer): bool {.importc: "QQmlExpression_hasError".}
 proc fcQQmlExpression_clearError(self: pointer): void {.importc: "QQmlExpression_clearError".}
@@ -84,12 +84,12 @@ proc fcQQmlExpression_error(self: pointer): pointer {.importc: "QQmlExpression_e
 proc fcQQmlExpression_evaluate(self: pointer): pointer {.importc: "QQmlExpression_evaluate".}
 proc fcQQmlExpression_valueChanged(self: pointer): void {.importc: "QQmlExpression_valueChanged".}
 proc fcQQmlExpression_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlExpression_connect_valueChanged".}
-proc fcQQmlExpression_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlExpression_tr2".}
-proc fcQQmlExpression_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlExpression_tr3".}
-proc fcQQmlExpression_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlExpression_trUtf82".}
-proc fcQQmlExpression_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlExpression_trUtf83".}
-proc fcQQmlExpression_setSourceLocation2(self: pointer, fileName: struct_seaqt_string, line: cint, column: cint): void {.importc: "QQmlExpression_setSourceLocation2".}
-proc fcQQmlExpression_evaluateWithValueIsUndefined(self: pointer, valueIsUndefined: ptr bool): pointer {.importc: "QQmlExpression_evaluateWithValueIsUndefined".}
+proc fcQQmlExpression_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlExpression_tr_s_c".}
+proc fcQQmlExpression_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlExpression_tr_s_c_n".}
+proc fcQQmlExpression_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlExpression_trUtf8_s_c".}
+proc fcQQmlExpression_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlExpression_trUtf8_s_c_n".}
+proc fcQQmlExpression_setSourceLocationFileNameLineColumn(self: pointer, fileName: struct_seaqt_string, line: cint, column: cint): void {.importc: "QQmlExpression_setSourceLocation_fileName_line_column".}
+proc fcQQmlExpression_evaluateValueIsUndefined(self: pointer, valueIsUndefined: ptr bool): pointer {.importc: "QQmlExpression_evaluate_valueIsUndefined".}
 proc fcQQmlExpression_vdata(self: pointer): ptr pointer {.importc: "QQmlExpression_vdata".}
 proc fvdata_cQQmlExpression(self: pointer): pointer {.importc: "vdata_QQmlExpression".}
 
@@ -120,12 +120,12 @@ proc fcQQmlExpression_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQQmlExpression_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlExpression_protectedbase_receivers".}
 proc fcQQmlExpression_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlExpression_protectedbase_isSignalConnected".}
 proc fcQQmlExpression_new(vtbl: pointer, vdata: csize_t): ptr cQQmlExpression {.importc: "QQmlExpression_new".}
-proc fcQQmlExpression_new2(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer, param3: struct_seaqt_string): ptr cQQmlExpression {.importc: "QQmlExpression_new2".}
-proc fcQQmlExpression_new3(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new3".}
-proc fcQQmlExpression_new4(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer, param3: struct_seaqt_string, param4: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new4".}
-proc fcQQmlExpression_new5(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new5".}
-proc fcQQmlExpression_new6(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer, param3: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new6".}
-proc fcQQmlExpression_new7(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer, param3: pointer, param4: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new7".}
+proc fcQQmlExpression_new2(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer, param3: struct_seaqt_string): ptr cQQmlExpression {.importc: "QQmlExpression_new_QQmlContext_QObject_QString".}
+proc fcQQmlExpression_new3(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new_QQmlScriptString".}
+proc fcQQmlExpression_new4(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer, param3: struct_seaqt_string, param4: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new_QQmlContext_QObject_QString_QObject".}
+proc fcQQmlExpression_new5(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new_QQmlScriptString_QQmlContext".}
+proc fcQQmlExpression_new6(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer, param3: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new_QQmlScriptString_QQmlContext_QObject".}
+proc fcQQmlExpression_new7(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer, param3: pointer, param4: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new_QQmlScriptString_QQmlContext_QObject_QObject".}
 proc fcQQmlExpression_staticMetaObject(): pointer {.importc: "QQmlExpression_staticMetaObject".}
 
 proc metaObject*(self: gen_qqmlexpression_types.QQmlExpression): gen_qobjectdefs_types.QMetaObject =
@@ -138,13 +138,13 @@ proc metacall*(self: gen_qqmlexpression_types.QQmlExpression, param1: cint, para
   fcQQmlExpression_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlexpression_types.QQmlExpression, s: cstring): string =
-  let v_ms = fcQQmlExpression_tr(s)
+  let v_ms = fcQQmlExpression_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlexpression_types.QQmlExpression, s: cstring): string =
-  let v_ms = fcQQmlExpression_trUtf8(s)
+  let v_ms = fcQQmlExpression_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -183,7 +183,7 @@ proc columnNumber*(self: gen_qqmlexpression_types.QQmlExpression): cint =
   fcQQmlExpression_columnNumber(self.h)
 
 proc setSourceLocation*(self: gen_qqmlexpression_types.QQmlExpression, fileName: openArray[char], line: cint): void =
-  fcQQmlExpression_setSourceLocation(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), line)
+  fcQQmlExpression_setSourceLocationFileNameLine(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), line)
 
 proc scopeObject*(self: gen_qqmlexpression_types.QQmlExpression): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQmlExpression_scopeObject(self.h), owned: false)
@@ -219,34 +219,34 @@ proc onValueChanged*(self: gen_qqmlexpression_types.QQmlExpression, slot: QQmlEx
   fcQQmlExpression_connect_valueChanged(self.h, cast[int](addr tmp[]), fcQQmlExpression_slot_callback_valueChanged, fcQQmlExpression_slot_callback_valueChanged_release)
 
 proc tr*(_: type gen_qqmlexpression_types.QQmlExpression, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlExpression_tr2(s, c)
+  let v_ms = fcQQmlExpression_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlexpression_types.QQmlExpression, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlExpression_tr3(s, c, n)
+  let v_ms = fcQQmlExpression_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlexpression_types.QQmlExpression, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlExpression_trUtf82(s, c)
+  let v_ms = fcQQmlExpression_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlexpression_types.QQmlExpression, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlExpression_trUtf83(s, c, n)
+  let v_ms = fcQQmlExpression_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setSourceLocation*(self: gen_qqmlexpression_types.QQmlExpression, fileName: openArray[char], line: cint, column: cint): void =
-  fcQQmlExpression_setSourceLocation2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), line, column)
+  fcQQmlExpression_setSourceLocationFileNameLineColumn(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), line, column)
 
 proc evaluate*(self: gen_qqmlexpression_types.QQmlExpression, valueIsUndefined: ptr bool): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlExpression_evaluateWithValueIsUndefined(self.h, valueIsUndefined), owned: true)
+  gen_qvariant_types.QVariant(h: fcQQmlExpression_evaluateValueIsUndefined(self.h, valueIsUndefined), owned: true)
 
 type QQmlExpressionmetaObjectProc* = proc(self: QQmlExpression): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QQmlExpressionmetacastProc* = proc(self: QQmlExpression, param1: cstring): pointer {.raises: [], gcsafe.}

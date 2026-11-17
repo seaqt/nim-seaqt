@@ -16,8 +16,8 @@ QSharedData* QSharedData_new() {
 	return new (std::nothrow) QSharedData();
 }
 
-QSharedData* QSharedData_new2(QSharedData* param1) {
-	return new (std::nothrow) QSharedData(*param1);
+QSharedData* QSharedData_new_from(QSharedData* from) {
+	return new (std::nothrow) QSharedData(*from);
 }
 
 void QSharedData_delete(QSharedData* self) {

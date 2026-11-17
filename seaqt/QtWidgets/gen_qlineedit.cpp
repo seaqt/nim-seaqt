@@ -314,19 +314,19 @@ public:
 	friend void QLineEdit_virtualbase_inputMethodEvent(VirtualQLineEdit* self, QInputMethodEvent* param1);
 
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
-		if (vtbl->inputMethodQuery == 0) {
+		if (vtbl->inputMethodQuery_Qt_InputMethodQuery == 0) {
 			return QLineEdit::inputMethodQuery(param1);
 		}
 
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery_Qt_InputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QLineEdit_virtualbase_inputMethodQuery(const VirtualQLineEdit* self, int param1);
+	friend QVariant* QLineEdit_virtualbase_inputMethodQuery_Qt_InputMethodQuery(const VirtualQLineEdit* self, int param1);
 
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
@@ -704,18 +704,18 @@ VirtualQLineEdit* QLineEdit_new(const QLineEdit_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQLineEdit(vtbl) : nullptr;
 }
 
-VirtualQLineEdit* QLineEdit_new2(const QLineEdit_VTable* vtbl, size_t vdata, struct seaqt_string param1) {
+VirtualQLineEdit* QLineEdit_new_QString(const QLineEdit_VTable* vtbl, size_t vdata, struct seaqt_string param1) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLineEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLineEdit(vtbl, param1_QString) : nullptr;
 }
 
-VirtualQLineEdit* QLineEdit_new3(const QLineEdit_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQLineEdit* QLineEdit_new_QWidget(const QLineEdit_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLineEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLineEdit(vtbl, parent) : nullptr;
 }
 
-VirtualQLineEdit* QLineEdit_new4(const QLineEdit_VTable* vtbl, size_t vdata, struct seaqt_string param1, QWidget* parent) {
+VirtualQLineEdit* QLineEdit_new_QString_QWidget(const QLineEdit_VTable* vtbl, size_t vdata, struct seaqt_string param1, QWidget* parent) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLineEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLineEdit(vtbl, param1_QString, parent) : nullptr;
@@ -737,7 +737,7 @@ int QLineEdit_metacall(QLineEdit* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QLineEdit_tr(const char* s) {
+struct seaqt_string QLineEdit_tr_s(const char* s) {
 	QString _ret = QLineEdit::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -748,7 +748,7 @@ struct seaqt_string QLineEdit_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QLineEdit_trUtf8(const char* s) {
+struct seaqt_string QLineEdit_trUtf8_s(const char* s) {
 	QString _ret = QLineEdit::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -883,11 +883,11 @@ int QLineEdit_alignment(const QLineEdit* self) {
 	return static_cast<int>(_ret);
 }
 
-void QLineEdit_cursorForward(QLineEdit* self, bool mark) {
+void QLineEdit_cursorForward_mark(QLineEdit* self, bool mark) {
 	self->cursorForward(mark);
 }
 
-void QLineEdit_cursorBackward(QLineEdit* self, bool mark) {
+void QLineEdit_cursorBackward_mark(QLineEdit* self, bool mark) {
 	self->cursorBackward(mark);
 }
 
@@ -999,11 +999,11 @@ bool QLineEdit_hasAcceptableInput(const QLineEdit* self) {
 	return self->hasAcceptableInput();
 }
 
-void QLineEdit_setTextMargins(QLineEdit* self, int left, int top, int right, int bottom) {
+void QLineEdit_setTextMargins_left_top_right_bottom(QLineEdit* self, int left, int top, int right, int bottom) {
 	self->setTextMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
-void QLineEdit_setTextMarginsWithMargins(QLineEdit* self, QMargins* margins) {
+void QLineEdit_setTextMargins_margins(QLineEdit* self, QMargins* margins) {
 	self->setTextMargins(*margins);
 }
 
@@ -1015,11 +1015,11 @@ QMargins* QLineEdit_textMargins(const QLineEdit* self) {
 	return new QMargins(self->textMargins());
 }
 
-void QLineEdit_addAction(QLineEdit* self, QAction* action, int position) {
+void QLineEdit_addAction_action_position(QLineEdit* self, QAction* action, int position) {
 	self->addAction(action, static_cast<QLineEdit::ActionPosition>(position));
 }
 
-QAction* QLineEdit_addAction2(QLineEdit* self, QIcon* icon, int position) {
+QAction* QLineEdit_addAction_icon_position(QLineEdit* self, QIcon* icon, int position) {
 	return self->addAction(*icon, static_cast<QLineEdit::ActionPosition>(position));
 }
 
@@ -1194,11 +1194,11 @@ void QLineEdit_connect_inputRejected(QLineEdit* self, intptr_t slot, void (*call
 	QLineEdit::connect(self, static_cast<void (QLineEdit::*)()>(&QLineEdit::inputRejected), self, local_caller{slot, callback, release});
 }
 
-QVariant* QLineEdit_inputMethodQuery(const QLineEdit* self, int param1) {
+QVariant* QLineEdit_inputMethodQuery_Qt_InputMethodQuery(const QLineEdit* self, int param1) {
 	return new QVariant(self->inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-QVariant* QLineEdit_inputMethodQuery2(const QLineEdit* self, int property, QVariant* argument) {
+QVariant* QLineEdit_inputMethodQuery_Qt_InputMethodQuery_QVariant(const QLineEdit* self, int property, QVariant* argument) {
 	return new QVariant(self->inputMethodQuery(static_cast<Qt::InputMethodQuery>(property), *argument));
 }
 
@@ -1206,7 +1206,7 @@ bool QLineEdit_event(QLineEdit* self, QEvent* param1) {
 	return self->event(param1);
 }
 
-struct seaqt_string QLineEdit_tr2(const char* s, const char* c) {
+struct seaqt_string QLineEdit_tr_s_c(const char* s, const char* c) {
 	QString _ret = QLineEdit::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1217,7 +1217,7 @@ struct seaqt_string QLineEdit_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QLineEdit_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QLineEdit_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QLineEdit::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1228,7 +1228,7 @@ struct seaqt_string QLineEdit_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QLineEdit_trUtf82(const char* s, const char* c) {
+struct seaqt_string QLineEdit_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QLineEdit::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1239,7 +1239,7 @@ struct seaqt_string QLineEdit_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QLineEdit_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QLineEdit_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QLineEdit::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1250,11 +1250,11 @@ struct seaqt_string QLineEdit_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QLineEdit_cursorForward2(QLineEdit* self, bool mark, int steps) {
+void QLineEdit_cursorForward_mark_steps(QLineEdit* self, bool mark, int steps) {
 	self->cursorForward(mark, static_cast<int>(steps));
 }
 
-void QLineEdit_cursorBackward2(QLineEdit* self, bool mark, int steps) {
+void QLineEdit_cursorBackward_mark_steps(QLineEdit* self, bool mark, int steps) {
 	self->cursorBackward(mark, static_cast<int>(steps));
 }
 
@@ -1362,7 +1362,7 @@ void QLineEdit_virtualbase_inputMethodEvent(VirtualQLineEdit* self, QInputMethod
 	self->QLineEdit::inputMethodEvent(param1);
 }
 
-QVariant* QLineEdit_virtualbase_inputMethodQuery(const VirtualQLineEdit* self, int param1) {
+QVariant* QLineEdit_virtualbase_inputMethodQuery_Qt_InputMethodQuery(const VirtualQLineEdit* self, int param1) {
 
 	return new QVariant(self->QLineEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }

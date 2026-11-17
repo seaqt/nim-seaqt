@@ -31,13 +31,13 @@ typedef struct QVector4D QVector4D;
 #endif
 
 QVector2D* QVector2D_new();
-QVector2D* QVector2D_new2(int param1);
-QVector2D* QVector2D_new3(float xpos, float ypos);
-QVector2D* QVector2D_new4(QPoint* point);
-QVector2D* QVector2D_new5(QPointF* point);
-QVector2D* QVector2D_new6(QVector3D* vector);
-QVector2D* QVector2D_new7(QVector4D* vector);
-QVector2D* QVector2D_new8(QVector2D* param1);
+QVector2D* QVector2D_new_Qt_Initialization(int param1);
+QVector2D* QVector2D_new_float_float(float xpos, float ypos);
+QVector2D* QVector2D_new_QPoint(QPoint* point);
+QVector2D* QVector2D_new_QPointF(QPointF* point);
+QVector2D* QVector2D_new_QVector3D(QVector3D* vector);
+QVector2D* QVector2D_new_QVector4D(QVector4D* vector);
+QVector2D* QVector2D_new_QVector2D(QVector2D* from);
 
 bool QVector2D_isNull(const QVector2D* self);
 float QVector2D_x(const QVector2D* self);
@@ -53,10 +53,10 @@ float QVector2D_distanceToPoint(const QVector2D* self, QVector2D* point);
 float QVector2D_distanceToLine(const QVector2D* self, QVector2D* point, QVector2D* direction);
 QVector2D* QVector2D_operatorPlusAssign(QVector2D* self, QVector2D* vector);
 QVector2D* QVector2D_operatorMinusAssign(QVector2D* self, QVector2D* vector);
-QVector2D* QVector2D_operatorMultiplyAssign(QVector2D* self, float factor);
-QVector2D* QVector2D_operatorMultiplyAssignWithVector(QVector2D* self, QVector2D* vector);
-QVector2D* QVector2D_operatorDivideAssign(QVector2D* self, float divisor);
-QVector2D* QVector2D_operatorDivideAssignWithVector(QVector2D* self, QVector2D* vector);
+QVector2D* QVector2D_operatorMultiplyAssign_factor(QVector2D* self, float factor);
+QVector2D* QVector2D_operatorMultiplyAssign_vector(QVector2D* self, QVector2D* vector);
+QVector2D* QVector2D_operatorDivideAssign_divisor(QVector2D* self, float divisor);
+QVector2D* QVector2D_operatorDivideAssign_vector(QVector2D* self, QVector2D* vector);
 float QVector2D_dotProduct(QVector2D* v1, QVector2D* v2);
 QVector3D* QVector2D_toVector3D(const QVector2D* self);
 QVector4D* QVector2D_toVector4D(const QVector2D* self);

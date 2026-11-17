@@ -38,8 +38,8 @@ void QCameraImageCaptureControl_virtbase(QCameraImageCaptureControl* src, QMedia
 QMetaObject* QCameraImageCaptureControl_metaObject(const QCameraImageCaptureControl* self);
 void* QCameraImageCaptureControl_metacast(QCameraImageCaptureControl* self, const char* param1);
 int QCameraImageCaptureControl_metacall(QCameraImageCaptureControl* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraImageCaptureControl_tr(const char* s);
-struct seaqt_string QCameraImageCaptureControl_trUtf8(const char* s);
+struct seaqt_string QCameraImageCaptureControl_tr_s(const char* s);
+struct seaqt_string QCameraImageCaptureControl_trUtf8_s(const char* s);
 bool QCameraImageCaptureControl_isReadyForCapture(const QCameraImageCaptureControl* self);
 int QCameraImageCaptureControl_driveMode(const QCameraImageCaptureControl* self);
 void QCameraImageCaptureControl_setDriveMode(QCameraImageCaptureControl* self, int mode);
@@ -59,10 +59,10 @@ void QCameraImageCaptureControl_imageSaved(QCameraImageCaptureControl* self, int
 void QCameraImageCaptureControl_connect_imageSaved(QCameraImageCaptureControl* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t));
 void QCameraImageCaptureControl_error(QCameraImageCaptureControl* self, int id, int error, struct seaqt_string errorString);
 void QCameraImageCaptureControl_connect_error(QCameraImageCaptureControl* self, intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t));
-struct seaqt_string QCameraImageCaptureControl_tr2(const char* s, const char* c);
-struct seaqt_string QCameraImageCaptureControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraImageCaptureControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraImageCaptureControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraImageCaptureControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraImageCaptureControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraImageCaptureControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraImageCaptureControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraImageCaptureControl_staticMetaObject();
 void QCameraImageCaptureControl_delete(QCameraImageCaptureControl* self);

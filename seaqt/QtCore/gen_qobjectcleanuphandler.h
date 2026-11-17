@@ -56,16 +56,16 @@ void QObjectCleanupHandler_virtbase(QObjectCleanupHandler* src, QObject** outptr
 QMetaObject* QObjectCleanupHandler_metaObject(const QObjectCleanupHandler* self);
 void* QObjectCleanupHandler_metacast(QObjectCleanupHandler* self, const char* param1);
 int QObjectCleanupHandler_metacall(QObjectCleanupHandler* self, int param1, int param2, void** param3);
-struct seaqt_string QObjectCleanupHandler_tr(const char* s);
-struct seaqt_string QObjectCleanupHandler_trUtf8(const char* s);
+struct seaqt_string QObjectCleanupHandler_tr_s(const char* s);
+struct seaqt_string QObjectCleanupHandler_trUtf8_s(const char* s);
 QObject* QObjectCleanupHandler_add(QObjectCleanupHandler* self, QObject* object);
 void QObjectCleanupHandler_remove(QObjectCleanupHandler* self, QObject* object);
 bool QObjectCleanupHandler_isEmpty(const QObjectCleanupHandler* self);
 void QObjectCleanupHandler_clear(QObjectCleanupHandler* self);
-struct seaqt_string QObjectCleanupHandler_tr2(const char* s, const char* c);
-struct seaqt_string QObjectCleanupHandler_tr3(const char* s, const char* c, int n);
-struct seaqt_string QObjectCleanupHandler_trUtf82(const char* s, const char* c);
-struct seaqt_string QObjectCleanupHandler_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QObjectCleanupHandler_tr_s_c(const char* s, const char* c);
+struct seaqt_string QObjectCleanupHandler_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QObjectCleanupHandler_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QObjectCleanupHandler_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QObjectCleanupHandler_virtualbase_metaObject(const VirtualQObjectCleanupHandler* self);
 void* QObjectCleanupHandler_virtualbase_metacast(VirtualQObjectCleanupHandler* self, const char* param1);

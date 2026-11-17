@@ -31,10 +31,10 @@ typedef struct QVariant QVariant;
 #endif
 
 QNetworkRequest* QNetworkRequest_new();
-QNetworkRequest* QNetworkRequest_new2(QUrl* url);
-QNetworkRequest* QNetworkRequest_new3(QNetworkRequest* other);
+QNetworkRequest* QNetworkRequest_new_url(QUrl* url);
+QNetworkRequest* QNetworkRequest_new_from(QNetworkRequest* from);
 
-void QNetworkRequest_operatorAssign(QNetworkRequest* self, QNetworkRequest* other);
+void QNetworkRequest_operatorAssign(QNetworkRequest* self, QNetworkRequest* from);
 void QNetworkRequest_swap(QNetworkRequest* self, QNetworkRequest* other);
 bool QNetworkRequest_operatorEqual(const QNetworkRequest* self, QNetworkRequest* other);
 bool QNetworkRequest_operatorNotEqual(const QNetworkRequest* self, QNetworkRequest* other);
@@ -46,7 +46,7 @@ bool QNetworkRequest_hasRawHeader(const QNetworkRequest* self, struct seaqt_stri
 struct seaqt_array /* of struct seaqt_string */  QNetworkRequest_rawHeaderList(const QNetworkRequest* self);
 struct seaqt_string QNetworkRequest_rawHeader(const QNetworkRequest* self, struct seaqt_string headerName);
 void QNetworkRequest_setRawHeader(QNetworkRequest* self, struct seaqt_string headerName, struct seaqt_string value);
-QVariant* QNetworkRequest_attribute(const QNetworkRequest* self, int code);
+QVariant* QNetworkRequest_attribute_code(const QNetworkRequest* self, int code);
 void QNetworkRequest_setAttribute(QNetworkRequest* self, int code, QVariant* value);
 QSslConfiguration* QNetworkRequest_sslConfiguration(const QNetworkRequest* self);
 void QNetworkRequest_setSslConfiguration(QNetworkRequest* self, QSslConfiguration* configuration);
@@ -62,8 +62,8 @@ QHttp2Configuration* QNetworkRequest_http2Configuration(const QNetworkRequest* s
 void QNetworkRequest_setHttp2Configuration(QNetworkRequest* self, QHttp2Configuration* configuration);
 int QNetworkRequest_transferTimeout(const QNetworkRequest* self);
 void QNetworkRequest_setTransferTimeout(QNetworkRequest* self);
-QVariant* QNetworkRequest_attribute2(const QNetworkRequest* self, int code, QVariant* defaultValue);
-void QNetworkRequest_setTransferTimeoutWithTimeout(QNetworkRequest* self, int timeout);
+QVariant* QNetworkRequest_attribute_code_defaultValue(const QNetworkRequest* self, int code, QVariant* defaultValue);
+void QNetworkRequest_setTransferTimeout_timeout(QNetworkRequest* self, int timeout);
 
 void QNetworkRequest_delete(QNetworkRequest* self);
 

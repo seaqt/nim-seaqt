@@ -27,9 +27,9 @@ typedef struct QRectF QRectF;
 #endif
 
 QGlyphRun* QGlyphRun_new();
-QGlyphRun* QGlyphRun_new2(QGlyphRun* other);
+QGlyphRun* QGlyphRun_new_from(QGlyphRun* from);
 
-void QGlyphRun_operatorAssign(QGlyphRun* self, QGlyphRun* other);
+void QGlyphRun_operatorAssign(QGlyphRun* self, QGlyphRun* from);
 void QGlyphRun_swap(QGlyphRun* self, QGlyphRun* other);
 QRawFont* QGlyphRun_rawFont(const QGlyphRun* self);
 void QGlyphRun_setRawFont(QGlyphRun* self, QRawFont* rawFont);
@@ -49,13 +49,13 @@ void QGlyphRun_setStrikeOut(QGlyphRun* self, bool strikeOut);
 bool QGlyphRun_strikeOut(const QGlyphRun* self);
 void QGlyphRun_setRightToLeft(QGlyphRun* self, bool on);
 bool QGlyphRun_isRightToLeft(const QGlyphRun* self);
-void QGlyphRun_setFlag(QGlyphRun* self, int flag);
+void QGlyphRun_setFlag_flag(QGlyphRun* self, int flag);
 void QGlyphRun_setFlags(QGlyphRun* self, int flags);
 int QGlyphRun_flags(const QGlyphRun* self);
 void QGlyphRun_setBoundingRect(QGlyphRun* self, QRectF* boundingRect);
 QRectF* QGlyphRun_boundingRect(const QGlyphRun* self);
 bool QGlyphRun_isEmpty(const QGlyphRun* self);
-void QGlyphRun_setFlag2(QGlyphRun* self, int flag, bool enabled);
+void QGlyphRun_setFlag_flag_enabled(QGlyphRun* self, int flag, bool enabled);
 
 void QGlyphRun_delete(QGlyphRun* self);
 

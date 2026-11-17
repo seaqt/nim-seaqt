@@ -78,9 +78,9 @@ type cQAudioDecoder*{.exportc: "QAudioDecoder", incompleteStruct.} = object
 proc fcQAudioDecoder_metaObject(self: pointer): pointer {.importc: "QAudioDecoder_metaObject".}
 proc fcQAudioDecoder_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioDecoder_metacast".}
 proc fcQAudioDecoder_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioDecoder_metacall".}
-proc fcQAudioDecoder_tr(s: cstring): struct_seaqt_string {.importc: "QAudioDecoder_tr".}
-proc fcQAudioDecoder_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAudioDecoder_trUtf8".}
-proc fcQAudioDecoder_hasSupport(mimeType: struct_seaqt_string): cint {.importc: "QAudioDecoder_hasSupport".}
+proc fcQAudioDecoder_trS(s: cstring): struct_seaqt_string {.importc: "QAudioDecoder_tr_s".}
+proc fcQAudioDecoder_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAudioDecoder_trUtf8_s".}
+proc fcQAudioDecoder_hasSupportMimeType(mimeType: struct_seaqt_string): cint {.importc: "QAudioDecoder_hasSupport_mimeType".}
 proc fcQAudioDecoder_state(self: pointer): cint {.importc: "QAudioDecoder_state".}
 proc fcQAudioDecoder_sourceFilename(self: pointer): struct_seaqt_string {.importc: "QAudioDecoder_sourceFilename".}
 proc fcQAudioDecoder_setSourceFilename(self: pointer, fileName: struct_seaqt_string): void {.importc: "QAudioDecoder_setSourceFilename".}
@@ -106,8 +106,8 @@ proc fcQAudioDecoder_stateChanged(self: pointer, newState: cint): void {.importc
 proc fcQAudioDecoder_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, newState: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioDecoder_connect_stateChanged".}
 proc fcQAudioDecoder_formatChanged(self: pointer, format: pointer): void {.importc: "QAudioDecoder_formatChanged".}
 proc fcQAudioDecoder_connect_formatChanged(self: pointer, slot: int, callback: proc (slot: int, format: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioDecoder_connect_formatChanged".}
-proc fcQAudioDecoder_errorWithError(self: pointer, error: cint): void {.importc: "QAudioDecoder_errorWithError".}
-proc fcQAudioDecoder_connect_errorWithError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioDecoder_connect_errorWithError".}
+proc fcQAudioDecoder_errorError(self: pointer, error: cint): void {.importc: "QAudioDecoder_error_error".}
+proc fcQAudioDecoder_connect_errorError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioDecoder_connect_error_error".}
 proc fcQAudioDecoder_sourceChanged(self: pointer): void {.importc: "QAudioDecoder_sourceChanged".}
 proc fcQAudioDecoder_connect_sourceChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioDecoder_connect_sourceChanged".}
 proc fcQAudioDecoder_positionChanged(self: pointer, position: clonglong): void {.importc: "QAudioDecoder_positionChanged".}
@@ -116,11 +116,11 @@ proc fcQAudioDecoder_durationChanged(self: pointer, duration: clonglong): void {
 proc fcQAudioDecoder_connect_durationChanged(self: pointer, slot: int, callback: proc (slot: int, duration: clonglong) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioDecoder_connect_durationChanged".}
 proc fcQAudioDecoder_bindX(self: pointer, param1: pointer): bool {.importc: "QAudioDecoder_bind".}
 proc fcQAudioDecoder_unbind(self: pointer, param1: pointer): void {.importc: "QAudioDecoder_unbind".}
-proc fcQAudioDecoder_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioDecoder_tr2".}
-proc fcQAudioDecoder_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioDecoder_tr3".}
-proc fcQAudioDecoder_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioDecoder_trUtf82".}
-proc fcQAudioDecoder_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioDecoder_trUtf83".}
-proc fcQAudioDecoder_hasSupport2(mimeType: struct_seaqt_string, codecs: struct_seaqt_array): cint {.importc: "QAudioDecoder_hasSupport2".}
+proc fcQAudioDecoder_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioDecoder_tr_s_c".}
+proc fcQAudioDecoder_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioDecoder_tr_s_c_n".}
+proc fcQAudioDecoder_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioDecoder_trUtf8_s_c".}
+proc fcQAudioDecoder_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioDecoder_trUtf8_s_c_n".}
+proc fcQAudioDecoder_hasSupportMimeTypeCodecs(mimeType: struct_seaqt_string, codecs: struct_seaqt_array): cint {.importc: "QAudioDecoder_hasSupport_mimeType_codecs".}
 proc fcQAudioDecoder_vdata(self: pointer): ptr pointer {.importc: "QAudioDecoder_vdata".}
 proc fvdata_cQAudioDecoder(self: pointer): pointer {.importc: "vdata_QAudioDecoder".}
 
@@ -163,7 +163,7 @@ proc fcQAudioDecoder_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQAudioDecoder_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioDecoder_protectedbase_receivers".}
 proc fcQAudioDecoder_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioDecoder_protectedbase_isSignalConnected".}
 proc fcQAudioDecoder_new(vtbl: pointer, vdata: csize_t): ptr cQAudioDecoder {.importc: "QAudioDecoder_new".}
-proc fcQAudioDecoder_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioDecoder {.importc: "QAudioDecoder_new2".}
+proc fcQAudioDecoder_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioDecoder {.importc: "QAudioDecoder_new_parent".}
 proc fcQAudioDecoder_staticMetaObject(): pointer {.importc: "QAudioDecoder_staticMetaObject".}
 
 proc metaObject*(self: gen_qaudiodecoder_types.QAudioDecoder): gen_qobjectdefs_types.QMetaObject =
@@ -176,19 +176,19 @@ proc metacall*(self: gen_qaudiodecoder_types.QAudioDecoder, param1: cint, param2
   fcQAudioDecoder_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring): string =
-  let v_ms = fcQAudioDecoder_tr(s)
+  let v_ms = fcQAudioDecoder_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring): string =
-  let v_ms = fcQAudioDecoder_trUtf8(s)
+  let v_ms = fcQAudioDecoder_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc hasSupport*(_: type gen_qaudiodecoder_types.QAudioDecoder, mimeType: openArray[char]): cint =
-  cint(fcQAudioDecoder_hasSupport(struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType)))))
+  cint(fcQAudioDecoder_hasSupportMimeType(struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType)))))
 
 proc state*(self: gen_qaudiodecoder_types.QAudioDecoder): cint =
   cint(fcQAudioDecoder_state(self.h))
@@ -338,24 +338,24 @@ proc onFormatChanged*(self: gen_qaudiodecoder_types.QAudioDecoder, slot: QAudioD
   fcQAudioDecoder_connect_formatChanged(self.h, cast[int](addr tmp[]), fcQAudioDecoder_slot_callback_formatChanged, fcQAudioDecoder_slot_callback_formatChanged_release)
 
 proc error*(self: gen_qaudiodecoder_types.QAudioDecoder, error: cint): void =
-  fcQAudioDecoder_errorWithError(self.h, cint(error))
+  fcQAudioDecoder_errorError(self.h, cint(error))
 
-type QAudioDecodererrorWithErrorSlot* = proc(error: cint)
-proc fcQAudioDecoder_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QAudioDecodererrorWithErrorSlot](cast[pointer](slot))
+type QAudioDecodererrorErrorSlot* = proc(error: cint)
+proc fcQAudioDecoder_slot_callback_errorError(slot: int, error: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAudioDecodererrorErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
-proc fcQAudioDecoder_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QAudioDecodererrorWithErrorSlot](cast[pointer](slot))
+proc fcQAudioDecoder_slot_callback_errorError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioDecodererrorErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onError*(self: gen_qaudiodecoder_types.QAudioDecoder, slot: QAudioDecodererrorWithErrorSlot) =
-  var tmp = new QAudioDecodererrorWithErrorSlot
+proc onError*(self: gen_qaudiodecoder_types.QAudioDecoder, slot: QAudioDecodererrorErrorSlot) =
+  var tmp = new QAudioDecodererrorErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioDecoder_connect_errorWithError(self.h, cast[int](addr tmp[]), fcQAudioDecoder_slot_callback_errorWithError, fcQAudioDecoder_slot_callback_errorWithError_release)
+  fcQAudioDecoder_connect_errorError(self.h, cast[int](addr tmp[]), fcQAudioDecoder_slot_callback_errorError, fcQAudioDecoder_slot_callback_errorError_release)
 
 proc sourceChanged*(self: gen_qaudiodecoder_types.QAudioDecoder): void =
   fcQAudioDecoder_sourceChanged(self.h)
@@ -422,25 +422,25 @@ proc unbind*(self: gen_qaudiodecoder_types.QAudioDecoder, param1: gen_qobject_ty
   fcQAudioDecoder_unbind(self.h, param1.h)
 
 proc tr*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioDecoder_tr2(s, c)
+  let v_ms = fcQAudioDecoder_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioDecoder_tr3(s, c, n)
+  let v_ms = fcQAudioDecoder_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioDecoder_trUtf82(s, c)
+  let v_ms = fcQAudioDecoder_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioDecoder_trUtf83(s, c, n)
+  let v_ms = fcQAudioDecoder_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -450,7 +450,7 @@ proc hasSupport*(_: type gen_qaudiodecoder_types.QAudioDecoder, mimeType: openAr
   for i in 0..<len(codecs):
     codecs_CArray[i] = struct_seaqt_string(data: if len(codecs[i]) > 0: addr codecs[i][0] else: nil, len: csize_t(len(codecs[i])))
 
-  cint(fcQAudioDecoder_hasSupport2(struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), struct_seaqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))))
+  cint(fcQAudioDecoder_hasSupportMimeTypeCodecs(struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), struct_seaqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))))
 
 type QAudioDecodermetaObjectProc* = proc(self: QAudioDecoder): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAudioDecodermetacastProc* = proc(self: QAudioDecoder, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -51,7 +51,7 @@ proc fcQWebFullScreenRequest_toggleOn(self: pointer): bool {.importc: "QWebFullS
 proc fcQWebFullScreenRequest_origin(self: pointer): pointer {.importc: "QWebFullScreenRequest_origin".}
 proc fcQWebFullScreenRequest_element(self: pointer): pointer {.importc: "QWebFullScreenRequest_element".}
 proc fcQWebFullScreenRequest_new(): ptr cQWebFullScreenRequest {.importc: "QWebFullScreenRequest_new".}
-proc fcQWebFullScreenRequest_new2(param1: pointer): ptr cQWebFullScreenRequest {.importc: "QWebFullScreenRequest_new2".}
+proc fcQWebFullScreenRequest_new2(fromVal: pointer): ptr cQWebFullScreenRequest {.importc: "QWebFullScreenRequest_new_from".}
 
 proc accept*(self: gen_qwebfullscreenrequest_types.QWebFullScreenRequest): void =
   fcQWebFullScreenRequest_accept(self.h)
@@ -72,6 +72,6 @@ proc create*(T: type gen_qwebfullscreenrequest_types.QWebFullScreenRequest): gen
   let tmp = gen_qwebfullscreenrequest_types.QWebFullScreenRequest(h: fcQWebFullScreenRequest_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebfullscreenrequest_types.QWebFullScreenRequest,
-    param1: gen_qwebfullscreenrequest_types.QWebFullScreenRequest): gen_qwebfullscreenrequest_types.QWebFullScreenRequest =
-  let tmp = gen_qwebfullscreenrequest_types.QWebFullScreenRequest(h: fcQWebFullScreenRequest_new2(param1.h), owned: true)
+    fromVal: gen_qwebfullscreenrequest_types.QWebFullScreenRequest): gen_qwebfullscreenrequest_types.QWebFullScreenRequest =
+  let tmp = gen_qwebfullscreenrequest_types.QWebFullScreenRequest(h: fcQWebFullScreenRequest_new2(fromVal.h), owned: true)
   tmp

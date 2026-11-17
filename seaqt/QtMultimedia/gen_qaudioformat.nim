@@ -51,7 +51,7 @@ export gen_qaudioformat_types
 
 type cQAudioFormat*{.exportc: "QAudioFormat", incompleteStruct.} = object
 
-proc fcQAudioFormat_operatorAssign(self: pointer, other: pointer): void {.importc: "QAudioFormat_operatorAssign".}
+proc fcQAudioFormat_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAudioFormat_operatorAssign".}
 proc fcQAudioFormat_operatorEqual(self: pointer, other: pointer): bool {.importc: "QAudioFormat_operatorEqual".}
 proc fcQAudioFormat_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QAudioFormat_operatorNotEqual".}
 proc fcQAudioFormat_isValid(self: pointer): bool {.importc: "QAudioFormat_isValid".}
@@ -75,10 +75,10 @@ proc fcQAudioFormat_framesForDuration(self: pointer, duration: clonglong): cint 
 proc fcQAudioFormat_durationForFrames(self: pointer, frameCount: cint): clonglong {.importc: "QAudioFormat_durationForFrames".}
 proc fcQAudioFormat_bytesPerFrame(self: pointer): cint {.importc: "QAudioFormat_bytesPerFrame".}
 proc fcQAudioFormat_new(): ptr cQAudioFormat {.importc: "QAudioFormat_new".}
-proc fcQAudioFormat_new2(other: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new2".}
+proc fcQAudioFormat_new2(fromVal: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new_from".}
 
-proc operatorAssign*(self: gen_qaudioformat_types.QAudioFormat, other: gen_qaudioformat_types.QAudioFormat): void =
-  fcQAudioFormat_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qaudioformat_types.QAudioFormat, fromVal: gen_qaudioformat_types.QAudioFormat): void =
+  fcQAudioFormat_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qaudioformat_types.QAudioFormat, other: gen_qaudioformat_types.QAudioFormat): bool =
   fcQAudioFormat_operatorEqual(self.h, other.h)
@@ -153,6 +153,6 @@ proc create*(T: type gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_type
   let tmp = gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new(), owned: true)
   tmp
 proc create*(T: type gen_qaudioformat_types.QAudioFormat,
-    other: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  let tmp = gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(other.h), owned: true)
+    fromVal: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
+  let tmp = gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(fromVal.h), owned: true)
   tmp

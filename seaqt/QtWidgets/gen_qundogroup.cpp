@@ -175,7 +175,7 @@ VirtualQUndoGroup* QUndoGroup_new(const QUndoGroup_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQUndoGroup(vtbl) : nullptr;
 }
 
-VirtualQUndoGroup* QUndoGroup_new2(const QUndoGroup_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQUndoGroup* QUndoGroup_new_parent(const QUndoGroup_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQUndoGroup>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQUndoGroup(vtbl, parent) : nullptr;
 }
@@ -196,7 +196,7 @@ int QUndoGroup_metacall(QUndoGroup* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QUndoGroup_tr(const char* s) {
+struct seaqt_string QUndoGroup_tr_s(const char* s) {
 	QString _ret = QUndoGroup::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -207,7 +207,7 @@ struct seaqt_string QUndoGroup_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QUndoGroup_trUtf8(const char* s) {
+struct seaqt_string QUndoGroup_trUtf8_s(const char* s) {
 	QString _ret = QUndoGroup::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -243,11 +243,11 @@ QUndoStack* QUndoGroup_activeStack(const QUndoGroup* self) {
 	return self->activeStack();
 }
 
-QAction* QUndoGroup_createUndoAction(const QUndoGroup* self, QObject* parent) {
+QAction* QUndoGroup_createUndoAction_parent(const QUndoGroup* self, QObject* parent) {
 	return self->createUndoAction(parent);
 }
 
-QAction* QUndoGroup_createRedoAction(const QUndoGroup* self, QObject* parent) {
+QAction* QUndoGroup_createRedoAction_parent(const QUndoGroup* self, QObject* parent) {
 	return self->createRedoAction(parent);
 }
 
@@ -425,7 +425,7 @@ void QUndoGroup_connect_redoTextChanged(QUndoGroup* self, intptr_t slot, void (*
 	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(const QString&)>(&QUndoGroup::redoTextChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QUndoGroup_tr2(const char* s, const char* c) {
+struct seaqt_string QUndoGroup_tr_s_c(const char* s, const char* c) {
 	QString _ret = QUndoGroup::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -436,7 +436,7 @@ struct seaqt_string QUndoGroup_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QUndoGroup_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QUndoGroup_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QUndoGroup::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -447,7 +447,7 @@ struct seaqt_string QUndoGroup_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QUndoGroup_trUtf82(const char* s, const char* c) {
+struct seaqt_string QUndoGroup_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QUndoGroup::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -458,7 +458,7 @@ struct seaqt_string QUndoGroup_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QUndoGroup_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QUndoGroup_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QUndoGroup::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -469,12 +469,12 @@ struct seaqt_string QUndoGroup_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QAction* QUndoGroup_createUndoAction2(const QUndoGroup* self, QObject* parent, struct seaqt_string prefix) {
+QAction* QUndoGroup_createUndoAction_parent_prefix(const QUndoGroup* self, QObject* parent, struct seaqt_string prefix) {
 	QString prefix_QString = QString::fromUtf8(prefix.data, prefix.len);
 	return self->createUndoAction(parent, prefix_QString);
 }
 
-QAction* QUndoGroup_createRedoAction2(const QUndoGroup* self, QObject* parent, struct seaqt_string prefix) {
+QAction* QUndoGroup_createRedoAction_parent_prefix(const QUndoGroup* self, QObject* parent, struct seaqt_string prefix) {
 	QString prefix_QString = QString::fromUtf8(prefix.data, prefix.len);
 	return self->createRedoAction(parent, prefix_QString);
 }

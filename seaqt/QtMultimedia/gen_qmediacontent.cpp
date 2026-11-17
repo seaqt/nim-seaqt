@@ -21,19 +21,19 @@ QMediaContent* QMediaContent_new() {
 	return new (std::nothrow) QMediaContent();
 }
 
-QMediaContent* QMediaContent_new2(QUrl* contentUrl) {
+QMediaContent* QMediaContent_new_contentUrl(QUrl* contentUrl) {
 	return new (std::nothrow) QMediaContent(*contentUrl);
 }
 
-QMediaContent* QMediaContent_new3(QNetworkRequest* contentRequest) {
+QMediaContent* QMediaContent_new_contentRequest(QNetworkRequest* contentRequest) {
 	return new (std::nothrow) QMediaContent(*contentRequest);
 }
 
-QMediaContent* QMediaContent_new4(QMediaResource* contentResource) {
+QMediaContent* QMediaContent_new_contentResource(QMediaResource* contentResource) {
 	return new (std::nothrow) QMediaContent(*contentResource);
 }
 
-QMediaContent* QMediaContent_new5(struct seaqt_array /* of QMediaResource* */  resources) {
+QMediaContent* QMediaContent_new_resources(struct seaqt_array /* of QMediaResource* */  resources) {
 	QMediaResourceList resources_QList;
 	resources_QList.reserve(resources.len);
 	QMediaResource** resources_arr = static_cast<QMediaResource**>(resources.data);
@@ -43,24 +43,24 @@ QMediaContent* QMediaContent_new5(struct seaqt_array /* of QMediaResource* */  r
 	return new (std::nothrow) QMediaContent(resources_QList);
 }
 
-QMediaContent* QMediaContent_new6(QMediaContent* other) {
-	return new (std::nothrow) QMediaContent(*other);
+QMediaContent* QMediaContent_new_from(QMediaContent* from) {
+	return new (std::nothrow) QMediaContent(*from);
 }
 
-QMediaContent* QMediaContent_new7(QMediaPlaylist* playlist) {
+QMediaContent* QMediaContent_new_playlist(QMediaPlaylist* playlist) {
 	return new (std::nothrow) QMediaContent(playlist);
 }
 
-QMediaContent* QMediaContent_new8(QMediaPlaylist* playlist, QUrl* contentUrl) {
+QMediaContent* QMediaContent_new_playlist_contentUrl(QMediaPlaylist* playlist, QUrl* contentUrl) {
 	return new (std::nothrow) QMediaContent(playlist, *contentUrl);
 }
 
-QMediaContent* QMediaContent_new9(QMediaPlaylist* playlist, QUrl* contentUrl, bool takeOwnership) {
+QMediaContent* QMediaContent_new_playlist_contentUrl_takeOwnership(QMediaPlaylist* playlist, QUrl* contentUrl, bool takeOwnership) {
 	return new (std::nothrow) QMediaContent(playlist, *contentUrl, takeOwnership);
 }
 
-void QMediaContent_operatorAssign(QMediaContent* self, QMediaContent* other) {
-	self->operator=(*other);
+void QMediaContent_operatorAssign(QMediaContent* self, QMediaContent* from) {
+	self->operator=(*from);
 }
 
 bool QMediaContent_operatorEqual(const QMediaContent* self, QMediaContent* other) {

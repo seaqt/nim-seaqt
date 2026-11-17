@@ -43,12 +43,12 @@ typedef struct QGeoPositionInfoSourceFactory_VTable{
 void* QGeoPositionInfoSourceFactory_vdata(VirtualQGeoPositionInfoSourceFactory* self);
 VirtualQGeoPositionInfoSourceFactory* vdata_QGeoPositionInfoSourceFactory(void* vdata);
 
-VirtualQGeoPositionInfoSourceFactory* QGeoPositionInfoSourceFactory_new(const QGeoPositionInfoSourceFactory_VTable* vtbl, size_t vdata, QGeoPositionInfoSourceFactory* param1);
+VirtualQGeoPositionInfoSourceFactory* QGeoPositionInfoSourceFactory_new(const QGeoPositionInfoSourceFactory_VTable* vtbl, size_t vdata, QGeoPositionInfoSourceFactory* from);
 
 QGeoPositionInfoSource* QGeoPositionInfoSourceFactory_positionInfoSource(QGeoPositionInfoSourceFactory* self, QObject* parent);
 QGeoSatelliteInfoSource* QGeoPositionInfoSourceFactory_satelliteInfoSource(QGeoPositionInfoSourceFactory* self, QObject* parent);
 QGeoAreaMonitorSource* QGeoPositionInfoSourceFactory_areaMonitor(QGeoPositionInfoSourceFactory* self, QObject* parent);
-void QGeoPositionInfoSourceFactory_operatorAssign(QGeoPositionInfoSourceFactory* self, QGeoPositionInfoSourceFactory* param1);
+void QGeoPositionInfoSourceFactory_operatorAssign(QGeoPositionInfoSourceFactory* self, QGeoPositionInfoSourceFactory* from);
 
 QGeoPositionInfoSource* QGeoPositionInfoSourceFactory_virtualbase_positionInfoSource(VirtualQGeoPositionInfoSourceFactory* self, QObject* parent);
 QGeoSatelliteInfoSource* QGeoPositionInfoSourceFactory_virtualbase_satelliteInfoSource(VirtualQGeoPositionInfoSourceFactory* self, QObject* parent);
@@ -70,13 +70,13 @@ typedef struct QGeoPositionInfoSourceFactoryV2_VTable{
 void* QGeoPositionInfoSourceFactoryV2_vdata(VirtualQGeoPositionInfoSourceFactoryV2* self);
 VirtualQGeoPositionInfoSourceFactoryV2* vdata_QGeoPositionInfoSourceFactoryV2(void* vdata);
 
-VirtualQGeoPositionInfoSourceFactoryV2* QGeoPositionInfoSourceFactoryV2_new(const QGeoPositionInfoSourceFactoryV2_VTable* vtbl, size_t vdata, QGeoPositionInfoSourceFactoryV2* param1);
+VirtualQGeoPositionInfoSourceFactoryV2* QGeoPositionInfoSourceFactoryV2_new(const QGeoPositionInfoSourceFactoryV2_VTable* vtbl, size_t vdata, QGeoPositionInfoSourceFactoryV2* from);
 
 void QGeoPositionInfoSourceFactoryV2_virtbase(QGeoPositionInfoSourceFactoryV2* src, QGeoPositionInfoSourceFactory** outptr_QGeoPositionInfoSourceFactory);
 QGeoPositionInfoSource* QGeoPositionInfoSourceFactoryV2_positionInfoSourceWithParameters(QGeoPositionInfoSourceFactoryV2* self, QObject* parent, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters);
 QGeoSatelliteInfoSource* QGeoPositionInfoSourceFactoryV2_satelliteInfoSourceWithParameters(QGeoPositionInfoSourceFactoryV2* self, QObject* parent, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters);
 QGeoAreaMonitorSource* QGeoPositionInfoSourceFactoryV2_areaMonitorWithParameters(QGeoPositionInfoSourceFactoryV2* self, QObject* parent, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters);
-void QGeoPositionInfoSourceFactoryV2_operatorAssign(QGeoPositionInfoSourceFactoryV2* self, QGeoPositionInfoSourceFactoryV2* param1);
+void QGeoPositionInfoSourceFactoryV2_operatorAssign(QGeoPositionInfoSourceFactoryV2* self, QGeoPositionInfoSourceFactoryV2* from);
 
 QGeoPositionInfoSource* QGeoPositionInfoSourceFactoryV2_virtualbase_positionInfoSourceWithParameters(VirtualQGeoPositionInfoSourceFactoryV2* self, QObject* parent, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters);
 QGeoSatelliteInfoSource* QGeoPositionInfoSourceFactoryV2_virtualbase_satelliteInfoSourceWithParameters(VirtualQGeoPositionInfoSourceFactoryV2* self, QObject* parent, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters);

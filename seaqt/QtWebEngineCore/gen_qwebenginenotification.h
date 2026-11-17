@@ -34,8 +34,8 @@ void QWebEngineNotification_virtbase(QWebEngineNotification* src, QObject** outp
 QMetaObject* QWebEngineNotification_metaObject(const QWebEngineNotification* self);
 void* QWebEngineNotification_metacast(QWebEngineNotification* self, const char* param1);
 int QWebEngineNotification_metacall(QWebEngineNotification* self, int param1, int param2, void** param3);
-struct seaqt_string QWebEngineNotification_tr(const char* s);
-struct seaqt_string QWebEngineNotification_trUtf8(const char* s);
+struct seaqt_string QWebEngineNotification_tr_s(const char* s);
+struct seaqt_string QWebEngineNotification_trUtf8_s(const char* s);
 bool QWebEngineNotification_matches(const QWebEngineNotification* self, QWebEngineNotification* other);
 QUrl* QWebEngineNotification_origin(const QWebEngineNotification* self);
 QImage* QWebEngineNotification_icon(const QWebEngineNotification* self);
@@ -49,10 +49,10 @@ void QWebEngineNotification_click(const QWebEngineNotification* self);
 void QWebEngineNotification_close(const QWebEngineNotification* self);
 void QWebEngineNotification_closed(QWebEngineNotification* self);
 void QWebEngineNotification_connect_closed(QWebEngineNotification* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QWebEngineNotification_tr2(const char* s, const char* c);
-struct seaqt_string QWebEngineNotification_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebEngineNotification_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebEngineNotification_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineNotification_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineNotification_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineNotification_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineNotification_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebEngineNotification_staticMetaObject();
 void QWebEngineNotification_delete(QWebEngineNotification* self);

@@ -91,7 +91,7 @@ export
 type cQWebHitTestResult*{.exportc: "QWebHitTestResult", incompleteStruct.} = object
 type cQWebFrame*{.exportc: "QWebFrame", incompleteStruct.} = object
 
-proc fcQWebHitTestResult_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebHitTestResult_operatorAssign".}
+proc fcQWebHitTestResult_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebHitTestResult_operatorAssign".}
 proc fcQWebHitTestResult_isNull(self: pointer): bool {.importc: "QWebHitTestResult_isNull".}
 proc fcQWebHitTestResult_pos(self: pointer): pointer {.importc: "QWebHitTestResult_pos".}
 proc fcQWebHitTestResult_boundingRect(self: pointer): pointer {.importc: "QWebHitTestResult_boundingRect".}
@@ -112,18 +112,18 @@ proc fcQWebHitTestResult_isContentSelected(self: pointer): bool {.importc: "QWeb
 proc fcQWebHitTestResult_element(self: pointer): pointer {.importc: "QWebHitTestResult_element".}
 proc fcQWebHitTestResult_frame(self: pointer): pointer {.importc: "QWebHitTestResult_frame".}
 proc fcQWebHitTestResult_new(): ptr cQWebHitTestResult {.importc: "QWebHitTestResult_new".}
-proc fcQWebHitTestResult_new2(other: pointer): ptr cQWebHitTestResult {.importc: "QWebHitTestResult_new2".}
+proc fcQWebHitTestResult_new2(fromVal: pointer): ptr cQWebHitTestResult {.importc: "QWebHitTestResult_new_from".}
 proc fcQWebFrame_metaObject(self: pointer): pointer {.importc: "QWebFrame_metaObject".}
 proc fcQWebFrame_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebFrame_metacast".}
 proc fcQWebFrame_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebFrame_metacall".}
-proc fcQWebFrame_tr(s: cstring): struct_seaqt_string {.importc: "QWebFrame_tr".}
-proc fcQWebFrame_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebFrame_trUtf8".}
+proc fcQWebFrame_trS(s: cstring): struct_seaqt_string {.importc: "QWebFrame_tr_s".}
+proc fcQWebFrame_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebFrame_trUtf8_s".}
 proc fcQWebFrame_page(self: pointer): pointer {.importc: "QWebFrame_page".}
-proc fcQWebFrame_load(self: pointer, url: pointer): void {.importc: "QWebFrame_load".}
-proc fcQWebFrame_loadWithRequest(self: pointer, request: pointer): void {.importc: "QWebFrame_loadWithRequest".}
-proc fcQWebFrame_setHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QWebFrame_setHtml".}
-proc fcQWebFrame_setContent(self: pointer, data: struct_seaqt_string): void {.importc: "QWebFrame_setContent".}
-proc fcQWebFrame_addToJavaScriptWindowObject(self: pointer, name: struct_seaqt_string, objectVal: pointer): void {.importc: "QWebFrame_addToJavaScriptWindowObject".}
+proc fcQWebFrame_loadUrl(self: pointer, url: pointer): void {.importc: "QWebFrame_load_url".}
+proc fcQWebFrame_loadRequest(self: pointer, request: pointer): void {.importc: "QWebFrame_load_request".}
+proc fcQWebFrame_setHtmlHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QWebFrame_setHtml_html".}
+proc fcQWebFrame_setContentData(self: pointer, data: struct_seaqt_string): void {.importc: "QWebFrame_setContent_data".}
+proc fcQWebFrame_addToJavaScriptWindowObjectNameObject(self: pointer, name: struct_seaqt_string, objectVal: pointer): void {.importc: "QWebFrame_addToJavaScriptWindowObject_name_object".}
 proc fcQWebFrame_toHtml(self: pointer): struct_seaqt_string {.importc: "QWebFrame_toHtml".}
 proc fcQWebFrame_toPlainText(self: pointer): struct_seaqt_string {.importc: "QWebFrame_toPlainText".}
 proc fcQWebFrame_title(self: pointer): struct_seaqt_string {.importc: "QWebFrame_title".}
@@ -146,8 +146,8 @@ proc fcQWebFrame_scroll(self: pointer, param1: cint, param2: cint): void {.impor
 proc fcQWebFrame_scrollPosition(self: pointer): pointer {.importc: "QWebFrame_scrollPosition".}
 proc fcQWebFrame_setScrollPosition(self: pointer, pos: pointer): void {.importc: "QWebFrame_setScrollPosition".}
 proc fcQWebFrame_scrollToAnchor(self: pointer, anchor: struct_seaqt_string): void {.importc: "QWebFrame_scrollToAnchor".}
-proc fcQWebFrame_render(self: pointer, param1: pointer): void {.importc: "QWebFrame_render".}
-proc fcQWebFrame_render2(self: pointer, param1: pointer, layer: cint): void {.importc: "QWebFrame_render2".}
+proc fcQWebFrame_render_QPainter(self: pointer, param1: pointer): void {.importc: "QWebFrame_render_QPainter".}
+proc fcQWebFrame_render_QPainter_QWebFrame_RenderLayers(self: pointer, param1: pointer, layer: cint): void {.importc: "QWebFrame_render_QPainter_QWebFrame_RenderLayers".}
 proc fcQWebFrame_setTextSizeMultiplier(self: pointer, factor: float64): void {.importc: "QWebFrame_setTextSizeMultiplier".}
 proc fcQWebFrame_textSizeMultiplier(self: pointer): float64 {.importc: "QWebFrame_textSizeMultiplier".}
 proc fcQWebFrame_zoomFactor(self: pointer): float64 {.importc: "QWebFrame_zoomFactor".}
@@ -186,26 +186,26 @@ proc fcQWebFrame_loadFinished(self: pointer, ok: bool): void {.importc: "QWebFra
 proc fcQWebFrame_connect_loadFinished(self: pointer, slot: int, callback: proc (slot: int, ok: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_loadFinished".}
 proc fcQWebFrame_pageChanged(self: pointer): void {.importc: "QWebFrame_pageChanged".}
 proc fcQWebFrame_connect_pageChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_pageChanged".}
-proc fcQWebFrame_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebFrame_tr2".}
-proc fcQWebFrame_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebFrame_tr3".}
-proc fcQWebFrame_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebFrame_trUtf82".}
-proc fcQWebFrame_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebFrame_trUtf83".}
-proc fcQWebFrame_load2(self: pointer, request: pointer, operation: cint): void {.importc: "QWebFrame_load2".}
-proc fcQWebFrame_load3(self: pointer, request: pointer, operation: cint, body: struct_seaqt_string): void {.importc: "QWebFrame_load3".}
-proc fcQWebFrame_setHtml2(self: pointer, html: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebFrame_setHtml2".}
-proc fcQWebFrame_setContent2(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QWebFrame_setContent2".}
-proc fcQWebFrame_setContent3(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebFrame_setContent3".}
-proc fcQWebFrame_addToJavaScriptWindowObject2(self: pointer, name: struct_seaqt_string, objectVal: pointer, ownership: cint): void {.importc: "QWebFrame_addToJavaScriptWindowObject2".}
-proc fcQWebFrame_render3(self: pointer, param1: pointer, clip: pointer): void {.importc: "QWebFrame_render3".}
-proc fcQWebFrame_render4(self: pointer, param1: pointer, layer: cint, clip: pointer): void {.importc: "QWebFrame_render4".}
+proc fcQWebFrame_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebFrame_tr_s_c".}
+proc fcQWebFrame_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebFrame_tr_s_c_n".}
+proc fcQWebFrame_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebFrame_trUtf8_s_c".}
+proc fcQWebFrame_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebFrame_trUtf8_s_c_n".}
+proc fcQWebFrame_loadRequestOperation(self: pointer, request: pointer, operation: cint): void {.importc: "QWebFrame_load_request_operation".}
+proc fcQWebFrame_loadRequestOperationBody(self: pointer, request: pointer, operation: cint, body: struct_seaqt_string): void {.importc: "QWebFrame_load_request_operation_body".}
+proc fcQWebFrame_setHtmlHtmlBaseUrl(self: pointer, html: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebFrame_setHtml_html_baseUrl".}
+proc fcQWebFrame_setContentDataMimeType(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QWebFrame_setContent_data_mimeType".}
+proc fcQWebFrame_setContentDataMimeTypeBaseUrl(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebFrame_setContent_data_mimeType_baseUrl".}
+proc fcQWebFrame_addToJavaScriptWindowObjectNameObjectOwnership(self: pointer, name: struct_seaqt_string, objectVal: pointer, ownership: cint): void {.importc: "QWebFrame_addToJavaScriptWindowObject_name_object_ownership".}
+proc fcQWebFrame_render_QPainter_QRegion(self: pointer, param1: pointer, clip: pointer): void {.importc: "QWebFrame_render_QPainter_QRegion".}
+proc fcQWebFrame_render_QPainter_QWebFrame_RenderLayers_QRegion(self: pointer, param1: pointer, layer: cint, clip: pointer): void {.importc: "QWebFrame_render_QPainter_QWebFrame_RenderLayers_QRegion".}
 proc fcQWebFrame_protectedbase_sender(self: pointer): pointer {.importc: "QWebFrame_protectedbase_sender".}
 proc fcQWebFrame_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebFrame_protectedbase_senderSignalIndex".}
 proc fcQWebFrame_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebFrame_protectedbase_receivers".}
 proc fcQWebFrame_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebFrame_protectedbase_isSignalConnected".}
 proc fcQWebFrame_staticMetaObject(): pointer {.importc: "QWebFrame_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qwebframe_types.QWebHitTestResult, other: gen_qwebframe_types.QWebHitTestResult): void =
-  fcQWebHitTestResult_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebframe_types.QWebHitTestResult, fromVal: gen_qwebframe_types.QWebHitTestResult): void =
+  fcQWebHitTestResult_operatorAssign(self.h, fromVal.h)
 
 proc isNull*(self: gen_qwebframe_types.QWebHitTestResult): bool =
   fcQWebHitTestResult_isNull(self.h)
@@ -280,8 +280,8 @@ proc create*(T: type gen_qwebframe_types.QWebHitTestResult): gen_qwebframe_types
   let tmp = gen_qwebframe_types.QWebHitTestResult(h: fcQWebHitTestResult_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebframe_types.QWebHitTestResult,
-    other: gen_qwebframe_types.QWebHitTestResult): gen_qwebframe_types.QWebHitTestResult =
-  let tmp = gen_qwebframe_types.QWebHitTestResult(h: fcQWebHitTestResult_new2(other.h), owned: true)
+    fromVal: gen_qwebframe_types.QWebHitTestResult): gen_qwebframe_types.QWebHitTestResult =
+  let tmp = gen_qwebframe_types.QWebHitTestResult(h: fcQWebHitTestResult_new2(fromVal.h), owned: true)
   tmp
 proc metaObject*(self: gen_qwebframe_types.QWebFrame): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebFrame_metaObject(self.h), owned: false)
@@ -293,13 +293,13 @@ proc metacall*(self: gen_qwebframe_types.QWebFrame, param1: cint, param2: cint, 
   fcQWebFrame_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebframe_types.QWebFrame, s: cstring): string =
-  let v_ms = fcQWebFrame_tr(s)
+  let v_ms = fcQWebFrame_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebframe_types.QWebFrame, s: cstring): string =
-  let v_ms = fcQWebFrame_trUtf8(s)
+  let v_ms = fcQWebFrame_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -308,19 +308,19 @@ proc page*(self: gen_qwebframe_types.QWebFrame): gen_qwebpage_types.QWebPage =
   gen_qwebpage_types.QWebPage(h: fcQWebFrame_page(self.h), owned: false)
 
 proc load*(self: gen_qwebframe_types.QWebFrame, url: gen_qurl_types.QUrl): void =
-  fcQWebFrame_load(self.h, url.h)
+  fcQWebFrame_loadUrl(self.h, url.h)
 
 proc load*(self: gen_qwebframe_types.QWebFrame, request: gen_qnetworkrequest_types.QNetworkRequest): void =
-  fcQWebFrame_loadWithRequest(self.h, request.h)
+  fcQWebFrame_loadRequest(self.h, request.h)
 
 proc setHtml*(self: gen_qwebframe_types.QWebFrame, html: openArray[char]): void =
-  fcQWebFrame_setHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
+  fcQWebFrame_setHtmlHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc setContent*(self: gen_qwebframe_types.QWebFrame, data: openArray[byte]): void =
-  fcQWebFrame_setContent(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQWebFrame_setContentData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc addToJavaScriptWindowObject*(self: gen_qwebframe_types.QWebFrame, name: openArray[char], objectVal: gen_qobject_types.QObject): void =
-  fcQWebFrame_addToJavaScriptWindowObject(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), objectVal.h)
+  fcQWebFrame_addToJavaScriptWindowObjectNameObject(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), objectVal.h)
 
 proc toHtml*(self: gen_qwebframe_types.QWebFrame): string =
   let v_ms = fcQWebFrame_toHtml(self.h)
@@ -407,10 +407,10 @@ proc scrollToAnchor*(self: gen_qwebframe_types.QWebFrame, anchor: openArray[char
   fcQWebFrame_scrollToAnchor(self.h, struct_seaqt_string(data: if len(anchor) > 0: addr anchor[0] else: nil, len: csize_t(len(anchor))))
 
 proc render*(self: gen_qwebframe_types.QWebFrame, param1: gen_qpainter_types.QPainter): void =
-  fcQWebFrame_render(self.h, param1.h)
+  fcQWebFrame_render_QPainter(self.h, param1.h)
 
 proc render*(self: gen_qwebframe_types.QWebFrame, param1: gen_qpainter_types.QPainter, layer: cint): void =
-  fcQWebFrame_render2(self.h, param1.h, cint(layer))
+  fcQWebFrame_render_QPainter_QWebFrame_RenderLayers(self.h, param1.h, cint(layer))
 
 proc setTextSizeMultiplier*(self: gen_qwebframe_types.QWebFrame, factor: float64): void =
   fcQWebFrame_setTextSizeMultiplier(self.h, factor)
@@ -658,52 +658,52 @@ proc onPageChanged*(self: gen_qwebframe_types.QWebFrame, slot: QWebFramepageChan
   fcQWebFrame_connect_pageChanged(self.h, cast[int](addr tmp[]), fcQWebFrame_slot_callback_pageChanged, fcQWebFrame_slot_callback_pageChanged_release)
 
 proc tr*(_: type gen_qwebframe_types.QWebFrame, s: cstring, c: cstring): string =
-  let v_ms = fcQWebFrame_tr2(s, c)
+  let v_ms = fcQWebFrame_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebframe_types.QWebFrame, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebFrame_tr3(s, c, n)
+  let v_ms = fcQWebFrame_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebframe_types.QWebFrame, s: cstring, c: cstring): string =
-  let v_ms = fcQWebFrame_trUtf82(s, c)
+  let v_ms = fcQWebFrame_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebframe_types.QWebFrame, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebFrame_trUtf83(s, c, n)
+  let v_ms = fcQWebFrame_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc load*(self: gen_qwebframe_types.QWebFrame, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint): void =
-  fcQWebFrame_load2(self.h, request.h, cint(operation))
+  fcQWebFrame_loadRequestOperation(self.h, request.h, cint(operation))
 
 proc load*(self: gen_qwebframe_types.QWebFrame, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint, body: openArray[byte]): void =
-  fcQWebFrame_load3(self.h, request.h, cint(operation), struct_seaqt_string(data: if len(body) > 0: addr body[0] else: nil, len: csize_t(len(body))))
+  fcQWebFrame_loadRequestOperationBody(self.h, request.h, cint(operation), struct_seaqt_string(data: if len(body) > 0: addr body[0] else: nil, len: csize_t(len(body))))
 
 proc setHtml*(self: gen_qwebframe_types.QWebFrame, html: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebFrame_setHtml2(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
+  fcQWebFrame_setHtmlHtmlBaseUrl(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
 
 proc setContent*(self: gen_qwebframe_types.QWebFrame, data: openArray[byte], mimeType: openArray[char]): void =
-  fcQWebFrame_setContent2(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
+  fcQWebFrame_setContentDataMimeType(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
 proc setContent*(self: gen_qwebframe_types.QWebFrame, data: openArray[byte], mimeType: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebFrame_setContent3(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
+  fcQWebFrame_setContentDataMimeTypeBaseUrl(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
 
 proc addToJavaScriptWindowObject*(self: gen_qwebframe_types.QWebFrame, name: openArray[char], objectVal: gen_qobject_types.QObject, ownership: cint): void =
-  fcQWebFrame_addToJavaScriptWindowObject2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), objectVal.h, cint(ownership))
+  fcQWebFrame_addToJavaScriptWindowObjectNameObjectOwnership(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), objectVal.h, cint(ownership))
 
 proc render*(self: gen_qwebframe_types.QWebFrame, param1: gen_qpainter_types.QPainter, clip: gen_qregion_types.QRegion): void =
-  fcQWebFrame_render3(self.h, param1.h, clip.h)
+  fcQWebFrame_render_QPainter_QRegion(self.h, param1.h, clip.h)
 
 proc render*(self: gen_qwebframe_types.QWebFrame, param1: gen_qpainter_types.QPainter, layer: cint, clip: gen_qregion_types.QRegion): void =
-  fcQWebFrame_render4(self.h, param1.h, cint(layer), clip.h)
+  fcQWebFrame_render_QPainter_QWebFrame_RenderLayers_QRegion(self.h, param1.h, cint(layer), clip.h)
 
 proc sender*(self: gen_qwebframe_types.QWebFrame): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebFrame_protectedbase_sender(self.h), owned: false)

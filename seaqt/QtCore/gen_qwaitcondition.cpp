@@ -19,19 +19,19 @@ QWaitCondition* QWaitCondition_new() {
 	return new (std::nothrow) QWaitCondition();
 }
 
-bool QWaitCondition_wait(QWaitCondition* self, QMutex* lockedMutex) {
+bool QWaitCondition_wait_lockedMutex(QWaitCondition* self, QMutex* lockedMutex) {
 	return self->wait(lockedMutex);
 }
 
-bool QWaitCondition_wait2(QWaitCondition* self, QMutex* lockedMutex, unsigned long time) {
+bool QWaitCondition_wait_lockedMutex_time(QWaitCondition* self, QMutex* lockedMutex, unsigned long time) {
 	return self->wait(lockedMutex, static_cast<unsigned long>(time));
 }
 
-bool QWaitCondition_waitWithLockedReadWriteLock(QWaitCondition* self, QReadWriteLock* lockedReadWriteLock) {
+bool QWaitCondition_wait_lockedReadWriteLock(QWaitCondition* self, QReadWriteLock* lockedReadWriteLock) {
 	return self->wait(lockedReadWriteLock);
 }
 
-bool QWaitCondition_wait3(QWaitCondition* self, QReadWriteLock* lockedReadWriteLock, unsigned long time) {
+bool QWaitCondition_wait_lockedReadWriteLock_time(QWaitCondition* self, QReadWriteLock* lockedReadWriteLock, unsigned long time) {
 	return self->wait(lockedReadWriteLock, static_cast<unsigned long>(time));
 }
 
@@ -43,19 +43,19 @@ void QWaitCondition_wakeAll(QWaitCondition* self) {
 	self->wakeAll();
 }
 
-void QWaitCondition_notifyOne(QWaitCondition* self) {
+void QWaitCondition_notify_one(QWaitCondition* self) {
 	self->notify_one();
 }
 
-void QWaitCondition_notifyAll(QWaitCondition* self) {
+void QWaitCondition_notify_all(QWaitCondition* self) {
 	self->notify_all();
 }
 
-bool QWaitCondition_wait4(QWaitCondition* self, QMutex* lockedMutex, QDeadlineTimer* deadline) {
+bool QWaitCondition_wait_lockedMutex_deadline(QWaitCondition* self, QMutex* lockedMutex, QDeadlineTimer* deadline) {
 	return self->wait(lockedMutex, *deadline);
 }
 
-bool QWaitCondition_wait5(QWaitCondition* self, QReadWriteLock* lockedReadWriteLock, QDeadlineTimer* deadline) {
+bool QWaitCondition_wait_lockedReadWriteLock_deadline(QWaitCondition* self, QReadWriteLock* lockedReadWriteLock, QDeadlineTimer* deadline) {
 	return self->wait(lockedReadWriteLock, *deadline);
 }
 

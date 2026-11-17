@@ -57,43 +57,43 @@ type cQFile*{.exportc: "QFile", incompleteStruct.} = object
 proc fcQFile_metaObject(self: pointer): pointer {.importc: "QFile_metaObject".}
 proc fcQFile_metacast(self: pointer, param1: cstring): pointer {.importc: "QFile_metacast".}
 proc fcQFile_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFile_metacall".}
-proc fcQFile_tr(s: cstring): struct_seaqt_string {.importc: "QFile_tr".}
-proc fcQFile_trUtf8(s: cstring): struct_seaqt_string {.importc: "QFile_trUtf8".}
+proc fcQFile_trS(s: cstring): struct_seaqt_string {.importc: "QFile_tr_s".}
+proc fcQFile_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QFile_trUtf8_s".}
 proc fcQFile_fileName(self: pointer): struct_seaqt_string {.importc: "QFile_fileName".}
 proc fcQFile_setFileName(self: pointer, name: struct_seaqt_string): void {.importc: "QFile_setFileName".}
 proc fcQFile_encodeName(fileName: struct_seaqt_string): struct_seaqt_string {.importc: "QFile_encodeName".}
-proc fcQFile_decodeName(localFileName: struct_seaqt_string): struct_seaqt_string {.importc: "QFile_decodeName".}
-proc fcQFile_decodeNameWithLocalFileName(localFileName: cstring): struct_seaqt_string {.importc: "QFile_decodeNameWithLocalFileName".}
+proc fcQFile_decodeName_QByteArray(localFileName: struct_seaqt_string): struct_seaqt_string {.importc: "QFile_decodeName_QByteArray".}
+proc fcQFile_decodeNameChar(localFileName: cstring): struct_seaqt_string {.importc: "QFile_decodeName_char".}
 proc fcQFile_exists(self: pointer): bool {.importc: "QFile_exists".}
-proc fcQFile_existsWithFileName(fileName: struct_seaqt_string): bool {.importc: "QFile_existsWithFileName".}
+proc fcQFile_existsFileName(fileName: struct_seaqt_string): bool {.importc: "QFile_exists_fileName".}
 proc fcQFile_readLink(self: pointer): struct_seaqt_string {.importc: "QFile_readLink".}
-proc fcQFile_readLinkWithFileName(fileName: struct_seaqt_string): struct_seaqt_string {.importc: "QFile_readLinkWithFileName".}
+proc fcQFile_readLinkFileName(fileName: struct_seaqt_string): struct_seaqt_string {.importc: "QFile_readLink_fileName".}
 proc fcQFile_symLinkTarget(self: pointer): struct_seaqt_string {.importc: "QFile_symLinkTarget".}
-proc fcQFile_symLinkTargetWithFileName(fileName: struct_seaqt_string): struct_seaqt_string {.importc: "QFile_symLinkTargetWithFileName".}
+proc fcQFile_symLinkTargetFileName(fileName: struct_seaqt_string): struct_seaqt_string {.importc: "QFile_symLinkTarget_fileName".}
 proc fcQFile_remove(self: pointer): bool {.importc: "QFile_remove".}
-proc fcQFile_removeWithFileName(fileName: struct_seaqt_string): bool {.importc: "QFile_removeWithFileName".}
+proc fcQFile_removeFileName(fileName: struct_seaqt_string): bool {.importc: "QFile_remove_fileName".}
 proc fcQFile_moveToTrash(self: pointer): bool {.importc: "QFile_moveToTrash".}
-proc fcQFile_moveToTrashWithFileName(fileName: struct_seaqt_string): bool {.importc: "QFile_moveToTrashWithFileName".}
-proc fcQFile_rename(self: pointer, newName: struct_seaqt_string): bool {.importc: "QFile_rename".}
-proc fcQFile_rename2(oldName: struct_seaqt_string, newName: struct_seaqt_string): bool {.importc: "QFile_rename2".}
-proc fcQFile_link(self: pointer, newName: struct_seaqt_string): bool {.importc: "QFile_link".}
-proc fcQFile_link2(oldname: struct_seaqt_string, newName: struct_seaqt_string): bool {.importc: "QFile_link2".}
-proc fcQFile_copy(self: pointer, newName: struct_seaqt_string): bool {.importc: "QFile_copy".}
-proc fcQFile_copy2(fileName: struct_seaqt_string, newName: struct_seaqt_string): bool {.importc: "QFile_copy2".}
-proc fcQFile_open(self: pointer, flags: cint): bool {.importc: "QFile_open".}
-proc fcQFile_open3(self: pointer, fd: cint, ioFlags: cint): bool {.importc: "QFile_open3".}
+proc fcQFile_moveToTrashFileName(fileName: struct_seaqt_string): bool {.importc: "QFile_moveToTrash_fileName".}
+proc fcQFile_renameNewName(self: pointer, newName: struct_seaqt_string): bool {.importc: "QFile_rename_newName".}
+proc fcQFile_renameOldNameNewName(oldName: struct_seaqt_string, newName: struct_seaqt_string): bool {.importc: "QFile_rename_oldName_newName".}
+proc fcQFile_linkNewName(self: pointer, newName: struct_seaqt_string): bool {.importc: "QFile_link_newName".}
+proc fcQFile_linkOldnameNewName(oldname: struct_seaqt_string, newName: struct_seaqt_string): bool {.importc: "QFile_link_oldname_newName".}
+proc fcQFile_copyNewName(self: pointer, newName: struct_seaqt_string): bool {.importc: "QFile_copy_newName".}
+proc fcQFile_copyFileNameNewName(fileName: struct_seaqt_string, newName: struct_seaqt_string): bool {.importc: "QFile_copy_fileName_newName".}
+proc fcQFile_openFlags(self: pointer, flags: cint): bool {.importc: "QFile_open_flags".}
+proc fcQFile_openFdIoFlags(self: pointer, fd: cint, ioFlags: cint): bool {.importc: "QFile_open_fd_ioFlags".}
 proc fcQFile_size(self: pointer): clonglong {.importc: "QFile_size".}
-proc fcQFile_resize(self: pointer, sz: clonglong): bool {.importc: "QFile_resize".}
-proc fcQFile_resize2(filename: struct_seaqt_string, sz: clonglong): bool {.importc: "QFile_resize2".}
+proc fcQFile_resizeSz(self: pointer, sz: clonglong): bool {.importc: "QFile_resize_sz".}
+proc fcQFile_resizeFilenameSz(filename: struct_seaqt_string, sz: clonglong): bool {.importc: "QFile_resize_filename_sz".}
 proc fcQFile_permissions(self: pointer): cint {.importc: "QFile_permissions".}
-proc fcQFile_permissionsWithFilename(filename: struct_seaqt_string): cint {.importc: "QFile_permissionsWithFilename".}
-proc fcQFile_setPermissions(self: pointer, permissionSpec: cint): bool {.importc: "QFile_setPermissions".}
-proc fcQFile_setPermissions2(filename: struct_seaqt_string, permissionSpec: cint): bool {.importc: "QFile_setPermissions2".}
-proc fcQFile_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFile_tr2".}
-proc fcQFile_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFile_tr3".}
-proc fcQFile_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFile_trUtf82".}
-proc fcQFile_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFile_trUtf83".}
-proc fcQFile_open5(self: pointer, fd: cint, ioFlags: cint, handleFlags: cint): bool {.importc: "QFile_open5".}
+proc fcQFile_permissionsFilename(filename: struct_seaqt_string): cint {.importc: "QFile_permissions_filename".}
+proc fcQFile_setPermissionsPermissionSpec(self: pointer, permissionSpec: cint): bool {.importc: "QFile_setPermissions_permissionSpec".}
+proc fcQFile_setPermissionsFilenamePermissionSpec(filename: struct_seaqt_string, permissionSpec: cint): bool {.importc: "QFile_setPermissions_filename_permissionSpec".}
+proc fcQFile_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFile_tr_s_c".}
+proc fcQFile_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFile_tr_s_c_n".}
+proc fcQFile_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFile_trUtf8_s_c".}
+proc fcQFile_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFile_trUtf8_s_c_n".}
+proc fcQFile_openFdIoFlagsHandleFlags(self: pointer, fd: cint, ioFlags: cint, handleFlags: cint): bool {.importc: "QFile_open_fd_ioFlags_handleFlags".}
 proc fcQFile_vdata(self: pointer): ptr pointer {.importc: "QFile_vdata".}
 proc fvdata_cQFile(self: pointer): pointer {.importc: "vdata_QFile".}
 
@@ -103,11 +103,11 @@ type cQFileVTable {.pure.} = object
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
   fileName*: proc(self: pointer): struct_seaqt_string {.cdecl, raises: [], gcsafe.}
-  open*: proc(self: pointer, flags: cint): bool {.cdecl, raises: [], gcsafe.}
+  openFlags*: proc(self: pointer, flags: cint): bool {.cdecl, raises: [], gcsafe.}
   size*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
-  resize*: proc(self: pointer, sz: clonglong): bool {.cdecl, raises: [], gcsafe.}
+  resizeSz*: proc(self: pointer, sz: clonglong): bool {.cdecl, raises: [], gcsafe.}
   permissions*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
-  setPermissions*: proc(self: pointer, permissionSpec: cint): bool {.cdecl, raises: [], gcsafe.}
+  setPermissionsPermissionSpec*: proc(self: pointer, permissionSpec: cint): bool {.cdecl, raises: [], gcsafe.}
   close*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   isSequential*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
   pos*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
@@ -133,11 +133,11 @@ proc fcQFile_virtualbase_metaObject(self: pointer): pointer {.importc: "QFile_vi
 proc fcQFile_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QFile_virtualbase_metacast".}
 proc fcQFile_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFile_virtualbase_metacall".}
 proc fcQFile_virtualbase_fileName(self: pointer): struct_seaqt_string {.importc: "QFile_virtualbase_fileName".}
-proc fcQFile_virtualbase_open(self: pointer, flags: cint): bool {.importc: "QFile_virtualbase_open".}
+proc fcQFile_virtualbase_openFlags(self: pointer, flags: cint): bool {.importc: "QFile_virtualbase_open_flags".}
 proc fcQFile_virtualbase_size(self: pointer): clonglong {.importc: "QFile_virtualbase_size".}
-proc fcQFile_virtualbase_resize(self: pointer, sz: clonglong): bool {.importc: "QFile_virtualbase_resize".}
+proc fcQFile_virtualbase_resizeSz(self: pointer, sz: clonglong): bool {.importc: "QFile_virtualbase_resize_sz".}
 proc fcQFile_virtualbase_permissions(self: pointer): cint {.importc: "QFile_virtualbase_permissions".}
-proc fcQFile_virtualbase_setPermissions(self: pointer, permissionSpec: cint): bool {.importc: "QFile_virtualbase_setPermissions".}
+proc fcQFile_virtualbase_setPermissionsPermissionSpec(self: pointer, permissionSpec: cint): bool {.importc: "QFile_virtualbase_setPermissions_permissionSpec".}
 proc fcQFile_virtualbase_close(self: pointer): void {.importc: "QFile_virtualbase_close".}
 proc fcQFile_virtualbase_isSequential(self: pointer): bool {.importc: "QFile_virtualbase_isSequential".}
 proc fcQFile_virtualbase_pos(self: pointer): clonglong {.importc: "QFile_virtualbase_pos".}
@@ -166,9 +166,9 @@ proc fcQFile_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QF
 proc fcQFile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFile_protectedbase_receivers".}
 proc fcQFile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFile_protectedbase_isSignalConnected".}
 proc fcQFile_new(vtbl: pointer, vdata: csize_t): ptr cQFile {.importc: "QFile_new".}
-proc fcQFile_new2(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string): ptr cQFile {.importc: "QFile_new2".}
-proc fcQFile_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFile {.importc: "QFile_new3".}
-proc fcQFile_new4(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, parent: pointer): ptr cQFile {.importc: "QFile_new4".}
+proc fcQFile_new2(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string): ptr cQFile {.importc: "QFile_new_name".}
+proc fcQFile_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFile {.importc: "QFile_new_parent".}
+proc fcQFile_new4(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, parent: pointer): ptr cQFile {.importc: "QFile_new_name_parent".}
 proc fcQFile_staticMetaObject(): pointer {.importc: "QFile_staticMetaObject".}
 
 proc metaObject*(self: gen_qfile_types.QFile): gen_qobjectdefs_types.QMetaObject =
@@ -181,13 +181,13 @@ proc metacall*(self: gen_qfile_types.QFile, param1: cint, param2: cint, param3: 
   fcQFile_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfile_types.QFile, s: cstring): string =
-  let v_ms = fcQFile_tr(s)
+  let v_ms = fcQFile_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfile_types.QFile, s: cstring): string =
-  let v_ms = fcQFile_trUtf8(s)
+  let v_ms = fcQFile_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -208,13 +208,13 @@ proc encodeName*(_: type gen_qfile_types.QFile, fileName: openArray[char]): seq[
   vx_ret
 
 proc decodeName*(_: type gen_qfile_types.QFile, localFileName: openArray[byte]): string =
-  let v_ms = fcQFile_decodeName(struct_seaqt_string(data: if len(localFileName) > 0: addr localFileName[0] else: nil, len: csize_t(len(localFileName))))
+  let v_ms = fcQFile_decodeName_QByteArray(struct_seaqt_string(data: if len(localFileName) > 0: addr localFileName[0] else: nil, len: csize_t(len(localFileName))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc decodeName*(_: type gen_qfile_types.QFile, localFileName: cstring): string =
-  let v_ms = fcQFile_decodeNameWithLocalFileName(localFileName)
+  let v_ms = fcQFile_decodeNameChar(localFileName)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -223,7 +223,7 @@ proc exists*(self: gen_qfile_types.QFile): bool =
   fcQFile_exists(self.h)
 
 proc exists*(_: type gen_qfile_types.QFile, fileName: openArray[char]): bool =
-  fcQFile_existsWithFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQFile_existsFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc readLink*(self: gen_qfile_types.QFile): string =
   let v_ms = fcQFile_readLink(self.h)
@@ -232,7 +232,7 @@ proc readLink*(self: gen_qfile_types.QFile): string =
   vx_ret
 
 proc readLink*(_: type gen_qfile_types.QFile, fileName: openArray[char]): string =
-  let v_ms = fcQFile_readLinkWithFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  let v_ms = fcQFile_readLinkFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -244,7 +244,7 @@ proc symLinkTarget*(self: gen_qfile_types.QFile): string =
   vx_ret
 
 proc symLinkTarget*(_: type gen_qfile_types.QFile, fileName: openArray[char]): string =
-  let v_ms = fcQFile_symLinkTargetWithFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  let v_ms = fcQFile_symLinkTargetFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -253,95 +253,95 @@ proc remove*(self: gen_qfile_types.QFile): bool =
   fcQFile_remove(self.h)
 
 proc remove*(_: type gen_qfile_types.QFile, fileName: openArray[char]): bool =
-  fcQFile_removeWithFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQFile_removeFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc moveToTrash*(self: gen_qfile_types.QFile): bool =
   fcQFile_moveToTrash(self.h)
 
 proc moveToTrash*(_: type gen_qfile_types.QFile, fileName: openArray[char]): bool =
-  fcQFile_moveToTrashWithFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQFile_moveToTrashFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc rename*(self: gen_qfile_types.QFile, newName: openArray[char]): bool =
-  fcQFile_rename(self.h, struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
+  fcQFile_renameNewName(self.h, struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
 proc rename*(_: type gen_qfile_types.QFile, oldName: openArray[char], newName: openArray[char]): bool =
-  fcQFile_rename2(struct_seaqt_string(data: if len(oldName) > 0: addr oldName[0] else: nil, len: csize_t(len(oldName))), struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
+  fcQFile_renameOldNameNewName(struct_seaqt_string(data: if len(oldName) > 0: addr oldName[0] else: nil, len: csize_t(len(oldName))), struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
 proc link*(self: gen_qfile_types.QFile, newName: openArray[char]): bool =
-  fcQFile_link(self.h, struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
+  fcQFile_linkNewName(self.h, struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
 proc link*(_: type gen_qfile_types.QFile, oldname: openArray[char], newName: openArray[char]): bool =
-  fcQFile_link2(struct_seaqt_string(data: if len(oldname) > 0: addr oldname[0] else: nil, len: csize_t(len(oldname))), struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
+  fcQFile_linkOldnameNewName(struct_seaqt_string(data: if len(oldname) > 0: addr oldname[0] else: nil, len: csize_t(len(oldname))), struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
 proc copy*(self: gen_qfile_types.QFile, newName: openArray[char]): bool =
-  fcQFile_copy(self.h, struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
+  fcQFile_copyNewName(self.h, struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
 proc copy*(_: type gen_qfile_types.QFile, fileName: openArray[char], newName: openArray[char]): bool =
-  fcQFile_copy2(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
+  fcQFile_copyFileNameNewName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
 proc open*(self: gen_qfile_types.QFile, flags: cint): bool =
-  fcQFile_open(self.h, cint(flags))
+  fcQFile_openFlags(self.h, cint(flags))
 
 proc open*(self: gen_qfile_types.QFile, fd: cint, ioFlags: cint): bool =
-  fcQFile_open3(self.h, fd, cint(ioFlags))
+  fcQFile_openFdIoFlags(self.h, fd, cint(ioFlags))
 
 proc size*(self: gen_qfile_types.QFile): clonglong =
   fcQFile_size(self.h)
 
 proc resize*(self: gen_qfile_types.QFile, sz: clonglong): bool =
-  fcQFile_resize(self.h, sz)
+  fcQFile_resizeSz(self.h, sz)
 
 proc resize*(_: type gen_qfile_types.QFile, filename: openArray[char], sz: clonglong): bool =
-  fcQFile_resize2(struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), sz)
+  fcQFile_resizeFilenameSz(struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), sz)
 
 proc permissions*(self: gen_qfile_types.QFile): cint =
   cint(fcQFile_permissions(self.h))
 
 proc permissions*(_: type gen_qfile_types.QFile, filename: openArray[char]): cint =
-  cint(fcQFile_permissionsWithFilename(struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename)))))
+  cint(fcQFile_permissionsFilename(struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename)))))
 
 proc setPermissions*(self: gen_qfile_types.QFile, permissionSpec: cint): bool =
-  fcQFile_setPermissions(self.h, cint(permissionSpec))
+  fcQFile_setPermissionsPermissionSpec(self.h, cint(permissionSpec))
 
 proc setPermissions*(_: type gen_qfile_types.QFile, filename: openArray[char], permissionSpec: cint): bool =
-  fcQFile_setPermissions2(struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), cint(permissionSpec))
+  fcQFile_setPermissionsFilenamePermissionSpec(struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), cint(permissionSpec))
 
 proc tr*(_: type gen_qfile_types.QFile, s: cstring, c: cstring): string =
-  let v_ms = fcQFile_tr2(s, c)
+  let v_ms = fcQFile_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfile_types.QFile, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFile_tr3(s, c, n)
+  let v_ms = fcQFile_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfile_types.QFile, s: cstring, c: cstring): string =
-  let v_ms = fcQFile_trUtf82(s, c)
+  let v_ms = fcQFile_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfile_types.QFile, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFile_trUtf83(s, c, n)
+  let v_ms = fcQFile_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc open*(self: gen_qfile_types.QFile, fd: cint, ioFlags: cint, handleFlags: cint): bool =
-  fcQFile_open5(self.h, fd, cint(ioFlags), cint(handleFlags))
+  fcQFile_openFdIoFlagsHandleFlags(self.h, fd, cint(ioFlags), cint(handleFlags))
 
 type QFilemetaObjectProc* = proc(self: QFile): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QFilemetacastProc* = proc(self: QFile, param1: cstring): pointer {.raises: [], gcsafe.}
 type QFilemetacallProc* = proc(self: QFile, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QFilefileNameProc* = proc(self: QFile): string {.raises: [], gcsafe.}
-type QFileopenProc* = proc(self: QFile, flags: cint): bool {.raises: [], gcsafe.}
+type QFileopenFlagsProc* = proc(self: QFile, flags: cint): bool {.raises: [], gcsafe.}
 type QFilesizeProc* = proc(self: QFile): clonglong {.raises: [], gcsafe.}
-type QFileresizeProc* = proc(self: QFile, sz: clonglong): bool {.raises: [], gcsafe.}
+type QFileresizeSzProc* = proc(self: QFile, sz: clonglong): bool {.raises: [], gcsafe.}
 type QFilepermissionsProc* = proc(self: QFile): cint {.raises: [], gcsafe.}
-type QFilesetPermissionsProc* = proc(self: QFile, permissionSpec: cint): bool {.raises: [], gcsafe.}
+type QFilesetPermissionsPermissionSpecProc* = proc(self: QFile, permissionSpec: cint): bool {.raises: [], gcsafe.}
 type QFilecloseProc* = proc(self: QFile): void {.raises: [], gcsafe.}
 type QFileisSequentialProc* = proc(self: QFile): bool {.raises: [], gcsafe.}
 type QFileposProc* = proc(self: QFile): clonglong {.raises: [], gcsafe.}
@@ -370,11 +370,11 @@ type QFileVTable* {.inheritable, pure.} = object
   metacast*: QFilemetacastProc
   metacall*: QFilemetacallProc
   fileName*: QFilefileNameProc
-  open*: QFileopenProc
+  openFlags*: QFileopenFlagsProc
   size*: QFilesizeProc
-  resize*: QFileresizeProc
+  resizeSz*: QFileresizeSzProc
   permissions*: QFilepermissionsProc
-  setPermissions*: QFilesetPermissionsProc
+  setPermissionsPermissionSpec*: QFilesetPermissionsPermissionSpecProc
   close*: QFilecloseProc
   isSequential*: QFileisSequentialProc
   pos*: QFileposProc
@@ -413,19 +413,19 @@ proc QFilefileName*(self: gen_qfile_types.QFile): string =
   vx_ret
 
 proc QFileopen*(self: gen_qfile_types.QFile, flags: cint): bool =
-  fcQFile_virtualbase_open(self.h, cint(flags))
+  fcQFile_virtualbase_openFlags(self.h, cint(flags))
 
 proc QFilesize*(self: gen_qfile_types.QFile): clonglong =
   fcQFile_virtualbase_size(self.h)
 
 proc QFileresize*(self: gen_qfile_types.QFile, sz: clonglong): bool =
-  fcQFile_virtualbase_resize(self.h, sz)
+  fcQFile_virtualbase_resizeSz(self.h, sz)
 
 proc QFilepermissions*(self: gen_qfile_types.QFile): cint =
   cint(fcQFile_virtualbase_permissions(self.h))
 
 proc QFilesetPermissions*(self: gen_qfile_types.QFile, permissionSpec: cint): bool =
-  fcQFile_virtualbase_setPermissions(self.h, cint(permissionSpec))
+  fcQFile_virtualbase_setPermissionsPermissionSpec(self.h, cint(permissionSpec))
 
 proc QFileclose*(self: gen_qfile_types.QFile): void =
   fcQFile_virtualbase_close(self.h)
@@ -524,11 +524,11 @@ proc fcQFile_vtable_callback_fileName(self: pointer): struct_seaqt_string {.cdec
   if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_seaqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-proc fcQFile_vtable_callback_open(self: pointer, flags: cint): bool {.cdecl.} =
+proc fcQFile_vtable_callback_openFlags(self: pointer, flags: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   let slotval1 = cint(flags)
-  var virtualReturn = vtbl[].open(self, slotval1)
+  var virtualReturn = vtbl[].openFlags(self, slotval1)
   virtualReturn
 
 proc fcQFile_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
@@ -537,11 +537,11 @@ proc fcQFile_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
   var virtualReturn = vtbl[].size(self)
   virtualReturn
 
-proc fcQFile_vtable_callback_resize(self: pointer, sz: clonglong): bool {.cdecl.} =
+proc fcQFile_vtable_callback_resizeSz(self: pointer, sz: clonglong): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   let slotval1 = sz
-  var virtualReturn = vtbl[].resize(self, slotval1)
+  var virtualReturn = vtbl[].resizeSz(self, slotval1)
   virtualReturn
 
 proc fcQFile_vtable_callback_permissions(self: pointer): cint {.cdecl.} =
@@ -550,11 +550,11 @@ proc fcQFile_vtable_callback_permissions(self: pointer): cint {.cdecl.} =
   var virtualReturn = vtbl[].permissions(self)
   cint(virtualReturn)
 
-proc fcQFile_vtable_callback_setPermissions(self: pointer, permissionSpec: cint): bool {.cdecl.} =
+proc fcQFile_vtable_callback_setPermissionsPermissionSpec(self: pointer, permissionSpec: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   let slotval1 = cint(permissionSpec)
-  var virtualReturn = vtbl[].setPermissions(self, slotval1)
+  var virtualReturn = vtbl[].setPermissionsPermissionSpec(self, slotval1)
   virtualReturn
 
 proc fcQFile_vtable_callback_close(self: pointer): void {.cdecl.} =
@@ -787,7 +787,7 @@ proc fcQFile_method_callback_fileName(self: pointer): struct_seaqt_string {.cdec
   if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_seaqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-proc fcQFile_method_callback_open(self: pointer, flags: cint): bool {.cdecl.} =
+proc fcQFile_method_callback_openFlags(self: pointer, flags: cint): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = cint(flags)
   var virtualReturn = inst.open(slotval1)
@@ -798,7 +798,7 @@ proc fcQFile_method_callback_size(self: pointer): clonglong {.cdecl.} =
   var virtualReturn = inst.size()
   virtualReturn
 
-proc fcQFile_method_callback_resize(self: pointer, sz: clonglong): bool {.cdecl.} =
+proc fcQFile_method_callback_resizeSz(self: pointer, sz: clonglong): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = sz
   var virtualReturn = inst.resize(slotval1)
@@ -809,7 +809,7 @@ proc fcQFile_method_callback_permissions(self: pointer): cint {.cdecl.} =
   var virtualReturn = inst.permissions()
   cint(virtualReturn)
 
-proc fcQFile_method_callback_setPermissions(self: pointer, permissionSpec: cint): bool {.cdecl.} =
+proc fcQFile_method_callback_setPermissionsPermissionSpec(self: pointer, permissionSpec: cint): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = cint(permissionSpec)
   var virtualReturn = inst.setPermissions(slotval1)
@@ -965,16 +965,16 @@ proc create*(T: type gen_qfile_types.QFile,
     vtbl[].vtbl.metacall = fcQFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = fcQFile_vtable_callback_fileName
-  if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = fcQFile_vtable_callback_open
+  if not isNil(vtbl[].openFlags):
+    vtbl[].vtbl.openFlags = fcQFile_vtable_callback_openFlags
   if not isNil(vtbl[].size):
     vtbl[].vtbl.size = fcQFile_vtable_callback_size
-  if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = fcQFile_vtable_callback_resize
+  if not isNil(vtbl[].resizeSz):
+    vtbl[].vtbl.resizeSz = fcQFile_vtable_callback_resizeSz
   if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = fcQFile_vtable_callback_permissions
-  if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = fcQFile_vtable_callback_setPermissions
+  if not isNil(vtbl[].setPermissionsPermissionSpec):
+    vtbl[].vtbl.setPermissionsPermissionSpec = fcQFile_vtable_callback_setPermissionsPermissionSpec
   if not isNil(vtbl[].close):
     vtbl[].vtbl.close = fcQFile_vtable_callback_close
   if not isNil(vtbl[].isSequential):
@@ -1036,16 +1036,16 @@ proc create*(T: type gen_qfile_types.QFile,
     vtbl[].vtbl.metacall = fcQFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = fcQFile_vtable_callback_fileName
-  if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = fcQFile_vtable_callback_open
+  if not isNil(vtbl[].openFlags):
+    vtbl[].vtbl.openFlags = fcQFile_vtable_callback_openFlags
   if not isNil(vtbl[].size):
     vtbl[].vtbl.size = fcQFile_vtable_callback_size
-  if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = fcQFile_vtable_callback_resize
+  if not isNil(vtbl[].resizeSz):
+    vtbl[].vtbl.resizeSz = fcQFile_vtable_callback_resizeSz
   if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = fcQFile_vtable_callback_permissions
-  if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = fcQFile_vtable_callback_setPermissions
+  if not isNil(vtbl[].setPermissionsPermissionSpec):
+    vtbl[].vtbl.setPermissionsPermissionSpec = fcQFile_vtable_callback_setPermissionsPermissionSpec
   if not isNil(vtbl[].close):
     vtbl[].vtbl.close = fcQFile_vtable_callback_close
   if not isNil(vtbl[].isSequential):
@@ -1107,16 +1107,16 @@ proc create*(T: type gen_qfile_types.QFile,
     vtbl[].vtbl.metacall = fcQFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = fcQFile_vtable_callback_fileName
-  if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = fcQFile_vtable_callback_open
+  if not isNil(vtbl[].openFlags):
+    vtbl[].vtbl.openFlags = fcQFile_vtable_callback_openFlags
   if not isNil(vtbl[].size):
     vtbl[].vtbl.size = fcQFile_vtable_callback_size
-  if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = fcQFile_vtable_callback_resize
+  if not isNil(vtbl[].resizeSz):
+    vtbl[].vtbl.resizeSz = fcQFile_vtable_callback_resizeSz
   if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = fcQFile_vtable_callback_permissions
-  if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = fcQFile_vtable_callback_setPermissions
+  if not isNil(vtbl[].setPermissionsPermissionSpec):
+    vtbl[].vtbl.setPermissionsPermissionSpec = fcQFile_vtable_callback_setPermissionsPermissionSpec
   if not isNil(vtbl[].close):
     vtbl[].vtbl.close = fcQFile_vtable_callback_close
   if not isNil(vtbl[].isSequential):
@@ -1178,16 +1178,16 @@ proc create*(T: type gen_qfile_types.QFile,
     vtbl[].vtbl.metacall = fcQFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = fcQFile_vtable_callback_fileName
-  if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = fcQFile_vtable_callback_open
+  if not isNil(vtbl[].openFlags):
+    vtbl[].vtbl.openFlags = fcQFile_vtable_callback_openFlags
   if not isNil(vtbl[].size):
     vtbl[].vtbl.size = fcQFile_vtable_callback_size
-  if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = fcQFile_vtable_callback_resize
+  if not isNil(vtbl[].resizeSz):
+    vtbl[].vtbl.resizeSz = fcQFile_vtable_callback_resizeSz
   if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = fcQFile_vtable_callback_permissions
-  if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = fcQFile_vtable_callback_setPermissions
+  if not isNil(vtbl[].setPermissionsPermissionSpec):
+    vtbl[].vtbl.setPermissionsPermissionSpec = fcQFile_vtable_callback_setPermissionsPermissionSpec
   if not isNil(vtbl[].close):
     vtbl[].vtbl.close = fcQFile_vtable_callback_close
   if not isNil(vtbl[].isSequential):
@@ -1243,11 +1243,11 @@ const cQFile_mvtbl = cQFileVTable(
   metacast: fcQFile_method_callback_metacast,
   metacall: fcQFile_method_callback_metacall,
   fileName: fcQFile_method_callback_fileName,
-  open: fcQFile_method_callback_open,
+  openFlags: fcQFile_method_callback_openFlags,
   size: fcQFile_method_callback_size,
-  resize: fcQFile_method_callback_resize,
+  resizeSz: fcQFile_method_callback_resizeSz,
   permissions: fcQFile_method_callback_permissions,
-  setPermissions: fcQFile_method_callback_setPermissions,
+  setPermissionsPermissionSpec: fcQFile_method_callback_setPermissionsPermissionSpec,
   close: fcQFile_method_callback_close,
   isSequential: fcQFile_method_callback_isSequential,
   pos: fcQFile_method_callback_pos,

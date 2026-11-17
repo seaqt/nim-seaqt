@@ -26,12 +26,12 @@ QCborArray* QCborArray_new() {
 	return new (std::nothrow) QCborArray();
 }
 
-QCborArray* QCborArray_new2(QCborArray* other) {
-	return new (std::nothrow) QCborArray(*other);
+QCborArray* QCborArray_new_from(QCborArray* from) {
+	return new (std::nothrow) QCborArray(*from);
 }
 
-void QCborArray_operatorAssign(QCborArray* self, QCborArray* other) {
-	self->operator=(*other);
+void QCborArray_operatorAssign(QCborArray* self, QCborArray* from) {
+	self->operator=(*from);
 }
 
 void QCborArray_swap(QCborArray* self, QCborArray* other) {
@@ -59,31 +59,31 @@ QCborValue* QCborArray_at(const QCborArray* self, ptrdiff_t i) {
 	return new QCborValue(self->at((qsizetype)(i)));
 }
 
-QCborValue* QCborArray_first(const QCborArray* self) {
+QCborValue* QCborArray_first_const(const QCborArray* self) {
 	return new QCborValue(self->first());
 }
 
-QCborValue* QCborArray_last(const QCborArray* self) {
+QCborValue* QCborArray_last_const(const QCborArray* self) {
 	return new QCborValue(self->last());
 }
 
-QCborValue* QCborArray_operatorSubscript(const QCborArray* self, ptrdiff_t i) {
+QCborValue* QCborArray_operatorSubscript_const_qsizetype(const QCborArray* self, ptrdiff_t i) {
 	return new QCborValue(self->operator[]((qsizetype)(i)));
 }
 
-QCborValueRef* QCborArray_first2(QCborArray* self) {
+QCborValueRef* QCborArray_first(QCborArray* self) {
 	return new QCborValueRef(self->first());
 }
 
-QCborValueRef* QCborArray_last2(QCborArray* self) {
+QCborValueRef* QCborArray_last(QCborArray* self) {
 	return new QCborValueRef(self->last());
 }
 
-QCborValueRef* QCborArray_operatorSubscriptWithQsizetype(QCborArray* self, ptrdiff_t i) {
+QCborValueRef* QCborArray_operatorSubscript_qsizetype(QCborArray* self, ptrdiff_t i) {
 	return new QCborValueRef(self->operator[]((qsizetype)(i)));
 }
 
-void QCborArray_insert(QCborArray* self, ptrdiff_t i, QCborValue* value) {
+void QCborArray_insert_qsizetype_QCborValue(QCborArray* self, ptrdiff_t i, QCborValue* value) {
 	self->insert((qsizetype)(i), *value);
 }
 
@@ -95,11 +95,11 @@ void QCborArray_append(QCborArray* self, QCborValue* value) {
 	self->append(*value);
 }
 
-QCborValue* QCborArray_extract(QCborArray* self, QCborArray__ConstIterator* it) {
+QCborValue* QCborArray_extract_QCborArray_ConstIterator(QCborArray* self, QCborArray__ConstIterator* it) {
 	return new QCborValue(self->extract(*it));
 }
 
-QCborValue* QCborArray_extractWithIt(QCborArray* self, QCborArray__Iterator* it) {
+QCborValue* QCborArray_extract_QCborArray_Iterator(QCborArray* self, QCborArray__Iterator* it) {
 	return new QCborValue(self->extract(*it));
 }
 
@@ -155,7 +155,7 @@ QCborArray__ConstIterator* QCborArray_constBegin(const QCborArray* self) {
 	return new QCborArray::ConstIterator(self->constBegin());
 }
 
-QCborArray__ConstIterator* QCborArray_begin2(const QCborArray* self) {
+QCborArray__ConstIterator* QCborArray_begin_const(const QCborArray* self) {
 	return new QCborArray::ConstIterator(self->begin());
 }
 
@@ -171,7 +171,7 @@ QCborArray__ConstIterator* QCborArray_constEnd(const QCborArray* self) {
 	return new QCborArray::ConstIterator(self->constEnd());
 }
 
-QCborArray__ConstIterator* QCborArray_end2(const QCborArray* self) {
+QCborArray__ConstIterator* QCborArray_end_const(const QCborArray* self) {
 	return new QCborArray::ConstIterator(self->end());
 }
 
@@ -179,35 +179,35 @@ QCborArray__ConstIterator* QCborArray_cend(const QCborArray* self) {
 	return new QCborArray::ConstIterator(self->cend());
 }
 
-QCborArray__Iterator* QCborArray_insert2(QCborArray* self, QCborArray__Iterator* before, QCborValue* value) {
+QCborArray__Iterator* QCborArray_insert_QCborArray_iterator_QCborValue(QCborArray* self, QCborArray__Iterator* before, QCborValue* value) {
 	return new QCborArray::Iterator(self->insert(*before, *value));
 }
 
-QCborArray__Iterator* QCborArray_insert3(QCborArray* self, QCborArray__ConstIterator* before, QCborValue* value) {
+QCborArray__Iterator* QCborArray_insert_QCborArray_const_iterator_QCborValue(QCborArray* self, QCborArray__ConstIterator* before, QCborValue* value) {
 	return new QCborArray::Iterator(self->insert(*before, *value));
 }
 
-QCborArray__Iterator* QCborArray_erase(QCborArray* self, QCborArray__Iterator* it) {
+QCborArray__Iterator* QCborArray_erase_QCborArray_iterator(QCborArray* self, QCborArray__Iterator* it) {
 	return new QCborArray::Iterator(self->erase(*it));
 }
 
-QCborArray__Iterator* QCborArray_eraseWithIt(QCborArray* self, QCborArray__ConstIterator* it) {
+QCborArray__Iterator* QCborArray_erase_QCborArray_const_iterator(QCborArray* self, QCborArray__ConstIterator* it) {
 	return new QCborArray::Iterator(self->erase(*it));
 }
 
-void QCborArray_pushBack(QCborArray* self, QCborValue* t) {
+void QCborArray_push_back(QCborArray* self, QCborValue* t) {
 	self->push_back(*t);
 }
 
-void QCborArray_pushFront(QCborArray* self, QCborValue* t) {
+void QCborArray_push_front(QCborArray* self, QCborValue* t) {
 	self->push_front(*t);
 }
 
-void QCborArray_popFront(QCborArray* self) {
+void QCborArray_pop_front(QCborArray* self) {
 	self->pop_front();
 }
 
-void QCborArray_popBack(QCborArray* self) {
+void QCborArray_pop_back(QCborArray* self) {
 	self->pop_back();
 }
 
@@ -281,12 +281,12 @@ QCborArray__Iterator* QCborArray__Iterator_new() {
 	return new (std::nothrow) QCborArray__Iterator();
 }
 
-QCborArray__Iterator* QCborArray__Iterator_new2(QCborArray__Iterator* param1) {
-	return new (std::nothrow) QCborArray__Iterator(*param1);
+QCborArray__Iterator* QCborArray__Iterator_new_from(QCborArray__Iterator* from) {
+	return new (std::nothrow) QCborArray__Iterator(*from);
 }
 
-void QCborArray__Iterator_operatorAssign(QCborArray__Iterator* self, QCborArray__Iterator* other) {
-	self->operator=(*other);
+void QCborArray__Iterator_operatorAssign(QCborArray__Iterator* self, QCborArray__Iterator* from) {
+	self->operator=(*from);
 }
 
 QCborValueRef* QCborArray__Iterator_operatorMultiply(const QCborArray__Iterator* self) {
@@ -301,51 +301,51 @@ QCborValueRef* QCborArray__Iterator_operatorSubscript(QCborArray__Iterator* self
 	return new QCborValueRef(self->operator[]((qsizetype)(j)));
 }
 
-bool QCborArray__Iterator_operatorEqual(const QCborArray__Iterator* self, QCborArray__Iterator* o) {
+bool QCborArray__Iterator_operatorEqual_QCborArray_Iterator(const QCborArray__Iterator* self, QCborArray__Iterator* o) {
 	return (*self == *o);
 }
 
-bool QCborArray__Iterator_operatorNotEqual(const QCborArray__Iterator* self, QCborArray__Iterator* o) {
+bool QCborArray__Iterator_operatorNotEqual_QCborArray_Iterator(const QCborArray__Iterator* self, QCborArray__Iterator* o) {
 	return (*self != *o);
 }
 
-bool QCborArray__Iterator_operatorLesser(const QCborArray__Iterator* self, QCborArray__Iterator* other) {
+bool QCborArray__Iterator_operatorLesser_QCborArray_Iterator(const QCborArray__Iterator* self, QCborArray__Iterator* other) {
 	return (*self < *other);
 }
 
-bool QCborArray__Iterator_operatorLesserOrEqual(const QCborArray__Iterator* self, QCborArray__Iterator* other) {
+bool QCborArray__Iterator_operatorLesserOrEqual_QCborArray_Iterator(const QCborArray__Iterator* self, QCborArray__Iterator* other) {
 	return (*self <= *other);
 }
 
-bool QCborArray__Iterator_operatorGreater(const QCborArray__Iterator* self, QCborArray__Iterator* other) {
+bool QCborArray__Iterator_operatorGreater_QCborArray_Iterator(const QCborArray__Iterator* self, QCborArray__Iterator* other) {
 	return (*self > *other);
 }
 
-bool QCborArray__Iterator_operatorGreaterOrEqual(const QCborArray__Iterator* self, QCborArray__Iterator* other) {
+bool QCborArray__Iterator_operatorGreaterOrEqual_QCborArray_Iterator(const QCborArray__Iterator* self, QCborArray__Iterator* other) {
 	return (*self >= *other);
 }
 
-bool QCborArray__Iterator_operatorEqualWithQCborArrayConstIterator(const QCborArray__Iterator* self, QCborArray__ConstIterator* o) {
+bool QCborArray__Iterator_operatorEqual_QCborArray_ConstIterator(const QCborArray__Iterator* self, QCborArray__ConstIterator* o) {
 	return (*self == *o);
 }
 
-bool QCborArray__Iterator_operatorNotEqualWithQCborArrayConstIterator(const QCborArray__Iterator* self, QCborArray__ConstIterator* o) {
+bool QCborArray__Iterator_operatorNotEqual_QCborArray_ConstIterator(const QCborArray__Iterator* self, QCborArray__ConstIterator* o) {
 	return (*self != *o);
 }
 
-bool QCborArray__Iterator_operatorLesserWithOther(const QCborArray__Iterator* self, QCborArray__ConstIterator* other) {
+bool QCborArray__Iterator_operatorLesser_QCborArray_ConstIterator(const QCborArray__Iterator* self, QCborArray__ConstIterator* other) {
 	return (*self < *other);
 }
 
-bool QCborArray__Iterator_operatorLesserOrEqualWithOther(const QCborArray__Iterator* self, QCborArray__ConstIterator* other) {
+bool QCborArray__Iterator_operatorLesserOrEqual_QCborArray_ConstIterator(const QCborArray__Iterator* self, QCborArray__ConstIterator* other) {
 	return (*self <= *other);
 }
 
-bool QCborArray__Iterator_operatorGreaterWithOther(const QCborArray__Iterator* self, QCborArray__ConstIterator* other) {
+bool QCborArray__Iterator_operatorGreater_QCborArray_ConstIterator(const QCborArray__Iterator* self, QCborArray__ConstIterator* other) {
 	return (*self > *other);
 }
 
-bool QCborArray__Iterator_operatorGreaterOrEqualWithOther(const QCborArray__Iterator* self, QCborArray__ConstIterator* other) {
+bool QCborArray__Iterator_operatorGreaterOrEqual_QCborArray_ConstIterator(const QCborArray__Iterator* self, QCborArray__ConstIterator* other) {
 	return (*self >= *other);
 }
 
@@ -355,7 +355,7 @@ QCborArray__Iterator* QCborArray__Iterator_operatorPlusPlus(QCborArray__Iterator
 	return &_ret;
 }
 
-QCborArray__Iterator* QCborArray__Iterator_operatorPlusPlusWithInt(QCborArray__Iterator* self, int param1) {
+QCborArray__Iterator* QCborArray__Iterator_operatorPlusPlus_int(QCborArray__Iterator* self, int param1) {
 	return new QCborArray::Iterator(self->operator++(static_cast<int>(param1)));
 }
 
@@ -365,7 +365,7 @@ QCborArray__Iterator* QCborArray__Iterator_operatorMinusMinus(QCborArray__Iterat
 	return &_ret;
 }
 
-QCborArray__Iterator* QCborArray__Iterator_operatorMinusMinusWithInt(QCborArray__Iterator* self, int param1) {
+QCborArray__Iterator* QCborArray__Iterator_operatorMinusMinus_int(QCborArray__Iterator* self, int param1) {
 	return new QCborArray::Iterator(self->operator--(static_cast<int>(param1)));
 }
 
@@ -385,11 +385,11 @@ QCborArray__Iterator* QCborArray__Iterator_operatorPlus(const QCborArray__Iterat
 	return new QCborArray::Iterator(self->operator+((qsizetype)(j)));
 }
 
-QCborArray__Iterator* QCborArray__Iterator_operatorMinus(const QCborArray__Iterator* self, ptrdiff_t j) {
+QCborArray__Iterator* QCborArray__Iterator_operatorMinus_qsizetype(const QCborArray__Iterator* self, ptrdiff_t j) {
 	return new QCborArray::Iterator(self->operator-((qsizetype)(j)));
 }
 
-ptrdiff_t QCborArray__Iterator_operatorMinusWithQCborArrayIterator(const QCborArray__Iterator* self, QCborArray__Iterator* j) {
+ptrdiff_t QCborArray__Iterator_operatorMinus_QCborArray_Iterator(const QCborArray__Iterator* self, QCborArray__Iterator* j) {
 	qsizetype _ret = self->operator-(*j);
 	return static_cast<ptrdiff_t>(_ret);
 }
@@ -402,12 +402,12 @@ QCborArray__ConstIterator* QCborArray__ConstIterator_new() {
 	return new (std::nothrow) QCborArray__ConstIterator();
 }
 
-QCborArray__ConstIterator* QCborArray__ConstIterator_new2(QCborArray__ConstIterator* param1) {
-	return new (std::nothrow) QCborArray__ConstIterator(*param1);
+QCborArray__ConstIterator* QCborArray__ConstIterator_new_from(QCborArray__ConstIterator* from) {
+	return new (std::nothrow) QCborArray__ConstIterator(*from);
 }
 
-void QCborArray__ConstIterator_operatorAssign(QCborArray__ConstIterator* self, QCborArray__ConstIterator* other) {
-	self->operator=(*other);
+void QCborArray__ConstIterator_operatorAssign(QCborArray__ConstIterator* self, QCborArray__ConstIterator* from) {
+	self->operator=(*from);
 }
 
 QCborValueRef* QCborArray__ConstIterator_operatorMultiply(const QCborArray__ConstIterator* self) {
@@ -422,51 +422,51 @@ QCborValueRef* QCborArray__ConstIterator_operatorSubscript(QCborArray__ConstIter
 	return new QCborValueRef(self->operator[]((qsizetype)(j)));
 }
 
-bool QCborArray__ConstIterator_operatorEqual(const QCborArray__ConstIterator* self, QCborArray__Iterator* o) {
+bool QCborArray__ConstIterator_operatorEqual_QCborArray_Iterator(const QCborArray__ConstIterator* self, QCborArray__Iterator* o) {
 	return (*self == *o);
 }
 
-bool QCborArray__ConstIterator_operatorNotEqual(const QCborArray__ConstIterator* self, QCborArray__Iterator* o) {
+bool QCborArray__ConstIterator_operatorNotEqual_QCborArray_Iterator(const QCborArray__ConstIterator* self, QCborArray__Iterator* o) {
 	return (*self != *o);
 }
 
-bool QCborArray__ConstIterator_operatorLesser(const QCborArray__ConstIterator* self, QCborArray__Iterator* other) {
+bool QCborArray__ConstIterator_operatorLesser_QCborArray_Iterator(const QCborArray__ConstIterator* self, QCborArray__Iterator* other) {
 	return (*self < *other);
 }
 
-bool QCborArray__ConstIterator_operatorLesserOrEqual(const QCborArray__ConstIterator* self, QCborArray__Iterator* other) {
+bool QCborArray__ConstIterator_operatorLesserOrEqual_QCborArray_Iterator(const QCborArray__ConstIterator* self, QCborArray__Iterator* other) {
 	return (*self <= *other);
 }
 
-bool QCborArray__ConstIterator_operatorGreater(const QCborArray__ConstIterator* self, QCborArray__Iterator* other) {
+bool QCborArray__ConstIterator_operatorGreater_QCborArray_Iterator(const QCborArray__ConstIterator* self, QCborArray__Iterator* other) {
 	return (*self > *other);
 }
 
-bool QCborArray__ConstIterator_operatorGreaterOrEqual(const QCborArray__ConstIterator* self, QCborArray__Iterator* other) {
+bool QCborArray__ConstIterator_operatorGreaterOrEqual_QCborArray_Iterator(const QCborArray__ConstIterator* self, QCborArray__Iterator* other) {
 	return (*self >= *other);
 }
 
-bool QCborArray__ConstIterator_operatorEqualWithQCborArrayConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* o) {
+bool QCborArray__ConstIterator_operatorEqual_QCborArray_ConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* o) {
 	return (*self == *o);
 }
 
-bool QCborArray__ConstIterator_operatorNotEqualWithQCborArrayConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* o) {
+bool QCborArray__ConstIterator_operatorNotEqual_QCborArray_ConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* o) {
 	return (*self != *o);
 }
 
-bool QCborArray__ConstIterator_operatorLesserWithOther(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* other) {
+bool QCborArray__ConstIterator_operatorLesser_QCborArray_ConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* other) {
 	return (*self < *other);
 }
 
-bool QCborArray__ConstIterator_operatorLesserOrEqualWithOther(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* other) {
+bool QCborArray__ConstIterator_operatorLesserOrEqual_QCborArray_ConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* other) {
 	return (*self <= *other);
 }
 
-bool QCborArray__ConstIterator_operatorGreaterWithOther(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* other) {
+bool QCborArray__ConstIterator_operatorGreater_QCborArray_ConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* other) {
 	return (*self > *other);
 }
 
-bool QCborArray__ConstIterator_operatorGreaterOrEqualWithOther(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* other) {
+bool QCborArray__ConstIterator_operatorGreaterOrEqual_QCborArray_ConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* other) {
 	return (*self >= *other);
 }
 
@@ -476,7 +476,7 @@ QCborArray__ConstIterator* QCborArray__ConstIterator_operatorPlusPlus(QCborArray
 	return &_ret;
 }
 
-QCborArray__ConstIterator* QCborArray__ConstIterator_operatorPlusPlusWithInt(QCborArray__ConstIterator* self, int param1) {
+QCborArray__ConstIterator* QCborArray__ConstIterator_operatorPlusPlus_int(QCborArray__ConstIterator* self, int param1) {
 	return new QCborArray::ConstIterator(self->operator++(static_cast<int>(param1)));
 }
 
@@ -486,7 +486,7 @@ QCborArray__ConstIterator* QCborArray__ConstIterator_operatorMinusMinus(QCborArr
 	return &_ret;
 }
 
-QCborArray__ConstIterator* QCborArray__ConstIterator_operatorMinusMinusWithInt(QCborArray__ConstIterator* self, int param1) {
+QCborArray__ConstIterator* QCborArray__ConstIterator_operatorMinusMinus_int(QCborArray__ConstIterator* self, int param1) {
 	return new QCborArray::ConstIterator(self->operator--(static_cast<int>(param1)));
 }
 
@@ -506,11 +506,11 @@ QCborArray__ConstIterator* QCborArray__ConstIterator_operatorPlus(const QCborArr
 	return new QCborArray::ConstIterator(self->operator+((qsizetype)(j)));
 }
 
-QCborArray__ConstIterator* QCborArray__ConstIterator_operatorMinus(const QCborArray__ConstIterator* self, ptrdiff_t j) {
+QCborArray__ConstIterator* QCborArray__ConstIterator_operatorMinus_qsizetype(const QCborArray__ConstIterator* self, ptrdiff_t j) {
 	return new QCborArray::ConstIterator(self->operator-((qsizetype)(j)));
 }
 
-ptrdiff_t QCborArray__ConstIterator_operatorMinusWithQCborArrayConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* j) {
+ptrdiff_t QCborArray__ConstIterator_operatorMinus_QCborArray_ConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* j) {
 	qsizetype _ret = self->operator-(*j);
 	return static_cast<ptrdiff_t>(_ret);
 }

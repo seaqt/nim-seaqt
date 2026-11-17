@@ -192,12 +192,12 @@ public:
 	friend bool QRadioData_protectedbase_isSignalConnected(const VirtualQRadioData* self, QMetaMethod* signal);
 };
 
-VirtualQRadioData* QRadioData_new(const QRadioData_VTable* vtbl, size_t vdata, QMediaObject* mediaObject) {
+VirtualQRadioData* QRadioData_new_mediaObject(const QRadioData_VTable* vtbl, size_t vdata, QMediaObject* mediaObject) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRadioData>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRadioData(vtbl, mediaObject) : nullptr;
 }
 
-VirtualQRadioData* QRadioData_new2(const QRadioData_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent) {
+VirtualQRadioData* QRadioData_new_mediaObject_parent(const QRadioData_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRadioData>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRadioData(vtbl, mediaObject, parent) : nullptr;
 }
@@ -219,7 +219,7 @@ int QRadioData_metacall(QRadioData* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QRadioData_tr(const char* s) {
+struct seaqt_string QRadioData_tr_s(const char* s) {
 	QString _ret = QRadioData::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -230,7 +230,7 @@ struct seaqt_string QRadioData_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QRadioData_trUtf8(const char* s) {
+struct seaqt_string QRadioData_trUtf8_s(const char* s) {
 	QString _ret = QRadioData::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -452,11 +452,11 @@ void QRadioData_connect_alternativeFrequenciesEnabledChanged(QRadioData* self, i
 	QRadioData::connect(self, static_cast<void (QRadioData::*)(bool)>(&QRadioData::alternativeFrequenciesEnabledChanged), self, local_caller{slot, callback, release});
 }
 
-void QRadioData_errorWithError(QRadioData* self, int error) {
+void QRadioData_error_error(QRadioData* self, int error) {
 	self->error(static_cast<QRadioData::Error>(error));
 }
 
-void QRadioData_connect_errorWithError(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QRadioData_connect_error_error(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -469,7 +469,7 @@ void QRadioData_connect_errorWithError(QRadioData* self, intptr_t slot, void (*c
 	QRadioData::connect(self, static_cast<void (QRadioData::*)(QRadioData::Error)>(&QRadioData::error), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QRadioData_tr2(const char* s, const char* c) {
+struct seaqt_string QRadioData_tr_s_c(const char* s, const char* c) {
 	QString _ret = QRadioData::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -480,7 +480,7 @@ struct seaqt_string QRadioData_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QRadioData_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QRadioData_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QRadioData::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -491,7 +491,7 @@ struct seaqt_string QRadioData_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QRadioData_trUtf82(const char* s, const char* c) {
+struct seaqt_string QRadioData_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QRadioData::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -502,7 +502,7 @@ struct seaqt_string QRadioData_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QRadioData_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QRadioData_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QRadioData::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -61,8 +61,8 @@ type cQAudioDecoderControl*{.exportc: "QAudioDecoderControl", incompleteStruct.}
 proc fcQAudioDecoderControl_metaObject(self: pointer): pointer {.importc: "QAudioDecoderControl_metaObject".}
 proc fcQAudioDecoderControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioDecoderControl_metacast".}
 proc fcQAudioDecoderControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioDecoderControl_metacall".}
-proc fcQAudioDecoderControl_tr(s: cstring): struct_seaqt_string {.importc: "QAudioDecoderControl_tr".}
-proc fcQAudioDecoderControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAudioDecoderControl_trUtf8".}
+proc fcQAudioDecoderControl_trS(s: cstring): struct_seaqt_string {.importc: "QAudioDecoderControl_tr_s".}
+proc fcQAudioDecoderControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAudioDecoderControl_trUtf8_s".}
 proc fcQAudioDecoderControl_state(self: pointer): cint {.importc: "QAudioDecoderControl_state".}
 proc fcQAudioDecoderControl_sourceFilename(self: pointer): struct_seaqt_string {.importc: "QAudioDecoderControl_sourceFilename".}
 proc fcQAudioDecoderControl_setSourceFilename(self: pointer, fileName: struct_seaqt_string): void {.importc: "QAudioDecoderControl_setSourceFilename".}
@@ -94,10 +94,10 @@ proc fcQAudioDecoderControl_positionChanged(self: pointer, position: clonglong):
 proc fcQAudioDecoderControl_connect_positionChanged(self: pointer, slot: int, callback: proc (slot: int, position: clonglong) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioDecoderControl_connect_positionChanged".}
 proc fcQAudioDecoderControl_durationChanged(self: pointer, duration: clonglong): void {.importc: "QAudioDecoderControl_durationChanged".}
 proc fcQAudioDecoderControl_connect_durationChanged(self: pointer, slot: int, callback: proc (slot: int, duration: clonglong) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioDecoderControl_connect_durationChanged".}
-proc fcQAudioDecoderControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioDecoderControl_tr2".}
-proc fcQAudioDecoderControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioDecoderControl_tr3".}
-proc fcQAudioDecoderControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioDecoderControl_trUtf82".}
-proc fcQAudioDecoderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioDecoderControl_trUtf83".}
+proc fcQAudioDecoderControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioDecoderControl_tr_s_c".}
+proc fcQAudioDecoderControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioDecoderControl_tr_s_c_n".}
+proc fcQAudioDecoderControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioDecoderControl_trUtf8_s_c".}
+proc fcQAudioDecoderControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioDecoderControl_trUtf8_s_c_n".}
 proc fcQAudioDecoderControl_protectedbase_sender(self: pointer): pointer {.importc: "QAudioDecoderControl_protectedbase_sender".}
 proc fcQAudioDecoderControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAudioDecoderControl_protectedbase_senderSignalIndex".}
 proc fcQAudioDecoderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioDecoderControl_protectedbase_receivers".}
@@ -114,13 +114,13 @@ proc metacall*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, param1
   fcQAudioDecoderControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, s: cstring): string =
-  let v_ms = fcQAudioDecoderControl_tr(s)
+  let v_ms = fcQAudioDecoderControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, s: cstring): string =
-  let v_ms = fcQAudioDecoderControl_trUtf8(s)
+  let v_ms = fcQAudioDecoderControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -347,25 +347,25 @@ proc onDurationChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderContro
   fcQAudioDecoderControl_connect_durationChanged(self.h, cast[int](addr tmp[]), fcQAudioDecoderControl_slot_callback_durationChanged, fcQAudioDecoderControl_slot_callback_durationChanged_release)
 
 proc tr*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioDecoderControl_tr2(s, c)
+  let v_ms = fcQAudioDecoderControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioDecoderControl_tr3(s, c, n)
+  let v_ms = fcQAudioDecoderControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioDecoderControl_trUtf82(s, c)
+  let v_ms = fcQAudioDecoderControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioDecoderControl_trUtf83(s, c, n)
+  let v_ms = fcQAudioDecoderControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

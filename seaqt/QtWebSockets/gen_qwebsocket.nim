@@ -73,8 +73,8 @@ type cQWebSocket*{.exportc: "QWebSocket", incompleteStruct.} = object
 proc fcQWebSocket_metaObject(self: pointer): pointer {.importc: "QWebSocket_metaObject".}
 proc fcQWebSocket_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebSocket_metacast".}
 proc fcQWebSocket_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebSocket_metacall".}
-proc fcQWebSocket_tr(s: cstring): struct_seaqt_string {.importc: "QWebSocket_tr".}
-proc fcQWebSocket_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebSocket_trUtf8".}
+proc fcQWebSocket_trS(s: cstring): struct_seaqt_string {.importc: "QWebSocket_tr_s".}
+proc fcQWebSocket_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebSocket_trUtf8_s".}
 proc fcQWebSocket_abort(self: pointer): void {.importc: "QWebSocket_abort".}
 proc fcQWebSocket_error(self: pointer): cint {.importc: "QWebSocket_error".}
 proc fcQWebSocket_errorString(self: pointer): struct_seaqt_string {.importc: "QWebSocket_errorString".}
@@ -104,7 +104,7 @@ proc fcQWebSocket_closeCode(self: pointer): cint {.importc: "QWebSocket_closeCod
 proc fcQWebSocket_closeReason(self: pointer): struct_seaqt_string {.importc: "QWebSocket_closeReason".}
 proc fcQWebSocket_sendTextMessage(self: pointer, message: struct_seaqt_string): clonglong {.importc: "QWebSocket_sendTextMessage".}
 proc fcQWebSocket_sendBinaryMessage(self: pointer, data: struct_seaqt_string): clonglong {.importc: "QWebSocket_sendBinaryMessage".}
-proc fcQWebSocket_ignoreSslErrors(self: pointer, errors: struct_seaqt_array): void {.importc: "QWebSocket_ignoreSslErrors".}
+proc fcQWebSocket_ignoreSslErrorsErrors(self: pointer, errors: struct_seaqt_array): void {.importc: "QWebSocket_ignoreSslErrors_errors".}
 proc fcQWebSocket_setSslConfiguration(self: pointer, sslConfiguration: pointer): void {.importc: "QWebSocket_setSslConfiguration".}
 proc fcQWebSocket_sslConfiguration(self: pointer): pointer {.importc: "QWebSocket_sslConfiguration".}
 proc fcQWebSocket_bytesToWrite(self: pointer): clonglong {.importc: "QWebSocket_bytesToWrite".}
@@ -118,10 +118,10 @@ proc fcQWebSocket_setOutgoingFrameSize(self: pointer, outgoingFrameSize: culongl
 proc fcQWebSocket_outgoingFrameSize(self: pointer): culonglong {.importc: "QWebSocket_outgoingFrameSize".}
 proc fcQWebSocket_maxOutgoingFrameSize(): culonglong {.importc: "QWebSocket_maxOutgoingFrameSize".}
 proc fcQWebSocket_close(self: pointer): void {.importc: "QWebSocket_close".}
-proc fcQWebSocket_open(self: pointer, url: pointer): void {.importc: "QWebSocket_open".}
-proc fcQWebSocket_openWithRequest(self: pointer, request: pointer): void {.importc: "QWebSocket_openWithRequest".}
+proc fcQWebSocket_openUrl(self: pointer, url: pointer): void {.importc: "QWebSocket_open_url".}
+proc fcQWebSocket_openRequest(self: pointer, request: pointer): void {.importc: "QWebSocket_open_request".}
 proc fcQWebSocket_ping(self: pointer): void {.importc: "QWebSocket_ping".}
-proc fcQWebSocket_ignoreSslErrors2(self: pointer): void {.importc: "QWebSocket_ignoreSslErrors2".}
+proc fcQWebSocket_ignoreSslErrors(self: pointer): void {.importc: "QWebSocket_ignoreSslErrors".}
 proc fcQWebSocket_aboutToClose(self: pointer): void {.importc: "QWebSocket_aboutToClose".}
 proc fcQWebSocket_connect_aboutToClose(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebSocket_connect_aboutToClose".}
 proc fcQWebSocket_connected(self: pointer): void {.importc: "QWebSocket_connected".}
@@ -142,8 +142,8 @@ proc fcQWebSocket_textMessageReceived(self: pointer, message: struct_seaqt_strin
 proc fcQWebSocket_connect_textMessageReceived(self: pointer, slot: int, callback: proc (slot: int, message: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebSocket_connect_textMessageReceived".}
 proc fcQWebSocket_binaryMessageReceived(self: pointer, message: struct_seaqt_string): void {.importc: "QWebSocket_binaryMessageReceived".}
 proc fcQWebSocket_connect_binaryMessageReceived(self: pointer, slot: int, callback: proc (slot: int, message: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebSocket_connect_binaryMessageReceived".}
-proc fcQWebSocket_errorWithError(self: pointer, error: cint): void {.importc: "QWebSocket_errorWithError".}
-proc fcQWebSocket_connect_errorWithError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebSocket_connect_errorWithError".}
+proc fcQWebSocket_errorError(self: pointer, error: cint): void {.importc: "QWebSocket_error_error".}
+proc fcQWebSocket_connect_errorError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebSocket_connect_error_error".}
 proc fcQWebSocket_pong(self: pointer, elapsedTime: culonglong, payload: struct_seaqt_string): void {.importc: "QWebSocket_pong".}
 proc fcQWebSocket_connect_pong(self: pointer, slot: int, callback: proc (slot: int, elapsedTime: culonglong, payload: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebSocket_connect_pong".}
 proc fcQWebSocket_bytesWritten(self: pointer, bytes: clonglong): void {.importc: "QWebSocket_bytesWritten".}
@@ -152,13 +152,13 @@ proc fcQWebSocket_sslErrors(self: pointer, errors: struct_seaqt_array): void {.i
 proc fcQWebSocket_connect_sslErrors(self: pointer, slot: int, callback: proc (slot: int, errors: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebSocket_connect_sslErrors".}
 proc fcQWebSocket_preSharedKeyAuthenticationRequired(self: pointer, authenticator: pointer): void {.importc: "QWebSocket_preSharedKeyAuthenticationRequired".}
 proc fcQWebSocket_connect_preSharedKeyAuthenticationRequired(self: pointer, slot: int, callback: proc (slot: int, authenticator: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebSocket_connect_preSharedKeyAuthenticationRequired".}
-proc fcQWebSocket_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebSocket_tr2".}
-proc fcQWebSocket_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebSocket_tr3".}
-proc fcQWebSocket_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebSocket_trUtf82".}
-proc fcQWebSocket_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebSocket_trUtf83".}
-proc fcQWebSocket_closeWithCloseCode(self: pointer, closeCode: cint): void {.importc: "QWebSocket_closeWithCloseCode".}
-proc fcQWebSocket_close2(self: pointer, closeCode: cint, reason: struct_seaqt_string): void {.importc: "QWebSocket_close2".}
-proc fcQWebSocket_pingWithPayload(self: pointer, payload: struct_seaqt_string): void {.importc: "QWebSocket_pingWithPayload".}
+proc fcQWebSocket_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebSocket_tr_s_c".}
+proc fcQWebSocket_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebSocket_tr_s_c_n".}
+proc fcQWebSocket_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebSocket_trUtf8_s_c".}
+proc fcQWebSocket_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebSocket_trUtf8_s_c_n".}
+proc fcQWebSocket_closeCloseCode(self: pointer, closeCode: cint): void {.importc: "QWebSocket_close_closeCode".}
+proc fcQWebSocket_closeCloseCodeReason(self: pointer, closeCode: cint, reason: struct_seaqt_string): void {.importc: "QWebSocket_close_closeCode_reason".}
+proc fcQWebSocket_pingPayload(self: pointer, payload: struct_seaqt_string): void {.importc: "QWebSocket_ping_payload".}
 proc fcQWebSocket_vdata(self: pointer): ptr pointer {.importc: "QWebSocket_vdata".}
 proc fvdata_cQWebSocket(self: pointer): pointer {.importc: "vdata_QWebSocket".}
 
@@ -189,9 +189,9 @@ proc fcQWebSocket_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQWebSocket_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebSocket_protectedbase_receivers".}
 proc fcQWebSocket_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebSocket_protectedbase_isSignalConnected".}
 proc fcQWebSocket_new(vtbl: pointer, vdata: csize_t): ptr cQWebSocket {.importc: "QWebSocket_new".}
-proc fcQWebSocket_new2(vtbl: pointer, vdata: csize_t, origin: struct_seaqt_string): ptr cQWebSocket {.importc: "QWebSocket_new2".}
-proc fcQWebSocket_new3(vtbl: pointer, vdata: csize_t, origin: struct_seaqt_string, version: cint): ptr cQWebSocket {.importc: "QWebSocket_new3".}
-proc fcQWebSocket_new4(vtbl: pointer, vdata: csize_t, origin: struct_seaqt_string, version: cint, parent: pointer): ptr cQWebSocket {.importc: "QWebSocket_new4".}
+proc fcQWebSocket_new2(vtbl: pointer, vdata: csize_t, origin: struct_seaqt_string): ptr cQWebSocket {.importc: "QWebSocket_new_origin".}
+proc fcQWebSocket_new3(vtbl: pointer, vdata: csize_t, origin: struct_seaqt_string, version: cint): ptr cQWebSocket {.importc: "QWebSocket_new_origin_version".}
+proc fcQWebSocket_new4(vtbl: pointer, vdata: csize_t, origin: struct_seaqt_string, version: cint, parent: pointer): ptr cQWebSocket {.importc: "QWebSocket_new_origin_version_parent".}
 proc fcQWebSocket_staticMetaObject(): pointer {.importc: "QWebSocket_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebsocket_types.QWebSocket): gen_qobjectdefs_types.QMetaObject =
@@ -204,13 +204,13 @@ proc metacall*(self: gen_qwebsocket_types.QWebSocket, param1: cint, param2: cint
   fcQWebSocket_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebsocket_types.QWebSocket, s: cstring): string =
-  let v_ms = fcQWebSocket_tr(s)
+  let v_ms = fcQWebSocket_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebsocket_types.QWebSocket, s: cstring): string =
-  let v_ms = fcQWebSocket_trUtf8(s)
+  let v_ms = fcQWebSocket_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -322,7 +322,7 @@ proc ignoreSslErrors*(self: gen_qwebsocket_types.QWebSocket, errors: openArray[g
   for i in 0..<len(errors):
     errors_CArray[i] = errors[i].h
 
-  fcQWebSocket_ignoreSslErrors(self.h, struct_seaqt_array(len: csize_t(len(errors)), data: if len(errors) == 0: nil else: addr(errors_CArray[0])))
+  fcQWebSocket_ignoreSslErrorsErrors(self.h, struct_seaqt_array(len: csize_t(len(errors)), data: if len(errors) == 0: nil else: addr(errors_CArray[0])))
 
 proc setSslConfiguration*(self: gen_qwebsocket_types.QWebSocket, sslConfiguration: gen_qsslconfiguration_types.QSslConfiguration): void =
   fcQWebSocket_setSslConfiguration(self.h, sslConfiguration.h)
@@ -364,16 +364,16 @@ proc close*(self: gen_qwebsocket_types.QWebSocket): void =
   fcQWebSocket_close(self.h)
 
 proc open*(self: gen_qwebsocket_types.QWebSocket, url: gen_qurl_types.QUrl): void =
-  fcQWebSocket_open(self.h, url.h)
+  fcQWebSocket_openUrl(self.h, url.h)
 
 proc open*(self: gen_qwebsocket_types.QWebSocket, request: gen_qnetworkrequest_types.QNetworkRequest): void =
-  fcQWebSocket_openWithRequest(self.h, request.h)
+  fcQWebSocket_openRequest(self.h, request.h)
 
 proc ping*(self: gen_qwebsocket_types.QWebSocket): void =
   fcQWebSocket_ping(self.h)
 
 proc ignoreSslErrors*(self: gen_qwebsocket_types.QWebSocket): void =
-  fcQWebSocket_ignoreSslErrors2(self.h)
+  fcQWebSocket_ignoreSslErrors(self.h)
 
 proc aboutToClose*(self: gen_qwebsocket_types.QWebSocket): void =
   fcQWebSocket_aboutToClose(self.h)
@@ -586,24 +586,24 @@ proc onBinaryMessageReceived*(self: gen_qwebsocket_types.QWebSocket, slot: QWebS
   fcQWebSocket_connect_binaryMessageReceived(self.h, cast[int](addr tmp[]), fcQWebSocket_slot_callback_binaryMessageReceived, fcQWebSocket_slot_callback_binaryMessageReceived_release)
 
 proc error*(self: gen_qwebsocket_types.QWebSocket, error: cint): void =
-  fcQWebSocket_errorWithError(self.h, cint(error))
+  fcQWebSocket_errorError(self.h, cint(error))
 
-type QWebSocketerrorWithErrorSlot* = proc(error: cint)
-proc fcQWebSocket_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QWebSocketerrorWithErrorSlot](cast[pointer](slot))
+type QWebSocketerrorErrorSlot* = proc(error: cint)
+proc fcQWebSocket_slot_callback_errorError(slot: int, error: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QWebSocketerrorErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
-proc fcQWebSocket_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QWebSocketerrorWithErrorSlot](cast[pointer](slot))
+proc fcQWebSocket_slot_callback_errorError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebSocketerrorErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onError*(self: gen_qwebsocket_types.QWebSocket, slot: QWebSocketerrorWithErrorSlot) =
-  var tmp = new QWebSocketerrorWithErrorSlot
+proc onError*(self: gen_qwebsocket_types.QWebSocket, slot: QWebSocketerrorErrorSlot) =
+  var tmp = new QWebSocketerrorErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebSocket_connect_errorWithError(self.h, cast[int](addr tmp[]), fcQWebSocket_slot_callback_errorWithError, fcQWebSocket_slot_callback_errorWithError_release)
+  fcQWebSocket_connect_errorError(self.h, cast[int](addr tmp[]), fcQWebSocket_slot_callback_errorError, fcQWebSocket_slot_callback_errorError_release)
 
 proc pong*(self: gen_qwebsocket_types.QWebSocket, elapsedTime: culonglong, payload: openArray[byte]): void =
   fcQWebSocket_pong(self.h, elapsedTime, struct_seaqt_string(data: if len(payload) > 0: addr payload[0] else: nil, len: csize_t(len(payload))))
@@ -701,37 +701,37 @@ proc onPreSharedKeyAuthenticationRequired*(self: gen_qwebsocket_types.QWebSocket
   fcQWebSocket_connect_preSharedKeyAuthenticationRequired(self.h, cast[int](addr tmp[]), fcQWebSocket_slot_callback_preSharedKeyAuthenticationRequired, fcQWebSocket_slot_callback_preSharedKeyAuthenticationRequired_release)
 
 proc tr*(_: type gen_qwebsocket_types.QWebSocket, s: cstring, c: cstring): string =
-  let v_ms = fcQWebSocket_tr2(s, c)
+  let v_ms = fcQWebSocket_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebsocket_types.QWebSocket, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebSocket_tr3(s, c, n)
+  let v_ms = fcQWebSocket_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebsocket_types.QWebSocket, s: cstring, c: cstring): string =
-  let v_ms = fcQWebSocket_trUtf82(s, c)
+  let v_ms = fcQWebSocket_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebsocket_types.QWebSocket, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebSocket_trUtf83(s, c, n)
+  let v_ms = fcQWebSocket_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc close*(self: gen_qwebsocket_types.QWebSocket, closeCode: cint): void =
-  fcQWebSocket_closeWithCloseCode(self.h, cint(closeCode))
+  fcQWebSocket_closeCloseCode(self.h, cint(closeCode))
 
 proc close*(self: gen_qwebsocket_types.QWebSocket, closeCode: cint, reason: openArray[char]): void =
-  fcQWebSocket_close2(self.h, cint(closeCode), struct_seaqt_string(data: if len(reason) > 0: addr reason[0] else: nil, len: csize_t(len(reason))))
+  fcQWebSocket_closeCloseCodeReason(self.h, cint(closeCode), struct_seaqt_string(data: if len(reason) > 0: addr reason[0] else: nil, len: csize_t(len(reason))))
 
 proc ping*(self: gen_qwebsocket_types.QWebSocket, payload: openArray[byte]): void =
-  fcQWebSocket_pingWithPayload(self.h, struct_seaqt_string(data: if len(payload) > 0: addr payload[0] else: nil, len: csize_t(len(payload))))
+  fcQWebSocket_pingPayload(self.h, struct_seaqt_string(data: if len(payload) > 0: addr payload[0] else: nil, len: csize_t(len(payload))))
 
 type QWebSocketmetaObjectProc* = proc(self: QWebSocket): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebSocketmetacastProc* = proc(self: QWebSocket, param1: cstring): pointer {.raises: [], gcsafe.}

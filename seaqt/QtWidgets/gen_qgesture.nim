@@ -84,8 +84,8 @@ type cQGestureEvent*{.exportc: "QGestureEvent", incompleteStruct.} = object
 proc fcQGesture_metaObject(self: pointer): pointer {.importc: "QGesture_metaObject".}
 proc fcQGesture_metacast(self: pointer, param1: cstring): pointer {.importc: "QGesture_metacast".}
 proc fcQGesture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGesture_metacall".}
-proc fcQGesture_tr(s: cstring): struct_seaqt_string {.importc: "QGesture_tr".}
-proc fcQGesture_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGesture_trUtf8".}
+proc fcQGesture_trS(s: cstring): struct_seaqt_string {.importc: "QGesture_tr_s".}
+proc fcQGesture_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGesture_trUtf8_s".}
 proc fcQGesture_gestureType(self: pointer): cint {.importc: "QGesture_gestureType".}
 proc fcQGesture_state(self: pointer): cint {.importc: "QGesture_state".}
 proc fcQGesture_hotSpot(self: pointer): pointer {.importc: "QGesture_hotSpot".}
@@ -94,10 +94,10 @@ proc fcQGesture_hasHotSpot(self: pointer): bool {.importc: "QGesture_hasHotSpot"
 proc fcQGesture_unsetHotSpot(self: pointer): void {.importc: "QGesture_unsetHotSpot".}
 proc fcQGesture_setGestureCancelPolicy(self: pointer, policy: cint): void {.importc: "QGesture_setGestureCancelPolicy".}
 proc fcQGesture_gestureCancelPolicy(self: pointer): cint {.importc: "QGesture_gestureCancelPolicy".}
-proc fcQGesture_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGesture_tr2".}
-proc fcQGesture_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGesture_tr3".}
-proc fcQGesture_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGesture_trUtf82".}
-proc fcQGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGesture_trUtf83".}
+proc fcQGesture_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGesture_tr_s_c".}
+proc fcQGesture_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGesture_tr_s_c_n".}
+proc fcQGesture_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGesture_trUtf8_s_c".}
+proc fcQGesture_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGesture_trUtf8_s_c_n".}
 proc fcQGesture_vdata(self: pointer): ptr pointer {.importc: "QGesture_vdata".}
 proc fvdata_cQGesture(self: pointer): pointer {.importc: "vdata_QGesture".}
 
@@ -128,13 +128,13 @@ proc fcQGesture_protectedbase_senderSignalIndex(self: pointer): cint {.importc: 
 proc fcQGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGesture_protectedbase_receivers".}
 proc fcQGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGesture_protectedbase_isSignalConnected".}
 proc fcQGesture_new(vtbl: pointer, vdata: csize_t): ptr cQGesture {.importc: "QGesture_new".}
-proc fcQGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGesture {.importc: "QGesture_new2".}
+proc fcQGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGesture {.importc: "QGesture_new_parent".}
 proc fcQGesture_staticMetaObject(): pointer {.importc: "QGesture_staticMetaObject".}
 proc fcQPanGesture_metaObject(self: pointer): pointer {.importc: "QPanGesture_metaObject".}
 proc fcQPanGesture_metacast(self: pointer, param1: cstring): pointer {.importc: "QPanGesture_metacast".}
 proc fcQPanGesture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPanGesture_metacall".}
-proc fcQPanGesture_tr(s: cstring): struct_seaqt_string {.importc: "QPanGesture_tr".}
-proc fcQPanGesture_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPanGesture_trUtf8".}
+proc fcQPanGesture_trS(s: cstring): struct_seaqt_string {.importc: "QPanGesture_tr_s".}
+proc fcQPanGesture_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPanGesture_trUtf8_s".}
 proc fcQPanGesture_lastOffset(self: pointer): pointer {.importc: "QPanGesture_lastOffset".}
 proc fcQPanGesture_offset(self: pointer): pointer {.importc: "QPanGesture_offset".}
 proc fcQPanGesture_delta(self: pointer): pointer {.importc: "QPanGesture_delta".}
@@ -142,10 +142,10 @@ proc fcQPanGesture_acceleration(self: pointer): float64 {.importc: "QPanGesture_
 proc fcQPanGesture_setLastOffset(self: pointer, value: pointer): void {.importc: "QPanGesture_setLastOffset".}
 proc fcQPanGesture_setOffset(self: pointer, value: pointer): void {.importc: "QPanGesture_setOffset".}
 proc fcQPanGesture_setAcceleration(self: pointer, value: float64): void {.importc: "QPanGesture_setAcceleration".}
-proc fcQPanGesture_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPanGesture_tr2".}
-proc fcQPanGesture_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPanGesture_tr3".}
-proc fcQPanGesture_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPanGesture_trUtf82".}
-proc fcQPanGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPanGesture_trUtf83".}
+proc fcQPanGesture_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPanGesture_tr_s_c".}
+proc fcQPanGesture_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPanGesture_tr_s_c_n".}
+proc fcQPanGesture_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPanGesture_trUtf8_s_c".}
+proc fcQPanGesture_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPanGesture_trUtf8_s_c_n".}
 proc fcQPanGesture_vdata(self: pointer): ptr pointer {.importc: "QPanGesture_vdata".}
 proc fvdata_cQPanGesture(self: pointer): pointer {.importc: "vdata_QPanGesture".}
 
@@ -176,13 +176,13 @@ proc fcQPanGesture_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQPanGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPanGesture_protectedbase_receivers".}
 proc fcQPanGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPanGesture_protectedbase_isSignalConnected".}
 proc fcQPanGesture_new(vtbl: pointer, vdata: csize_t): ptr cQPanGesture {.importc: "QPanGesture_new".}
-proc fcQPanGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPanGesture {.importc: "QPanGesture_new2".}
+proc fcQPanGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPanGesture {.importc: "QPanGesture_new_parent".}
 proc fcQPanGesture_staticMetaObject(): pointer {.importc: "QPanGesture_staticMetaObject".}
 proc fcQPinchGesture_metaObject(self: pointer): pointer {.importc: "QPinchGesture_metaObject".}
 proc fcQPinchGesture_metacast(self: pointer, param1: cstring): pointer {.importc: "QPinchGesture_metacast".}
 proc fcQPinchGesture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPinchGesture_metacall".}
-proc fcQPinchGesture_tr(s: cstring): struct_seaqt_string {.importc: "QPinchGesture_tr".}
-proc fcQPinchGesture_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPinchGesture_trUtf8".}
+proc fcQPinchGesture_trS(s: cstring): struct_seaqt_string {.importc: "QPinchGesture_tr_s".}
+proc fcQPinchGesture_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPinchGesture_trUtf8_s".}
 proc fcQPinchGesture_totalChangeFlags(self: pointer): cint {.importc: "QPinchGesture_totalChangeFlags".}
 proc fcQPinchGesture_setTotalChangeFlags(self: pointer, value: cint): void {.importc: "QPinchGesture_setTotalChangeFlags".}
 proc fcQPinchGesture_changeFlags(self: pointer): cint {.importc: "QPinchGesture_changeFlags".}
@@ -205,10 +205,10 @@ proc fcQPinchGesture_rotationAngle(self: pointer): float64 {.importc: "QPinchGes
 proc fcQPinchGesture_setTotalRotationAngle(self: pointer, value: float64): void {.importc: "QPinchGesture_setTotalRotationAngle".}
 proc fcQPinchGesture_setLastRotationAngle(self: pointer, value: float64): void {.importc: "QPinchGesture_setLastRotationAngle".}
 proc fcQPinchGesture_setRotationAngle(self: pointer, value: float64): void {.importc: "QPinchGesture_setRotationAngle".}
-proc fcQPinchGesture_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPinchGesture_tr2".}
-proc fcQPinchGesture_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPinchGesture_tr3".}
-proc fcQPinchGesture_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPinchGesture_trUtf82".}
-proc fcQPinchGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPinchGesture_trUtf83".}
+proc fcQPinchGesture_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPinchGesture_tr_s_c".}
+proc fcQPinchGesture_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPinchGesture_tr_s_c_n".}
+proc fcQPinchGesture_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPinchGesture_trUtf8_s_c".}
+proc fcQPinchGesture_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPinchGesture_trUtf8_s_c_n".}
 proc fcQPinchGesture_vdata(self: pointer): ptr pointer {.importc: "QPinchGesture_vdata".}
 proc fvdata_cQPinchGesture(self: pointer): pointer {.importc: "vdata_QPinchGesture".}
 
@@ -239,21 +239,21 @@ proc fcQPinchGesture_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQPinchGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPinchGesture_protectedbase_receivers".}
 proc fcQPinchGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPinchGesture_protectedbase_isSignalConnected".}
 proc fcQPinchGesture_new(vtbl: pointer, vdata: csize_t): ptr cQPinchGesture {.importc: "QPinchGesture_new".}
-proc fcQPinchGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPinchGesture {.importc: "QPinchGesture_new2".}
+proc fcQPinchGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPinchGesture {.importc: "QPinchGesture_new_parent".}
 proc fcQPinchGesture_staticMetaObject(): pointer {.importc: "QPinchGesture_staticMetaObject".}
 proc fcQSwipeGesture_metaObject(self: pointer): pointer {.importc: "QSwipeGesture_metaObject".}
 proc fcQSwipeGesture_metacast(self: pointer, param1: cstring): pointer {.importc: "QSwipeGesture_metacast".}
 proc fcQSwipeGesture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSwipeGesture_metacall".}
-proc fcQSwipeGesture_tr(s: cstring): struct_seaqt_string {.importc: "QSwipeGesture_tr".}
-proc fcQSwipeGesture_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSwipeGesture_trUtf8".}
+proc fcQSwipeGesture_trS(s: cstring): struct_seaqt_string {.importc: "QSwipeGesture_tr_s".}
+proc fcQSwipeGesture_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSwipeGesture_trUtf8_s".}
 proc fcQSwipeGesture_horizontalDirection(self: pointer): cint {.importc: "QSwipeGesture_horizontalDirection".}
 proc fcQSwipeGesture_verticalDirection(self: pointer): cint {.importc: "QSwipeGesture_verticalDirection".}
 proc fcQSwipeGesture_swipeAngle(self: pointer): float64 {.importc: "QSwipeGesture_swipeAngle".}
 proc fcQSwipeGesture_setSwipeAngle(self: pointer, value: float64): void {.importc: "QSwipeGesture_setSwipeAngle".}
-proc fcQSwipeGesture_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSwipeGesture_tr2".}
-proc fcQSwipeGesture_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSwipeGesture_tr3".}
-proc fcQSwipeGesture_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSwipeGesture_trUtf82".}
-proc fcQSwipeGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSwipeGesture_trUtf83".}
+proc fcQSwipeGesture_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSwipeGesture_tr_s_c".}
+proc fcQSwipeGesture_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSwipeGesture_tr_s_c_n".}
+proc fcQSwipeGesture_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSwipeGesture_trUtf8_s_c".}
+proc fcQSwipeGesture_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSwipeGesture_trUtf8_s_c_n".}
 proc fcQSwipeGesture_vdata(self: pointer): ptr pointer {.importc: "QSwipeGesture_vdata".}
 proc fvdata_cQSwipeGesture(self: pointer): pointer {.importc: "vdata_QSwipeGesture".}
 
@@ -284,19 +284,19 @@ proc fcQSwipeGesture_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQSwipeGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSwipeGesture_protectedbase_receivers".}
 proc fcQSwipeGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSwipeGesture_protectedbase_isSignalConnected".}
 proc fcQSwipeGesture_new(vtbl: pointer, vdata: csize_t): ptr cQSwipeGesture {.importc: "QSwipeGesture_new".}
-proc fcQSwipeGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSwipeGesture {.importc: "QSwipeGesture_new2".}
+proc fcQSwipeGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSwipeGesture {.importc: "QSwipeGesture_new_parent".}
 proc fcQSwipeGesture_staticMetaObject(): pointer {.importc: "QSwipeGesture_staticMetaObject".}
 proc fcQTapGesture_metaObject(self: pointer): pointer {.importc: "QTapGesture_metaObject".}
 proc fcQTapGesture_metacast(self: pointer, param1: cstring): pointer {.importc: "QTapGesture_metacast".}
 proc fcQTapGesture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTapGesture_metacall".}
-proc fcQTapGesture_tr(s: cstring): struct_seaqt_string {.importc: "QTapGesture_tr".}
-proc fcQTapGesture_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTapGesture_trUtf8".}
+proc fcQTapGesture_trS(s: cstring): struct_seaqt_string {.importc: "QTapGesture_tr_s".}
+proc fcQTapGesture_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTapGesture_trUtf8_s".}
 proc fcQTapGesture_position(self: pointer): pointer {.importc: "QTapGesture_position".}
 proc fcQTapGesture_setPosition(self: pointer, pos: pointer): void {.importc: "QTapGesture_setPosition".}
-proc fcQTapGesture_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTapGesture_tr2".}
-proc fcQTapGesture_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTapGesture_tr3".}
-proc fcQTapGesture_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTapGesture_trUtf82".}
-proc fcQTapGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTapGesture_trUtf83".}
+proc fcQTapGesture_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTapGesture_tr_s_c".}
+proc fcQTapGesture_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTapGesture_tr_s_c_n".}
+proc fcQTapGesture_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTapGesture_trUtf8_s_c".}
+proc fcQTapGesture_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTapGesture_trUtf8_s_c_n".}
 proc fcQTapGesture_vdata(self: pointer): ptr pointer {.importc: "QTapGesture_vdata".}
 proc fvdata_cQTapGesture(self: pointer): pointer {.importc: "vdata_QTapGesture".}
 
@@ -327,21 +327,21 @@ proc fcQTapGesture_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQTapGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTapGesture_protectedbase_receivers".}
 proc fcQTapGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTapGesture_protectedbase_isSignalConnected".}
 proc fcQTapGesture_new(vtbl: pointer, vdata: csize_t): ptr cQTapGesture {.importc: "QTapGesture_new".}
-proc fcQTapGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTapGesture {.importc: "QTapGesture_new2".}
+proc fcQTapGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTapGesture {.importc: "QTapGesture_new_parent".}
 proc fcQTapGesture_staticMetaObject(): pointer {.importc: "QTapGesture_staticMetaObject".}
 proc fcQTapAndHoldGesture_metaObject(self: pointer): pointer {.importc: "QTapAndHoldGesture_metaObject".}
 proc fcQTapAndHoldGesture_metacast(self: pointer, param1: cstring): pointer {.importc: "QTapAndHoldGesture_metacast".}
 proc fcQTapAndHoldGesture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTapAndHoldGesture_metacall".}
-proc fcQTapAndHoldGesture_tr(s: cstring): struct_seaqt_string {.importc: "QTapAndHoldGesture_tr".}
-proc fcQTapAndHoldGesture_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTapAndHoldGesture_trUtf8".}
+proc fcQTapAndHoldGesture_trS(s: cstring): struct_seaqt_string {.importc: "QTapAndHoldGesture_tr_s".}
+proc fcQTapAndHoldGesture_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTapAndHoldGesture_trUtf8_s".}
 proc fcQTapAndHoldGesture_position(self: pointer): pointer {.importc: "QTapAndHoldGesture_position".}
 proc fcQTapAndHoldGesture_setPosition(self: pointer, pos: pointer): void {.importc: "QTapAndHoldGesture_setPosition".}
 proc fcQTapAndHoldGesture_setTimeout(msecs: cint): void {.importc: "QTapAndHoldGesture_setTimeout".}
 proc fcQTapAndHoldGesture_timeout(): cint {.importc: "QTapAndHoldGesture_timeout".}
-proc fcQTapAndHoldGesture_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTapAndHoldGesture_tr2".}
-proc fcQTapAndHoldGesture_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTapAndHoldGesture_tr3".}
-proc fcQTapAndHoldGesture_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTapAndHoldGesture_trUtf82".}
-proc fcQTapAndHoldGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTapAndHoldGesture_trUtf83".}
+proc fcQTapAndHoldGesture_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTapAndHoldGesture_tr_s_c".}
+proc fcQTapAndHoldGesture_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTapAndHoldGesture_tr_s_c_n".}
+proc fcQTapAndHoldGesture_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTapAndHoldGesture_trUtf8_s_c".}
+proc fcQTapAndHoldGesture_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTapAndHoldGesture_trUtf8_s_c_n".}
 proc fcQTapAndHoldGesture_vdata(self: pointer): ptr pointer {.importc: "QTapAndHoldGesture_vdata".}
 proc fvdata_cQTapAndHoldGesture(self: pointer): pointer {.importc: "vdata_QTapAndHoldGesture".}
 
@@ -372,26 +372,26 @@ proc fcQTapAndHoldGesture_protectedbase_senderSignalIndex(self: pointer): cint {
 proc fcQTapAndHoldGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTapAndHoldGesture_protectedbase_receivers".}
 proc fcQTapAndHoldGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTapAndHoldGesture_protectedbase_isSignalConnected".}
 proc fcQTapAndHoldGesture_new(vtbl: pointer, vdata: csize_t): ptr cQTapAndHoldGesture {.importc: "QTapAndHoldGesture_new".}
-proc fcQTapAndHoldGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTapAndHoldGesture {.importc: "QTapAndHoldGesture_new2".}
+proc fcQTapAndHoldGesture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTapAndHoldGesture {.importc: "QTapAndHoldGesture_new_parent".}
 proc fcQTapAndHoldGesture_staticMetaObject(): pointer {.importc: "QTapAndHoldGesture_staticMetaObject".}
 proc fcQGestureEvent_gestures(self: pointer): struct_seaqt_array {.importc: "QGestureEvent_gestures".}
 proc fcQGestureEvent_gesture(self: pointer, typeVal: cint): pointer {.importc: "QGestureEvent_gesture".}
 proc fcQGestureEvent_activeGestures(self: pointer): struct_seaqt_array {.importc: "QGestureEvent_activeGestures".}
 proc fcQGestureEvent_canceledGestures(self: pointer): struct_seaqt_array {.importc: "QGestureEvent_canceledGestures".}
-proc fcQGestureEvent_setAccepted(self: pointer, param1: pointer, param2: bool): void {.importc: "QGestureEvent_setAccepted".}
-proc fcQGestureEvent_accept(self: pointer, param1: pointer): void {.importc: "QGestureEvent_accept".}
-proc fcQGestureEvent_ignore(self: pointer, param1: pointer): void {.importc: "QGestureEvent_ignore".}
-proc fcQGestureEvent_isAccepted(self: pointer, param1: pointer): bool {.importc: "QGestureEvent_isAccepted".}
-proc fcQGestureEvent_setAccepted2(self: pointer, param1: cint, param2: bool): void {.importc: "QGestureEvent_setAccepted2".}
-proc fcQGestureEvent_acceptWithQtGestureType(self: pointer, param1: cint): void {.importc: "QGestureEvent_acceptWithQtGestureType".}
-proc fcQGestureEvent_ignoreWithQtGestureType(self: pointer, param1: cint): void {.importc: "QGestureEvent_ignoreWithQtGestureType".}
-proc fcQGestureEvent_isAcceptedWithQtGestureType(self: pointer, param1: cint): bool {.importc: "QGestureEvent_isAcceptedWithQtGestureType".}
+proc fcQGestureEvent_setAccepted_QGestureBool(self: pointer, param1: pointer, param2: bool): void {.importc: "QGestureEvent_setAccepted_QGesture_bool".}
+proc fcQGestureEvent_accept_QGesture(self: pointer, param1: pointer): void {.importc: "QGestureEvent_accept_QGesture".}
+proc fcQGestureEvent_ignore_QGesture(self: pointer, param1: pointer): void {.importc: "QGestureEvent_ignore_QGesture".}
+proc fcQGestureEvent_isAccepted_QGesture(self: pointer, param1: pointer): bool {.importc: "QGestureEvent_isAccepted_QGesture".}
+proc fcQGestureEvent_setAccepted_Qt_GestureTypeBool(self: pointer, param1: cint, param2: bool): void {.importc: "QGestureEvent_setAccepted_Qt_GestureType_bool".}
+proc fcQGestureEvent_accept_Qt_GestureType(self: pointer, param1: cint): void {.importc: "QGestureEvent_accept_Qt_GestureType".}
+proc fcQGestureEvent_ignore_Qt_GestureType(self: pointer, param1: cint): void {.importc: "QGestureEvent_ignore_Qt_GestureType".}
+proc fcQGestureEvent_isAccepted_Qt_GestureType(self: pointer, param1: cint): bool {.importc: "QGestureEvent_isAccepted_Qt_GestureType".}
 proc fcQGestureEvent_setWidget(self: pointer, widget: pointer): void {.importc: "QGestureEvent_setWidget".}
 proc fcQGestureEvent_widget(self: pointer): pointer {.importc: "QGestureEvent_widget".}
 proc fcQGestureEvent_mapToGraphicsScene(self: pointer, gesturePoint: pointer): pointer {.importc: "QGestureEvent_mapToGraphicsScene".}
-proc fcQGestureEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QGestureEvent_operatorAssign".}
-proc fcQGestureEvent_new(gestures: struct_seaqt_array): ptr cQGestureEvent {.importc: "QGestureEvent_new".}
-proc fcQGestureEvent_new2(param1: pointer): ptr cQGestureEvent {.importc: "QGestureEvent_new2".}
+proc fcQGestureEvent_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGestureEvent_operatorAssign".}
+proc fcQGestureEvent_new(gestures: struct_seaqt_array): ptr cQGestureEvent {.importc: "QGestureEvent_new_gestures".}
+proc fcQGestureEvent_new2(fromVal: pointer): ptr cQGestureEvent {.importc: "QGestureEvent_new_from".}
 
 proc metaObject*(self: gen_qgesture_types.QGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGesture_metaObject(self.h), owned: false)
@@ -403,13 +403,13 @@ proc metacall*(self: gen_qgesture_types.QGesture, param1: cint, param2: cint, pa
   fcQGesture_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgesture_types.QGesture, s: cstring): string =
-  let v_ms = fcQGesture_tr(s)
+  let v_ms = fcQGesture_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QGesture, s: cstring): string =
-  let v_ms = fcQGesture_trUtf8(s)
+  let v_ms = fcQGesture_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -439,25 +439,25 @@ proc gestureCancelPolicy*(self: gen_qgesture_types.QGesture): cint =
   cint(fcQGesture_gestureCancelPolicy(self.h))
 
 proc tr*(_: type gen_qgesture_types.QGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQGesture_tr2(s, c)
+  let v_ms = fcQGesture_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGesture_tr3(s, c, n)
+  let v_ms = fcQGesture_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQGesture_trUtf82(s, c)
+  let v_ms = fcQGesture_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGesture_trUtf83(s, c, n)
+  let v_ms = fcQGesture_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -789,13 +789,13 @@ proc metacall*(self: gen_qgesture_types.QPanGesture, param1: cint, param2: cint,
   fcQPanGesture_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgesture_types.QPanGesture, s: cstring): string =
-  let v_ms = fcQPanGesture_tr(s)
+  let v_ms = fcQPanGesture_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QPanGesture, s: cstring): string =
-  let v_ms = fcQPanGesture_trUtf8(s)
+  let v_ms = fcQPanGesture_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -822,25 +822,25 @@ proc setAcceleration*(self: gen_qgesture_types.QPanGesture, value: float64): voi
   fcQPanGesture_setAcceleration(self.h, value)
 
 proc tr*(_: type gen_qgesture_types.QPanGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQPanGesture_tr2(s, c)
+  let v_ms = fcQPanGesture_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QPanGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPanGesture_tr3(s, c, n)
+  let v_ms = fcQPanGesture_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QPanGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQPanGesture_trUtf82(s, c)
+  let v_ms = fcQPanGesture_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QPanGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPanGesture_trUtf83(s, c, n)
+  let v_ms = fcQPanGesture_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1172,13 +1172,13 @@ proc metacall*(self: gen_qgesture_types.QPinchGesture, param1: cint, param2: cin
   fcQPinchGesture_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgesture_types.QPinchGesture, s: cstring): string =
-  let v_ms = fcQPinchGesture_tr(s)
+  let v_ms = fcQPinchGesture_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QPinchGesture, s: cstring): string =
-  let v_ms = fcQPinchGesture_trUtf8(s)
+  let v_ms = fcQPinchGesture_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1250,25 +1250,25 @@ proc setRotationAngle*(self: gen_qgesture_types.QPinchGesture, value: float64): 
   fcQPinchGesture_setRotationAngle(self.h, value)
 
 proc tr*(_: type gen_qgesture_types.QPinchGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQPinchGesture_tr2(s, c)
+  let v_ms = fcQPinchGesture_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QPinchGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPinchGesture_tr3(s, c, n)
+  let v_ms = fcQPinchGesture_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QPinchGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQPinchGesture_trUtf82(s, c)
+  let v_ms = fcQPinchGesture_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QPinchGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPinchGesture_trUtf83(s, c, n)
+  let v_ms = fcQPinchGesture_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1600,13 +1600,13 @@ proc metacall*(self: gen_qgesture_types.QSwipeGesture, param1: cint, param2: cin
   fcQSwipeGesture_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgesture_types.QSwipeGesture, s: cstring): string =
-  let v_ms = fcQSwipeGesture_tr(s)
+  let v_ms = fcQSwipeGesture_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QSwipeGesture, s: cstring): string =
-  let v_ms = fcQSwipeGesture_trUtf8(s)
+  let v_ms = fcQSwipeGesture_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1624,25 +1624,25 @@ proc setSwipeAngle*(self: gen_qgesture_types.QSwipeGesture, value: float64): voi
   fcQSwipeGesture_setSwipeAngle(self.h, value)
 
 proc tr*(_: type gen_qgesture_types.QSwipeGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQSwipeGesture_tr2(s, c)
+  let v_ms = fcQSwipeGesture_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QSwipeGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSwipeGesture_tr3(s, c, n)
+  let v_ms = fcQSwipeGesture_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QSwipeGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQSwipeGesture_trUtf82(s, c)
+  let v_ms = fcQSwipeGesture_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QSwipeGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSwipeGesture_trUtf83(s, c, n)
+  let v_ms = fcQSwipeGesture_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1974,13 +1974,13 @@ proc metacall*(self: gen_qgesture_types.QTapGesture, param1: cint, param2: cint,
   fcQTapGesture_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgesture_types.QTapGesture, s: cstring): string =
-  let v_ms = fcQTapGesture_tr(s)
+  let v_ms = fcQTapGesture_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QTapGesture, s: cstring): string =
-  let v_ms = fcQTapGesture_trUtf8(s)
+  let v_ms = fcQTapGesture_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1992,25 +1992,25 @@ proc setPosition*(self: gen_qgesture_types.QTapGesture, pos: gen_qpoint_types.QP
   fcQTapGesture_setPosition(self.h, pos.h)
 
 proc tr*(_: type gen_qgesture_types.QTapGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQTapGesture_tr2(s, c)
+  let v_ms = fcQTapGesture_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QTapGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTapGesture_tr3(s, c, n)
+  let v_ms = fcQTapGesture_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QTapGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQTapGesture_trUtf82(s, c)
+  let v_ms = fcQTapGesture_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QTapGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTapGesture_trUtf83(s, c, n)
+  let v_ms = fcQTapGesture_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2342,13 +2342,13 @@ proc metacall*(self: gen_qgesture_types.QTapAndHoldGesture, param1: cint, param2
   fcQTapAndHoldGesture_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgesture_types.QTapAndHoldGesture, s: cstring): string =
-  let v_ms = fcQTapAndHoldGesture_tr(s)
+  let v_ms = fcQTapAndHoldGesture_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QTapAndHoldGesture, s: cstring): string =
-  let v_ms = fcQTapAndHoldGesture_trUtf8(s)
+  let v_ms = fcQTapAndHoldGesture_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2366,25 +2366,25 @@ proc timeout*(_: type gen_qgesture_types.QTapAndHoldGesture): cint =
   fcQTapAndHoldGesture_timeout()
 
 proc tr*(_: type gen_qgesture_types.QTapAndHoldGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQTapAndHoldGesture_tr2(s, c)
+  let v_ms = fcQTapAndHoldGesture_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QTapAndHoldGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTapAndHoldGesture_tr3(s, c, n)
+  let v_ms = fcQTapAndHoldGesture_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QTapAndHoldGesture, s: cstring, c: cstring): string =
-  let v_ms = fcQTapAndHoldGesture_trUtf82(s, c)
+  let v_ms = fcQTapAndHoldGesture_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgesture_types.QTapAndHoldGesture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTapAndHoldGesture_trUtf83(s, c, n)
+  let v_ms = fcQTapAndHoldGesture_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2737,28 +2737,28 @@ proc canceledGestures*(self: gen_qgesture_types.QGestureEvent): seq[gen_qgesture
   vx_ret
 
 proc setAccepted*(self: gen_qgesture_types.QGestureEvent, param1: gen_qgesture_types.QGesture, param2: bool): void =
-  fcQGestureEvent_setAccepted(self.h, param1.h, param2)
+  fcQGestureEvent_setAccepted_QGestureBool(self.h, param1.h, param2)
 
 proc accept*(self: gen_qgesture_types.QGestureEvent, param1: gen_qgesture_types.QGesture): void =
-  fcQGestureEvent_accept(self.h, param1.h)
+  fcQGestureEvent_accept_QGesture(self.h, param1.h)
 
 proc ignore*(self: gen_qgesture_types.QGestureEvent, param1: gen_qgesture_types.QGesture): void =
-  fcQGestureEvent_ignore(self.h, param1.h)
+  fcQGestureEvent_ignore_QGesture(self.h, param1.h)
 
 proc isAccepted*(self: gen_qgesture_types.QGestureEvent, param1: gen_qgesture_types.QGesture): bool =
-  fcQGestureEvent_isAccepted(self.h, param1.h)
+  fcQGestureEvent_isAccepted_QGesture(self.h, param1.h)
 
 proc setAccepted*(self: gen_qgesture_types.QGestureEvent, param1: cint, param2: bool): void =
-  fcQGestureEvent_setAccepted2(self.h, cint(param1), param2)
+  fcQGestureEvent_setAccepted_Qt_GestureTypeBool(self.h, cint(param1), param2)
 
 proc accept*(self: gen_qgesture_types.QGestureEvent, param1: cint): void =
-  fcQGestureEvent_acceptWithQtGestureType(self.h, cint(param1))
+  fcQGestureEvent_accept_Qt_GestureType(self.h, cint(param1))
 
 proc ignore*(self: gen_qgesture_types.QGestureEvent, param1: cint): void =
-  fcQGestureEvent_ignoreWithQtGestureType(self.h, cint(param1))
+  fcQGestureEvent_ignore_Qt_GestureType(self.h, cint(param1))
 
 proc isAccepted*(self: gen_qgesture_types.QGestureEvent, param1: cint): bool =
-  fcQGestureEvent_isAcceptedWithQtGestureType(self.h, cint(param1))
+  fcQGestureEvent_isAccepted_Qt_GestureType(self.h, cint(param1))
 
 proc setWidget*(self: gen_qgesture_types.QGestureEvent, widget: gen_qwidget_types.QWidget): void =
   fcQGestureEvent_setWidget(self.h, widget.h)
@@ -2769,8 +2769,8 @@ proc widget*(self: gen_qgesture_types.QGestureEvent): gen_qwidget_types.QWidget 
 proc mapToGraphicsScene*(self: gen_qgesture_types.QGestureEvent, gesturePoint: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGestureEvent_mapToGraphicsScene(self.h, gesturePoint.h), owned: true)
 
-proc operatorAssign*(self: gen_qgesture_types.QGestureEvent, param1: gen_qgesture_types.QGestureEvent): void =
-  fcQGestureEvent_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qgesture_types.QGestureEvent, fromVal: gen_qgesture_types.QGestureEvent): void =
+  fcQGestureEvent_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qgesture_types.QGestureEvent,
     gestures: openArray[gen_qgesture_types.QGesture]): gen_qgesture_types.QGestureEvent =
@@ -2781,6 +2781,6 @@ proc create*(T: type gen_qgesture_types.QGestureEvent,
   let tmp = gen_qgesture_types.QGestureEvent(h: fcQGestureEvent_new(struct_seaqt_array(len: csize_t(len(gestures)), data: if len(gestures) == 0: nil else: addr(gestures_CArray[0]))), owned: true)
   tmp
 proc create*(T: type gen_qgesture_types.QGestureEvent,
-    param1: gen_qgesture_types.QGestureEvent): gen_qgesture_types.QGestureEvent =
-  let tmp = gen_qgesture_types.QGestureEvent(h: fcQGestureEvent_new2(param1.h), owned: true)
+    fromVal: gen_qgesture_types.QGestureEvent): gen_qgesture_types.QGestureEvent =
+  let tmp = gen_qgesture_types.QGestureEvent(h: fcQGestureEvent_new2(fromVal.h), owned: true)
   tmp

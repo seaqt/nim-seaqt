@@ -34,8 +34,8 @@ void QVideoWidgetControl_virtbase(QVideoWidgetControl* src, QMediaControl** outp
 QMetaObject* QVideoWidgetControl_metaObject(const QVideoWidgetControl* self);
 void* QVideoWidgetControl_metacast(QVideoWidgetControl* self, const char* param1);
 int QVideoWidgetControl_metacall(QVideoWidgetControl* self, int param1, int param2, void** param3);
-struct seaqt_string QVideoWidgetControl_tr(const char* s);
-struct seaqt_string QVideoWidgetControl_trUtf8(const char* s);
+struct seaqt_string QVideoWidgetControl_tr_s(const char* s);
+struct seaqt_string QVideoWidgetControl_trUtf8_s(const char* s);
 QWidget* QVideoWidgetControl_videoWidget(QVideoWidgetControl* self);
 int QVideoWidgetControl_aspectRatioMode(const QVideoWidgetControl* self);
 void QVideoWidgetControl_setAspectRatioMode(QVideoWidgetControl* self, int mode);
@@ -59,10 +59,10 @@ void QVideoWidgetControl_hueChanged(QVideoWidgetControl* self, int hue);
 void QVideoWidgetControl_connect_hueChanged(QVideoWidgetControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QVideoWidgetControl_saturationChanged(QVideoWidgetControl* self, int saturation);
 void QVideoWidgetControl_connect_saturationChanged(QVideoWidgetControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
-struct seaqt_string QVideoWidgetControl_tr2(const char* s, const char* c);
-struct seaqt_string QVideoWidgetControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QVideoWidgetControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QVideoWidgetControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QVideoWidgetControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QVideoWidgetControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QVideoWidgetControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QVideoWidgetControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QVideoWidgetControl_staticMetaObject();
 void QVideoWidgetControl_delete(QVideoWidgetControl* self);

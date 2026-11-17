@@ -54,16 +54,16 @@ proc fcQStringView_toUcs4(self: pointer): struct_seaqt_array {.importc: "QString
 proc fcQStringView_at(self: pointer, n: int64): pointer {.importc: "QStringView_at".}
 proc fcQStringView_truncate(self: pointer, n: int64): void {.importc: "QStringView_truncate".}
 proc fcQStringView_chop(self: pointer, n: int64): void {.importc: "QStringView_chop".}
-proc fcQStringView_compareWithQChar(self: pointer, c: pointer): cint {.importc: "QStringView_compareWithQChar".}
-proc fcQStringView_compare2(self: pointer, c: pointer, cs: cint): cint {.importc: "QStringView_compare2".}
-proc fcQStringView_startsWithWithQChar(self: pointer, c: pointer): bool {.importc: "QStringView_startsWithWithQChar".}
-proc fcQStringView_startsWith2(self: pointer, c: pointer, cs: cint): bool {.importc: "QStringView_startsWith2".}
-proc fcQStringView_endsWithWithQChar(self: pointer, c: pointer): bool {.importc: "QStringView_endsWithWithQChar".}
-proc fcQStringView_endsWith2(self: pointer, c: pointer, cs: cint): bool {.importc: "QStringView_endsWith2".}
-proc fcQStringView_indexOf(self: pointer, c: pointer): int64 {.importc: "QStringView_indexOf".}
-proc fcQStringView_contains(self: pointer, c: pointer): bool {.importc: "QStringView_contains".}
-proc fcQStringView_count(self: pointer, c: pointer): int64 {.importc: "QStringView_count".}
-proc fcQStringView_lastIndexOf(self: pointer, c: pointer): int64 {.importc: "QStringView_lastIndexOf".}
+proc fcQStringView_compare_QChar(self: pointer, c: pointer): cint {.importc: "QStringView_compare_QChar".}
+proc fcQStringView_compare_QChar_Qt_CaseSensitivity(self: pointer, c: pointer, cs: cint): cint {.importc: "QStringView_compare_QChar_Qt_CaseSensitivity".}
+proc fcQStringView_startsWith_QChar(self: pointer, c: pointer): bool {.importc: "QStringView_startsWith_QChar".}
+proc fcQStringView_startsWith_QChar_Qt_CaseSensitivity(self: pointer, c: pointer, cs: cint): bool {.importc: "QStringView_startsWith_QChar_Qt_CaseSensitivity".}
+proc fcQStringView_endsWith_QChar(self: pointer, c: pointer): bool {.importc: "QStringView_endsWith_QChar".}
+proc fcQStringView_endsWith_QChar_Qt_CaseSensitivity(self: pointer, c: pointer, cs: cint): bool {.importc: "QStringView_endsWith_QChar_Qt_CaseSensitivity".}
+proc fcQStringView_indexOf_QChar(self: pointer, c: pointer): int64 {.importc: "QStringView_indexOf_QChar".}
+proc fcQStringView_contains_QChar(self: pointer, c: pointer): bool {.importc: "QStringView_contains_QChar".}
+proc fcQStringView_countC(self: pointer, c: pointer): int64 {.importc: "QStringView_count_c".}
+proc fcQStringView_lastIndexOf_QChar(self: pointer, c: pointer): int64 {.importc: "QStringView_lastIndexOf_QChar".}
 proc fcQStringView_isRightToLeft(self: pointer): bool {.importc: "QStringView_isRightToLeft".}
 proc fcQStringView_isValidUtf16(self: pointer): bool {.importc: "QStringView_isValidUtf16".}
 proc fcQStringView_toShort(self: pointer): cshort {.importc: "QStringView_toShort".}
@@ -88,30 +88,30 @@ proc fcQStringView_isEmpty(self: pointer): bool {.importc: "QStringView_isEmpty"
 proc fcQStringView_length(self: pointer): cint {.importc: "QStringView_length".}
 proc fcQStringView_first(self: pointer): pointer {.importc: "QStringView_first".}
 proc fcQStringView_last(self: pointer): pointer {.importc: "QStringView_last".}
-proc fcQStringView_indexOf2(self: pointer, c: pointer, fromVal: int64): int64 {.importc: "QStringView_indexOf2".}
-proc fcQStringView_indexOf3(self: pointer, c: pointer, fromVal: int64, cs: cint): int64 {.importc: "QStringView_indexOf3".}
-proc fcQStringView_contains2(self: pointer, c: pointer, cs: cint): bool {.importc: "QStringView_contains2".}
-proc fcQStringView_count2(self: pointer, c: pointer, cs: cint): int64 {.importc: "QStringView_count2".}
-proc fcQStringView_lastIndexOf2(self: pointer, c: pointer, fromVal: int64): int64 {.importc: "QStringView_lastIndexOf2".}
-proc fcQStringView_lastIndexOf3(self: pointer, c: pointer, fromVal: int64, cs: cint): int64 {.importc: "QStringView_lastIndexOf3".}
-proc fcQStringView_toShortWithOk(self: pointer, ok: ptr bool): cshort {.importc: "QStringView_toShortWithOk".}
-proc fcQStringView_toShort2(self: pointer, ok: ptr bool, base: cint): cshort {.importc: "QStringView_toShort2".}
-proc fcQStringView_toUShortWithOk(self: pointer, ok: ptr bool): cushort {.importc: "QStringView_toUShortWithOk".}
-proc fcQStringView_toUShort2(self: pointer, ok: ptr bool, base: cint): cushort {.importc: "QStringView_toUShort2".}
-proc fcQStringView_toIntWithOk(self: pointer, ok: ptr bool): cint {.importc: "QStringView_toIntWithOk".}
-proc fcQStringView_toInt2(self: pointer, ok: ptr bool, base: cint): cint {.importc: "QStringView_toInt2".}
-proc fcQStringView_toUIntWithOk(self: pointer, ok: ptr bool): cuint {.importc: "QStringView_toUIntWithOk".}
-proc fcQStringView_toUInt2(self: pointer, ok: ptr bool, base: cint): cuint {.importc: "QStringView_toUInt2".}
-proc fcQStringView_toLongWithOk(self: pointer, ok: ptr bool): clong {.importc: "QStringView_toLongWithOk".}
-proc fcQStringView_toLong2(self: pointer, ok: ptr bool, base: cint): clong {.importc: "QStringView_toLong2".}
-proc fcQStringView_toULongWithOk(self: pointer, ok: ptr bool): culong {.importc: "QStringView_toULongWithOk".}
-proc fcQStringView_toULong2(self: pointer, ok: ptr bool, base: cint): culong {.importc: "QStringView_toULong2".}
-proc fcQStringView_toLongLongWithOk(self: pointer, ok: ptr bool): clonglong {.importc: "QStringView_toLongLongWithOk".}
-proc fcQStringView_toLongLong2(self: pointer, ok: ptr bool, base: cint): clonglong {.importc: "QStringView_toLongLong2".}
-proc fcQStringView_toULongLongWithOk(self: pointer, ok: ptr bool): culonglong {.importc: "QStringView_toULongLongWithOk".}
-proc fcQStringView_toULongLong2(self: pointer, ok: ptr bool, base: cint): culonglong {.importc: "QStringView_toULongLong2".}
-proc fcQStringView_toFloatWithOk(self: pointer, ok: ptr bool): float32 {.importc: "QStringView_toFloatWithOk".}
-proc fcQStringView_toDoubleWithOk(self: pointer, ok: ptr bool): float64 {.importc: "QStringView_toDoubleWithOk".}
+proc fcQStringView_indexOf_QCharQsizetype(self: pointer, c: pointer, fromVal: int64): int64 {.importc: "QStringView_indexOf_QChar_qsizetype".}
+proc fcQStringView_indexOf_QCharQsizetype_Qt_CaseSensitivity(self: pointer, c: pointer, fromVal: int64, cs: cint): int64 {.importc: "QStringView_indexOf_QChar_qsizetype_Qt_CaseSensitivity".}
+proc fcQStringView_contains_QChar_Qt_CaseSensitivity(self: pointer, c: pointer, cs: cint): bool {.importc: "QStringView_contains_QChar_Qt_CaseSensitivity".}
+proc fcQStringView_countCCs(self: pointer, c: pointer, cs: cint): int64 {.importc: "QStringView_count_c_cs".}
+proc fcQStringView_lastIndexOf_QCharQsizetype(self: pointer, c: pointer, fromVal: int64): int64 {.importc: "QStringView_lastIndexOf_QChar_qsizetype".}
+proc fcQStringView_lastIndexOf_QCharQsizetype_Qt_CaseSensitivity(self: pointer, c: pointer, fromVal: int64, cs: cint): int64 {.importc: "QStringView_lastIndexOf_QChar_qsizetype_Qt_CaseSensitivity".}
+proc fcQStringView_toShortOk(self: pointer, ok: ptr bool): cshort {.importc: "QStringView_toShort_ok".}
+proc fcQStringView_toShortOkBase(self: pointer, ok: ptr bool, base: cint): cshort {.importc: "QStringView_toShort_ok_base".}
+proc fcQStringView_toUShortOk(self: pointer, ok: ptr bool): cushort {.importc: "QStringView_toUShort_ok".}
+proc fcQStringView_toUShortOkBase(self: pointer, ok: ptr bool, base: cint): cushort {.importc: "QStringView_toUShort_ok_base".}
+proc fcQStringView_toIntOk(self: pointer, ok: ptr bool): cint {.importc: "QStringView_toInt_ok".}
+proc fcQStringView_toIntOkBase(self: pointer, ok: ptr bool, base: cint): cint {.importc: "QStringView_toInt_ok_base".}
+proc fcQStringView_toUIntOk(self: pointer, ok: ptr bool): cuint {.importc: "QStringView_toUInt_ok".}
+proc fcQStringView_toUIntOkBase(self: pointer, ok: ptr bool, base: cint): cuint {.importc: "QStringView_toUInt_ok_base".}
+proc fcQStringView_toLongOk(self: pointer, ok: ptr bool): clong {.importc: "QStringView_toLong_ok".}
+proc fcQStringView_toLongOkBase(self: pointer, ok: ptr bool, base: cint): clong {.importc: "QStringView_toLong_ok_base".}
+proc fcQStringView_toULongOk(self: pointer, ok: ptr bool): culong {.importc: "QStringView_toULong_ok".}
+proc fcQStringView_toULongOkBase(self: pointer, ok: ptr bool, base: cint): culong {.importc: "QStringView_toULong_ok_base".}
+proc fcQStringView_toLongLongOk(self: pointer, ok: ptr bool): clonglong {.importc: "QStringView_toLongLong_ok".}
+proc fcQStringView_toLongLongOkBase(self: pointer, ok: ptr bool, base: cint): clonglong {.importc: "QStringView_toLongLong_ok_base".}
+proc fcQStringView_toULongLongOk(self: pointer, ok: ptr bool): culonglong {.importc: "QStringView_toULongLong_ok".}
+proc fcQStringView_toULongLongOkBase(self: pointer, ok: ptr bool, base: cint): culonglong {.importc: "QStringView_toULongLong_ok_base".}
+proc fcQStringView_toFloatOk(self: pointer, ok: ptr bool): float32 {.importc: "QStringView_toFloat_ok".}
+proc fcQStringView_toDoubleOk(self: pointer, ok: ptr bool): float64 {.importc: "QStringView_toDouble_ok".}
 proc fcQStringView_new(): ptr cQStringView {.importc: "QStringView_new".}
 
 proc toString*(self: gen_qstringview_types.QStringView): string =
@@ -166,34 +166,34 @@ proc chop*(self: gen_qstringview_types.QStringView, n: int64): void =
   fcQStringView_chop(self.h, n)
 
 proc compare*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar): cint =
-  fcQStringView_compareWithQChar(self.h, c.h)
+  fcQStringView_compare_QChar(self.h, c.h)
 
 proc compare*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar, cs: cint): cint =
-  fcQStringView_compare2(self.h, c.h, cint(cs))
+  fcQStringView_compare_QChar_Qt_CaseSensitivity(self.h, c.h, cint(cs))
 
 proc startsWith*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar): bool =
-  fcQStringView_startsWithWithQChar(self.h, c.h)
+  fcQStringView_startsWith_QChar(self.h, c.h)
 
 proc startsWith*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar, cs: cint): bool =
-  fcQStringView_startsWith2(self.h, c.h, cint(cs))
+  fcQStringView_startsWith_QChar_Qt_CaseSensitivity(self.h, c.h, cint(cs))
 
 proc endsWith*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar): bool =
-  fcQStringView_endsWithWithQChar(self.h, c.h)
+  fcQStringView_endsWith_QChar(self.h, c.h)
 
 proc endsWith*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar, cs: cint): bool =
-  fcQStringView_endsWith2(self.h, c.h, cint(cs))
+  fcQStringView_endsWith_QChar_Qt_CaseSensitivity(self.h, c.h, cint(cs))
 
 proc indexOf*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar): int64 =
-  fcQStringView_indexOf(self.h, c.h)
+  fcQStringView_indexOf_QChar(self.h, c.h)
 
 proc contains*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar): bool =
-  fcQStringView_contains(self.h, c.h)
+  fcQStringView_contains_QChar(self.h, c.h)
 
 proc count*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar): int64 =
-  fcQStringView_count(self.h, c.h)
+  fcQStringView_countC(self.h, c.h)
 
 proc lastIndexOf*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar): int64 =
-  fcQStringView_lastIndexOf(self.h, c.h)
+  fcQStringView_lastIndexOf_QChar(self.h, c.h)
 
 proc isRightToLeft*(self: gen_qstringview_types.QStringView): bool =
   fcQStringView_isRightToLeft(self.h)
@@ -268,76 +268,76 @@ proc last*(self: gen_qstringview_types.QStringView): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQStringView_last(self.h), owned: true)
 
 proc indexOf*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar, fromVal: int64): int64 =
-  fcQStringView_indexOf2(self.h, c.h, fromVal)
+  fcQStringView_indexOf_QCharQsizetype(self.h, c.h, fromVal)
 
 proc indexOf*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar, fromVal: int64, cs: cint): int64 =
-  fcQStringView_indexOf3(self.h, c.h, fromVal, cint(cs))
+  fcQStringView_indexOf_QCharQsizetype_Qt_CaseSensitivity(self.h, c.h, fromVal, cint(cs))
 
 proc contains*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar, cs: cint): bool =
-  fcQStringView_contains2(self.h, c.h, cint(cs))
+  fcQStringView_contains_QChar_Qt_CaseSensitivity(self.h, c.h, cint(cs))
 
 proc count*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar, cs: cint): int64 =
-  fcQStringView_count2(self.h, c.h, cint(cs))
+  fcQStringView_countCCs(self.h, c.h, cint(cs))
 
 proc lastIndexOf*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar, fromVal: int64): int64 =
-  fcQStringView_lastIndexOf2(self.h, c.h, fromVal)
+  fcQStringView_lastIndexOf_QCharQsizetype(self.h, c.h, fromVal)
 
 proc lastIndexOf*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar, fromVal: int64, cs: cint): int64 =
-  fcQStringView_lastIndexOf3(self.h, c.h, fromVal, cint(cs))
+  fcQStringView_lastIndexOf_QCharQsizetype_Qt_CaseSensitivity(self.h, c.h, fromVal, cint(cs))
 
 proc toShort*(self: gen_qstringview_types.QStringView, ok: ptr bool): cshort =
-  fcQStringView_toShortWithOk(self.h, ok)
+  fcQStringView_toShortOk(self.h, ok)
 
 proc toShort*(self: gen_qstringview_types.QStringView, ok: ptr bool, base: cint): cshort =
-  fcQStringView_toShort2(self.h, ok, base)
+  fcQStringView_toShortOkBase(self.h, ok, base)
 
 proc toUShort*(self: gen_qstringview_types.QStringView, ok: ptr bool): cushort =
-  fcQStringView_toUShortWithOk(self.h, ok)
+  fcQStringView_toUShortOk(self.h, ok)
 
 proc toUShort*(self: gen_qstringview_types.QStringView, ok: ptr bool, base: cint): cushort =
-  fcQStringView_toUShort2(self.h, ok, base)
+  fcQStringView_toUShortOkBase(self.h, ok, base)
 
 proc toInt*(self: gen_qstringview_types.QStringView, ok: ptr bool): cint =
-  fcQStringView_toIntWithOk(self.h, ok)
+  fcQStringView_toIntOk(self.h, ok)
 
 proc toInt*(self: gen_qstringview_types.QStringView, ok: ptr bool, base: cint): cint =
-  fcQStringView_toInt2(self.h, ok, base)
+  fcQStringView_toIntOkBase(self.h, ok, base)
 
 proc toUInt*(self: gen_qstringview_types.QStringView, ok: ptr bool): cuint =
-  fcQStringView_toUIntWithOk(self.h, ok)
+  fcQStringView_toUIntOk(self.h, ok)
 
 proc toUInt*(self: gen_qstringview_types.QStringView, ok: ptr bool, base: cint): cuint =
-  fcQStringView_toUInt2(self.h, ok, base)
+  fcQStringView_toUIntOkBase(self.h, ok, base)
 
 proc toLong*(self: gen_qstringview_types.QStringView, ok: ptr bool): clong =
-  fcQStringView_toLongWithOk(self.h, ok)
+  fcQStringView_toLongOk(self.h, ok)
 
 proc toLong*(self: gen_qstringview_types.QStringView, ok: ptr bool, base: cint): clong =
-  fcQStringView_toLong2(self.h, ok, base)
+  fcQStringView_toLongOkBase(self.h, ok, base)
 
 proc toULong*(self: gen_qstringview_types.QStringView, ok: ptr bool): culong =
-  fcQStringView_toULongWithOk(self.h, ok)
+  fcQStringView_toULongOk(self.h, ok)
 
 proc toULong*(self: gen_qstringview_types.QStringView, ok: ptr bool, base: cint): culong =
-  fcQStringView_toULong2(self.h, ok, base)
+  fcQStringView_toULongOkBase(self.h, ok, base)
 
 proc toLongLong*(self: gen_qstringview_types.QStringView, ok: ptr bool): clonglong =
-  fcQStringView_toLongLongWithOk(self.h, ok)
+  fcQStringView_toLongLongOk(self.h, ok)
 
 proc toLongLong*(self: gen_qstringview_types.QStringView, ok: ptr bool, base: cint): clonglong =
-  fcQStringView_toLongLong2(self.h, ok, base)
+  fcQStringView_toLongLongOkBase(self.h, ok, base)
 
 proc toULongLong*(self: gen_qstringview_types.QStringView, ok: ptr bool): culonglong =
-  fcQStringView_toULongLongWithOk(self.h, ok)
+  fcQStringView_toULongLongOk(self.h, ok)
 
 proc toULongLong*(self: gen_qstringview_types.QStringView, ok: ptr bool, base: cint): culonglong =
-  fcQStringView_toULongLong2(self.h, ok, base)
+  fcQStringView_toULongLongOkBase(self.h, ok, base)
 
 proc toFloat*(self: gen_qstringview_types.QStringView, ok: ptr bool): float32 =
-  fcQStringView_toFloatWithOk(self.h, ok)
+  fcQStringView_toFloatOk(self.h, ok)
 
 proc toDouble*(self: gen_qstringview_types.QStringView, ok: ptr bool): float64 =
-  fcQStringView_toDoubleWithOk(self.h, ok)
+  fcQStringView_toDoubleOk(self.h, ok)
 
 proc create*(T: type gen_qstringview_types.QStringView): gen_qstringview_types.QStringView =
   let tmp = gen_qstringview_types.QStringView(h: fcQStringView_new(), owned: true)

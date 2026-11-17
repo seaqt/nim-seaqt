@@ -87,7 +87,7 @@ public:
 	friend int QFileSystemModel_virtualbase_metacall(VirtualQFileSystemModel* self, int param1, int param2, void** param3);
 
 	virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override {
-		if (vtbl->index == 0) {
+		if (vtbl->index_row_column_parent == 0) {
 			return QFileSystemModel::index(row, column, parent);
 		}
 
@@ -96,13 +96,13 @@ public:
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
-		QModelIndex* callback_return_value = vtbl->index(this, sigval1, sigval2, sigval3);
+		QModelIndex* callback_return_value = vtbl->index_row_column_parent(this, sigval1, sigval2, sigval3);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 		return callback_return_value_Value;
 	}
 
-	friend QModelIndex* QFileSystemModel_virtualbase_index(const VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent);
+	friend QModelIndex* QFileSystemModel_virtualbase_index_row_column_parent(const VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent);
 
 	virtual QModelIndex parent(const QModelIndex& child) const override {
 		if (vtbl->parent == 0) {
@@ -757,7 +757,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QFileSystemModel_protectedbase_resetInternalData(VirtualQFileSystemModel* self);
-	friend QModelIndex* QFileSystemModel_protectedbase_createIndex(const VirtualQFileSystemModel* self, int row, int column);
+	friend QModelIndex* QFileSystemModel_protectedbase_createIndex_row_column(const VirtualQFileSystemModel* self, int row, int column);
 	friend void QFileSystemModel_protectedbase_encodeData(const VirtualQFileSystemModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QFileSystemModel_protectedbase_decodeData(VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QFileSystemModel_protectedbase_beginInsertRows(VirtualQFileSystemModel* self, QModelIndex* parent, int first, int last);
@@ -788,7 +788,7 @@ VirtualQFileSystemModel* QFileSystemModel_new(const QFileSystemModel_VTable* vtb
 	return _mem_ ? new (_mem_)VirtualQFileSystemModel(vtbl) : nullptr;
 }
 
-VirtualQFileSystemModel* QFileSystemModel_new2(const QFileSystemModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQFileSystemModel* QFileSystemModel_new_parent(const QFileSystemModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFileSystemModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFileSystemModel(vtbl, parent) : nullptr;
 }
@@ -809,7 +809,7 @@ int QFileSystemModel_metacall(QFileSystemModel* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QFileSystemModel_tr(const char* s) {
+struct seaqt_string QFileSystemModel_tr_s(const char* s) {
 	QString _ret = QFileSystemModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -820,7 +820,7 @@ struct seaqt_string QFileSystemModel_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QFileSystemModel_trUtf8(const char* s) {
+struct seaqt_string QFileSystemModel_trUtf8_s(const char* s) {
 	QString _ret = QFileSystemModel::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -921,11 +921,11 @@ void QFileSystemModel_connect_directoryLoaded(QFileSystemModel* self, intptr_t s
 	QFileSystemModel::connect(self, static_cast<void (QFileSystemModel::*)(const QString&)>(&QFileSystemModel::directoryLoaded), self, local_caller{slot, callback, release});
 }
 
-QModelIndex* QFileSystemModel_index(const QFileSystemModel* self, int row, int column, QModelIndex* parent) {
+QModelIndex* QFileSystemModel_index_row_column_parent(const QFileSystemModel* self, int row, int column, QModelIndex* parent) {
 	return new QModelIndex(self->index(static_cast<int>(row), static_cast<int>(column), *parent));
 }
 
-QModelIndex* QFileSystemModel_indexWithPath(const QFileSystemModel* self, struct seaqt_string path) {
+QModelIndex* QFileSystemModel_index_path(const QFileSystemModel* self, struct seaqt_string path) {
 	QString path_QString = QString::fromUtf8(path.data, path.len);
 	return new QModelIndex(self->index(path_QString));
 }
@@ -1114,7 +1114,7 @@ struct seaqt_array /* of struct seaqt_string */  QFileSystemModel_nameFilters(co
 	return _out;
 }
 
-void QFileSystemModel_setOption(QFileSystemModel* self, int option) {
+void QFileSystemModel_setOption_option(QFileSystemModel* self, int option) {
 	self->setOption(static_cast<QFileSystemModel::Option>(option));
 }
 
@@ -1203,7 +1203,7 @@ bool QFileSystemModel_remove(QFileSystemModel* self, QModelIndex* index) {
 	return self->remove(*index);
 }
 
-struct seaqt_string QFileSystemModel_tr2(const char* s, const char* c) {
+struct seaqt_string QFileSystemModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QFileSystemModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1214,7 +1214,7 @@ struct seaqt_string QFileSystemModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFileSystemModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QFileSystemModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFileSystemModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1225,7 +1225,7 @@ struct seaqt_string QFileSystemModel_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QFileSystemModel_trUtf82(const char* s, const char* c) {
+struct seaqt_string QFileSystemModel_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QFileSystemModel::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1236,7 +1236,7 @@ struct seaqt_string QFileSystemModel_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFileSystemModel_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QFileSystemModel_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFileSystemModel::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1247,16 +1247,16 @@ struct seaqt_string QFileSystemModel_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-QModelIndex* QFileSystemModel_index2(const QFileSystemModel* self, struct seaqt_string path, int column) {
+QModelIndex* QFileSystemModel_index_path_column(const QFileSystemModel* self, struct seaqt_string path, int column) {
 	QString path_QString = QString::fromUtf8(path.data, path.len);
 	return new QModelIndex(self->index(path_QString, static_cast<int>(column)));
 }
 
-QVariant* QFileSystemModel_myComputerWithRole(const QFileSystemModel* self, int role) {
+QVariant* QFileSystemModel_myComputer_role(const QFileSystemModel* self, int role) {
 	return new QVariant(self->myComputer(static_cast<int>(role)));
 }
 
-void QFileSystemModel_setOption2(QFileSystemModel* self, int option, bool on) {
+void QFileSystemModel_setOption_option_on(QFileSystemModel* self, int option, bool on) {
 	self->setOption(static_cast<QFileSystemModel::Option>(option), on);
 }
 
@@ -1279,7 +1279,7 @@ int QFileSystemModel_virtualbase_metacall(VirtualQFileSystemModel* self, int par
 	return self->QFileSystemModel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QModelIndex* QFileSystemModel_virtualbase_index(const VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent) {
+QModelIndex* QFileSystemModel_virtualbase_index_row_column_parent(const VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent) {
 
 	return new QModelIndex(self->QFileSystemModel::index(static_cast<int>(row), static_cast<int>(column), *parent));
 }
@@ -1561,7 +1561,7 @@ void QFileSystemModel_protectedbase_resetInternalData(VirtualQFileSystemModel* s
 	self->resetInternalData();
 }
 
-QModelIndex* QFileSystemModel_protectedbase_createIndex(const VirtualQFileSystemModel* self, int row, int column) {
+QModelIndex* QFileSystemModel_protectedbase_createIndex_row_column(const VirtualQFileSystemModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

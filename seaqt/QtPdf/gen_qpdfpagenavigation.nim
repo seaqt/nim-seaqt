@@ -57,8 +57,8 @@ type cQPdfPageNavigation*{.exportc: "QPdfPageNavigation", incompleteStruct.} = o
 proc fcQPdfPageNavigation_metaObject(self: pointer): pointer {.importc: "QPdfPageNavigation_metaObject".}
 proc fcQPdfPageNavigation_metacast(self: pointer, param1: cstring): pointer {.importc: "QPdfPageNavigation_metacast".}
 proc fcQPdfPageNavigation_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPdfPageNavigation_metacall".}
-proc fcQPdfPageNavigation_tr(s: cstring): struct_seaqt_string {.importc: "QPdfPageNavigation_tr".}
-proc fcQPdfPageNavigation_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPdfPageNavigation_trUtf8".}
+proc fcQPdfPageNavigation_trS(s: cstring): struct_seaqt_string {.importc: "QPdfPageNavigation_tr_s".}
+proc fcQPdfPageNavigation_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPdfPageNavigation_trUtf8_s".}
 proc fcQPdfPageNavigation_document(self: pointer): pointer {.importc: "QPdfPageNavigation_document".}
 proc fcQPdfPageNavigation_setDocument(self: pointer, document: pointer): void {.importc: "QPdfPageNavigation_setDocument".}
 proc fcQPdfPageNavigation_currentPage(self: pointer): cint {.importc: "QPdfPageNavigation_currentPage".}
@@ -78,10 +78,10 @@ proc fcQPdfPageNavigation_canGoToPreviousPageChanged(self: pointer, canGo: bool)
 proc fcQPdfPageNavigation_connect_canGoToPreviousPageChanged(self: pointer, slot: int, callback: proc (slot: int, canGo: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfPageNavigation_connect_canGoToPreviousPageChanged".}
 proc fcQPdfPageNavigation_canGoToNextPageChanged(self: pointer, canGo: bool): void {.importc: "QPdfPageNavigation_canGoToNextPageChanged".}
 proc fcQPdfPageNavigation_connect_canGoToNextPageChanged(self: pointer, slot: int, callback: proc (slot: int, canGo: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfPageNavigation_connect_canGoToNextPageChanged".}
-proc fcQPdfPageNavigation_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfPageNavigation_tr2".}
-proc fcQPdfPageNavigation_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfPageNavigation_tr3".}
-proc fcQPdfPageNavigation_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfPageNavigation_trUtf82".}
-proc fcQPdfPageNavigation_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfPageNavigation_trUtf83".}
+proc fcQPdfPageNavigation_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfPageNavigation_tr_s_c".}
+proc fcQPdfPageNavigation_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfPageNavigation_tr_s_c_n".}
+proc fcQPdfPageNavigation_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfPageNavigation_trUtf8_s_c".}
+proc fcQPdfPageNavigation_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfPageNavigation_trUtf8_s_c_n".}
 proc fcQPdfPageNavigation_vdata(self: pointer): ptr pointer {.importc: "QPdfPageNavigation_vdata".}
 proc fvdata_cQPdfPageNavigation(self: pointer): pointer {.importc: "vdata_QPdfPageNavigation".}
 
@@ -112,7 +112,7 @@ proc fcQPdfPageNavigation_protectedbase_senderSignalIndex(self: pointer): cint {
 proc fcQPdfPageNavigation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPdfPageNavigation_protectedbase_receivers".}
 proc fcQPdfPageNavigation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPdfPageNavigation_protectedbase_isSignalConnected".}
 proc fcQPdfPageNavigation_new(vtbl: pointer, vdata: csize_t): ptr cQPdfPageNavigation {.importc: "QPdfPageNavigation_new".}
-proc fcQPdfPageNavigation_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfPageNavigation {.importc: "QPdfPageNavigation_new2".}
+proc fcQPdfPageNavigation_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfPageNavigation {.importc: "QPdfPageNavigation_new_parent".}
 proc fcQPdfPageNavigation_staticMetaObject(): pointer {.importc: "QPdfPageNavigation_staticMetaObject".}
 
 proc metaObject*(self: gen_qpdfpagenavigation_types.QPdfPageNavigation): gen_qobjectdefs_types.QMetaObject =
@@ -125,13 +125,13 @@ proc metacall*(self: gen_qpdfpagenavigation_types.QPdfPageNavigation, param1: ci
   fcQPdfPageNavigation_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpdfpagenavigation_types.QPdfPageNavigation, s: cstring): string =
-  let v_ms = fcQPdfPageNavigation_tr(s)
+  let v_ms = fcQPdfPageNavigation_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfpagenavigation_types.QPdfPageNavigation, s: cstring): string =
-  let v_ms = fcQPdfPageNavigation_trUtf8(s)
+  let v_ms = fcQPdfPageNavigation_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -264,25 +264,25 @@ proc onCanGoToNextPageChanged*(self: gen_qpdfpagenavigation_types.QPdfPageNaviga
   fcQPdfPageNavigation_connect_canGoToNextPageChanged(self.h, cast[int](addr tmp[]), fcQPdfPageNavigation_slot_callback_canGoToNextPageChanged, fcQPdfPageNavigation_slot_callback_canGoToNextPageChanged_release)
 
 proc tr*(_: type gen_qpdfpagenavigation_types.QPdfPageNavigation, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfPageNavigation_tr2(s, c)
+  let v_ms = fcQPdfPageNavigation_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpdfpagenavigation_types.QPdfPageNavigation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfPageNavigation_tr3(s, c, n)
+  let v_ms = fcQPdfPageNavigation_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfpagenavigation_types.QPdfPageNavigation, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfPageNavigation_trUtf82(s, c)
+  let v_ms = fcQPdfPageNavigation_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfpagenavigation_types.QPdfPageNavigation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfPageNavigation_trUtf83(s, c, n)
+  let v_ms = fcQPdfPageNavigation_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

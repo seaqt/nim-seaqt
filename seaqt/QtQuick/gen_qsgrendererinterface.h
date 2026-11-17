@@ -23,13 +23,13 @@ typedef struct QSGRendererInterface QSGRendererInterface;
 #endif
 
 int QSGRendererInterface_graphicsApi(const QSGRendererInterface* self);
-void* QSGRendererInterface_getResource(const QSGRendererInterface* self, QQuickWindow* window, int resource);
-void* QSGRendererInterface_getResource2(const QSGRendererInterface* self, QQuickWindow* window, const char* resource);
+void* QSGRendererInterface_getResource_QQuickWindow_QSGRendererInterface_Resource(const QSGRendererInterface* self, QQuickWindow* window, int resource);
+void* QSGRendererInterface_getResource_QQuickWindow_char(const QSGRendererInterface* self, QQuickWindow* window, const char* resource);
 int QSGRendererInterface_shaderType(const QSGRendererInterface* self);
 int QSGRendererInterface_shaderCompilationType(const QSGRendererInterface* self);
 int QSGRendererInterface_shaderSourceType(const QSGRendererInterface* self);
 bool QSGRendererInterface_isApiRhiBased(int api);
-void QSGRendererInterface_operatorAssign(QSGRendererInterface* self, QSGRendererInterface* param1);
+void QSGRendererInterface_operatorAssign(QSGRendererInterface* self, QSGRendererInterface* from);
 
 void QSGRendererInterface_delete(QSGRendererInterface* self);
 

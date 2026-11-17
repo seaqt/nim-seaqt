@@ -85,8 +85,8 @@ type cQFontComboBox*{.exportc: "QFontComboBox", incompleteStruct.} = object
 proc fcQFontComboBox_metaObject(self: pointer): pointer {.importc: "QFontComboBox_metaObject".}
 proc fcQFontComboBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QFontComboBox_metacast".}
 proc fcQFontComboBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFontComboBox_metacall".}
-proc fcQFontComboBox_tr(s: cstring): struct_seaqt_string {.importc: "QFontComboBox_tr".}
-proc fcQFontComboBox_trUtf8(s: cstring): struct_seaqt_string {.importc: "QFontComboBox_trUtf8".}
+proc fcQFontComboBox_trS(s: cstring): struct_seaqt_string {.importc: "QFontComboBox_tr_s".}
+proc fcQFontComboBox_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QFontComboBox_trUtf8_s".}
 proc fcQFontComboBox_setWritingSystem(self: pointer, writingSystem: cint): void {.importc: "QFontComboBox_setWritingSystem".}
 proc fcQFontComboBox_writingSystem(self: pointer): cint {.importc: "QFontComboBox_writingSystem".}
 proc fcQFontComboBox_setFontFilters(self: pointer, filters: cint): void {.importc: "QFontComboBox_setFontFilters".}
@@ -96,10 +96,10 @@ proc fcQFontComboBox_sizeHint(self: pointer): pointer {.importc: "QFontComboBox_
 proc fcQFontComboBox_setCurrentFont(self: pointer, f: pointer): void {.importc: "QFontComboBox_setCurrentFont".}
 proc fcQFontComboBox_currentFontChanged(self: pointer, f: pointer): void {.importc: "QFontComboBox_currentFontChanged".}
 proc fcQFontComboBox_connect_currentFontChanged(self: pointer, slot: int, callback: proc (slot: int, f: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFontComboBox_connect_currentFontChanged".}
-proc fcQFontComboBox_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFontComboBox_tr2".}
-proc fcQFontComboBox_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFontComboBox_tr3".}
-proc fcQFontComboBox_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFontComboBox_trUtf82".}
-proc fcQFontComboBox_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFontComboBox_trUtf83".}
+proc fcQFontComboBox_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFontComboBox_tr_s_c".}
+proc fcQFontComboBox_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFontComboBox_tr_s_c_n".}
+proc fcQFontComboBox_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFontComboBox_trUtf8_s_c".}
+proc fcQFontComboBox_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFontComboBox_trUtf8_s_c_n".}
 proc fcQFontComboBox_vdata(self: pointer): ptr pointer {.importc: "QFontComboBox_vdata".}
 proc fvdata_cQFontComboBox(self: pointer): pointer {.importc: "vdata_QFontComboBox".}
 
@@ -113,7 +113,7 @@ type cQFontComboBoxVTable {.pure.} = object
   minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
   showPopup*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   hidePopup*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery_Qt_InputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
   focusInEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
   focusOutEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
   changeEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -165,7 +165,7 @@ proc fcQFontComboBox_virtualbase_event(self: pointer, e: pointer): bool {.import
 proc fcQFontComboBox_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QFontComboBox_virtualbase_minimumSizeHint".}
 proc fcQFontComboBox_virtualbase_showPopup(self: pointer): void {.importc: "QFontComboBox_virtualbase_showPopup".}
 proc fcQFontComboBox_virtualbase_hidePopup(self: pointer): void {.importc: "QFontComboBox_virtualbase_hidePopup".}
-proc fcQFontComboBox_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QFontComboBox_virtualbase_inputMethodQuery".}
+proc fcQFontComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QFontComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery".}
 proc fcQFontComboBox_virtualbase_focusInEvent(self: pointer, e: pointer): void {.importc: "QFontComboBox_virtualbase_focusInEvent".}
 proc fcQFontComboBox_virtualbase_focusOutEvent(self: pointer, e: pointer): void {.importc: "QFontComboBox_virtualbase_focusOutEvent".}
 proc fcQFontComboBox_virtualbase_changeEvent(self: pointer, e: pointer): void {.importc: "QFontComboBox_virtualbase_changeEvent".}
@@ -220,7 +220,7 @@ proc fcQFontComboBox_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQFontComboBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFontComboBox_protectedbase_receivers".}
 proc fcQFontComboBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFontComboBox_protectedbase_isSignalConnected".}
 proc fcQFontComboBox_new(vtbl: pointer, vdata: csize_t): ptr cQFontComboBox {.importc: "QFontComboBox_new".}
-proc fcQFontComboBox_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFontComboBox {.importc: "QFontComboBox_new2".}
+proc fcQFontComboBox_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFontComboBox {.importc: "QFontComboBox_new_parent".}
 proc fcQFontComboBox_staticMetaObject(): pointer {.importc: "QFontComboBox_staticMetaObject".}
 
 proc metaObject*(self: gen_qfontcombobox_types.QFontComboBox): gen_qobjectdefs_types.QMetaObject =
@@ -233,13 +233,13 @@ proc metacall*(self: gen_qfontcombobox_types.QFontComboBox, param1: cint, param2
   fcQFontComboBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfontcombobox_types.QFontComboBox, s: cstring): string =
-  let v_ms = fcQFontComboBox_tr(s)
+  let v_ms = fcQFontComboBox_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfontcombobox_types.QFontComboBox, s: cstring): string =
-  let v_ms = fcQFontComboBox_trUtf8(s)
+  let v_ms = fcQFontComboBox_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -286,25 +286,25 @@ proc onCurrentFontChanged*(self: gen_qfontcombobox_types.QFontComboBox, slot: QF
   fcQFontComboBox_connect_currentFontChanged(self.h, cast[int](addr tmp[]), fcQFontComboBox_slot_callback_currentFontChanged, fcQFontComboBox_slot_callback_currentFontChanged_release)
 
 proc tr*(_: type gen_qfontcombobox_types.QFontComboBox, s: cstring, c: cstring): string =
-  let v_ms = fcQFontComboBox_tr2(s, c)
+  let v_ms = fcQFontComboBox_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfontcombobox_types.QFontComboBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFontComboBox_tr3(s, c, n)
+  let v_ms = fcQFontComboBox_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfontcombobox_types.QFontComboBox, s: cstring, c: cstring): string =
-  let v_ms = fcQFontComboBox_trUtf82(s, c)
+  let v_ms = fcQFontComboBox_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfontcombobox_types.QFontComboBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFontComboBox_trUtf83(s, c, n)
+  let v_ms = fcQFontComboBox_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -317,7 +317,7 @@ type QFontComboBoxeventProc* = proc(self: QFontComboBox, e: gen_qcoreevent_types
 type QFontComboBoxminimumSizeHintProc* = proc(self: QFontComboBox): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QFontComboBoxshowPopupProc* = proc(self: QFontComboBox): void {.raises: [], gcsafe.}
 type QFontComboBoxhidePopupProc* = proc(self: QFontComboBox): void {.raises: [], gcsafe.}
-type QFontComboBoxinputMethodQueryProc* = proc(self: QFontComboBox, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QFontComboBoxinputMethodQuery_Qt_InputMethodQueryProc* = proc(self: QFontComboBox, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QFontComboBoxfocusInEventProc* = proc(self: QFontComboBox, e: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
 type QFontComboBoxfocusOutEventProc* = proc(self: QFontComboBox, e: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
 type QFontComboBoxchangeEventProc* = proc(self: QFontComboBox, e: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
@@ -372,7 +372,7 @@ type QFontComboBoxVTable* {.inheritable, pure.} = object
   minimumSizeHint*: QFontComboBoxminimumSizeHintProc
   showPopup*: QFontComboBoxshowPopupProc
   hidePopup*: QFontComboBoxhidePopupProc
-  inputMethodQuery*: QFontComboBoxinputMethodQueryProc
+  inputMethodQuery_Qt_InputMethodQuery*: QFontComboBoxinputMethodQuery_Qt_InputMethodQueryProc
   focusInEvent*: QFontComboBoxfocusInEventProc
   focusOutEvent*: QFontComboBoxfocusOutEventProc
   changeEvent*: QFontComboBoxchangeEventProc
@@ -442,7 +442,7 @@ proc QFontComboBoxhidePopup*(self: gen_qfontcombobox_types.QFontComboBox): void 
   fcQFontComboBox_virtualbase_hidePopup(self.h)
 
 proc QFontComboBoxinputMethodQuery*(self: gen_qfontcombobox_types.QFontComboBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQFontComboBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+  gen_qvariant_types.QVariant(h: fcQFontComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QFontComboBoxfocusInEvent*(self: gen_qfontcombobox_types.QFontComboBox, e: gen_qevent_types.QFocusEvent): void =
   fcQFontComboBox_virtualbase_focusInEvent(self.h, e.h)
@@ -634,11 +634,11 @@ proc fcQFontComboBox_vtable_callback_hidePopup(self: pointer): void {.cdecl.} =
   let self = QFontComboBox(h: self)
   vtbl[].hidePopup(self)
 
-proc fcQFontComboBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQFontComboBox_vtable_callback_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QFontComboBoxVTable](fcQFontComboBox_vdata(self)[])
   let self = QFontComboBox(h: self)
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
+  var virtualReturn = vtbl[].inputMethodQuery_Qt_InputMethodQuery(self, slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1083,7 +1083,7 @@ proc fcQFontComboBox_method_callback_hidePopup(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontComboBox](fcQFontComboBox_vdata(self)[])
   inst.hidePopup()
 
-proc fcQFontComboBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQFontComboBox_method_callback_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQFontComboBox](fcQFontComboBox_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1382,8 +1382,8 @@ proc create*(T: type gen_qfontcombobox_types.QFontComboBox,
     vtbl[].vtbl.showPopup = fcQFontComboBox_vtable_callback_showPopup
   if not isNil(vtbl[].hidePopup):
     vtbl[].vtbl.hidePopup = fcQFontComboBox_vtable_callback_hidePopup
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQFontComboBox_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQuery_Qt_InputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery_Qt_InputMethodQuery = fcQFontComboBox_vtable_callback_inputMethodQuery_Qt_InputMethodQuery
   if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = fcQFontComboBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
@@ -1497,8 +1497,8 @@ proc create*(T: type gen_qfontcombobox_types.QFontComboBox,
     vtbl[].vtbl.showPopup = fcQFontComboBox_vtable_callback_showPopup
   if not isNil(vtbl[].hidePopup):
     vtbl[].vtbl.hidePopup = fcQFontComboBox_vtable_callback_hidePopup
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQFontComboBox_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQuery_Qt_InputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery_Qt_InputMethodQuery = fcQFontComboBox_vtable_callback_inputMethodQuery_Qt_InputMethodQuery
   if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = fcQFontComboBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
@@ -1602,7 +1602,7 @@ const cQFontComboBox_mvtbl = cQFontComboBoxVTable(
   minimumSizeHint: fcQFontComboBox_method_callback_minimumSizeHint,
   showPopup: fcQFontComboBox_method_callback_showPopup,
   hidePopup: fcQFontComboBox_method_callback_hidePopup,
-  inputMethodQuery: fcQFontComboBox_method_callback_inputMethodQuery,
+  inputMethodQuery_Qt_InputMethodQuery: fcQFontComboBox_method_callback_inputMethodQuery_Qt_InputMethodQuery,
   focusInEvent: fcQFontComboBox_method_callback_focusInEvent,
   focusOutEvent: fcQFontComboBox_method_callback_focusOutEvent,
   changeEvent: fcQFontComboBox_method_callback_changeEvent,

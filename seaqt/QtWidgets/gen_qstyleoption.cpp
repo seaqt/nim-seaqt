@@ -64,15 +64,15 @@ QStyleOption* QStyleOption_new() {
 	return new (std::nothrow) QStyleOption();
 }
 
-QStyleOption* QStyleOption_new2(QStyleOption* other) {
-	return new (std::nothrow) QStyleOption(*other);
+QStyleOption* QStyleOption_new_from(QStyleOption* from) {
+	return new (std::nothrow) QStyleOption(*from);
 }
 
-QStyleOption* QStyleOption_new3(int version) {
+QStyleOption* QStyleOption_new_version(int version) {
 	return new (std::nothrow) QStyleOption(static_cast<int>(version));
 }
 
-QStyleOption* QStyleOption_new4(int version, int type) {
+QStyleOption* QStyleOption_new_version_type(int version, int type) {
 	return new (std::nothrow) QStyleOption(static_cast<int>(version), static_cast<int>(type));
 }
 
@@ -150,8 +150,8 @@ void QStyleOption_initFrom(QStyleOption* self, QWidget* w) {
 	self->initFrom(w);
 }
 
-void QStyleOption_operatorAssign(QStyleOption* self, QStyleOption* other) {
-	self->operator=(*other);
+void QStyleOption_operatorAssign(QStyleOption* self, QStyleOption* from) {
+	self->operator=(*from);
 }
 
 void QStyleOption_delete(QStyleOption* self) {
@@ -162,8 +162,8 @@ QStyleOptionFocusRect* QStyleOptionFocusRect_new() {
 	return new (std::nothrow) QStyleOptionFocusRect();
 }
 
-QStyleOptionFocusRect* QStyleOptionFocusRect_new2(QStyleOptionFocusRect* other) {
-	return new (std::nothrow) QStyleOptionFocusRect(*other);
+QStyleOptionFocusRect* QStyleOptionFocusRect_new_from(QStyleOptionFocusRect* from) {
+	return new (std::nothrow) QStyleOptionFocusRect(*from);
 }
 
 void QStyleOptionFocusRect_virtbase(QStyleOptionFocusRect* src, QStyleOption** outptr_QStyleOption) {
@@ -178,8 +178,8 @@ void QStyleOptionFocusRect_setBackgroundColor(QStyleOptionFocusRect* self, QColo
 	self->backgroundColor = *backgroundColor;
 }
 
-void QStyleOptionFocusRect_operatorAssign(QStyleOptionFocusRect* self, QStyleOptionFocusRect* param1) {
-	self->operator=(*param1);
+void QStyleOptionFocusRect_operatorAssign(QStyleOptionFocusRect* self, QStyleOptionFocusRect* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionFocusRect_delete(QStyleOptionFocusRect* self) {
@@ -190,8 +190,8 @@ QStyleOptionFrame* QStyleOptionFrame_new() {
 	return new (std::nothrow) QStyleOptionFrame();
 }
 
-QStyleOptionFrame* QStyleOptionFrame_new2(QStyleOptionFrame* other) {
-	return new (std::nothrow) QStyleOptionFrame(*other);
+QStyleOptionFrame* QStyleOptionFrame_new_from(QStyleOptionFrame* from) {
+	return new (std::nothrow) QStyleOptionFrame(*from);
 }
 
 void QStyleOptionFrame_virtbase(QStyleOptionFrame* src, QStyleOption** outptr_QStyleOption) {
@@ -232,8 +232,8 @@ void QStyleOptionFrame_setFrameShape(QStyleOptionFrame* self, int frameShape) {
 	self->frameShape = static_cast<QFrame::Shape>(frameShape);
 }
 
-void QStyleOptionFrame_operatorAssign(QStyleOptionFrame* self, QStyleOptionFrame* param1) {
-	self->operator=(*param1);
+void QStyleOptionFrame_operatorAssign(QStyleOptionFrame* self, QStyleOptionFrame* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionFrame_delete(QStyleOptionFrame* self) {
@@ -244,8 +244,8 @@ QStyleOptionTabWidgetFrame* QStyleOptionTabWidgetFrame_new() {
 	return new (std::nothrow) QStyleOptionTabWidgetFrame();
 }
 
-QStyleOptionTabWidgetFrame* QStyleOptionTabWidgetFrame_new2(QStyleOptionTabWidgetFrame* other) {
-	return new (std::nothrow) QStyleOptionTabWidgetFrame(*other);
+QStyleOptionTabWidgetFrame* QStyleOptionTabWidgetFrame_new_from(QStyleOptionTabWidgetFrame* from) {
+	return new (std::nothrow) QStyleOptionTabWidgetFrame(*from);
 }
 
 void QStyleOptionTabWidgetFrame_virtbase(QStyleOptionTabWidgetFrame* src, QStyleOption** outptr_QStyleOption) {
@@ -317,8 +317,8 @@ void QStyleOptionTabWidgetFrame_setSelectedTabRect(QStyleOptionTabWidgetFrame* s
 	self->selectedTabRect = *selectedTabRect;
 }
 
-void QStyleOptionTabWidgetFrame_operatorAssign(QStyleOptionTabWidgetFrame* self, QStyleOptionTabWidgetFrame* param1) {
-	self->operator=(*param1);
+void QStyleOptionTabWidgetFrame_operatorAssign(QStyleOptionTabWidgetFrame* self, QStyleOptionTabWidgetFrame* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionTabWidgetFrame_delete(QStyleOptionTabWidgetFrame* self) {
@@ -329,8 +329,8 @@ QStyleOptionTabBarBase* QStyleOptionTabBarBase_new() {
 	return new (std::nothrow) QStyleOptionTabBarBase();
 }
 
-QStyleOptionTabBarBase* QStyleOptionTabBarBase_new2(QStyleOptionTabBarBase* other) {
-	return new (std::nothrow) QStyleOptionTabBarBase(*other);
+QStyleOptionTabBarBase* QStyleOptionTabBarBase_new_from(QStyleOptionTabBarBase* from) {
+	return new (std::nothrow) QStyleOptionTabBarBase(*from);
 }
 
 void QStyleOptionTabBarBase_virtbase(QStyleOptionTabBarBase* src, QStyleOption** outptr_QStyleOption) {
@@ -370,8 +370,8 @@ void QStyleOptionTabBarBase_setDocumentMode(QStyleOptionTabBarBase* self, bool d
 	self->documentMode = documentMode;
 }
 
-void QStyleOptionTabBarBase_operatorAssign(QStyleOptionTabBarBase* self, QStyleOptionTabBarBase* param1) {
-	self->operator=(*param1);
+void QStyleOptionTabBarBase_operatorAssign(QStyleOptionTabBarBase* self, QStyleOptionTabBarBase* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionTabBarBase_delete(QStyleOptionTabBarBase* self) {
@@ -382,8 +382,8 @@ QStyleOptionHeader* QStyleOptionHeader_new() {
 	return new (std::nothrow) QStyleOptionHeader();
 }
 
-QStyleOptionHeader* QStyleOptionHeader_new2(QStyleOptionHeader* other) {
-	return new (std::nothrow) QStyleOptionHeader(*other);
+QStyleOptionHeader* QStyleOptionHeader_new_from(QStyleOptionHeader* from) {
+	return new (std::nothrow) QStyleOptionHeader(*from);
 }
 
 void QStyleOptionHeader_virtbase(QStyleOptionHeader* src, QStyleOption** outptr_QStyleOption) {
@@ -476,8 +476,8 @@ void QStyleOptionHeader_setOrientation(QStyleOptionHeader* self, int orientation
 	self->orientation = static_cast<Qt::Orientation>(orientation);
 }
 
-void QStyleOptionHeader_operatorAssign(QStyleOptionHeader* self, QStyleOptionHeader* param1) {
-	self->operator=(*param1);
+void QStyleOptionHeader_operatorAssign(QStyleOptionHeader* self, QStyleOptionHeader* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionHeader_delete(QStyleOptionHeader* self) {
@@ -488,8 +488,8 @@ QStyleOptionButton* QStyleOptionButton_new() {
 	return new (std::nothrow) QStyleOptionButton();
 }
 
-QStyleOptionButton* QStyleOptionButton_new2(QStyleOptionButton* other) {
-	return new (std::nothrow) QStyleOptionButton(*other);
+QStyleOptionButton* QStyleOptionButton_new_from(QStyleOptionButton* from) {
+	return new (std::nothrow) QStyleOptionButton(*from);
 }
 
 void QStyleOptionButton_virtbase(QStyleOptionButton* src, QStyleOption** outptr_QStyleOption) {
@@ -537,8 +537,8 @@ void QStyleOptionButton_setIconSize(QStyleOptionButton* self, QSize* iconSize) {
 	self->iconSize = *iconSize;
 }
 
-void QStyleOptionButton_operatorAssign(QStyleOptionButton* self, QStyleOptionButton* param1) {
-	self->operator=(*param1);
+void QStyleOptionButton_operatorAssign(QStyleOptionButton* self, QStyleOptionButton* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionButton_delete(QStyleOptionButton* self) {
@@ -549,8 +549,8 @@ QStyleOptionTab* QStyleOptionTab_new() {
 	return new (std::nothrow) QStyleOptionTab();
 }
 
-QStyleOptionTab* QStyleOptionTab_new2(QStyleOptionTab* other) {
-	return new (std::nothrow) QStyleOptionTab(*other);
+QStyleOptionTab* QStyleOptionTab_new_from(QStyleOptionTab* from) {
+	return new (std::nothrow) QStyleOptionTab(*from);
 }
 
 void QStyleOptionTab_virtbase(QStyleOptionTab* src, QStyleOption** outptr_QStyleOption) {
@@ -666,8 +666,8 @@ void QStyleOptionTab_setFeatures(QStyleOptionTab* self, int features) {
 	self->features = static_cast<QStyleOptionTab::TabFeatures>(features);
 }
 
-void QStyleOptionTab_operatorAssign(QStyleOptionTab* self, QStyleOptionTab* param1) {
-	self->operator=(*param1);
+void QStyleOptionTab_operatorAssign(QStyleOptionTab* self, QStyleOptionTab* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionTab_delete(QStyleOptionTab* self) {
@@ -678,8 +678,8 @@ QStyleOptionTabV4* QStyleOptionTabV4_new() {
 	return new (std::nothrow) QStyleOptionTabV4();
 }
 
-QStyleOptionTabV4* QStyleOptionTabV4_new2(QStyleOptionTabV4* param1) {
-	return new (std::nothrow) QStyleOptionTabV4(*param1);
+QStyleOptionTabV4* QStyleOptionTabV4_new_from(QStyleOptionTabV4* from) {
+	return new (std::nothrow) QStyleOptionTabV4(*from);
 }
 
 void QStyleOptionTabV4_virtbase(QStyleOptionTabV4* src, QStyleOptionTab** outptr_QStyleOptionTab) {
@@ -694,8 +694,8 @@ void QStyleOptionTabV4_setTabIndex(QStyleOptionTabV4* self, int tabIndex) {
 	self->tabIndex = static_cast<int>(tabIndex);
 }
 
-void QStyleOptionTabV4_operatorAssign(QStyleOptionTabV4* self, QStyleOptionTabV4* param1) {
-	self->operator=(*param1);
+void QStyleOptionTabV4_operatorAssign(QStyleOptionTabV4* self, QStyleOptionTabV4* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionTabV4_delete(QStyleOptionTabV4* self) {
@@ -706,8 +706,8 @@ QStyleOptionToolBar* QStyleOptionToolBar_new() {
 	return new (std::nothrow) QStyleOptionToolBar();
 }
 
-QStyleOptionToolBar* QStyleOptionToolBar_new2(QStyleOptionToolBar* other) {
-	return new (std::nothrow) QStyleOptionToolBar(*other);
+QStyleOptionToolBar* QStyleOptionToolBar_new_from(QStyleOptionToolBar* from) {
+	return new (std::nothrow) QStyleOptionToolBar(*from);
 }
 
 void QStyleOptionToolBar_virtbase(QStyleOptionToolBar* src, QStyleOption** outptr_QStyleOption) {
@@ -766,8 +766,8 @@ void QStyleOptionToolBar_setMidLineWidth(QStyleOptionToolBar* self, int midLineW
 	self->midLineWidth = static_cast<int>(midLineWidth);
 }
 
-void QStyleOptionToolBar_operatorAssign(QStyleOptionToolBar* self, QStyleOptionToolBar* param1) {
-	self->operator=(*param1);
+void QStyleOptionToolBar_operatorAssign(QStyleOptionToolBar* self, QStyleOptionToolBar* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionToolBar_delete(QStyleOptionToolBar* self) {
@@ -778,8 +778,8 @@ QStyleOptionProgressBar* QStyleOptionProgressBar_new() {
 	return new (std::nothrow) QStyleOptionProgressBar();
 }
 
-QStyleOptionProgressBar* QStyleOptionProgressBar_new2(QStyleOptionProgressBar* other) {
-	return new (std::nothrow) QStyleOptionProgressBar(*other);
+QStyleOptionProgressBar* QStyleOptionProgressBar_new_from(QStyleOptionProgressBar* from) {
+	return new (std::nothrow) QStyleOptionProgressBar(*from);
 }
 
 void QStyleOptionProgressBar_virtbase(QStyleOptionProgressBar* src, QStyleOption** outptr_QStyleOption) {
@@ -868,8 +868,8 @@ void QStyleOptionProgressBar_setBottomToTop(QStyleOptionProgressBar* self, bool 
 	self->bottomToTop = bottomToTop;
 }
 
-void QStyleOptionProgressBar_operatorAssign(QStyleOptionProgressBar* self, QStyleOptionProgressBar* param1) {
-	self->operator=(*param1);
+void QStyleOptionProgressBar_operatorAssign(QStyleOptionProgressBar* self, QStyleOptionProgressBar* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionProgressBar_delete(QStyleOptionProgressBar* self) {
@@ -880,8 +880,8 @@ QStyleOptionMenuItem* QStyleOptionMenuItem_new() {
 	return new (std::nothrow) QStyleOptionMenuItem();
 }
 
-QStyleOptionMenuItem* QStyleOptionMenuItem_new2(QStyleOptionMenuItem* other) {
-	return new (std::nothrow) QStyleOptionMenuItem(*other);
+QStyleOptionMenuItem* QStyleOptionMenuItem_new_from(QStyleOptionMenuItem* from) {
+	return new (std::nothrow) QStyleOptionMenuItem(*from);
 }
 
 void QStyleOptionMenuItem_virtbase(QStyleOptionMenuItem* src, QStyleOption** outptr_QStyleOption) {
@@ -978,8 +978,8 @@ void QStyleOptionMenuItem_setFont(QStyleOptionMenuItem* self, QFont* font) {
 	self->font = *font;
 }
 
-void QStyleOptionMenuItem_operatorAssign(QStyleOptionMenuItem* self, QStyleOptionMenuItem* param1) {
-	self->operator=(*param1);
+void QStyleOptionMenuItem_operatorAssign(QStyleOptionMenuItem* self, QStyleOptionMenuItem* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionMenuItem_delete(QStyleOptionMenuItem* self) {
@@ -990,8 +990,8 @@ QStyleOptionDockWidget* QStyleOptionDockWidget_new() {
 	return new (std::nothrow) QStyleOptionDockWidget();
 }
 
-QStyleOptionDockWidget* QStyleOptionDockWidget_new2(QStyleOptionDockWidget* other) {
-	return new (std::nothrow) QStyleOptionDockWidget(*other);
+QStyleOptionDockWidget* QStyleOptionDockWidget_new_from(QStyleOptionDockWidget* from) {
+	return new (std::nothrow) QStyleOptionDockWidget(*from);
 }
 
 void QStyleOptionDockWidget_virtbase(QStyleOptionDockWidget* src, QStyleOption** outptr_QStyleOption) {
@@ -1046,8 +1046,8 @@ void QStyleOptionDockWidget_setVerticalTitleBar(QStyleOptionDockWidget* self, bo
 	self->verticalTitleBar = verticalTitleBar;
 }
 
-void QStyleOptionDockWidget_operatorAssign(QStyleOptionDockWidget* self, QStyleOptionDockWidget* param1) {
-	self->operator=(*param1);
+void QStyleOptionDockWidget_operatorAssign(QStyleOptionDockWidget* self, QStyleOptionDockWidget* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionDockWidget_delete(QStyleOptionDockWidget* self) {
@@ -1058,8 +1058,8 @@ QStyleOptionViewItem* QStyleOptionViewItem_new() {
 	return new (std::nothrow) QStyleOptionViewItem();
 }
 
-QStyleOptionViewItem* QStyleOptionViewItem_new2(QStyleOptionViewItem* other) {
-	return new (std::nothrow) QStyleOptionViewItem(*other);
+QStyleOptionViewItem* QStyleOptionViewItem_new_from(QStyleOptionViewItem* from) {
+	return new (std::nothrow) QStyleOptionViewItem(*from);
 }
 
 void QStyleOptionViewItem_virtbase(QStyleOptionViewItem* src, QStyleOption** outptr_QStyleOption) {
@@ -1209,8 +1209,8 @@ void QStyleOptionViewItem_setBackgroundBrush(QStyleOptionViewItem* self, QBrush*
 	self->backgroundBrush = *backgroundBrush;
 }
 
-void QStyleOptionViewItem_operatorAssign(QStyleOptionViewItem* self, QStyleOptionViewItem* param1) {
-	self->operator=(*param1);
+void QStyleOptionViewItem_operatorAssign(QStyleOptionViewItem* self, QStyleOptionViewItem* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionViewItem_delete(QStyleOptionViewItem* self) {
@@ -1221,8 +1221,8 @@ QStyleOptionToolBox* QStyleOptionToolBox_new() {
 	return new (std::nothrow) QStyleOptionToolBox();
 }
 
-QStyleOptionToolBox* QStyleOptionToolBox_new2(QStyleOptionToolBox* other) {
-	return new (std::nothrow) QStyleOptionToolBox(*other);
+QStyleOptionToolBox* QStyleOptionToolBox_new_from(QStyleOptionToolBox* from) {
+	return new (std::nothrow) QStyleOptionToolBox(*from);
 }
 
 void QStyleOptionToolBox_virtbase(QStyleOptionToolBox* src, QStyleOption** outptr_QStyleOption) {
@@ -1271,8 +1271,8 @@ void QStyleOptionToolBox_setSelectedPosition(QStyleOptionToolBox* self, int sele
 	self->selectedPosition = static_cast<QStyleOptionToolBox::SelectedPosition>(selectedPosition);
 }
 
-void QStyleOptionToolBox_operatorAssign(QStyleOptionToolBox* self, QStyleOptionToolBox* param1) {
-	self->operator=(*param1);
+void QStyleOptionToolBox_operatorAssign(QStyleOptionToolBox* self, QStyleOptionToolBox* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionToolBox_delete(QStyleOptionToolBox* self) {
@@ -1283,8 +1283,8 @@ QStyleOptionRubberBand* QStyleOptionRubberBand_new() {
 	return new (std::nothrow) QStyleOptionRubberBand();
 }
 
-QStyleOptionRubberBand* QStyleOptionRubberBand_new2(QStyleOptionRubberBand* other) {
-	return new (std::nothrow) QStyleOptionRubberBand(*other);
+QStyleOptionRubberBand* QStyleOptionRubberBand_new_from(QStyleOptionRubberBand* from) {
+	return new (std::nothrow) QStyleOptionRubberBand(*from);
 }
 
 void QStyleOptionRubberBand_virtbase(QStyleOptionRubberBand* src, QStyleOption** outptr_QStyleOption) {
@@ -1308,8 +1308,8 @@ void QStyleOptionRubberBand_setOpaque(QStyleOptionRubberBand* self, bool opaque)
 	self->opaque = opaque;
 }
 
-void QStyleOptionRubberBand_operatorAssign(QStyleOptionRubberBand* self, QStyleOptionRubberBand* param1) {
-	self->operator=(*param1);
+void QStyleOptionRubberBand_operatorAssign(QStyleOptionRubberBand* self, QStyleOptionRubberBand* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionRubberBand_delete(QStyleOptionRubberBand* self) {
@@ -1320,15 +1320,15 @@ QStyleOptionComplex* QStyleOptionComplex_new() {
 	return new (std::nothrow) QStyleOptionComplex();
 }
 
-QStyleOptionComplex* QStyleOptionComplex_new2(QStyleOptionComplex* other) {
-	return new (std::nothrow) QStyleOptionComplex(*other);
+QStyleOptionComplex* QStyleOptionComplex_new_from(QStyleOptionComplex* from) {
+	return new (std::nothrow) QStyleOptionComplex(*from);
 }
 
-QStyleOptionComplex* QStyleOptionComplex_new3(int version) {
+QStyleOptionComplex* QStyleOptionComplex_new_version(int version) {
 	return new (std::nothrow) QStyleOptionComplex(static_cast<int>(version));
 }
 
-QStyleOptionComplex* QStyleOptionComplex_new4(int version, int type) {
+QStyleOptionComplex* QStyleOptionComplex_new_version_type(int version, int type) {
 	return new (std::nothrow) QStyleOptionComplex(static_cast<int>(version), static_cast<int>(type));
 }
 
@@ -1354,8 +1354,8 @@ void QStyleOptionComplex_setActiveSubControls(QStyleOptionComplex* self, int act
 	self->activeSubControls = static_cast<QStyle::SubControls>(activeSubControls);
 }
 
-void QStyleOptionComplex_operatorAssign(QStyleOptionComplex* self, QStyleOptionComplex* param1) {
-	self->operator=(*param1);
+void QStyleOptionComplex_operatorAssign(QStyleOptionComplex* self, QStyleOptionComplex* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionComplex_delete(QStyleOptionComplex* self) {
@@ -1366,8 +1366,8 @@ QStyleOptionSlider* QStyleOptionSlider_new() {
 	return new (std::nothrow) QStyleOptionSlider();
 }
 
-QStyleOptionSlider* QStyleOptionSlider_new2(QStyleOptionSlider* other) {
-	return new (std::nothrow) QStyleOptionSlider(*other);
+QStyleOptionSlider* QStyleOptionSlider_new_from(QStyleOptionSlider* from) {
+	return new (std::nothrow) QStyleOptionSlider(*from);
 }
 
 void QStyleOptionSlider_virtbase(QStyleOptionSlider* src, QStyleOptionComplex** outptr_QStyleOptionComplex) {
@@ -1473,8 +1473,8 @@ void QStyleOptionSlider_setDialWrapping(QStyleOptionSlider* self, bool dialWrapp
 	self->dialWrapping = dialWrapping;
 }
 
-void QStyleOptionSlider_operatorAssign(QStyleOptionSlider* self, QStyleOptionSlider* param1) {
-	self->operator=(*param1);
+void QStyleOptionSlider_operatorAssign(QStyleOptionSlider* self, QStyleOptionSlider* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionSlider_delete(QStyleOptionSlider* self) {
@@ -1485,8 +1485,8 @@ QStyleOptionSpinBox* QStyleOptionSpinBox_new() {
 	return new (std::nothrow) QStyleOptionSpinBox();
 }
 
-QStyleOptionSpinBox* QStyleOptionSpinBox_new2(QStyleOptionSpinBox* other) {
-	return new (std::nothrow) QStyleOptionSpinBox(*other);
+QStyleOptionSpinBox* QStyleOptionSpinBox_new_from(QStyleOptionSpinBox* from) {
+	return new (std::nothrow) QStyleOptionSpinBox(*from);
 }
 
 void QStyleOptionSpinBox_virtbase(QStyleOptionSpinBox* src, QStyleOptionComplex** outptr_QStyleOptionComplex) {
@@ -1519,8 +1519,8 @@ void QStyleOptionSpinBox_setFrame(QStyleOptionSpinBox* self, bool frame) {
 	self->frame = frame;
 }
 
-void QStyleOptionSpinBox_operatorAssign(QStyleOptionSpinBox* self, QStyleOptionSpinBox* param1) {
-	self->operator=(*param1);
+void QStyleOptionSpinBox_operatorAssign(QStyleOptionSpinBox* self, QStyleOptionSpinBox* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionSpinBox_delete(QStyleOptionSpinBox* self) {
@@ -1531,8 +1531,8 @@ QStyleOptionToolButton* QStyleOptionToolButton_new() {
 	return new (std::nothrow) QStyleOptionToolButton();
 }
 
-QStyleOptionToolButton* QStyleOptionToolButton_new2(QStyleOptionToolButton* other) {
-	return new (std::nothrow) QStyleOptionToolButton(*other);
+QStyleOptionToolButton* QStyleOptionToolButton_new_from(QStyleOptionToolButton* from) {
+	return new (std::nothrow) QStyleOptionToolButton(*from);
 }
 
 void QStyleOptionToolButton_virtbase(QStyleOptionToolButton* src, QStyleOptionComplex** outptr_QStyleOptionComplex) {
@@ -1614,8 +1614,8 @@ void QStyleOptionToolButton_setFont(QStyleOptionToolButton* self, QFont* font) {
 	self->font = *font;
 }
 
-void QStyleOptionToolButton_operatorAssign(QStyleOptionToolButton* self, QStyleOptionToolButton* param1) {
-	self->operator=(*param1);
+void QStyleOptionToolButton_operatorAssign(QStyleOptionToolButton* self, QStyleOptionToolButton* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionToolButton_delete(QStyleOptionToolButton* self) {
@@ -1626,8 +1626,8 @@ QStyleOptionComboBox* QStyleOptionComboBox_new() {
 	return new (std::nothrow) QStyleOptionComboBox();
 }
 
-QStyleOptionComboBox* QStyleOptionComboBox_new2(QStyleOptionComboBox* other) {
-	return new (std::nothrow) QStyleOptionComboBox(*other);
+QStyleOptionComboBox* QStyleOptionComboBox_new_from(QStyleOptionComboBox* from) {
+	return new (std::nothrow) QStyleOptionComboBox(*from);
 }
 
 void QStyleOptionComboBox_virtbase(QStyleOptionComboBox* src, QStyleOptionComplex** outptr_QStyleOptionComplex) {
@@ -1690,8 +1690,8 @@ void QStyleOptionComboBox_setIconSize(QStyleOptionComboBox* self, QSize* iconSiz
 	self->iconSize = *iconSize;
 }
 
-void QStyleOptionComboBox_operatorAssign(QStyleOptionComboBox* self, QStyleOptionComboBox* param1) {
-	self->operator=(*param1);
+void QStyleOptionComboBox_operatorAssign(QStyleOptionComboBox* self, QStyleOptionComboBox* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionComboBox_delete(QStyleOptionComboBox* self) {
@@ -1702,8 +1702,8 @@ QStyleOptionTitleBar* QStyleOptionTitleBar_new() {
 	return new (std::nothrow) QStyleOptionTitleBar();
 }
 
-QStyleOptionTitleBar* QStyleOptionTitleBar_new2(QStyleOptionTitleBar* other) {
-	return new (std::nothrow) QStyleOptionTitleBar(*other);
+QStyleOptionTitleBar* QStyleOptionTitleBar_new_from(QStyleOptionTitleBar* from) {
+	return new (std::nothrow) QStyleOptionTitleBar(*from);
 }
 
 void QStyleOptionTitleBar_virtbase(QStyleOptionTitleBar* src, QStyleOptionComplex** outptr_QStyleOptionComplex) {
@@ -1751,8 +1751,8 @@ void QStyleOptionTitleBar_setTitleBarFlags(QStyleOptionTitleBar* self, int title
 	self->titleBarFlags = static_cast<Qt::WindowFlags>(titleBarFlags);
 }
 
-void QStyleOptionTitleBar_operatorAssign(QStyleOptionTitleBar* self, QStyleOptionTitleBar* param1) {
-	self->operator=(*param1);
+void QStyleOptionTitleBar_operatorAssign(QStyleOptionTitleBar* self, QStyleOptionTitleBar* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionTitleBar_delete(QStyleOptionTitleBar* self) {
@@ -1763,8 +1763,8 @@ QStyleOptionGroupBox* QStyleOptionGroupBox_new() {
 	return new (std::nothrow) QStyleOptionGroupBox();
 }
 
-QStyleOptionGroupBox* QStyleOptionGroupBox_new2(QStyleOptionGroupBox* other) {
-	return new (std::nothrow) QStyleOptionGroupBox(*other);
+QStyleOptionGroupBox* QStyleOptionGroupBox_new_from(QStyleOptionGroupBox* from) {
+	return new (std::nothrow) QStyleOptionGroupBox(*from);
 }
 
 void QStyleOptionGroupBox_virtbase(QStyleOptionGroupBox* src, QStyleOptionComplex** outptr_QStyleOptionComplex) {
@@ -1829,8 +1829,8 @@ void QStyleOptionGroupBox_setMidLineWidth(QStyleOptionGroupBox* self, int midLin
 	self->midLineWidth = static_cast<int>(midLineWidth);
 }
 
-void QStyleOptionGroupBox_operatorAssign(QStyleOptionGroupBox* self, QStyleOptionGroupBox* param1) {
-	self->operator=(*param1);
+void QStyleOptionGroupBox_operatorAssign(QStyleOptionGroupBox* self, QStyleOptionGroupBox* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionGroupBox_delete(QStyleOptionGroupBox* self) {
@@ -1841,8 +1841,8 @@ QStyleOptionSizeGrip* QStyleOptionSizeGrip_new() {
 	return new (std::nothrow) QStyleOptionSizeGrip();
 }
 
-QStyleOptionSizeGrip* QStyleOptionSizeGrip_new2(QStyleOptionSizeGrip* other) {
-	return new (std::nothrow) QStyleOptionSizeGrip(*other);
+QStyleOptionSizeGrip* QStyleOptionSizeGrip_new_from(QStyleOptionSizeGrip* from) {
+	return new (std::nothrow) QStyleOptionSizeGrip(*from);
 }
 
 void QStyleOptionSizeGrip_virtbase(QStyleOptionSizeGrip* src, QStyleOptionComplex** outptr_QStyleOptionComplex) {
@@ -1858,8 +1858,8 @@ void QStyleOptionSizeGrip_setCorner(QStyleOptionSizeGrip* self, int corner) {
 	self->corner = static_cast<Qt::Corner>(corner);
 }
 
-void QStyleOptionSizeGrip_operatorAssign(QStyleOptionSizeGrip* self, QStyleOptionSizeGrip* param1) {
-	self->operator=(*param1);
+void QStyleOptionSizeGrip_operatorAssign(QStyleOptionSizeGrip* self, QStyleOptionSizeGrip* from) {
+	self->operator=(*from);
 }
 
 void QStyleOptionSizeGrip_delete(QStyleOptionSizeGrip* self) {
@@ -1870,8 +1870,8 @@ QStyleOptionGraphicsItem* QStyleOptionGraphicsItem_new() {
 	return new (std::nothrow) QStyleOptionGraphicsItem();
 }
 
-QStyleOptionGraphicsItem* QStyleOptionGraphicsItem_new2(QStyleOptionGraphicsItem* other) {
-	return new (std::nothrow) QStyleOptionGraphicsItem(*other);
+QStyleOptionGraphicsItem* QStyleOptionGraphicsItem_new_from(QStyleOptionGraphicsItem* from) {
+	return new (std::nothrow) QStyleOptionGraphicsItem(*from);
 }
 
 void QStyleOptionGraphicsItem_virtbase(QStyleOptionGraphicsItem* src, QStyleOption** outptr_QStyleOption) {
@@ -1903,8 +1903,8 @@ void QStyleOptionGraphicsItem_setLevelOfDetail(QStyleOptionGraphicsItem* self, d
 	self->levelOfDetail = static_cast<qreal>(levelOfDetail);
 }
 
-void QStyleOptionGraphicsItem_operatorAssign(QStyleOptionGraphicsItem* self, QStyleOptionGraphicsItem* param1) {
-	self->operator=(*param1);
+void QStyleOptionGraphicsItem_operatorAssign(QStyleOptionGraphicsItem* self, QStyleOptionGraphicsItem* from) {
+	self->operator=(*from);
 }
 
 double QStyleOptionGraphicsItem_levelOfDetailFromTransform(QTransform* worldTransform) {
@@ -1920,15 +1920,15 @@ QStyleHintReturn* QStyleHintReturn_new() {
 	return new (std::nothrow) QStyleHintReturn();
 }
 
-QStyleHintReturn* QStyleHintReturn_new2(QStyleHintReturn* param1) {
-	return new (std::nothrow) QStyleHintReturn(*param1);
+QStyleHintReturn* QStyleHintReturn_new_from(QStyleHintReturn* from) {
+	return new (std::nothrow) QStyleHintReturn(*from);
 }
 
-QStyleHintReturn* QStyleHintReturn_new3(int version) {
+QStyleHintReturn* QStyleHintReturn_new_version(int version) {
 	return new (std::nothrow) QStyleHintReturn(static_cast<int>(version));
 }
 
-QStyleHintReturn* QStyleHintReturn_new4(int version, int type) {
+QStyleHintReturn* QStyleHintReturn_new_version_type(int version, int type) {
 	return new (std::nothrow) QStyleHintReturn(static_cast<int>(version), static_cast<int>(type));
 }
 
@@ -1948,8 +1948,8 @@ void QStyleHintReturn_setType(QStyleHintReturn* self, int type) {
 	self->type = static_cast<int>(type);
 }
 
-void QStyleHintReturn_operatorAssign(QStyleHintReturn* self, QStyleHintReturn* param1) {
-	self->operator=(*param1);
+void QStyleHintReturn_operatorAssign(QStyleHintReturn* self, QStyleHintReturn* from) {
+	self->operator=(*from);
 }
 
 void QStyleHintReturn_delete(QStyleHintReturn* self) {
@@ -1960,8 +1960,8 @@ QStyleHintReturnMask* QStyleHintReturnMask_new() {
 	return new (std::nothrow) QStyleHintReturnMask();
 }
 
-QStyleHintReturnMask* QStyleHintReturnMask_new2(QStyleHintReturnMask* param1) {
-	return new (std::nothrow) QStyleHintReturnMask(*param1);
+QStyleHintReturnMask* QStyleHintReturnMask_new_from(QStyleHintReturnMask* from) {
+	return new (std::nothrow) QStyleHintReturnMask(*from);
 }
 
 void QStyleHintReturnMask_virtbase(QStyleHintReturnMask* src, QStyleHintReturn** outptr_QStyleHintReturn) {
@@ -1976,8 +1976,8 @@ void QStyleHintReturnMask_setRegion(QStyleHintReturnMask* self, QRegion* region)
 	self->region = *region;
 }
 
-void QStyleHintReturnMask_operatorAssign(QStyleHintReturnMask* self, QStyleHintReturnMask* param1) {
-	self->operator=(*param1);
+void QStyleHintReturnMask_operatorAssign(QStyleHintReturnMask* self, QStyleHintReturnMask* from) {
+	self->operator=(*from);
 }
 
 void QStyleHintReturnMask_delete(QStyleHintReturnMask* self) {
@@ -1988,8 +1988,8 @@ QStyleHintReturnVariant* QStyleHintReturnVariant_new() {
 	return new (std::nothrow) QStyleHintReturnVariant();
 }
 
-QStyleHintReturnVariant* QStyleHintReturnVariant_new2(QStyleHintReturnVariant* param1) {
-	return new (std::nothrow) QStyleHintReturnVariant(*param1);
+QStyleHintReturnVariant* QStyleHintReturnVariant_new_from(QStyleHintReturnVariant* from) {
+	return new (std::nothrow) QStyleHintReturnVariant(*from);
 }
 
 void QStyleHintReturnVariant_virtbase(QStyleHintReturnVariant* src, QStyleHintReturn** outptr_QStyleHintReturn) {
@@ -2004,8 +2004,8 @@ void QStyleHintReturnVariant_setVariant(QStyleHintReturnVariant* self, QVariant*
 	self->variant = *variant;
 }
 
-void QStyleHintReturnVariant_operatorAssign(QStyleHintReturnVariant* self, QStyleHintReturnVariant* param1) {
-	self->operator=(*param1);
+void QStyleHintReturnVariant_operatorAssign(QStyleHintReturnVariant* self, QStyleHintReturnVariant* from) {
+	self->operator=(*from);
 }
 
 void QStyleHintReturnVariant_delete(QStyleHintReturnVariant* self) {

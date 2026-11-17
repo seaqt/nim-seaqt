@@ -19,12 +19,12 @@ QScriptString* QScriptString_new() {
 	return new (std::nothrow) QScriptString();
 }
 
-QScriptString* QScriptString_new2(QScriptString* other) {
-	return new (std::nothrow) QScriptString(*other);
+QScriptString* QScriptString_new_from(QScriptString* from) {
+	return new (std::nothrow) QScriptString(*from);
 }
 
-void QScriptString_operatorAssign(QScriptString* self, QScriptString* other) {
-	self->operator=(*other);
+void QScriptString_operatorAssign(QScriptString* self, QScriptString* from) {
+	self->operator=(*from);
 }
 
 bool QScriptString_isValid(const QScriptString* self) {
@@ -66,7 +66,7 @@ struct seaqt_string QScriptString_ToQString(const QScriptString* self) {
 	return _ms;
 }
 
-unsigned int QScriptString_toArrayIndexWithOk(const QScriptString* self, bool* ok) {
+unsigned int QScriptString_toArrayIndex_ok(const QScriptString* self, bool* ok) {
 	quint32 _ret = self->toArrayIndex(ok);
 	return static_cast<unsigned int>(_ret);
 }

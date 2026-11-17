@@ -53,9 +53,9 @@ type cQPdfSearchResult*{.exportc: "QPdfSearchResult", incompleteStruct.} = objec
 proc fcQPdfSearchResult_contextBefore(self: pointer): struct_seaqt_string {.importc: "QPdfSearchResult_contextBefore".}
 proc fcQPdfSearchResult_contextAfter(self: pointer): struct_seaqt_string {.importc: "QPdfSearchResult_contextAfter".}
 proc fcQPdfSearchResult_rectangles(self: pointer): struct_seaqt_array {.importc: "QPdfSearchResult_rectangles".}
-proc fcQPdfSearchResult_operatorAssign(self: pointer, param1: pointer): void {.importc: "QPdfSearchResult_operatorAssign".}
+proc fcQPdfSearchResult_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QPdfSearchResult_operatorAssign".}
 proc fcQPdfSearchResult_new(): ptr cQPdfSearchResult {.importc: "QPdfSearchResult_new".}
-proc fcQPdfSearchResult_new2(param1: pointer): ptr cQPdfSearchResult {.importc: "QPdfSearchResult_new2".}
+proc fcQPdfSearchResult_new2(fromVal: pointer): ptr cQPdfSearchResult {.importc: "QPdfSearchResult_new_from".}
 proc fcQPdfSearchResult_staticMetaObject(): pointer {.importc: "QPdfSearchResult_staticMetaObject".}
 
 proc contextBefore*(self: gen_qpdfsearchresult_types.QPdfSearchResult): string =
@@ -79,15 +79,15 @@ proc rectangles*(self: gen_qpdfsearchresult_types.QPdfSearchResult): seq[gen_qre
   c_free(v_ma.data)
   vx_ret
 
-proc operatorAssign*(self: gen_qpdfsearchresult_types.QPdfSearchResult, param1: gen_qpdfsearchresult_types.QPdfSearchResult): void =
-  fcQPdfSearchResult_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qpdfsearchresult_types.QPdfSearchResult, fromVal: gen_qpdfsearchresult_types.QPdfSearchResult): void =
+  fcQPdfSearchResult_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qpdfsearchresult_types.QPdfSearchResult): gen_qpdfsearchresult_types.QPdfSearchResult =
   let tmp = gen_qpdfsearchresult_types.QPdfSearchResult(h: fcQPdfSearchResult_new(), owned: true)
   tmp
 proc create*(T: type gen_qpdfsearchresult_types.QPdfSearchResult,
-    param1: gen_qpdfsearchresult_types.QPdfSearchResult): gen_qpdfsearchresult_types.QPdfSearchResult =
-  let tmp = gen_qpdfsearchresult_types.QPdfSearchResult(h: fcQPdfSearchResult_new2(param1.h), owned: true)
+    fromVal: gen_qpdfsearchresult_types.QPdfSearchResult): gen_qpdfsearchresult_types.QPdfSearchResult =
+  let tmp = gen_qpdfsearchresult_types.QPdfSearchResult(h: fcQPdfSearchResult_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qpdfsearchresult_types.QPdfSearchResult): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfSearchResult_staticMetaObject())

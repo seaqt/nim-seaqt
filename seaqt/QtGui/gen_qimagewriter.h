@@ -25,12 +25,12 @@ typedef struct QImageWriter QImageWriter;
 #endif
 
 QImageWriter* QImageWriter_new();
-QImageWriter* QImageWriter_new2(QIODevice* device, struct seaqt_string format);
-QImageWriter* QImageWriter_new3(struct seaqt_string fileName);
-QImageWriter* QImageWriter_new4(struct seaqt_string fileName, struct seaqt_string format);
+QImageWriter* QImageWriter_new_device_format(QIODevice* device, struct seaqt_string format);
+QImageWriter* QImageWriter_new_fileName(struct seaqt_string fileName);
+QImageWriter* QImageWriter_new_fileName_format(struct seaqt_string fileName, struct seaqt_string format);
 
-struct seaqt_string QImageWriter_tr(const char* sourceText);
-struct seaqt_string QImageWriter_trUtf8(const char* sourceText);
+struct seaqt_string QImageWriter_tr_sourceText(const char* sourceText);
+struct seaqt_string QImageWriter_trUtf8_sourceText(const char* sourceText);
 void QImageWriter_setFormat(QImageWriter* self, struct seaqt_string format);
 struct seaqt_string QImageWriter_format(const QImageWriter* self);
 void QImageWriter_setDevice(QImageWriter* self, QIODevice* device);
@@ -63,10 +63,10 @@ bool QImageWriter_supportsOption(const QImageWriter* self, int option);
 struct seaqt_array /* of struct seaqt_string */  QImageWriter_supportedImageFormats();
 struct seaqt_array /* of struct seaqt_string */  QImageWriter_supportedMimeTypes();
 struct seaqt_array /* of struct seaqt_string */  QImageWriter_imageFormatsForMimeType(struct seaqt_string mimeType);
-struct seaqt_string QImageWriter_tr2(const char* sourceText, const char* disambiguation);
-struct seaqt_string QImageWriter_tr3(const char* sourceText, const char* disambiguation, int n);
-struct seaqt_string QImageWriter_trUtf82(const char* sourceText, const char* disambiguation);
-struct seaqt_string QImageWriter_trUtf83(const char* sourceText, const char* disambiguation, int n);
+struct seaqt_string QImageWriter_tr_sourceText_disambiguation(const char* sourceText, const char* disambiguation);
+struct seaqt_string QImageWriter_tr_sourceText_disambiguation_n(const char* sourceText, const char* disambiguation, int n);
+struct seaqt_string QImageWriter_trUtf8_sourceText_disambiguation(const char* sourceText, const char* disambiguation);
+struct seaqt_string QImageWriter_trUtf8_sourceText_disambiguation_n(const char* sourceText, const char* disambiguation, int n);
 
 void QImageWriter_delete(QImageWriter* self);
 

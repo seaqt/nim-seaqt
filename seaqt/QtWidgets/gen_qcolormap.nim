@@ -52,15 +52,15 @@ type cQColormap*{.exportc: "QColormap", incompleteStruct.} = object
 proc fcQColormap_initialize(): void {.importc: "QColormap_initialize".}
 proc fcQColormap_cleanup(): void {.importc: "QColormap_cleanup".}
 proc fcQColormap_instance(): pointer {.importc: "QColormap_instance".}
-proc fcQColormap_operatorAssign(self: pointer, colormap: pointer): void {.importc: "QColormap_operatorAssign".}
+proc fcQColormap_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QColormap_operatorAssign".}
 proc fcQColormap_mode(self: pointer): cint {.importc: "QColormap_mode".}
 proc fcQColormap_depth(self: pointer): cint {.importc: "QColormap_depth".}
 proc fcQColormap_size(self: pointer): cint {.importc: "QColormap_size".}
 proc fcQColormap_pixel(self: pointer, color: pointer): cuint {.importc: "QColormap_pixel".}
 proc fcQColormap_colorAt(self: pointer, pixel: cuint): pointer {.importc: "QColormap_colorAt".}
 proc fcQColormap_colormap(self: pointer): struct_seaqt_array {.importc: "QColormap_colormap".}
-proc fcQColormap_instanceWithScreen(screen: cint): pointer {.importc: "QColormap_instanceWithScreen".}
-proc fcQColormap_new(colormap: pointer): ptr cQColormap {.importc: "QColormap_new".}
+proc fcQColormap_instanceScreen(screen: cint): pointer {.importc: "QColormap_instance_screen".}
+proc fcQColormap_new(fromVal: pointer): ptr cQColormap {.importc: "QColormap_new".}
 
 proc initialize*(_: type gen_qcolormap_types.QColormap): void =
   fcQColormap_initialize()
@@ -71,8 +71,8 @@ proc cleanup*(_: type gen_qcolormap_types.QColormap): void =
 proc instance*(_: type gen_qcolormap_types.QColormap): gen_qcolormap_types.QColormap =
   gen_qcolormap_types.QColormap(h: fcQColormap_instance(), owned: true)
 
-proc operatorAssign*(self: gen_qcolormap_types.QColormap, colormap: gen_qcolormap_types.QColormap): void =
-  fcQColormap_operatorAssign(self.h, colormap.h)
+proc operatorAssign*(self: gen_qcolormap_types.QColormap, fromVal: gen_qcolormap_types.QColormap): void =
+  fcQColormap_operatorAssign(self.h, fromVal.h)
 
 proc mode*(self: gen_qcolormap_types.QColormap): cint =
   cint(fcQColormap_mode(self.h))
@@ -99,9 +99,9 @@ proc colormap*(self: gen_qcolormap_types.QColormap): seq[gen_qcolor_types.QColor
   vx_ret
 
 proc instance*(_: type gen_qcolormap_types.QColormap, screen: cint): gen_qcolormap_types.QColormap =
-  gen_qcolormap_types.QColormap(h: fcQColormap_instanceWithScreen(screen), owned: true)
+  gen_qcolormap_types.QColormap(h: fcQColormap_instanceScreen(screen), owned: true)
 
 proc create*(T: type gen_qcolormap_types.QColormap,
-    colormap: gen_qcolormap_types.QColormap): gen_qcolormap_types.QColormap =
-  let tmp = gen_qcolormap_types.QColormap(h: fcQColormap_new(colormap.h), owned: true)
+    fromVal: gen_qcolormap_types.QColormap): gen_qcolormap_types.QColormap =
+  let tmp = gen_qcolormap_types.QColormap(h: fcQColormap_new(fromVal.h), owned: true)
   tmp

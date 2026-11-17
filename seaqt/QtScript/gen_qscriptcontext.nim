@@ -77,8 +77,8 @@ proc fcQScriptContext_thisObject(self: pointer): pointer {.importc: "QScriptCont
 proc fcQScriptContext_setThisObject(self: pointer, thisObject: pointer): void {.importc: "QScriptContext_setThisObject".}
 proc fcQScriptContext_isCalledAsConstructor(self: pointer): bool {.importc: "QScriptContext_isCalledAsConstructor".}
 proc fcQScriptContext_throwValue(self: pointer, value: pointer): pointer {.importc: "QScriptContext_throwValue".}
-proc fcQScriptContext_throwError(self: pointer, error: cint, text: struct_seaqt_string): pointer {.importc: "QScriptContext_throwError".}
-proc fcQScriptContext_throwErrorWithText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QScriptContext_throwErrorWithText".}
+proc fcQScriptContext_throwErrorErrorText(self: pointer, error: cint, text: struct_seaqt_string): pointer {.importc: "QScriptContext_throwError_error_text".}
+proc fcQScriptContext_throwErrorText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QScriptContext_throwError_text".}
 proc fcQScriptContext_backtrace(self: pointer): struct_seaqt_array {.importc: "QScriptContext_backtrace".}
 proc fcQScriptContext_toString(self: pointer): struct_seaqt_string {.importc: "QScriptContext_toString".}
 
@@ -143,10 +143,10 @@ proc throwValue*(self: gen_qscriptcontext_types.QScriptContext, value: gen_qscri
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwValue(self.h, value.h), owned: true)
 
 proc throwError*(self: gen_qscriptcontext_types.QScriptContext, error: cint, text: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwError(self.h, cint(error), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwErrorErrorText(self.h, cint(error), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc throwError*(self: gen_qscriptcontext_types.QScriptContext, text: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwErrorWithText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwErrorText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc backtrace*(self: gen_qscriptcontext_types.QScriptContext): seq[string] =
   var v_ma = fcQScriptContext_backtrace(self.h)

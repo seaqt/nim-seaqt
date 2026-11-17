@@ -46,7 +46,7 @@ export
 type cQWebEngineHistoryItem*{.exportc: "QWebEngineHistoryItem", incompleteStruct.} = object
 type cQWebEngineHistory*{.exportc: "QWebEngineHistory", incompleteStruct.} = object
 
-proc fcQWebEngineHistoryItem_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineHistoryItem_operatorAssign".}
+proc fcQWebEngineHistoryItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineHistoryItem_operatorAssign".}
 proc fcQWebEngineHistoryItem_originalUrl(self: pointer): pointer {.importc: "QWebEngineHistoryItem_originalUrl".}
 proc fcQWebEngineHistoryItem_url(self: pointer): pointer {.importc: "QWebEngineHistoryItem_url".}
 proc fcQWebEngineHistoryItem_title(self: pointer): struct_seaqt_string {.importc: "QWebEngineHistoryItem_title".}
@@ -54,7 +54,7 @@ proc fcQWebEngineHistoryItem_lastVisited(self: pointer): pointer {.importc: "QWe
 proc fcQWebEngineHistoryItem_iconUrl(self: pointer): pointer {.importc: "QWebEngineHistoryItem_iconUrl".}
 proc fcQWebEngineHistoryItem_isValid(self: pointer): bool {.importc: "QWebEngineHistoryItem_isValid".}
 proc fcQWebEngineHistoryItem_swap(self: pointer, other: pointer): void {.importc: "QWebEngineHistoryItem_swap".}
-proc fcQWebEngineHistoryItem_new(other: pointer): ptr cQWebEngineHistoryItem {.importc: "QWebEngineHistoryItem_new".}
+proc fcQWebEngineHistoryItem_new(fromVal: pointer): ptr cQWebEngineHistoryItem {.importc: "QWebEngineHistoryItem_new".}
 proc fcQWebEngineHistory_clear(self: pointer): void {.importc: "QWebEngineHistory_clear".}
 proc fcQWebEngineHistory_items(self: pointer): struct_seaqt_array {.importc: "QWebEngineHistory_items".}
 proc fcQWebEngineHistory_backItems(self: pointer, maxItems: cint): struct_seaqt_array {.importc: "QWebEngineHistory_backItems".}
@@ -71,8 +71,8 @@ proc fcQWebEngineHistory_itemAt(self: pointer, i: cint): pointer {.importc: "QWe
 proc fcQWebEngineHistory_currentItemIndex(self: pointer): cint {.importc: "QWebEngineHistory_currentItemIndex".}
 proc fcQWebEngineHistory_count(self: pointer): cint {.importc: "QWebEngineHistory_count".}
 
-proc operatorAssign*(self: gen_qwebenginehistory_types.QWebEngineHistoryItem, other: gen_qwebenginehistory_types.QWebEngineHistoryItem): void =
-  fcQWebEngineHistoryItem_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebenginehistory_types.QWebEngineHistoryItem, fromVal: gen_qwebenginehistory_types.QWebEngineHistoryItem): void =
+  fcQWebEngineHistoryItem_operatorAssign(self.h, fromVal.h)
 
 proc originalUrl*(self: gen_qwebenginehistory_types.QWebEngineHistoryItem): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineHistoryItem_originalUrl(self.h), owned: true)
@@ -99,8 +99,8 @@ proc swap*(self: gen_qwebenginehistory_types.QWebEngineHistoryItem, other: gen_q
   fcQWebEngineHistoryItem_swap(self.h, other.h)
 
 proc create*(T: type gen_qwebenginehistory_types.QWebEngineHistoryItem,
-    other: gen_qwebenginehistory_types.QWebEngineHistoryItem): gen_qwebenginehistory_types.QWebEngineHistoryItem =
-  let tmp = gen_qwebenginehistory_types.QWebEngineHistoryItem(h: fcQWebEngineHistoryItem_new(other.h), owned: true)
+    fromVal: gen_qwebenginehistory_types.QWebEngineHistoryItem): gen_qwebenginehistory_types.QWebEngineHistoryItem =
+  let tmp = gen_qwebenginehistory_types.QWebEngineHistoryItem(h: fcQWebEngineHistoryItem_new(fromVal.h), owned: true)
   tmp
 proc clear*(self: gen_qwebenginehistory_types.QWebEngineHistory): void =
   fcQWebEngineHistory_clear(self.h)

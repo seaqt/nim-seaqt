@@ -29,9 +29,9 @@ typedef struct QVariant QVariant;
 #endif
 
 QGeoLocation* QGeoLocation_new();
-QGeoLocation* QGeoLocation_new2(QGeoLocation* other);
+QGeoLocation* QGeoLocation_new_from(QGeoLocation* from);
 
-void QGeoLocation_operatorAssign(QGeoLocation* self, QGeoLocation* other);
+void QGeoLocation_operatorAssign(QGeoLocation* self, QGeoLocation* from);
 bool QGeoLocation_operatorEqual(const QGeoLocation* self, QGeoLocation* other);
 bool QGeoLocation_operatorNotEqual(const QGeoLocation* self, QGeoLocation* other);
 QGeoAddress* QGeoLocation_address(const QGeoLocation* self);

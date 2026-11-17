@@ -57,15 +57,15 @@ type cQPictureFormatPlugin*{.exportc: "QPictureFormatPlugin", incompleteStruct.}
 proc fcQPictureFormatPlugin_metaObject(self: pointer): pointer {.importc: "QPictureFormatPlugin_metaObject".}
 proc fcQPictureFormatPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QPictureFormatPlugin_metacast".}
 proc fcQPictureFormatPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPictureFormatPlugin_metacall".}
-proc fcQPictureFormatPlugin_tr(s: cstring): struct_seaqt_string {.importc: "QPictureFormatPlugin_tr".}
-proc fcQPictureFormatPlugin_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPictureFormatPlugin_trUtf8".}
+proc fcQPictureFormatPlugin_trS(s: cstring): struct_seaqt_string {.importc: "QPictureFormatPlugin_tr_s".}
+proc fcQPictureFormatPlugin_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPictureFormatPlugin_trUtf8_s".}
 proc fcQPictureFormatPlugin_loadPicture(self: pointer, format: struct_seaqt_string, filename: struct_seaqt_string, pic: pointer): bool {.importc: "QPictureFormatPlugin_loadPicture".}
 proc fcQPictureFormatPlugin_savePicture(self: pointer, format: struct_seaqt_string, filename: struct_seaqt_string, pic: pointer): bool {.importc: "QPictureFormatPlugin_savePicture".}
 proc fcQPictureFormatPlugin_installIOHandler(self: pointer, format: struct_seaqt_string): bool {.importc: "QPictureFormatPlugin_installIOHandler".}
-proc fcQPictureFormatPlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPictureFormatPlugin_tr2".}
-proc fcQPictureFormatPlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPictureFormatPlugin_tr3".}
-proc fcQPictureFormatPlugin_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPictureFormatPlugin_trUtf82".}
-proc fcQPictureFormatPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPictureFormatPlugin_trUtf83".}
+proc fcQPictureFormatPlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPictureFormatPlugin_tr_s_c".}
+proc fcQPictureFormatPlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPictureFormatPlugin_tr_s_c_n".}
+proc fcQPictureFormatPlugin_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPictureFormatPlugin_trUtf8_s_c".}
+proc fcQPictureFormatPlugin_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPictureFormatPlugin_trUtf8_s_c_n".}
 proc fcQPictureFormatPlugin_vdata(self: pointer): ptr pointer {.importc: "QPictureFormatPlugin_vdata".}
 proc fvdata_cQPictureFormatPlugin(self: pointer): pointer {.importc: "vdata_QPictureFormatPlugin".}
 
@@ -101,7 +101,7 @@ proc fcQPictureFormatPlugin_protectedbase_senderSignalIndex(self: pointer): cint
 proc fcQPictureFormatPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPictureFormatPlugin_protectedbase_receivers".}
 proc fcQPictureFormatPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPictureFormatPlugin_protectedbase_isSignalConnected".}
 proc fcQPictureFormatPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQPictureFormatPlugin {.importc: "QPictureFormatPlugin_new".}
-proc fcQPictureFormatPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPictureFormatPlugin {.importc: "QPictureFormatPlugin_new2".}
+proc fcQPictureFormatPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPictureFormatPlugin {.importc: "QPictureFormatPlugin_new_parent".}
 proc fcQPictureFormatPlugin_staticMetaObject(): pointer {.importc: "QPictureFormatPlugin_staticMetaObject".}
 
 proc metaObject*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin): gen_qobjectdefs_types.QMetaObject =
@@ -114,13 +114,13 @@ proc metacall*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, param1
   fcQPictureFormatPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring): string =
-  let v_ms = fcQPictureFormatPlugin_tr(s)
+  let v_ms = fcQPictureFormatPlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring): string =
-  let v_ms = fcQPictureFormatPlugin_trUtf8(s)
+  let v_ms = fcQPictureFormatPlugin_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -135,25 +135,25 @@ proc installIOHandler*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin
   fcQPictureFormatPlugin_installIOHandler(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
 
 proc tr*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQPictureFormatPlugin_tr2(s, c)
+  let v_ms = fcQPictureFormatPlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPictureFormatPlugin_tr3(s, c, n)
+  let v_ms = fcQPictureFormatPlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQPictureFormatPlugin_trUtf82(s, c)
+  let v_ms = fcQPictureFormatPlugin_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPictureFormatPlugin_trUtf83(s, c, n)
+  let v_ms = fcQPictureFormatPlugin_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

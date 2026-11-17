@@ -150,14 +150,14 @@ void* QAbstractButton_vdata(VirtualQAbstractButton* self);
 VirtualQAbstractButton* vdata_QAbstractButton(void* vdata);
 
 VirtualQAbstractButton* QAbstractButton_new(const QAbstractButton_VTable* vtbl, size_t vdata);
-VirtualQAbstractButton* QAbstractButton_new2(const QAbstractButton_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQAbstractButton* QAbstractButton_new_parent(const QAbstractButton_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QAbstractButton_virtbase(QAbstractButton* src, QWidget** outptr_QWidget);
 QMetaObject* QAbstractButton_metaObject(const QAbstractButton* self);
 void* QAbstractButton_metacast(QAbstractButton* self, const char* param1);
 int QAbstractButton_metacall(QAbstractButton* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractButton_tr(const char* s);
-struct seaqt_string QAbstractButton_trUtf8(const char* s);
+struct seaqt_string QAbstractButton_tr_s(const char* s);
+struct seaqt_string QAbstractButton_trUtf8_s(const char* s);
 void QAbstractButton_setText(QAbstractButton* self, struct seaqt_string text);
 struct seaqt_string QAbstractButton_text(const QAbstractButton* self);
 void QAbstractButton_setIcon(QAbstractButton* self, QIcon* icon);
@@ -206,13 +206,13 @@ void QAbstractButton_focusInEvent(QAbstractButton* self, QFocusEvent* e);
 void QAbstractButton_focusOutEvent(QAbstractButton* self, QFocusEvent* e);
 void QAbstractButton_changeEvent(QAbstractButton* self, QEvent* e);
 void QAbstractButton_timerEvent(QAbstractButton* self, QTimerEvent* e);
-struct seaqt_string QAbstractButton_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractButton_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractButton_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractButton_trUtf83(const char* s, const char* c, int n);
-void QAbstractButton_animateClickWithMsec(QAbstractButton* self, int msec);
-void QAbstractButton_clickedWithChecked(QAbstractButton* self, bool checked);
-void QAbstractButton_connect_clickedWithChecked(QAbstractButton* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+struct seaqt_string QAbstractButton_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractButton_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractButton_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractButton_trUtf8_s_c_n(const char* s, const char* c, int n);
+void QAbstractButton_animateClick_msec(QAbstractButton* self, int msec);
+void QAbstractButton_clicked_checked(QAbstractButton* self, bool checked);
+void QAbstractButton_connect_clicked_checked(QAbstractButton* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 
 QMetaObject* QAbstractButton_virtualbase_metaObject(const VirtualQAbstractButton* self);
 void* QAbstractButton_virtualbase_metacast(VirtualQAbstractButton* self, const char* param1);

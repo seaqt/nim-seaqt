@@ -59,14 +59,14 @@ void* QAbstractAnimation_vdata(VirtualQAbstractAnimation* self);
 VirtualQAbstractAnimation* vdata_QAbstractAnimation(void* vdata);
 
 VirtualQAbstractAnimation* QAbstractAnimation_new(const QAbstractAnimation_VTable* vtbl, size_t vdata);
-VirtualQAbstractAnimation* QAbstractAnimation_new2(const QAbstractAnimation_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAbstractAnimation* QAbstractAnimation_new_parent(const QAbstractAnimation_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAbstractAnimation_virtbase(QAbstractAnimation* src, QObject** outptr_QObject);
 QMetaObject* QAbstractAnimation_metaObject(const QAbstractAnimation* self);
 void* QAbstractAnimation_metacast(QAbstractAnimation* self, const char* param1);
 int QAbstractAnimation_metacall(QAbstractAnimation* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractAnimation_tr(const char* s);
-struct seaqt_string QAbstractAnimation_trUtf8(const char* s);
+struct seaqt_string QAbstractAnimation_tr_s(const char* s);
+struct seaqt_string QAbstractAnimation_trUtf8_s(const char* s);
 int QAbstractAnimation_state(const QAbstractAnimation* self);
 QAnimationGroup* QAbstractAnimation_group(const QAbstractAnimation* self);
 int QAbstractAnimation_direction(const QAbstractAnimation* self);
@@ -96,11 +96,11 @@ bool QAbstractAnimation_event(QAbstractAnimation* self, QEvent* event);
 void QAbstractAnimation_updateCurrentTime(QAbstractAnimation* self, int currentTime);
 void QAbstractAnimation_updateState(QAbstractAnimation* self, int newState, int oldState);
 void QAbstractAnimation_updateDirection(QAbstractAnimation* self, int direction);
-struct seaqt_string QAbstractAnimation_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractAnimation_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractAnimation_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractAnimation_trUtf83(const char* s, const char* c, int n);
-void QAbstractAnimation_startWithPolicy(QAbstractAnimation* self, int policy);
+struct seaqt_string QAbstractAnimation_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractAnimation_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractAnimation_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractAnimation_trUtf8_s_c_n(const char* s, const char* c, int n);
+void QAbstractAnimation_start_policy(QAbstractAnimation* self, int policy);
 
 QMetaObject* QAbstractAnimation_virtualbase_metaObject(const VirtualQAbstractAnimation* self);
 void* QAbstractAnimation_virtualbase_metacast(VirtualQAbstractAnimation* self, const char* param1);
@@ -148,14 +148,14 @@ void* QAnimationDriver_vdata(VirtualQAnimationDriver* self);
 VirtualQAnimationDriver* vdata_QAnimationDriver(void* vdata);
 
 VirtualQAnimationDriver* QAnimationDriver_new(const QAnimationDriver_VTable* vtbl, size_t vdata);
-VirtualQAnimationDriver* QAnimationDriver_new2(const QAnimationDriver_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAnimationDriver* QAnimationDriver_new_parent(const QAnimationDriver_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAnimationDriver_virtbase(QAnimationDriver* src, QObject** outptr_QObject);
 QMetaObject* QAnimationDriver_metaObject(const QAnimationDriver* self);
 void* QAnimationDriver_metacast(QAnimationDriver* self, const char* param1);
 int QAnimationDriver_metacall(QAnimationDriver* self, int param1, int param2, void** param3);
-struct seaqt_string QAnimationDriver_tr(const char* s);
-struct seaqt_string QAnimationDriver_trUtf8(const char* s);
+struct seaqt_string QAnimationDriver_tr_s(const char* s);
+struct seaqt_string QAnimationDriver_trUtf8_s(const char* s);
 void QAnimationDriver_advance(QAnimationDriver* self);
 void QAnimationDriver_install(QAnimationDriver* self);
 void QAnimationDriver_uninstall(QAnimationDriver* self);
@@ -169,10 +169,10 @@ void QAnimationDriver_stopped(QAnimationDriver* self);
 void QAnimationDriver_connect_stopped(QAnimationDriver* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QAnimationDriver_start(QAnimationDriver* self);
 void QAnimationDriver_stop(QAnimationDriver* self);
-struct seaqt_string QAnimationDriver_tr2(const char* s, const char* c);
-struct seaqt_string QAnimationDriver_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAnimationDriver_trUtf82(const char* s, const char* c);
-struct seaqt_string QAnimationDriver_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAnimationDriver_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAnimationDriver_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAnimationDriver_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAnimationDriver_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAnimationDriver_virtualbase_metaObject(const VirtualQAnimationDriver* self);
 void* QAnimationDriver_virtualbase_metacast(VirtualQAnimationDriver* self, const char* param1);
@@ -190,7 +190,7 @@ void QAnimationDriver_virtualbase_connectNotify(VirtualQAnimationDriver* self, Q
 void QAnimationDriver_virtualbase_disconnectNotify(VirtualQAnimationDriver* self, QMetaMethod* signal);
 
 void QAnimationDriver_protectedbase_advanceAnimation(VirtualQAnimationDriver* self);
-void QAnimationDriver_protectedbase_advanceAnimationWithTimeStep(VirtualQAnimationDriver* self, long long timeStep);
+void QAnimationDriver_protectedbase_advanceAnimation_timeStep(VirtualQAnimationDriver* self, long long timeStep);
 QObject* QAnimationDriver_protectedbase_sender(const VirtualQAnimationDriver* self);
 int QAnimationDriver_protectedbase_senderSignalIndex(const VirtualQAnimationDriver* self);
 int QAnimationDriver_protectedbase_receivers(const VirtualQAnimationDriver* self, const char* signal);

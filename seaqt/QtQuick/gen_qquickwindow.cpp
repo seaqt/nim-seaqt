@@ -472,12 +472,12 @@ VirtualQQuickWindow* QQuickWindow_new(const QQuickWindow_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQQuickWindow(vtbl) : nullptr;
 }
 
-VirtualQQuickWindow* QQuickWindow_new2(const QQuickWindow_VTable* vtbl, size_t vdata, QQuickRenderControl* renderControl) {
+VirtualQQuickWindow* QQuickWindow_new_renderControl(const QQuickWindow_VTable* vtbl, size_t vdata, QQuickRenderControl* renderControl) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickWindow>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickWindow(vtbl, renderControl) : nullptr;
 }
 
-VirtualQQuickWindow* QQuickWindow_new3(const QQuickWindow_VTable* vtbl, size_t vdata, QWindow* parent) {
+VirtualQQuickWindow* QQuickWindow_new_parent(const QQuickWindow_VTable* vtbl, size_t vdata, QWindow* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickWindow>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickWindow(vtbl, parent) : nullptr;
 }
@@ -498,7 +498,7 @@ int QQuickWindow_metacall(QQuickWindow* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickWindow_tr(const char* s) {
+struct seaqt_string QQuickWindow_tr_s(const char* s) {
 	QString _ret = QQuickWindow::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -509,7 +509,7 @@ struct seaqt_string QQuickWindow_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QQuickWindow_trUtf8(const char* s) {
+struct seaqt_string QQuickWindow_trUtf8_s(const char* s) {
 	QString _ret = QQuickWindow::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -544,7 +544,7 @@ QImage* QQuickWindow_grabWindow(QQuickWindow* self) {
 	return new QImage(self->grabWindow());
 }
 
-void QQuickWindow_setRenderTarget2(QQuickWindow* self, unsigned int fboId, QSize* size) {
+void QQuickWindow_setRenderTarget_fboId_size(QQuickWindow* self, unsigned int fboId, QSize* size) {
 	self->setRenderTarget(static_cast<uint>(fboId), *size);
 }
 
@@ -583,19 +583,19 @@ QAccessibleInterface* QQuickWindow_accessibleRoot(const QQuickWindow* self) {
 	return self->accessibleRoot();
 }
 
-QSGTexture* QQuickWindow_createTextureFromImage(const QQuickWindow* self, QImage* image) {
+QSGTexture* QQuickWindow_createTextureFromImage_image(const QQuickWindow* self, QImage* image) {
 	return self->createTextureFromImage(*image);
 }
 
-QSGTexture* QQuickWindow_createTextureFromImage2(const QQuickWindow* self, QImage* image, int options) {
+QSGTexture* QQuickWindow_createTextureFromImage_image_options(const QQuickWindow* self, QImage* image, int options) {
 	return self->createTextureFromImage(*image, static_cast<QQuickWindow::CreateTextureOptions>(options));
 }
 
-QSGTexture* QQuickWindow_createTextureFromId(const QQuickWindow* self, unsigned int id, QSize* size) {
+QSGTexture* QQuickWindow_createTextureFromId_id_size(const QQuickWindow* self, unsigned int id, QSize* size) {
 	return self->createTextureFromId(static_cast<uint>(id), *size);
 }
 
-QSGTexture* QQuickWindow_createTextureFromNativeObject(const QQuickWindow* self, int type, const void* nativeObjectPtr, int nativeLayout, QSize* size) {
+QSGTexture* QQuickWindow_createTextureFromNativeObject_type_nativeObjectPtr_nativeLayout_size(const QQuickWindow* self, int type, const void* nativeObjectPtr, int nativeLayout, QSize* size) {
 	return self->createTextureFromNativeObject(static_cast<QQuickWindow::NativeObjectType>(type), nativeObjectPtr, static_cast<int>(nativeLayout), *size);
 }
 
@@ -656,11 +656,11 @@ QSGRendererInterface* QQuickWindow_rendererInterface(const QQuickWindow* self) {
 	return self->rendererInterface();
 }
 
-void QQuickWindow_setSceneGraphBackend(int api) {
+void QQuickWindow_setSceneGraphBackend_api(int api) {
 	QQuickWindow::setSceneGraphBackend(static_cast<QSGRendererInterface::GraphicsApi>(api));
 }
 
-void QQuickWindow_setSceneGraphBackendWithBackend(struct seaqt_string backend) {
+void QQuickWindow_setSceneGraphBackend_backend(struct seaqt_string backend) {
 	QString backend_QString = QString::fromUtf8(backend.data, backend.len);
 	QQuickWindow::setSceneGraphBackend(backend_QString);
 }
@@ -929,7 +929,7 @@ void QQuickWindow_releaseResources(QQuickWindow* self) {
 	self->releaseResources();
 }
 
-struct seaqt_string QQuickWindow_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickWindow_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickWindow::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -940,7 +940,7 @@ struct seaqt_string QQuickWindow_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickWindow_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickWindow_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickWindow::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -951,7 +951,7 @@ struct seaqt_string QQuickWindow_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QQuickWindow_trUtf82(const char* s, const char* c) {
+struct seaqt_string QQuickWindow_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QQuickWindow::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -962,7 +962,7 @@ struct seaqt_string QQuickWindow_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickWindow_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QQuickWindow_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickWindow::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -973,11 +973,11 @@ struct seaqt_string QQuickWindow_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QSGTexture* QQuickWindow_createTextureFromId2(const QQuickWindow* self, unsigned int id, QSize* size, int options) {
+QSGTexture* QQuickWindow_createTextureFromId_id_size_options(const QQuickWindow* self, unsigned int id, QSize* size, int options) {
 	return self->createTextureFromId(static_cast<uint>(id), *size, static_cast<QQuickWindow::CreateTextureOptions>(options));
 }
 
-QSGTexture* QQuickWindow_createTextureFromNativeObject2(const QQuickWindow* self, int type, const void* nativeObjectPtr, int nativeLayout, QSize* size, int options) {
+QSGTexture* QQuickWindow_createTextureFromNativeObject_type_nativeObjectPtr_nativeLayout_size_options(const QQuickWindow* self, int type, const void* nativeObjectPtr, int nativeLayout, QSize* size, int options) {
 	return self->createTextureFromNativeObject(static_cast<QQuickWindow::NativeObjectType>(type), nativeObjectPtr, static_cast<int>(nativeLayout), *size, static_cast<QQuickWindow::CreateTextureOptions>(options));
 }
 

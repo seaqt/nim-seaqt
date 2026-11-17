@@ -55,16 +55,16 @@ type cQObjectCleanupHandler*{.exportc: "QObjectCleanupHandler", incompleteStruct
 proc fcQObjectCleanupHandler_metaObject(self: pointer): pointer {.importc: "QObjectCleanupHandler_metaObject".}
 proc fcQObjectCleanupHandler_metacast(self: pointer, param1: cstring): pointer {.importc: "QObjectCleanupHandler_metacast".}
 proc fcQObjectCleanupHandler_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QObjectCleanupHandler_metacall".}
-proc fcQObjectCleanupHandler_tr(s: cstring): struct_seaqt_string {.importc: "QObjectCleanupHandler_tr".}
-proc fcQObjectCleanupHandler_trUtf8(s: cstring): struct_seaqt_string {.importc: "QObjectCleanupHandler_trUtf8".}
+proc fcQObjectCleanupHandler_trS(s: cstring): struct_seaqt_string {.importc: "QObjectCleanupHandler_tr_s".}
+proc fcQObjectCleanupHandler_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QObjectCleanupHandler_trUtf8_s".}
 proc fcQObjectCleanupHandler_add(self: pointer, objectVal: pointer): pointer {.importc: "QObjectCleanupHandler_add".}
 proc fcQObjectCleanupHandler_remove(self: pointer, objectVal: pointer): void {.importc: "QObjectCleanupHandler_remove".}
 proc fcQObjectCleanupHandler_isEmpty(self: pointer): bool {.importc: "QObjectCleanupHandler_isEmpty".}
 proc fcQObjectCleanupHandler_clear(self: pointer): void {.importc: "QObjectCleanupHandler_clear".}
-proc fcQObjectCleanupHandler_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QObjectCleanupHandler_tr2".}
-proc fcQObjectCleanupHandler_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QObjectCleanupHandler_tr3".}
-proc fcQObjectCleanupHandler_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QObjectCleanupHandler_trUtf82".}
-proc fcQObjectCleanupHandler_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QObjectCleanupHandler_trUtf83".}
+proc fcQObjectCleanupHandler_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QObjectCleanupHandler_tr_s_c".}
+proc fcQObjectCleanupHandler_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QObjectCleanupHandler_tr_s_c_n".}
+proc fcQObjectCleanupHandler_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QObjectCleanupHandler_trUtf8_s_c".}
+proc fcQObjectCleanupHandler_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QObjectCleanupHandler_trUtf8_s_c_n".}
 proc fcQObjectCleanupHandler_vdata(self: pointer): ptr pointer {.importc: "QObjectCleanupHandler_vdata".}
 proc fvdata_cQObjectCleanupHandler(self: pointer): pointer {.importc: "vdata_QObjectCleanupHandler".}
 
@@ -107,13 +107,13 @@ proc metacall*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, para
   fcQObjectCleanupHandler_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler, s: cstring): string =
-  let v_ms = fcQObjectCleanupHandler_tr(s)
+  let v_ms = fcQObjectCleanupHandler_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler, s: cstring): string =
-  let v_ms = fcQObjectCleanupHandler_trUtf8(s)
+  let v_ms = fcQObjectCleanupHandler_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -131,25 +131,25 @@ proc clear*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler): void =
   fcQObjectCleanupHandler_clear(self.h)
 
 proc tr*(_: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler, s: cstring, c: cstring): string =
-  let v_ms = fcQObjectCleanupHandler_tr2(s, c)
+  let v_ms = fcQObjectCleanupHandler_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQObjectCleanupHandler_tr3(s, c, n)
+  let v_ms = fcQObjectCleanupHandler_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler, s: cstring, c: cstring): string =
-  let v_ms = fcQObjectCleanupHandler_trUtf82(s, c)
+  let v_ms = fcQObjectCleanupHandler_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQObjectCleanupHandler_trUtf83(s, c, n)
+  let v_ms = fcQObjectCleanupHandler_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

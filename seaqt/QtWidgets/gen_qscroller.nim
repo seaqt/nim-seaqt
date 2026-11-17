@@ -79,43 +79,43 @@ type cQScroller*{.exportc: "QScroller", incompleteStruct.} = object
 proc fcQScroller_metaObject(self: pointer): pointer {.importc: "QScroller_metaObject".}
 proc fcQScroller_metacast(self: pointer, param1: cstring): pointer {.importc: "QScroller_metacast".}
 proc fcQScroller_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QScroller_metacall".}
-proc fcQScroller_tr(s: cstring): struct_seaqt_string {.importc: "QScroller_tr".}
-proc fcQScroller_trUtf8(s: cstring): struct_seaqt_string {.importc: "QScroller_trUtf8".}
+proc fcQScroller_trS(s: cstring): struct_seaqt_string {.importc: "QScroller_tr_s".}
+proc fcQScroller_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QScroller_trUtf8_s".}
 proc fcQScroller_hasScroller(target: pointer): bool {.importc: "QScroller_hasScroller".}
-proc fcQScroller_scroller(target: pointer): pointer {.importc: "QScroller_scroller".}
-proc fcQScroller_scrollerWithTarget(target: pointer): pointer {.importc: "QScroller_scrollerWithTarget".}
-proc fcQScroller_grabGesture(target: pointer): cint {.importc: "QScroller_grabGesture".}
+proc fcQScroller_scrollerPQObject(target: pointer): pointer {.importc: "QScroller_scroller_pQObject".}
+proc fcQScroller_scrollerPcQObject(target: pointer): pointer {.importc: "QScroller_scroller_pcQObject".}
+proc fcQScroller_grabGestureTarget(target: pointer): cint {.importc: "QScroller_grabGesture_target".}
 proc fcQScroller_grabbedGesture(target: pointer): cint {.importc: "QScroller_grabbedGesture".}
 proc fcQScroller_ungrabGesture(target: pointer): void {.importc: "QScroller_ungrabGesture".}
 proc fcQScroller_activeScrollers(): struct_seaqt_array {.importc: "QScroller_activeScrollers".}
 proc fcQScroller_target(self: pointer): pointer {.importc: "QScroller_target".}
 proc fcQScroller_state(self: pointer): cint {.importc: "QScroller_state".}
-proc fcQScroller_handleInput(self: pointer, input: cint, position: pointer): bool {.importc: "QScroller_handleInput".}
+proc fcQScroller_handleInputInputPosition(self: pointer, input: cint, position: pointer): bool {.importc: "QScroller_handleInput_input_position".}
 proc fcQScroller_stop(self: pointer): void {.importc: "QScroller_stop".}
 proc fcQScroller_velocity(self: pointer): pointer {.importc: "QScroller_velocity".}
 proc fcQScroller_finalPosition(self: pointer): pointer {.importc: "QScroller_finalPosition".}
 proc fcQScroller_pixelPerMeter(self: pointer): pointer {.importc: "QScroller_pixelPerMeter".}
 proc fcQScroller_scrollerProperties(self: pointer): pointer {.importc: "QScroller_scrollerProperties".}
-proc fcQScroller_setSnapPositionsX(self: pointer, positions: struct_seaqt_array): void {.importc: "QScroller_setSnapPositionsX".}
-proc fcQScroller_setSnapPositionsX2(self: pointer, first: float64, interval: float64): void {.importc: "QScroller_setSnapPositionsX2".}
-proc fcQScroller_setSnapPositionsY(self: pointer, positions: struct_seaqt_array): void {.importc: "QScroller_setSnapPositionsY".}
-proc fcQScroller_setSnapPositionsY2(self: pointer, first: float64, interval: float64): void {.importc: "QScroller_setSnapPositionsY2".}
+proc fcQScroller_setSnapPositionsXPositions(self: pointer, positions: struct_seaqt_array): void {.importc: "QScroller_setSnapPositionsX_positions".}
+proc fcQScroller_setSnapPositionsXFirstInterval(self: pointer, first: float64, interval: float64): void {.importc: "QScroller_setSnapPositionsX_first_interval".}
+proc fcQScroller_setSnapPositionsYPositions(self: pointer, positions: struct_seaqt_array): void {.importc: "QScroller_setSnapPositionsY_positions".}
+proc fcQScroller_setSnapPositionsYFirstInterval(self: pointer, first: float64, interval: float64): void {.importc: "QScroller_setSnapPositionsY_first_interval".}
 proc fcQScroller_setScrollerProperties(self: pointer, prop: pointer): void {.importc: "QScroller_setScrollerProperties".}
-proc fcQScroller_scrollTo(self: pointer, pos: pointer): void {.importc: "QScroller_scrollTo".}
-proc fcQScroller_scrollTo2(self: pointer, pos: pointer, scrollTime: cint): void {.importc: "QScroller_scrollTo2".}
-proc fcQScroller_ensureVisible(self: pointer, rect: pointer, xmargin: float64, ymargin: float64): void {.importc: "QScroller_ensureVisible".}
-proc fcQScroller_ensureVisible2(self: pointer, rect: pointer, xmargin: float64, ymargin: float64, scrollTime: cint): void {.importc: "QScroller_ensureVisible2".}
+proc fcQScroller_scrollToPos(self: pointer, pos: pointer): void {.importc: "QScroller_scrollTo_pos".}
+proc fcQScroller_scrollToPosScrollTime(self: pointer, pos: pointer, scrollTime: cint): void {.importc: "QScroller_scrollTo_pos_scrollTime".}
+proc fcQScroller_ensureVisibleRectXmarginYmargin(self: pointer, rect: pointer, xmargin: float64, ymargin: float64): void {.importc: "QScroller_ensureVisible_rect_xmargin_ymargin".}
+proc fcQScroller_ensureVisibleRectXmarginYmarginScrollTime(self: pointer, rect: pointer, xmargin: float64, ymargin: float64, scrollTime: cint): void {.importc: "QScroller_ensureVisible_rect_xmargin_ymargin_scrollTime".}
 proc fcQScroller_resendPrepareEvent(self: pointer): void {.importc: "QScroller_resendPrepareEvent".}
 proc fcQScroller_stateChanged(self: pointer, newstate: cint): void {.importc: "QScroller_stateChanged".}
 proc fcQScroller_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, newstate: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QScroller_connect_stateChanged".}
 proc fcQScroller_scrollerPropertiesChanged(self: pointer, param1: pointer): void {.importc: "QScroller_scrollerPropertiesChanged".}
 proc fcQScroller_connect_scrollerPropertiesChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QScroller_connect_scrollerPropertiesChanged".}
-proc fcQScroller_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScroller_tr2".}
-proc fcQScroller_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScroller_tr3".}
-proc fcQScroller_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScroller_trUtf82".}
-proc fcQScroller_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScroller_trUtf83".}
-proc fcQScroller_grabGesture2(target: pointer, gestureType: cint): cint {.importc: "QScroller_grabGesture2".}
-proc fcQScroller_handleInput2(self: pointer, input: cint, position: pointer, timestamp: clonglong): bool {.importc: "QScroller_handleInput2".}
+proc fcQScroller_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScroller_tr_s_c".}
+proc fcQScroller_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScroller_tr_s_c_n".}
+proc fcQScroller_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScroller_trUtf8_s_c".}
+proc fcQScroller_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScroller_trUtf8_s_c_n".}
+proc fcQScroller_grabGestureTargetGestureType(target: pointer, gestureType: cint): cint {.importc: "QScroller_grabGesture_target_gestureType".}
+proc fcQScroller_handleInputInputPositionTimestamp(self: pointer, input: cint, position: pointer, timestamp: clonglong): bool {.importc: "QScroller_handleInput_input_position_timestamp".}
 proc fcQScroller_protectedbase_sender(self: pointer): pointer {.importc: "QScroller_protectedbase_sender".}
 proc fcQScroller_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QScroller_protectedbase_senderSignalIndex".}
 proc fcQScroller_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScroller_protectedbase_receivers".}
@@ -132,13 +132,13 @@ proc metacall*(self: gen_qscroller_types.QScroller, param1: cint, param2: cint, 
   fcQScroller_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qscroller_types.QScroller, s: cstring): string =
-  let v_ms = fcQScroller_tr(s)
+  let v_ms = fcQScroller_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscroller_types.QScroller, s: cstring): string =
-  let v_ms = fcQScroller_trUtf8(s)
+  let v_ms = fcQScroller_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -147,13 +147,13 @@ proc hasScroller*(_: type gen_qscroller_types.QScroller, target: gen_qobject_typ
   fcQScroller_hasScroller(target.h)
 
 proc scroller*(_: type gen_qscroller_types.QScroller, target: gen_qobject_types.QObject): gen_qscroller_types.QScroller =
-  gen_qscroller_types.QScroller(h: fcQScroller_scroller(target.h), owned: false)
+  gen_qscroller_types.QScroller(h: fcQScroller_scrollerPQObject(target.h), owned: false)
 
 proc scroller2*(_: type gen_qscroller_types.QScroller, target: gen_qobject_types.QObject): gen_qscroller_types.QScroller =
-  gen_qscroller_types.QScroller(h: fcQScroller_scrollerWithTarget(target.h), owned: false)
+  gen_qscroller_types.QScroller(h: fcQScroller_scrollerPcQObject(target.h), owned: false)
 
 proc grabGesture*(_: type gen_qscroller_types.QScroller, target: gen_qobject_types.QObject): cint =
-  cint(fcQScroller_grabGesture(target.h))
+  cint(fcQScroller_grabGestureTarget(target.h))
 
 proc grabbedGesture*(_: type gen_qscroller_types.QScroller, target: gen_qobject_types.QObject): cint =
   cint(fcQScroller_grabbedGesture(target.h))
@@ -177,7 +177,7 @@ proc state*(self: gen_qscroller_types.QScroller): cint =
   cint(fcQScroller_state(self.h))
 
 proc handleInput*(self: gen_qscroller_types.QScroller, input: cint, position: gen_qpoint_types.QPointF): bool =
-  fcQScroller_handleInput(self.h, cint(input), position.h)
+  fcQScroller_handleInputInputPosition(self.h, cint(input), position.h)
 
 proc stop*(self: gen_qscroller_types.QScroller): void =
   fcQScroller_stop(self.h)
@@ -199,35 +199,35 @@ proc setSnapPositionsX*(self: gen_qscroller_types.QScroller, positions: openArra
   for i in 0..<len(positions):
     positions_CArray[i] = positions[i]
 
-  fcQScroller_setSnapPositionsX(self.h, struct_seaqt_array(len: csize_t(len(positions)), data: if len(positions) == 0: nil else: addr(positions_CArray[0])))
+  fcQScroller_setSnapPositionsXPositions(self.h, struct_seaqt_array(len: csize_t(len(positions)), data: if len(positions) == 0: nil else: addr(positions_CArray[0])))
 
 proc setSnapPositionsX*(self: gen_qscroller_types.QScroller, first: float64, interval: float64): void =
-  fcQScroller_setSnapPositionsX2(self.h, first, interval)
+  fcQScroller_setSnapPositionsXFirstInterval(self.h, first, interval)
 
 proc setSnapPositionsY*(self: gen_qscroller_types.QScroller, positions: openArray[float64]): void =
   var positions_CArray = newSeq[float64](len(positions))
   for i in 0..<len(positions):
     positions_CArray[i] = positions[i]
 
-  fcQScroller_setSnapPositionsY(self.h, struct_seaqt_array(len: csize_t(len(positions)), data: if len(positions) == 0: nil else: addr(positions_CArray[0])))
+  fcQScroller_setSnapPositionsYPositions(self.h, struct_seaqt_array(len: csize_t(len(positions)), data: if len(positions) == 0: nil else: addr(positions_CArray[0])))
 
 proc setSnapPositionsY*(self: gen_qscroller_types.QScroller, first: float64, interval: float64): void =
-  fcQScroller_setSnapPositionsY2(self.h, first, interval)
+  fcQScroller_setSnapPositionsYFirstInterval(self.h, first, interval)
 
 proc setScrollerProperties*(self: gen_qscroller_types.QScroller, prop: gen_qscrollerproperties_types.QScrollerProperties): void =
   fcQScroller_setScrollerProperties(self.h, prop.h)
 
 proc scrollTo*(self: gen_qscroller_types.QScroller, pos: gen_qpoint_types.QPointF): void =
-  fcQScroller_scrollTo(self.h, pos.h)
+  fcQScroller_scrollToPos(self.h, pos.h)
 
 proc scrollTo*(self: gen_qscroller_types.QScroller, pos: gen_qpoint_types.QPointF, scrollTime: cint): void =
-  fcQScroller_scrollTo2(self.h, pos.h, scrollTime)
+  fcQScroller_scrollToPosScrollTime(self.h, pos.h, scrollTime)
 
 proc ensureVisible*(self: gen_qscroller_types.QScroller, rect: gen_qrect_types.QRectF, xmargin: float64, ymargin: float64): void =
-  fcQScroller_ensureVisible(self.h, rect.h, xmargin, ymargin)
+  fcQScroller_ensureVisibleRectXmarginYmargin(self.h, rect.h, xmargin, ymargin)
 
 proc ensureVisible*(self: gen_qscroller_types.QScroller, rect: gen_qrect_types.QRectF, xmargin: float64, ymargin: float64, scrollTime: cint): void =
-  fcQScroller_ensureVisible2(self.h, rect.h, xmargin, ymargin, scrollTime)
+  fcQScroller_ensureVisibleRectXmarginYmarginScrollTime(self.h, rect.h, xmargin, ymargin, scrollTime)
 
 proc resendPrepareEvent*(self: gen_qscroller_types.QScroller): void =
   fcQScroller_resendPrepareEvent(self.h)
@@ -273,34 +273,34 @@ proc onScrollerPropertiesChanged*(self: gen_qscroller_types.QScroller, slot: QSc
   fcQScroller_connect_scrollerPropertiesChanged(self.h, cast[int](addr tmp[]), fcQScroller_slot_callback_scrollerPropertiesChanged, fcQScroller_slot_callback_scrollerPropertiesChanged_release)
 
 proc tr*(_: type gen_qscroller_types.QScroller, s: cstring, c: cstring): string =
-  let v_ms = fcQScroller_tr2(s, c)
+  let v_ms = fcQScroller_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qscroller_types.QScroller, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQScroller_tr3(s, c, n)
+  let v_ms = fcQScroller_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscroller_types.QScroller, s: cstring, c: cstring): string =
-  let v_ms = fcQScroller_trUtf82(s, c)
+  let v_ms = fcQScroller_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscroller_types.QScroller, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQScroller_trUtf83(s, c, n)
+  let v_ms = fcQScroller_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc grabGesture*(_: type gen_qscroller_types.QScroller, target: gen_qobject_types.QObject, gestureType: cint): cint =
-  cint(fcQScroller_grabGesture2(target.h, cint(gestureType)))
+  cint(fcQScroller_grabGestureTargetGestureType(target.h, cint(gestureType)))
 
 proc handleInput*(self: gen_qscroller_types.QScroller, input: cint, position: gen_qpoint_types.QPointF, timestamp: clonglong): bool =
-  fcQScroller_handleInput2(self.h, cint(input), position.h, timestamp)
+  fcQScroller_handleInputInputPositionTimestamp(self.h, cint(input), position.h, timestamp)
 
 proc sender*(self: gen_qscroller_types.QScroller): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQScroller_protectedbase_sender(self.h), owned: false)

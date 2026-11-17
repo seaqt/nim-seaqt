@@ -44,7 +44,7 @@ struct seaqt_array /* of struct seaqt_string */  QAudioSystemFactoryInterface_av
 QAbstractAudioInput* QAudioSystemFactoryInterface_createInput(QAudioSystemFactoryInterface* self, struct seaqt_string device);
 QAbstractAudioOutput* QAudioSystemFactoryInterface_createOutput(QAudioSystemFactoryInterface* self, struct seaqt_string device);
 QAbstractAudioDeviceInfo* QAudioSystemFactoryInterface_createDeviceInfo(QAudioSystemFactoryInterface* self, struct seaqt_string device, int mode);
-void QAudioSystemFactoryInterface_operatorAssign(QAudioSystemFactoryInterface* self, QAudioSystemFactoryInterface* param1);
+void QAudioSystemFactoryInterface_operatorAssign(QAudioSystemFactoryInterface* self, QAudioSystemFactoryInterface* from);
 
 void QAudioSystemFactoryInterface_delete(QAudioSystemFactoryInterface* self);
 
@@ -71,22 +71,22 @@ void* QAudioSystemPlugin_vdata(VirtualQAudioSystemPlugin* self);
 VirtualQAudioSystemPlugin* vdata_QAudioSystemPlugin(void* vdata);
 
 VirtualQAudioSystemPlugin* QAudioSystemPlugin_new(const QAudioSystemPlugin_VTable* vtbl, size_t vdata);
-VirtualQAudioSystemPlugin* QAudioSystemPlugin_new2(const QAudioSystemPlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAudioSystemPlugin* QAudioSystemPlugin_new_parent(const QAudioSystemPlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAudioSystemPlugin_virtbase(QAudioSystemPlugin* src, QObject** outptr_QObject, QAudioSystemFactoryInterface** outptr_QAudioSystemFactoryInterface);
 QMetaObject* QAudioSystemPlugin_metaObject(const QAudioSystemPlugin* self);
 void* QAudioSystemPlugin_metacast(QAudioSystemPlugin* self, const char* param1);
 int QAudioSystemPlugin_metacall(QAudioSystemPlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QAudioSystemPlugin_tr(const char* s);
-struct seaqt_string QAudioSystemPlugin_trUtf8(const char* s);
+struct seaqt_string QAudioSystemPlugin_tr_s(const char* s);
+struct seaqt_string QAudioSystemPlugin_trUtf8_s(const char* s);
 struct seaqt_array /* of struct seaqt_string */  QAudioSystemPlugin_availableDevices(const QAudioSystemPlugin* self, int param1);
 QAbstractAudioInput* QAudioSystemPlugin_createInput(QAudioSystemPlugin* self, struct seaqt_string device);
 QAbstractAudioOutput* QAudioSystemPlugin_createOutput(QAudioSystemPlugin* self, struct seaqt_string device);
 QAbstractAudioDeviceInfo* QAudioSystemPlugin_createDeviceInfo(QAudioSystemPlugin* self, struct seaqt_string device, int mode);
-struct seaqt_string QAudioSystemPlugin_tr2(const char* s, const char* c);
-struct seaqt_string QAudioSystemPlugin_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAudioSystemPlugin_trUtf82(const char* s, const char* c);
-struct seaqt_string QAudioSystemPlugin_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAudioSystemPlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAudioSystemPlugin_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAudioSystemPlugin_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAudioSystemPlugin_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAudioSystemPlugin_virtualbase_metaObject(const VirtualQAudioSystemPlugin* self);
 void* QAudioSystemPlugin_virtualbase_metacast(VirtualQAudioSystemPlugin* self, const char* param1);

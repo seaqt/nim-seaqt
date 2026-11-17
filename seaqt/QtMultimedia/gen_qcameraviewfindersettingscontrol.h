@@ -38,15 +38,15 @@ void QCameraViewfinderSettingsControl_virtbase(QCameraViewfinderSettingsControl*
 QMetaObject* QCameraViewfinderSettingsControl_metaObject(const QCameraViewfinderSettingsControl* self);
 void* QCameraViewfinderSettingsControl_metacast(QCameraViewfinderSettingsControl* self, const char* param1);
 int QCameraViewfinderSettingsControl_metacall(QCameraViewfinderSettingsControl* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraViewfinderSettingsControl_tr(const char* s);
-struct seaqt_string QCameraViewfinderSettingsControl_trUtf8(const char* s);
+struct seaqt_string QCameraViewfinderSettingsControl_tr_s(const char* s);
+struct seaqt_string QCameraViewfinderSettingsControl_trUtf8_s(const char* s);
 bool QCameraViewfinderSettingsControl_isViewfinderParameterSupported(const QCameraViewfinderSettingsControl* self, int parameter);
 QVariant* QCameraViewfinderSettingsControl_viewfinderParameter(const QCameraViewfinderSettingsControl* self, int parameter);
 void QCameraViewfinderSettingsControl_setViewfinderParameter(QCameraViewfinderSettingsControl* self, int parameter, QVariant* value);
-struct seaqt_string QCameraViewfinderSettingsControl_tr2(const char* s, const char* c);
-struct seaqt_string QCameraViewfinderSettingsControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraViewfinderSettingsControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraViewfinderSettingsControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraViewfinderSettingsControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraViewfinderSettingsControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraViewfinderSettingsControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraViewfinderSettingsControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraViewfinderSettingsControl_staticMetaObject();
 void QCameraViewfinderSettingsControl_delete(QCameraViewfinderSettingsControl* self);
@@ -55,15 +55,15 @@ void QCameraViewfinderSettingsControl2_virtbase(QCameraViewfinderSettingsControl
 QMetaObject* QCameraViewfinderSettingsControl2_metaObject(const QCameraViewfinderSettingsControl2* self);
 void* QCameraViewfinderSettingsControl2_metacast(QCameraViewfinderSettingsControl2* self, const char* param1);
 int QCameraViewfinderSettingsControl2_metacall(QCameraViewfinderSettingsControl2* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraViewfinderSettingsControl2_tr(const char* s);
-struct seaqt_string QCameraViewfinderSettingsControl2_trUtf8(const char* s);
+struct seaqt_string QCameraViewfinderSettingsControl2_tr_s(const char* s);
+struct seaqt_string QCameraViewfinderSettingsControl2_trUtf8_s(const char* s);
 struct seaqt_array /* of QCameraViewfinderSettings* */  QCameraViewfinderSettingsControl2_supportedViewfinderSettings(const QCameraViewfinderSettingsControl2* self);
 QCameraViewfinderSettings* QCameraViewfinderSettingsControl2_viewfinderSettings(const QCameraViewfinderSettingsControl2* self);
 void QCameraViewfinderSettingsControl2_setViewfinderSettings(QCameraViewfinderSettingsControl2* self, QCameraViewfinderSettings* settings);
-struct seaqt_string QCameraViewfinderSettingsControl2_tr2(const char* s, const char* c);
-struct seaqt_string QCameraViewfinderSettingsControl2_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraViewfinderSettingsControl2_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraViewfinderSettingsControl2_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraViewfinderSettingsControl2_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraViewfinderSettingsControl2_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraViewfinderSettingsControl2_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraViewfinderSettingsControl2_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraViewfinderSettingsControl2_staticMetaObject();
 void QCameraViewfinderSettingsControl2_delete(QCameraViewfinderSettingsControl2* self);

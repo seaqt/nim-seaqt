@@ -57,8 +57,8 @@ type cQMetaDataWriterControl*{.exportc: "QMetaDataWriterControl", incompleteStru
 proc fcQMetaDataWriterControl_metaObject(self: pointer): pointer {.importc: "QMetaDataWriterControl_metaObject".}
 proc fcQMetaDataWriterControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMetaDataWriterControl_metacast".}
 proc fcQMetaDataWriterControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMetaDataWriterControl_metacall".}
-proc fcQMetaDataWriterControl_tr(s: cstring): struct_seaqt_string {.importc: "QMetaDataWriterControl_tr".}
-proc fcQMetaDataWriterControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMetaDataWriterControl_trUtf8".}
+proc fcQMetaDataWriterControl_trS(s: cstring): struct_seaqt_string {.importc: "QMetaDataWriterControl_tr_s".}
+proc fcQMetaDataWriterControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMetaDataWriterControl_trUtf8_s".}
 proc fcQMetaDataWriterControl_isWritable(self: pointer): bool {.importc: "QMetaDataWriterControl_isWritable".}
 proc fcQMetaDataWriterControl_isMetaDataAvailable(self: pointer): bool {.importc: "QMetaDataWriterControl_isMetaDataAvailable".}
 proc fcQMetaDataWriterControl_metaData(self: pointer, key: struct_seaqt_string): pointer {.importc: "QMetaDataWriterControl_metaData".}
@@ -66,16 +66,16 @@ proc fcQMetaDataWriterControl_setMetaData(self: pointer, key: struct_seaqt_strin
 proc fcQMetaDataWriterControl_availableMetaData(self: pointer): struct_seaqt_array {.importc: "QMetaDataWriterControl_availableMetaData".}
 proc fcQMetaDataWriterControl_metaDataChanged(self: pointer): void {.importc: "QMetaDataWriterControl_metaDataChanged".}
 proc fcQMetaDataWriterControl_connect_metaDataChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMetaDataWriterControl_connect_metaDataChanged".}
-proc fcQMetaDataWriterControl_metaDataChanged2(self: pointer, key: struct_seaqt_string, value: pointer): void {.importc: "QMetaDataWriterControl_metaDataChanged2".}
-proc fcQMetaDataWriterControl_connect_metaDataChanged2(self: pointer, slot: int, callback: proc (slot: int, key: struct_seaqt_string, value: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMetaDataWriterControl_connect_metaDataChanged2".}
+proc fcQMetaDataWriterControl_metaDataChangedKeyValue(self: pointer, key: struct_seaqt_string, value: pointer): void {.importc: "QMetaDataWriterControl_metaDataChanged_key_value".}
+proc fcQMetaDataWriterControl_connect_metaDataChangedKeyValue(self: pointer, slot: int, callback: proc (slot: int, key: struct_seaqt_string, value: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMetaDataWriterControl_connect_metaDataChanged_key_value".}
 proc fcQMetaDataWriterControl_writableChanged(self: pointer, writable: bool): void {.importc: "QMetaDataWriterControl_writableChanged".}
 proc fcQMetaDataWriterControl_connect_writableChanged(self: pointer, slot: int, callback: proc (slot: int, writable: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMetaDataWriterControl_connect_writableChanged".}
 proc fcQMetaDataWriterControl_metaDataAvailableChanged(self: pointer, available: bool): void {.importc: "QMetaDataWriterControl_metaDataAvailableChanged".}
 proc fcQMetaDataWriterControl_connect_metaDataAvailableChanged(self: pointer, slot: int, callback: proc (slot: int, available: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMetaDataWriterControl_connect_metaDataAvailableChanged".}
-proc fcQMetaDataWriterControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMetaDataWriterControl_tr2".}
-proc fcQMetaDataWriterControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMetaDataWriterControl_tr3".}
-proc fcQMetaDataWriterControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMetaDataWriterControl_trUtf82".}
-proc fcQMetaDataWriterControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMetaDataWriterControl_trUtf83".}
+proc fcQMetaDataWriterControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMetaDataWriterControl_tr_s_c".}
+proc fcQMetaDataWriterControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMetaDataWriterControl_tr_s_c_n".}
+proc fcQMetaDataWriterControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMetaDataWriterControl_trUtf8_s_c".}
+proc fcQMetaDataWriterControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMetaDataWriterControl_trUtf8_s_c_n".}
 proc fcQMetaDataWriterControl_protectedbase_sender(self: pointer): pointer {.importc: "QMetaDataWriterControl_protectedbase_sender".}
 proc fcQMetaDataWriterControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMetaDataWriterControl_protectedbase_senderSignalIndex".}
 proc fcQMetaDataWriterControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMetaDataWriterControl_protectedbase_receivers".}
@@ -92,13 +92,13 @@ proc metacall*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, pa
   fcQMetaDataWriterControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl, s: cstring): string =
-  let v_ms = fcQMetaDataWriterControl_tr(s)
+  let v_ms = fcQMetaDataWriterControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl, s: cstring): string =
-  let v_ms = fcQMetaDataWriterControl_trUtf8(s)
+  let v_ms = fcQMetaDataWriterControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -146,11 +146,11 @@ proc onMetaDataChanged*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterCo
   fcQMetaDataWriterControl_connect_metaDataChanged(self.h, cast[int](addr tmp[]), fcQMetaDataWriterControl_slot_callback_metaDataChanged, fcQMetaDataWriterControl_slot_callback_metaDataChanged_release)
 
 proc metaDataChanged*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, key: openArray[char], value: gen_qvariant_types.QVariant): void =
-  fcQMetaDataWriterControl_metaDataChanged2(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
+  fcQMetaDataWriterControl_metaDataChangedKeyValue(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
-type QMetaDataWriterControlmetaDataChanged2Slot* = proc(key: openArray[char], value: gen_qvariant_types.QVariant)
-proc fcQMetaDataWriterControl_slot_callback_metaDataChanged2(slot: int, key: struct_seaqt_string, value: pointer) {.cdecl.} =
-  let nimfunc = cast[ptr QMetaDataWriterControlmetaDataChanged2Slot](cast[pointer](slot))
+type QMetaDataWriterControlmetaDataChangedKeyValueSlot* = proc(key: openArray[char], value: gen_qvariant_types.QVariant)
+proc fcQMetaDataWriterControl_slot_callback_metaDataChangedKeyValue(slot: int, key: struct_seaqt_string, value: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QMetaDataWriterControlmetaDataChangedKeyValueSlot](cast[pointer](slot))
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
@@ -160,15 +160,15 @@ proc fcQMetaDataWriterControl_slot_callback_metaDataChanged2(slot: int, key: str
 
   nimfunc[](slotval1, slotval2)
 
-proc fcQMetaDataWriterControl_slot_callback_metaDataChanged2_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QMetaDataWriterControlmetaDataChanged2Slot](cast[pointer](slot))
+proc fcQMetaDataWriterControl_slot_callback_metaDataChangedKeyValue_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMetaDataWriterControlmetaDataChangedKeyValueSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onMetaDataChanged*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, slot: QMetaDataWriterControlmetaDataChanged2Slot) =
-  var tmp = new QMetaDataWriterControlmetaDataChanged2Slot
+proc onMetaDataChanged*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, slot: QMetaDataWriterControlmetaDataChangedKeyValueSlot) =
+  var tmp = new QMetaDataWriterControlmetaDataChangedKeyValueSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMetaDataWriterControl_connect_metaDataChanged2(self.h, cast[int](addr tmp[]), fcQMetaDataWriterControl_slot_callback_metaDataChanged2, fcQMetaDataWriterControl_slot_callback_metaDataChanged2_release)
+  fcQMetaDataWriterControl_connect_metaDataChangedKeyValue(self.h, cast[int](addr tmp[]), fcQMetaDataWriterControl_slot_callback_metaDataChangedKeyValue, fcQMetaDataWriterControl_slot_callback_metaDataChangedKeyValue_release)
 
 proc writableChanged*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, writable: bool): void =
   fcQMetaDataWriterControl_writableChanged(self.h, writable)
@@ -211,25 +211,25 @@ proc onMetaDataAvailableChanged*(self: gen_qmetadatawritercontrol_types.QMetaDat
   fcQMetaDataWriterControl_connect_metaDataAvailableChanged(self.h, cast[int](addr tmp[]), fcQMetaDataWriterControl_slot_callback_metaDataAvailableChanged, fcQMetaDataWriterControl_slot_callback_metaDataAvailableChanged_release)
 
 proc tr*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMetaDataWriterControl_tr2(s, c)
+  let v_ms = fcQMetaDataWriterControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMetaDataWriterControl_tr3(s, c, n)
+  let v_ms = fcQMetaDataWriterControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMetaDataWriterControl_trUtf82(s, c)
+  let v_ms = fcQMetaDataWriterControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMetaDataWriterControl_trUtf83(s, c, n)
+  let v_ms = fcQMetaDataWriterControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -39,9 +39,9 @@ typedef struct QVariant QVariant;
 #endif
 
 QHttpPart* QHttpPart_new();
-QHttpPart* QHttpPart_new2(QHttpPart* other);
+QHttpPart* QHttpPart_new_from(QHttpPart* from);
 
-void QHttpPart_operatorAssign(QHttpPart* self, QHttpPart* other);
+void QHttpPart_operatorAssign(QHttpPart* self, QHttpPart* from);
 void QHttpPart_swap(QHttpPart* self, QHttpPart* other);
 bool QHttpPart_operatorEqual(const QHttpPart* self, QHttpPart* other);
 bool QHttpPart_operatorNotEqual(const QHttpPart* self, QHttpPart* other);
@@ -71,24 +71,24 @@ void* QHttpMultiPart_vdata(VirtualQHttpMultiPart* self);
 VirtualQHttpMultiPart* vdata_QHttpMultiPart(void* vdata);
 
 VirtualQHttpMultiPart* QHttpMultiPart_new(const QHttpMultiPart_VTable* vtbl, size_t vdata);
-VirtualQHttpMultiPart* QHttpMultiPart_new2(const QHttpMultiPart_VTable* vtbl, size_t vdata, int contentType);
-VirtualQHttpMultiPart* QHttpMultiPart_new3(const QHttpMultiPart_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQHttpMultiPart* QHttpMultiPart_new4(const QHttpMultiPart_VTable* vtbl, size_t vdata, int contentType, QObject* parent);
+VirtualQHttpMultiPart* QHttpMultiPart_new_contentType(const QHttpMultiPart_VTable* vtbl, size_t vdata, int contentType);
+VirtualQHttpMultiPart* QHttpMultiPart_new_parent(const QHttpMultiPart_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQHttpMultiPart* QHttpMultiPart_new_contentType_parent(const QHttpMultiPart_VTable* vtbl, size_t vdata, int contentType, QObject* parent);
 
 void QHttpMultiPart_virtbase(QHttpMultiPart* src, QObject** outptr_QObject);
 QMetaObject* QHttpMultiPart_metaObject(const QHttpMultiPart* self);
 void* QHttpMultiPart_metacast(QHttpMultiPart* self, const char* param1);
 int QHttpMultiPart_metacall(QHttpMultiPart* self, int param1, int param2, void** param3);
-struct seaqt_string QHttpMultiPart_tr(const char* s);
-struct seaqt_string QHttpMultiPart_trUtf8(const char* s);
+struct seaqt_string QHttpMultiPart_tr_s(const char* s);
+struct seaqt_string QHttpMultiPart_trUtf8_s(const char* s);
 void QHttpMultiPart_append(QHttpMultiPart* self, QHttpPart* httpPart);
 void QHttpMultiPart_setContentType(QHttpMultiPart* self, int contentType);
 struct seaqt_string QHttpMultiPart_boundary(const QHttpMultiPart* self);
 void QHttpMultiPart_setBoundary(QHttpMultiPart* self, struct seaqt_string boundary);
-struct seaqt_string QHttpMultiPart_tr2(const char* s, const char* c);
-struct seaqt_string QHttpMultiPart_tr3(const char* s, const char* c, int n);
-struct seaqt_string QHttpMultiPart_trUtf82(const char* s, const char* c);
-struct seaqt_string QHttpMultiPart_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QHttpMultiPart_tr_s_c(const char* s, const char* c);
+struct seaqt_string QHttpMultiPart_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QHttpMultiPart_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QHttpMultiPart_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QHttpMultiPart_virtualbase_metaObject(const VirtualQHttpMultiPart* self);
 void* QHttpMultiPart_virtualbase_metacast(VirtualQHttpMultiPart* self, const char* param1);

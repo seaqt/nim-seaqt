@@ -66,8 +66,8 @@ proc fcQSvgGenerator_size(self: pointer): pointer {.importc: "QSvgGenerator_size
 proc fcQSvgGenerator_setSize(self: pointer, size: pointer): void {.importc: "QSvgGenerator_setSize".}
 proc fcQSvgGenerator_viewBox(self: pointer): pointer {.importc: "QSvgGenerator_viewBox".}
 proc fcQSvgGenerator_viewBoxF(self: pointer): pointer {.importc: "QSvgGenerator_viewBoxF".}
-proc fcQSvgGenerator_setViewBox(self: pointer, viewBox: pointer): void {.importc: "QSvgGenerator_setViewBox".}
-proc fcQSvgGenerator_setViewBoxWithViewBox(self: pointer, viewBox: pointer): void {.importc: "QSvgGenerator_setViewBoxWithViewBox".}
+proc fcQSvgGenerator_setViewBox_QRect(self: pointer, viewBox: pointer): void {.importc: "QSvgGenerator_setViewBox_QRect".}
+proc fcQSvgGenerator_setViewBox_QRectF(self: pointer, viewBox: pointer): void {.importc: "QSvgGenerator_setViewBox_QRectF".}
 proc fcQSvgGenerator_fileName(self: pointer): struct_seaqt_string {.importc: "QSvgGenerator_fileName".}
 proc fcQSvgGenerator_setFileName(self: pointer, fileName: struct_seaqt_string): void {.importc: "QSvgGenerator_setFileName".}
 proc fcQSvgGenerator_outputDevice(self: pointer): pointer {.importc: "QSvgGenerator_outputDevice".}
@@ -124,10 +124,10 @@ proc viewBoxF*(self: gen_qsvggenerator_types.QSvgGenerator): gen_qrect_types.QRe
   gen_qrect_types.QRectF(h: fcQSvgGenerator_viewBoxF(self.h), owned: true)
 
 proc setViewBox*(self: gen_qsvggenerator_types.QSvgGenerator, viewBox: gen_qrect_types.QRect): void =
-  fcQSvgGenerator_setViewBox(self.h, viewBox.h)
+  fcQSvgGenerator_setViewBox_QRect(self.h, viewBox.h)
 
 proc setViewBox*(self: gen_qsvggenerator_types.QSvgGenerator, viewBox: gen_qrect_types.QRectF): void =
-  fcQSvgGenerator_setViewBoxWithViewBox(self.h, viewBox.h)
+  fcQSvgGenerator_setViewBox_QRectF(self.h, viewBox.h)
 
 proc fileName*(self: gen_qsvggenerator_types.QSvgGenerator): string =
   let v_ms = fcQSvgGenerator_fileName(self.h)

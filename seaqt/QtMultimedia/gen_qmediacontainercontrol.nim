@@ -55,16 +55,16 @@ type cQMediaContainerControl*{.exportc: "QMediaContainerControl", incompleteStru
 proc fcQMediaContainerControl_metaObject(self: pointer): pointer {.importc: "QMediaContainerControl_metaObject".}
 proc fcQMediaContainerControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaContainerControl_metacast".}
 proc fcQMediaContainerControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaContainerControl_metacall".}
-proc fcQMediaContainerControl_tr(s: cstring): struct_seaqt_string {.importc: "QMediaContainerControl_tr".}
-proc fcQMediaContainerControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaContainerControl_trUtf8".}
+proc fcQMediaContainerControl_trS(s: cstring): struct_seaqt_string {.importc: "QMediaContainerControl_tr_s".}
+proc fcQMediaContainerControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaContainerControl_trUtf8_s".}
 proc fcQMediaContainerControl_supportedContainers(self: pointer): struct_seaqt_array {.importc: "QMediaContainerControl_supportedContainers".}
 proc fcQMediaContainerControl_containerFormat(self: pointer): struct_seaqt_string {.importc: "QMediaContainerControl_containerFormat".}
 proc fcQMediaContainerControl_setContainerFormat(self: pointer, format: struct_seaqt_string): void {.importc: "QMediaContainerControl_setContainerFormat".}
 proc fcQMediaContainerControl_containerDescription(self: pointer, formatMimeType: struct_seaqt_string): struct_seaqt_string {.importc: "QMediaContainerControl_containerDescription".}
-proc fcQMediaContainerControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaContainerControl_tr2".}
-proc fcQMediaContainerControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaContainerControl_tr3".}
-proc fcQMediaContainerControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaContainerControl_trUtf82".}
-proc fcQMediaContainerControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaContainerControl_trUtf83".}
+proc fcQMediaContainerControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaContainerControl_tr_s_c".}
+proc fcQMediaContainerControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaContainerControl_tr_s_c_n".}
+proc fcQMediaContainerControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaContainerControl_trUtf8_s_c".}
+proc fcQMediaContainerControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaContainerControl_trUtf8_s_c_n".}
 proc fcQMediaContainerControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaContainerControl_protectedbase_sender".}
 proc fcQMediaContainerControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaContainerControl_protectedbase_senderSignalIndex".}
 proc fcQMediaContainerControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaContainerControl_protectedbase_receivers".}
@@ -81,13 +81,13 @@ proc metacall*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, pa
   fcQMediaContainerControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring): string =
-  let v_ms = fcQMediaContainerControl_tr(s)
+  let v_ms = fcQMediaContainerControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring): string =
-  let v_ms = fcQMediaContainerControl_trUtf8(s)
+  let v_ms = fcQMediaContainerControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -120,25 +120,25 @@ proc containerDescription*(self: gen_qmediacontainercontrol_types.QMediaContaine
   vx_ret
 
 proc tr*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaContainerControl_tr2(s, c)
+  let v_ms = fcQMediaContainerControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaContainerControl_tr3(s, c, n)
+  let v_ms = fcQMediaContainerControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaContainerControl_trUtf82(s, c)
+  let v_ms = fcQMediaContainerControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaContainerControl_trUtf83(s, c, n)
+  let v_ms = fcQMediaContainerControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

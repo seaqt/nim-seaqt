@@ -55,29 +55,29 @@ void* QEventLoop_vdata(VirtualQEventLoop* self);
 VirtualQEventLoop* vdata_QEventLoop(void* vdata);
 
 VirtualQEventLoop* QEventLoop_new(const QEventLoop_VTable* vtbl, size_t vdata);
-VirtualQEventLoop* QEventLoop_new2(const QEventLoop_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQEventLoop* QEventLoop_new_parent(const QEventLoop_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QEventLoop_virtbase(QEventLoop* src, QObject** outptr_QObject);
 QMetaObject* QEventLoop_metaObject(const QEventLoop* self);
 void* QEventLoop_metacast(QEventLoop* self, const char* param1);
 int QEventLoop_metacall(QEventLoop* self, int param1, int param2, void** param3);
-struct seaqt_string QEventLoop_tr(const char* s);
-struct seaqt_string QEventLoop_trUtf8(const char* s);
+struct seaqt_string QEventLoop_tr_s(const char* s);
+struct seaqt_string QEventLoop_trUtf8_s(const char* s);
 bool QEventLoop_processEvents(QEventLoop* self);
-void QEventLoop_processEvents2(QEventLoop* self, int flags, int maximumTime);
+void QEventLoop_processEvents_flags_maximumTime(QEventLoop* self, int flags, int maximumTime);
 int QEventLoop_exec(QEventLoop* self);
 void QEventLoop_exit(QEventLoop* self);
 bool QEventLoop_isRunning(const QEventLoop* self);
 void QEventLoop_wakeUp(QEventLoop* self);
 bool QEventLoop_event(QEventLoop* self, QEvent* event);
 void QEventLoop_quit(QEventLoop* self);
-struct seaqt_string QEventLoop_tr2(const char* s, const char* c);
-struct seaqt_string QEventLoop_tr3(const char* s, const char* c, int n);
-struct seaqt_string QEventLoop_trUtf82(const char* s, const char* c);
-struct seaqt_string QEventLoop_trUtf83(const char* s, const char* c, int n);
-bool QEventLoop_processEventsWithFlags(QEventLoop* self, int flags);
-int QEventLoop_execWithFlags(QEventLoop* self, int flags);
-void QEventLoop_exitWithReturnCode(QEventLoop* self, int returnCode);
+struct seaqt_string QEventLoop_tr_s_c(const char* s, const char* c);
+struct seaqt_string QEventLoop_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QEventLoop_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QEventLoop_trUtf8_s_c_n(const char* s, const char* c, int n);
+bool QEventLoop_processEvents_flags(QEventLoop* self, int flags);
+int QEventLoop_exec_flags(QEventLoop* self, int flags);
+void QEventLoop_exit_returnCode(QEventLoop* self, int returnCode);
 
 QMetaObject* QEventLoop_virtualbase_metaObject(const VirtualQEventLoop* self);
 void* QEventLoop_virtualbase_metacast(VirtualQEventLoop* self, const char* param1);
@@ -99,8 +99,8 @@ const QMetaObject* QEventLoop_staticMetaObject();
 void QEventLoop_delete(QEventLoop* self);
 
 QEventLoopLocker* QEventLoopLocker_new();
-QEventLoopLocker* QEventLoopLocker_new2(QEventLoop* loop);
-QEventLoopLocker* QEventLoopLocker_new3(QThread* thread);
+QEventLoopLocker* QEventLoopLocker_new_loop(QEventLoop* loop);
+QEventLoopLocker* QEventLoopLocker_new_thread(QThread* thread);
 
 void QEventLoopLocker_delete(QEventLoopLocker* self);
 

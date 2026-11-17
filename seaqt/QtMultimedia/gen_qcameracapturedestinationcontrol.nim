@@ -55,17 +55,17 @@ type cQCameraCaptureDestinationControl*{.exportc: "QCameraCaptureDestinationCont
 proc fcQCameraCaptureDestinationControl_metaObject(self: pointer): pointer {.importc: "QCameraCaptureDestinationControl_metaObject".}
 proc fcQCameraCaptureDestinationControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraCaptureDestinationControl_metacast".}
 proc fcQCameraCaptureDestinationControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraCaptureDestinationControl_metacall".}
-proc fcQCameraCaptureDestinationControl_tr(s: cstring): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_tr".}
-proc fcQCameraCaptureDestinationControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_trUtf8".}
+proc fcQCameraCaptureDestinationControl_trS(s: cstring): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_tr_s".}
+proc fcQCameraCaptureDestinationControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_trUtf8_s".}
 proc fcQCameraCaptureDestinationControl_isCaptureDestinationSupported(self: pointer, destination: cint): bool {.importc: "QCameraCaptureDestinationControl_isCaptureDestinationSupported".}
 proc fcQCameraCaptureDestinationControl_captureDestination(self: pointer): cint {.importc: "QCameraCaptureDestinationControl_captureDestination".}
 proc fcQCameraCaptureDestinationControl_setCaptureDestination(self: pointer, destination: cint): void {.importc: "QCameraCaptureDestinationControl_setCaptureDestination".}
 proc fcQCameraCaptureDestinationControl_captureDestinationChanged(self: pointer, destination: cint): void {.importc: "QCameraCaptureDestinationControl_captureDestinationChanged".}
 proc fcQCameraCaptureDestinationControl_connect_captureDestinationChanged(self: pointer, slot: int, callback: proc (slot: int, destination: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraCaptureDestinationControl_connect_captureDestinationChanged".}
-proc fcQCameraCaptureDestinationControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_tr2".}
-proc fcQCameraCaptureDestinationControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_tr3".}
-proc fcQCameraCaptureDestinationControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_trUtf82".}
-proc fcQCameraCaptureDestinationControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_trUtf83".}
+proc fcQCameraCaptureDestinationControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_tr_s_c".}
+proc fcQCameraCaptureDestinationControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_tr_s_c_n".}
+proc fcQCameraCaptureDestinationControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_trUtf8_s_c".}
+proc fcQCameraCaptureDestinationControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraCaptureDestinationControl_trUtf8_s_c_n".}
 proc fcQCameraCaptureDestinationControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraCaptureDestinationControl_protectedbase_sender".}
 proc fcQCameraCaptureDestinationControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraCaptureDestinationControl_protectedbase_senderSignalIndex".}
 proc fcQCameraCaptureDestinationControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraCaptureDestinationControl_protectedbase_receivers".}
@@ -82,13 +82,13 @@ proc metacall*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDe
   fcQCameraCaptureDestinationControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, s: cstring): string =
-  let v_ms = fcQCameraCaptureDestinationControl_tr(s)
+  let v_ms = fcQCameraCaptureDestinationControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, s: cstring): string =
-  let v_ms = fcQCameraCaptureDestinationControl_trUtf8(s)
+  let v_ms = fcQCameraCaptureDestinationControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -123,25 +123,25 @@ proc onCaptureDestinationChanged*(self: gen_qcameracapturedestinationcontrol_typ
   fcQCameraCaptureDestinationControl_connect_captureDestinationChanged(self.h, cast[int](addr tmp[]), fcQCameraCaptureDestinationControl_slot_callback_captureDestinationChanged, fcQCameraCaptureDestinationControl_slot_callback_captureDestinationChanged_release)
 
 proc tr*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraCaptureDestinationControl_tr2(s, c)
+  let v_ms = fcQCameraCaptureDestinationControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraCaptureDestinationControl_tr3(s, c, n)
+  let v_ms = fcQCameraCaptureDestinationControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraCaptureDestinationControl_trUtf82(s, c)
+  let v_ms = fcQCameraCaptureDestinationControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraCaptureDestinationControl_trUtf83(s, c, n)
+  let v_ms = fcQCameraCaptureDestinationControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

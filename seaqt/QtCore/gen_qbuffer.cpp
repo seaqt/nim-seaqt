@@ -367,7 +367,7 @@ VirtualQBuffer* QBuffer_new(const QBuffer_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQBuffer(vtbl) : nullptr;
 }
 
-VirtualQBuffer* QBuffer_new2(const QBuffer_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQBuffer* QBuffer_new_parent(const QBuffer_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQBuffer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQBuffer(vtbl, parent) : nullptr;
 }
@@ -388,7 +388,7 @@ int QBuffer_metacall(QBuffer* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QBuffer_tr(const char* s) {
+struct seaqt_string QBuffer_tr_s(const char* s) {
 	QString _ret = QBuffer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -399,7 +399,7 @@ struct seaqt_string QBuffer_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QBuffer_trUtf8(const char* s) {
+struct seaqt_string QBuffer_trUtf8_s(const char* s) {
 	QString _ret = QBuffer::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -419,7 +419,7 @@ struct seaqt_string QBuffer_buffer(QBuffer* self) {
 	return _ms;
 }
 
-struct seaqt_string QBuffer_buffer2(const QBuffer* self) {
+struct seaqt_string QBuffer_buffer_const(const QBuffer* self) {
 	const QByteArray _qb = self->buffer();
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();
@@ -428,12 +428,12 @@ struct seaqt_string QBuffer_buffer2(const QBuffer* self) {
 	return _ms;
 }
 
-void QBuffer_setData(QBuffer* self, struct seaqt_string data) {
+void QBuffer_setData_data(QBuffer* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->setData(data_QByteArray);
 }
 
-void QBuffer_setData2(QBuffer* self, const char* data, int len) {
+void QBuffer_setData_data_len(QBuffer* self, const char* data, int len) {
 	self->setData(data, static_cast<int>(len));
 }
 
@@ -476,7 +476,7 @@ bool QBuffer_canReadLine(const QBuffer* self) {
 	return self->canReadLine();
 }
 
-struct seaqt_string QBuffer_tr2(const char* s, const char* c) {
+struct seaqt_string QBuffer_tr_s_c(const char* s, const char* c) {
 	QString _ret = QBuffer::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -487,7 +487,7 @@ struct seaqt_string QBuffer_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QBuffer_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QBuffer_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QBuffer::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -498,7 +498,7 @@ struct seaqt_string QBuffer_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QBuffer_trUtf82(const char* s, const char* c) {
+struct seaqt_string QBuffer_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QBuffer::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -509,7 +509,7 @@ struct seaqt_string QBuffer_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QBuffer_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QBuffer_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QBuffer::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

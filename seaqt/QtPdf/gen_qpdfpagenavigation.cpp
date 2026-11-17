@@ -173,7 +173,7 @@ VirtualQPdfPageNavigation* QPdfPageNavigation_new(const QPdfPageNavigation_VTabl
 	return _mem_ ? new (_mem_)VirtualQPdfPageNavigation(vtbl) : nullptr;
 }
 
-VirtualQPdfPageNavigation* QPdfPageNavigation_new2(const QPdfPageNavigation_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQPdfPageNavigation* QPdfPageNavigation_new_parent(const QPdfPageNavigation_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPdfPageNavigation>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPdfPageNavigation(vtbl, parent) : nullptr;
 }
@@ -194,7 +194,7 @@ int QPdfPageNavigation_metacall(QPdfPageNavigation* self, int param1, int param2
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPdfPageNavigation_tr(const char* s) {
+struct seaqt_string QPdfPageNavigation_tr_s(const char* s) {
 	QString _ret = QPdfPageNavigation::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -205,7 +205,7 @@ struct seaqt_string QPdfPageNavigation_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QPdfPageNavigation_trUtf8(const char* s) {
+struct seaqt_string QPdfPageNavigation_trUtf8_s(const char* s) {
 	QString _ret = QPdfPageNavigation::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -332,7 +332,7 @@ void QPdfPageNavigation_connect_canGoToNextPageChanged(QPdfPageNavigation* self,
 	QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(bool)>(&QPdfPageNavigation::canGoToNextPageChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QPdfPageNavigation_tr2(const char* s, const char* c) {
+struct seaqt_string QPdfPageNavigation_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPdfPageNavigation::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -343,7 +343,7 @@ struct seaqt_string QPdfPageNavigation_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfPageNavigation_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPdfPageNavigation_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfPageNavigation::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -354,7 +354,7 @@ struct seaqt_string QPdfPageNavigation_tr3(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-struct seaqt_string QPdfPageNavigation_trUtf82(const char* s, const char* c) {
+struct seaqt_string QPdfPageNavigation_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QPdfPageNavigation::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -365,7 +365,7 @@ struct seaqt_string QPdfPageNavigation_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfPageNavigation_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QPdfPageNavigation_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfPageNavigation::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

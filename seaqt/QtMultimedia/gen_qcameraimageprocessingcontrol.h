@@ -34,16 +34,16 @@ void QCameraImageProcessingControl_virtbase(QCameraImageProcessingControl* src, 
 QMetaObject* QCameraImageProcessingControl_metaObject(const QCameraImageProcessingControl* self);
 void* QCameraImageProcessingControl_metacast(QCameraImageProcessingControl* self, const char* param1);
 int QCameraImageProcessingControl_metacall(QCameraImageProcessingControl* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraImageProcessingControl_tr(const char* s);
-struct seaqt_string QCameraImageProcessingControl_trUtf8(const char* s);
+struct seaqt_string QCameraImageProcessingControl_tr_s(const char* s);
+struct seaqt_string QCameraImageProcessingControl_trUtf8_s(const char* s);
 bool QCameraImageProcessingControl_isParameterSupported(const QCameraImageProcessingControl* self, int param1);
 bool QCameraImageProcessingControl_isParameterValueSupported(const QCameraImageProcessingControl* self, int parameter, QVariant* value);
 QVariant* QCameraImageProcessingControl_parameter(const QCameraImageProcessingControl* self, int parameter);
 void QCameraImageProcessingControl_setParameter(QCameraImageProcessingControl* self, int parameter, QVariant* value);
-struct seaqt_string QCameraImageProcessingControl_tr2(const char* s, const char* c);
-struct seaqt_string QCameraImageProcessingControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraImageProcessingControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraImageProcessingControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraImageProcessingControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraImageProcessingControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraImageProcessingControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraImageProcessingControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraImageProcessingControl_staticMetaObject();
 void QCameraImageProcessingControl_delete(QCameraImageProcessingControl* self);

@@ -23,15 +23,15 @@ QGeoRectangle* QGeoRectangle_new() {
 	return new (std::nothrow) QGeoRectangle();
 }
 
-QGeoRectangle* QGeoRectangle_new2(QGeoCoordinate* center, double degreesWidth, double degreesHeight) {
+QGeoRectangle* QGeoRectangle_new_center_degreesWidth_degreesHeight(QGeoCoordinate* center, double degreesWidth, double degreesHeight) {
 	return new (std::nothrow) QGeoRectangle(*center, static_cast<double>(degreesWidth), static_cast<double>(degreesHeight));
 }
 
-QGeoRectangle* QGeoRectangle_new3(QGeoCoordinate* topLeft, QGeoCoordinate* bottomRight) {
+QGeoRectangle* QGeoRectangle_new_topLeft_bottomRight(QGeoCoordinate* topLeft, QGeoCoordinate* bottomRight) {
 	return new (std::nothrow) QGeoRectangle(*topLeft, *bottomRight);
 }
 
-QGeoRectangle* QGeoRectangle_new4(struct seaqt_array /* of QGeoCoordinate* */  coordinates) {
+QGeoRectangle* QGeoRectangle_new_coordinates(struct seaqt_array /* of QGeoCoordinate* */  coordinates) {
 	QList<QGeoCoordinate> coordinates_QList;
 	coordinates_QList.reserve(coordinates.len);
 	QGeoCoordinate** coordinates_arr = static_cast<QGeoCoordinate**>(coordinates.data);
@@ -41,11 +41,11 @@ QGeoRectangle* QGeoRectangle_new4(struct seaqt_array /* of QGeoCoordinate* */  c
 	return new (std::nothrow) QGeoRectangle(coordinates_QList);
 }
 
-QGeoRectangle* QGeoRectangle_new5(QGeoRectangle* other) {
-	return new (std::nothrow) QGeoRectangle(*other);
+QGeoRectangle* QGeoRectangle_new_from(QGeoRectangle* from) {
+	return new (std::nothrow) QGeoRectangle(*from);
 }
 
-QGeoRectangle* QGeoRectangle_new6(QGeoShape* other) {
+QGeoRectangle* QGeoRectangle_new_other(QGeoShape* other) {
 	return new (std::nothrow) QGeoRectangle(*other);
 }
 
@@ -53,8 +53,8 @@ void QGeoRectangle_virtbase(QGeoRectangle* src, QGeoShape** outptr_QGeoShape) {
 	*outptr_QGeoShape = static_cast<QGeoShape*>(src);
 }
 
-void QGeoRectangle_operatorAssign(QGeoRectangle* self, QGeoRectangle* other) {
-	self->operator=(*other);
+void QGeoRectangle_operatorAssign(QGeoRectangle* self, QGeoRectangle* from) {
+	self->operator=(*from);
 }
 
 bool QGeoRectangle_operatorEqual(const QGeoRectangle* self, QGeoRectangle* other) {

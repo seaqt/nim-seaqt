@@ -26,12 +26,12 @@ QWebElement* QWebElement_new() {
 	return new (std::nothrow) QWebElement();
 }
 
-QWebElement* QWebElement_new2(QWebElement* param1) {
-	return new (std::nothrow) QWebElement(*param1);
+QWebElement* QWebElement_new_from(QWebElement* from) {
+	return new (std::nothrow) QWebElement(*from);
 }
 
-void QWebElement_operatorAssign(QWebElement* self, QWebElement* param1) {
-	self->operator=(*param1);
+void QWebElement_operatorAssign(QWebElement* self, QWebElement* from) {
+	self->operator=(*from);
 }
 
 bool QWebElement_operatorEqual(const QWebElement* self, QWebElement* o) {
@@ -117,7 +117,7 @@ void QWebElement_setAttributeNS(QWebElement* self, struct seaqt_string namespace
 	self->setAttributeNS(namespaceUri_QString, name_QString, value_QString);
 }
 
-struct seaqt_string QWebElement_attribute(const QWebElement* self, struct seaqt_string name) {
+struct seaqt_string QWebElement_attribute_name(const QWebElement* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString _ret = self->attribute(name_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -129,7 +129,7 @@ struct seaqt_string QWebElement_attribute(const QWebElement* self, struct seaqt_
 	return _ms;
 }
 
-struct seaqt_string QWebElement_attributeNS(const QWebElement* self, struct seaqt_string namespaceUri, struct seaqt_string name) {
+struct seaqt_string QWebElement_attributeNS_namespaceUri_name(const QWebElement* self, struct seaqt_string namespaceUri, struct seaqt_string name) {
 	QString namespaceUri_QString = QString::fromUtf8(namespaceUri.data, namespaceUri.len);
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString _ret = self->attributeNS(namespaceUri_QString, name_QString);
@@ -308,66 +308,66 @@ QWebElement* QWebElement_document(const QWebElement* self) {
 	return new QWebElement(self->document());
 }
 
-void QWebElement_appendInside(QWebElement* self, struct seaqt_string markup) {
+void QWebElement_appendInside_markup(QWebElement* self, struct seaqt_string markup) {
 	QString markup_QString = QString::fromUtf8(markup.data, markup.len);
 	self->appendInside(markup_QString);
 }
 
-void QWebElement_appendInsideWithElement(QWebElement* self, QWebElement* element) {
+void QWebElement_appendInside_element(QWebElement* self, QWebElement* element) {
 	self->appendInside(*element);
 }
 
-void QWebElement_prependInside(QWebElement* self, struct seaqt_string markup) {
+void QWebElement_prependInside_markup(QWebElement* self, struct seaqt_string markup) {
 	QString markup_QString = QString::fromUtf8(markup.data, markup.len);
 	self->prependInside(markup_QString);
 }
 
-void QWebElement_prependInsideWithElement(QWebElement* self, QWebElement* element) {
+void QWebElement_prependInside_element(QWebElement* self, QWebElement* element) {
 	self->prependInside(*element);
 }
 
-void QWebElement_appendOutside(QWebElement* self, struct seaqt_string markup) {
+void QWebElement_appendOutside_markup(QWebElement* self, struct seaqt_string markup) {
 	QString markup_QString = QString::fromUtf8(markup.data, markup.len);
 	self->appendOutside(markup_QString);
 }
 
-void QWebElement_appendOutsideWithElement(QWebElement* self, QWebElement* element) {
+void QWebElement_appendOutside_element(QWebElement* self, QWebElement* element) {
 	self->appendOutside(*element);
 }
 
-void QWebElement_prependOutside(QWebElement* self, struct seaqt_string markup) {
+void QWebElement_prependOutside_markup(QWebElement* self, struct seaqt_string markup) {
 	QString markup_QString = QString::fromUtf8(markup.data, markup.len);
 	self->prependOutside(markup_QString);
 }
 
-void QWebElement_prependOutsideWithElement(QWebElement* self, QWebElement* element) {
+void QWebElement_prependOutside_element(QWebElement* self, QWebElement* element) {
 	self->prependOutside(*element);
 }
 
-void QWebElement_encloseContentsWith(QWebElement* self, QWebElement* element) {
+void QWebElement_encloseContentsWith_element(QWebElement* self, QWebElement* element) {
 	self->encloseContentsWith(*element);
 }
 
-void QWebElement_encloseContentsWithWithMarkup(QWebElement* self, struct seaqt_string markup) {
+void QWebElement_encloseContentsWith_markup(QWebElement* self, struct seaqt_string markup) {
 	QString markup_QString = QString::fromUtf8(markup.data, markup.len);
 	self->encloseContentsWith(markup_QString);
 }
 
-void QWebElement_encloseWith(QWebElement* self, struct seaqt_string markup) {
+void QWebElement_encloseWith_markup(QWebElement* self, struct seaqt_string markup) {
 	QString markup_QString = QString::fromUtf8(markup.data, markup.len);
 	self->encloseWith(markup_QString);
 }
 
-void QWebElement_encloseWithWithElement(QWebElement* self, QWebElement* element) {
+void QWebElement_encloseWith_element(QWebElement* self, QWebElement* element) {
 	self->encloseWith(*element);
 }
 
-void QWebElement_replace(QWebElement* self, struct seaqt_string markup) {
+void QWebElement_replace_markup(QWebElement* self, struct seaqt_string markup) {
 	QString markup_QString = QString::fromUtf8(markup.data, markup.len);
 	self->replace(markup_QString);
 }
 
-void QWebElement_replaceWithElement(QWebElement* self, QWebElement* element) {
+void QWebElement_replace_element(QWebElement* self, QWebElement* element) {
 	self->replace(*element);
 }
 
@@ -412,15 +412,15 @@ void QWebElement_setStyleProperty(QWebElement* self, struct seaqt_string name, s
 	self->setStyleProperty(name_QString, value_QString);
 }
 
-void QWebElement_render(QWebElement* self, QPainter* painter) {
+void QWebElement_render_painter(QWebElement* self, QPainter* painter) {
 	self->render(painter);
 }
 
-void QWebElement_render2(QWebElement* self, QPainter* painter, QRect* clipRect) {
+void QWebElement_render_painter_clipRect(QWebElement* self, QPainter* painter, QRect* clipRect) {
 	self->render(painter, *clipRect);
 }
 
-struct seaqt_string QWebElement_attribute2(const QWebElement* self, struct seaqt_string name, struct seaqt_string defaultValue) {
+struct seaqt_string QWebElement_attribute_name_defaultValue(const QWebElement* self, struct seaqt_string name, struct seaqt_string defaultValue) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString defaultValue_QString = QString::fromUtf8(defaultValue.data, defaultValue.len);
 	QString _ret = self->attribute(name_QString, defaultValue_QString);
@@ -433,7 +433,7 @@ struct seaqt_string QWebElement_attribute2(const QWebElement* self, struct seaqt
 	return _ms;
 }
 
-struct seaqt_string QWebElement_attributeNS2(const QWebElement* self, struct seaqt_string namespaceUri, struct seaqt_string name, struct seaqt_string defaultValue) {
+struct seaqt_string QWebElement_attributeNS_namespaceUri_name_defaultValue(const QWebElement* self, struct seaqt_string namespaceUri, struct seaqt_string name, struct seaqt_string defaultValue) {
 	QString namespaceUri_QString = QString::fromUtf8(namespaceUri.data, namespaceUri.len);
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString defaultValue_QString = QString::fromUtf8(defaultValue.data, defaultValue.len);
@@ -447,7 +447,7 @@ struct seaqt_string QWebElement_attributeNS2(const QWebElement* self, struct sea
 	return _ms;
 }
 
-struct seaqt_array /* of struct seaqt_string */  QWebElement_attributeNamesWithNamespaceUri(const QWebElement* self, struct seaqt_string namespaceUri) {
+struct seaqt_array /* of struct seaqt_string */  QWebElement_attributeNames_namespaceUri(const QWebElement* self, struct seaqt_string namespaceUri) {
 	QString namespaceUri_QString = QString::fromUtf8(namespaceUri.data, namespaceUri.len);
 	QStringList _ret = self->attributeNames(namespaceUri_QString);
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -476,17 +476,17 @@ QWebElementCollection* QWebElementCollection_new() {
 	return new (std::nothrow) QWebElementCollection();
 }
 
-QWebElementCollection* QWebElementCollection_new2(QWebElement* contextElement, struct seaqt_string query) {
+QWebElementCollection* QWebElementCollection_new_contextElement_query(QWebElement* contextElement, struct seaqt_string query) {
 	QString query_QString = QString::fromUtf8(query.data, query.len);
 	return new (std::nothrow) QWebElementCollection(*contextElement, query_QString);
 }
 
-QWebElementCollection* QWebElementCollection_new3(QWebElementCollection* param1) {
-	return new (std::nothrow) QWebElementCollection(*param1);
+QWebElementCollection* QWebElementCollection_new_from(QWebElementCollection* from) {
+	return new (std::nothrow) QWebElementCollection(*from);
 }
 
-void QWebElementCollection_operatorAssign(QWebElementCollection* self, QWebElementCollection* param1) {
-	self->operator=(*param1);
+void QWebElementCollection_operatorAssign(QWebElementCollection* self, QWebElementCollection* from) {
+	self->operator=(*from);
 }
 
 QWebElementCollection* QWebElementCollection_operatorPlus(const QWebElementCollection* self, QWebElementCollection* other) {
@@ -536,11 +536,11 @@ struct seaqt_array /* of QWebElement* */  QWebElementCollection_toList(const QWe
 	return _out;
 }
 
-QWebElementCollection__const_iterator* QWebElementCollection_begin(const QWebElementCollection* self) {
+QWebElementCollection__const_iterator* QWebElementCollection_begin_const(const QWebElementCollection* self) {
 	return new QWebElementCollection::const_iterator(self->begin());
 }
 
-QWebElementCollection__const_iterator* QWebElementCollection_end(const QWebElementCollection* self) {
+QWebElementCollection__const_iterator* QWebElementCollection_end_const(const QWebElementCollection* self) {
 	return new QWebElementCollection::const_iterator(self->end());
 }
 
@@ -552,11 +552,11 @@ QWebElementCollection__const_iterator* QWebElementCollection_constEnd(const QWeb
 	return new QWebElementCollection::const_iterator(self->constEnd());
 }
 
-QWebElementCollection__iterator* QWebElementCollection_begin2(QWebElementCollection* self) {
+QWebElementCollection__iterator* QWebElementCollection_begin(QWebElementCollection* self) {
 	return new QWebElementCollection::iterator(self->begin());
 }
 
-QWebElementCollection__iterator* QWebElementCollection_end2(QWebElementCollection* self) {
+QWebElementCollection__iterator* QWebElementCollection_end(QWebElementCollection* self) {
 	return new QWebElementCollection::iterator(self->end());
 }
 
@@ -564,12 +564,12 @@ void QWebElementCollection_delete(QWebElementCollection* self) {
 	delete self;
 }
 
-QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_new(QWebElementCollection* collection_, int index) {
+QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_new_collection__index(QWebElementCollection* collection_, int index) {
 	return new (std::nothrow) QWebElementCollection__const_iterator(collection_, static_cast<int>(index));
 }
 
-QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_new2(QWebElementCollection__const_iterator* o) {
-	return new (std::nothrow) QWebElementCollection__const_iterator(*o);
+QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_new_from(QWebElementCollection__const_iterator* from) {
+	return new (std::nothrow) QWebElementCollection__const_iterator(*from);
 }
 
 QWebElement* QWebElementCollection__const_iterator_operatorMultiply(const QWebElementCollection__const_iterator* self) {
@@ -606,7 +606,7 @@ QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_ope
 	return &_ret;
 }
 
-QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_operatorPlusPlusWithInt(QWebElementCollection__const_iterator* self, int param1) {
+QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_operatorPlusPlus_int(QWebElementCollection__const_iterator* self, int param1) {
 	return new QWebElementCollection::const_iterator(self->operator++(static_cast<int>(param1)));
 }
 
@@ -616,7 +616,7 @@ QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_ope
 	return &_ret;
 }
 
-QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_operatorMinusMinusWithInt(QWebElementCollection__const_iterator* self, int param1) {
+QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_operatorMinusMinus_int(QWebElementCollection__const_iterator* self, int param1) {
 	return new QWebElementCollection::const_iterator(self->operator--(static_cast<int>(param1)));
 }
 
@@ -636,11 +636,11 @@ QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_ope
 	return new QWebElementCollection::const_iterator(self->operator+(static_cast<int>(j)));
 }
 
-QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_operatorMinus(const QWebElementCollection__const_iterator* self, int j) {
+QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_operatorMinus_int(const QWebElementCollection__const_iterator* self, int j) {
 	return new QWebElementCollection::const_iterator(self->operator-(static_cast<int>(j)));
 }
 
-int QWebElementCollection__const_iterator_operatorMinusWithQWebElementCollectionconstIterator(const QWebElementCollection__const_iterator* self, QWebElementCollection__const_iterator* j) {
+int QWebElementCollection__const_iterator_operatorMinus_QWebElementCollection_const_iterator(const QWebElementCollection__const_iterator* self, QWebElementCollection__const_iterator* j) {
 	return self->operator-(*j);
 }
 
@@ -648,12 +648,12 @@ void QWebElementCollection__const_iterator_delete(QWebElementCollection__const_i
 	delete self;
 }
 
-QWebElementCollection__iterator* QWebElementCollection__iterator_new(QWebElementCollection* collection_, int index) {
+QWebElementCollection__iterator* QWebElementCollection__iterator_new_collection__index(QWebElementCollection* collection_, int index) {
 	return new (std::nothrow) QWebElementCollection__iterator(collection_, static_cast<int>(index));
 }
 
-QWebElementCollection__iterator* QWebElementCollection__iterator_new2(QWebElementCollection__iterator* o) {
-	return new (std::nothrow) QWebElementCollection__iterator(*o);
+QWebElementCollection__iterator* QWebElementCollection__iterator_new_from(QWebElementCollection__iterator* from) {
+	return new (std::nothrow) QWebElementCollection__iterator(*from);
 }
 
 QWebElement* QWebElementCollection__iterator_operatorMultiply(const QWebElementCollection__iterator* self) {
@@ -690,7 +690,7 @@ QWebElementCollection__iterator* QWebElementCollection__iterator_operatorPlusPlu
 	return &_ret;
 }
 
-QWebElementCollection__iterator* QWebElementCollection__iterator_operatorPlusPlusWithInt(QWebElementCollection__iterator* self, int param1) {
+QWebElementCollection__iterator* QWebElementCollection__iterator_operatorPlusPlus_int(QWebElementCollection__iterator* self, int param1) {
 	return new QWebElementCollection::iterator(self->operator++(static_cast<int>(param1)));
 }
 
@@ -700,7 +700,7 @@ QWebElementCollection__iterator* QWebElementCollection__iterator_operatorMinusMi
 	return &_ret;
 }
 
-QWebElementCollection__iterator* QWebElementCollection__iterator_operatorMinusMinusWithInt(QWebElementCollection__iterator* self, int param1) {
+QWebElementCollection__iterator* QWebElementCollection__iterator_operatorMinusMinus_int(QWebElementCollection__iterator* self, int param1) {
 	return new QWebElementCollection::iterator(self->operator--(static_cast<int>(param1)));
 }
 
@@ -720,11 +720,11 @@ QWebElementCollection__iterator* QWebElementCollection__iterator_operatorPlus(co
 	return new QWebElementCollection::iterator(self->operator+(static_cast<int>(j)));
 }
 
-QWebElementCollection__iterator* QWebElementCollection__iterator_operatorMinus(const QWebElementCollection__iterator* self, int j) {
+QWebElementCollection__iterator* QWebElementCollection__iterator_operatorMinus_int(const QWebElementCollection__iterator* self, int j) {
 	return new QWebElementCollection::iterator(self->operator-(static_cast<int>(j)));
 }
 
-int QWebElementCollection__iterator_operatorMinusWithQWebElementCollectioniterator(const QWebElementCollection__iterator* self, QWebElementCollection__iterator* j) {
+int QWebElementCollection__iterator_operatorMinus_QWebElementCollection_iterator(const QWebElementCollection__iterator* self, QWebElementCollection__iterator* j) {
 	return self->operator-(*j);
 }
 

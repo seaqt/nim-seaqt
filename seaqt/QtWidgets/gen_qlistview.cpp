@@ -776,7 +776,7 @@ public:
 	friend void QListView_virtualbase_editorDestroyed(VirtualQListView* self, QObject* editor);
 
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
-		if (vtbl->edit2 == 0) {
+		if (vtbl->edit_index_trigger_event == 0) {
 			return QListView::edit(index, trigger, event);
 		}
 
@@ -786,11 +786,11 @@ public:
 		QAbstractItemView::EditTrigger trigger_ret = trigger;
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
-		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit_index_trigger_event(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QListView_virtualbase_edit2(VirtualQListView* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QListView_virtualbase_edit_index_trigger_event(VirtualQListView* self, QModelIndex* index, int trigger, QEvent* event);
 
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
@@ -1294,7 +1294,7 @@ public:
 	friend void QListView_protectedbase_stopAutoScroll(VirtualQListView* self);
 	friend void QListView_protectedbase_doAutoScroll(VirtualQListView* self);
 	friend int QListView_protectedbase_dropIndicatorPosition(const VirtualQListView* self);
-	friend void QListView_protectedbase_setViewportMargins(VirtualQListView* self, int left, int top, int right, int bottom);
+	friend void QListView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQListView* self, int left, int top, int right, int bottom);
 	friend QMargins* QListView_protectedbase_viewportMargins(const VirtualQListView* self);
 	friend void QListView_protectedbase_drawFrame(VirtualQListView* self, QPainter* param1);
 	friend void QListView_protectedbase_initStyleOption(const VirtualQListView* self, QStyleOptionFrame* option);
@@ -1314,7 +1314,7 @@ VirtualQListView* QListView_new(const QListView_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQListView(vtbl) : nullptr;
 }
 
-VirtualQListView* QListView_new2(const QListView_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQListView* QListView_new_parent(const QListView_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQListView(vtbl, parent) : nullptr;
 }
@@ -1335,7 +1335,7 @@ int QListView_metacall(QListView* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QListView_tr(const char* s) {
+struct seaqt_string QListView_tr_s(const char* s) {
 	QString _ret = QListView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1346,7 +1346,7 @@ struct seaqt_string QListView_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QListView_trUtf8(const char* s) {
+struct seaqt_string QListView_trUtf8_s(const char* s) {
 	QString _ret = QListView::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1542,7 +1542,7 @@ void QListView_connect_indexesMoved(QListView* self, intptr_t slot, void (*callb
 	QListView::connect(self, static_cast<void (QListView::*)(const QModelIndexList&)>(&QListView::indexesMoved), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QListView_tr2(const char* s, const char* c) {
+struct seaqt_string QListView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QListView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1553,7 +1553,7 @@ struct seaqt_string QListView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QListView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QListView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QListView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1564,7 +1564,7 @@ struct seaqt_string QListView_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QListView_trUtf82(const char* s, const char* c) {
+struct seaqt_string QListView_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QListView::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1575,7 +1575,7 @@ struct seaqt_string QListView_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QListView_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QListView_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QListView::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1866,7 +1866,7 @@ void QListView_virtualbase_editorDestroyed(VirtualQListView* self, QObject* edit
 	self->QListView::editorDestroyed(editor);
 }
 
-bool QListView_virtualbase_edit2(VirtualQListView* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QListView_virtualbase_edit_index_trigger_event(VirtualQListView* self, QModelIndex* index, int trigger, QEvent* event) {
 
 	return self->QListView::edit(*index, static_cast<VirtualQListView::EditTrigger>(trigger), event);
 }
@@ -2146,7 +2146,7 @@ int QListView_protectedbase_dropIndicatorPosition(const VirtualQListView* self) 
 	return static_cast<int>(_ret);
 }
 
-void QListView_protectedbase_setViewportMargins(VirtualQListView* self, int left, int top, int right, int bottom) {
+void QListView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQListView* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

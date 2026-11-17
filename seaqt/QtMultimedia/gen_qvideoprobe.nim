@@ -61,19 +61,19 @@ type cQVideoProbe*{.exportc: "QVideoProbe", incompleteStruct.} = object
 proc fcQVideoProbe_metaObject(self: pointer): pointer {.importc: "QVideoProbe_metaObject".}
 proc fcQVideoProbe_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoProbe_metacast".}
 proc fcQVideoProbe_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoProbe_metacall".}
-proc fcQVideoProbe_tr(s: cstring): struct_seaqt_string {.importc: "QVideoProbe_tr".}
-proc fcQVideoProbe_trUtf8(s: cstring): struct_seaqt_string {.importc: "QVideoProbe_trUtf8".}
-proc fcQVideoProbe_setSource(self: pointer, source: pointer): bool {.importc: "QVideoProbe_setSource".}
-proc fcQVideoProbe_setSourceWithSource(self: pointer, source: pointer): bool {.importc: "QVideoProbe_setSourceWithSource".}
+proc fcQVideoProbe_trS(s: cstring): struct_seaqt_string {.importc: "QVideoProbe_tr_s".}
+proc fcQVideoProbe_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QVideoProbe_trUtf8_s".}
+proc fcQVideoProbe_setSource_QMediaObject(self: pointer, source: pointer): bool {.importc: "QVideoProbe_setSource_QMediaObject".}
+proc fcQVideoProbe_setSource_QMediaRecorder(self: pointer, source: pointer): bool {.importc: "QVideoProbe_setSource_QMediaRecorder".}
 proc fcQVideoProbe_isActive(self: pointer): bool {.importc: "QVideoProbe_isActive".}
 proc fcQVideoProbe_videoFrameProbed(self: pointer, frame: pointer): void {.importc: "QVideoProbe_videoFrameProbed".}
 proc fcQVideoProbe_connect_videoFrameProbed(self: pointer, slot: int, callback: proc (slot: int, frame: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoProbe_connect_videoFrameProbed".}
 proc fcQVideoProbe_flush(self: pointer): void {.importc: "QVideoProbe_flush".}
 proc fcQVideoProbe_connect_flush(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoProbe_connect_flush".}
-proc fcQVideoProbe_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoProbe_tr2".}
-proc fcQVideoProbe_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoProbe_tr3".}
-proc fcQVideoProbe_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoProbe_trUtf82".}
-proc fcQVideoProbe_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoProbe_trUtf83".}
+proc fcQVideoProbe_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoProbe_tr_s_c".}
+proc fcQVideoProbe_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoProbe_tr_s_c_n".}
+proc fcQVideoProbe_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoProbe_trUtf8_s_c".}
+proc fcQVideoProbe_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoProbe_trUtf8_s_c_n".}
 proc fcQVideoProbe_vdata(self: pointer): ptr pointer {.importc: "QVideoProbe_vdata".}
 proc fvdata_cQVideoProbe(self: pointer): pointer {.importc: "vdata_QVideoProbe".}
 
@@ -104,7 +104,7 @@ proc fcQVideoProbe_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQVideoProbe_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoProbe_protectedbase_receivers".}
 proc fcQVideoProbe_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoProbe_protectedbase_isSignalConnected".}
 proc fcQVideoProbe_new(vtbl: pointer, vdata: csize_t): ptr cQVideoProbe {.importc: "QVideoProbe_new".}
-proc fcQVideoProbe_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQVideoProbe {.importc: "QVideoProbe_new2".}
+proc fcQVideoProbe_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQVideoProbe {.importc: "QVideoProbe_new_parent".}
 proc fcQVideoProbe_staticMetaObject(): pointer {.importc: "QVideoProbe_staticMetaObject".}
 
 proc metaObject*(self: gen_qvideoprobe_types.QVideoProbe): gen_qobjectdefs_types.QMetaObject =
@@ -117,22 +117,22 @@ proc metacall*(self: gen_qvideoprobe_types.QVideoProbe, param1: cint, param2: ci
   fcQVideoProbe_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvideoprobe_types.QVideoProbe, s: cstring): string =
-  let v_ms = fcQVideoProbe_tr(s)
+  let v_ms = fcQVideoProbe_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideoprobe_types.QVideoProbe, s: cstring): string =
-  let v_ms = fcQVideoProbe_trUtf8(s)
+  let v_ms = fcQVideoProbe_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setSource*(self: gen_qvideoprobe_types.QVideoProbe, source: gen_qmediaobject_types.QMediaObject): bool =
-  fcQVideoProbe_setSource(self.h, source.h)
+  fcQVideoProbe_setSource_QMediaObject(self.h, source.h)
 
 proc setSource*(self: gen_qvideoprobe_types.QVideoProbe, source: gen_qmediarecorder_types.QMediaRecorder): bool =
-  fcQVideoProbe_setSourceWithSource(self.h, source.h)
+  fcQVideoProbe_setSource_QMediaRecorder(self.h, source.h)
 
 proc isActive*(self: gen_qvideoprobe_types.QVideoProbe): bool =
   fcQVideoProbe_isActive(self.h)
@@ -176,25 +176,25 @@ proc onFlush*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbeflushSlo
   fcQVideoProbe_connect_flush(self.h, cast[int](addr tmp[]), fcQVideoProbe_slot_callback_flush, fcQVideoProbe_slot_callback_flush_release)
 
 proc tr*(_: type gen_qvideoprobe_types.QVideoProbe, s: cstring, c: cstring): string =
-  let v_ms = fcQVideoProbe_tr2(s, c)
+  let v_ms = fcQVideoProbe_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvideoprobe_types.QVideoProbe, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVideoProbe_tr3(s, c, n)
+  let v_ms = fcQVideoProbe_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideoprobe_types.QVideoProbe, s: cstring, c: cstring): string =
-  let v_ms = fcQVideoProbe_trUtf82(s, c)
+  let v_ms = fcQVideoProbe_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideoprobe_types.QVideoProbe, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVideoProbe_trUtf83(s, c, n)
+  let v_ms = fcQVideoProbe_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

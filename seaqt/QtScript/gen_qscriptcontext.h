@@ -42,8 +42,8 @@ QScriptValue* QScriptContext_thisObject(const QScriptContext* self);
 void QScriptContext_setThisObject(QScriptContext* self, QScriptValue* thisObject);
 bool QScriptContext_isCalledAsConstructor(const QScriptContext* self);
 QScriptValue* QScriptContext_throwValue(QScriptContext* self, QScriptValue* value);
-QScriptValue* QScriptContext_throwError(QScriptContext* self, int error, struct seaqt_string text);
-QScriptValue* QScriptContext_throwErrorWithText(QScriptContext* self, struct seaqt_string text);
+QScriptValue* QScriptContext_throwError_error_text(QScriptContext* self, int error, struct seaqt_string text);
+QScriptValue* QScriptContext_throwError_text(QScriptContext* self, struct seaqt_string text);
 struct seaqt_array /* of struct seaqt_string */  QScriptContext_backtrace(const QScriptContext* self);
 struct seaqt_string QScriptContext_toString(const QScriptContext* self);
 

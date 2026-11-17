@@ -67,7 +67,7 @@ void QWebSettings_setThirdPartyCookiePolicy(QWebSettings* self, int thirdPartyCo
 int QWebSettings_thirdPartyCookiePolicy(const QWebSettings* self);
 void QWebSettings_setCSSMediaType(QWebSettings* self, struct seaqt_string cSSMediaType);
 struct seaqt_string QWebSettings_cssMediaType(const QWebSettings* self);
-void QWebSettings_enablePersistentStorageWithPath(struct seaqt_string path);
+void QWebSettings_enablePersistentStorage_path(struct seaqt_string path);
 
 
 #ifdef __cplusplus

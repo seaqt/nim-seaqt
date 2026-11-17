@@ -24,7 +24,7 @@ public:
 	friend void* QScriptExtensionInterface_vdata(VirtualQScriptExtensionInterface* self);
 	friend VirtualQScriptExtensionInterface* vdata_QScriptExtensionInterface(void* vdata);
 
-	VirtualQScriptExtensionInterface(const QScriptExtensionInterface_VTable* vtbl, const QScriptExtensionInterface& param1): QScriptExtensionInterface(param1), vtbl(vtbl) {}
+	VirtualQScriptExtensionInterface(const QScriptExtensionInterface_VTable* vtbl, const QScriptExtensionInterface& from): QScriptExtensionInterface(from), vtbl(vtbl) {}
 
 	virtual ~VirtualQScriptExtensionInterface() override { if(vtbl->destructor) vtbl->destructor(this); }
 
@@ -66,9 +66,9 @@ public:
 
 };
 
-VirtualQScriptExtensionInterface* QScriptExtensionInterface_new(const QScriptExtensionInterface_VTable* vtbl, size_t vdata, QScriptExtensionInterface* param1) {
+VirtualQScriptExtensionInterface* QScriptExtensionInterface_new(const QScriptExtensionInterface_VTable* vtbl, size_t vdata, QScriptExtensionInterface* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQScriptExtensionInterface>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQScriptExtensionInterface(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQScriptExtensionInterface(vtbl, *from) : nullptr;
 }
 
 void QScriptExtensionInterface_virtbase(QScriptExtensionInterface* src, QFactoryInterface** outptr_QFactoryInterface) {
@@ -80,8 +80,8 @@ void QScriptExtensionInterface_initialize(QScriptExtensionInterface* self, struc
 	self->initialize(key_QString, engine);
 }
 
-void QScriptExtensionInterface_operatorAssign(QScriptExtensionInterface* self, QScriptExtensionInterface* param1) {
-	self->operator=(*param1);
+void QScriptExtensionInterface_operatorAssign(QScriptExtensionInterface* self, QScriptExtensionInterface* from) {
+	self->operator=(*from);
 }
 
 void* QScriptExtensionInterface_vdata(VirtualQScriptExtensionInterface* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQScriptExtensionInterface>()); }

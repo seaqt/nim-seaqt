@@ -54,19 +54,19 @@ void* QSqlDriverPlugin_vdata(VirtualQSqlDriverPlugin* self);
 VirtualQSqlDriverPlugin* vdata_QSqlDriverPlugin(void* vdata);
 
 VirtualQSqlDriverPlugin* QSqlDriverPlugin_new(const QSqlDriverPlugin_VTable* vtbl, size_t vdata);
-VirtualQSqlDriverPlugin* QSqlDriverPlugin_new2(const QSqlDriverPlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSqlDriverPlugin* QSqlDriverPlugin_new_parent(const QSqlDriverPlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QSqlDriverPlugin_virtbase(QSqlDriverPlugin* src, QObject** outptr_QObject);
 QMetaObject* QSqlDriverPlugin_metaObject(const QSqlDriverPlugin* self);
 void* QSqlDriverPlugin_metacast(QSqlDriverPlugin* self, const char* param1);
 int QSqlDriverPlugin_metacall(QSqlDriverPlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QSqlDriverPlugin_tr(const char* s);
-struct seaqt_string QSqlDriverPlugin_trUtf8(const char* s);
+struct seaqt_string QSqlDriverPlugin_tr_s(const char* s);
+struct seaqt_string QSqlDriverPlugin_trUtf8_s(const char* s);
 QSqlDriver* QSqlDriverPlugin_create(QSqlDriverPlugin* self, struct seaqt_string key);
-struct seaqt_string QSqlDriverPlugin_tr2(const char* s, const char* c);
-struct seaqt_string QSqlDriverPlugin_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSqlDriverPlugin_trUtf82(const char* s, const char* c);
-struct seaqt_string QSqlDriverPlugin_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QSqlDriverPlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSqlDriverPlugin_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSqlDriverPlugin_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSqlDriverPlugin_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSqlDriverPlugin_virtualbase_metaObject(const VirtualQSqlDriverPlugin* self);
 void* QSqlDriverPlugin_virtualbase_metacast(VirtualQSqlDriverPlugin* self, const char* param1);

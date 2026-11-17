@@ -52,11 +52,11 @@ struct seaqt_array /* of QWebEngineScript* */  QWebEngineScriptCollection_findSc
 	return _out;
 }
 
-void QWebEngineScriptCollection_insert(QWebEngineScriptCollection* self, QWebEngineScript* param1) {
+void QWebEngineScriptCollection_insert_QWebEngineScript(QWebEngineScriptCollection* self, QWebEngineScript* param1) {
 	self->insert(*param1);
 }
 
-void QWebEngineScriptCollection_insertWithList(QWebEngineScriptCollection* self, struct seaqt_array /* of QWebEngineScript* */  list) {
+void QWebEngineScriptCollection_insert_QListOfQWebEngineScript(QWebEngineScriptCollection* self, struct seaqt_array /* of QWebEngineScript* */  list) {
 	QList<QWebEngineScript> list_QList;
 	list_QList.reserve(list.len);
 	QWebEngineScript** list_arr = static_cast<QWebEngineScript**>(list.data);

@@ -46,16 +46,16 @@ type cQQmlExtensionInterface*{.exportc: "QQmlExtensionInterface", incompleteStru
 type cQQmlEngineExtensionInterface*{.exportc: "QQmlEngineExtensionInterface", incompleteStruct.} = object
 
 proc fcQQmlTypesExtensionInterface_registerTypes(self: pointer, uri: cstring): void {.importc: "QQmlTypesExtensionInterface_registerTypes".}
-proc fcQQmlTypesExtensionInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlTypesExtensionInterface_operatorAssign".}
+proc fcQQmlTypesExtensionInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlTypesExtensionInterface_operatorAssign".}
 proc fcQQmlTypesExtensionInterface_vdata(self: pointer): ptr pointer {.importc: "QQmlTypesExtensionInterface_vdata".}
 proc fvdata_cQQmlTypesExtensionInterface(self: pointer): pointer {.importc: "vdata_QQmlTypesExtensionInterface".}
 
 type cQQmlTypesExtensionInterfaceVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   registerTypes*: proc(self: pointer, uri: cstring): void {.cdecl, raises: [], gcsafe.}
-proc fcQQmlTypesExtensionInterface_new(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQQmlTypesExtensionInterface {.importc: "QQmlTypesExtensionInterface_new".}
+proc fcQQmlTypesExtensionInterface_new(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQQmlTypesExtensionInterface {.importc: "QQmlTypesExtensionInterface_new".}
 proc fcQQmlExtensionInterface_initializeEngine(self: pointer, engine: pointer, uri: cstring): void {.importc: "QQmlExtensionInterface_initializeEngine".}
-proc fcQQmlExtensionInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlExtensionInterface_operatorAssign".}
+proc fcQQmlExtensionInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlExtensionInterface_operatorAssign".}
 proc fcQQmlExtensionInterface_vdata(self: pointer): ptr pointer {.importc: "QQmlExtensionInterface_vdata".}
 proc fvdata_cQQmlExtensionInterface(self: pointer): pointer {.importc: "vdata_QQmlExtensionInterface".}
 
@@ -63,15 +63,15 @@ type cQQmlExtensionInterfaceVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   initializeEngine*: proc(self: pointer, engine: pointer, uri: cstring): void {.cdecl, raises: [], gcsafe.}
   registerTypes*: proc(self: pointer, uri: cstring): void {.cdecl, raises: [], gcsafe.}
-proc fcQQmlExtensionInterface_new(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQQmlExtensionInterface {.importc: "QQmlExtensionInterface_new".}
+proc fcQQmlExtensionInterface_new(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQQmlExtensionInterface {.importc: "QQmlExtensionInterface_new".}
 proc fcQQmlEngineExtensionInterface_initializeEngine(self: pointer, engine: pointer, uri: cstring): void {.importc: "QQmlEngineExtensionInterface_initializeEngine".}
-proc fcQQmlEngineExtensionInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlEngineExtensionInterface_operatorAssign".}
+proc fcQQmlEngineExtensionInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlEngineExtensionInterface_operatorAssign".}
 
 proc registerTypes*(self: gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface, uri: cstring): void =
   fcQQmlTypesExtensionInterface_registerTypes(self.h, uri)
 
-proc operatorAssign*(self: gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface, param1: gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface): void =
-  fcQQmlTypesExtensionInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface, fromVal: gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface): void =
+  fcQQmlTypesExtensionInterface_operatorAssign(self.h, fromVal.h)
 
 type QQmlTypesExtensionInterfaceregisterTypesProc* = proc(self: QQmlTypesExtensionInterface, uri: cstring): void {.raises: [], gcsafe.}
 
@@ -99,7 +99,7 @@ proc fcQQmlTypesExtensionInterface_method_callback_registerTypes(self: pointer, 
 
 
 proc create*(T: type gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface,
-    param1: gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface,
+    fromVal: gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface,
     vtbl: ref QQmlTypesExtensionInterfaceVTable = nil): gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface =
   let vtbl = if vtbl == nil: new QQmlTypesExtensionInterfaceVTable else: vtbl
   GC_ref(vtbl)
@@ -108,7 +108,7 @@ proc create*(T: type gen_qqmlextensioninterface_types.QQmlTypesExtensionInterfac
     GC_unref(vtbl)
   if not isNil(vtbl[].registerTypes):
     vtbl[].vtbl.registerTypes = fcQQmlTypesExtensionInterface_vtable_callback_registerTypes
-  let tmp = gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface(h: fcQQmlTypesExtensionInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface(h: fcQQmlTypesExtensionInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQQmlTypesExtensionInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQQmlTypesExtensionInterface_mvtbl = cQQmlTypesExtensionInterfaceVTable(
@@ -120,18 +120,18 @@ const cQQmlTypesExtensionInterface_mvtbl = cQQmlTypesExtensionInterfaceVTable(
   registerTypes: fcQQmlTypesExtensionInterface_method_callback_registerTypes,
 )
 proc create*(T: type gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface,
-    param1: gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface,
+    fromVal: gen_qqmlextensioninterface_types.QQmlTypesExtensionInterface,
     inst: VirtualQQmlTypesExtensionInterface) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQQmlTypesExtensionInterface_new(addr(cQQmlTypesExtensionInterface_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQQmlTypesExtensionInterface_new(addr(cQQmlTypesExtensionInterface_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQQmlTypesExtensionInterface_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
 proc initializeEngine*(self: gen_qqmlextensioninterface_types.QQmlExtensionInterface, engine: gen_qqmlengine_types.QQmlEngine, uri: cstring): void =
   fcQQmlExtensionInterface_initializeEngine(self.h, engine.h, uri)
 
-proc operatorAssign*(self: gen_qqmlextensioninterface_types.QQmlExtensionInterface, param1: gen_qqmlextensioninterface_types.QQmlExtensionInterface): void =
-  fcQQmlExtensionInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlextensioninterface_types.QQmlExtensionInterface, fromVal: gen_qqmlextensioninterface_types.QQmlExtensionInterface): void =
+  fcQQmlExtensionInterface_operatorAssign(self.h, fromVal.h)
 
 type QQmlExtensionInterfaceinitializeEngineProc* = proc(self: QQmlExtensionInterface, engine: gen_qqmlengine_types.QQmlEngine, uri: cstring): void {.raises: [], gcsafe.}
 type QQmlExtensionInterfaceregisterTypesProc* = proc(self: QQmlExtensionInterface, uri: cstring): void {.raises: [], gcsafe.}
@@ -176,7 +176,7 @@ proc fcQQmlExtensionInterface_method_callback_registerTypes(self: pointer, uri: 
 
 
 proc create*(T: type gen_qqmlextensioninterface_types.QQmlExtensionInterface,
-    param1: gen_qqmlextensioninterface_types.QQmlExtensionInterface,
+    fromVal: gen_qqmlextensioninterface_types.QQmlExtensionInterface,
     vtbl: ref QQmlExtensionInterfaceVTable = nil): gen_qqmlextensioninterface_types.QQmlExtensionInterface =
   let vtbl = if vtbl == nil: new QQmlExtensionInterfaceVTable else: vtbl
   GC_ref(vtbl)
@@ -187,7 +187,7 @@ proc create*(T: type gen_qqmlextensioninterface_types.QQmlExtensionInterface,
     vtbl[].vtbl.initializeEngine = fcQQmlExtensionInterface_vtable_callback_initializeEngine
   if not isNil(vtbl[].registerTypes):
     vtbl[].vtbl.registerTypes = fcQQmlExtensionInterface_vtable_callback_registerTypes
-  let tmp = gen_qqmlextensioninterface_types.QQmlExtensionInterface(h: fcQQmlExtensionInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qqmlextensioninterface_types.QQmlExtensionInterface(h: fcQQmlExtensionInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQQmlExtensionInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQQmlExtensionInterface_mvtbl = cQQmlExtensionInterfaceVTable(
@@ -200,16 +200,16 @@ const cQQmlExtensionInterface_mvtbl = cQQmlExtensionInterfaceVTable(
   registerTypes: fcQQmlExtensionInterface_method_callback_registerTypes,
 )
 proc create*(T: type gen_qqmlextensioninterface_types.QQmlExtensionInterface,
-    param1: gen_qqmlextensioninterface_types.QQmlExtensionInterface,
+    fromVal: gen_qqmlextensioninterface_types.QQmlExtensionInterface,
     inst: VirtualQQmlExtensionInterface) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQQmlExtensionInterface_new(addr(cQQmlExtensionInterface_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQQmlExtensionInterface_new(addr(cQQmlExtensionInterface_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQQmlExtensionInterface_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
 proc initializeEngine*(self: gen_qqmlextensioninterface_types.QQmlEngineExtensionInterface, engine: gen_qqmlengine_types.QQmlEngine, uri: cstring): void =
   fcQQmlEngineExtensionInterface_initializeEngine(self.h, engine.h, uri)
 
-proc operatorAssign*(self: gen_qqmlextensioninterface_types.QQmlEngineExtensionInterface, param1: gen_qqmlextensioninterface_types.QQmlEngineExtensionInterface): void =
-  fcQQmlEngineExtensionInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlextensioninterface_types.QQmlEngineExtensionInterface, fromVal: gen_qqmlextensioninterface_types.QQmlEngineExtensionInterface): void =
+  fcQQmlEngineExtensionInterface_operatorAssign(self.h, fromVal.h)
 

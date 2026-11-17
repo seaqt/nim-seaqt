@@ -49,7 +49,7 @@ typedef struct QVariant QVariant;
 #endif
 
 QModelIndex* QModelIndex_new();
-QModelIndex* QModelIndex_new2(QModelIndex* param1);
+QModelIndex* QModelIndex_new_from(QModelIndex* from);
 
 int QModelIndex_row(const QModelIndex* self);
 int QModelIndex_column(const QModelIndex* self);
@@ -67,23 +67,23 @@ bool QModelIndex_isValid(const QModelIndex* self);
 bool QModelIndex_operatorEqual(const QModelIndex* self, QModelIndex* other);
 bool QModelIndex_operatorNotEqual(const QModelIndex* self, QModelIndex* other);
 bool QModelIndex_operatorLesser(const QModelIndex* self, QModelIndex* other);
-void QModelIndex_operatorAssign(QModelIndex* self, QModelIndex* param1);
-QVariant* QModelIndex_dataWithRole(const QModelIndex* self, int role);
+void QModelIndex_operatorAssign(QModelIndex* self, QModelIndex* from);
+QVariant* QModelIndex_data_role(const QModelIndex* self, int role);
 
 void QModelIndex_delete(QModelIndex* self);
 
 QPersistentModelIndex* QPersistentModelIndex_new();
-QPersistentModelIndex* QPersistentModelIndex_new2(QModelIndex* index);
-QPersistentModelIndex* QPersistentModelIndex_new3(QPersistentModelIndex* other);
+QPersistentModelIndex* QPersistentModelIndex_new_index(QModelIndex* index);
+QPersistentModelIndex* QPersistentModelIndex_new_from(QPersistentModelIndex* from);
 
 bool QPersistentModelIndex_operatorLesser(const QPersistentModelIndex* self, QPersistentModelIndex* other);
-bool QPersistentModelIndex_operatorEqual(const QPersistentModelIndex* self, QPersistentModelIndex* other);
-bool QPersistentModelIndex_operatorNotEqual(const QPersistentModelIndex* self, QPersistentModelIndex* other);
-void QPersistentModelIndex_operatorAssign(QPersistentModelIndex* self, QPersistentModelIndex* other);
+bool QPersistentModelIndex_operatorEqual_QPersistentModelIndex(const QPersistentModelIndex* self, QPersistentModelIndex* other);
+bool QPersistentModelIndex_operatorNotEqual_QPersistentModelIndex(const QPersistentModelIndex* self, QPersistentModelIndex* other);
+void QPersistentModelIndex_operatorAssign_from(QPersistentModelIndex* self, QPersistentModelIndex* from);
 void QPersistentModelIndex_swap(QPersistentModelIndex* self, QPersistentModelIndex* other);
-bool QPersistentModelIndex_operatorEqualWithOther(const QPersistentModelIndex* self, QModelIndex* other);
-bool QPersistentModelIndex_operatorNotEqualWithOther(const QPersistentModelIndex* self, QModelIndex* other);
-void QPersistentModelIndex_operatorAssignWithOther(QPersistentModelIndex* self, QModelIndex* other);
+bool QPersistentModelIndex_operatorEqual_QModelIndex(const QPersistentModelIndex* self, QModelIndex* other);
+bool QPersistentModelIndex_operatorNotEqual_QModelIndex(const QPersistentModelIndex* self, QModelIndex* other);
+void QPersistentModelIndex_operatorAssign_other(QPersistentModelIndex* self, QModelIndex* other);
 QModelIndex* QPersistentModelIndex_ToConstQModelIndexBitwiseAnd(const QPersistentModelIndex* self);
 int QPersistentModelIndex_row(const QPersistentModelIndex* self);
 int QPersistentModelIndex_column(const QPersistentModelIndex* self);
@@ -96,7 +96,7 @@ QVariant* QPersistentModelIndex_data(const QPersistentModelIndex* self);
 int QPersistentModelIndex_flags(const QPersistentModelIndex* self);
 QAbstractItemModel* QPersistentModelIndex_model(const QPersistentModelIndex* self);
 bool QPersistentModelIndex_isValid(const QPersistentModelIndex* self);
-QVariant* QPersistentModelIndex_dataWithRole(const QPersistentModelIndex* self, int role);
+QVariant* QPersistentModelIndex_data_role(const QPersistentModelIndex* self, int role);
 
 void QPersistentModelIndex_delete(QPersistentModelIndex* self);
 
@@ -153,15 +153,15 @@ void* QAbstractItemModel_vdata(VirtualQAbstractItemModel* self);
 VirtualQAbstractItemModel* vdata_QAbstractItemModel(void* vdata);
 
 VirtualQAbstractItemModel* QAbstractItemModel_new(const QAbstractItemModel_VTable* vtbl, size_t vdata);
-VirtualQAbstractItemModel* QAbstractItemModel_new2(const QAbstractItemModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAbstractItemModel* QAbstractItemModel_new_parent(const QAbstractItemModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAbstractItemModel_virtbase(QAbstractItemModel* src, QObject** outptr_QObject);
 QMetaObject* QAbstractItemModel_metaObject(const QAbstractItemModel* self);
 void* QAbstractItemModel_metacast(QAbstractItemModel* self, const char* param1);
 int QAbstractItemModel_metacall(QAbstractItemModel* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractItemModel_tr(const char* s);
-struct seaqt_string QAbstractItemModel_trUtf8(const char* s);
-bool QAbstractItemModel_hasIndex(const QAbstractItemModel* self, int row, int column);
+struct seaqt_string QAbstractItemModel_tr_s(const char* s);
+struct seaqt_string QAbstractItemModel_trUtf8_s(const char* s);
+bool QAbstractItemModel_hasIndex_row_column(const QAbstractItemModel* self, int row, int column);
 QModelIndex* QAbstractItemModel_index(const QAbstractItemModel* self, int row, int column, QModelIndex* parent);
 QModelIndex* QAbstractItemModel_parent(const QAbstractItemModel* self, QModelIndex* child);
 QModelIndex* QAbstractItemModel_sibling(const QAbstractItemModel* self, int row, int column, QModelIndex* idx);
@@ -186,10 +186,10 @@ bool QAbstractItemModel_removeRows(QAbstractItemModel* self, int row, int count,
 bool QAbstractItemModel_removeColumns(QAbstractItemModel* self, int column, int count, QModelIndex* parent);
 bool QAbstractItemModel_moveRows(QAbstractItemModel* self, QModelIndex* sourceParent, int sourceRow, int count, QModelIndex* destinationParent, int destinationChild);
 bool QAbstractItemModel_moveColumns(QAbstractItemModel* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild);
-bool QAbstractItemModel_insertRow(QAbstractItemModel* self, int row);
-bool QAbstractItemModel_insertColumn(QAbstractItemModel* self, int column);
-bool QAbstractItemModel_removeRow(QAbstractItemModel* self, int row);
-bool QAbstractItemModel_removeColumn(QAbstractItemModel* self, int column);
+bool QAbstractItemModel_insertRow_row(QAbstractItemModel* self, int row);
+bool QAbstractItemModel_insertColumn_column(QAbstractItemModel* self, int column);
+bool QAbstractItemModel_removeRow_row(QAbstractItemModel* self, int row);
+bool QAbstractItemModel_removeColumn_column(QAbstractItemModel* self, int column);
 bool QAbstractItemModel_moveRow(QAbstractItemModel* self, QModelIndex* sourceParent, int sourceRow, QModelIndex* destinationParent, int destinationChild);
 bool QAbstractItemModel_moveColumn(QAbstractItemModel* self, QModelIndex* sourceParent, int sourceColumn, QModelIndex* destinationParent, int destinationChild);
 void QAbstractItemModel_fetchMore(QAbstractItemModel* self, QModelIndex* parent);
@@ -200,9 +200,9 @@ QModelIndex* QAbstractItemModel_buddy(const QAbstractItemModel* self, QModelInde
 struct seaqt_array /* of QModelIndex* */  QAbstractItemModel_match(const QAbstractItemModel* self, QModelIndex* start, int role, QVariant* value, int hits, int flags);
 QSize* QAbstractItemModel_span(const QAbstractItemModel* self, QModelIndex* index);
 struct seaqt_map /* of int to struct seaqt_string */  QAbstractItemModel_roleNames(const QAbstractItemModel* self);
-bool QAbstractItemModel_checkIndex(const QAbstractItemModel* self, QModelIndex* index);
-void QAbstractItemModel_dataChanged(QAbstractItemModel* self, QModelIndex* topLeft, QModelIndex* bottomRight);
-void QAbstractItemModel_connect_dataChanged(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t));
+bool QAbstractItemModel_checkIndex_index(const QAbstractItemModel* self, QModelIndex* index);
+void QAbstractItemModel_dataChanged_topLeft_bottomRight(QAbstractItemModel* self, QModelIndex* topLeft, QModelIndex* bottomRight);
+void QAbstractItemModel_connect_dataChanged_topLeft_bottomRight(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t));
 void QAbstractItemModel_headerDataChanged(QAbstractItemModel* self, int orientation, int first, int last);
 void QAbstractItemModel_connect_headerDataChanged(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t));
 void QAbstractItemModel_layoutChanged(QAbstractItemModel* self);
@@ -211,26 +211,26 @@ void QAbstractItemModel_layoutAboutToBeChanged(QAbstractItemModel* self);
 void QAbstractItemModel_connect_layoutAboutToBeChanged(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 bool QAbstractItemModel_submit(QAbstractItemModel* self);
 void QAbstractItemModel_revert(QAbstractItemModel* self);
-struct seaqt_string QAbstractItemModel_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractItemModel_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractItemModel_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractItemModel_trUtf83(const char* s, const char* c, int n);
-bool QAbstractItemModel_hasIndex2(const QAbstractItemModel* self, int row, int column, QModelIndex* parent);
-bool QAbstractItemModel_insertRow2(QAbstractItemModel* self, int row, QModelIndex* parent);
-bool QAbstractItemModel_insertColumn2(QAbstractItemModel* self, int column, QModelIndex* parent);
-bool QAbstractItemModel_removeRow2(QAbstractItemModel* self, int row, QModelIndex* parent);
-bool QAbstractItemModel_removeColumn2(QAbstractItemModel* self, int column, QModelIndex* parent);
-bool QAbstractItemModel_checkIndex2(const QAbstractItemModel* self, QModelIndex* index, int options);
-void QAbstractItemModel_dataChanged2(QAbstractItemModel* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct seaqt_array /* of int */  roles);
-void QAbstractItemModel_connect_dataChanged2(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*, struct seaqt_array /* of int */ ), void (*release)(intptr_t));
-void QAbstractItemModel_layoutChangedWithParents(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents);
-void QAbstractItemModel_connect_layoutChangedWithParents(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t));
-void QAbstractItemModel_layoutChanged2(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents, int hint);
-void QAbstractItemModel_connect_layoutChanged2(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t));
-void QAbstractItemModel_layoutAboutToBeChangedWithParents(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents);
-void QAbstractItemModel_connect_layoutAboutToBeChangedWithParents(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t));
-void QAbstractItemModel_layoutAboutToBeChanged2(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents, int hint);
-void QAbstractItemModel_connect_layoutAboutToBeChanged2(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t));
+struct seaqt_string QAbstractItemModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractItemModel_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractItemModel_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractItemModel_trUtf8_s_c_n(const char* s, const char* c, int n);
+bool QAbstractItemModel_hasIndex_row_column_parent(const QAbstractItemModel* self, int row, int column, QModelIndex* parent);
+bool QAbstractItemModel_insertRow_row_parent(QAbstractItemModel* self, int row, QModelIndex* parent);
+bool QAbstractItemModel_insertColumn_column_parent(QAbstractItemModel* self, int column, QModelIndex* parent);
+bool QAbstractItemModel_removeRow_row_parent(QAbstractItemModel* self, int row, QModelIndex* parent);
+bool QAbstractItemModel_removeColumn_column_parent(QAbstractItemModel* self, int column, QModelIndex* parent);
+bool QAbstractItemModel_checkIndex_index_options(const QAbstractItemModel* self, QModelIndex* index, int options);
+void QAbstractItemModel_dataChanged_topLeft_bottomRight_roles(QAbstractItemModel* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct seaqt_array /* of int */  roles);
+void QAbstractItemModel_connect_dataChanged_topLeft_bottomRight_roles(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*, struct seaqt_array /* of int */ ), void (*release)(intptr_t));
+void QAbstractItemModel_layoutChanged_parents(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents);
+void QAbstractItemModel_connect_layoutChanged_parents(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t));
+void QAbstractItemModel_layoutChanged_parents_hint(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents, int hint);
+void QAbstractItemModel_connect_layoutChanged_parents_hint(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t));
+void QAbstractItemModel_layoutAboutToBeChanged_parents(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents);
+void QAbstractItemModel_connect_layoutAboutToBeChanged_parents(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t));
+void QAbstractItemModel_layoutAboutToBeChanged_parents_hint(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents, int hint);
+void QAbstractItemModel_connect_layoutAboutToBeChanged_parents_hint(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t));
 
 QMetaObject* QAbstractItemModel_virtualbase_metaObject(const VirtualQAbstractItemModel* self);
 void* QAbstractItemModel_virtualbase_metacast(VirtualQAbstractItemModel* self, const char* param1);
@@ -278,8 +278,8 @@ void QAbstractItemModel_virtualbase_connectNotify(VirtualQAbstractItemModel* sel
 void QAbstractItemModel_virtualbase_disconnectNotify(VirtualQAbstractItemModel* self, QMetaMethod* signal);
 
 void QAbstractItemModel_protectedbase_resetInternalData(VirtualQAbstractItemModel* self);
-QModelIndex* QAbstractItemModel_protectedbase_createIndex(const VirtualQAbstractItemModel* self, int row, int column);
-QModelIndex* QAbstractItemModel_protectedbase_createIndex2(const VirtualQAbstractItemModel* self, int row, int column, uintptr_t id);
+QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column(const VirtualQAbstractItemModel* self, int row, int column);
+QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column_id(const VirtualQAbstractItemModel* self, int row, int column, uintptr_t id);
 void QAbstractItemModel_protectedbase_encodeData(const VirtualQAbstractItemModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QAbstractItemModel_protectedbase_decodeData(VirtualQAbstractItemModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QAbstractItemModel_protectedbase_beginInsertRows(VirtualQAbstractItemModel* self, QModelIndex* parent, int first, int last);
@@ -299,7 +299,7 @@ void QAbstractItemModel_protectedbase_endResetModel(VirtualQAbstractItemModel* s
 void QAbstractItemModel_protectedbase_changePersistentIndex(VirtualQAbstractItemModel* self, QModelIndex* from, QModelIndex* to);
 void QAbstractItemModel_protectedbase_changePersistentIndexList(VirtualQAbstractItemModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to);
 struct seaqt_array /* of QModelIndex* */  QAbstractItemModel_protectedbase_persistentIndexList(const VirtualQAbstractItemModel* self);
-QModelIndex* QAbstractItemModel_protectedbase_createIndex3(const VirtualQAbstractItemModel* self, int row, int column, void* data);
+QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column_data(const VirtualQAbstractItemModel* self, int row, int column, void* data);
 QObject* QAbstractItemModel_protectedbase_sender(const VirtualQAbstractItemModel* self);
 int QAbstractItemModel_protectedbase_senderSignalIndex(const VirtualQAbstractItemModel* self);
 int QAbstractItemModel_protectedbase_receivers(const VirtualQAbstractItemModel* self, const char* signal);
@@ -359,22 +359,22 @@ void* QAbstractTableModel_vdata(VirtualQAbstractTableModel* self);
 VirtualQAbstractTableModel* vdata_QAbstractTableModel(void* vdata);
 
 VirtualQAbstractTableModel* QAbstractTableModel_new(const QAbstractTableModel_VTable* vtbl, size_t vdata);
-VirtualQAbstractTableModel* QAbstractTableModel_new2(const QAbstractTableModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAbstractTableModel* QAbstractTableModel_new_parent(const QAbstractTableModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAbstractTableModel_virtbase(QAbstractTableModel* src, QAbstractItemModel** outptr_QAbstractItemModel);
 QMetaObject* QAbstractTableModel_metaObject(const QAbstractTableModel* self);
 void* QAbstractTableModel_metacast(QAbstractTableModel* self, const char* param1);
 int QAbstractTableModel_metacall(QAbstractTableModel* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractTableModel_tr(const char* s);
-struct seaqt_string QAbstractTableModel_trUtf8(const char* s);
+struct seaqt_string QAbstractTableModel_tr_s(const char* s);
+struct seaqt_string QAbstractTableModel_trUtf8_s(const char* s);
 QModelIndex* QAbstractTableModel_index(const QAbstractTableModel* self, int row, int column, QModelIndex* parent);
 QModelIndex* QAbstractTableModel_sibling(const QAbstractTableModel* self, int row, int column, QModelIndex* idx);
 bool QAbstractTableModel_dropMimeData(QAbstractTableModel* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 int QAbstractTableModel_flags(const QAbstractTableModel* self, QModelIndex* index);
-struct seaqt_string QAbstractTableModel_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractTableModel_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractTableModel_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractTableModel_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAbstractTableModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractTableModel_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractTableModel_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractTableModel_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractTableModel_virtualbase_metaObject(const VirtualQAbstractTableModel* self);
 void* QAbstractTableModel_virtualbase_metacast(VirtualQAbstractTableModel* self, const char* param1);
@@ -420,7 +420,7 @@ void QAbstractTableModel_virtualbase_connectNotify(VirtualQAbstractTableModel* s
 void QAbstractTableModel_virtualbase_disconnectNotify(VirtualQAbstractTableModel* self, QMetaMethod* signal);
 
 void QAbstractTableModel_protectedbase_resetInternalData(VirtualQAbstractTableModel* self);
-QModelIndex* QAbstractTableModel_protectedbase_createIndex(const VirtualQAbstractTableModel* self, int row, int column);
+QModelIndex* QAbstractTableModel_protectedbase_createIndex_row_column(const VirtualQAbstractTableModel* self, int row, int column);
 void QAbstractTableModel_protectedbase_encodeData(const VirtualQAbstractTableModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QAbstractTableModel_protectedbase_decodeData(VirtualQAbstractTableModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QAbstractTableModel_protectedbase_beginInsertRows(VirtualQAbstractTableModel* self, QModelIndex* parent, int first, int last);
@@ -498,22 +498,22 @@ void* QAbstractListModel_vdata(VirtualQAbstractListModel* self);
 VirtualQAbstractListModel* vdata_QAbstractListModel(void* vdata);
 
 VirtualQAbstractListModel* QAbstractListModel_new(const QAbstractListModel_VTable* vtbl, size_t vdata);
-VirtualQAbstractListModel* QAbstractListModel_new2(const QAbstractListModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAbstractListModel* QAbstractListModel_new_parent(const QAbstractListModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAbstractListModel_virtbase(QAbstractListModel* src, QAbstractItemModel** outptr_QAbstractItemModel);
 QMetaObject* QAbstractListModel_metaObject(const QAbstractListModel* self);
 void* QAbstractListModel_metacast(QAbstractListModel* self, const char* param1);
 int QAbstractListModel_metacall(QAbstractListModel* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractListModel_tr(const char* s);
-struct seaqt_string QAbstractListModel_trUtf8(const char* s);
+struct seaqt_string QAbstractListModel_tr_s(const char* s);
+struct seaqt_string QAbstractListModel_trUtf8_s(const char* s);
 QModelIndex* QAbstractListModel_index(const QAbstractListModel* self, int row, int column, QModelIndex* parent);
 QModelIndex* QAbstractListModel_sibling(const QAbstractListModel* self, int row, int column, QModelIndex* idx);
 bool QAbstractListModel_dropMimeData(QAbstractListModel* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 int QAbstractListModel_flags(const QAbstractListModel* self, QModelIndex* index);
-struct seaqt_string QAbstractListModel_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractListModel_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractListModel_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractListModel_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAbstractListModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractListModel_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractListModel_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractListModel_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractListModel_virtualbase_metaObject(const VirtualQAbstractListModel* self);
 void* QAbstractListModel_virtualbase_metacast(VirtualQAbstractListModel* self, const char* param1);
@@ -558,7 +558,7 @@ void QAbstractListModel_virtualbase_connectNotify(VirtualQAbstractListModel* sel
 void QAbstractListModel_virtualbase_disconnectNotify(VirtualQAbstractListModel* self, QMetaMethod* signal);
 
 void QAbstractListModel_protectedbase_resetInternalData(VirtualQAbstractListModel* self);
-QModelIndex* QAbstractListModel_protectedbase_createIndex(const VirtualQAbstractListModel* self, int row, int column);
+QModelIndex* QAbstractListModel_protectedbase_createIndex_row_column(const VirtualQAbstractListModel* self, int row, int column);
 void QAbstractListModel_protectedbase_encodeData(const VirtualQAbstractListModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QAbstractListModel_protectedbase_decodeData(VirtualQAbstractListModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QAbstractListModel_protectedbase_beginInsertRows(VirtualQAbstractListModel* self, QModelIndex* parent, int first, int last);

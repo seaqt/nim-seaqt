@@ -760,7 +760,7 @@ VirtualQTabBar* QTabBar_new(const QTabBar_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQTabBar(vtbl) : nullptr;
 }
 
-VirtualQTabBar* QTabBar_new2(const QTabBar_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQTabBar* QTabBar_new_parent(const QTabBar_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTabBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTabBar(vtbl, parent) : nullptr;
 }
@@ -781,7 +781,7 @@ int QTabBar_metacall(QTabBar* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTabBar_tr(const char* s) {
+struct seaqt_string QTabBar_tr_s(const char* s) {
 	QString _ret = QTabBar::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -792,7 +792,7 @@ struct seaqt_string QTabBar_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTabBar_trUtf8(const char* s) {
+struct seaqt_string QTabBar_trUtf8_s(const char* s) {
 	QString _ret = QTabBar::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -812,22 +812,22 @@ void QTabBar_setShape(QTabBar* self, int shape) {
 	self->setShape(static_cast<QTabBar::Shape>(shape));
 }
 
-int QTabBar_addTab(QTabBar* self, struct seaqt_string text) {
+int QTabBar_addTab_text(QTabBar* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addTab(text_QString);
 }
 
-int QTabBar_addTab2(QTabBar* self, QIcon* icon, struct seaqt_string text) {
+int QTabBar_addTab_icon_text(QTabBar* self, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addTab(*icon, text_QString);
 }
 
-int QTabBar_insertTab(QTabBar* self, int index, struct seaqt_string text) {
+int QTabBar_insertTab_index_text(QTabBar* self, int index, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->insertTab(static_cast<int>(index), text_QString);
 }
 
-int QTabBar_insertTab2(QTabBar* self, int index, QIcon* icon, struct seaqt_string text) {
+int QTabBar_insertTab_index_icon_text(QTabBar* self, int index, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->insertTab(static_cast<int>(index), *icon, text_QString);
 }
@@ -1151,7 +1151,7 @@ void QTabBar_connect_tabBarDoubleClicked(QTabBar* self, intptr_t slot, void (*ca
 	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::tabBarDoubleClicked), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QTabBar_tr2(const char* s, const char* c) {
+struct seaqt_string QTabBar_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTabBar::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1162,7 +1162,7 @@ struct seaqt_string QTabBar_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTabBar_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTabBar_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTabBar::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1173,7 +1173,7 @@ struct seaqt_string QTabBar_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QTabBar_trUtf82(const char* s, const char* c) {
+struct seaqt_string QTabBar_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QTabBar::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1184,7 +1184,7 @@ struct seaqt_string QTabBar_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTabBar_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QTabBar_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTabBar::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

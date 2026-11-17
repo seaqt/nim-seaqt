@@ -82,23 +82,23 @@ void* QWebPluginFactory_vdata(VirtualQWebPluginFactory* self);
 VirtualQWebPluginFactory* vdata_QWebPluginFactory(void* vdata);
 
 VirtualQWebPluginFactory* QWebPluginFactory_new(const QWebPluginFactory_VTable* vtbl, size_t vdata);
-VirtualQWebPluginFactory* QWebPluginFactory_new2(const QWebPluginFactory_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQWebPluginFactory* QWebPluginFactory_new_parent(const QWebPluginFactory_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QWebPluginFactory_virtbase(QWebPluginFactory* src, QObject** outptr_QObject);
 QMetaObject* QWebPluginFactory_metaObject(const QWebPluginFactory* self);
 void* QWebPluginFactory_metacast(QWebPluginFactory* self, const char* param1);
 int QWebPluginFactory_metacall(QWebPluginFactory* self, int param1, int param2, void** param3);
-struct seaqt_string QWebPluginFactory_tr(const char* s);
-struct seaqt_string QWebPluginFactory_trUtf8(const char* s);
+struct seaqt_string QWebPluginFactory_tr_s(const char* s);
+struct seaqt_string QWebPluginFactory_trUtf8_s(const char* s);
 struct seaqt_array /* of QWebPluginFactory__Plugin* */  QWebPluginFactory_plugins(const QWebPluginFactory* self);
 void QWebPluginFactory_refreshPlugins(QWebPluginFactory* self);
 QObject* QWebPluginFactory_create(const QWebPluginFactory* self, struct seaqt_string mimeType, QUrl* param2, struct seaqt_array /* of struct seaqt_string */  argumentNames, struct seaqt_array /* of struct seaqt_string */  argumentValues);
 bool QWebPluginFactory_extension(QWebPluginFactory* self, int extension, QWebPluginFactory__ExtensionOption* option, QWebPluginFactory__ExtensionReturn* output);
 bool QWebPluginFactory_supportsExtension(const QWebPluginFactory* self, int extension);
-struct seaqt_string QWebPluginFactory_tr2(const char* s, const char* c);
-struct seaqt_string QWebPluginFactory_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebPluginFactory_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebPluginFactory_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebPluginFactory_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebPluginFactory_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebPluginFactory_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebPluginFactory_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QWebPluginFactory_virtualbase_metaObject(const VirtualQWebPluginFactory* self);
 void* QWebPluginFactory_virtualbase_metacast(VirtualQWebPluginFactory* self, const char* param1);
@@ -124,7 +124,7 @@ bool QWebPluginFactory_protectedbase_isSignalConnected(const VirtualQWebPluginFa
 const QMetaObject* QWebPluginFactory_staticMetaObject();
 void QWebPluginFactory_delete(QWebPluginFactory* self);
 
-QWebPluginFactory__MimeType* QWebPluginFactory__MimeType_new(QWebPluginFactory__MimeType* param1);
+QWebPluginFactory__MimeType* QWebPluginFactory__MimeType_new(QWebPluginFactory__MimeType* from);
 
 struct seaqt_string QWebPluginFactory__MimeType_name(const QWebPluginFactory__MimeType* self);
 void QWebPluginFactory__MimeType_setName(QWebPluginFactory__MimeType* self, struct seaqt_string name);
@@ -134,11 +134,11 @@ struct seaqt_array /* of struct seaqt_string */  QWebPluginFactory__MimeType_fil
 void QWebPluginFactory__MimeType_setFileExtensions(QWebPluginFactory__MimeType* self, struct seaqt_array /* of struct seaqt_string */  fileExtensions);
 bool QWebPluginFactory__MimeType_operatorEqual(const QWebPluginFactory__MimeType* self, QWebPluginFactory__MimeType* other);
 bool QWebPluginFactory__MimeType_operatorNotEqual(const QWebPluginFactory__MimeType* self, QWebPluginFactory__MimeType* other);
-void QWebPluginFactory__MimeType_operatorAssign(QWebPluginFactory__MimeType* self, QWebPluginFactory__MimeType* param1);
+void QWebPluginFactory__MimeType_operatorAssign(QWebPluginFactory__MimeType* self, QWebPluginFactory__MimeType* from);
 
 void QWebPluginFactory__MimeType_delete(QWebPluginFactory__MimeType* self);
 
-QWebPluginFactory__Plugin* QWebPluginFactory__Plugin_new(QWebPluginFactory__Plugin* param1);
+QWebPluginFactory__Plugin* QWebPluginFactory__Plugin_new(QWebPluginFactory__Plugin* from);
 
 struct seaqt_string QWebPluginFactory__Plugin_name(const QWebPluginFactory__Plugin* self);
 void QWebPluginFactory__Plugin_setName(QWebPluginFactory__Plugin* self, struct seaqt_string name);
@@ -146,7 +146,7 @@ struct seaqt_string QWebPluginFactory__Plugin_description(const QWebPluginFactor
 void QWebPluginFactory__Plugin_setDescription(QWebPluginFactory__Plugin* self, struct seaqt_string description);
 struct seaqt_array /* of QWebPluginFactory__MimeType* */  QWebPluginFactory__Plugin_mimeTypes(const QWebPluginFactory__Plugin* self);
 void QWebPluginFactory__Plugin_setMimeTypes(QWebPluginFactory__Plugin* self, struct seaqt_array /* of QWebPluginFactory__MimeType* */  mimeTypes);
-void QWebPluginFactory__Plugin_operatorAssign(QWebPluginFactory__Plugin* self, QWebPluginFactory__Plugin* param1);
+void QWebPluginFactory__Plugin_operatorAssign(QWebPluginFactory__Plugin* self, QWebPluginFactory__Plugin* from);
 
 void QWebPluginFactory__Plugin_delete(QWebPluginFactory__Plugin* self);
 

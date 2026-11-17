@@ -728,7 +728,7 @@ VirtualQAbstractButton* QAbstractButton_new(const QAbstractButton_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQAbstractButton(vtbl) : nullptr;
 }
 
-VirtualQAbstractButton* QAbstractButton_new2(const QAbstractButton_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQAbstractButton* QAbstractButton_new_parent(const QAbstractButton_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAbstractButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAbstractButton(vtbl, parent) : nullptr;
 }
@@ -749,7 +749,7 @@ int QAbstractButton_metacall(QAbstractButton* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractButton_tr(const char* s) {
+struct seaqt_string QAbstractButton_tr_s(const char* s) {
 	QString _ret = QAbstractButton::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -760,7 +760,7 @@ struct seaqt_string QAbstractButton_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractButton_trUtf8(const char* s) {
+struct seaqt_string QAbstractButton_trUtf8_s(const char* s) {
 	QString _ret = QAbstractButton::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -944,7 +944,7 @@ void QAbstractButton_connect_toggled(QAbstractButton* self, intptr_t slot, void 
 	QAbstractButton::connect(self, static_cast<void (QAbstractButton::*)(bool)>(&QAbstractButton::toggled), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAbstractButton_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractButton_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractButton::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -955,7 +955,7 @@ struct seaqt_string QAbstractButton_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractButton_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractButton_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractButton::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -966,7 +966,7 @@ struct seaqt_string QAbstractButton_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractButton_trUtf82(const char* s, const char* c) {
+struct seaqt_string QAbstractButton_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractButton::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -977,7 +977,7 @@ struct seaqt_string QAbstractButton_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractButton_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractButton_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractButton::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -988,15 +988,15 @@ struct seaqt_string QAbstractButton_trUtf83(const char* s, const char* c, int n)
 	return _ms;
 }
 
-void QAbstractButton_animateClickWithMsec(QAbstractButton* self, int msec) {
+void QAbstractButton_animateClick_msec(QAbstractButton* self, int msec) {
 	self->animateClick(static_cast<int>(msec));
 }
 
-void QAbstractButton_clickedWithChecked(QAbstractButton* self, bool checked) {
+void QAbstractButton_clicked_checked(QAbstractButton* self, bool checked) {
 	self->clicked(checked);
 }
 
-void QAbstractButton_connect_clickedWithChecked(QAbstractButton* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QAbstractButton_connect_clicked_checked(QAbstractButton* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);

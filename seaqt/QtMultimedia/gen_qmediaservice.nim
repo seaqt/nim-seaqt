@@ -55,14 +55,14 @@ type cQMediaService*{.exportc: "QMediaService", incompleteStruct.} = object
 proc fcQMediaService_metaObject(self: pointer): pointer {.importc: "QMediaService_metaObject".}
 proc fcQMediaService_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaService_metacast".}
 proc fcQMediaService_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaService_metacall".}
-proc fcQMediaService_tr(s: cstring): struct_seaqt_string {.importc: "QMediaService_tr".}
-proc fcQMediaService_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaService_trUtf8".}
+proc fcQMediaService_trS(s: cstring): struct_seaqt_string {.importc: "QMediaService_tr_s".}
+proc fcQMediaService_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaService_trUtf8_s".}
 proc fcQMediaService_requestControl(self: pointer, name: cstring): pointer {.importc: "QMediaService_requestControl".}
 proc fcQMediaService_releaseControl(self: pointer, control: pointer): void {.importc: "QMediaService_releaseControl".}
-proc fcQMediaService_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaService_tr2".}
-proc fcQMediaService_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaService_tr3".}
-proc fcQMediaService_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaService_trUtf82".}
-proc fcQMediaService_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaService_trUtf83".}
+proc fcQMediaService_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaService_tr_s_c".}
+proc fcQMediaService_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaService_tr_s_c_n".}
+proc fcQMediaService_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaService_trUtf8_s_c".}
+proc fcQMediaService_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaService_trUtf8_s_c_n".}
 proc fcQMediaService_protectedbase_sender(self: pointer): pointer {.importc: "QMediaService_protectedbase_sender".}
 proc fcQMediaService_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaService_protectedbase_senderSignalIndex".}
 proc fcQMediaService_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaService_protectedbase_receivers".}
@@ -79,13 +79,13 @@ proc metacall*(self: gen_qmediaservice_types.QMediaService, param1: cint, param2
   fcQMediaService_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediaservice_types.QMediaService, s: cstring): string =
-  let v_ms = fcQMediaService_tr(s)
+  let v_ms = fcQMediaService_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaservice_types.QMediaService, s: cstring): string =
-  let v_ms = fcQMediaService_trUtf8(s)
+  let v_ms = fcQMediaService_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -97,25 +97,25 @@ proc releaseControl*(self: gen_qmediaservice_types.QMediaService, control: gen_q
   fcQMediaService_releaseControl(self.h, control.h)
 
 proc tr*(_: type gen_qmediaservice_types.QMediaService, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaService_tr2(s, c)
+  let v_ms = fcQMediaService_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediaservice_types.QMediaService, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaService_tr3(s, c, n)
+  let v_ms = fcQMediaService_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaservice_types.QMediaService, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaService_trUtf82(s, c)
+  let v_ms = fcQMediaService_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaservice_types.QMediaService, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaService_trUtf83(s, c, n)
+  let v_ms = fcQMediaService_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

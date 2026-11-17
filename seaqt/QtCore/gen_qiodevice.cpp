@@ -362,7 +362,7 @@ VirtualQIODevice* QIODevice_new(const QIODevice_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQIODevice(vtbl) : nullptr;
 }
 
-VirtualQIODevice* QIODevice_new2(const QIODevice_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQIODevice* QIODevice_new_parent(const QIODevice_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQIODevice>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQIODevice(vtbl, parent) : nullptr;
 }
@@ -383,7 +383,7 @@ int QIODevice_metacall(QIODevice* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QIODevice_tr(const char* s) {
+struct seaqt_string QIODevice_tr_s(const char* s) {
 	QString _ret = QIODevice::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -394,7 +394,7 @@ struct seaqt_string QIODevice_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QIODevice_trUtf8(const char* s) {
+struct seaqt_string QIODevice_trUtf8_s(const char* s) {
 	QString _ret = QIODevice::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -498,12 +498,12 @@ long long QIODevice_bytesToWrite(const QIODevice* self) {
 	return static_cast<long long>(_ret);
 }
 
-long long QIODevice_read(QIODevice* self, char* data, long long maxlen) {
+long long QIODevice_read_data_maxlen(QIODevice* self, char* data, long long maxlen) {
 	qint64 _ret = self->read(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
 }
 
-struct seaqt_string QIODevice_readWithMaxlen(QIODevice* self, long long maxlen) {
+struct seaqt_string QIODevice_read_maxlen(QIODevice* self, long long maxlen) {
 	QByteArray _qb = self->read(static_cast<qint64>(maxlen));
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();
@@ -521,12 +521,12 @@ struct seaqt_string QIODevice_readAll(QIODevice* self) {
 	return _ms;
 }
 
-long long QIODevice_readLine(QIODevice* self, char* data, long long maxlen) {
+long long QIODevice_readLine_data_maxlen(QIODevice* self, char* data, long long maxlen) {
 	qint64 _ret = self->readLine(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
 }
 
-struct seaqt_string QIODevice_readLine2(QIODevice* self) {
+struct seaqt_string QIODevice_readLine(QIODevice* self) {
 	QByteArray _qb = self->readLine();
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();
@@ -555,28 +555,28 @@ bool QIODevice_isTransactionStarted(const QIODevice* self) {
 	return self->isTransactionStarted();
 }
 
-long long QIODevice_write(QIODevice* self, const char* data, long long len) {
+long long QIODevice_write_char_qint64(QIODevice* self, const char* data, long long len) {
 	qint64 _ret = self->write(data, static_cast<qint64>(len));
 	return static_cast<long long>(_ret);
 }
 
-long long QIODevice_writeWithData(QIODevice* self, const char* data) {
+long long QIODevice_write_char(QIODevice* self, const char* data) {
 	qint64 _ret = self->write(data);
 	return static_cast<long long>(_ret);
 }
 
-long long QIODevice_write2(QIODevice* self, struct seaqt_string data) {
+long long QIODevice_write_QByteArray(QIODevice* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	qint64 _ret = self->write(data_QByteArray);
 	return static_cast<long long>(_ret);
 }
 
-long long QIODevice_peek(QIODevice* self, char* data, long long maxlen) {
+long long QIODevice_peek_data_maxlen(QIODevice* self, char* data, long long maxlen) {
 	qint64 _ret = self->peek(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
 }
 
-struct seaqt_string QIODevice_peekWithMaxlen(QIODevice* self, long long maxlen) {
+struct seaqt_string QIODevice_peek_maxlen(QIODevice* self, long long maxlen) {
 	QByteArray _qb = self->peek(static_cast<qint64>(maxlen));
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();
@@ -717,7 +717,7 @@ void QIODevice_connect_readChannelFinished(QIODevice* self, intptr_t slot, void 
 	QIODevice::connect(self, static_cast<void (QIODevice::*)()>(&QIODevice::readChannelFinished), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QIODevice_tr2(const char* s, const char* c) {
+struct seaqt_string QIODevice_tr_s_c(const char* s, const char* c) {
 	QString _ret = QIODevice::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -728,7 +728,7 @@ struct seaqt_string QIODevice_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QIODevice_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QIODevice_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QIODevice::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -739,7 +739,7 @@ struct seaqt_string QIODevice_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QIODevice_trUtf82(const char* s, const char* c) {
+struct seaqt_string QIODevice_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QIODevice::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -750,7 +750,7 @@ struct seaqt_string QIODevice_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QIODevice_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QIODevice_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QIODevice::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -761,7 +761,7 @@ struct seaqt_string QIODevice_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QIODevice_readLineWithMaxlen(QIODevice* self, long long maxlen) {
+struct seaqt_string QIODevice_readLine_maxlen(QIODevice* self, long long maxlen) {
 	QByteArray _qb = self->readLine(static_cast<qint64>(maxlen));
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();

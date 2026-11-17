@@ -96,13 +96,13 @@ proc fcQScriptSyntaxCheckResult_state(self: pointer): cint {.importc: "QScriptSy
 proc fcQScriptSyntaxCheckResult_errorLineNumber(self: pointer): cint {.importc: "QScriptSyntaxCheckResult_errorLineNumber".}
 proc fcQScriptSyntaxCheckResult_errorColumnNumber(self: pointer): cint {.importc: "QScriptSyntaxCheckResult_errorColumnNumber".}
 proc fcQScriptSyntaxCheckResult_errorMessage(self: pointer): struct_seaqt_string {.importc: "QScriptSyntaxCheckResult_errorMessage".}
-proc fcQScriptSyntaxCheckResult_operatorAssign(self: pointer, other: pointer): void {.importc: "QScriptSyntaxCheckResult_operatorAssign".}
-proc fcQScriptSyntaxCheckResult_new(other: pointer): ptr cQScriptSyntaxCheckResult {.importc: "QScriptSyntaxCheckResult_new".}
+proc fcQScriptSyntaxCheckResult_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QScriptSyntaxCheckResult_operatorAssign".}
+proc fcQScriptSyntaxCheckResult_new(fromVal: pointer): ptr cQScriptSyntaxCheckResult {.importc: "QScriptSyntaxCheckResult_new".}
 proc fcQScriptEngine_metaObject(self: pointer): pointer {.importc: "QScriptEngine_metaObject".}
 proc fcQScriptEngine_metacast(self: pointer, param1: cstring): pointer {.importc: "QScriptEngine_metacast".}
 proc fcQScriptEngine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QScriptEngine_metacall".}
-proc fcQScriptEngine_tr(s: cstring): struct_seaqt_string {.importc: "QScriptEngine_tr".}
-proc fcQScriptEngine_trUtf8(s: cstring): struct_seaqt_string {.importc: "QScriptEngine_trUtf8".}
+proc fcQScriptEngine_trS(s: cstring): struct_seaqt_string {.importc: "QScriptEngine_tr_s".}
+proc fcQScriptEngine_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QScriptEngine_trUtf8_s".}
 proc fcQScriptEngine_globalObject(self: pointer): pointer {.importc: "QScriptEngine_globalObject".}
 proc fcQScriptEngine_setGlobalObject(self: pointer, objectVal: pointer): void {.importc: "QScriptEngine_setGlobalObject".}
 proc fcQScriptEngine_currentContext(self: pointer): pointer {.importc: "QScriptEngine_currentContext".}
@@ -110,8 +110,8 @@ proc fcQScriptEngine_pushContext(self: pointer): pointer {.importc: "QScriptEngi
 proc fcQScriptEngine_popContext(self: pointer): void {.importc: "QScriptEngine_popContext".}
 proc fcQScriptEngine_canEvaluate(self: pointer, program: struct_seaqt_string): bool {.importc: "QScriptEngine_canEvaluate".}
 proc fcQScriptEngine_checkSyntax(program: struct_seaqt_string): pointer {.importc: "QScriptEngine_checkSyntax".}
-proc fcQScriptEngine_evaluate(self: pointer, program: struct_seaqt_string): pointer {.importc: "QScriptEngine_evaluate".}
-proc fcQScriptEngine_evaluateWithProgram(self: pointer, program: pointer): pointer {.importc: "QScriptEngine_evaluateWithProgram".}
+proc fcQScriptEngine_evaluate_QString(self: pointer, program: struct_seaqt_string): pointer {.importc: "QScriptEngine_evaluate_QString".}
+proc fcQScriptEngine_evaluate_QScriptProgram(self: pointer, program: pointer): pointer {.importc: "QScriptEngine_evaluate_QScriptProgram".}
 proc fcQScriptEngine_isEvaluating(self: pointer): bool {.importc: "QScriptEngine_isEvaluating".}
 proc fcQScriptEngine_abortEvaluation(self: pointer): void {.importc: "QScriptEngine_abortEvaluation".}
 proc fcQScriptEngine_hasUncaughtException(self: pointer): bool {.importc: "QScriptEngine_hasUncaughtException".}
@@ -121,19 +121,19 @@ proc fcQScriptEngine_uncaughtExceptionBacktrace(self: pointer): struct_seaqt_arr
 proc fcQScriptEngine_clearExceptions(self: pointer): void {.importc: "QScriptEngine_clearExceptions".}
 proc fcQScriptEngine_nullValue(self: pointer): pointer {.importc: "QScriptEngine_nullValue".}
 proc fcQScriptEngine_undefinedValue(self: pointer): pointer {.importc: "QScriptEngine_undefinedValue".}
-proc fcQScriptEngine_newVariant(self: pointer, value: pointer): pointer {.importc: "QScriptEngine_newVariant".}
-proc fcQScriptEngine_newVariant2(self: pointer, objectVal: pointer, value: pointer): pointer {.importc: "QScriptEngine_newVariant2".}
-proc fcQScriptEngine_newRegExp(self: pointer, regexp: pointer): pointer {.importc: "QScriptEngine_newRegExp".}
+proc fcQScriptEngine_newVariantValue(self: pointer, value: pointer): pointer {.importc: "QScriptEngine_newVariant_value".}
+proc fcQScriptEngine_newVariantObjectValue(self: pointer, objectVal: pointer, value: pointer): pointer {.importc: "QScriptEngine_newVariant_object_value".}
+proc fcQScriptEngine_newRegExpRegexp(self: pointer, regexp: pointer): pointer {.importc: "QScriptEngine_newRegExp_regexp".}
 proc fcQScriptEngine_newObject(self: pointer): pointer {.importc: "QScriptEngine_newObject".}
-proc fcQScriptEngine_newObjectWithScriptClass(self: pointer, scriptClass: pointer): pointer {.importc: "QScriptEngine_newObjectWithScriptClass".}
+proc fcQScriptEngine_newObjectScriptClass(self: pointer, scriptClass: pointer): pointer {.importc: "QScriptEngine_newObject_scriptClass".}
 proc fcQScriptEngine_newArray(self: pointer): pointer {.importc: "QScriptEngine_newArray".}
-proc fcQScriptEngine_newRegExp2(self: pointer, pattern: struct_seaqt_string, flags: struct_seaqt_string): pointer {.importc: "QScriptEngine_newRegExp2".}
-proc fcQScriptEngine_newDate(self: pointer, value: float64): pointer {.importc: "QScriptEngine_newDate".}
-proc fcQScriptEngine_newDateWithValue(self: pointer, value: pointer): pointer {.importc: "QScriptEngine_newDateWithValue".}
+proc fcQScriptEngine_newRegExpPatternFlags(self: pointer, pattern: struct_seaqt_string, flags: struct_seaqt_string): pointer {.importc: "QScriptEngine_newRegExp_pattern_flags".}
+proc fcQScriptEngine_newDateQsreal(self: pointer, value: float64): pointer {.importc: "QScriptEngine_newDate_qsreal".}
+proc fcQScriptEngine_newDate_QDateTime(self: pointer, value: pointer): pointer {.importc: "QScriptEngine_newDate_QDateTime".}
 proc fcQScriptEngine_newActivationObject(self: pointer): pointer {.importc: "QScriptEngine_newActivationObject".}
-proc fcQScriptEngine_newQObject(self: pointer, objectVal: pointer): pointer {.importc: "QScriptEngine_newQObject".}
-proc fcQScriptEngine_newQObject2(self: pointer, scriptObject: pointer, qtObject: pointer): pointer {.importc: "QScriptEngine_newQObject2".}
-proc fcQScriptEngine_newQMetaObject(self: pointer, metaObject: pointer): pointer {.importc: "QScriptEngine_newQMetaObject".}
+proc fcQScriptEngine_newQObjectObject(self: pointer, objectVal: pointer): pointer {.importc: "QScriptEngine_newQObject_object".}
+proc fcQScriptEngine_newQObjectScriptObjectQtObject(self: pointer, scriptObject: pointer, qtObject: pointer): pointer {.importc: "QScriptEngine_newQObject_scriptObject_qtObject".}
+proc fcQScriptEngine_newQMetaObjectMetaObject(self: pointer, metaObject: pointer): pointer {.importc: "QScriptEngine_newQMetaObject_metaObject".}
 proc fcQScriptEngine_defaultPrototype(self: pointer, metaTypeId: cint): pointer {.importc: "QScriptEngine_defaultPrototype".}
 proc fcQScriptEngine_setDefaultPrototype(self: pointer, metaTypeId: cint, prototype: pointer): void {.importc: "QScriptEngine_setDefaultPrototype".}
 proc fcQScriptEngine_installTranslatorFunctions(self: pointer): void {.importc: "QScriptEngine_installTranslatorFunctions".}
@@ -151,21 +151,21 @@ proc fcQScriptEngine_toObject(self: pointer, value: pointer): pointer {.importc:
 proc fcQScriptEngine_objectById(self: pointer, id: clonglong): pointer {.importc: "QScriptEngine_objectById".}
 proc fcQScriptEngine_signalHandlerException(self: pointer, exception: pointer): void {.importc: "QScriptEngine_signalHandlerException".}
 proc fcQScriptEngine_connect_signalHandlerException(self: pointer, slot: int, callback: proc (slot: int, exception: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QScriptEngine_connect_signalHandlerException".}
-proc fcQScriptEngine_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScriptEngine_tr2".}
-proc fcQScriptEngine_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScriptEngine_tr3".}
-proc fcQScriptEngine_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScriptEngine_trUtf82".}
-proc fcQScriptEngine_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScriptEngine_trUtf83".}
-proc fcQScriptEngine_evaluate2(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string): pointer {.importc: "QScriptEngine_evaluate2".}
-proc fcQScriptEngine_evaluate3(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string, lineNumber: cint): pointer {.importc: "QScriptEngine_evaluate3".}
-proc fcQScriptEngine_abortEvaluationWithResult(self: pointer, resultVal: pointer): void {.importc: "QScriptEngine_abortEvaluationWithResult".}
-proc fcQScriptEngine_newObject2(self: pointer, scriptClass: pointer, data: pointer): pointer {.importc: "QScriptEngine_newObject2".}
-proc fcQScriptEngine_newArrayWithLength(self: pointer, length: cuint): pointer {.importc: "QScriptEngine_newArrayWithLength".}
-proc fcQScriptEngine_newQObject3(self: pointer, objectVal: pointer, ownership: cint): pointer {.importc: "QScriptEngine_newQObject3".}
-proc fcQScriptEngine_newQObject4(self: pointer, objectVal: pointer, ownership: cint, options: ptr cint): pointer {.importc: "QScriptEngine_newQObject4".}
-proc fcQScriptEngine_newQObject5(self: pointer, scriptObject: pointer, qtObject: pointer, ownership: cint): pointer {.importc: "QScriptEngine_newQObject5".}
-proc fcQScriptEngine_newQObject6(self: pointer, scriptObject: pointer, qtObject: pointer, ownership: cint, options: ptr cint): pointer {.importc: "QScriptEngine_newQObject6".}
-proc fcQScriptEngine_newQMetaObject2(self: pointer, metaObject: pointer, ctor: pointer): pointer {.importc: "QScriptEngine_newQMetaObject2".}
-proc fcQScriptEngine_installTranslatorFunctionsWithObject(self: pointer, objectVal: pointer): void {.importc: "QScriptEngine_installTranslatorFunctionsWithObject".}
+proc fcQScriptEngine_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScriptEngine_tr_s_c".}
+proc fcQScriptEngine_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScriptEngine_tr_s_c_n".}
+proc fcQScriptEngine_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScriptEngine_trUtf8_s_c".}
+proc fcQScriptEngine_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScriptEngine_trUtf8_s_c_n".}
+proc fcQScriptEngine_evaluate_QString_QString(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string): pointer {.importc: "QScriptEngine_evaluate_QString_QString".}
+proc fcQScriptEngine_evaluate_QString_QStringInt(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string, lineNumber: cint): pointer {.importc: "QScriptEngine_evaluate_QString_QString_int".}
+proc fcQScriptEngine_abortEvaluationResult(self: pointer, resultVal: pointer): void {.importc: "QScriptEngine_abortEvaluation_result".}
+proc fcQScriptEngine_newObjectScriptClassData(self: pointer, scriptClass: pointer, data: pointer): pointer {.importc: "QScriptEngine_newObject_scriptClass_data".}
+proc fcQScriptEngine_newArrayLength(self: pointer, length: cuint): pointer {.importc: "QScriptEngine_newArray_length".}
+proc fcQScriptEngine_newQObjectObjectOwnership(self: pointer, objectVal: pointer, ownership: cint): pointer {.importc: "QScriptEngine_newQObject_object_ownership".}
+proc fcQScriptEngine_newQObjectObjectOwnershipOptions(self: pointer, objectVal: pointer, ownership: cint, options: ptr cint): pointer {.importc: "QScriptEngine_newQObject_object_ownership_options".}
+proc fcQScriptEngine_newQObjectScriptObjectQtObjectOwnership(self: pointer, scriptObject: pointer, qtObject: pointer, ownership: cint): pointer {.importc: "QScriptEngine_newQObject_scriptObject_qtObject_ownership".}
+proc fcQScriptEngine_newQObjectScriptObjectQtObjectOwnershipOptions(self: pointer, scriptObject: pointer, qtObject: pointer, ownership: cint, options: ptr cint): pointer {.importc: "QScriptEngine_newQObject_scriptObject_qtObject_ownership_options".}
+proc fcQScriptEngine_newQMetaObjectMetaObjectCtor(self: pointer, metaObject: pointer, ctor: pointer): pointer {.importc: "QScriptEngine_newQMetaObject_metaObject_ctor".}
+proc fcQScriptEngine_installTranslatorFunctionsObject(self: pointer, objectVal: pointer): void {.importc: "QScriptEngine_installTranslatorFunctions_object".}
 proc fcQScriptEngine_vdata(self: pointer): ptr pointer {.importc: "QScriptEngine_vdata".}
 proc fvdata_cQScriptEngine(self: pointer): pointer {.importc: "vdata_QScriptEngine".}
 
@@ -196,7 +196,7 @@ proc fcQScriptEngine_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQScriptEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScriptEngine_protectedbase_receivers".}
 proc fcQScriptEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QScriptEngine_protectedbase_isSignalConnected".}
 proc fcQScriptEngine_new(vtbl: pointer, vdata: csize_t): ptr cQScriptEngine {.importc: "QScriptEngine_new".}
-proc fcQScriptEngine_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQScriptEngine {.importc: "QScriptEngine_new2".}
+proc fcQScriptEngine_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQScriptEngine {.importc: "QScriptEngine_new_parent".}
 proc fcQScriptEngine_staticMetaObject(): pointer {.importc: "QScriptEngine_staticMetaObject".}
 
 proc state*(self: gen_qscriptengine_types.QScriptSyntaxCheckResult): cint =
@@ -214,12 +214,12 @@ proc errorMessage*(self: gen_qscriptengine_types.QScriptSyntaxCheckResult): stri
   c_free(v_ms.data)
   vx_ret
 
-proc operatorAssign*(self: gen_qscriptengine_types.QScriptSyntaxCheckResult, other: gen_qscriptengine_types.QScriptSyntaxCheckResult): void =
-  fcQScriptSyntaxCheckResult_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qscriptengine_types.QScriptSyntaxCheckResult, fromVal: gen_qscriptengine_types.QScriptSyntaxCheckResult): void =
+  fcQScriptSyntaxCheckResult_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qscriptengine_types.QScriptSyntaxCheckResult,
-    other: gen_qscriptengine_types.QScriptSyntaxCheckResult): gen_qscriptengine_types.QScriptSyntaxCheckResult =
-  let tmp = gen_qscriptengine_types.QScriptSyntaxCheckResult(h: fcQScriptSyntaxCheckResult_new(other.h), owned: true)
+    fromVal: gen_qscriptengine_types.QScriptSyntaxCheckResult): gen_qscriptengine_types.QScriptSyntaxCheckResult =
+  let tmp = gen_qscriptengine_types.QScriptSyntaxCheckResult(h: fcQScriptSyntaxCheckResult_new(fromVal.h), owned: true)
   tmp
 proc metaObject*(self: gen_qscriptengine_types.QScriptEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQScriptEngine_metaObject(self.h), owned: false)
@@ -231,13 +231,13 @@ proc metacall*(self: gen_qscriptengine_types.QScriptEngine, param1: cint, param2
   fcQScriptEngine_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qscriptengine_types.QScriptEngine, s: cstring): string =
-  let v_ms = fcQScriptEngine_tr(s)
+  let v_ms = fcQScriptEngine_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscriptengine_types.QScriptEngine, s: cstring): string =
-  let v_ms = fcQScriptEngine_trUtf8(s)
+  let v_ms = fcQScriptEngine_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -264,10 +264,10 @@ proc checkSyntax*(_: type gen_qscriptengine_types.QScriptEngine, program: openAr
   gen_qscriptengine_types.QScriptSyntaxCheckResult(h: fcQScriptEngine_checkSyntax(struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program)))), owned: true)
 
 proc evaluate*(self: gen_qscriptengine_types.QScriptEngine, program: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_evaluate(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program)))), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_evaluate_QString(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program)))), owned: true)
 
 proc evaluate*(self: gen_qscriptengine_types.QScriptEngine, program: gen_qscriptprogram_types.QScriptProgram): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_evaluateWithProgram(self.h, program.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_evaluate_QScriptProgram(self.h, program.h), owned: true)
 
 proc isEvaluating*(self: gen_qscriptengine_types.QScriptEngine): bool =
   fcQScriptEngine_isEvaluating(self.h)
@@ -306,43 +306,43 @@ proc undefinedValue*(self: gen_qscriptengine_types.QScriptEngine): gen_qscriptva
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_undefinedValue(self.h), owned: true)
 
 proc newVariant*(self: gen_qscriptengine_types.QScriptEngine, value: gen_qvariant_types.QVariant): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newVariant(self.h, value.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newVariantValue(self.h, value.h), owned: true)
 
 proc newVariant*(self: gen_qscriptengine_types.QScriptEngine, objectVal: gen_qscriptvalue_types.QScriptValue, value: gen_qvariant_types.QVariant): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newVariant2(self.h, objectVal.h, value.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newVariantObjectValue(self.h, objectVal.h, value.h), owned: true)
 
 proc newRegExp*(self: gen_qscriptengine_types.QScriptEngine, regexp: gen_qregexp_types.QRegExp): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newRegExp(self.h, regexp.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newRegExpRegexp(self.h, regexp.h), owned: true)
 
 proc newObject*(self: gen_qscriptengine_types.QScriptEngine): gen_qscriptvalue_types.QScriptValue =
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newObject(self.h), owned: true)
 
 proc newObject*(self: gen_qscriptengine_types.QScriptEngine, scriptClass: gen_qscriptclass_types.QScriptClass): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newObjectWithScriptClass(self.h, scriptClass.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newObjectScriptClass(self.h, scriptClass.h), owned: true)
 
 proc newArray*(self: gen_qscriptengine_types.QScriptEngine): gen_qscriptvalue_types.QScriptValue =
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newArray(self.h), owned: true)
 
 proc newRegExp*(self: gen_qscriptengine_types.QScriptEngine, pattern: openArray[char], flags: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newRegExp2(self.h, struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), struct_seaqt_string(data: if len(flags) > 0: addr flags[0] else: nil, len: csize_t(len(flags)))), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newRegExpPatternFlags(self.h, struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), struct_seaqt_string(data: if len(flags) > 0: addr flags[0] else: nil, len: csize_t(len(flags)))), owned: true)
 
 proc newDate*(self: gen_qscriptengine_types.QScriptEngine, value: float64): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newDate(self.h, value), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newDateQsreal(self.h, value), owned: true)
 
 proc newDate*(self: gen_qscriptengine_types.QScriptEngine, value: gen_qdatetime_types.QDateTime): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newDateWithValue(self.h, value.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newDate_QDateTime(self.h, value.h), owned: true)
 
 proc newActivationObject*(self: gen_qscriptengine_types.QScriptEngine): gen_qscriptvalue_types.QScriptValue =
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newActivationObject(self.h), owned: true)
 
 proc newQObject*(self: gen_qscriptengine_types.QScriptEngine, objectVal: gen_qobject_types.QObject): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObject(self.h, objectVal.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObjectObject(self.h, objectVal.h), owned: true)
 
 proc newQObject*(self: gen_qscriptengine_types.QScriptEngine, scriptObject: gen_qscriptvalue_types.QScriptValue, qtObject: gen_qobject_types.QObject): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObject2(self.h, scriptObject.h, qtObject.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObjectScriptObjectQtObject(self.h, scriptObject.h, qtObject.h), owned: true)
 
 proc newQMetaObject*(self: gen_qscriptengine_types.QScriptEngine, metaObject: gen_qobjectdefs_types.QMetaObject): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQMetaObject(self.h, metaObject.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQMetaObjectMetaObject(self.h, metaObject.h), owned: true)
 
 proc defaultPrototype*(self: gen_qscriptengine_types.QScriptEngine, metaTypeId: cint): gen_qscriptvalue_types.QScriptValue =
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_defaultPrototype(self.h, metaTypeId), owned: true)
@@ -428,61 +428,61 @@ proc onSignalHandlerException*(self: gen_qscriptengine_types.QScriptEngine, slot
   fcQScriptEngine_connect_signalHandlerException(self.h, cast[int](addr tmp[]), fcQScriptEngine_slot_callback_signalHandlerException, fcQScriptEngine_slot_callback_signalHandlerException_release)
 
 proc tr*(_: type gen_qscriptengine_types.QScriptEngine, s: cstring, c: cstring): string =
-  let v_ms = fcQScriptEngine_tr2(s, c)
+  let v_ms = fcQScriptEngine_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qscriptengine_types.QScriptEngine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQScriptEngine_tr3(s, c, n)
+  let v_ms = fcQScriptEngine_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscriptengine_types.QScriptEngine, s: cstring, c: cstring): string =
-  let v_ms = fcQScriptEngine_trUtf82(s, c)
+  let v_ms = fcQScriptEngine_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscriptengine_types.QScriptEngine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQScriptEngine_trUtf83(s, c, n)
+  let v_ms = fcQScriptEngine_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc evaluate*(self: gen_qscriptengine_types.QScriptEngine, program: openArray[char], fileName: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_evaluate2(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_evaluate_QString_QString(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
 proc evaluate*(self: gen_qscriptengine_types.QScriptEngine, program: openArray[char], fileName: openArray[char], lineNumber: cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_evaluate3(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), lineNumber), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_evaluate_QString_QStringInt(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), lineNumber), owned: true)
 
 proc abortEvaluation*(self: gen_qscriptengine_types.QScriptEngine, resultVal: gen_qscriptvalue_types.QScriptValue): void =
-  fcQScriptEngine_abortEvaluationWithResult(self.h, resultVal.h)
+  fcQScriptEngine_abortEvaluationResult(self.h, resultVal.h)
 
 proc newObject*(self: gen_qscriptengine_types.QScriptEngine, scriptClass: gen_qscriptclass_types.QScriptClass, data: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newObject2(self.h, scriptClass.h, data.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newObjectScriptClassData(self.h, scriptClass.h, data.h), owned: true)
 
 proc newArray*(self: gen_qscriptengine_types.QScriptEngine, length: cuint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newArrayWithLength(self.h, length), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newArrayLength(self.h, length), owned: true)
 
 proc newQObject*(self: gen_qscriptengine_types.QScriptEngine, objectVal: gen_qobject_types.QObject, ownership: cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObject3(self.h, objectVal.h, cint(ownership)), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObjectObjectOwnership(self.h, objectVal.h, cint(ownership)), owned: true)
 
 proc newQObject*(self: gen_qscriptengine_types.QScriptEngine, objectVal: gen_qobject_types.QObject, ownership: cint, options: ptr cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObject4(self.h, objectVal.h, cint(ownership), options), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObjectObjectOwnershipOptions(self.h, objectVal.h, cint(ownership), options), owned: true)
 
 proc newQObject*(self: gen_qscriptengine_types.QScriptEngine, scriptObject: gen_qscriptvalue_types.QScriptValue, qtObject: gen_qobject_types.QObject, ownership: cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObject5(self.h, scriptObject.h, qtObject.h, cint(ownership)), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObjectScriptObjectQtObjectOwnership(self.h, scriptObject.h, qtObject.h, cint(ownership)), owned: true)
 
 proc newQObject*(self: gen_qscriptengine_types.QScriptEngine, scriptObject: gen_qscriptvalue_types.QScriptValue, qtObject: gen_qobject_types.QObject, ownership: cint, options: ptr cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObject6(self.h, scriptObject.h, qtObject.h, cint(ownership), options), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQObjectScriptObjectQtObjectOwnershipOptions(self.h, scriptObject.h, qtObject.h, cint(ownership), options), owned: true)
 
 proc newQMetaObject*(self: gen_qscriptengine_types.QScriptEngine, metaObject: gen_qobjectdefs_types.QMetaObject, ctor: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQMetaObject2(self.h, metaObject.h, ctor.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptEngine_newQMetaObjectMetaObjectCtor(self.h, metaObject.h, ctor.h), owned: true)
 
 proc installTranslatorFunctions*(self: gen_qscriptengine_types.QScriptEngine, objectVal: gen_qscriptvalue_types.QScriptValue): void =
-  fcQScriptEngine_installTranslatorFunctionsWithObject(self.h, objectVal.h)
+  fcQScriptEngine_installTranslatorFunctionsObject(self.h, objectVal.h)
 
 type QScriptEnginemetaObjectProc* = proc(self: QScriptEngine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QScriptEnginemetacastProc* = proc(self: QScriptEngine, param1: cstring): pointer {.raises: [], gcsafe.}

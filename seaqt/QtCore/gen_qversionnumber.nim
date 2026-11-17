@@ -52,15 +52,15 @@ proc fcQVersionNumber_isPrefixOf(self: pointer, other: pointer): bool {.importc:
 proc fcQVersionNumber_compare(v1: pointer, v2: pointer): cint {.importc: "QVersionNumber_compare".}
 proc fcQVersionNumber_commonPrefix(v1: pointer, v2: pointer): pointer {.importc: "QVersionNumber_commonPrefix".}
 proc fcQVersionNumber_toString(self: pointer): struct_seaqt_string {.importc: "QVersionNumber_toString".}
-proc fcQVersionNumber_fromString(stringVal: struct_seaqt_string): pointer {.importc: "QVersionNumber_fromString".}
-proc fcQVersionNumber_operatorAssign(self: pointer, param1: pointer): void {.importc: "QVersionNumber_operatorAssign".}
-proc fcQVersionNumber_fromString3(stringVal: struct_seaqt_string, suffixIndex: ptr cint): pointer {.importc: "QVersionNumber_fromString3".}
+proc fcQVersionNumber_fromString_QString(stringVal: struct_seaqt_string): pointer {.importc: "QVersionNumber_fromString_QString".}
+proc fcQVersionNumber_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QVersionNumber_operatorAssign".}
+proc fcQVersionNumber_fromString_QStringInt(stringVal: struct_seaqt_string, suffixIndex: ptr cint): pointer {.importc: "QVersionNumber_fromString_QString_int".}
 proc fcQVersionNumber_new(): ptr cQVersionNumber {.importc: "QVersionNumber_new".}
-proc fcQVersionNumber_new2(seg: struct_seaqt_array): ptr cQVersionNumber {.importc: "QVersionNumber_new2".}
-proc fcQVersionNumber_new3(maj: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new3".}
-proc fcQVersionNumber_new4(maj: cint, min: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new4".}
-proc fcQVersionNumber_new5(maj: cint, min: cint, mic: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new5".}
-proc fcQVersionNumber_new6(param1: pointer): ptr cQVersionNumber {.importc: "QVersionNumber_new6".}
+proc fcQVersionNumber_new2(seg: struct_seaqt_array): ptr cQVersionNumber {.importc: "QVersionNumber_new_seg".}
+proc fcQVersionNumber_new3(maj: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new_maj".}
+proc fcQVersionNumber_new4(maj: cint, min: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new_maj_min".}
+proc fcQVersionNumber_new5(maj: cint, min: cint, mic: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new_maj_min_mic".}
+proc fcQVersionNumber_new6(fromVal: pointer): ptr cQVersionNumber {.importc: "QVersionNumber_new_from".}
 
 proc isNull*(self: gen_qversionnumber_types.QVersionNumber): bool =
   fcQVersionNumber_isNull(self.h)
@@ -111,13 +111,13 @@ proc toString*(self: gen_qversionnumber_types.QVersionNumber): string =
   vx_ret
 
 proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, stringVal: openArray[char]): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString_QString(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
-proc operatorAssign*(self: gen_qversionnumber_types.QVersionNumber, param1: gen_qversionnumber_types.QVersionNumber): void =
-  fcQVersionNumber_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qversionnumber_types.QVersionNumber, fromVal: gen_qversionnumber_types.QVersionNumber): void =
+  fcQVersionNumber_operatorAssign(self.h, fromVal.h)
 
 proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, stringVal: openArray[char], suffixIndex: ptr cint): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString3(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), suffixIndex), owned: true)
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString_QStringInt(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), suffixIndex), owned: true)
 
 proc create*(T: type gen_qversionnumber_types.QVersionNumber): gen_qversionnumber_types.QVersionNumber =
   let tmp = gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new(), owned: true)
@@ -143,6 +143,6 @@ proc create*(T: type gen_qversionnumber_types.QVersionNumber,
   let tmp = gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new5(maj, min, mic), owned: true)
   tmp
 proc create*(T: type gen_qversionnumber_types.QVersionNumber,
-    param1: gen_qversionnumber_types.QVersionNumber): gen_qversionnumber_types.QVersionNumber =
-  let tmp = gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new6(param1.h), owned: true)
+    fromVal: gen_qversionnumber_types.QVersionNumber): gen_qversionnumber_types.QVersionNumber =
+  let tmp = gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new6(fromVal.h), owned: true)
   tmp

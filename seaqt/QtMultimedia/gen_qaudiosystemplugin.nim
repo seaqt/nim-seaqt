@@ -56,20 +56,20 @@ proc fcQAudioSystemFactoryInterface_availableDevices(self: pointer, param1: cint
 proc fcQAudioSystemFactoryInterface_createInput(self: pointer, device: struct_seaqt_string): pointer {.importc: "QAudioSystemFactoryInterface_createInput".}
 proc fcQAudioSystemFactoryInterface_createOutput(self: pointer, device: struct_seaqt_string): pointer {.importc: "QAudioSystemFactoryInterface_createOutput".}
 proc fcQAudioSystemFactoryInterface_createDeviceInfo(self: pointer, device: struct_seaqt_string, mode: cint): pointer {.importc: "QAudioSystemFactoryInterface_createDeviceInfo".}
-proc fcQAudioSystemFactoryInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAudioSystemFactoryInterface_operatorAssign".}
+proc fcQAudioSystemFactoryInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAudioSystemFactoryInterface_operatorAssign".}
 proc fcQAudioSystemPlugin_metaObject(self: pointer): pointer {.importc: "QAudioSystemPlugin_metaObject".}
 proc fcQAudioSystemPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioSystemPlugin_metacast".}
 proc fcQAudioSystemPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioSystemPlugin_metacall".}
-proc fcQAudioSystemPlugin_tr(s: cstring): struct_seaqt_string {.importc: "QAudioSystemPlugin_tr".}
-proc fcQAudioSystemPlugin_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAudioSystemPlugin_trUtf8".}
+proc fcQAudioSystemPlugin_trS(s: cstring): struct_seaqt_string {.importc: "QAudioSystemPlugin_tr_s".}
+proc fcQAudioSystemPlugin_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAudioSystemPlugin_trUtf8_s".}
 proc fcQAudioSystemPlugin_availableDevices(self: pointer, param1: cint): struct_seaqt_array {.importc: "QAudioSystemPlugin_availableDevices".}
 proc fcQAudioSystemPlugin_createInput(self: pointer, device: struct_seaqt_string): pointer {.importc: "QAudioSystemPlugin_createInput".}
 proc fcQAudioSystemPlugin_createOutput(self: pointer, device: struct_seaqt_string): pointer {.importc: "QAudioSystemPlugin_createOutput".}
 proc fcQAudioSystemPlugin_createDeviceInfo(self: pointer, device: struct_seaqt_string, mode: cint): pointer {.importc: "QAudioSystemPlugin_createDeviceInfo".}
-proc fcQAudioSystemPlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioSystemPlugin_tr2".}
-proc fcQAudioSystemPlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioSystemPlugin_tr3".}
-proc fcQAudioSystemPlugin_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioSystemPlugin_trUtf82".}
-proc fcQAudioSystemPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioSystemPlugin_trUtf83".}
+proc fcQAudioSystemPlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioSystemPlugin_tr_s_c".}
+proc fcQAudioSystemPlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioSystemPlugin_tr_s_c_n".}
+proc fcQAudioSystemPlugin_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioSystemPlugin_trUtf8_s_c".}
+proc fcQAudioSystemPlugin_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioSystemPlugin_trUtf8_s_c_n".}
 proc fcQAudioSystemPlugin_vdata(self: pointer): ptr pointer {.importc: "QAudioSystemPlugin_vdata".}
 proc fvdata_cQAudioSystemPlugin(self: pointer): pointer {.importc: "vdata_QAudioSystemPlugin".}
 
@@ -104,7 +104,7 @@ proc fcQAudioSystemPlugin_protectedbase_senderSignalIndex(self: pointer): cint {
 proc fcQAudioSystemPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioSystemPlugin_protectedbase_receivers".}
 proc fcQAudioSystemPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioSystemPlugin_protectedbase_isSignalConnected".}
 proc fcQAudioSystemPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQAudioSystemPlugin {.importc: "QAudioSystemPlugin_new".}
-proc fcQAudioSystemPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioSystemPlugin {.importc: "QAudioSystemPlugin_new2".}
+proc fcQAudioSystemPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioSystemPlugin {.importc: "QAudioSystemPlugin_new_parent".}
 proc fcQAudioSystemPlugin_staticMetaObject(): pointer {.importc: "QAudioSystemPlugin_staticMetaObject".}
 
 proc availableDevices*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, param1: cint): seq[seq[byte]] =
@@ -128,8 +128,8 @@ proc createOutput*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterfa
 proc createDeviceInfo*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, device: openArray[byte], mode: cint): gen_qaudiosystem_types.QAbstractAudioDeviceInfo =
   gen_qaudiosystem_types.QAbstractAudioDeviceInfo(h: fcQAudioSystemFactoryInterface_createDeviceInfo(self.h, struct_seaqt_string(data: if len(device) > 0: addr device[0] else: nil, len: csize_t(len(device))), cint(mode)), owned: false)
 
-proc operatorAssign*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, param1: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface): void =
-  fcQAudioSystemFactoryInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, fromVal: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface): void =
+  fcQAudioSystemFactoryInterface_operatorAssign(self.h, fromVal.h)
 
 proc metaObject*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioSystemPlugin_metaObject(self.h), owned: false)
@@ -141,13 +141,13 @@ proc metacall*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, param1: ci
   fcQAudioSystemPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring): string =
-  let v_ms = fcQAudioSystemPlugin_tr(s)
+  let v_ms = fcQAudioSystemPlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring): string =
-  let v_ms = fcQAudioSystemPlugin_trUtf8(s)
+  let v_ms = fcQAudioSystemPlugin_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -174,25 +174,25 @@ proc createDeviceInfo*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, de
   gen_qaudiosystem_types.QAbstractAudioDeviceInfo(h: fcQAudioSystemPlugin_createDeviceInfo(self.h, struct_seaqt_string(data: if len(device) > 0: addr device[0] else: nil, len: csize_t(len(device))), cint(mode)), owned: false)
 
 proc tr*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioSystemPlugin_tr2(s, c)
+  let v_ms = fcQAudioSystemPlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioSystemPlugin_tr3(s, c, n)
+  let v_ms = fcQAudioSystemPlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioSystemPlugin_trUtf82(s, c)
+  let v_ms = fcQAudioSystemPlugin_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioSystemPlugin_trUtf83(s, c, n)
+  let v_ms = fcQAudioSystemPlugin_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

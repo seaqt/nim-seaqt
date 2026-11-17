@@ -15,46 +15,46 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QSqlError* QSqlError_new(struct seaqt_string driverText, struct seaqt_string databaseText, int type, int number) {
+QSqlError* QSqlError_new_driverText_databaseText_type_number(struct seaqt_string driverText, struct seaqt_string databaseText, int type, int number) {
 	QString driverText_QString = QString::fromUtf8(driverText.data, driverText.len);
 	QString databaseText_QString = QString::fromUtf8(databaseText.data, databaseText.len);
 	return new (std::nothrow) QSqlError(driverText_QString, databaseText_QString, static_cast<QSqlError::ErrorType>(type), static_cast<int>(number));
 }
 
-QSqlError* QSqlError_new2() {
+QSqlError* QSqlError_new() {
 	return new (std::nothrow) QSqlError();
 }
 
-QSqlError* QSqlError_new3(QSqlError* other) {
-	return new (std::nothrow) QSqlError(*other);
+QSqlError* QSqlError_new_from(QSqlError* from) {
+	return new (std::nothrow) QSqlError(*from);
 }
 
-QSqlError* QSqlError_new4(struct seaqt_string driverText) {
+QSqlError* QSqlError_new_driverText(struct seaqt_string driverText) {
 	QString driverText_QString = QString::fromUtf8(driverText.data, driverText.len);
 	return new (std::nothrow) QSqlError(driverText_QString);
 }
 
-QSqlError* QSqlError_new5(struct seaqt_string driverText, struct seaqt_string databaseText) {
+QSqlError* QSqlError_new_driverText_databaseText(struct seaqt_string driverText, struct seaqt_string databaseText) {
 	QString driverText_QString = QString::fromUtf8(driverText.data, driverText.len);
 	QString databaseText_QString = QString::fromUtf8(databaseText.data, databaseText.len);
 	return new (std::nothrow) QSqlError(driverText_QString, databaseText_QString);
 }
 
-QSqlError* QSqlError_new6(struct seaqt_string driverText, struct seaqt_string databaseText, int type) {
+QSqlError* QSqlError_new_driverText_databaseText_type(struct seaqt_string driverText, struct seaqt_string databaseText, int type) {
 	QString driverText_QString = QString::fromUtf8(driverText.data, driverText.len);
 	QString databaseText_QString = QString::fromUtf8(databaseText.data, databaseText.len);
 	return new (std::nothrow) QSqlError(driverText_QString, databaseText_QString, static_cast<QSqlError::ErrorType>(type));
 }
 
-QSqlError* QSqlError_new7(struct seaqt_string driverText, struct seaqt_string databaseText, int type, struct seaqt_string errorCode) {
+QSqlError* QSqlError_new_driverText_databaseText_type_errorCode(struct seaqt_string driverText, struct seaqt_string databaseText, int type, struct seaqt_string errorCode) {
 	QString driverText_QString = QString::fromUtf8(driverText.data, driverText.len);
 	QString databaseText_QString = QString::fromUtf8(databaseText.data, databaseText.len);
 	QString errorCode_QString = QString::fromUtf8(errorCode.data, errorCode.len);
 	return new (std::nothrow) QSqlError(driverText_QString, databaseText_QString, static_cast<QSqlError::ErrorType>(type), errorCode_QString);
 }
 
-void QSqlError_operatorAssign(QSqlError* self, QSqlError* other) {
-	self->operator=(*other);
+void QSqlError_operatorAssign(QSqlError* self, QSqlError* from) {
+	self->operator=(*from);
 }
 
 bool QSqlError_operatorEqual(const QSqlError* self, QSqlError* other) {

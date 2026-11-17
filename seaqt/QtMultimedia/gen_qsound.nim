@@ -59,20 +59,20 @@ type cQSound*{.exportc: "QSound", incompleteStruct.} = object
 proc fcQSound_metaObject(self: pointer): pointer {.importc: "QSound_metaObject".}
 proc fcQSound_metacast(self: pointer, param1: cstring): pointer {.importc: "QSound_metacast".}
 proc fcQSound_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSound_metacall".}
-proc fcQSound_tr(s: cstring): struct_seaqt_string {.importc: "QSound_tr".}
-proc fcQSound_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSound_trUtf8".}
-proc fcQSound_play(filename: struct_seaqt_string): void {.importc: "QSound_play".}
+proc fcQSound_trS(s: cstring): struct_seaqt_string {.importc: "QSound_tr_s".}
+proc fcQSound_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSound_trUtf8_s".}
+proc fcQSound_playFilename(filename: struct_seaqt_string): void {.importc: "QSound_play_filename".}
 proc fcQSound_loops(self: pointer): cint {.importc: "QSound_loops".}
 proc fcQSound_loopsRemaining(self: pointer): cint {.importc: "QSound_loopsRemaining".}
 proc fcQSound_setLoops(self: pointer, loops: cint): void {.importc: "QSound_setLoops".}
 proc fcQSound_fileName(self: pointer): struct_seaqt_string {.importc: "QSound_fileName".}
 proc fcQSound_isFinished(self: pointer): bool {.importc: "QSound_isFinished".}
-proc fcQSound_play2(self: pointer): void {.importc: "QSound_play2".}
+proc fcQSound_play(self: pointer): void {.importc: "QSound_play".}
 proc fcQSound_stop(self: pointer): void {.importc: "QSound_stop".}
-proc fcQSound_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSound_tr2".}
-proc fcQSound_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSound_tr3".}
-proc fcQSound_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSound_trUtf82".}
-proc fcQSound_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSound_trUtf83".}
+proc fcQSound_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSound_tr_s_c".}
+proc fcQSound_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSound_tr_s_c_n".}
+proc fcQSound_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSound_trUtf8_s_c".}
+proc fcQSound_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSound_trUtf8_s_c_n".}
 proc fcQSound_vdata(self: pointer): ptr pointer {.importc: "QSound_vdata".}
 proc fvdata_cQSound(self: pointer): pointer {.importc: "vdata_QSound".}
 
@@ -102,8 +102,8 @@ proc fcQSound_protectedbase_sender(self: pointer): pointer {.importc: "QSound_pr
 proc fcQSound_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSound_protectedbase_senderSignalIndex".}
 proc fcQSound_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSound_protectedbase_receivers".}
 proc fcQSound_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSound_protectedbase_isSignalConnected".}
-proc fcQSound_new(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string): ptr cQSound {.importc: "QSound_new".}
-proc fcQSound_new2(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string, parent: pointer): ptr cQSound {.importc: "QSound_new2".}
+proc fcQSound_new(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string): ptr cQSound {.importc: "QSound_new_filename".}
+proc fcQSound_new2(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string, parent: pointer): ptr cQSound {.importc: "QSound_new_filename_parent".}
 proc fcQSound_staticMetaObject(): pointer {.importc: "QSound_staticMetaObject".}
 
 proc metaObject*(self: gen_qsound_types.QSound): gen_qobjectdefs_types.QMetaObject =
@@ -116,19 +116,19 @@ proc metacall*(self: gen_qsound_types.QSound, param1: cint, param2: cint, param3
   fcQSound_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsound_types.QSound, s: cstring): string =
-  let v_ms = fcQSound_tr(s)
+  let v_ms = fcQSound_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsound_types.QSound, s: cstring): string =
-  let v_ms = fcQSound_trUtf8(s)
+  let v_ms = fcQSound_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc play*(_: type gen_qsound_types.QSound, filename: openArray[char]): void =
-  fcQSound_play(struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
+  fcQSound_playFilename(struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
 proc loops*(self: gen_qsound_types.QSound): cint =
   fcQSound_loops(self.h)
@@ -149,31 +149,31 @@ proc isFinished*(self: gen_qsound_types.QSound): bool =
   fcQSound_isFinished(self.h)
 
 proc play*(self: gen_qsound_types.QSound): void =
-  fcQSound_play2(self.h)
+  fcQSound_play(self.h)
 
 proc stop*(self: gen_qsound_types.QSound): void =
   fcQSound_stop(self.h)
 
 proc tr*(_: type gen_qsound_types.QSound, s: cstring, c: cstring): string =
-  let v_ms = fcQSound_tr2(s, c)
+  let v_ms = fcQSound_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsound_types.QSound, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSound_tr3(s, c, n)
+  let v_ms = fcQSound_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsound_types.QSound, s: cstring, c: cstring): string =
-  let v_ms = fcQSound_trUtf82(s, c)
+  let v_ms = fcQSound_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsound_types.QSound, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSound_trUtf83(s, c, n)
+  let v_ms = fcQSound_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -18,15 +18,15 @@ QSizePolicy* QSizePolicy_new() {
 	return new (std::nothrow) QSizePolicy();
 }
 
-QSizePolicy* QSizePolicy_new2(int horizontal, int vertical) {
+QSizePolicy* QSizePolicy_new_horizontal_vertical(int horizontal, int vertical) {
 	return new (std::nothrow) QSizePolicy(static_cast<QSizePolicy::Policy>(horizontal), static_cast<QSizePolicy::Policy>(vertical));
 }
 
-QSizePolicy* QSizePolicy_new3(QSizePolicy* param1) {
-	return new (std::nothrow) QSizePolicy(*param1);
+QSizePolicy* QSizePolicy_new_from(QSizePolicy* from) {
+	return new (std::nothrow) QSizePolicy(*from);
 }
 
-QSizePolicy* QSizePolicy_new4(int horizontal, int vertical, int type) {
+QSizePolicy* QSizePolicy_new_horizontal_vertical_type(int horizontal, int vertical, int type) {
 	return new (std::nothrow) QSizePolicy(static_cast<QSizePolicy::Policy>(horizontal), static_cast<QSizePolicy::Policy>(vertical), static_cast<QSizePolicy::ControlType>(type));
 }
 
@@ -122,8 +122,8 @@ QSizePolicy* QSizePolicy_transposed(const QSizePolicy* self) {
 	return new QSizePolicy(self->transposed());
 }
 
-void QSizePolicy_operatorAssign(QSizePolicy* self, QSizePolicy* param1) {
-	self->operator=(*param1);
+void QSizePolicy_operatorAssign(QSizePolicy* self, QSizePolicy* from) {
+	self->operator=(*from);
 }
 
 const QMetaObject* QSizePolicy_staticMetaObject() { return &QSizePolicy::staticMetaObject; }

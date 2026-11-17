@@ -31,16 +31,16 @@ typedef struct QVariant QVariant;
 #endif
 
 QJSValue* QJSValue_new();
-QJSValue* QJSValue_new2(QJSValue* other);
-QJSValue* QJSValue_new3(bool value);
-QJSValue* QJSValue_new4(int value);
-QJSValue* QJSValue_new5(unsigned int value);
-QJSValue* QJSValue_new6(double value);
-QJSValue* QJSValue_new7(struct seaqt_string value);
-QJSValue* QJSValue_new8(const char* str);
-QJSValue* QJSValue_new9(int value);
+QJSValue* QJSValue_new_QJSValue(QJSValue* from);
+QJSValue* QJSValue_new_bool(bool value);
+QJSValue* QJSValue_new_int(int value);
+QJSValue* QJSValue_new_uint(unsigned int value);
+QJSValue* QJSValue_new_double(double value);
+QJSValue* QJSValue_new_QString(struct seaqt_string value);
+QJSValue* QJSValue_new_char(const char* str);
+QJSValue* QJSValue_new_QJSValue_SpecialValue(int value);
 
-void QJSValue_operatorAssign(QJSValue* self, QJSValue* other);
+void QJSValue_operatorAssign(QJSValue* self, QJSValue* from);
 bool QJSValue_isBool(const QJSValue* self);
 bool QJSValue_isNumber(const QJSValue* self);
 bool QJSValue_isNull(const QJSValue* self);
@@ -67,22 +67,22 @@ bool QJSValue_equals(const QJSValue* self, QJSValue* other);
 bool QJSValue_strictlyEquals(const QJSValue* self, QJSValue* other);
 QJSValue* QJSValue_prototype(const QJSValue* self);
 void QJSValue_setPrototype(QJSValue* self, QJSValue* prototype);
-QJSValue* QJSValue_property(const QJSValue* self, struct seaqt_string name);
-void QJSValue_setProperty(QJSValue* self, struct seaqt_string name, QJSValue* value);
+QJSValue* QJSValue_property_name(const QJSValue* self, struct seaqt_string name);
+void QJSValue_setProperty_name_value(QJSValue* self, struct seaqt_string name, QJSValue* value);
 bool QJSValue_hasProperty(const QJSValue* self, struct seaqt_string name);
 bool QJSValue_hasOwnProperty(const QJSValue* self, struct seaqt_string name);
-QJSValue* QJSValue_propertyWithArrayIndex(const QJSValue* self, unsigned int arrayIndex);
-void QJSValue_setProperty2(QJSValue* self, unsigned int arrayIndex, QJSValue* value);
+QJSValue* QJSValue_property_arrayIndex(const QJSValue* self, unsigned int arrayIndex);
+void QJSValue_setProperty_arrayIndex_value(QJSValue* self, unsigned int arrayIndex, QJSValue* value);
 bool QJSValue_deleteProperty(QJSValue* self, struct seaqt_string name);
 bool QJSValue_isCallable(const QJSValue* self);
 QJSValue* QJSValue_call(QJSValue* self);
-QJSValue* QJSValue_callWithInstance(QJSValue* self, QJSValue* instance);
+QJSValue* QJSValue_callWithInstance_instance(QJSValue* self, QJSValue* instance);
 QJSValue* QJSValue_callAsConstructor(QJSValue* self);
 int QJSValue_errorType(const QJSValue* self);
 QJSEngine* QJSValue_engine(const QJSValue* self);
-QJSValue* QJSValue_callWithArgs(QJSValue* self, struct seaqt_array /* of QJSValue* */  args);
-QJSValue* QJSValue_callWithInstance2(QJSValue* self, QJSValue* instance, struct seaqt_array /* of QJSValue* */  args);
-QJSValue* QJSValue_callAsConstructorWithArgs(QJSValue* self, struct seaqt_array /* of QJSValue* */  args);
+QJSValue* QJSValue_call_args(QJSValue* self, struct seaqt_array /* of QJSValue* */  args);
+QJSValue* QJSValue_callWithInstance_instance_args(QJSValue* self, QJSValue* instance, struct seaqt_array /* of QJSValue* */  args);
+QJSValue* QJSValue_callAsConstructor_args(QJSValue* self, struct seaqt_array /* of QJSValue* */  args);
 
 void QJSValue_delete(QJSValue* self);
 

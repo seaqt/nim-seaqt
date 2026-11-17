@@ -58,17 +58,17 @@ type cQWebPluginFactoryExtensionReturn*{.exportc: "QWebPluginFactory__ExtensionR
 proc fcQWebPluginFactory_metaObject(self: pointer): pointer {.importc: "QWebPluginFactory_metaObject".}
 proc fcQWebPluginFactory_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebPluginFactory_metacast".}
 proc fcQWebPluginFactory_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebPluginFactory_metacall".}
-proc fcQWebPluginFactory_tr(s: cstring): struct_seaqt_string {.importc: "QWebPluginFactory_tr".}
-proc fcQWebPluginFactory_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebPluginFactory_trUtf8".}
+proc fcQWebPluginFactory_trS(s: cstring): struct_seaqt_string {.importc: "QWebPluginFactory_tr_s".}
+proc fcQWebPluginFactory_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebPluginFactory_trUtf8_s".}
 proc fcQWebPluginFactory_plugins(self: pointer): struct_seaqt_array {.importc: "QWebPluginFactory_plugins".}
 proc fcQWebPluginFactory_refreshPlugins(self: pointer): void {.importc: "QWebPluginFactory_refreshPlugins".}
 proc fcQWebPluginFactory_createX(self: pointer, mimeType: struct_seaqt_string, param2: pointer, argumentNames: struct_seaqt_array, argumentValues: struct_seaqt_array): pointer {.importc: "QWebPluginFactory_create".}
 proc fcQWebPluginFactory_extension(self: pointer, extension: cint, option: pointer, output: pointer): bool {.importc: "QWebPluginFactory_extension".}
 proc fcQWebPluginFactory_supportsExtension(self: pointer, extension: cint): bool {.importc: "QWebPluginFactory_supportsExtension".}
-proc fcQWebPluginFactory_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebPluginFactory_tr2".}
-proc fcQWebPluginFactory_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebPluginFactory_tr3".}
-proc fcQWebPluginFactory_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebPluginFactory_trUtf82".}
-proc fcQWebPluginFactory_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebPluginFactory_trUtf83".}
+proc fcQWebPluginFactory_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebPluginFactory_tr_s_c".}
+proc fcQWebPluginFactory_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebPluginFactory_tr_s_c_n".}
+proc fcQWebPluginFactory_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebPluginFactory_trUtf8_s_c".}
+proc fcQWebPluginFactory_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebPluginFactory_trUtf8_s_c_n".}
 proc fcQWebPluginFactory_vdata(self: pointer): ptr pointer {.importc: "QWebPluginFactory_vdata".}
 proc fvdata_cQWebPluginFactory(self: pointer): pointer {.importc: "vdata_QWebPluginFactory".}
 
@@ -107,7 +107,7 @@ proc fcQWebPluginFactory_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQWebPluginFactory_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebPluginFactory_protectedbase_receivers".}
 proc fcQWebPluginFactory_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebPluginFactory_protectedbase_isSignalConnected".}
 proc fcQWebPluginFactory_new(vtbl: pointer, vdata: csize_t): ptr cQWebPluginFactory {.importc: "QWebPluginFactory_new".}
-proc fcQWebPluginFactory_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebPluginFactory {.importc: "QWebPluginFactory_new2".}
+proc fcQWebPluginFactory_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebPluginFactory {.importc: "QWebPluginFactory_new_parent".}
 proc fcQWebPluginFactory_staticMetaObject(): pointer {.importc: "QWebPluginFactory_staticMetaObject".}
 proc fcQWebPluginFactoryMimeType_name(self: pointer): struct_seaqt_string {.importc: "QWebPluginFactory__MimeType_name".}
 proc fcQWebPluginFactoryMimeType_setName(self: pointer, name: struct_seaqt_string): void {.importc: "QWebPluginFactory__MimeType_setName".}
@@ -117,16 +117,16 @@ proc fcQWebPluginFactoryMimeType_fileExtensions(self: pointer): struct_seaqt_arr
 proc fcQWebPluginFactoryMimeType_setFileExtensions(self: pointer, fileExtensions: struct_seaqt_array): void {.importc: "QWebPluginFactory__MimeType_setFileExtensions".}
 proc fcQWebPluginFactoryMimeType_operatorEqual(self: pointer, other: pointer): bool {.importc: "QWebPluginFactory__MimeType_operatorEqual".}
 proc fcQWebPluginFactoryMimeType_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QWebPluginFactory__MimeType_operatorNotEqual".}
-proc fcQWebPluginFactoryMimeType_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebPluginFactory__MimeType_operatorAssign".}
-proc fcQWebPluginFactoryMimeType_new(param1: pointer): ptr cQWebPluginFactoryMimeType {.importc: "QWebPluginFactory__MimeType_new".}
+proc fcQWebPluginFactoryMimeType_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebPluginFactory__MimeType_operatorAssign".}
+proc fcQWebPluginFactoryMimeType_new(fromVal: pointer): ptr cQWebPluginFactoryMimeType {.importc: "QWebPluginFactory__MimeType_new".}
 proc fcQWebPluginFactoryPlugin_name(self: pointer): struct_seaqt_string {.importc: "QWebPluginFactory__Plugin_name".}
 proc fcQWebPluginFactoryPlugin_setName(self: pointer, name: struct_seaqt_string): void {.importc: "QWebPluginFactory__Plugin_setName".}
 proc fcQWebPluginFactoryPlugin_description(self: pointer): struct_seaqt_string {.importc: "QWebPluginFactory__Plugin_description".}
 proc fcQWebPluginFactoryPlugin_setDescription(self: pointer, description: struct_seaqt_string): void {.importc: "QWebPluginFactory__Plugin_setDescription".}
 proc fcQWebPluginFactoryPlugin_mimeTypes(self: pointer): struct_seaqt_array {.importc: "QWebPluginFactory__Plugin_mimeTypes".}
 proc fcQWebPluginFactoryPlugin_setMimeTypes(self: pointer, mimeTypes: struct_seaqt_array): void {.importc: "QWebPluginFactory__Plugin_setMimeTypes".}
-proc fcQWebPluginFactoryPlugin_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebPluginFactory__Plugin_operatorAssign".}
-proc fcQWebPluginFactoryPlugin_new(param1: pointer): ptr cQWebPluginFactoryPlugin {.importc: "QWebPluginFactory__Plugin_new".}
+proc fcQWebPluginFactoryPlugin_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebPluginFactory__Plugin_operatorAssign".}
+proc fcQWebPluginFactoryPlugin_new(fromVal: pointer): ptr cQWebPluginFactoryPlugin {.importc: "QWebPluginFactory__Plugin_new".}
 
 proc metaObject*(self: gen_qwebpluginfactory_types.QWebPluginFactory): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebPluginFactory_metaObject(self.h), owned: false)
@@ -138,13 +138,13 @@ proc metacall*(self: gen_qwebpluginfactory_types.QWebPluginFactory, param1: cint
   fcQWebPluginFactory_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring): string =
-  let v_ms = fcQWebPluginFactory_tr(s)
+  let v_ms = fcQWebPluginFactory_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring): string =
-  let v_ms = fcQWebPluginFactory_trUtf8(s)
+  let v_ms = fcQWebPluginFactory_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -179,25 +179,25 @@ proc supportsExtension*(self: gen_qwebpluginfactory_types.QWebPluginFactory, ext
   fcQWebPluginFactory_supportsExtension(self.h, cint(extension))
 
 proc tr*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring, c: cstring): string =
-  let v_ms = fcQWebPluginFactory_tr2(s, c)
+  let v_ms = fcQWebPluginFactory_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebPluginFactory_tr3(s, c, n)
+  let v_ms = fcQWebPluginFactory_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring, c: cstring): string =
-  let v_ms = fcQWebPluginFactory_trUtf82(s, c)
+  let v_ms = fcQWebPluginFactory_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebPluginFactory_trUtf83(s, c, n)
+  let v_ms = fcQWebPluginFactory_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -747,12 +747,12 @@ proc operatorEqual*(self: gen_qwebpluginfactory_types.QWebPluginFactoryMimeType,
 proc operatorNotEqual*(self: gen_qwebpluginfactory_types.QWebPluginFactoryMimeType, other: gen_qwebpluginfactory_types.QWebPluginFactoryMimeType): bool =
   fcQWebPluginFactoryMimeType_operatorNotEqual(self.h, other.h)
 
-proc operatorAssign*(self: gen_qwebpluginfactory_types.QWebPluginFactoryMimeType, param1: gen_qwebpluginfactory_types.QWebPluginFactoryMimeType): void =
-  fcQWebPluginFactoryMimeType_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qwebpluginfactory_types.QWebPluginFactoryMimeType, fromVal: gen_qwebpluginfactory_types.QWebPluginFactoryMimeType): void =
+  fcQWebPluginFactoryMimeType_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qwebpluginfactory_types.QWebPluginFactoryMimeType,
-    param1: gen_qwebpluginfactory_types.QWebPluginFactoryMimeType): gen_qwebpluginfactory_types.QWebPluginFactoryMimeType =
-  let tmp = gen_qwebpluginfactory_types.QWebPluginFactoryMimeType(h: fcQWebPluginFactoryMimeType_new(param1.h), owned: true)
+    fromVal: gen_qwebpluginfactory_types.QWebPluginFactoryMimeType): gen_qwebpluginfactory_types.QWebPluginFactoryMimeType =
+  let tmp = gen_qwebpluginfactory_types.QWebPluginFactoryMimeType(h: fcQWebPluginFactoryMimeType_new(fromVal.h), owned: true)
   tmp
 proc name*(self: gen_qwebpluginfactory_types.QWebPluginFactoryPlugin): string =
   let vname_ms = fcQWebPluginFactoryPlugin_name(self.h)
@@ -788,10 +788,10 @@ proc setMimeTypes*(self: gen_qwebpluginfactory_types.QWebPluginFactoryPlugin, mi
 
   fcQWebPluginFactoryPlugin_setMimeTypes(self.h, struct_seaqt_array(len: csize_t(len(mimeTypes)), data: if len(mimeTypes) == 0: nil else: addr(mimeTypes_CArray[0])))
 
-proc operatorAssign*(self: gen_qwebpluginfactory_types.QWebPluginFactoryPlugin, param1: gen_qwebpluginfactory_types.QWebPluginFactoryPlugin): void =
-  fcQWebPluginFactoryPlugin_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qwebpluginfactory_types.QWebPluginFactoryPlugin, fromVal: gen_qwebpluginfactory_types.QWebPluginFactoryPlugin): void =
+  fcQWebPluginFactoryPlugin_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qwebpluginfactory_types.QWebPluginFactoryPlugin,
-    param1: gen_qwebpluginfactory_types.QWebPluginFactoryPlugin): gen_qwebpluginfactory_types.QWebPluginFactoryPlugin =
-  let tmp = gen_qwebpluginfactory_types.QWebPluginFactoryPlugin(h: fcQWebPluginFactoryPlugin_new(param1.h), owned: true)
+    fromVal: gen_qwebpluginfactory_types.QWebPluginFactoryPlugin): gen_qwebpluginfactory_types.QWebPluginFactoryPlugin =
+  let tmp = gen_qwebpluginfactory_types.QWebPluginFactoryPlugin(h: fcQWebPluginFactoryPlugin_new(fromVal.h), owned: true)
   tmp

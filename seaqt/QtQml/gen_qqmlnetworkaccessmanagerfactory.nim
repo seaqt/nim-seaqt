@@ -39,8 +39,8 @@ export gen_qqmlnetworkaccessmanagerfactory_types
 
 type cQQmlNetworkAccessManagerFactory*{.exportc: "QQmlNetworkAccessManagerFactory", incompleteStruct.} = object
 
-proc fcQQmlNetworkAccessManagerFactory_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlNetworkAccessManagerFactory_operatorAssign".}
+proc fcQQmlNetworkAccessManagerFactory_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlNetworkAccessManagerFactory_operatorAssign".}
 
-proc operatorAssign*(self: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory, param1: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory): void =
-  fcQQmlNetworkAccessManagerFactory_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory, fromVal: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory): void =
+  fcQQmlNetworkAccessManagerFactory_operatorAssign(self.h, fromVal.h)
 

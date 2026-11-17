@@ -24,15 +24,15 @@ typedef struct QDirIterator QDirIterator;
 typedef struct QFileInfo QFileInfo;
 #endif
 
-QDirIterator* QDirIterator_new(QDir* dir);
-QDirIterator* QDirIterator_new2(struct seaqt_string path);
-QDirIterator* QDirIterator_new3(struct seaqt_string path, int filter);
-QDirIterator* QDirIterator_new4(struct seaqt_string path, struct seaqt_array /* of struct seaqt_string */  nameFilters);
-QDirIterator* QDirIterator_new5(QDir* dir, int flags);
-QDirIterator* QDirIterator_new6(struct seaqt_string path, int flags);
-QDirIterator* QDirIterator_new7(struct seaqt_string path, int filter, int flags);
-QDirIterator* QDirIterator_new8(struct seaqt_string path, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters);
-QDirIterator* QDirIterator_new9(struct seaqt_string path, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters, int flags);
+QDirIterator* QDirIterator_new_dir(QDir* dir);
+QDirIterator* QDirIterator_new_path(struct seaqt_string path);
+QDirIterator* QDirIterator_new_path_filter(struct seaqt_string path, int filter);
+QDirIterator* QDirIterator_new_path_nameFilters(struct seaqt_string path, struct seaqt_array /* of struct seaqt_string */  nameFilters);
+QDirIterator* QDirIterator_new_dir_flags(QDir* dir, int flags);
+QDirIterator* QDirIterator_new_path_flags(struct seaqt_string path, int flags);
+QDirIterator* QDirIterator_new_path_filter_flags(struct seaqt_string path, int filter, int flags);
+QDirIterator* QDirIterator_new_path_nameFilters_filters(struct seaqt_string path, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters);
+QDirIterator* QDirIterator_new_path_nameFilters_filters_flags(struct seaqt_string path, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters, int flags);
 
 struct seaqt_string QDirIterator_next(QDirIterator* self);
 bool QDirIterator_hasNext(const QDirIterator* self);

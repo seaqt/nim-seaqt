@@ -168,19 +168,19 @@ public:
 	friend bool QComboBox_virtualbase_event(VirtualQComboBox* self, QEvent* event);
 
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
-		if (vtbl->inputMethodQuery == 0) {
+		if (vtbl->inputMethodQuery_Qt_InputMethodQuery == 0) {
 			return QComboBox::inputMethodQuery(param1);
 		}
 
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery_Qt_InputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QComboBox_virtualbase_inputMethodQuery(const VirtualQComboBox* self, int param1);
+	friend QVariant* QComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery(const VirtualQComboBox* self, int param1);
 
 	virtual void focusInEvent(QFocusEvent* e) override {
 		if (vtbl->focusInEvent == 0) {
@@ -725,7 +725,7 @@ VirtualQComboBox* QComboBox_new(const QComboBox_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQComboBox(vtbl) : nullptr;
 }
 
-VirtualQComboBox* QComboBox_new2(const QComboBox_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQComboBox* QComboBox_new_parent(const QComboBox_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQComboBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQComboBox(vtbl, parent) : nullptr;
 }
@@ -746,7 +746,7 @@ int QComboBox_metacall(QComboBox* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QComboBox_tr(const char* s) {
+struct seaqt_string QComboBox_tr_s(const char* s) {
 	QString _ret = QComboBox::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -757,7 +757,7 @@ struct seaqt_string QComboBox_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QComboBox_trUtf8(const char* s) {
+struct seaqt_string QComboBox_trUtf8_s(const char* s) {
 	QString _ret = QComboBox::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -821,12 +821,12 @@ bool QComboBox_hasFrame(const QComboBox* self) {
 	return self->hasFrame();
 }
 
-int QComboBox_findText(const QComboBox* self, struct seaqt_string text) {
+int QComboBox_findText_text(const QComboBox* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->findText(text_QString);
 }
 
-int QComboBox_findData(const QComboBox* self, QVariant* data) {
+int QComboBox_findData_data(const QComboBox* self, QVariant* data) {
 	return self->findData(*data);
 }
 
@@ -978,16 +978,16 @@ QIcon* QComboBox_itemIcon(const QComboBox* self, int index) {
 	return new QIcon(self->itemIcon(static_cast<int>(index)));
 }
 
-QVariant* QComboBox_itemData(const QComboBox* self, int index) {
+QVariant* QComboBox_itemData_index(const QComboBox* self, int index) {
 	return new QVariant(self->itemData(static_cast<int>(index)));
 }
 
-void QComboBox_addItem(QComboBox* self, struct seaqt_string text) {
+void QComboBox_addItem_text(QComboBox* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->addItem(text_QString);
 }
 
-void QComboBox_addItem2(QComboBox* self, QIcon* icon, struct seaqt_string text) {
+void QComboBox_addItem_icon_text(QComboBox* self, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->addItem(*icon, text_QString);
 }
@@ -1003,12 +1003,12 @@ void QComboBox_addItems(QComboBox* self, struct seaqt_array /* of struct seaqt_s
 	self->addItems(texts_QList);
 }
 
-void QComboBox_insertItem(QComboBox* self, int index, struct seaqt_string text) {
+void QComboBox_insertItem_index_text(QComboBox* self, int index, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->insertItem(static_cast<int>(index), text_QString);
 }
 
-void QComboBox_insertItem2(QComboBox* self, int index, QIcon* icon, struct seaqt_string text) {
+void QComboBox_insertItem_index_icon_text(QComboBox* self, int index, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->insertItem(static_cast<int>(index), *icon, text_QString);
 }
@@ -1041,7 +1041,7 @@ void QComboBox_setItemIcon(QComboBox* self, int index, QIcon* icon) {
 	self->setItemIcon(static_cast<int>(index), *icon);
 }
 
-void QComboBox_setItemData(QComboBox* self, int index, QVariant* value) {
+void QComboBox_setItemData_index_value(QComboBox* self, int index, QVariant* value) {
 	self->setItemData(static_cast<int>(index), *value);
 }
 
@@ -1073,11 +1073,11 @@ bool QComboBox_event(QComboBox* self, QEvent* event) {
 	return self->event(event);
 }
 
-QVariant* QComboBox_inputMethodQuery(const QComboBox* self, int param1) {
+QVariant* QComboBox_inputMethodQuery_Qt_InputMethodQuery(const QComboBox* self, int param1) {
 	return new QVariant(self->inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-QVariant* QComboBox_inputMethodQuery2(const QComboBox* self, int query, QVariant* argument) {
+QVariant* QComboBox_inputMethodQuery_Qt_InputMethodQuery_QVariant(const QComboBox* self, int query, QVariant* argument) {
 	return new QVariant(self->inputMethodQuery(static_cast<Qt::InputMethodQuery>(query), *argument));
 }
 
@@ -1127,11 +1127,11 @@ void QComboBox_connect_editTextChanged(QComboBox* self, intptr_t slot, void (*ca
 	QComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::editTextChanged), self, local_caller{slot, callback, release});
 }
 
-void QComboBox_activated(QComboBox* self, int index) {
+void QComboBox_activated_int(QComboBox* self, int index) {
 	self->activated(static_cast<int>(index));
 }
 
-void QComboBox_connect_activated(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QComboBox_connect_activated_int(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1167,11 +1167,11 @@ void QComboBox_connect_textActivated(QComboBox* self, intptr_t slot, void (*call
 	QComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::textActivated), self, local_caller{slot, callback, release});
 }
 
-void QComboBox_highlighted(QComboBox* self, int index) {
+void QComboBox_highlighted_int(QComboBox* self, int index) {
 	self->highlighted(static_cast<int>(index));
 }
 
-void QComboBox_connect_highlighted(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QComboBox_connect_highlighted_int(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1207,11 +1207,11 @@ void QComboBox_connect_textHighlighted(QComboBox* self, intptr_t slot, void (*ca
 	QComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::textHighlighted), self, local_caller{slot, callback, release});
 }
 
-void QComboBox_currentIndexChanged(QComboBox* self, int index) {
+void QComboBox_currentIndexChanged_int(QComboBox* self, int index) {
 	self->currentIndexChanged(static_cast<int>(index));
 }
 
-void QComboBox_connect_currentIndexChanged(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QComboBox_connect_currentIndexChanged_int(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1223,12 +1223,12 @@ void QComboBox_connect_currentIndexChanged(QComboBox* self, intptr_t slot, void 
 	QComboBox::connect(self, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), self, local_caller{slot, callback, release});
 }
 
-void QComboBox_currentIndexChangedWithQString(QComboBox* self, struct seaqt_string param1) {
+void QComboBox_currentIndexChanged_QString(QComboBox* self, struct seaqt_string param1) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	self->currentIndexChanged(param1_QString);
 }
 
-void QComboBox_connect_currentIndexChangedWithQString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+void QComboBox_connect_currentIndexChanged_QString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_string);
@@ -1271,12 +1271,12 @@ void QComboBox_connect_currentTextChanged(QComboBox* self, intptr_t slot, void (
 	QComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentTextChanged), self, local_caller{slot, callback, release});
 }
 
-void QComboBox_activatedWithQString(QComboBox* self, struct seaqt_string param1) {
+void QComboBox_activated_QString(QComboBox* self, struct seaqt_string param1) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	self->activated(param1_QString);
 }
 
-void QComboBox_connect_activatedWithQString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+void QComboBox_connect_activated_QString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_string);
@@ -1295,12 +1295,12 @@ void QComboBox_connect_activatedWithQString(QComboBox* self, intptr_t slot, void
 	QComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::activated), self, local_caller{slot, callback, release});
 }
 
-void QComboBox_highlightedWithQString(QComboBox* self, struct seaqt_string param1) {
+void QComboBox_highlighted_QString(QComboBox* self, struct seaqt_string param1) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	self->highlighted(param1_QString);
 }
 
-void QComboBox_connect_highlightedWithQString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+void QComboBox_connect_highlighted_QString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_string);
@@ -1319,7 +1319,7 @@ void QComboBox_connect_highlightedWithQString(QComboBox* self, intptr_t slot, vo
 	QComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::highlighted), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QComboBox_tr2(const char* s, const char* c) {
+struct seaqt_string QComboBox_tr_s_c(const char* s, const char* c) {
 	QString _ret = QComboBox::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1330,7 +1330,7 @@ struct seaqt_string QComboBox_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QComboBox_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QComboBox_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QComboBox::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1341,7 +1341,7 @@ struct seaqt_string QComboBox_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QComboBox_trUtf82(const char* s, const char* c) {
+struct seaqt_string QComboBox_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QComboBox::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1352,7 +1352,7 @@ struct seaqt_string QComboBox_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QComboBox_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QComboBox_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QComboBox::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1363,48 +1363,48 @@ struct seaqt_string QComboBox_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-int QComboBox_findText2(const QComboBox* self, struct seaqt_string text, int flags) {
+int QComboBox_findText_text_flags(const QComboBox* self, struct seaqt_string text, int flags) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->findText(text_QString, static_cast<Qt::MatchFlags>(flags));
 }
 
-int QComboBox_findData2(const QComboBox* self, QVariant* data, int role) {
+int QComboBox_findData_data_role(const QComboBox* self, QVariant* data, int role) {
 	return self->findData(*data, static_cast<int>(role));
 }
 
-int QComboBox_findData3(const QComboBox* self, QVariant* data, int role, int flags) {
+int QComboBox_findData_data_role_flags(const QComboBox* self, QVariant* data, int role, int flags) {
 	return self->findData(*data, static_cast<int>(role), static_cast<Qt::MatchFlags>(flags));
 }
 
-QVariant* QComboBox_currentDataWithRole(const QComboBox* self, int role) {
+QVariant* QComboBox_currentData_role(const QComboBox* self, int role) {
 	return new QVariant(self->currentData(static_cast<int>(role)));
 }
 
-QVariant* QComboBox_itemData2(const QComboBox* self, int index, int role) {
+QVariant* QComboBox_itemData_index_role(const QComboBox* self, int index, int role) {
 	return new QVariant(self->itemData(static_cast<int>(index), static_cast<int>(role)));
 }
 
-void QComboBox_addItem3(QComboBox* self, struct seaqt_string text, QVariant* userData) {
+void QComboBox_addItem_text_userData(QComboBox* self, struct seaqt_string text, QVariant* userData) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->addItem(text_QString, *userData);
 }
 
-void QComboBox_addItem4(QComboBox* self, QIcon* icon, struct seaqt_string text, QVariant* userData) {
+void QComboBox_addItem_icon_text_userData(QComboBox* self, QIcon* icon, struct seaqt_string text, QVariant* userData) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->addItem(*icon, text_QString, *userData);
 }
 
-void QComboBox_insertItem3(QComboBox* self, int index, struct seaqt_string text, QVariant* userData) {
+void QComboBox_insertItem_index_text_userData(QComboBox* self, int index, struct seaqt_string text, QVariant* userData) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->insertItem(static_cast<int>(index), text_QString, *userData);
 }
 
-void QComboBox_insertItem4(QComboBox* self, int index, QIcon* icon, struct seaqt_string text, QVariant* userData) {
+void QComboBox_insertItem_index_icon_text_userData(QComboBox* self, int index, QIcon* icon, struct seaqt_string text, QVariant* userData) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->insertItem(static_cast<int>(index), *icon, text_QString, *userData);
 }
 
-void QComboBox_setItemData2(QComboBox* self, int index, QVariant* value, int role) {
+void QComboBox_setItemData_index_value_role(QComboBox* self, int index, QVariant* value, int role) {
 	self->setItemData(static_cast<int>(index), *value, static_cast<int>(role));
 }
 
@@ -1452,7 +1452,7 @@ bool QComboBox_virtualbase_event(VirtualQComboBox* self, QEvent* event) {
 	return self->QComboBox::event(event);
 }
 
-QVariant* QComboBox_virtualbase_inputMethodQuery(const VirtualQComboBox* self, int param1) {
+QVariant* QComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery(const VirtualQComboBox* self, int param1) {
 
 	return new QVariant(self->QComboBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }

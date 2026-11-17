@@ -92,15 +92,15 @@ proc fcQFutureInterfaceBase_waitForNextResult(self: pointer): bool {.importc: "Q
 proc fcQFutureInterfaceBase_waitForResult(self: pointer, resultIndex: cint): void {.importc: "QFutureInterfaceBase_waitForResult".}
 proc fcQFutureInterfaceBase_waitForResume(self: pointer): void {.importc: "QFutureInterfaceBase_waitForResume".}
 proc fcQFutureInterfaceBase_mutex(self: pointer): pointer {.importc: "QFutureInterfaceBase_mutex".}
-proc fcQFutureInterfaceBase_mutexWithInt(self: pointer, param1: cint): pointer {.importc: "QFutureInterfaceBase_mutexWithInt".}
+proc fcQFutureInterfaceBase_mutexInt(self: pointer, param1: cint): pointer {.importc: "QFutureInterfaceBase_mutex_int".}
 proc fcQFutureInterfaceBase_operatorEqual(self: pointer, other: pointer): bool {.importc: "QFutureInterfaceBase_operatorEqual".}
 proc fcQFutureInterfaceBase_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QFutureInterfaceBase_operatorNotEqual".}
-proc fcQFutureInterfaceBase_operatorAssign(self: pointer, other: pointer): void {.importc: "QFutureInterfaceBase_operatorAssign".}
+proc fcQFutureInterfaceBase_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QFutureInterfaceBase_operatorAssign".}
 proc fcQFutureInterfaceBase_protectedbase_refT(self: pointer): bool {.importc: "QFutureInterfaceBase_protectedbase_refT".}
 proc fcQFutureInterfaceBase_protectedbase_derefT(self: pointer): bool {.importc: "QFutureInterfaceBase_protectedbase_derefT".}
 proc fcQFutureInterfaceBase_new(): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new".}
-proc fcQFutureInterfaceBase_new2(other: pointer): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new2".}
-proc fcQFutureInterfaceBase_new3(initialState: cint): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new3".}
+proc fcQFutureInterfaceBase_new2(fromVal: pointer): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new_from".}
+proc fcQFutureInterfaceBase_new3(initialState: cint): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new_initialState".}
 
 proc reportStarted*(self: gen_qfutureinterface_types.QFutureInterfaceBase): void =
   fcQFutureInterfaceBase_reportStarted(self.h)
@@ -211,7 +211,7 @@ proc mutex*(self: gen_qfutureinterface_types.QFutureInterfaceBase): gen_qmutex_t
   gen_qmutex_types.QMutex(h: fcQFutureInterfaceBase_mutex(self.h), owned: false)
 
 proc mutex*(self: gen_qfutureinterface_types.QFutureInterfaceBase, param1: cint): gen_qmutex_types.QMutex =
-  gen_qmutex_types.QMutex(h: fcQFutureInterfaceBase_mutexWithInt(self.h, param1), owned: false)
+  gen_qmutex_types.QMutex(h: fcQFutureInterfaceBase_mutexInt(self.h, param1), owned: false)
 
 proc operatorEqual*(self: gen_qfutureinterface_types.QFutureInterfaceBase, other: gen_qfutureinterface_types.QFutureInterfaceBase): bool =
   fcQFutureInterfaceBase_operatorEqual(self.h, other.h)
@@ -219,8 +219,8 @@ proc operatorEqual*(self: gen_qfutureinterface_types.QFutureInterfaceBase, other
 proc operatorNotEqual*(self: gen_qfutureinterface_types.QFutureInterfaceBase, other: gen_qfutureinterface_types.QFutureInterfaceBase): bool =
   fcQFutureInterfaceBase_operatorNotEqual(self.h, other.h)
 
-proc operatorAssign*(self: gen_qfutureinterface_types.QFutureInterfaceBase, other: gen_qfutureinterface_types.QFutureInterfaceBase): void =
-  fcQFutureInterfaceBase_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qfutureinterface_types.QFutureInterfaceBase, fromVal: gen_qfutureinterface_types.QFutureInterfaceBase): void =
+  fcQFutureInterfaceBase_operatorAssign(self.h, fromVal.h)
 
 proc refT*(self: gen_qfutureinterface_types.QFutureInterfaceBase): bool =
   fcQFutureInterfaceBase_protectedbase_refT(self.h)
@@ -232,8 +232,8 @@ proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutu
   let tmp = gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new(), owned: true)
   tmp
 proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase,
-    other: gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
-  let tmp = gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new2(other.h), owned: true)
+    fromVal: gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
+  let tmp = gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase,
     initialState: cint): gen_qfutureinterface_types.QFutureInterfaceBase =

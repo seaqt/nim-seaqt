@@ -17,20 +17,20 @@ QBitArray* QBitArray_new() {
 	return new (std::nothrow) QBitArray();
 }
 
-QBitArray* QBitArray_new2(int size) {
+QBitArray* QBitArray_new_size(int size) {
 	return new (std::nothrow) QBitArray(static_cast<int>(size));
 }
 
-QBitArray* QBitArray_new3(QBitArray* other) {
-	return new (std::nothrow) QBitArray(*other);
+QBitArray* QBitArray_new_from(QBitArray* from) {
+	return new (std::nothrow) QBitArray(*from);
 }
 
-QBitArray* QBitArray_new4(int size, bool val) {
+QBitArray* QBitArray_new_size_val(int size, bool val) {
 	return new (std::nothrow) QBitArray(static_cast<int>(size), val);
 }
 
-void QBitArray_operatorAssign(QBitArray* self, QBitArray* other) {
-	self->operator=(*other);
+void QBitArray_operatorAssign(QBitArray* self, QBitArray* from) {
+	self->operator=(*from);
 }
 
 void QBitArray_swap(QBitArray* self, QBitArray* other) {
@@ -45,7 +45,7 @@ int QBitArray_count(const QBitArray* self) {
 	return self->count();
 }
 
-int QBitArray_countWithOn(const QBitArray* self, bool on) {
+int QBitArray_count_on(const QBitArray* self, bool on) {
 	return self->count(on);
 }
 
@@ -77,11 +77,11 @@ bool QBitArray_testBit(const QBitArray* self, int i) {
 	return self->testBit(static_cast<int>(i));
 }
 
-void QBitArray_setBit(QBitArray* self, int i) {
+void QBitArray_setBit_i(QBitArray* self, int i) {
 	self->setBit(static_cast<int>(i));
 }
 
-void QBitArray_setBit2(QBitArray* self, int i, bool val) {
+void QBitArray_setBit_i_val(QBitArray* self, int i, bool val) {
 	self->setBit(static_cast<int>(i), val);
 }
 
@@ -97,19 +97,19 @@ bool QBitArray_at(const QBitArray* self, int i) {
 	return self->at(static_cast<int>(i));
 }
 
-QBitRef* QBitArray_operatorSubscript(QBitArray* self, int i) {
+QBitRef* QBitArray_operatorSubscript_int(QBitArray* self, int i) {
 	return new QBitRef(self->operator[](static_cast<int>(i)));
 }
 
-bool QBitArray_operatorSubscriptWithInt(const QBitArray* self, int i) {
+bool QBitArray_operatorSubscript_const_int(const QBitArray* self, int i) {
 	return self->operator[](static_cast<int>(i));
 }
 
-QBitRef* QBitArray_operatorSubscriptWithUint(QBitArray* self, unsigned int i) {
+QBitRef* QBitArray_operatorSubscript_uint(QBitArray* self, unsigned int i) {
 	return new QBitRef(self->operator[](static_cast<uint>(i)));
 }
 
-bool QBitArray_operatorSubscript2(const QBitArray* self, unsigned int i) {
+bool QBitArray_operatorSubscript_const_uint(const QBitArray* self, unsigned int i) {
 	return self->operator[](static_cast<uint>(i));
 }
 
@@ -133,11 +133,11 @@ bool QBitArray_operatorNotEqual(const QBitArray* self, QBitArray* other) {
 	return (*self != *other);
 }
 
-bool QBitArray_fill(QBitArray* self, bool val) {
+bool QBitArray_fill_val(QBitArray* self, bool val) {
 	return self->fill(val);
 }
 
-void QBitArray_fill2(QBitArray* self, bool val, int first, int last) {
+void QBitArray_fill_val_first_last(QBitArray* self, bool val, int first, int last) {
 	self->fill(val, static_cast<int>(first), static_cast<int>(last));
 }
 
@@ -153,7 +153,7 @@ QBitArray* QBitArray_fromBits(const char* data, ptrdiff_t len) {
 	return new QBitArray(QBitArray::fromBits(data, (qsizetype)(len)));
 }
 
-bool QBitArray_fill3(QBitArray* self, bool val, int size) {
+bool QBitArray_fill_val_size(QBitArray* self, bool val, int size) {
 	return self->fill(val, static_cast<int>(size));
 }
 
@@ -161,8 +161,8 @@ void QBitArray_delete(QBitArray* self) {
 	delete self;
 }
 
-QBitRef* QBitRef_new(QBitRef* param1) {
-	return new (std::nothrow) QBitRef(*param1);
+QBitRef* QBitRef_new(QBitRef* from) {
+	return new (std::nothrow) QBitRef(*from);
 }
 
 bool QBitRef_ToBool(const QBitRef* self) {
@@ -173,11 +173,11 @@ bool QBitRef_operatorNot(const QBitRef* self) {
 	return self->operator!();
 }
 
-void QBitRef_operatorAssign(QBitRef* self, QBitRef* val) {
-	self->operator=(*val);
+void QBitRef_operatorAssign_from(QBitRef* self, QBitRef* from) {
+	self->operator=(*from);
 }
 
-void QBitRef_operatorAssignWithVal(QBitRef* self, bool val) {
+void QBitRef_operatorAssign_val(QBitRef* self, bool val) {
 	self->operator=(val);
 }
 

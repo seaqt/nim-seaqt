@@ -100,8 +100,8 @@ type cQImageIOPlugin*{.exportc: "QImageIOPlugin", incompleteStruct.} = object
 
 proc fcQImageIOHandler_setDevice(self: pointer, device: pointer): void {.importc: "QImageIOHandler_setDevice".}
 proc fcQImageIOHandler_device(self: pointer): pointer {.importc: "QImageIOHandler_device".}
-proc fcQImageIOHandler_setFormat(self: pointer, format: struct_seaqt_string): void {.importc: "QImageIOHandler_setFormat".}
-proc fcQImageIOHandler_setFormatWithFormat(self: pointer, format: struct_seaqt_string): void {.importc: "QImageIOHandler_setFormatWithFormat".}
+proc fcQImageIOHandler_setFormatCQByteArray(self: pointer, format: struct_seaqt_string): void {.importc: "QImageIOHandler_setFormat_cQByteArray".}
+proc fcQImageIOHandler_setFormatConstCQByteArray(self: pointer, format: struct_seaqt_string): void {.importc: "QImageIOHandler_setFormat_const_cQByteArray".}
 proc fcQImageIOHandler_format(self: pointer): struct_seaqt_string {.importc: "QImageIOHandler_format".}
 proc fcQImageIOHandler_name(self: pointer): struct_seaqt_string {.importc: "QImageIOHandler_name".}
 proc fcQImageIOHandler_canRead(self: pointer): bool {.importc: "QImageIOHandler_canRead".}
@@ -152,14 +152,14 @@ proc fcQImageIOHandler_new(vtbl: pointer, vdata: csize_t): ptr cQImageIOHandler 
 proc fcQImageIOPlugin_metaObject(self: pointer): pointer {.importc: "QImageIOPlugin_metaObject".}
 proc fcQImageIOPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QImageIOPlugin_metacast".}
 proc fcQImageIOPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QImageIOPlugin_metacall".}
-proc fcQImageIOPlugin_tr(s: cstring): struct_seaqt_string {.importc: "QImageIOPlugin_tr".}
-proc fcQImageIOPlugin_trUtf8(s: cstring): struct_seaqt_string {.importc: "QImageIOPlugin_trUtf8".}
+proc fcQImageIOPlugin_trS(s: cstring): struct_seaqt_string {.importc: "QImageIOPlugin_tr_s".}
+proc fcQImageIOPlugin_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QImageIOPlugin_trUtf8_s".}
 proc fcQImageIOPlugin_capabilities(self: pointer, device: pointer, format: struct_seaqt_string): cint {.importc: "QImageIOPlugin_capabilities".}
 proc fcQImageIOPlugin_createX(self: pointer, device: pointer, format: struct_seaqt_string): pointer {.importc: "QImageIOPlugin_create".}
-proc fcQImageIOPlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QImageIOPlugin_tr2".}
-proc fcQImageIOPlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QImageIOPlugin_tr3".}
-proc fcQImageIOPlugin_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QImageIOPlugin_trUtf82".}
-proc fcQImageIOPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QImageIOPlugin_trUtf83".}
+proc fcQImageIOPlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QImageIOPlugin_tr_s_c".}
+proc fcQImageIOPlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QImageIOPlugin_tr_s_c_n".}
+proc fcQImageIOPlugin_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QImageIOPlugin_trUtf8_s_c".}
+proc fcQImageIOPlugin_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QImageIOPlugin_trUtf8_s_c_n".}
 proc fcQImageIOPlugin_vdata(self: pointer): ptr pointer {.importc: "QImageIOPlugin_vdata".}
 proc fvdata_cQImageIOPlugin(self: pointer): pointer {.importc: "vdata_QImageIOPlugin".}
 
@@ -192,7 +192,7 @@ proc fcQImageIOPlugin_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQImageIOPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QImageIOPlugin_protectedbase_receivers".}
 proc fcQImageIOPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QImageIOPlugin_protectedbase_isSignalConnected".}
 proc fcQImageIOPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQImageIOPlugin {.importc: "QImageIOPlugin_new".}
-proc fcQImageIOPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQImageIOPlugin {.importc: "QImageIOPlugin_new2".}
+proc fcQImageIOPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQImageIOPlugin {.importc: "QImageIOPlugin_new_parent".}
 proc fcQImageIOPlugin_staticMetaObject(): pointer {.importc: "QImageIOPlugin_staticMetaObject".}
 
 proc setDevice*(self: gen_qimageiohandler_types.QImageIOHandler, device: gen_qiodevice_types.QIODevice): void =
@@ -202,10 +202,10 @@ proc device*(self: gen_qimageiohandler_types.QImageIOHandler): gen_qiodevice_typ
   gen_qiodevice_types.QIODevice(h: fcQImageIOHandler_device(self.h), owned: false)
 
 proc setFormat*(self: gen_qimageiohandler_types.QImageIOHandler, format: openArray[byte]): void =
-  fcQImageIOHandler_setFormat(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  fcQImageIOHandler_setFormatCQByteArray(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
 
 proc setFormat2*(self: gen_qimageiohandler_types.QImageIOHandler, format: openArray[byte]): void =
-  fcQImageIOHandler_setFormatWithFormat(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  fcQImageIOHandler_setFormatConstCQByteArray(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
 
 proc format*(self: gen_qimageiohandler_types.QImageIOHandler): seq[byte] =
   var v_bytearray = fcQImageIOHandler_format(self.h)
@@ -621,13 +621,13 @@ proc metacall*(self: gen_qimageiohandler_types.QImageIOPlugin, param1: cint, par
   fcQImageIOPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring): string =
-  let v_ms = fcQImageIOPlugin_tr(s)
+  let v_ms = fcQImageIOPlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring): string =
-  let v_ms = fcQImageIOPlugin_trUtf8(s)
+  let v_ms = fcQImageIOPlugin_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -639,25 +639,25 @@ proc createX*(self: gen_qimageiohandler_types.QImageIOPlugin, device: gen_qiodev
   gen_qimageiohandler_types.QImageIOHandler(h: fcQImageIOPlugin_createX(self.h, device.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: false)
 
 proc tr*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQImageIOPlugin_tr2(s, c)
+  let v_ms = fcQImageIOPlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQImageIOPlugin_tr3(s, c, n)
+  let v_ms = fcQImageIOPlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQImageIOPlugin_trUtf82(s, c)
+  let v_ms = fcQImageIOPlugin_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQImageIOPlugin_trUtf83(s, c, n)
+  let v_ms = fcQImageIOPlugin_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -19,29 +19,29 @@ QScriptProgram* QScriptProgram_new() {
 	return new (std::nothrow) QScriptProgram();
 }
 
-QScriptProgram* QScriptProgram_new2(struct seaqt_string sourceCode) {
+QScriptProgram* QScriptProgram_new_sourceCode(struct seaqt_string sourceCode) {
 	QString sourceCode_QString = QString::fromUtf8(sourceCode.data, sourceCode.len);
 	return new (std::nothrow) QScriptProgram(sourceCode_QString);
 }
 
-QScriptProgram* QScriptProgram_new3(QScriptProgram* other) {
-	return new (std::nothrow) QScriptProgram(*other);
+QScriptProgram* QScriptProgram_new_from(QScriptProgram* from) {
+	return new (std::nothrow) QScriptProgram(*from);
 }
 
-QScriptProgram* QScriptProgram_new4(struct seaqt_string sourceCode, struct seaqt_string fileName) {
+QScriptProgram* QScriptProgram_new_sourceCode_fileName(struct seaqt_string sourceCode, struct seaqt_string fileName) {
 	QString sourceCode_QString = QString::fromUtf8(sourceCode.data, sourceCode.len);
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new (std::nothrow) QScriptProgram(sourceCode_QString, fileName_QString);
 }
 
-QScriptProgram* QScriptProgram_new5(struct seaqt_string sourceCode, struct seaqt_string fileName, int firstLineNumber) {
+QScriptProgram* QScriptProgram_new_sourceCode_fileName_firstLineNumber(struct seaqt_string sourceCode, struct seaqt_string fileName, int firstLineNumber) {
 	QString sourceCode_QString = QString::fromUtf8(sourceCode.data, sourceCode.len);
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new (std::nothrow) QScriptProgram(sourceCode_QString, fileName_QString, static_cast<int>(firstLineNumber));
 }
 
-void QScriptProgram_operatorAssign(QScriptProgram* self, QScriptProgram* other) {
-	self->operator=(*other);
+void QScriptProgram_operatorAssign(QScriptProgram* self, QScriptProgram* from) {
+	self->operator=(*from);
 }
 
 bool QScriptProgram_isNull(const QScriptProgram* self) {

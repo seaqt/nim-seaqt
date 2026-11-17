@@ -692,7 +692,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QDial_protectedbase_initStyleOption(const VirtualQDial* self, QStyleOptionSlider* option);
-	friend void QDial_protectedbase_setRepeatAction(VirtualQDial* self, int action);
+	friend void QDial_protectedbase_setRepeatAction_action(VirtualQDial* self, int action);
 	friend int QDial_protectedbase_repeatAction(const VirtualQDial* self);
 	friend void QDial_protectedbase_updateMicroFocus(VirtualQDial* self);
 	friend void QDial_protectedbase_create(VirtualQDial* self);
@@ -710,7 +710,7 @@ VirtualQDial* QDial_new(const QDial_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQDial(vtbl) : nullptr;
 }
 
-VirtualQDial* QDial_new2(const QDial_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQDial* QDial_new_parent(const QDial_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDial>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDial(vtbl, parent) : nullptr;
 }
@@ -731,7 +731,7 @@ int QDial_metacall(QDial* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDial_tr(const char* s) {
+struct seaqt_string QDial_tr_s(const char* s) {
 	QString _ret = QDial::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -742,7 +742,7 @@ struct seaqt_string QDial_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDial_trUtf8(const char* s) {
+struct seaqt_string QDial_trUtf8_s(const char* s) {
 	QString _ret = QDial::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -790,7 +790,7 @@ void QDial_setWrapping(QDial* self, bool on) {
 	self->setWrapping(on);
 }
 
-struct seaqt_string QDial_tr2(const char* s, const char* c) {
+struct seaqt_string QDial_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDial::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -801,7 +801,7 @@ struct seaqt_string QDial_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDial_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDial_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDial::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -812,7 +812,7 @@ struct seaqt_string QDial_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDial_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDial_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDial::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -823,7 +823,7 @@ struct seaqt_string QDial_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDial_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDial_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDial::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1098,7 +1098,7 @@ void QDial_protectedbase_initStyleOption(const VirtualQDial* self, QStyleOptionS
 	self->initStyleOption(option);
 }
 
-void QDial_protectedbase_setRepeatAction(VirtualQDial* self, int action) {
+void QDial_protectedbase_setRepeatAction_action(VirtualQDial* self, int action) {
 	self->setRepeatAction(static_cast<VirtualQDial::SliderAction>(action));
 }
 

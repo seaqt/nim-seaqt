@@ -61,8 +61,8 @@ type cQOffscreenSurface*{.exportc: "QOffscreenSurface", incompleteStruct.} = obj
 proc fcQOffscreenSurface_metaObject(self: pointer): pointer {.importc: "QOffscreenSurface_metaObject".}
 proc fcQOffscreenSurface_metacast(self: pointer, param1: cstring): pointer {.importc: "QOffscreenSurface_metacast".}
 proc fcQOffscreenSurface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QOffscreenSurface_metacall".}
-proc fcQOffscreenSurface_tr(s: cstring): struct_seaqt_string {.importc: "QOffscreenSurface_tr".}
-proc fcQOffscreenSurface_trUtf8(s: cstring): struct_seaqt_string {.importc: "QOffscreenSurface_trUtf8".}
+proc fcQOffscreenSurface_trS(s: cstring): struct_seaqt_string {.importc: "QOffscreenSurface_tr_s".}
+proc fcQOffscreenSurface_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QOffscreenSurface_trUtf8_s".}
 proc fcQOffscreenSurface_surfaceType(self: pointer): cint {.importc: "QOffscreenSurface_surfaceType".}
 proc fcQOffscreenSurface_createX(self: pointer): void {.importc: "QOffscreenSurface_create".}
 proc fcQOffscreenSurface_destroy(self: pointer): void {.importc: "QOffscreenSurface_destroy".}
@@ -77,10 +77,10 @@ proc fcQOffscreenSurface_nativeHandle(self: pointer): pointer {.importc: "QOffsc
 proc fcQOffscreenSurface_setNativeHandle(self: pointer, handle: pointer): void {.importc: "QOffscreenSurface_setNativeHandle".}
 proc fcQOffscreenSurface_screenChanged(self: pointer, screen: pointer): void {.importc: "QOffscreenSurface_screenChanged".}
 proc fcQOffscreenSurface_connect_screenChanged(self: pointer, slot: int, callback: proc (slot: int, screen: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QOffscreenSurface_connect_screenChanged".}
-proc fcQOffscreenSurface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QOffscreenSurface_tr2".}
-proc fcQOffscreenSurface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QOffscreenSurface_tr3".}
-proc fcQOffscreenSurface_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QOffscreenSurface_trUtf82".}
-proc fcQOffscreenSurface_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QOffscreenSurface_trUtf83".}
+proc fcQOffscreenSurface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QOffscreenSurface_tr_s_c".}
+proc fcQOffscreenSurface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QOffscreenSurface_tr_s_c_n".}
+proc fcQOffscreenSurface_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QOffscreenSurface_trUtf8_s_c".}
+proc fcQOffscreenSurface_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QOffscreenSurface_trUtf8_s_c_n".}
 proc fcQOffscreenSurface_vdata(self: pointer): ptr pointer {.importc: "QOffscreenSurface_vdata".}
 proc fvdata_cQOffscreenSurface(self: pointer): pointer {.importc: "vdata_QOffscreenSurface".}
 
@@ -116,9 +116,9 @@ proc fcQOffscreenSurface_protectedbase_sender(self: pointer): pointer {.importc:
 proc fcQOffscreenSurface_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QOffscreenSurface_protectedbase_senderSignalIndex".}
 proc fcQOffscreenSurface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QOffscreenSurface_protectedbase_receivers".}
 proc fcQOffscreenSurface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QOffscreenSurface_protectedbase_isSignalConnected".}
-proc fcQOffscreenSurface_new(vtbl: pointer, vdata: csize_t, screen: pointer, parent: pointer): ptr cQOffscreenSurface {.importc: "QOffscreenSurface_new".}
-proc fcQOffscreenSurface_new2(vtbl: pointer, vdata: csize_t): ptr cQOffscreenSurface {.importc: "QOffscreenSurface_new2".}
-proc fcQOffscreenSurface_new3(vtbl: pointer, vdata: csize_t, screen: pointer): ptr cQOffscreenSurface {.importc: "QOffscreenSurface_new3".}
+proc fcQOffscreenSurface_new(vtbl: pointer, vdata: csize_t, screen: pointer, parent: pointer): ptr cQOffscreenSurface {.importc: "QOffscreenSurface_new_screen_parent".}
+proc fcQOffscreenSurface_new2(vtbl: pointer, vdata: csize_t): ptr cQOffscreenSurface {.importc: "QOffscreenSurface_new".}
+proc fcQOffscreenSurface_new3(vtbl: pointer, vdata: csize_t, screen: pointer): ptr cQOffscreenSurface {.importc: "QOffscreenSurface_new_screen".}
 proc fcQOffscreenSurface_staticMetaObject(): pointer {.importc: "QOffscreenSurface_staticMetaObject".}
 
 proc metaObject*(self: gen_qoffscreensurface_types.QOffscreenSurface): gen_qobjectdefs_types.QMetaObject =
@@ -131,13 +131,13 @@ proc metacall*(self: gen_qoffscreensurface_types.QOffscreenSurface, param1: cint
   fcQOffscreenSurface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qoffscreensurface_types.QOffscreenSurface, s: cstring): string =
-  let v_ms = fcQOffscreenSurface_tr(s)
+  let v_ms = fcQOffscreenSurface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qoffscreensurface_types.QOffscreenSurface, s: cstring): string =
-  let v_ms = fcQOffscreenSurface_trUtf8(s)
+  let v_ms = fcQOffscreenSurface_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -199,25 +199,25 @@ proc onScreenChanged*(self: gen_qoffscreensurface_types.QOffscreenSurface, slot:
   fcQOffscreenSurface_connect_screenChanged(self.h, cast[int](addr tmp[]), fcQOffscreenSurface_slot_callback_screenChanged, fcQOffscreenSurface_slot_callback_screenChanged_release)
 
 proc tr*(_: type gen_qoffscreensurface_types.QOffscreenSurface, s: cstring, c: cstring): string =
-  let v_ms = fcQOffscreenSurface_tr2(s, c)
+  let v_ms = fcQOffscreenSurface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qoffscreensurface_types.QOffscreenSurface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQOffscreenSurface_tr3(s, c, n)
+  let v_ms = fcQOffscreenSurface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qoffscreensurface_types.QOffscreenSurface, s: cstring, c: cstring): string =
-  let v_ms = fcQOffscreenSurface_trUtf82(s, c)
+  let v_ms = fcQOffscreenSurface_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qoffscreensurface_types.QOffscreenSurface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQOffscreenSurface_trUtf83(s, c, n)
+  let v_ms = fcQOffscreenSurface_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

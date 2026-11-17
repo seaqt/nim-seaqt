@@ -50,7 +50,7 @@ export
 
 type cQGeoCircle*{.exportc: "QGeoCircle", incompleteStruct.} = object
 
-proc fcQGeoCircle_operatorAssign(self: pointer, other: pointer): void {.importc: "QGeoCircle_operatorAssign".}
+proc fcQGeoCircle_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGeoCircle_operatorAssign".}
 proc fcQGeoCircle_operatorEqual(self: pointer, other: pointer): bool {.importc: "QGeoCircle_operatorEqual".}
 proc fcQGeoCircle_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QGeoCircle_operatorNotEqual".}
 proc fcQGeoCircle_setCenter(self: pointer, center: pointer): void {.importc: "QGeoCircle_setCenter".}
@@ -62,14 +62,14 @@ proc fcQGeoCircle_translated(self: pointer, degreesLatitude: float64, degreesLon
 proc fcQGeoCircle_extendCircle(self: pointer, coordinate: pointer): void {.importc: "QGeoCircle_extendCircle".}
 proc fcQGeoCircle_toString(self: pointer): struct_seaqt_string {.importc: "QGeoCircle_toString".}
 proc fcQGeoCircle_new(): ptr cQGeoCircle {.importc: "QGeoCircle_new".}
-proc fcQGeoCircle_new2(center: pointer): ptr cQGeoCircle {.importc: "QGeoCircle_new2".}
-proc fcQGeoCircle_new3(other: pointer): ptr cQGeoCircle {.importc: "QGeoCircle_new3".}
-proc fcQGeoCircle_new4(other: pointer): ptr cQGeoCircle {.importc: "QGeoCircle_new4".}
-proc fcQGeoCircle_new5(center: pointer, radius: float64): ptr cQGeoCircle {.importc: "QGeoCircle_new5".}
+proc fcQGeoCircle_new2(center: pointer): ptr cQGeoCircle {.importc: "QGeoCircle_new_center".}
+proc fcQGeoCircle_new3(fromVal: pointer): ptr cQGeoCircle {.importc: "QGeoCircle_new_from".}
+proc fcQGeoCircle_new4(other: pointer): ptr cQGeoCircle {.importc: "QGeoCircle_new_other".}
+proc fcQGeoCircle_new5(center: pointer, radius: float64): ptr cQGeoCircle {.importc: "QGeoCircle_new_center_radius".}
 proc fcQGeoCircle_staticMetaObject(): pointer {.importc: "QGeoCircle_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qgeocircle_types.QGeoCircle, other: gen_qgeocircle_types.QGeoCircle): void =
-  fcQGeoCircle_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qgeocircle_types.QGeoCircle, fromVal: gen_qgeocircle_types.QGeoCircle): void =
+  fcQGeoCircle_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qgeocircle_types.QGeoCircle, other: gen_qgeocircle_types.QGeoCircle): bool =
   fcQGeoCircle_operatorEqual(self.h, other.h)
@@ -112,8 +112,8 @@ proc create*(T: type gen_qgeocircle_types.QGeoCircle,
   let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new2(center.h), owned: true)
   tmp
 proc create*(T: type gen_qgeocircle_types.QGeoCircle,
-    other: gen_qgeocircle_types.QGeoCircle): gen_qgeocircle_types.QGeoCircle =
-  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new3(other.h), owned: true)
+    fromVal: gen_qgeocircle_types.QGeoCircle): gen_qgeocircle_types.QGeoCircle =
+  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qgeocircle_types.QGeoCircle,
     other: gen_qgeoshape_types.QGeoShape): gen_qgeocircle_types.QGeoCircle =

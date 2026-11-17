@@ -27,90 +27,90 @@ QNetworkProxyQuery* QNetworkProxyQuery_new() {
 	return new (std::nothrow) QNetworkProxyQuery();
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new2(QUrl* requestUrl) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_requestUrl(QUrl* requestUrl) {
 	return new (std::nothrow) QNetworkProxyQuery(*requestUrl);
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new3(struct seaqt_string hostname, int port) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_hostname_port(struct seaqt_string hostname, int port) {
 	QString hostname_QString = QString::fromUtf8(hostname.data, hostname.len);
 	return new (std::nothrow) QNetworkProxyQuery(hostname_QString, static_cast<int>(port));
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new4(unsigned short bindPort) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_bindPort(unsigned short bindPort) {
 	return new (std::nothrow) QNetworkProxyQuery(static_cast<quint16>(bindPort));
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new5(QNetworkConfiguration* networkConfiguration, QUrl* requestUrl) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_networkConfiguration_requestUrl(QNetworkConfiguration* networkConfiguration, QUrl* requestUrl) {
 	return new (std::nothrow) QNetworkProxyQuery(*networkConfiguration, *requestUrl);
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new6(QNetworkConfiguration* networkConfiguration, struct seaqt_string hostname, int port) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_networkConfiguration_hostname_port(QNetworkConfiguration* networkConfiguration, struct seaqt_string hostname, int port) {
 	QString hostname_QString = QString::fromUtf8(hostname.data, hostname.len);
 	return new (std::nothrow) QNetworkProxyQuery(*networkConfiguration, hostname_QString, static_cast<int>(port));
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new7(QNetworkConfiguration* networkConfiguration, unsigned short bindPort) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_networkConfiguration_bindPort(QNetworkConfiguration* networkConfiguration, unsigned short bindPort) {
 	return new (std::nothrow) QNetworkProxyQuery(*networkConfiguration, static_cast<quint16>(bindPort));
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new8(QNetworkProxyQuery* other) {
-	return new (std::nothrow) QNetworkProxyQuery(*other);
+QNetworkProxyQuery* QNetworkProxyQuery_new_from(QNetworkProxyQuery* from) {
+	return new (std::nothrow) QNetworkProxyQuery(*from);
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new9(QUrl* requestUrl, int queryType) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_requestUrl_queryType(QUrl* requestUrl, int queryType) {
 	return new (std::nothrow) QNetworkProxyQuery(*requestUrl, static_cast<QNetworkProxyQuery::QueryType>(queryType));
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new10(struct seaqt_string hostname, int port, struct seaqt_string protocolTag) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_hostname_port_protocolTag(struct seaqt_string hostname, int port, struct seaqt_string protocolTag) {
 	QString hostname_QString = QString::fromUtf8(hostname.data, hostname.len);
 	QString protocolTag_QString = QString::fromUtf8(protocolTag.data, protocolTag.len);
 	return new (std::nothrow) QNetworkProxyQuery(hostname_QString, static_cast<int>(port), protocolTag_QString);
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new11(struct seaqt_string hostname, int port, struct seaqt_string protocolTag, int queryType) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_hostname_port_protocolTag_queryType(struct seaqt_string hostname, int port, struct seaqt_string protocolTag, int queryType) {
 	QString hostname_QString = QString::fromUtf8(hostname.data, hostname.len);
 	QString protocolTag_QString = QString::fromUtf8(protocolTag.data, protocolTag.len);
 	return new (std::nothrow) QNetworkProxyQuery(hostname_QString, static_cast<int>(port), protocolTag_QString, static_cast<QNetworkProxyQuery::QueryType>(queryType));
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new12(unsigned short bindPort, struct seaqt_string protocolTag) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_bindPort_protocolTag(unsigned short bindPort, struct seaqt_string protocolTag) {
 	QString protocolTag_QString = QString::fromUtf8(protocolTag.data, protocolTag.len);
 	return new (std::nothrow) QNetworkProxyQuery(static_cast<quint16>(bindPort), protocolTag_QString);
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new13(unsigned short bindPort, struct seaqt_string protocolTag, int queryType) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_bindPort_protocolTag_queryType(unsigned short bindPort, struct seaqt_string protocolTag, int queryType) {
 	QString protocolTag_QString = QString::fromUtf8(protocolTag.data, protocolTag.len);
 	return new (std::nothrow) QNetworkProxyQuery(static_cast<quint16>(bindPort), protocolTag_QString, static_cast<QNetworkProxyQuery::QueryType>(queryType));
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new14(QNetworkConfiguration* networkConfiguration, QUrl* requestUrl, int queryType) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_networkConfiguration_requestUrl_queryType(QNetworkConfiguration* networkConfiguration, QUrl* requestUrl, int queryType) {
 	return new (std::nothrow) QNetworkProxyQuery(*networkConfiguration, *requestUrl, static_cast<QNetworkProxyQuery::QueryType>(queryType));
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new15(QNetworkConfiguration* networkConfiguration, struct seaqt_string hostname, int port, struct seaqt_string protocolTag) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_networkConfiguration_hostname_port_protocolTag(QNetworkConfiguration* networkConfiguration, struct seaqt_string hostname, int port, struct seaqt_string protocolTag) {
 	QString hostname_QString = QString::fromUtf8(hostname.data, hostname.len);
 	QString protocolTag_QString = QString::fromUtf8(protocolTag.data, protocolTag.len);
 	return new (std::nothrow) QNetworkProxyQuery(*networkConfiguration, hostname_QString, static_cast<int>(port), protocolTag_QString);
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new16(QNetworkConfiguration* networkConfiguration, struct seaqt_string hostname, int port, struct seaqt_string protocolTag, int queryType) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_networkConfiguration_hostname_port_protocolTag_queryType(QNetworkConfiguration* networkConfiguration, struct seaqt_string hostname, int port, struct seaqt_string protocolTag, int queryType) {
 	QString hostname_QString = QString::fromUtf8(hostname.data, hostname.len);
 	QString protocolTag_QString = QString::fromUtf8(protocolTag.data, protocolTag.len);
 	return new (std::nothrow) QNetworkProxyQuery(*networkConfiguration, hostname_QString, static_cast<int>(port), protocolTag_QString, static_cast<QNetworkProxyQuery::QueryType>(queryType));
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new17(QNetworkConfiguration* networkConfiguration, unsigned short bindPort, struct seaqt_string protocolTag) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_networkConfiguration_bindPort_protocolTag(QNetworkConfiguration* networkConfiguration, unsigned short bindPort, struct seaqt_string protocolTag) {
 	QString protocolTag_QString = QString::fromUtf8(protocolTag.data, protocolTag.len);
 	return new (std::nothrow) QNetworkProxyQuery(*networkConfiguration, static_cast<quint16>(bindPort), protocolTag_QString);
 }
 
-QNetworkProxyQuery* QNetworkProxyQuery_new18(QNetworkConfiguration* networkConfiguration, unsigned short bindPort, struct seaqt_string protocolTag, int queryType) {
+QNetworkProxyQuery* QNetworkProxyQuery_new_networkConfiguration_bindPort_protocolTag_queryType(QNetworkConfiguration* networkConfiguration, unsigned short bindPort, struct seaqt_string protocolTag, int queryType) {
 	QString protocolTag_QString = QString::fromUtf8(protocolTag.data, protocolTag.len);
 	return new (std::nothrow) QNetworkProxyQuery(*networkConfiguration, static_cast<quint16>(bindPort), protocolTag_QString, static_cast<QNetworkProxyQuery::QueryType>(queryType));
 }
 
-void QNetworkProxyQuery_operatorAssign(QNetworkProxyQuery* self, QNetworkProxyQuery* other) {
-	self->operator=(*other);
+void QNetworkProxyQuery_operatorAssign(QNetworkProxyQuery* self, QNetworkProxyQuery* from) {
+	self->operator=(*from);
 }
 
 void QNetworkProxyQuery_swap(QNetworkProxyQuery* self, QNetworkProxyQuery* other) {
@@ -207,39 +207,39 @@ QNetworkProxy* QNetworkProxy_new() {
 	return new (std::nothrow) QNetworkProxy();
 }
 
-QNetworkProxy* QNetworkProxy_new2(int type) {
+QNetworkProxy* QNetworkProxy_new_type(int type) {
 	return new (std::nothrow) QNetworkProxy(static_cast<QNetworkProxy::ProxyType>(type));
 }
 
-QNetworkProxy* QNetworkProxy_new3(QNetworkProxy* other) {
-	return new (std::nothrow) QNetworkProxy(*other);
+QNetworkProxy* QNetworkProxy_new_from(QNetworkProxy* from) {
+	return new (std::nothrow) QNetworkProxy(*from);
 }
 
-QNetworkProxy* QNetworkProxy_new4(int type, struct seaqt_string hostName) {
+QNetworkProxy* QNetworkProxy_new_type_hostName(int type, struct seaqt_string hostName) {
 	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
 	return new (std::nothrow) QNetworkProxy(static_cast<QNetworkProxy::ProxyType>(type), hostName_QString);
 }
 
-QNetworkProxy* QNetworkProxy_new5(int type, struct seaqt_string hostName, unsigned short port) {
+QNetworkProxy* QNetworkProxy_new_type_hostName_port(int type, struct seaqt_string hostName, unsigned short port) {
 	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
 	return new (std::nothrow) QNetworkProxy(static_cast<QNetworkProxy::ProxyType>(type), hostName_QString, static_cast<quint16>(port));
 }
 
-QNetworkProxy* QNetworkProxy_new6(int type, struct seaqt_string hostName, unsigned short port, struct seaqt_string user) {
+QNetworkProxy* QNetworkProxy_new_type_hostName_port_user(int type, struct seaqt_string hostName, unsigned short port, struct seaqt_string user) {
 	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
 	QString user_QString = QString::fromUtf8(user.data, user.len);
 	return new (std::nothrow) QNetworkProxy(static_cast<QNetworkProxy::ProxyType>(type), hostName_QString, static_cast<quint16>(port), user_QString);
 }
 
-QNetworkProxy* QNetworkProxy_new7(int type, struct seaqt_string hostName, unsigned short port, struct seaqt_string user, struct seaqt_string password) {
+QNetworkProxy* QNetworkProxy_new_type_hostName_port_user_password(int type, struct seaqt_string hostName, unsigned short port, struct seaqt_string user, struct seaqt_string password) {
 	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
 	QString user_QString = QString::fromUtf8(user.data, user.len);
 	QString password_QString = QString::fromUtf8(password.data, password.len);
 	return new (std::nothrow) QNetworkProxy(static_cast<QNetworkProxy::ProxyType>(type), hostName_QString, static_cast<quint16>(port), user_QString, password_QString);
 }
 
-void QNetworkProxy_operatorAssign(QNetworkProxy* self, QNetworkProxy* other) {
-	self->operator=(*other);
+void QNetworkProxy_operatorAssign(QNetworkProxy* self, QNetworkProxy* from) {
+	self->operator=(*from);
 }
 
 void QNetworkProxy_swap(QNetworkProxy* self, QNetworkProxy* other) {
@@ -484,11 +484,11 @@ struct seaqt_array /* of QNetworkProxy* */  QNetworkProxyFactory_systemProxyForQ
 	return _out;
 }
 
-void QNetworkProxyFactory_operatorAssign(QNetworkProxyFactory* self, QNetworkProxyFactory* param1) {
-	self->operator=(*param1);
+void QNetworkProxyFactory_operatorAssign(QNetworkProxyFactory* self, QNetworkProxyFactory* from) {
+	self->operator=(*from);
 }
 
-struct seaqt_array /* of QNetworkProxy* */  QNetworkProxyFactory_systemProxyForQueryWithQuery(QNetworkProxyQuery* query) {
+struct seaqt_array /* of QNetworkProxy* */  QNetworkProxyFactory_systemProxyForQuery_query(QNetworkProxyQuery* query) {
 	QList<QNetworkProxy> _ret = QNetworkProxyFactory::systemProxyForQuery(*query);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QNetworkProxy** _arr = static_cast<QNetworkProxy**>(malloc(sizeof(QNetworkProxy*) * _ret.length()));

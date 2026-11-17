@@ -25,39 +25,39 @@ QQmlProperty* QQmlProperty_new() {
 	return new (std::nothrow) QQmlProperty();
 }
 
-QQmlProperty* QQmlProperty_new2(QObject* param1) {
+QQmlProperty* QQmlProperty_new_QObject(QObject* param1) {
 	return new (std::nothrow) QQmlProperty(param1);
 }
 
-QQmlProperty* QQmlProperty_new3(QObject* param1, QQmlContext* param2) {
+QQmlProperty* QQmlProperty_new_QObject_QQmlContext(QObject* param1, QQmlContext* param2) {
 	return new (std::nothrow) QQmlProperty(param1, param2);
 }
 
-QQmlProperty* QQmlProperty_new4(QObject* param1, QQmlEngine* param2) {
+QQmlProperty* QQmlProperty_new_QObject_QQmlEngine(QObject* param1, QQmlEngine* param2) {
 	return new (std::nothrow) QQmlProperty(param1, param2);
 }
 
-QQmlProperty* QQmlProperty_new5(QObject* param1, struct seaqt_string param2) {
+QQmlProperty* QQmlProperty_new_QObject_QString(QObject* param1, struct seaqt_string param2) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	return new (std::nothrow) QQmlProperty(param1, param2_QString);
 }
 
-QQmlProperty* QQmlProperty_new6(QObject* param1, struct seaqt_string param2, QQmlContext* param3) {
+QQmlProperty* QQmlProperty_new_QObject_QString_QQmlContext(QObject* param1, struct seaqt_string param2, QQmlContext* param3) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	return new (std::nothrow) QQmlProperty(param1, param2_QString, param3);
 }
 
-QQmlProperty* QQmlProperty_new7(QObject* param1, struct seaqt_string param2, QQmlEngine* param3) {
+QQmlProperty* QQmlProperty_new_QObject_QString_QQmlEngine(QObject* param1, struct seaqt_string param2, QQmlEngine* param3) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	return new (std::nothrow) QQmlProperty(param1, param2_QString, param3);
 }
 
-QQmlProperty* QQmlProperty_new8(QQmlProperty* param1) {
-	return new (std::nothrow) QQmlProperty(*param1);
+QQmlProperty* QQmlProperty_new_QQmlProperty(QQmlProperty* from) {
+	return new (std::nothrow) QQmlProperty(*from);
 }
 
-void QQmlProperty_operatorAssign(QQmlProperty* self, QQmlProperty* param1) {
-	self->operator=(*param1);
+void QQmlProperty_operatorAssign(QQmlProperty* self, QQmlProperty* from) {
+	self->operator=(*from);
 }
 
 bool QQmlProperty_operatorEqual(const QQmlProperty* self, QQmlProperty* param1) {
@@ -109,36 +109,36 @@ QVariant* QQmlProperty_read(const QQmlProperty* self) {
 	return new QVariant(self->read());
 }
 
-QVariant* QQmlProperty_read2(QObject* param1, struct seaqt_string param2) {
+QVariant* QQmlProperty_read_QObject_QString(QObject* param1, struct seaqt_string param2) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	return new QVariant(QQmlProperty::read(param1, param2_QString));
 }
 
-QVariant* QQmlProperty_read3(QObject* param1, struct seaqt_string param2, QQmlContext* param3) {
+QVariant* QQmlProperty_read_QObject_QString_QQmlContext(QObject* param1, struct seaqt_string param2, QQmlContext* param3) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	return new QVariant(QQmlProperty::read(param1, param2_QString, param3));
 }
 
-QVariant* QQmlProperty_read4(QObject* param1, struct seaqt_string param2, QQmlEngine* param3) {
+QVariant* QQmlProperty_read_QObject_QString_QQmlEngine(QObject* param1, struct seaqt_string param2, QQmlEngine* param3) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	return new QVariant(QQmlProperty::read(param1, param2_QString, param3));
 }
 
-bool QQmlProperty_write(const QQmlProperty* self, QVariant* param1) {
+bool QQmlProperty_write_QVariant(const QQmlProperty* self, QVariant* param1) {
 	return self->write(*param1);
 }
 
-bool QQmlProperty_write2(QObject* param1, struct seaqt_string param2, QVariant* param3) {
+bool QQmlProperty_write_QObject_QString_QVariant(QObject* param1, struct seaqt_string param2, QVariant* param3) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	return QQmlProperty::write(param1, param2_QString, *param3);
 }
 
-bool QQmlProperty_write3(QObject* param1, struct seaqt_string param2, QVariant* param3, QQmlContext* param4) {
+bool QQmlProperty_write_QObject_QString_QVariant_QQmlContext(QObject* param1, struct seaqt_string param2, QVariant* param3, QQmlContext* param4) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	return QQmlProperty::write(param1, param2_QString, *param3, param4);
 }
 
-bool QQmlProperty_write4(QObject* param1, struct seaqt_string param2, QVariant* param3, QQmlEngine* param4) {
+bool QQmlProperty_write_QObject_QString_QVariant_QQmlEngine(QObject* param1, struct seaqt_string param2, QVariant* param3, QQmlEngine* param4) {
 	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
 	return QQmlProperty::write(param1, param2_QString, *param3, param4);
 }
@@ -155,11 +155,11 @@ bool QQmlProperty_needsNotifySignal(const QQmlProperty* self) {
 	return self->needsNotifySignal();
 }
 
-bool QQmlProperty_connectNotifySignal(const QQmlProperty* self, QObject* dest, const char* slot) {
+bool QQmlProperty_connectNotifySignal_dest_slot(const QQmlProperty* self, QObject* dest, const char* slot) {
 	return self->connectNotifySignal(dest, slot);
 }
 
-bool QQmlProperty_connectNotifySignal2(const QQmlProperty* self, QObject* dest, int method) {
+bool QQmlProperty_connectNotifySignal_dest_method(const QQmlProperty* self, QObject* dest, int method) {
 	return self->connectNotifySignal(dest, static_cast<int>(method));
 }
 

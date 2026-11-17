@@ -26,32 +26,32 @@ QMatrix4x4* QMatrix4x4_new() {
 	return new (std::nothrow) QMatrix4x4();
 }
 
-QMatrix4x4* QMatrix4x4_new2(int param1) {
+QMatrix4x4* QMatrix4x4_new_Qt_Initialization(int param1) {
 	return new (std::nothrow) QMatrix4x4(static_cast<Qt::Initialization>(param1));
 }
 
-QMatrix4x4* QMatrix4x4_new3(const float* values) {
+QMatrix4x4* QMatrix4x4_new_float(const float* values) {
 	return new (std::nothrow) QMatrix4x4(static_cast<const float*>(values));
 }
 
-QMatrix4x4* QMatrix4x4_new4(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24, float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44) {
+QMatrix4x4* QMatrix4x4_new_float_float_float_float_float_float_float_float_float_float_float_float_float_float_float_float(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24, float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44) {
 	return new (std::nothrow) QMatrix4x4(static_cast<float>(m11), static_cast<float>(m12), static_cast<float>(m13), static_cast<float>(m14), static_cast<float>(m21), static_cast<float>(m22), static_cast<float>(m23), static_cast<float>(m24), static_cast<float>(m31), static_cast<float>(m32), static_cast<float>(m33), static_cast<float>(m34), static_cast<float>(m41), static_cast<float>(m42), static_cast<float>(m43), static_cast<float>(m44));
 }
 
-QMatrix4x4* QMatrix4x4_new5(const float* values, int cols, int rows) {
+QMatrix4x4* QMatrix4x4_new_float_int_int(const float* values, int cols, int rows) {
 	return new (std::nothrow) QMatrix4x4(static_cast<const float*>(values), static_cast<int>(cols), static_cast<int>(rows));
 }
 
-QMatrix4x4* QMatrix4x4_new6(QTransform* transform) {
+QMatrix4x4* QMatrix4x4_new_QTransform(QTransform* transform) {
 	return new (std::nothrow) QMatrix4x4(*transform);
 }
 
-QMatrix4x4* QMatrix4x4_new7(QMatrix* matrix) {
+QMatrix4x4* QMatrix4x4_new_QMatrix(QMatrix* matrix) {
 	return new (std::nothrow) QMatrix4x4(*matrix);
 }
 
-QMatrix4x4* QMatrix4x4_new8(QMatrix4x4* param1) {
-	return new (std::nothrow) QMatrix4x4(*param1);
+QMatrix4x4* QMatrix4x4_new_QMatrix4x4(QMatrix4x4* from) {
+	return new (std::nothrow) QMatrix4x4(*from);
 }
 
 QVector4D* QMatrix4x4_column(const QMatrix4x4* self, int index) {
@@ -110,13 +110,13 @@ QMatrix4x4* QMatrix4x4_operatorMinusAssign(QMatrix4x4* self, QMatrix4x4* other) 
 	return &_ret;
 }
 
-QMatrix4x4* QMatrix4x4_operatorMultiplyAssign(QMatrix4x4* self, QMatrix4x4* other) {
+QMatrix4x4* QMatrix4x4_operatorMultiplyAssign_other(QMatrix4x4* self, QMatrix4x4* other) {
 	QMatrix4x4& _ret = self->operator*=(*other);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QMatrix4x4* QMatrix4x4_operatorMultiplyAssignWithFactor(QMatrix4x4* self, float factor) {
+QMatrix4x4* QMatrix4x4_operatorMultiplyAssign_factor(QMatrix4x4* self, float factor) {
 	QMatrix4x4& _ret = self->operator*=(static_cast<float>(factor));
 	// Cast returned reference into pointer
 	return &_ret;
@@ -136,55 +136,55 @@ bool QMatrix4x4_operatorNotEqual(const QMatrix4x4* self, QMatrix4x4* other) {
 	return (*self != *other);
 }
 
-void QMatrix4x4_scale(QMatrix4x4* self, QVector3D* vector) {
+void QMatrix4x4_scale_vector(QMatrix4x4* self, QVector3D* vector) {
 	self->scale(*vector);
 }
 
-void QMatrix4x4_translate(QMatrix4x4* self, QVector3D* vector) {
+void QMatrix4x4_translate_vector(QMatrix4x4* self, QVector3D* vector) {
 	self->translate(*vector);
 }
 
-void QMatrix4x4_rotate(QMatrix4x4* self, float angle, QVector3D* vector) {
+void QMatrix4x4_rotate_angle_vector(QMatrix4x4* self, float angle, QVector3D* vector) {
 	self->rotate(static_cast<float>(angle), *vector);
 }
 
-void QMatrix4x4_scale2(QMatrix4x4* self, float x, float y) {
+void QMatrix4x4_scale_x_y(QMatrix4x4* self, float x, float y) {
 	self->scale(static_cast<float>(x), static_cast<float>(y));
 }
 
-void QMatrix4x4_scale3(QMatrix4x4* self, float x, float y, float z) {
+void QMatrix4x4_scale_x_y_z(QMatrix4x4* self, float x, float y, float z) {
 	self->scale(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
 }
 
-void QMatrix4x4_scaleWithFactor(QMatrix4x4* self, float factor) {
+void QMatrix4x4_scale_factor(QMatrix4x4* self, float factor) {
 	self->scale(static_cast<float>(factor));
 }
 
-void QMatrix4x4_translate2(QMatrix4x4* self, float x, float y) {
+void QMatrix4x4_translate_x_y(QMatrix4x4* self, float x, float y) {
 	self->translate(static_cast<float>(x), static_cast<float>(y));
 }
 
-void QMatrix4x4_translate3(QMatrix4x4* self, float x, float y, float z) {
+void QMatrix4x4_translate_x_y_z(QMatrix4x4* self, float x, float y, float z) {
 	self->translate(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
 }
 
-void QMatrix4x4_rotate2(QMatrix4x4* self, float angle, float x, float y) {
+void QMatrix4x4_rotate_angle_x_y(QMatrix4x4* self, float angle, float x, float y) {
 	self->rotate(static_cast<float>(angle), static_cast<float>(x), static_cast<float>(y));
 }
 
-void QMatrix4x4_rotateWithQuaternion(QMatrix4x4* self, QQuaternion* quaternion) {
+void QMatrix4x4_rotate_quaternion(QMatrix4x4* self, QQuaternion* quaternion) {
 	self->rotate(*quaternion);
 }
 
-void QMatrix4x4_ortho(QMatrix4x4* self, QRect* rect) {
+void QMatrix4x4_ortho_QRect(QMatrix4x4* self, QRect* rect) {
 	self->ortho(*rect);
 }
 
-void QMatrix4x4_orthoWithRect(QMatrix4x4* self, QRectF* rect) {
+void QMatrix4x4_ortho_QRectF(QMatrix4x4* self, QRectF* rect) {
 	self->ortho(*rect);
 }
 
-void QMatrix4x4_ortho2(QMatrix4x4* self, float left, float right, float bottom, float top, float nearPlane, float farPlane) {
+void QMatrix4x4_ortho_float_float_float_float_float_float(QMatrix4x4* self, float left, float right, float bottom, float top, float nearPlane, float farPlane) {
 	self->ortho(static_cast<float>(left), static_cast<float>(right), static_cast<float>(bottom), static_cast<float>(top), static_cast<float>(nearPlane), static_cast<float>(farPlane));
 }
 
@@ -200,11 +200,11 @@ void QMatrix4x4_lookAt(QMatrix4x4* self, QVector3D* eye, QVector3D* center, QVec
 	self->lookAt(*eye, *center, *up);
 }
 
-void QMatrix4x4_viewport(QMatrix4x4* self, QRectF* rect) {
+void QMatrix4x4_viewport_rect(QMatrix4x4* self, QRectF* rect) {
 	self->viewport(*rect);
 }
 
-void QMatrix4x4_viewport2(QMatrix4x4* self, float left, float bottom, float width, float height) {
+void QMatrix4x4_viewport_left_bottom_width_height(QMatrix4x4* self, float left, float bottom, float width, float height) {
 	self->viewport(static_cast<float>(left), static_cast<float>(bottom), static_cast<float>(width), static_cast<float>(height));
 }
 
@@ -224,19 +224,19 @@ QTransform* QMatrix4x4_toTransform(const QMatrix4x4* self) {
 	return new QTransform(self->toTransform());
 }
 
-QTransform* QMatrix4x4_toTransformWithDistanceToPlane(const QMatrix4x4* self, float distanceToPlane) {
+QTransform* QMatrix4x4_toTransform_distanceToPlane(const QMatrix4x4* self, float distanceToPlane) {
 	return new QTransform(self->toTransform(static_cast<float>(distanceToPlane)));
 }
 
-QPoint* QMatrix4x4_map(const QMatrix4x4* self, QPoint* point) {
+QPoint* QMatrix4x4_map_QPoint(const QMatrix4x4* self, QPoint* point) {
 	return new QPoint(self->map(*point));
 }
 
-QPointF* QMatrix4x4_mapWithPoint(const QMatrix4x4* self, QPointF* point) {
+QPointF* QMatrix4x4_map_QPointF(const QMatrix4x4* self, QPointF* point) {
 	return new QPointF(self->map(*point));
 }
 
-QVector3D* QMatrix4x4_map2(const QMatrix4x4* self, QVector3D* point) {
+QVector3D* QMatrix4x4_map_QVector3D(const QMatrix4x4* self, QVector3D* point) {
 	return new QVector3D(self->map(*point));
 }
 
@@ -244,15 +244,15 @@ QVector3D* QMatrix4x4_mapVector(const QMatrix4x4* self, QVector3D* vector) {
 	return new QVector3D(self->mapVector(*vector));
 }
 
-QVector4D* QMatrix4x4_map3(const QMatrix4x4* self, QVector4D* point) {
+QVector4D* QMatrix4x4_map_QVector4D(const QMatrix4x4* self, QVector4D* point) {
 	return new QVector4D(self->map(*point));
 }
 
-QRect* QMatrix4x4_mapRect(const QMatrix4x4* self, QRect* rect) {
+QRect* QMatrix4x4_mapRect_QRect(const QMatrix4x4* self, QRect* rect) {
 	return new QRect(self->mapRect(*rect));
 }
 
-QRectF* QMatrix4x4_mapRectWithRect(const QMatrix4x4* self, QRectF* rect) {
+QRectF* QMatrix4x4_mapRect_QRectF(const QMatrix4x4* self, QRectF* rect) {
 	return new QRectF(self->mapRect(*rect));
 }
 
@@ -260,7 +260,7 @@ float* QMatrix4x4_data(QMatrix4x4* self) {
 	return self->data();
 }
 
-const float* QMatrix4x4_data2(const QMatrix4x4* self) {
+const float* QMatrix4x4_data_const(const QMatrix4x4* self) {
 	return (const float*) self->data();
 }
 
@@ -276,19 +276,19 @@ QVariant* QMatrix4x4_ToQVariant(const QMatrix4x4* self) {
 	return new QVariant(self->operator QVariant());
 }
 
-QMatrix4x4* QMatrix4x4_invertedWithInvertible(const QMatrix4x4* self, bool* invertible) {
+QMatrix4x4* QMatrix4x4_inverted_invertible(const QMatrix4x4* self, bool* invertible) {
 	return new QMatrix4x4(self->inverted(invertible));
 }
 
-void QMatrix4x4_rotate3(QMatrix4x4* self, float angle, float x, float y, float z) {
+void QMatrix4x4_rotate_angle_x_y_z(QMatrix4x4* self, float angle, float x, float y, float z) {
 	self->rotate(static_cast<float>(angle), static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
 }
 
-void QMatrix4x4_viewport3(QMatrix4x4* self, float left, float bottom, float width, float height, float nearPlane) {
+void QMatrix4x4_viewport_left_bottom_width_height_nearPlane(QMatrix4x4* self, float left, float bottom, float width, float height, float nearPlane) {
 	self->viewport(static_cast<float>(left), static_cast<float>(bottom), static_cast<float>(width), static_cast<float>(height), static_cast<float>(nearPlane));
 }
 
-void QMatrix4x4_viewport4(QMatrix4x4* self, float left, float bottom, float width, float height, float nearPlane, float farPlane) {
+void QMatrix4x4_viewport_left_bottom_width_height_nearPlane_farPlane(QMatrix4x4* self, float left, float bottom, float width, float height, float nearPlane, float farPlane) {
 	self->viewport(static_cast<float>(left), static_cast<float>(bottom), static_cast<float>(width), static_cast<float>(height), static_cast<float>(nearPlane), static_cast<float>(farPlane));
 }
 

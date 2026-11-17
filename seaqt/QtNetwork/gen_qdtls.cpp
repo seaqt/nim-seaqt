@@ -182,7 +182,7 @@ VirtualQDtlsClientVerifier* QDtlsClientVerifier_new(const QDtlsClientVerifier_VT
 	return _mem_ ? new (_mem_)VirtualQDtlsClientVerifier(vtbl) : nullptr;
 }
 
-VirtualQDtlsClientVerifier* QDtlsClientVerifier_new2(const QDtlsClientVerifier_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQDtlsClientVerifier* QDtlsClientVerifier_new_parent(const QDtlsClientVerifier_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDtlsClientVerifier>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDtlsClientVerifier(vtbl, parent) : nullptr;
 }
@@ -203,7 +203,7 @@ int QDtlsClientVerifier_metacall(QDtlsClientVerifier* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDtlsClientVerifier_tr(const char* s) {
+struct seaqt_string QDtlsClientVerifier_tr_s(const char* s) {
 	QString _ret = QDtlsClientVerifier::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -214,7 +214,7 @@ struct seaqt_string QDtlsClientVerifier_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDtlsClientVerifier_trUtf8(const char* s) {
+struct seaqt_string QDtlsClientVerifier_trUtf8_s(const char* s) {
 	QString _ret = QDtlsClientVerifier::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -263,7 +263,7 @@ struct seaqt_string QDtlsClientVerifier_dtlsErrorString(const QDtlsClientVerifie
 	return _ms;
 }
 
-struct seaqt_string QDtlsClientVerifier_tr2(const char* s, const char* c) {
+struct seaqt_string QDtlsClientVerifier_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDtlsClientVerifier::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -274,7 +274,7 @@ struct seaqt_string QDtlsClientVerifier_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDtlsClientVerifier_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDtlsClientVerifier_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDtlsClientVerifier::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -285,7 +285,7 @@ struct seaqt_string QDtlsClientVerifier_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-struct seaqt_string QDtlsClientVerifier_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDtlsClientVerifier_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDtlsClientVerifier::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -296,7 +296,7 @@ struct seaqt_string QDtlsClientVerifier_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDtlsClientVerifier_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDtlsClientVerifier_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDtlsClientVerifier::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -527,12 +527,12 @@ public:
 	friend bool QDtls_protectedbase_isSignalConnected(const VirtualQDtls* self, QMetaMethod* signal);
 };
 
-VirtualQDtls* QDtls_new(const QDtls_VTable* vtbl, size_t vdata, int mode) {
+VirtualQDtls* QDtls_new_mode(const QDtls_VTable* vtbl, size_t vdata, int mode) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDtls>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDtls(vtbl, static_cast<QSslSocket::SslMode>(mode)) : nullptr;
 }
 
-VirtualQDtls* QDtls_new2(const QDtls_VTable* vtbl, size_t vdata, int mode, QObject* parent) {
+VirtualQDtls* QDtls_new_mode_parent(const QDtls_VTable* vtbl, size_t vdata, int mode, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDtls>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDtls(vtbl, static_cast<QSslSocket::SslMode>(mode), parent) : nullptr;
 }
@@ -553,7 +553,7 @@ int QDtls_metacall(QDtls* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDtls_tr(const char* s) {
+struct seaqt_string QDtls_tr_s(const char* s) {
 	QString _ret = QDtls::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -564,7 +564,7 @@ struct seaqt_string QDtls_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDtls_trUtf8(const char* s) {
+struct seaqt_string QDtls_trUtf8_s(const char* s) {
 	QString _ret = QDtls::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -575,7 +575,7 @@ struct seaqt_string QDtls_trUtf8(const char* s) {
 	return _ms;
 }
 
-bool QDtls_setPeer(QDtls* self, QHostAddress* address, unsigned short port) {
+bool QDtls_setPeer_address_port(QDtls* self, QHostAddress* address, unsigned short port) {
 	return self->setPeer(*address, static_cast<quint16>(port));
 }
 
@@ -639,7 +639,7 @@ int QDtls_handshakeState(const QDtls* self) {
 	return static_cast<int>(_ret);
 }
 
-bool QDtls_doHandshake(QDtls* self, QUdpSocket* socket) {
+bool QDtls_doHandshake_socket(QDtls* self, QUdpSocket* socket) {
 	return self->doHandshake(socket);
 }
 
@@ -758,7 +758,7 @@ void QDtls_connect_handshakeTimeout(QDtls* self, intptr_t slot, void (*callback)
 	QDtls::connect(self, static_cast<void (QDtls::*)()>(&QDtls::handshakeTimeout), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDtls_tr2(const char* s, const char* c) {
+struct seaqt_string QDtls_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDtls::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -769,7 +769,7 @@ struct seaqt_string QDtls_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDtls_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDtls_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDtls::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -780,7 +780,7 @@ struct seaqt_string QDtls_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDtls_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDtls_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDtls::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -791,7 +791,7 @@ struct seaqt_string QDtls_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDtls_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDtls_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDtls::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -802,12 +802,12 @@ struct seaqt_string QDtls_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QDtls_setPeer2(QDtls* self, QHostAddress* address, unsigned short port, struct seaqt_string verificationName) {
+bool QDtls_setPeer_address_port_verificationName(QDtls* self, QHostAddress* address, unsigned short port, struct seaqt_string verificationName) {
 	QString verificationName_QString = QString::fromUtf8(verificationName.data, verificationName.len);
 	return self->setPeer(*address, static_cast<quint16>(port), verificationName_QString);
 }
 
-bool QDtls_doHandshake2(QDtls* self, QUdpSocket* socket, struct seaqt_string dgram) {
+bool QDtls_doHandshake_socket_dgram(QDtls* self, QUdpSocket* socket, struct seaqt_string dgram) {
 	QByteArray dgram_QByteArray(dgram.data, dgram.len);
 	return self->doHandshake(socket, dgram_QByteArray);
 }
@@ -890,13 +890,13 @@ QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParamete
 	return new (std::nothrow) QDtlsClientVerifier__GeneratorParameters();
 }
 
-QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new2(int a, struct seaqt_string s) {
+QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new_a_s(int a, struct seaqt_string s) {
 	QByteArray s_QByteArray(s.data, s.len);
 	return new (std::nothrow) QDtlsClientVerifier__GeneratorParameters(static_cast<QCryptographicHash::Algorithm>(a), s_QByteArray);
 }
 
-QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new3(QDtlsClientVerifier__GeneratorParameters* param1) {
-	return new (std::nothrow) QDtlsClientVerifier__GeneratorParameters(*param1);
+QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new_from(QDtlsClientVerifier__GeneratorParameters* from) {
+	return new (std::nothrow) QDtlsClientVerifier__GeneratorParameters(*from);
 }
 
 int QDtlsClientVerifier__GeneratorParameters_hash(const QDtlsClientVerifier__GeneratorParameters* self) {
@@ -922,8 +922,8 @@ void QDtlsClientVerifier__GeneratorParameters_setSecret(QDtlsClientVerifier__Gen
 	self->secret = secret_QByteArray;
 }
 
-void QDtlsClientVerifier__GeneratorParameters_operatorAssign(QDtlsClientVerifier__GeneratorParameters* self, QDtlsClientVerifier__GeneratorParameters* param1) {
-	self->operator=(*param1);
+void QDtlsClientVerifier__GeneratorParameters_operatorAssign(QDtlsClientVerifier__GeneratorParameters* self, QDtlsClientVerifier__GeneratorParameters* from) {
+	self->operator=(*from);
 }
 
 void QDtlsClientVerifier__GeneratorParameters_delete(QDtlsClientVerifier__GeneratorParameters* self) {

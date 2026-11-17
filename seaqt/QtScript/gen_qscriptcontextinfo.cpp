@@ -17,20 +17,20 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QScriptContextInfo* QScriptContextInfo_new(QScriptContext* context) {
+QScriptContextInfo* QScriptContextInfo_new_context(QScriptContext* context) {
 	return new (std::nothrow) QScriptContextInfo(context);
 }
 
-QScriptContextInfo* QScriptContextInfo_new2(QScriptContextInfo* other) {
-	return new (std::nothrow) QScriptContextInfo(*other);
+QScriptContextInfo* QScriptContextInfo_new_from(QScriptContextInfo* from) {
+	return new (std::nothrow) QScriptContextInfo(*from);
 }
 
-QScriptContextInfo* QScriptContextInfo_new3() {
+QScriptContextInfo* QScriptContextInfo_new() {
 	return new (std::nothrow) QScriptContextInfo();
 }
 
-void QScriptContextInfo_operatorAssign(QScriptContextInfo* self, QScriptContextInfo* other) {
-	self->operator=(*other);
+void QScriptContextInfo_operatorAssign(QScriptContextInfo* self, QScriptContextInfo* from) {
+	self->operator=(*from);
 }
 
 bool QScriptContextInfo_isNull(const QScriptContextInfo* self) {

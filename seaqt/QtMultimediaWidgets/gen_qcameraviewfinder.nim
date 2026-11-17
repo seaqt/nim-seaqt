@@ -75,13 +75,13 @@ type cQCameraViewfinder*{.exportc: "QCameraViewfinder", incompleteStruct.} = obj
 proc fcQCameraViewfinder_metaObject(self: pointer): pointer {.importc: "QCameraViewfinder_metaObject".}
 proc fcQCameraViewfinder_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraViewfinder_metacast".}
 proc fcQCameraViewfinder_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraViewfinder_metacall".}
-proc fcQCameraViewfinder_tr(s: cstring): struct_seaqt_string {.importc: "QCameraViewfinder_tr".}
-proc fcQCameraViewfinder_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraViewfinder_trUtf8".}
+proc fcQCameraViewfinder_trS(s: cstring): struct_seaqt_string {.importc: "QCameraViewfinder_tr_s".}
+proc fcQCameraViewfinder_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraViewfinder_trUtf8_s".}
 proc fcQCameraViewfinder_mediaObject(self: pointer): pointer {.importc: "QCameraViewfinder_mediaObject".}
-proc fcQCameraViewfinder_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraViewfinder_tr2".}
-proc fcQCameraViewfinder_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraViewfinder_tr3".}
-proc fcQCameraViewfinder_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraViewfinder_trUtf82".}
-proc fcQCameraViewfinder_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraViewfinder_trUtf83".}
+proc fcQCameraViewfinder_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraViewfinder_tr_s_c".}
+proc fcQCameraViewfinder_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraViewfinder_tr_s_c_n".}
+proc fcQCameraViewfinder_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraViewfinder_trUtf8_s_c".}
+proc fcQCameraViewfinder_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraViewfinder_trUtf8_s_c_n".}
 proc fcQCameraViewfinder_vdata(self: pointer): ptr pointer {.importc: "QCameraViewfinder_vdata".}
 proc fvdata_cQCameraViewfinder(self: pointer): pointer {.importc: "vdata_QCameraViewfinder".}
 
@@ -201,7 +201,7 @@ proc fcQCameraViewfinder_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQCameraViewfinder_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraViewfinder_protectedbase_receivers".}
 proc fcQCameraViewfinder_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraViewfinder_protectedbase_isSignalConnected".}
 proc fcQCameraViewfinder_new(vtbl: pointer, vdata: csize_t): ptr cQCameraViewfinder {.importc: "QCameraViewfinder_new".}
-proc fcQCameraViewfinder_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCameraViewfinder {.importc: "QCameraViewfinder_new2".}
+proc fcQCameraViewfinder_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCameraViewfinder {.importc: "QCameraViewfinder_new_parent".}
 proc fcQCameraViewfinder_staticMetaObject(): pointer {.importc: "QCameraViewfinder_staticMetaObject".}
 
 proc metaObject*(self: gen_qcameraviewfinder_types.QCameraViewfinder): gen_qobjectdefs_types.QMetaObject =
@@ -214,13 +214,13 @@ proc metacall*(self: gen_qcameraviewfinder_types.QCameraViewfinder, param1: cint
   fcQCameraViewfinder_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraviewfinder_types.QCameraViewfinder, s: cstring): string =
-  let v_ms = fcQCameraViewfinder_tr(s)
+  let v_ms = fcQCameraViewfinder_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraviewfinder_types.QCameraViewfinder, s: cstring): string =
-  let v_ms = fcQCameraViewfinder_trUtf8(s)
+  let v_ms = fcQCameraViewfinder_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -229,25 +229,25 @@ proc mediaObject*(self: gen_qcameraviewfinder_types.QCameraViewfinder): gen_qmed
   gen_qmediaobject_types.QMediaObject(h: fcQCameraViewfinder_mediaObject(self.h), owned: false)
 
 proc tr*(_: type gen_qcameraviewfinder_types.QCameraViewfinder, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraViewfinder_tr2(s, c)
+  let v_ms = fcQCameraViewfinder_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcameraviewfinder_types.QCameraViewfinder, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraViewfinder_tr3(s, c, n)
+  let v_ms = fcQCameraViewfinder_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraviewfinder_types.QCameraViewfinder, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraViewfinder_trUtf82(s, c)
+  let v_ms = fcQCameraViewfinder_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraviewfinder_types.QCameraViewfinder, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraViewfinder_trUtf83(s, c, n)
+  let v_ms = fcQCameraViewfinder_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

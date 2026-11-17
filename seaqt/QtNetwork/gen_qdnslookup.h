@@ -45,9 +45,9 @@ typedef struct QTimerEvent QTimerEvent;
 #endif
 
 QDnsDomainNameRecord* QDnsDomainNameRecord_new();
-QDnsDomainNameRecord* QDnsDomainNameRecord_new2(QDnsDomainNameRecord* other);
+QDnsDomainNameRecord* QDnsDomainNameRecord_new_from(QDnsDomainNameRecord* from);
 
-void QDnsDomainNameRecord_operatorAssign(QDnsDomainNameRecord* self, QDnsDomainNameRecord* other);
+void QDnsDomainNameRecord_operatorAssign(QDnsDomainNameRecord* self, QDnsDomainNameRecord* from);
 void QDnsDomainNameRecord_swap(QDnsDomainNameRecord* self, QDnsDomainNameRecord* other);
 struct seaqt_string QDnsDomainNameRecord_name(const QDnsDomainNameRecord* self);
 unsigned int QDnsDomainNameRecord_timeToLive(const QDnsDomainNameRecord* self);
@@ -56,9 +56,9 @@ struct seaqt_string QDnsDomainNameRecord_value(const QDnsDomainNameRecord* self)
 void QDnsDomainNameRecord_delete(QDnsDomainNameRecord* self);
 
 QDnsHostAddressRecord* QDnsHostAddressRecord_new();
-QDnsHostAddressRecord* QDnsHostAddressRecord_new2(QDnsHostAddressRecord* other);
+QDnsHostAddressRecord* QDnsHostAddressRecord_new_from(QDnsHostAddressRecord* from);
 
-void QDnsHostAddressRecord_operatorAssign(QDnsHostAddressRecord* self, QDnsHostAddressRecord* other);
+void QDnsHostAddressRecord_operatorAssign(QDnsHostAddressRecord* self, QDnsHostAddressRecord* from);
 void QDnsHostAddressRecord_swap(QDnsHostAddressRecord* self, QDnsHostAddressRecord* other);
 struct seaqt_string QDnsHostAddressRecord_name(const QDnsHostAddressRecord* self);
 unsigned int QDnsHostAddressRecord_timeToLive(const QDnsHostAddressRecord* self);
@@ -67,9 +67,9 @@ QHostAddress* QDnsHostAddressRecord_value(const QDnsHostAddressRecord* self);
 void QDnsHostAddressRecord_delete(QDnsHostAddressRecord* self);
 
 QDnsMailExchangeRecord* QDnsMailExchangeRecord_new();
-QDnsMailExchangeRecord* QDnsMailExchangeRecord_new2(QDnsMailExchangeRecord* other);
+QDnsMailExchangeRecord* QDnsMailExchangeRecord_new_from(QDnsMailExchangeRecord* from);
 
-void QDnsMailExchangeRecord_operatorAssign(QDnsMailExchangeRecord* self, QDnsMailExchangeRecord* other);
+void QDnsMailExchangeRecord_operatorAssign(QDnsMailExchangeRecord* self, QDnsMailExchangeRecord* from);
 void QDnsMailExchangeRecord_swap(QDnsMailExchangeRecord* self, QDnsMailExchangeRecord* other);
 struct seaqt_string QDnsMailExchangeRecord_exchange(const QDnsMailExchangeRecord* self);
 struct seaqt_string QDnsMailExchangeRecord_name(const QDnsMailExchangeRecord* self);
@@ -79,9 +79,9 @@ unsigned int QDnsMailExchangeRecord_timeToLive(const QDnsMailExchangeRecord* sel
 void QDnsMailExchangeRecord_delete(QDnsMailExchangeRecord* self);
 
 QDnsServiceRecord* QDnsServiceRecord_new();
-QDnsServiceRecord* QDnsServiceRecord_new2(QDnsServiceRecord* other);
+QDnsServiceRecord* QDnsServiceRecord_new_from(QDnsServiceRecord* from);
 
-void QDnsServiceRecord_operatorAssign(QDnsServiceRecord* self, QDnsServiceRecord* other);
+void QDnsServiceRecord_operatorAssign(QDnsServiceRecord* self, QDnsServiceRecord* from);
 void QDnsServiceRecord_swap(QDnsServiceRecord* self, QDnsServiceRecord* other);
 struct seaqt_string QDnsServiceRecord_name(const QDnsServiceRecord* self);
 unsigned short QDnsServiceRecord_port(const QDnsServiceRecord* self);
@@ -93,9 +93,9 @@ unsigned short QDnsServiceRecord_weight(const QDnsServiceRecord* self);
 void QDnsServiceRecord_delete(QDnsServiceRecord* self);
 
 QDnsTextRecord* QDnsTextRecord_new();
-QDnsTextRecord* QDnsTextRecord_new2(QDnsTextRecord* other);
+QDnsTextRecord* QDnsTextRecord_new_from(QDnsTextRecord* from);
 
-void QDnsTextRecord_operatorAssign(QDnsTextRecord* self, QDnsTextRecord* other);
+void QDnsTextRecord_operatorAssign(QDnsTextRecord* self, QDnsTextRecord* from);
 void QDnsTextRecord_swap(QDnsTextRecord* self, QDnsTextRecord* other);
 struct seaqt_string QDnsTextRecord_name(const QDnsTextRecord* self);
 unsigned int QDnsTextRecord_timeToLive(const QDnsTextRecord* self);
@@ -122,18 +122,18 @@ void* QDnsLookup_vdata(VirtualQDnsLookup* self);
 VirtualQDnsLookup* vdata_QDnsLookup(void* vdata);
 
 VirtualQDnsLookup* QDnsLookup_new(const QDnsLookup_VTable* vtbl, size_t vdata);
-VirtualQDnsLookup* QDnsLookup_new2(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name);
-VirtualQDnsLookup* QDnsLookup_new3(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QHostAddress* nameserver);
-VirtualQDnsLookup* QDnsLookup_new4(const QDnsLookup_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQDnsLookup* QDnsLookup_new5(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QObject* parent);
-VirtualQDnsLookup* QDnsLookup_new6(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QHostAddress* nameserver, QObject* parent);
+VirtualQDnsLookup* QDnsLookup_new_type_name(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name);
+VirtualQDnsLookup* QDnsLookup_new_type_name_nameserver(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QHostAddress* nameserver);
+VirtualQDnsLookup* QDnsLookup_new_parent(const QDnsLookup_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQDnsLookup* QDnsLookup_new_type_name_parent(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QObject* parent);
+VirtualQDnsLookup* QDnsLookup_new_type_name_nameserver_parent(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QHostAddress* nameserver, QObject* parent);
 
 void QDnsLookup_virtbase(QDnsLookup* src, QObject** outptr_QObject);
 QMetaObject* QDnsLookup_metaObject(const QDnsLookup* self);
 void* QDnsLookup_metacast(QDnsLookup* self, const char* param1);
 int QDnsLookup_metacall(QDnsLookup* self, int param1, int param2, void** param3);
-struct seaqt_string QDnsLookup_tr(const char* s);
-struct seaqt_string QDnsLookup_trUtf8(const char* s);
+struct seaqt_string QDnsLookup_tr_s(const char* s);
+struct seaqt_string QDnsLookup_trUtf8_s(const char* s);
 int QDnsLookup_error(const QDnsLookup* self);
 struct seaqt_string QDnsLookup_errorString(const QDnsLookup* self);
 bool QDnsLookup_isFinished(const QDnsLookup* self);
@@ -160,10 +160,10 @@ void QDnsLookup_typeChanged(QDnsLookup* self, int type);
 void QDnsLookup_connect_typeChanged(QDnsLookup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QDnsLookup_nameserverChanged(QDnsLookup* self, QHostAddress* nameserver);
 void QDnsLookup_connect_nameserverChanged(QDnsLookup* self, intptr_t slot, void (*callback)(intptr_t, QHostAddress*), void (*release)(intptr_t));
-struct seaqt_string QDnsLookup_tr2(const char* s, const char* c);
-struct seaqt_string QDnsLookup_tr3(const char* s, const char* c, int n);
-struct seaqt_string QDnsLookup_trUtf82(const char* s, const char* c);
-struct seaqt_string QDnsLookup_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QDnsLookup_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDnsLookup_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QDnsLookup_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QDnsLookup_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDnsLookup_virtualbase_metaObject(const VirtualQDnsLookup* self);
 void* QDnsLookup_virtualbase_metacast(VirtualQDnsLookup* self, const char* param1);

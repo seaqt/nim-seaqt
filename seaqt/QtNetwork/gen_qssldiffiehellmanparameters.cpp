@@ -21,28 +21,28 @@ QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_new() {
 	return new (std::nothrow) QSslDiffieHellmanParameters();
 }
 
-QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_new2(QSslDiffieHellmanParameters* other) {
-	return new (std::nothrow) QSslDiffieHellmanParameters(*other);
+QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_new_from(QSslDiffieHellmanParameters* from) {
+	return new (std::nothrow) QSslDiffieHellmanParameters(*from);
 }
 
 QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_defaultParameters() {
 	return new QSslDiffieHellmanParameters(QSslDiffieHellmanParameters::defaultParameters());
 }
 
-void QSslDiffieHellmanParameters_operatorAssign(QSslDiffieHellmanParameters* self, QSslDiffieHellmanParameters* other) {
-	self->operator=(*other);
+void QSslDiffieHellmanParameters_operatorAssign(QSslDiffieHellmanParameters* self, QSslDiffieHellmanParameters* from) {
+	self->operator=(*from);
 }
 
 void QSslDiffieHellmanParameters_swap(QSslDiffieHellmanParameters* self, QSslDiffieHellmanParameters* other) {
 	self->swap(*other);
 }
 
-QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_fromEncoded(struct seaqt_string encoded) {
+QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_fromEncoded_encoded(struct seaqt_string encoded) {
 	QByteArray encoded_QByteArray(encoded.data, encoded.len);
 	return new QSslDiffieHellmanParameters(QSslDiffieHellmanParameters::fromEncoded(encoded_QByteArray));
 }
 
-QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_fromEncodedWithDevice(QIODevice* device) {
+QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_fromEncoded_device(QIODevice* device) {
 	return new QSslDiffieHellmanParameters(QSslDiffieHellmanParameters::fromEncoded(device));
 }
 
@@ -70,12 +70,12 @@ struct seaqt_string QSslDiffieHellmanParameters_errorString(const QSslDiffieHell
 	return _ms;
 }
 
-QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_fromEncoded2(struct seaqt_string encoded, int format) {
+QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_fromEncoded_encoded_format(struct seaqt_string encoded, int format) {
 	QByteArray encoded_QByteArray(encoded.data, encoded.len);
 	return new QSslDiffieHellmanParameters(QSslDiffieHellmanParameters::fromEncoded(encoded_QByteArray, static_cast<QSsl::EncodingFormat>(format)));
 }
 
-QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_fromEncoded3(QIODevice* device, int format) {
+QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_fromEncoded_device_format(QIODevice* device, int format) {
 	return new QSslDiffieHellmanParameters(QSslDiffieHellmanParameters::fromEncoded(device, static_cast<QSsl::EncodingFormat>(format)));
 }
 

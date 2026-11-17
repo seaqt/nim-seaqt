@@ -26,9 +26,9 @@ typedef struct QWebEngineHistory QWebEngineHistory;
 typedef struct QWebEngineHistoryItem QWebEngineHistoryItem;
 #endif
 
-QWebEngineHistoryItem* QWebEngineHistoryItem_new(QWebEngineHistoryItem* other);
+QWebEngineHistoryItem* QWebEngineHistoryItem_new(QWebEngineHistoryItem* from);
 
-void QWebEngineHistoryItem_operatorAssign(QWebEngineHistoryItem* self, QWebEngineHistoryItem* other);
+void QWebEngineHistoryItem_operatorAssign(QWebEngineHistoryItem* self, QWebEngineHistoryItem* from);
 QUrl* QWebEngineHistoryItem_originalUrl(const QWebEngineHistoryItem* self);
 QUrl* QWebEngineHistoryItem_url(const QWebEngineHistoryItem* self);
 struct seaqt_string QWebEngineHistoryItem_title(const QWebEngineHistoryItem* self);

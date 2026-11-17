@@ -19,12 +19,12 @@ QGeoAddress* QGeoAddress_new() {
 	return new (std::nothrow) QGeoAddress();
 }
 
-QGeoAddress* QGeoAddress_new2(QGeoAddress* other) {
-	return new (std::nothrow) QGeoAddress(*other);
+QGeoAddress* QGeoAddress_new_from(QGeoAddress* from) {
+	return new (std::nothrow) QGeoAddress(*from);
 }
 
-void QGeoAddress_operatorAssign(QGeoAddress* self, QGeoAddress* other) {
-	self->operator=(*other);
+void QGeoAddress_operatorAssign(QGeoAddress* self, QGeoAddress* from) {
+	self->operator=(*from);
 }
 
 bool QGeoAddress_operatorEqual(const QGeoAddress* self, QGeoAddress* other) {

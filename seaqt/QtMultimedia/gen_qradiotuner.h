@@ -62,14 +62,14 @@ void* QRadioTuner_vdata(VirtualQRadioTuner* self);
 VirtualQRadioTuner* vdata_QRadioTuner(void* vdata);
 
 VirtualQRadioTuner* QRadioTuner_new(const QRadioTuner_VTable* vtbl, size_t vdata);
-VirtualQRadioTuner* QRadioTuner_new2(const QRadioTuner_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQRadioTuner* QRadioTuner_new_parent(const QRadioTuner_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QRadioTuner_virtbase(QRadioTuner* src, QMediaObject** outptr_QMediaObject);
 QMetaObject* QRadioTuner_metaObject(const QRadioTuner* self);
 void* QRadioTuner_metacast(QRadioTuner* self, const char* param1);
 int QRadioTuner_metacall(QRadioTuner* self, int param1, int param2, void** param3);
-struct seaqt_string QRadioTuner_tr(const char* s);
-struct seaqt_string QRadioTuner_trUtf8(const char* s);
+struct seaqt_string QRadioTuner_tr_s(const char* s);
+struct seaqt_string QRadioTuner_trUtf8_s(const char* s);
 int QRadioTuner_availability(const QRadioTuner* self);
 int QRadioTuner_state(const QRadioTuner* self);
 int QRadioTuner_band(const QRadioTuner* self);
@@ -118,13 +118,13 @@ void QRadioTuner_stationFound(QRadioTuner* self, int frequency, struct seaqt_str
 void QRadioTuner_connect_stationFound(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t));
 void QRadioTuner_antennaConnectedChanged(QRadioTuner* self, bool connectionStatus);
 void QRadioTuner_connect_antennaConnectedChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
-void QRadioTuner_errorWithError(QRadioTuner* self, int error);
-void QRadioTuner_connect_errorWithError(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
-struct seaqt_string QRadioTuner_tr2(const char* s, const char* c);
-struct seaqt_string QRadioTuner_tr3(const char* s, const char* c, int n);
-struct seaqt_string QRadioTuner_trUtf82(const char* s, const char* c);
-struct seaqt_string QRadioTuner_trUtf83(const char* s, const char* c, int n);
-void QRadioTuner_searchAllStationsWithSearchMode(QRadioTuner* self, int searchMode);
+void QRadioTuner_error_error(QRadioTuner* self, int error);
+void QRadioTuner_connect_error_error(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+struct seaqt_string QRadioTuner_tr_s_c(const char* s, const char* c);
+struct seaqt_string QRadioTuner_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QRadioTuner_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QRadioTuner_trUtf8_s_c_n(const char* s, const char* c, int n);
+void QRadioTuner_searchAllStations_searchMode(QRadioTuner* self, int searchMode);
 
 QMetaObject* QRadioTuner_virtualbase_metaObject(const VirtualQRadioTuner* self);
 void* QRadioTuner_virtualbase_metacast(VirtualQRadioTuner* self, const char* param1);

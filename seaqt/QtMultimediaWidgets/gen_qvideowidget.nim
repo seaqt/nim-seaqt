@@ -75,8 +75,8 @@ type cQVideoWidget*{.exportc: "QVideoWidget", incompleteStruct.} = object
 proc fcQVideoWidget_metaObject(self: pointer): pointer {.importc: "QVideoWidget_metaObject".}
 proc fcQVideoWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoWidget_metacast".}
 proc fcQVideoWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoWidget_metacall".}
-proc fcQVideoWidget_tr(s: cstring): struct_seaqt_string {.importc: "QVideoWidget_tr".}
-proc fcQVideoWidget_trUtf8(s: cstring): struct_seaqt_string {.importc: "QVideoWidget_trUtf8".}
+proc fcQVideoWidget_trS(s: cstring): struct_seaqt_string {.importc: "QVideoWidget_tr_s".}
+proc fcQVideoWidget_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QVideoWidget_trUtf8_s".}
 proc fcQVideoWidget_mediaObject(self: pointer): pointer {.importc: "QVideoWidget_mediaObject".}
 proc fcQVideoWidget_videoSurface(self: pointer): pointer {.importc: "QVideoWidget_videoSurface".}
 proc fcQVideoWidget_aspectRatioMode(self: pointer): cint {.importc: "QVideoWidget_aspectRatioMode".}
@@ -101,10 +101,10 @@ proc fcQVideoWidget_hueChanged(self: pointer, hue: cint): void {.importc: "QVide
 proc fcQVideoWidget_connect_hueChanged(self: pointer, slot: int, callback: proc (slot: int, hue: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWidget_connect_hueChanged".}
 proc fcQVideoWidget_saturationChanged(self: pointer, saturation: cint): void {.importc: "QVideoWidget_saturationChanged".}
 proc fcQVideoWidget_connect_saturationChanged(self: pointer, slot: int, callback: proc (slot: int, saturation: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWidget_connect_saturationChanged".}
-proc fcQVideoWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoWidget_tr2".}
-proc fcQVideoWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoWidget_tr3".}
-proc fcQVideoWidget_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoWidget_trUtf82".}
-proc fcQVideoWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoWidget_trUtf83".}
+proc fcQVideoWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoWidget_tr_s_c".}
+proc fcQVideoWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoWidget_tr_s_c_n".}
+proc fcQVideoWidget_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoWidget_trUtf8_s_c".}
+proc fcQVideoWidget_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoWidget_trUtf8_s_c_n".}
 proc fcQVideoWidget_vdata(self: pointer): ptr pointer {.importc: "QVideoWidget_vdata".}
 proc fvdata_cQVideoWidget(self: pointer): pointer {.importc: "vdata_QVideoWidget".}
 
@@ -224,7 +224,7 @@ proc fcQVideoWidget_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQVideoWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoWidget_protectedbase_receivers".}
 proc fcQVideoWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoWidget_protectedbase_isSignalConnected".}
 proc fcQVideoWidget_new(vtbl: pointer, vdata: csize_t): ptr cQVideoWidget {.importc: "QVideoWidget_new".}
-proc fcQVideoWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQVideoWidget {.importc: "QVideoWidget_new2".}
+proc fcQVideoWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQVideoWidget {.importc: "QVideoWidget_new_parent".}
 proc fcQVideoWidget_staticMetaObject(): pointer {.importc: "QVideoWidget_staticMetaObject".}
 
 proc metaObject*(self: gen_qvideowidget_types.QVideoWidget): gen_qobjectdefs_types.QMetaObject =
@@ -237,13 +237,13 @@ proc metacall*(self: gen_qvideowidget_types.QVideoWidget, param1: cint, param2: 
   fcQVideoWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvideowidget_types.QVideoWidget, s: cstring): string =
-  let v_ms = fcQVideoWidget_tr(s)
+  let v_ms = fcQVideoWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideowidget_types.QVideoWidget, s: cstring): string =
-  let v_ms = fcQVideoWidget_trUtf8(s)
+  let v_ms = fcQVideoWidget_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -391,25 +391,25 @@ proc onSaturationChanged*(self: gen_qvideowidget_types.QVideoWidget, slot: QVide
   fcQVideoWidget_connect_saturationChanged(self.h, cast[int](addr tmp[]), fcQVideoWidget_slot_callback_saturationChanged, fcQVideoWidget_slot_callback_saturationChanged_release)
 
 proc tr*(_: type gen_qvideowidget_types.QVideoWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQVideoWidget_tr2(s, c)
+  let v_ms = fcQVideoWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvideowidget_types.QVideoWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVideoWidget_tr3(s, c, n)
+  let v_ms = fcQVideoWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideowidget_types.QVideoWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQVideoWidget_trUtf82(s, c)
+  let v_ms = fcQVideoWidget_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideowidget_types.QVideoWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVideoWidget_trUtf83(s, c, n)
+  let v_ms = fcQVideoWidget_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

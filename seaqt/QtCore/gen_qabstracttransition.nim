@@ -68,8 +68,8 @@ type cQAbstractTransition*{.exportc: "QAbstractTransition", incompleteStruct.} =
 proc fcQAbstractTransition_metaObject(self: pointer): pointer {.importc: "QAbstractTransition_metaObject".}
 proc fcQAbstractTransition_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractTransition_metacast".}
 proc fcQAbstractTransition_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractTransition_metacall".}
-proc fcQAbstractTransition_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractTransition_tr".}
-proc fcQAbstractTransition_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAbstractTransition_trUtf8".}
+proc fcQAbstractTransition_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractTransition_tr_s".}
+proc fcQAbstractTransition_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAbstractTransition_trUtf8_s".}
 proc fcQAbstractTransition_sourceState(self: pointer): pointer {.importc: "QAbstractTransition_sourceState".}
 proc fcQAbstractTransition_targetState(self: pointer): pointer {.importc: "QAbstractTransition_targetState".}
 proc fcQAbstractTransition_setTargetState(self: pointer, target: pointer): void {.importc: "QAbstractTransition_setTargetState".}
@@ -81,10 +81,10 @@ proc fcQAbstractTransition_machine(self: pointer): pointer {.importc: "QAbstract
 proc fcQAbstractTransition_addAnimation(self: pointer, animation: pointer): void {.importc: "QAbstractTransition_addAnimation".}
 proc fcQAbstractTransition_removeAnimation(self: pointer, animation: pointer): void {.importc: "QAbstractTransition_removeAnimation".}
 proc fcQAbstractTransition_animations(self: pointer): struct_seaqt_array {.importc: "QAbstractTransition_animations".}
-proc fcQAbstractTransition_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractTransition_tr2".}
-proc fcQAbstractTransition_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractTransition_tr3".}
-proc fcQAbstractTransition_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractTransition_trUtf82".}
-proc fcQAbstractTransition_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractTransition_trUtf83".}
+proc fcQAbstractTransition_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractTransition_tr_s_c".}
+proc fcQAbstractTransition_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractTransition_tr_s_c_n".}
+proc fcQAbstractTransition_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractTransition_trUtf8_s_c".}
+proc fcQAbstractTransition_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractTransition_trUtf8_s_c_n".}
 proc fcQAbstractTransition_vdata(self: pointer): ptr pointer {.importc: "QAbstractTransition_vdata".}
 proc fvdata_cQAbstractTransition(self: pointer): pointer {.importc: "vdata_QAbstractTransition".}
 
@@ -117,7 +117,7 @@ proc fcQAbstractTransition_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQAbstractTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractTransition_protectedbase_receivers".}
 proc fcQAbstractTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractTransition_protectedbase_isSignalConnected".}
 proc fcQAbstractTransition_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractTransition {.importc: "QAbstractTransition_new".}
-proc fcQAbstractTransition_new2(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQAbstractTransition {.importc: "QAbstractTransition_new2".}
+proc fcQAbstractTransition_new2(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQAbstractTransition {.importc: "QAbstractTransition_new_sourceState".}
 proc fcQAbstractTransition_staticMetaObject(): pointer {.importc: "QAbstractTransition_staticMetaObject".}
 
 proc metaObject*(self: gen_qabstracttransition_types.QAbstractTransition): gen_qobjectdefs_types.QMetaObject =
@@ -130,13 +130,13 @@ proc metacall*(self: gen_qabstracttransition_types.QAbstractTransition, param1: 
   fcQAbstractTransition_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstracttransition_types.QAbstractTransition, s: cstring): string =
-  let v_ms = fcQAbstractTransition_tr(s)
+  let v_ms = fcQAbstractTransition_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstracttransition_types.QAbstractTransition, s: cstring): string =
-  let v_ms = fcQAbstractTransition_trUtf8(s)
+  let v_ms = fcQAbstractTransition_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -191,25 +191,25 @@ proc animations*(self: gen_qabstracttransition_types.QAbstractTransition): seq[g
   vx_ret
 
 proc tr*(_: type gen_qabstracttransition_types.QAbstractTransition, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractTransition_tr2(s, c)
+  let v_ms = fcQAbstractTransition_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstracttransition_types.QAbstractTransition, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractTransition_tr3(s, c, n)
+  let v_ms = fcQAbstractTransition_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstracttransition_types.QAbstractTransition, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractTransition_trUtf82(s, c)
+  let v_ms = fcQAbstractTransition_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstracttransition_types.QAbstractTransition, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractTransition_trUtf83(s, c, n)
+  let v_ms = fcQAbstractTransition_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

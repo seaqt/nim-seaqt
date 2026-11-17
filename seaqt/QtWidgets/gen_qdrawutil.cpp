@@ -12,19 +12,19 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QTileRules* QTileRules_new(int horizontalRule, int verticalRule) {
+QTileRules* QTileRules_new_horizontalRule_verticalRule(int horizontalRule, int verticalRule) {
 	return new (std::nothrow) QTileRules(static_cast<Qt::TileRule>(horizontalRule), static_cast<Qt::TileRule>(verticalRule));
 }
 
-QTileRules* QTileRules_new2() {
+QTileRules* QTileRules_new() {
 	return new (std::nothrow) QTileRules();
 }
 
-QTileRules* QTileRules_new3(QTileRules* param1) {
-	return new (std::nothrow) QTileRules(*param1);
+QTileRules* QTileRules_new_from(QTileRules* from) {
+	return new (std::nothrow) QTileRules(*from);
 }
 
-QTileRules* QTileRules_new4(int rule) {
+QTileRules* QTileRules_new_rule(int rule) {
 	return new (std::nothrow) QTileRules(static_cast<Qt::TileRule>(rule));
 }
 

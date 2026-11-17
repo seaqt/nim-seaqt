@@ -59,15 +59,15 @@ type cQScriptExtensionPlugin*{.exportc: "QScriptExtensionPlugin", incompleteStru
 proc fcQScriptExtensionPlugin_metaObject(self: pointer): pointer {.importc: "QScriptExtensionPlugin_metaObject".}
 proc fcQScriptExtensionPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QScriptExtensionPlugin_metacast".}
 proc fcQScriptExtensionPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QScriptExtensionPlugin_metacall".}
-proc fcQScriptExtensionPlugin_tr(s: cstring): struct_seaqt_string {.importc: "QScriptExtensionPlugin_tr".}
-proc fcQScriptExtensionPlugin_trUtf8(s: cstring): struct_seaqt_string {.importc: "QScriptExtensionPlugin_trUtf8".}
+proc fcQScriptExtensionPlugin_trS(s: cstring): struct_seaqt_string {.importc: "QScriptExtensionPlugin_tr_s".}
+proc fcQScriptExtensionPlugin_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QScriptExtensionPlugin_trUtf8_s".}
 proc fcQScriptExtensionPlugin_keys(self: pointer): struct_seaqt_array {.importc: "QScriptExtensionPlugin_keys".}
 proc fcQScriptExtensionPlugin_initialize(self: pointer, key: struct_seaqt_string, engine: pointer): void {.importc: "QScriptExtensionPlugin_initialize".}
 proc fcQScriptExtensionPlugin_setupPackage(self: pointer, key: struct_seaqt_string, engine: pointer): pointer {.importc: "QScriptExtensionPlugin_setupPackage".}
-proc fcQScriptExtensionPlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScriptExtensionPlugin_tr2".}
-proc fcQScriptExtensionPlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScriptExtensionPlugin_tr3".}
-proc fcQScriptExtensionPlugin_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScriptExtensionPlugin_trUtf82".}
-proc fcQScriptExtensionPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScriptExtensionPlugin_trUtf83".}
+proc fcQScriptExtensionPlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScriptExtensionPlugin_tr_s_c".}
+proc fcQScriptExtensionPlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScriptExtensionPlugin_tr_s_c_n".}
+proc fcQScriptExtensionPlugin_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScriptExtensionPlugin_trUtf8_s_c".}
+proc fcQScriptExtensionPlugin_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScriptExtensionPlugin_trUtf8_s_c_n".}
 proc fcQScriptExtensionPlugin_vdata(self: pointer): ptr pointer {.importc: "QScriptExtensionPlugin_vdata".}
 proc fvdata_cQScriptExtensionPlugin(self: pointer): pointer {.importc: "vdata_QScriptExtensionPlugin".}
 
@@ -100,7 +100,7 @@ proc fcQScriptExtensionPlugin_protectedbase_senderSignalIndex(self: pointer): ci
 proc fcQScriptExtensionPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScriptExtensionPlugin_protectedbase_receivers".}
 proc fcQScriptExtensionPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QScriptExtensionPlugin_protectedbase_isSignalConnected".}
 proc fcQScriptExtensionPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQScriptExtensionPlugin {.importc: "QScriptExtensionPlugin_new".}
-proc fcQScriptExtensionPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQScriptExtensionPlugin {.importc: "QScriptExtensionPlugin_new2".}
+proc fcQScriptExtensionPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQScriptExtensionPlugin {.importc: "QScriptExtensionPlugin_new_parent".}
 proc fcQScriptExtensionPlugin_staticMetaObject(): pointer {.importc: "QScriptExtensionPlugin_staticMetaObject".}
 
 proc metaObject*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
@@ -113,13 +113,13 @@ proc metacall*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, pa
   fcQScriptExtensionPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin, s: cstring): string =
-  let v_ms = fcQScriptExtensionPlugin_tr(s)
+  let v_ms = fcQScriptExtensionPlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin, s: cstring): string =
-  let v_ms = fcQScriptExtensionPlugin_trUtf8(s)
+  let v_ms = fcQScriptExtensionPlugin_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -143,25 +143,25 @@ proc setupPackage*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptExtensionPlugin_setupPackage(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), engine.h), owned: true)
 
 proc tr*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQScriptExtensionPlugin_tr2(s, c)
+  let v_ms = fcQScriptExtensionPlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQScriptExtensionPlugin_tr3(s, c, n)
+  let v_ms = fcQScriptExtensionPlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQScriptExtensionPlugin_trUtf82(s, c)
+  let v_ms = fcQScriptExtensionPlugin_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQScriptExtensionPlugin_trUtf83(s, c, n)
+  let v_ms = fcQScriptExtensionPlugin_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

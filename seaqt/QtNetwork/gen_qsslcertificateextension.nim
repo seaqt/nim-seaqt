@@ -43,7 +43,7 @@ export
 
 type cQSslCertificateExtension*{.exportc: "QSslCertificateExtension", incompleteStruct.} = object
 
-proc fcQSslCertificateExtension_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslCertificateExtension_operatorAssign".}
+proc fcQSslCertificateExtension_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSslCertificateExtension_operatorAssign".}
 proc fcQSslCertificateExtension_swap(self: pointer, other: pointer): void {.importc: "QSslCertificateExtension_swap".}
 proc fcQSslCertificateExtension_oid(self: pointer): struct_seaqt_string {.importc: "QSslCertificateExtension_oid".}
 proc fcQSslCertificateExtension_name(self: pointer): struct_seaqt_string {.importc: "QSslCertificateExtension_name".}
@@ -51,10 +51,10 @@ proc fcQSslCertificateExtension_value(self: pointer): pointer {.importc: "QSslCe
 proc fcQSslCertificateExtension_isCritical(self: pointer): bool {.importc: "QSslCertificateExtension_isCritical".}
 proc fcQSslCertificateExtension_isSupported(self: pointer): bool {.importc: "QSslCertificateExtension_isSupported".}
 proc fcQSslCertificateExtension_new(): ptr cQSslCertificateExtension {.importc: "QSslCertificateExtension_new".}
-proc fcQSslCertificateExtension_new2(other: pointer): ptr cQSslCertificateExtension {.importc: "QSslCertificateExtension_new2".}
+proc fcQSslCertificateExtension_new2(fromVal: pointer): ptr cQSslCertificateExtension {.importc: "QSslCertificateExtension_new_from".}
 
-proc operatorAssign*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, other: gen_qsslcertificateextension_types.QSslCertificateExtension): void =
-  fcQSslCertificateExtension_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, fromVal: gen_qsslcertificateextension_types.QSslCertificateExtension): void =
+  fcQSslCertificateExtension_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, other: gen_qsslcertificateextension_types.QSslCertificateExtension): void =
   fcQSslCertificateExtension_swap(self.h, other.h)
@@ -84,6 +84,6 @@ proc create*(T: type gen_qsslcertificateextension_types.QSslCertificateExtension
   let tmp = gen_qsslcertificateextension_types.QSslCertificateExtension(h: fcQSslCertificateExtension_new(), owned: true)
   tmp
 proc create*(T: type gen_qsslcertificateextension_types.QSslCertificateExtension,
-    other: gen_qsslcertificateextension_types.QSslCertificateExtension): gen_qsslcertificateextension_types.QSslCertificateExtension =
-  let tmp = gen_qsslcertificateextension_types.QSslCertificateExtension(h: fcQSslCertificateExtension_new2(other.h), owned: true)
+    fromVal: gen_qsslcertificateextension_types.QSslCertificateExtension): gen_qsslcertificateextension_types.QSslCertificateExtension =
+  let tmp = gen_qsslcertificateextension_types.QSslCertificateExtension(h: fcQSslCertificateExtension_new2(fromVal.h), owned: true)
   tmp

@@ -87,7 +87,7 @@ public:
 	friend int QDirModel_virtualbase_metacall(VirtualQDirModel* self, int param1, int param2, void** param3);
 
 	virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override {
-		if (vtbl->index == 0) {
+		if (vtbl->index_row_column_parent == 0) {
 			return QDirModel::index(row, column, parent);
 		}
 
@@ -96,13 +96,13 @@ public:
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
-		QModelIndex* callback_return_value = vtbl->index(this, sigval1, sigval2, sigval3);
+		QModelIndex* callback_return_value = vtbl->index_row_column_parent(this, sigval1, sigval2, sigval3);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 		return callback_return_value_Value;
 	}
 
-	friend QModelIndex* QDirModel_virtualbase_index(const VirtualQDirModel* self, int row, int column, QModelIndex* parent);
+	friend QModelIndex* QDirModel_virtualbase_index_row_column_parent(const VirtualQDirModel* self, int row, int column, QModelIndex* parent);
 
 	virtual QModelIndex parent(const QModelIndex& child) const override {
 		if (vtbl->parent == 0) {
@@ -757,7 +757,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QDirModel_protectedbase_resetInternalData(VirtualQDirModel* self);
-	friend QModelIndex* QDirModel_protectedbase_createIndex(const VirtualQDirModel* self, int row, int column);
+	friend QModelIndex* QDirModel_protectedbase_createIndex_row_column(const VirtualQDirModel* self, int row, int column);
 	friend void QDirModel_protectedbase_encodeData(const VirtualQDirModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QDirModel_protectedbase_decodeData(VirtualQDirModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QDirModel_protectedbase_beginInsertRows(VirtualQDirModel* self, QModelIndex* parent, int first, int last);
@@ -783,7 +783,7 @@ public:
 	friend bool QDirModel_protectedbase_isSignalConnected(const VirtualQDirModel* self, QMetaMethod* signal);
 };
 
-VirtualQDirModel* QDirModel_new(const QDirModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters, int sort) {
+VirtualQDirModel* QDirModel_new_nameFilters_filters_sort(const QDirModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters, int sort) {
 	QStringList nameFilters_QList;
 	nameFilters_QList.reserve(nameFilters.len);
 	struct seaqt_string* nameFilters_arr = static_cast<struct seaqt_string*>(nameFilters.data);
@@ -795,12 +795,12 @@ VirtualQDirModel* QDirModel_new(const QDirModel_VTable* vtbl, size_t vdata, stru
 	return _mem_ ? new (_mem_)VirtualQDirModel(vtbl, nameFilters_QList, static_cast<QDir::Filters>(filters), static_cast<QDir::SortFlags>(sort)) : nullptr;
 }
 
-VirtualQDirModel* QDirModel_new2(const QDirModel_VTable* vtbl, size_t vdata) {
+VirtualQDirModel* QDirModel_new(const QDirModel_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDirModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDirModel(vtbl) : nullptr;
 }
 
-VirtualQDirModel* QDirModel_new3(const QDirModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters, int sort, QObject* parent) {
+VirtualQDirModel* QDirModel_new_nameFilters_filters_sort_parent(const QDirModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters, int sort, QObject* parent) {
 	QStringList nameFilters_QList;
 	nameFilters_QList.reserve(nameFilters.len);
 	struct seaqt_string* nameFilters_arr = static_cast<struct seaqt_string*>(nameFilters.data);
@@ -812,7 +812,7 @@ VirtualQDirModel* QDirModel_new3(const QDirModel_VTable* vtbl, size_t vdata, str
 	return _mem_ ? new (_mem_)VirtualQDirModel(vtbl, nameFilters_QList, static_cast<QDir::Filters>(filters), static_cast<QDir::SortFlags>(sort), parent) : nullptr;
 }
 
-VirtualQDirModel* QDirModel_new4(const QDirModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQDirModel* QDirModel_new_parent(const QDirModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDirModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDirModel(vtbl, parent) : nullptr;
 }
@@ -833,7 +833,7 @@ int QDirModel_metacall(QDirModel* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDirModel_tr(const char* s) {
+struct seaqt_string QDirModel_tr_s(const char* s) {
 	QString _ret = QDirModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -844,7 +844,7 @@ struct seaqt_string QDirModel_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDirModel_trUtf8(const char* s) {
+struct seaqt_string QDirModel_trUtf8_s(const char* s) {
 	QString _ret = QDirModel::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -855,7 +855,7 @@ struct seaqt_string QDirModel_trUtf8(const char* s) {
 	return _ms;
 }
 
-QModelIndex* QDirModel_index(const QDirModel* self, int row, int column, QModelIndex* parent) {
+QModelIndex* QDirModel_index_row_column_parent(const QDirModel* self, int row, int column, QModelIndex* parent) {
 	return new QModelIndex(self->index(static_cast<int>(row), static_cast<int>(column), *parent));
 }
 
@@ -1016,7 +1016,7 @@ bool QDirModel_lazyChildCount(const QDirModel* self) {
 	return self->lazyChildCount();
 }
 
-QModelIndex* QDirModel_indexWithPath(const QDirModel* self, struct seaqt_string path) {
+QModelIndex* QDirModel_index_path(const QDirModel* self, struct seaqt_string path) {
 	QString path_QString = QString::fromUtf8(path.data, path.len);
 	return new QModelIndex(self->index(path_QString));
 }
@@ -1072,7 +1072,7 @@ void QDirModel_refresh(QDirModel* self) {
 	self->refresh();
 }
 
-struct seaqt_string QDirModel_tr2(const char* s, const char* c) {
+struct seaqt_string QDirModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDirModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1083,7 +1083,7 @@ struct seaqt_string QDirModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDirModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDirModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDirModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1094,7 +1094,7 @@ struct seaqt_string QDirModel_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDirModel_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDirModel_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDirModel::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1105,7 +1105,7 @@ struct seaqt_string QDirModel_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDirModel_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDirModel_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDirModel::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1116,12 +1116,12 @@ struct seaqt_string QDirModel_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QModelIndex* QDirModel_index2(const QDirModel* self, struct seaqt_string path, int column) {
+QModelIndex* QDirModel_index_path_column(const QDirModel* self, struct seaqt_string path, int column) {
 	QString path_QString = QString::fromUtf8(path.data, path.len);
 	return new QModelIndex(self->index(path_QString, static_cast<int>(column)));
 }
 
-void QDirModel_refreshWithParent(QDirModel* self, QModelIndex* parent) {
+void QDirModel_refresh_parent(QDirModel* self, QModelIndex* parent) {
 	self->refresh(*parent);
 }
 
@@ -1144,7 +1144,7 @@ int QDirModel_virtualbase_metacall(VirtualQDirModel* self, int param1, int param
 	return self->QDirModel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QModelIndex* QDirModel_virtualbase_index(const VirtualQDirModel* self, int row, int column, QModelIndex* parent) {
+QModelIndex* QDirModel_virtualbase_index_row_column_parent(const VirtualQDirModel* self, int row, int column, QModelIndex* parent) {
 
 	return new QModelIndex(self->QDirModel::index(static_cast<int>(row), static_cast<int>(column), *parent));
 }
@@ -1426,7 +1426,7 @@ void QDirModel_protectedbase_resetInternalData(VirtualQDirModel* self) {
 	self->resetInternalData();
 }
 
-QModelIndex* QDirModel_protectedbase_createIndex(const VirtualQDirModel* self, int row, int column) {
+QModelIndex* QDirModel_protectedbase_createIndex_row_column(const VirtualQDirModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

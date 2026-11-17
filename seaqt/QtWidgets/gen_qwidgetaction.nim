@@ -59,16 +59,16 @@ type cQWidgetAction*{.exportc: "QWidgetAction", incompleteStruct.} = object
 proc fcQWidgetAction_metaObject(self: pointer): pointer {.importc: "QWidgetAction_metaObject".}
 proc fcQWidgetAction_metacast(self: pointer, param1: cstring): pointer {.importc: "QWidgetAction_metacast".}
 proc fcQWidgetAction_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWidgetAction_metacall".}
-proc fcQWidgetAction_tr(s: cstring): struct_seaqt_string {.importc: "QWidgetAction_tr".}
-proc fcQWidgetAction_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWidgetAction_trUtf8".}
+proc fcQWidgetAction_trS(s: cstring): struct_seaqt_string {.importc: "QWidgetAction_tr_s".}
+proc fcQWidgetAction_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWidgetAction_trUtf8_s".}
 proc fcQWidgetAction_setDefaultWidget(self: pointer, w: pointer): void {.importc: "QWidgetAction_setDefaultWidget".}
 proc fcQWidgetAction_defaultWidget(self: pointer): pointer {.importc: "QWidgetAction_defaultWidget".}
 proc fcQWidgetAction_requestWidget(self: pointer, parent: pointer): pointer {.importc: "QWidgetAction_requestWidget".}
 proc fcQWidgetAction_releaseWidget(self: pointer, widget: pointer): void {.importc: "QWidgetAction_releaseWidget".}
-proc fcQWidgetAction_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWidgetAction_tr2".}
-proc fcQWidgetAction_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWidgetAction_tr3".}
-proc fcQWidgetAction_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWidgetAction_trUtf82".}
-proc fcQWidgetAction_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWidgetAction_trUtf83".}
+proc fcQWidgetAction_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWidgetAction_tr_s_c".}
+proc fcQWidgetAction_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWidgetAction_tr_s_c_n".}
+proc fcQWidgetAction_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWidgetAction_trUtf8_s_c".}
+proc fcQWidgetAction_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWidgetAction_trUtf8_s_c_n".}
 proc fcQWidgetAction_vdata(self: pointer): ptr pointer {.importc: "QWidgetAction_vdata".}
 proc fvdata_cQWidgetAction(self: pointer): pointer {.importc: "vdata_QWidgetAction".}
 
@@ -116,13 +116,13 @@ proc metacall*(self: gen_qwidgetaction_types.QWidgetAction, param1: cint, param2
   fcQWidgetAction_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwidgetaction_types.QWidgetAction, s: cstring): string =
-  let v_ms = fcQWidgetAction_tr(s)
+  let v_ms = fcQWidgetAction_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwidgetaction_types.QWidgetAction, s: cstring): string =
-  let v_ms = fcQWidgetAction_trUtf8(s)
+  let v_ms = fcQWidgetAction_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -140,25 +140,25 @@ proc releaseWidget*(self: gen_qwidgetaction_types.QWidgetAction, widget: gen_qwi
   fcQWidgetAction_releaseWidget(self.h, widget.h)
 
 proc tr*(_: type gen_qwidgetaction_types.QWidgetAction, s: cstring, c: cstring): string =
-  let v_ms = fcQWidgetAction_tr2(s, c)
+  let v_ms = fcQWidgetAction_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwidgetaction_types.QWidgetAction, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWidgetAction_tr3(s, c, n)
+  let v_ms = fcQWidgetAction_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwidgetaction_types.QWidgetAction, s: cstring, c: cstring): string =
-  let v_ms = fcQWidgetAction_trUtf82(s, c)
+  let v_ms = fcQWidgetAction_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwidgetaction_types.QWidgetAction, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWidgetAction_trUtf83(s, c, n)
+  let v_ms = fcQWidgetAction_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

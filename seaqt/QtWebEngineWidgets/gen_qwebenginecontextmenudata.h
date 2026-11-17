@@ -27,9 +27,9 @@ typedef struct QWebEngineContextMenuData QWebEngineContextMenuData;
 #endif
 
 QWebEngineContextMenuData* QWebEngineContextMenuData_new();
-QWebEngineContextMenuData* QWebEngineContextMenuData_new2(QWebEngineContextMenuData* other);
+QWebEngineContextMenuData* QWebEngineContextMenuData_new_from(QWebEngineContextMenuData* from);
 
-void QWebEngineContextMenuData_operatorAssign(QWebEngineContextMenuData* self, QWebEngineContextMenuData* other);
+void QWebEngineContextMenuData_operatorAssign(QWebEngineContextMenuData* self, QWebEngineContextMenuData* from);
 bool QWebEngineContextMenuData_isValid(const QWebEngineContextMenuData* self);
 QPoint* QWebEngineContextMenuData_position(const QWebEngineContextMenuData* self);
 struct seaqt_string QWebEngineContextMenuData_selectedText(const QWebEngineContextMenuData* self);

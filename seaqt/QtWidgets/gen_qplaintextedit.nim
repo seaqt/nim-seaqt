@@ -111,8 +111,8 @@ type cQPlainTextDocumentLayout*{.exportc: "QPlainTextDocumentLayout", incomplete
 proc fcQPlainTextEdit_metaObject(self: pointer): pointer {.importc: "QPlainTextEdit_metaObject".}
 proc fcQPlainTextEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "QPlainTextEdit_metacast".}
 proc fcQPlainTextEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPlainTextEdit_metacall".}
-proc fcQPlainTextEdit_tr(s: cstring): struct_seaqt_string {.importc: "QPlainTextEdit_tr".}
-proc fcQPlainTextEdit_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPlainTextEdit_trUtf8".}
+proc fcQPlainTextEdit_trS(s: cstring): struct_seaqt_string {.importc: "QPlainTextEdit_tr_s".}
+proc fcQPlainTextEdit_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPlainTextEdit_trUtf8_s".}
 proc fcQPlainTextEdit_setDocument(self: pointer, document: pointer): void {.importc: "QPlainTextEdit_setDocument".}
 proc fcQPlainTextEdit_document(self: pointer): pointer {.importc: "QPlainTextEdit_document".}
 proc fcQPlainTextEdit_setPlaceholderText(self: pointer, placeholderText: struct_seaqt_string): void {.importc: "QPlainTextEdit_setPlaceholderText".}
@@ -142,17 +142,17 @@ proc fcQPlainTextEdit_setBackgroundVisible(self: pointer, visible: bool): void {
 proc fcQPlainTextEdit_backgroundVisible(self: pointer): bool {.importc: "QPlainTextEdit_backgroundVisible".}
 proc fcQPlainTextEdit_setCenterOnScroll(self: pointer, enabled: bool): void {.importc: "QPlainTextEdit_setCenterOnScroll".}
 proc fcQPlainTextEdit_centerOnScroll(self: pointer): bool {.importc: "QPlainTextEdit_centerOnScroll".}
-proc fcQPlainTextEdit_find(self: pointer, exp: struct_seaqt_string): bool {.importc: "QPlainTextEdit_find".}
-proc fcQPlainTextEdit_findWithExp(self: pointer, exp: pointer): bool {.importc: "QPlainTextEdit_findWithExp".}
-proc fcQPlainTextEdit_find2(self: pointer, exp: pointer): bool {.importc: "QPlainTextEdit_find2".}
+proc fcQPlainTextEdit_find_QString(self: pointer, exp: struct_seaqt_string): bool {.importc: "QPlainTextEdit_find_QString".}
+proc fcQPlainTextEdit_find_QRegExp(self: pointer, exp: pointer): bool {.importc: "QPlainTextEdit_find_QRegExp".}
+proc fcQPlainTextEdit_find_QRegularExpression(self: pointer, exp: pointer): bool {.importc: "QPlainTextEdit_find_QRegularExpression".}
 proc fcQPlainTextEdit_toPlainText(self: pointer): struct_seaqt_string {.importc: "QPlainTextEdit_toPlainText".}
 proc fcQPlainTextEdit_ensureCursorVisible(self: pointer): void {.importc: "QPlainTextEdit_ensureCursorVisible".}
 proc fcQPlainTextEdit_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.importc: "QPlainTextEdit_loadResource".}
 proc fcQPlainTextEdit_createStandardContextMenu(self: pointer): pointer {.importc: "QPlainTextEdit_createStandardContextMenu".}
-proc fcQPlainTextEdit_createStandardContextMenuWithPosition(self: pointer, position: pointer): pointer {.importc: "QPlainTextEdit_createStandardContextMenuWithPosition".}
+proc fcQPlainTextEdit_createStandardContextMenuPosition(self: pointer, position: pointer): pointer {.importc: "QPlainTextEdit_createStandardContextMenu_position".}
 proc fcQPlainTextEdit_cursorForPosition(self: pointer, pos: pointer): pointer {.importc: "QPlainTextEdit_cursorForPosition".}
-proc fcQPlainTextEdit_cursorRect(self: pointer, cursor: pointer): pointer {.importc: "QPlainTextEdit_cursorRect".}
-proc fcQPlainTextEdit_cursorRect2(self: pointer): pointer {.importc: "QPlainTextEdit_cursorRect2".}
+proc fcQPlainTextEdit_cursorRectCursor(self: pointer, cursor: pointer): pointer {.importc: "QPlainTextEdit_cursorRect_cursor".}
+proc fcQPlainTextEdit_cursorRect(self: pointer): pointer {.importc: "QPlainTextEdit_cursorRect".}
 proc fcQPlainTextEdit_anchorAt(self: pointer, pos: pointer): struct_seaqt_string {.importc: "QPlainTextEdit_anchorAt".}
 proc fcQPlainTextEdit_overwriteMode(self: pointer): bool {.importc: "QPlainTextEdit_overwriteMode".}
 proc fcQPlainTextEdit_setOverwriteMode(self: pointer, overwrite: bool): void {.importc: "QPlainTextEdit_setOverwriteMode".}
@@ -164,12 +164,12 @@ proc fcQPlainTextEdit_cursorWidth(self: pointer): cint {.importc: "QPlainTextEdi
 proc fcQPlainTextEdit_setCursorWidth(self: pointer, width: cint): void {.importc: "QPlainTextEdit_setCursorWidth".}
 proc fcQPlainTextEdit_setExtraSelections(self: pointer, selections: struct_seaqt_array): void {.importc: "QPlainTextEdit_setExtraSelections".}
 proc fcQPlainTextEdit_extraSelections(self: pointer): struct_seaqt_array {.importc: "QPlainTextEdit_extraSelections".}
-proc fcQPlainTextEdit_moveCursor(self: pointer, operation: cint): void {.importc: "QPlainTextEdit_moveCursor".}
+proc fcQPlainTextEdit_moveCursorOperation(self: pointer, operation: cint): void {.importc: "QPlainTextEdit_moveCursor_operation".}
 proc fcQPlainTextEdit_canPaste(self: pointer): bool {.importc: "QPlainTextEdit_canPaste".}
 proc fcQPlainTextEdit_print(self: pointer, printer: pointer): void {.importc: "QPlainTextEdit_print".}
 proc fcQPlainTextEdit_blockCount(self: pointer): cint {.importc: "QPlainTextEdit_blockCount".}
-proc fcQPlainTextEdit_inputMethodQuery(self: pointer, property: cint): pointer {.importc: "QPlainTextEdit_inputMethodQuery".}
-proc fcQPlainTextEdit_inputMethodQuery2(self: pointer, query: cint, argument: pointer): pointer {.importc: "QPlainTextEdit_inputMethodQuery2".}
+proc fcQPlainTextEdit_inputMethodQueryProperty(self: pointer, property: cint): pointer {.importc: "QPlainTextEdit_inputMethodQuery_property".}
+proc fcQPlainTextEdit_inputMethodQueryQueryArgument(self: pointer, query: cint, argument: pointer): pointer {.importc: "QPlainTextEdit_inputMethodQuery_query_argument".}
 proc fcQPlainTextEdit_setPlainText(self: pointer, text: struct_seaqt_string): void {.importc: "QPlainTextEdit_setPlainText".}
 proc fcQPlainTextEdit_cut(self: pointer): void {.importc: "QPlainTextEdit_cut".}
 proc fcQPlainTextEdit_copy(self: pointer): void {.importc: "QPlainTextEdit_copy".}
@@ -202,16 +202,16 @@ proc fcQPlainTextEdit_blockCountChanged(self: pointer, newBlockCount: cint): voi
 proc fcQPlainTextEdit_connect_blockCountChanged(self: pointer, slot: int, callback: proc (slot: int, newBlockCount: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPlainTextEdit_connect_blockCountChanged".}
 proc fcQPlainTextEdit_modificationChanged(self: pointer, param1: bool): void {.importc: "QPlainTextEdit_modificationChanged".}
 proc fcQPlainTextEdit_connect_modificationChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPlainTextEdit_connect_modificationChanged".}
-proc fcQPlainTextEdit_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPlainTextEdit_tr2".}
-proc fcQPlainTextEdit_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPlainTextEdit_tr3".}
-proc fcQPlainTextEdit_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPlainTextEdit_trUtf82".}
-proc fcQPlainTextEdit_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPlainTextEdit_trUtf83".}
-proc fcQPlainTextEdit_find3(self: pointer, exp: struct_seaqt_string, options: cint): bool {.importc: "QPlainTextEdit_find3".}
-proc fcQPlainTextEdit_find4(self: pointer, exp: pointer, options: cint): bool {.importc: "QPlainTextEdit_find4".}
-proc fcQPlainTextEdit_find5(self: pointer, exp: pointer, options: cint): bool {.importc: "QPlainTextEdit_find5".}
-proc fcQPlainTextEdit_moveCursor2(self: pointer, operation: cint, mode: cint): void {.importc: "QPlainTextEdit_moveCursor2".}
-proc fcQPlainTextEdit_zoomInWithRange(self: pointer, range: cint): void {.importc: "QPlainTextEdit_zoomInWithRange".}
-proc fcQPlainTextEdit_zoomOutWithRange(self: pointer, range: cint): void {.importc: "QPlainTextEdit_zoomOutWithRange".}
+proc fcQPlainTextEdit_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPlainTextEdit_tr_s_c".}
+proc fcQPlainTextEdit_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPlainTextEdit_tr_s_c_n".}
+proc fcQPlainTextEdit_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPlainTextEdit_trUtf8_s_c".}
+proc fcQPlainTextEdit_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPlainTextEdit_trUtf8_s_c_n".}
+proc fcQPlainTextEdit_find_QString_QTextDocument_FindFlags(self: pointer, exp: struct_seaqt_string, options: cint): bool {.importc: "QPlainTextEdit_find_QString_QTextDocument_FindFlags".}
+proc fcQPlainTextEdit_find_QRegExp_QTextDocument_FindFlags(self: pointer, exp: pointer, options: cint): bool {.importc: "QPlainTextEdit_find_QRegExp_QTextDocument_FindFlags".}
+proc fcQPlainTextEdit_find_QRegularExpression_QTextDocument_FindFlags(self: pointer, exp: pointer, options: cint): bool {.importc: "QPlainTextEdit_find_QRegularExpression_QTextDocument_FindFlags".}
+proc fcQPlainTextEdit_moveCursorOperationMode(self: pointer, operation: cint, mode: cint): void {.importc: "QPlainTextEdit_moveCursor_operation_mode".}
+proc fcQPlainTextEdit_zoomInRange(self: pointer, range: cint): void {.importc: "QPlainTextEdit_zoomIn_range".}
+proc fcQPlainTextEdit_zoomOutRange(self: pointer, range: cint): void {.importc: "QPlainTextEdit_zoomOut_range".}
 proc fcQPlainTextEdit_vdata(self: pointer): ptr pointer {.importc: "QPlainTextEdit_vdata".}
 proc fvdata_cQPlainTextEdit(self: pointer): pointer {.importc: "vdata_QPlainTextEdit".}
 
@@ -221,7 +221,7 @@ type cQPlainTextEditVTable {.pure.} = object
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
   loadResource*: proc(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(self: pointer, property: cint): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodQueryProperty*: proc(self: pointer, property: cint): pointer {.cdecl, raises: [], gcsafe.}
   event*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
   timerEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
   keyPressEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -280,7 +280,7 @@ proc fcQPlainTextEdit_virtualbase_metaObject(self: pointer): pointer {.importc: 
 proc fcQPlainTextEdit_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QPlainTextEdit_virtualbase_metacast".}
 proc fcQPlainTextEdit_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPlainTextEdit_virtualbase_metacall".}
 proc fcQPlainTextEdit_virtualbase_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.importc: "QPlainTextEdit_virtualbase_loadResource".}
-proc fcQPlainTextEdit_virtualbase_inputMethodQuery(self: pointer, property: cint): pointer {.importc: "QPlainTextEdit_virtualbase_inputMethodQuery".}
+proc fcQPlainTextEdit_virtualbase_inputMethodQueryProperty(self: pointer, property: cint): pointer {.importc: "QPlainTextEdit_virtualbase_inputMethodQuery_property".}
 proc fcQPlainTextEdit_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QPlainTextEdit_virtualbase_event".}
 proc fcQPlainTextEdit_virtualbase_timerEvent(self: pointer, e: pointer): void {.importc: "QPlainTextEdit_virtualbase_timerEvent".}
 proc fcQPlainTextEdit_virtualbase_keyPressEvent(self: pointer, e: pointer): void {.importc: "QPlainTextEdit_virtualbase_keyPressEvent".}
@@ -341,7 +341,7 @@ proc fcQPlainTextEdit_protectedbase_blockBoundingRect(self: pointer, blockVal: p
 proc fcQPlainTextEdit_protectedbase_blockBoundingGeometry(self: pointer, blockVal: pointer): pointer {.importc: "QPlainTextEdit_protectedbase_blockBoundingGeometry".}
 proc fcQPlainTextEdit_protectedbase_getPaintContext(self: pointer): pointer {.importc: "QPlainTextEdit_protectedbase_getPaintContext".}
 proc fcQPlainTextEdit_protectedbase_zoomInF(self: pointer, range: float32): void {.importc: "QPlainTextEdit_protectedbase_zoomInF".}
-proc fcQPlainTextEdit_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QPlainTextEdit_protectedbase_setViewportMargins".}
+proc fcQPlainTextEdit_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QPlainTextEdit_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQPlainTextEdit_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QPlainTextEdit_protectedbase_viewportMargins".}
 proc fcQPlainTextEdit_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QPlainTextEdit_protectedbase_drawFrame".}
 proc fcQPlainTextEdit_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QPlainTextEdit_protectedbase_initStyleOption".}
@@ -355,15 +355,15 @@ proc fcQPlainTextEdit_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQPlainTextEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPlainTextEdit_protectedbase_receivers".}
 proc fcQPlainTextEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPlainTextEdit_protectedbase_isSignalConnected".}
 proc fcQPlainTextEdit_new(vtbl: pointer, vdata: csize_t): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new".}
-proc fcQPlainTextEdit_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new2".}
-proc fcQPlainTextEdit_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new3".}
-proc fcQPlainTextEdit_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new4".}
+proc fcQPlainTextEdit_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new_text".}
+proc fcQPlainTextEdit_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new_parent".}
+proc fcQPlainTextEdit_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new_text_parent".}
 proc fcQPlainTextEdit_staticMetaObject(): pointer {.importc: "QPlainTextEdit_staticMetaObject".}
 proc fcQPlainTextDocumentLayout_metaObject(self: pointer): pointer {.importc: "QPlainTextDocumentLayout_metaObject".}
 proc fcQPlainTextDocumentLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QPlainTextDocumentLayout_metacast".}
 proc fcQPlainTextDocumentLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPlainTextDocumentLayout_metacall".}
-proc fcQPlainTextDocumentLayout_tr(s: cstring): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_tr".}
-proc fcQPlainTextDocumentLayout_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_trUtf8".}
+proc fcQPlainTextDocumentLayout_trS(s: cstring): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_tr_s".}
+proc fcQPlainTextDocumentLayout_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_trUtf8_s".}
 proc fcQPlainTextDocumentLayout_draw(self: pointer, param1: pointer, param2: pointer): void {.importc: "QPlainTextDocumentLayout_draw".}
 proc fcQPlainTextDocumentLayout_hitTest(self: pointer, param1: pointer, param2: cint): cint {.importc: "QPlainTextDocumentLayout_hitTest".}
 proc fcQPlainTextDocumentLayout_pageCount(self: pointer): cint {.importc: "QPlainTextDocumentLayout_pageCount".}
@@ -374,10 +374,10 @@ proc fcQPlainTextDocumentLayout_ensureBlockLayout(self: pointer, blockVal: point
 proc fcQPlainTextDocumentLayout_setCursorWidth(self: pointer, width: cint): void {.importc: "QPlainTextDocumentLayout_setCursorWidth".}
 proc fcQPlainTextDocumentLayout_cursorWidth(self: pointer): cint {.importc: "QPlainTextDocumentLayout_cursorWidth".}
 proc fcQPlainTextDocumentLayout_requestUpdate(self: pointer): void {.importc: "QPlainTextDocumentLayout_requestUpdate".}
-proc fcQPlainTextDocumentLayout_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_tr2".}
-proc fcQPlainTextDocumentLayout_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_tr3".}
-proc fcQPlainTextDocumentLayout_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_trUtf82".}
-proc fcQPlainTextDocumentLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_trUtf83".}
+proc fcQPlainTextDocumentLayout_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_tr_s_c".}
+proc fcQPlainTextDocumentLayout_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_tr_s_c_n".}
+proc fcQPlainTextDocumentLayout_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_trUtf8_s_c".}
+proc fcQPlainTextDocumentLayout_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPlainTextDocumentLayout_trUtf8_s_c_n".}
 proc fcQPlainTextDocumentLayout_vdata(self: pointer): ptr pointer {.importc: "QPlainTextDocumentLayout_vdata".}
 proc fvdata_cQPlainTextDocumentLayout(self: pointer): pointer {.importc: "vdata_QPlainTextDocumentLayout".}
 
@@ -442,13 +442,13 @@ proc metacall*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cint, para
   fcQPlainTextEdit_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qplaintextedit_types.QPlainTextEdit, s: cstring): string =
-  let v_ms = fcQPlainTextEdit_tr(s)
+  let v_ms = fcQPlainTextEdit_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qplaintextedit_types.QPlainTextEdit, s: cstring): string =
-  let v_ms = fcQPlainTextEdit_trUtf8(s)
+  let v_ms = fcQPlainTextEdit_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -547,13 +547,13 @@ proc centerOnScroll*(self: gen_qplaintextedit_types.QPlainTextEdit): bool =
   fcQPlainTextEdit_centerOnScroll(self.h)
 
 proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: openArray[char]): bool =
-  fcQPlainTextEdit_find(self.h, struct_seaqt_string(data: if len(exp) > 0: addr exp[0] else: nil, len: csize_t(len(exp))))
+  fcQPlainTextEdit_find_QString(self.h, struct_seaqt_string(data: if len(exp) > 0: addr exp[0] else: nil, len: csize_t(len(exp))))
 
 proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: gen_qregexp_types.QRegExp): bool =
-  fcQPlainTextEdit_findWithExp(self.h, exp.h)
+  fcQPlainTextEdit_find_QRegExp(self.h, exp.h)
 
 proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: gen_qregularexpression_types.QRegularExpression): bool =
-  fcQPlainTextEdit_find2(self.h, exp.h)
+  fcQPlainTextEdit_find_QRegularExpression(self.h, exp.h)
 
 proc toPlainText*(self: gen_qplaintextedit_types.QPlainTextEdit): string =
   let v_ms = fcQPlainTextEdit_toPlainText(self.h)
@@ -571,16 +571,16 @@ proc createStandardContextMenu*(self: gen_qplaintextedit_types.QPlainTextEdit): 
   gen_qmenu_types.QMenu(h: fcQPlainTextEdit_createStandardContextMenu(self.h), owned: false)
 
 proc createStandardContextMenu*(self: gen_qplaintextedit_types.QPlainTextEdit, position: gen_qpoint_types.QPoint): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQPlainTextEdit_createStandardContextMenuWithPosition(self.h, position.h), owned: false)
+  gen_qmenu_types.QMenu(h: fcQPlainTextEdit_createStandardContextMenuPosition(self.h, position.h), owned: false)
 
 proc cursorForPosition*(self: gen_qplaintextedit_types.QPlainTextEdit, pos: gen_qpoint_types.QPoint): gen_qtextcursor_types.QTextCursor =
   gen_qtextcursor_types.QTextCursor(h: fcQPlainTextEdit_cursorForPosition(self.h, pos.h), owned: true)
 
 proc cursorRect*(self: gen_qplaintextedit_types.QPlainTextEdit, cursor: gen_qtextcursor_types.QTextCursor): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPlainTextEdit_cursorRect(self.h, cursor.h), owned: true)
+  gen_qrect_types.QRect(h: fcQPlainTextEdit_cursorRectCursor(self.h, cursor.h), owned: true)
 
 proc cursorRect*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPlainTextEdit_cursorRect2(self.h), owned: true)
+  gen_qrect_types.QRect(h: fcQPlainTextEdit_cursorRect(self.h), owned: true)
 
 proc anchorAt*(self: gen_qplaintextedit_types.QPlainTextEdit, pos: gen_qpoint_types.QPoint): string =
   let v_ms = fcQPlainTextEdit_anchorAt(self.h, pos.h)
@@ -629,7 +629,7 @@ proc extraSelections*(self: gen_qplaintextedit_types.QPlainTextEdit): seq[gen_qt
   vx_ret
 
 proc moveCursor*(self: gen_qplaintextedit_types.QPlainTextEdit, operation: cint): void =
-  fcQPlainTextEdit_moveCursor(self.h, cint(operation))
+  fcQPlainTextEdit_moveCursorOperation(self.h, cint(operation))
 
 proc canPaste*(self: gen_qplaintextedit_types.QPlainTextEdit): bool =
   fcQPlainTextEdit_canPaste(self.h)
@@ -641,10 +641,10 @@ proc blockCount*(self: gen_qplaintextedit_types.QPlainTextEdit): cint =
   fcQPlainTextEdit_blockCount(self.h)
 
 proc inputMethodQuery*(self: gen_qplaintextedit_types.QPlainTextEdit, property: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPlainTextEdit_inputMethodQuery(self.h, cint(property)), owned: true)
+  gen_qvariant_types.QVariant(h: fcQPlainTextEdit_inputMethodQueryProperty(self.h, cint(property)), owned: true)
 
 proc inputMethodQuery*(self: gen_qplaintextedit_types.QPlainTextEdit, query: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPlainTextEdit_inputMethodQuery2(self.h, cint(query), argument.h), owned: true)
+  gen_qvariant_types.QVariant(h: fcQPlainTextEdit_inputMethodQueryQueryArgument(self.h, cint(query), argument.h), owned: true)
 
 proc setPlainText*(self: gen_qplaintextedit_types.QPlainTextEdit, text: openArray[char]): void =
   fcQPlainTextEdit_setPlainText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
@@ -865,52 +865,52 @@ proc onModificationChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot:
   fcQPlainTextEdit_connect_modificationChanged(self.h, cast[int](addr tmp[]), fcQPlainTextEdit_slot_callback_modificationChanged, fcQPlainTextEdit_slot_callback_modificationChanged_release)
 
 proc tr*(_: type gen_qplaintextedit_types.QPlainTextEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQPlainTextEdit_tr2(s, c)
+  let v_ms = fcQPlainTextEdit_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qplaintextedit_types.QPlainTextEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPlainTextEdit_tr3(s, c, n)
+  let v_ms = fcQPlainTextEdit_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qplaintextedit_types.QPlainTextEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQPlainTextEdit_trUtf82(s, c)
+  let v_ms = fcQPlainTextEdit_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qplaintextedit_types.QPlainTextEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPlainTextEdit_trUtf83(s, c, n)
+  let v_ms = fcQPlainTextEdit_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: openArray[char], options: cint): bool =
-  fcQPlainTextEdit_find3(self.h, struct_seaqt_string(data: if len(exp) > 0: addr exp[0] else: nil, len: csize_t(len(exp))), cint(options))
+  fcQPlainTextEdit_find_QString_QTextDocument_FindFlags(self.h, struct_seaqt_string(data: if len(exp) > 0: addr exp[0] else: nil, len: csize_t(len(exp))), cint(options))
 
 proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: gen_qregexp_types.QRegExp, options: cint): bool =
-  fcQPlainTextEdit_find4(self.h, exp.h, cint(options))
+  fcQPlainTextEdit_find_QRegExp_QTextDocument_FindFlags(self.h, exp.h, cint(options))
 
 proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: gen_qregularexpression_types.QRegularExpression, options: cint): bool =
-  fcQPlainTextEdit_find5(self.h, exp.h, cint(options))
+  fcQPlainTextEdit_find_QRegularExpression_QTextDocument_FindFlags(self.h, exp.h, cint(options))
 
 proc moveCursor*(self: gen_qplaintextedit_types.QPlainTextEdit, operation: cint, mode: cint): void =
-  fcQPlainTextEdit_moveCursor2(self.h, cint(operation), cint(mode))
+  fcQPlainTextEdit_moveCursorOperationMode(self.h, cint(operation), cint(mode))
 
 proc zoomIn*(self: gen_qplaintextedit_types.QPlainTextEdit, range: cint): void =
-  fcQPlainTextEdit_zoomInWithRange(self.h, range)
+  fcQPlainTextEdit_zoomInRange(self.h, range)
 
 proc zoomOut*(self: gen_qplaintextedit_types.QPlainTextEdit, range: cint): void =
-  fcQPlainTextEdit_zoomOutWithRange(self.h, range)
+  fcQPlainTextEdit_zoomOutRange(self.h, range)
 
 type QPlainTextEditmetaObjectProc* = proc(self: QPlainTextEdit): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPlainTextEditmetacastProc* = proc(self: QPlainTextEdit, param1: cstring): pointer {.raises: [], gcsafe.}
 type QPlainTextEditmetacallProc* = proc(self: QPlainTextEdit, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QPlainTextEditloadResourceProc* = proc(self: QPlainTextEdit, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QPlainTextEditinputMethodQueryProc* = proc(self: QPlainTextEdit, property: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QPlainTextEditinputMethodQueryPropertyProc* = proc(self: QPlainTextEdit, property: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QPlainTextEditeventProc* = proc(self: QPlainTextEdit, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QPlainTextEdittimerEventProc* = proc(self: QPlainTextEdit, e: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
 type QPlainTextEditkeyPressEventProc* = proc(self: QPlainTextEdit, e: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
@@ -972,7 +972,7 @@ type QPlainTextEditVTable* {.inheritable, pure.} = object
   metacast*: QPlainTextEditmetacastProc
   metacall*: QPlainTextEditmetacallProc
   loadResource*: QPlainTextEditloadResourceProc
-  inputMethodQuery*: QPlainTextEditinputMethodQueryProc
+  inputMethodQueryProperty*: QPlainTextEditinputMethodQueryPropertyProc
   event*: QPlainTextEditeventProc
   timerEvent*: QPlainTextEdittimerEventProc
   keyPressEvent*: QPlainTextEditkeyPressEventProc
@@ -1041,7 +1041,7 @@ proc QPlainTextEditloadResource*(self: gen_qplaintextedit_types.QPlainTextEdit, 
   gen_qvariant_types.QVariant(h: fcQPlainTextEdit_virtualbase_loadResource(self.h, typeVal, name.h), owned: true)
 
 proc QPlainTextEditinputMethodQuery*(self: gen_qplaintextedit_types.QPlainTextEdit, property: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPlainTextEdit_virtualbase_inputMethodQuery(self.h, cint(property)), owned: true)
+  gen_qvariant_types.QVariant(h: fcQPlainTextEdit_virtualbase_inputMethodQueryProperty(self.h, cint(property)), owned: true)
 
 proc QPlainTextEditevent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qcoreevent_types.QEvent): bool =
   fcQPlainTextEdit_virtualbase_event(self.h, e.h)
@@ -1242,11 +1242,11 @@ proc fcQPlainTextEdit_vtable_callback_loadResource(self: pointer, typeVal: cint,
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQPlainTextEdit_vtable_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_inputMethodQueryProperty(self: pointer, property: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self)[])
   let self = QPlainTextEdit(h: self)
   let slotval1 = cint(property)
-  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
+  var virtualReturn = vtbl[].inputMethodQueryProperty(self, slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1767,7 +1767,7 @@ proc fcQPlainTextEdit_method_callback_loadResource(self: pointer, typeVal: cint,
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQPlainTextEdit_method_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_inputMethodQueryProperty(self: pointer, property: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self)[])
   let slotval1 = cint(property)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -2103,7 +2103,7 @@ proc zoomInF*(self: gen_qplaintextedit_types.QPlainTextEdit, range: float32): vo
   fcQPlainTextEdit_protectedbase_zoomInF(self.h, range)
 
 proc setViewportMargins*(self: gen_qplaintextedit_types.QPlainTextEdit, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQPlainTextEdit_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQPlainTextEdit_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQPlainTextEdit_protectedbase_viewportMargins(self.h), owned: true)
@@ -2156,8 +2156,8 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     vtbl[].vtbl.metacall = fcQPlainTextEdit_vtable_callback_metacall
   if not isNil(vtbl[].loadResource):
     vtbl[].vtbl.loadResource = fcQPlainTextEdit_vtable_callback_loadResource
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQPlainTextEdit_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQueryProperty):
+    vtbl[].vtbl.inputMethodQueryProperty = fcQPlainTextEdit_vtable_callback_inputMethodQueryProperty
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = fcQPlainTextEdit_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
@@ -2285,8 +2285,8 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     vtbl[].vtbl.metacall = fcQPlainTextEdit_vtable_callback_metacall
   if not isNil(vtbl[].loadResource):
     vtbl[].vtbl.loadResource = fcQPlainTextEdit_vtable_callback_loadResource
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQPlainTextEdit_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQueryProperty):
+    vtbl[].vtbl.inputMethodQueryProperty = fcQPlainTextEdit_vtable_callback_inputMethodQueryProperty
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = fcQPlainTextEdit_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
@@ -2414,8 +2414,8 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     vtbl[].vtbl.metacall = fcQPlainTextEdit_vtable_callback_metacall
   if not isNil(vtbl[].loadResource):
     vtbl[].vtbl.loadResource = fcQPlainTextEdit_vtable_callback_loadResource
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQPlainTextEdit_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQueryProperty):
+    vtbl[].vtbl.inputMethodQueryProperty = fcQPlainTextEdit_vtable_callback_inputMethodQueryProperty
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = fcQPlainTextEdit_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
@@ -2543,8 +2543,8 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     vtbl[].vtbl.metacall = fcQPlainTextEdit_vtable_callback_metacall
   if not isNil(vtbl[].loadResource):
     vtbl[].vtbl.loadResource = fcQPlainTextEdit_vtable_callback_loadResource
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQPlainTextEdit_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQueryProperty):
+    vtbl[].vtbl.inputMethodQueryProperty = fcQPlainTextEdit_vtable_callback_inputMethodQueryProperty
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = fcQPlainTextEdit_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
@@ -2666,7 +2666,7 @@ const cQPlainTextEdit_mvtbl = cQPlainTextEditVTable(
   metacast: fcQPlainTextEdit_method_callback_metacast,
   metacall: fcQPlainTextEdit_method_callback_metacall,
   loadResource: fcQPlainTextEdit_method_callback_loadResource,
-  inputMethodQuery: fcQPlainTextEdit_method_callback_inputMethodQuery,
+  inputMethodQueryProperty: fcQPlainTextEdit_method_callback_inputMethodQueryProperty,
   event: fcQPlainTextEdit_method_callback_event,
   timerEvent: fcQPlainTextEdit_method_callback_timerEvent,
   keyPressEvent: fcQPlainTextEdit_method_callback_keyPressEvent,
@@ -2765,13 +2765,13 @@ proc metacall*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: 
   fcQPlainTextDocumentLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qplaintextedit_types.QPlainTextDocumentLayout, s: cstring): string =
-  let v_ms = fcQPlainTextDocumentLayout_tr(s)
+  let v_ms = fcQPlainTextDocumentLayout_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qplaintextedit_types.QPlainTextDocumentLayout, s: cstring): string =
-  let v_ms = fcQPlainTextDocumentLayout_trUtf8(s)
+  let v_ms = fcQPlainTextDocumentLayout_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2807,25 +2807,25 @@ proc requestUpdate*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout): vo
   fcQPlainTextDocumentLayout_requestUpdate(self.h)
 
 proc tr*(_: type gen_qplaintextedit_types.QPlainTextDocumentLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQPlainTextDocumentLayout_tr2(s, c)
+  let v_ms = fcQPlainTextDocumentLayout_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qplaintextedit_types.QPlainTextDocumentLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPlainTextDocumentLayout_tr3(s, c, n)
+  let v_ms = fcQPlainTextDocumentLayout_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qplaintextedit_types.QPlainTextDocumentLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQPlainTextDocumentLayout_trUtf82(s, c)
+  let v_ms = fcQPlainTextDocumentLayout_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qplaintextedit_types.QPlainTextDocumentLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPlainTextDocumentLayout_trUtf83(s, c, n)
+  let v_ms = fcQPlainTextDocumentLayout_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

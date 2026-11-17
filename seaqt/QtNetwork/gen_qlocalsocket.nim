@@ -78,10 +78,10 @@ type cQLocalSocket*{.exportc: "QLocalSocket", incompleteStruct.} = object
 proc fcQLocalSocket_metaObject(self: pointer): pointer {.importc: "QLocalSocket_metaObject".}
 proc fcQLocalSocket_metacast(self: pointer, param1: cstring): pointer {.importc: "QLocalSocket_metacast".}
 proc fcQLocalSocket_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLocalSocket_metacall".}
-proc fcQLocalSocket_tr(s: cstring): struct_seaqt_string {.importc: "QLocalSocket_tr".}
-proc fcQLocalSocket_trUtf8(s: cstring): struct_seaqt_string {.importc: "QLocalSocket_trUtf8".}
+proc fcQLocalSocket_trS(s: cstring): struct_seaqt_string {.importc: "QLocalSocket_tr_s".}
+proc fcQLocalSocket_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QLocalSocket_trUtf8_s".}
 proc fcQLocalSocket_connectToServer(self: pointer): void {.importc: "QLocalSocket_connectToServer".}
-proc fcQLocalSocket_connectToServerWithName(self: pointer, name: struct_seaqt_string): void {.importc: "QLocalSocket_connectToServerWithName".}
+proc fcQLocalSocket_connectToServerName(self: pointer, name: struct_seaqt_string): void {.importc: "QLocalSocket_connectToServer_name".}
 proc fcQLocalSocket_disconnectFromServer(self: pointer): void {.importc: "QLocalSocket_disconnectFromServer".}
 proc fcQLocalSocket_setServerName(self: pointer, name: struct_seaqt_string): void {.importc: "QLocalSocket_setServerName".}
 proc fcQLocalSocket_serverName(self: pointer): struct_seaqt_string {.importc: "QLocalSocket_serverName".}
@@ -98,7 +98,7 @@ proc fcQLocalSocket_flush(self: pointer): bool {.importc: "QLocalSocket_flush".}
 proc fcQLocalSocket_isValid(self: pointer): bool {.importc: "QLocalSocket_isValid".}
 proc fcQLocalSocket_readBufferSize(self: pointer): clonglong {.importc: "QLocalSocket_readBufferSize".}
 proc fcQLocalSocket_setReadBufferSize(self: pointer, size: clonglong): void {.importc: "QLocalSocket_setReadBufferSize".}
-proc fcQLocalSocket_setSocketDescriptor(self: pointer, socketDescriptor: uint): bool {.importc: "QLocalSocket_setSocketDescriptor".}
+proc fcQLocalSocket_setSocketDescriptorSocketDescriptor(self: pointer, socketDescriptor: uint): bool {.importc: "QLocalSocket_setSocketDescriptor_socketDescriptor".}
 proc fcQLocalSocket_socketDescriptor(self: pointer): uint {.importc: "QLocalSocket_socketDescriptor".}
 proc fcQLocalSocket_state(self: pointer): cint {.importc: "QLocalSocket_state".}
 proc fcQLocalSocket_waitForBytesWritten(self: pointer, msecs: cint): bool {.importc: "QLocalSocket_waitForBytesWritten".}
@@ -109,22 +109,22 @@ proc fcQLocalSocket_connected(self: pointer): void {.importc: "QLocalSocket_conn
 proc fcQLocalSocket_connect_connected(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_connected".}
 proc fcQLocalSocket_disconnected(self: pointer): void {.importc: "QLocalSocket_disconnected".}
 proc fcQLocalSocket_connect_disconnected(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_disconnected".}
-proc fcQLocalSocket_errorWithSocketError(self: pointer, socketError: cint): void {.importc: "QLocalSocket_errorWithSocketError".}
-proc fcQLocalSocket_connect_errorWithSocketError(self: pointer, slot: int, callback: proc (slot: int, socketError: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_errorWithSocketError".}
+proc fcQLocalSocket_errorSocketError(self: pointer, socketError: cint): void {.importc: "QLocalSocket_error_socketError".}
+proc fcQLocalSocket_connect_errorSocketError(self: pointer, slot: int, callback: proc (slot: int, socketError: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_error_socketError".}
 proc fcQLocalSocket_errorOccurred(self: pointer, socketError: cint): void {.importc: "QLocalSocket_errorOccurred".}
 proc fcQLocalSocket_connect_errorOccurred(self: pointer, slot: int, callback: proc (slot: int, socketError: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_errorOccurred".}
 proc fcQLocalSocket_stateChanged(self: pointer, socketState: cint): void {.importc: "QLocalSocket_stateChanged".}
 proc fcQLocalSocket_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, socketState: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_stateChanged".}
-proc fcQLocalSocket_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLocalSocket_tr2".}
-proc fcQLocalSocket_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLocalSocket_tr3".}
-proc fcQLocalSocket_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLocalSocket_trUtf82".}
-proc fcQLocalSocket_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLocalSocket_trUtf83".}
-proc fcQLocalSocket_connectToServerWithOpenMode(self: pointer, openMode: cint): void {.importc: "QLocalSocket_connectToServerWithOpenMode".}
-proc fcQLocalSocket_connectToServer2(self: pointer, name: struct_seaqt_string, openMode: cint): void {.importc: "QLocalSocket_connectToServer2".}
-proc fcQLocalSocket_setSocketDescriptor2(self: pointer, socketDescriptor: uint, socketState: cint): bool {.importc: "QLocalSocket_setSocketDescriptor2".}
-proc fcQLocalSocket_setSocketDescriptor3(self: pointer, socketDescriptor: uint, socketState: cint, openMode: cint): bool {.importc: "QLocalSocket_setSocketDescriptor3".}
-proc fcQLocalSocket_waitForConnectedWithMsecs(self: pointer, msecs: cint): bool {.importc: "QLocalSocket_waitForConnectedWithMsecs".}
-proc fcQLocalSocket_waitForDisconnectedWithMsecs(self: pointer, msecs: cint): bool {.importc: "QLocalSocket_waitForDisconnectedWithMsecs".}
+proc fcQLocalSocket_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLocalSocket_tr_s_c".}
+proc fcQLocalSocket_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLocalSocket_tr_s_c_n".}
+proc fcQLocalSocket_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLocalSocket_trUtf8_s_c".}
+proc fcQLocalSocket_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLocalSocket_trUtf8_s_c_n".}
+proc fcQLocalSocket_connectToServerOpenMode(self: pointer, openMode: cint): void {.importc: "QLocalSocket_connectToServer_openMode".}
+proc fcQLocalSocket_connectToServerNameOpenMode(self: pointer, name: struct_seaqt_string, openMode: cint): void {.importc: "QLocalSocket_connectToServer_name_openMode".}
+proc fcQLocalSocket_setSocketDescriptorSocketDescriptorSocketState(self: pointer, socketDescriptor: uint, socketState: cint): bool {.importc: "QLocalSocket_setSocketDescriptor_socketDescriptor_socketState".}
+proc fcQLocalSocket_setSocketDescriptorSocketDescriptorSocketStateOpenMode(self: pointer, socketDescriptor: uint, socketState: cint, openMode: cint): bool {.importc: "QLocalSocket_setSocketDescriptor_socketDescriptor_socketState_openMode".}
+proc fcQLocalSocket_waitForConnectedMsecs(self: pointer, msecs: cint): bool {.importc: "QLocalSocket_waitForConnected_msecs".}
+proc fcQLocalSocket_waitForDisconnectedMsecs(self: pointer, msecs: cint): bool {.importc: "QLocalSocket_waitForDisconnected_msecs".}
 proc fcQLocalSocket_vdata(self: pointer): ptr pointer {.importc: "QLocalSocket_vdata".}
 proc fvdata_cQLocalSocket(self: pointer): pointer {.importc: "vdata_QLocalSocket".}
 
@@ -189,7 +189,7 @@ proc fcQLocalSocket_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQLocalSocket_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLocalSocket_protectedbase_receivers".}
 proc fcQLocalSocket_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLocalSocket_protectedbase_isSignalConnected".}
 proc fcQLocalSocket_new(vtbl: pointer, vdata: csize_t): ptr cQLocalSocket {.importc: "QLocalSocket_new".}
-proc fcQLocalSocket_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLocalSocket {.importc: "QLocalSocket_new2".}
+proc fcQLocalSocket_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLocalSocket {.importc: "QLocalSocket_new_parent".}
 proc fcQLocalSocket_staticMetaObject(): pointer {.importc: "QLocalSocket_staticMetaObject".}
 
 proc metaObject*(self: gen_qlocalsocket_types.QLocalSocket): gen_qobjectdefs_types.QMetaObject =
@@ -202,13 +202,13 @@ proc metacall*(self: gen_qlocalsocket_types.QLocalSocket, param1: cint, param2: 
   fcQLocalSocket_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlocalsocket_types.QLocalSocket, s: cstring): string =
-  let v_ms = fcQLocalSocket_tr(s)
+  let v_ms = fcQLocalSocket_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlocalsocket_types.QLocalSocket, s: cstring): string =
-  let v_ms = fcQLocalSocket_trUtf8(s)
+  let v_ms = fcQLocalSocket_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -217,7 +217,7 @@ proc connectToServer*(self: gen_qlocalsocket_types.QLocalSocket): void =
   fcQLocalSocket_connectToServer(self.h)
 
 proc connectToServer*(self: gen_qlocalsocket_types.QLocalSocket, name: openArray[char]): void =
-  fcQLocalSocket_connectToServerWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  fcQLocalSocket_connectToServerName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc disconnectFromServer*(self: gen_qlocalsocket_types.QLocalSocket): void =
   fcQLocalSocket_disconnectFromServer(self.h)
@@ -274,7 +274,7 @@ proc setReadBufferSize*(self: gen_qlocalsocket_types.QLocalSocket, size: clonglo
   fcQLocalSocket_setReadBufferSize(self.h, size)
 
 proc setSocketDescriptor*(self: gen_qlocalsocket_types.QLocalSocket, socketDescriptor: uint): bool =
-  fcQLocalSocket_setSocketDescriptor(self.h, socketDescriptor)
+  fcQLocalSocket_setSocketDescriptorSocketDescriptor(self.h, socketDescriptor)
 
 proc socketDescriptor*(self: gen_qlocalsocket_types.QLocalSocket): uint =
   fcQLocalSocket_socketDescriptor(self.h)
@@ -331,24 +331,24 @@ proc onDisconnected*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSock
   fcQLocalSocket_connect_disconnected(self.h, cast[int](addr tmp[]), fcQLocalSocket_slot_callback_disconnected, fcQLocalSocket_slot_callback_disconnected_release)
 
 proc error*(self: gen_qlocalsocket_types.QLocalSocket, socketError: cint): void =
-  fcQLocalSocket_errorWithSocketError(self.h, cint(socketError))
+  fcQLocalSocket_errorSocketError(self.h, cint(socketError))
 
-type QLocalSocketerrorWithSocketErrorSlot* = proc(socketError: cint)
-proc fcQLocalSocket_slot_callback_errorWithSocketError(slot: int, socketError: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QLocalSocketerrorWithSocketErrorSlot](cast[pointer](slot))
+type QLocalSocketerrorSocketErrorSlot* = proc(socketError: cint)
+proc fcQLocalSocket_slot_callback_errorSocketError(slot: int, socketError: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QLocalSocketerrorSocketErrorSlot](cast[pointer](slot))
   let slotval1 = cint(socketError)
 
   nimfunc[](slotval1)
 
-proc fcQLocalSocket_slot_callback_errorWithSocketError_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QLocalSocketerrorWithSocketErrorSlot](cast[pointer](slot))
+proc fcQLocalSocket_slot_callback_errorSocketError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QLocalSocketerrorSocketErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onError*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSocketerrorWithSocketErrorSlot) =
-  var tmp = new QLocalSocketerrorWithSocketErrorSlot
+proc onError*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSocketerrorSocketErrorSlot) =
+  var tmp = new QLocalSocketerrorSocketErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQLocalSocket_connect_errorWithSocketError(self.h, cast[int](addr tmp[]), fcQLocalSocket_slot_callback_errorWithSocketError, fcQLocalSocket_slot_callback_errorWithSocketError_release)
+  fcQLocalSocket_connect_errorSocketError(self.h, cast[int](addr tmp[]), fcQLocalSocket_slot_callback_errorSocketError, fcQLocalSocket_slot_callback_errorSocketError_release)
 
 proc errorOccurred*(self: gen_qlocalsocket_types.QLocalSocket, socketError: cint): void =
   fcQLocalSocket_errorOccurred(self.h, cint(socketError))
@@ -391,46 +391,46 @@ proc onStateChanged*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSock
   fcQLocalSocket_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQLocalSocket_slot_callback_stateChanged, fcQLocalSocket_slot_callback_stateChanged_release)
 
 proc tr*(_: type gen_qlocalsocket_types.QLocalSocket, s: cstring, c: cstring): string =
-  let v_ms = fcQLocalSocket_tr2(s, c)
+  let v_ms = fcQLocalSocket_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qlocalsocket_types.QLocalSocket, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQLocalSocket_tr3(s, c, n)
+  let v_ms = fcQLocalSocket_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlocalsocket_types.QLocalSocket, s: cstring, c: cstring): string =
-  let v_ms = fcQLocalSocket_trUtf82(s, c)
+  let v_ms = fcQLocalSocket_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlocalsocket_types.QLocalSocket, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQLocalSocket_trUtf83(s, c, n)
+  let v_ms = fcQLocalSocket_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc connectToServer*(self: gen_qlocalsocket_types.QLocalSocket, openMode: cint): void =
-  fcQLocalSocket_connectToServerWithOpenMode(self.h, cint(openMode))
+  fcQLocalSocket_connectToServerOpenMode(self.h, cint(openMode))
 
 proc connectToServer*(self: gen_qlocalsocket_types.QLocalSocket, name: openArray[char], openMode: cint): void =
-  fcQLocalSocket_connectToServer2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(openMode))
+  fcQLocalSocket_connectToServerNameOpenMode(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(openMode))
 
 proc setSocketDescriptor*(self: gen_qlocalsocket_types.QLocalSocket, socketDescriptor: uint, socketState: cint): bool =
-  fcQLocalSocket_setSocketDescriptor2(self.h, socketDescriptor, cint(socketState))
+  fcQLocalSocket_setSocketDescriptorSocketDescriptorSocketState(self.h, socketDescriptor, cint(socketState))
 
 proc setSocketDescriptor*(self: gen_qlocalsocket_types.QLocalSocket, socketDescriptor: uint, socketState: cint, openMode: cint): bool =
-  fcQLocalSocket_setSocketDescriptor3(self.h, socketDescriptor, cint(socketState), cint(openMode))
+  fcQLocalSocket_setSocketDescriptorSocketDescriptorSocketStateOpenMode(self.h, socketDescriptor, cint(socketState), cint(openMode))
 
 proc waitForConnected*(self: gen_qlocalsocket_types.QLocalSocket, msecs: cint): bool =
-  fcQLocalSocket_waitForConnectedWithMsecs(self.h, msecs)
+  fcQLocalSocket_waitForConnectedMsecs(self.h, msecs)
 
 proc waitForDisconnected*(self: gen_qlocalsocket_types.QLocalSocket, msecs: cint): bool =
-  fcQLocalSocket_waitForDisconnectedWithMsecs(self.h, msecs)
+  fcQLocalSocket_waitForDisconnectedMsecs(self.h, msecs)
 
 type QLocalSocketmetaObjectProc* = proc(self: QLocalSocket): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QLocalSocketmetacastProc* = proc(self: QLocalSocket, param1: cstring): pointer {.raises: [], gcsafe.}

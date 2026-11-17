@@ -59,16 +59,16 @@ type cQPropertyAnimation*{.exportc: "QPropertyAnimation", incompleteStruct.} = o
 proc fcQPropertyAnimation_metaObject(self: pointer): pointer {.importc: "QPropertyAnimation_metaObject".}
 proc fcQPropertyAnimation_metacast(self: pointer, param1: cstring): pointer {.importc: "QPropertyAnimation_metacast".}
 proc fcQPropertyAnimation_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPropertyAnimation_metacall".}
-proc fcQPropertyAnimation_tr(s: cstring): struct_seaqt_string {.importc: "QPropertyAnimation_tr".}
-proc fcQPropertyAnimation_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPropertyAnimation_trUtf8".}
+proc fcQPropertyAnimation_trS(s: cstring): struct_seaqt_string {.importc: "QPropertyAnimation_tr_s".}
+proc fcQPropertyAnimation_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPropertyAnimation_trUtf8_s".}
 proc fcQPropertyAnimation_targetObject(self: pointer): pointer {.importc: "QPropertyAnimation_targetObject".}
 proc fcQPropertyAnimation_setTargetObject(self: pointer, target: pointer): void {.importc: "QPropertyAnimation_setTargetObject".}
 proc fcQPropertyAnimation_propertyName(self: pointer): struct_seaqt_string {.importc: "QPropertyAnimation_propertyName".}
 proc fcQPropertyAnimation_setPropertyName(self: pointer, propertyName: struct_seaqt_string): void {.importc: "QPropertyAnimation_setPropertyName".}
-proc fcQPropertyAnimation_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPropertyAnimation_tr2".}
-proc fcQPropertyAnimation_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPropertyAnimation_tr3".}
-proc fcQPropertyAnimation_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPropertyAnimation_trUtf82".}
-proc fcQPropertyAnimation_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPropertyAnimation_trUtf83".}
+proc fcQPropertyAnimation_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPropertyAnimation_tr_s_c".}
+proc fcQPropertyAnimation_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPropertyAnimation_tr_s_c_n".}
+proc fcQPropertyAnimation_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPropertyAnimation_trUtf8_s_c".}
+proc fcQPropertyAnimation_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPropertyAnimation_trUtf8_s_c_n".}
 proc fcQPropertyAnimation_vdata(self: pointer): ptr pointer {.importc: "QPropertyAnimation_vdata".}
 proc fvdata_cQPropertyAnimation(self: pointer): pointer {.importc: "vdata_QPropertyAnimation".}
 
@@ -111,9 +111,9 @@ proc fcQPropertyAnimation_protectedbase_senderSignalIndex(self: pointer): cint {
 proc fcQPropertyAnimation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPropertyAnimation_protectedbase_receivers".}
 proc fcQPropertyAnimation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPropertyAnimation_protectedbase_isSignalConnected".}
 proc fcQPropertyAnimation_new(vtbl: pointer, vdata: csize_t): ptr cQPropertyAnimation {.importc: "QPropertyAnimation_new".}
-proc fcQPropertyAnimation_new2(vtbl: pointer, vdata: csize_t, target: pointer, propertyName: struct_seaqt_string): ptr cQPropertyAnimation {.importc: "QPropertyAnimation_new2".}
-proc fcQPropertyAnimation_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPropertyAnimation {.importc: "QPropertyAnimation_new3".}
-proc fcQPropertyAnimation_new4(vtbl: pointer, vdata: csize_t, target: pointer, propertyName: struct_seaqt_string, parent: pointer): ptr cQPropertyAnimation {.importc: "QPropertyAnimation_new4".}
+proc fcQPropertyAnimation_new2(vtbl: pointer, vdata: csize_t, target: pointer, propertyName: struct_seaqt_string): ptr cQPropertyAnimation {.importc: "QPropertyAnimation_new_target_propertyName".}
+proc fcQPropertyAnimation_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPropertyAnimation {.importc: "QPropertyAnimation_new_parent".}
+proc fcQPropertyAnimation_new4(vtbl: pointer, vdata: csize_t, target: pointer, propertyName: struct_seaqt_string, parent: pointer): ptr cQPropertyAnimation {.importc: "QPropertyAnimation_new_target_propertyName_parent".}
 proc fcQPropertyAnimation_staticMetaObject(): pointer {.importc: "QPropertyAnimation_staticMetaObject".}
 
 proc metaObject*(self: gen_qpropertyanimation_types.QPropertyAnimation): gen_qobjectdefs_types.QMetaObject =
@@ -126,13 +126,13 @@ proc metacall*(self: gen_qpropertyanimation_types.QPropertyAnimation, param1: ci
   fcQPropertyAnimation_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpropertyanimation_types.QPropertyAnimation, s: cstring): string =
-  let v_ms = fcQPropertyAnimation_tr(s)
+  let v_ms = fcQPropertyAnimation_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpropertyanimation_types.QPropertyAnimation, s: cstring): string =
-  let v_ms = fcQPropertyAnimation_trUtf8(s)
+  let v_ms = fcQPropertyAnimation_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -153,25 +153,25 @@ proc setPropertyName*(self: gen_qpropertyanimation_types.QPropertyAnimation, pro
   fcQPropertyAnimation_setPropertyName(self.h, struct_seaqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))))
 
 proc tr*(_: type gen_qpropertyanimation_types.QPropertyAnimation, s: cstring, c: cstring): string =
-  let v_ms = fcQPropertyAnimation_tr2(s, c)
+  let v_ms = fcQPropertyAnimation_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpropertyanimation_types.QPropertyAnimation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPropertyAnimation_tr3(s, c, n)
+  let v_ms = fcQPropertyAnimation_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpropertyanimation_types.QPropertyAnimation, s: cstring, c: cstring): string =
-  let v_ms = fcQPropertyAnimation_trUtf82(s, c)
+  let v_ms = fcQPropertyAnimation_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpropertyanimation_types.QPropertyAnimation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPropertyAnimation_trUtf83(s, c, n)
+  let v_ms = fcQPropertyAnimation_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -56,21 +56,21 @@ void* QPictureFormatPlugin_vdata(VirtualQPictureFormatPlugin* self);
 VirtualQPictureFormatPlugin* vdata_QPictureFormatPlugin(void* vdata);
 
 VirtualQPictureFormatPlugin* QPictureFormatPlugin_new(const QPictureFormatPlugin_VTable* vtbl, size_t vdata);
-VirtualQPictureFormatPlugin* QPictureFormatPlugin_new2(const QPictureFormatPlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPictureFormatPlugin* QPictureFormatPlugin_new_parent(const QPictureFormatPlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QPictureFormatPlugin_virtbase(QPictureFormatPlugin* src, QObject** outptr_QObject);
 QMetaObject* QPictureFormatPlugin_metaObject(const QPictureFormatPlugin* self);
 void* QPictureFormatPlugin_metacast(QPictureFormatPlugin* self, const char* param1);
 int QPictureFormatPlugin_metacall(QPictureFormatPlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QPictureFormatPlugin_tr(const char* s);
-struct seaqt_string QPictureFormatPlugin_trUtf8(const char* s);
+struct seaqt_string QPictureFormatPlugin_tr_s(const char* s);
+struct seaqt_string QPictureFormatPlugin_trUtf8_s(const char* s);
 bool QPictureFormatPlugin_loadPicture(QPictureFormatPlugin* self, struct seaqt_string format, struct seaqt_string filename, QPicture* pic);
 bool QPictureFormatPlugin_savePicture(QPictureFormatPlugin* self, struct seaqt_string format, struct seaqt_string filename, QPicture* pic);
 bool QPictureFormatPlugin_installIOHandler(QPictureFormatPlugin* self, struct seaqt_string format);
-struct seaqt_string QPictureFormatPlugin_tr2(const char* s, const char* c);
-struct seaqt_string QPictureFormatPlugin_tr3(const char* s, const char* c, int n);
-struct seaqt_string QPictureFormatPlugin_trUtf82(const char* s, const char* c);
-struct seaqt_string QPictureFormatPlugin_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QPictureFormatPlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPictureFormatPlugin_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QPictureFormatPlugin_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QPictureFormatPlugin_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPictureFormatPlugin_virtualbase_metaObject(const VirtualQPictureFormatPlugin* self);
 void* QPictureFormatPlugin_virtualbase_metacast(VirtualQPictureFormatPlugin* self, const char* param1);

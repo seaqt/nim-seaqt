@@ -30,8 +30,8 @@ void QSessionManager_virtbase(QSessionManager* src, QObject** outptr_QObject);
 QMetaObject* QSessionManager_metaObject(const QSessionManager* self);
 void* QSessionManager_metacast(QSessionManager* self, const char* param1);
 int QSessionManager_metacall(QSessionManager* self, int param1, int param2, void** param3);
-struct seaqt_string QSessionManager_tr(const char* s);
-struct seaqt_string QSessionManager_trUtf8(const char* s);
+struct seaqt_string QSessionManager_tr_s(const char* s);
+struct seaqt_string QSessionManager_trUtf8_s(const char* s);
 struct seaqt_string QSessionManager_sessionId(const QSessionManager* self);
 struct seaqt_string QSessionManager_sessionKey(const QSessionManager* self);
 bool QSessionManager_allowsInteraction(QSessionManager* self);
@@ -44,14 +44,14 @@ void QSessionManager_setRestartCommand(QSessionManager* self, struct seaqt_array
 struct seaqt_array /* of struct seaqt_string */  QSessionManager_restartCommand(const QSessionManager* self);
 void QSessionManager_setDiscardCommand(QSessionManager* self, struct seaqt_array /* of struct seaqt_string */  discardCommand);
 struct seaqt_array /* of struct seaqt_string */  QSessionManager_discardCommand(const QSessionManager* self);
-void QSessionManager_setManagerProperty(QSessionManager* self, struct seaqt_string name, struct seaqt_string value);
-void QSessionManager_setManagerProperty2(QSessionManager* self, struct seaqt_string name, struct seaqt_array /* of struct seaqt_string */  value);
+void QSessionManager_setManagerProperty_QString_QString(QSessionManager* self, struct seaqt_string name, struct seaqt_string value);
+void QSessionManager_setManagerProperty_QString_QStringList(QSessionManager* self, struct seaqt_string name, struct seaqt_array /* of struct seaqt_string */  value);
 bool QSessionManager_isPhase2(const QSessionManager* self);
 void QSessionManager_requestPhase2(QSessionManager* self);
-struct seaqt_string QSessionManager_tr2(const char* s, const char* c);
-struct seaqt_string QSessionManager_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSessionManager_trUtf82(const char* s, const char* c);
-struct seaqt_string QSessionManager_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QSessionManager_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSessionManager_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSessionManager_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSessionManager_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QSessionManager_staticMetaObject();
 

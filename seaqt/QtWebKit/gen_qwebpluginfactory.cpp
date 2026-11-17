@@ -287,7 +287,7 @@ VirtualQWebPluginFactory* QWebPluginFactory_new(const QWebPluginFactory_VTable* 
 	return _mem_ ? new (_mem_)VirtualQWebPluginFactory(vtbl) : nullptr;
 }
 
-VirtualQWebPluginFactory* QWebPluginFactory_new2(const QWebPluginFactory_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQWebPluginFactory* QWebPluginFactory_new_parent(const QWebPluginFactory_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebPluginFactory>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebPluginFactory(vtbl, parent) : nullptr;
 }
@@ -308,7 +308,7 @@ int QWebPluginFactory_metacall(QWebPluginFactory* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebPluginFactory_tr(const char* s) {
+struct seaqt_string QWebPluginFactory_tr_s(const char* s) {
 	QString _ret = QWebPluginFactory::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -319,7 +319,7 @@ struct seaqt_string QWebPluginFactory_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebPluginFactory_trUtf8(const char* s) {
+struct seaqt_string QWebPluginFactory_trUtf8_s(const char* s) {
 	QString _ret = QWebPluginFactory::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -374,7 +374,7 @@ bool QWebPluginFactory_supportsExtension(const QWebPluginFactory* self, int exte
 	return self->supportsExtension(static_cast<QWebPluginFactory::Extension>(extension));
 }
 
-struct seaqt_string QWebPluginFactory_tr2(const char* s, const char* c) {
+struct seaqt_string QWebPluginFactory_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebPluginFactory::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -385,7 +385,7 @@ struct seaqt_string QWebPluginFactory_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebPluginFactory_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebPluginFactory_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebPluginFactory::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -396,7 +396,7 @@ struct seaqt_string QWebPluginFactory_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWebPluginFactory_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebPluginFactory_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebPluginFactory::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -407,7 +407,7 @@ struct seaqt_string QWebPluginFactory_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebPluginFactory_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebPluginFactory_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebPluginFactory::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -507,8 +507,8 @@ void QWebPluginFactory_delete(QWebPluginFactory* self) {
 	delete self;
 }
 
-QWebPluginFactory__MimeType* QWebPluginFactory__MimeType_new(QWebPluginFactory__MimeType* param1) {
-	return new (std::nothrow) QWebPluginFactory__MimeType(*param1);
+QWebPluginFactory__MimeType* QWebPluginFactory__MimeType_new(QWebPluginFactory__MimeType* from) {
+	return new (std::nothrow) QWebPluginFactory__MimeType(*from);
 }
 
 struct seaqt_string QWebPluginFactory__MimeType_name(const QWebPluginFactory__MimeType* self) {
@@ -582,16 +582,16 @@ bool QWebPluginFactory__MimeType_operatorNotEqual(const QWebPluginFactory__MimeT
 	return (*self != *other);
 }
 
-void QWebPluginFactory__MimeType_operatorAssign(QWebPluginFactory__MimeType* self, QWebPluginFactory__MimeType* param1) {
-	self->operator=(*param1);
+void QWebPluginFactory__MimeType_operatorAssign(QWebPluginFactory__MimeType* self, QWebPluginFactory__MimeType* from) {
+	self->operator=(*from);
 }
 
 void QWebPluginFactory__MimeType_delete(QWebPluginFactory__MimeType* self) {
 	delete self;
 }
 
-QWebPluginFactory__Plugin* QWebPluginFactory__Plugin_new(QWebPluginFactory__Plugin* param1) {
-	return new (std::nothrow) QWebPluginFactory__Plugin(*param1);
+QWebPluginFactory__Plugin* QWebPluginFactory__Plugin_new(QWebPluginFactory__Plugin* from) {
+	return new (std::nothrow) QWebPluginFactory__Plugin(*from);
 }
 
 struct seaqt_string QWebPluginFactory__Plugin_name(const QWebPluginFactory__Plugin* self) {
@@ -649,8 +649,8 @@ void QWebPluginFactory__Plugin_setMimeTypes(QWebPluginFactory__Plugin* self, str
 	self->mimeTypes = mimeTypes_QList;
 }
 
-void QWebPluginFactory__Plugin_operatorAssign(QWebPluginFactory__Plugin* self, QWebPluginFactory__Plugin* param1) {
-	self->operator=(*param1);
+void QWebPluginFactory__Plugin_operatorAssign(QWebPluginFactory__Plugin* self, QWebPluginFactory__Plugin* from) {
+	self->operator=(*from);
 }
 
 void QWebPluginFactory__Plugin_delete(QWebPluginFactory__Plugin* self) {

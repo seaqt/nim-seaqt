@@ -18,11 +18,11 @@ int QSGRendererInterface_graphicsApi(const QSGRendererInterface* self) {
 	return static_cast<int>(_ret);
 }
 
-void* QSGRendererInterface_getResource(const QSGRendererInterface* self, QQuickWindow* window, int resource) {
+void* QSGRendererInterface_getResource_QQuickWindow_QSGRendererInterface_Resource(const QSGRendererInterface* self, QQuickWindow* window, int resource) {
 	return self->getResource(window, static_cast<QSGRendererInterface::Resource>(resource));
 }
 
-void* QSGRendererInterface_getResource2(const QSGRendererInterface* self, QQuickWindow* window, const char* resource) {
+void* QSGRendererInterface_getResource_QQuickWindow_char(const QSGRendererInterface* self, QQuickWindow* window, const char* resource) {
 	return self->getResource(window, resource);
 }
 
@@ -45,8 +45,8 @@ bool QSGRendererInterface_isApiRhiBased(int api) {
 	return QSGRendererInterface::isApiRhiBased(static_cast<QSGRendererInterface::GraphicsApi>(api));
 }
 
-void QSGRendererInterface_operatorAssign(QSGRendererInterface* self, QSGRendererInterface* param1) {
-	self->operator=(*param1);
+void QSGRendererInterface_operatorAssign(QSGRendererInterface* self, QSGRendererInterface* from) {
+	self->operator=(*from);
 }
 
 void QSGRendererInterface_delete(QSGRendererInterface* self) {

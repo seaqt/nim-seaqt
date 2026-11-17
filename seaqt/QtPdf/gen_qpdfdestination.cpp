@@ -14,12 +14,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QPdfDestination* QPdfDestination_new(QPdfDestination* other) {
-	return new (std::nothrow) QPdfDestination(*other);
+QPdfDestination* QPdfDestination_new(QPdfDestination* from) {
+	return new (std::nothrow) QPdfDestination(*from);
 }
 
-void QPdfDestination_operatorAssign(QPdfDestination* self, QPdfDestination* other) {
-	self->operator=(*other);
+void QPdfDestination_operatorAssign(QPdfDestination* self, QPdfDestination* from) {
+	self->operator=(*from);
 }
 
 void QPdfDestination_swap(QPdfDestination* self, QPdfDestination* other) {

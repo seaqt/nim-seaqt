@@ -20,10 +20,10 @@ class QTileRules;
 typedef struct QTileRules QTileRules;
 #endif
 
-QTileRules* QTileRules_new(int horizontalRule, int verticalRule);
-QTileRules* QTileRules_new2();
-QTileRules* QTileRules_new3(QTileRules* param1);
-QTileRules* QTileRules_new4(int rule);
+QTileRules* QTileRules_new_horizontalRule_verticalRule(int horizontalRule, int verticalRule);
+QTileRules* QTileRules_new();
+QTileRules* QTileRules_new_from(QTileRules* from);
+QTileRules* QTileRules_new_rule(int rule);
 
 int QTileRules_horizontal(const QTileRules* self);
 void QTileRules_setHorizontal(QTileRules* self, int horizontal);

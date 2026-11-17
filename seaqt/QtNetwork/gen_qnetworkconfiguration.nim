@@ -76,7 +76,7 @@ export gen_qnetworkconfiguration_types
 
 type cQNetworkConfiguration*{.exportc: "QNetworkConfiguration", incompleteStruct.} = object
 
-proc fcQNetworkConfiguration_operatorAssign(self: pointer, other: pointer): void {.importc: "QNetworkConfiguration_operatorAssign".}
+proc fcQNetworkConfiguration_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QNetworkConfiguration_operatorAssign".}
 proc fcQNetworkConfiguration_swap(self: pointer, other: pointer): void {.importc: "QNetworkConfiguration_swap".}
 proc fcQNetworkConfiguration_operatorEqual(self: pointer, other: pointer): bool {.importc: "QNetworkConfiguration_operatorEqual".}
 proc fcQNetworkConfiguration_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QNetworkConfiguration_operatorNotEqual".}
@@ -94,10 +94,10 @@ proc fcQNetworkConfiguration_isValid(self: pointer): bool {.importc: "QNetworkCo
 proc fcQNetworkConfiguration_connectTimeout(self: pointer): cint {.importc: "QNetworkConfiguration_connectTimeout".}
 proc fcQNetworkConfiguration_setConnectTimeout(self: pointer, timeout: cint): bool {.importc: "QNetworkConfiguration_setConnectTimeout".}
 proc fcQNetworkConfiguration_new(): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new".}
-proc fcQNetworkConfiguration_new2(other: pointer): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new2".}
+proc fcQNetworkConfiguration_new2(fromVal: pointer): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new_from".}
 
-proc operatorAssign*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, other: gen_qnetworkconfiguration_types.QNetworkConfiguration): void =
-  fcQNetworkConfiguration_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, fromVal: gen_qnetworkconfiguration_types.QNetworkConfiguration): void =
+  fcQNetworkConfiguration_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, other: gen_qnetworkconfiguration_types.QNetworkConfiguration): void =
   fcQNetworkConfiguration_swap(self.h, other.h)
@@ -166,6 +166,6 @@ proc create*(T: type gen_qnetworkconfiguration_types.QNetworkConfiguration): gen
   let tmp = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQNetworkConfiguration_new(), owned: true)
   tmp
 proc create*(T: type gen_qnetworkconfiguration_types.QNetworkConfiguration,
-    other: gen_qnetworkconfiguration_types.QNetworkConfiguration): gen_qnetworkconfiguration_types.QNetworkConfiguration =
-  let tmp = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQNetworkConfiguration_new2(other.h), owned: true)
+    fromVal: gen_qnetworkconfiguration_types.QNetworkConfiguration): gen_qnetworkconfiguration_types.QNetworkConfiguration =
+  let tmp = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQNetworkConfiguration_new2(fromVal.h), owned: true)
   tmp

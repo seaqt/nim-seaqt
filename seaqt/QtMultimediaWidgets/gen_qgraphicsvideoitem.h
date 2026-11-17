@@ -130,14 +130,14 @@ void* QGraphicsVideoItem_vdata(VirtualQGraphicsVideoItem* self);
 VirtualQGraphicsVideoItem* vdata_QGraphicsVideoItem(void* vdata);
 
 VirtualQGraphicsVideoItem* QGraphicsVideoItem_new(const QGraphicsVideoItem_VTable* vtbl, size_t vdata);
-VirtualQGraphicsVideoItem* QGraphicsVideoItem_new2(const QGraphicsVideoItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent);
+VirtualQGraphicsVideoItem* QGraphicsVideoItem_new_parent(const QGraphicsVideoItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent);
 
 void QGraphicsVideoItem_virtbase(QGraphicsVideoItem* src, QGraphicsObject** outptr_QGraphicsObject, QMediaBindableInterface** outptr_QMediaBindableInterface);
 QMetaObject* QGraphicsVideoItem_metaObject(const QGraphicsVideoItem* self);
 void* QGraphicsVideoItem_metacast(QGraphicsVideoItem* self, const char* param1);
 int QGraphicsVideoItem_metacall(QGraphicsVideoItem* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsVideoItem_tr(const char* s);
-struct seaqt_string QGraphicsVideoItem_trUtf8(const char* s);
+struct seaqt_string QGraphicsVideoItem_tr_s(const char* s);
+struct seaqt_string QGraphicsVideoItem_trUtf8_s(const char* s);
 QMediaObject* QGraphicsVideoItem_mediaObject(const QGraphicsVideoItem* self);
 QAbstractVideoSurface* QGraphicsVideoItem_videoSurface(const QGraphicsVideoItem* self);
 int QGraphicsVideoItem_aspectRatioMode(const QGraphicsVideoItem* self);
@@ -154,10 +154,10 @@ void QGraphicsVideoItem_connect_nativeSizeChanged(QGraphicsVideoItem* self, intp
 void QGraphicsVideoItem_timerEvent(QGraphicsVideoItem* self, QTimerEvent* event);
 QVariant* QGraphicsVideoItem_itemChange(QGraphicsVideoItem* self, int change, QVariant* value);
 bool QGraphicsVideoItem_setMediaObject(QGraphicsVideoItem* self, QMediaObject* object);
-struct seaqt_string QGraphicsVideoItem_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsVideoItem_tr3(const char* s, const char* c, int n);
-struct seaqt_string QGraphicsVideoItem_trUtf82(const char* s, const char* c);
-struct seaqt_string QGraphicsVideoItem_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsVideoItem_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsVideoItem_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsVideoItem_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsVideoItem_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGraphicsVideoItem_virtualbase_metaObject(const VirtualQGraphicsVideoItem* self);
 void* QGraphicsVideoItem_virtualbase_metacast(VirtualQGraphicsVideoItem* self, const char* param1);

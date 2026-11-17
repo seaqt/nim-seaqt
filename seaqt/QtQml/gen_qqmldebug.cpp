@@ -22,7 +22,7 @@ QQmlDebuggingEnabler* QQmlDebuggingEnabler_new() {
 	return new (std::nothrow) QQmlDebuggingEnabler();
 }
 
-QQmlDebuggingEnabler* QQmlDebuggingEnabler_new2(bool printWarning) {
+QQmlDebuggingEnabler* QQmlDebuggingEnabler_new_printWarning(bool printWarning) {
 	return new (std::nothrow) QQmlDebuggingEnabler(printWarning);
 }
 
@@ -117,35 +117,35 @@ void QQmlDebuggingEnabler_setServices(struct seaqt_array /* of struct seaqt_stri
 	QQmlDebuggingEnabler::setServices(services_QList);
 }
 
-bool QQmlDebuggingEnabler_startTcpDebugServer(int port) {
+bool QQmlDebuggingEnabler_startTcpDebugServer_port(int port) {
 	return QQmlDebuggingEnabler::startTcpDebugServer(static_cast<int>(port));
 }
 
-bool QQmlDebuggingEnabler_connectToLocalDebugger(struct seaqt_string socketFileName) {
+bool QQmlDebuggingEnabler_connectToLocalDebugger_socketFileName(struct seaqt_string socketFileName) {
 	QString socketFileName_QString = QString::fromUtf8(socketFileName.data, socketFileName.len);
 	return QQmlDebuggingEnabler::connectToLocalDebugger(socketFileName_QString);
 }
 
-bool QQmlDebuggingEnabler_startDebugConnector(struct seaqt_string pluginName) {
+bool QQmlDebuggingEnabler_startDebugConnector_pluginName(struct seaqt_string pluginName) {
 	QString pluginName_QString = QString::fromUtf8(pluginName.data, pluginName.len);
 	return QQmlDebuggingEnabler::startDebugConnector(pluginName_QString);
 }
 
-bool QQmlDebuggingEnabler_startTcpDebugServer2(int port, int mode) {
+bool QQmlDebuggingEnabler_startTcpDebugServer_port_mode(int port, int mode) {
 	return QQmlDebuggingEnabler::startTcpDebugServer(static_cast<int>(port), static_cast<QQmlDebuggingEnabler::StartMode>(mode));
 }
 
-bool QQmlDebuggingEnabler_startTcpDebugServer3(int port, int mode, struct seaqt_string hostName) {
+bool QQmlDebuggingEnabler_startTcpDebugServer_port_mode_hostName(int port, int mode, struct seaqt_string hostName) {
 	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
 	return QQmlDebuggingEnabler::startTcpDebugServer(static_cast<int>(port), static_cast<QQmlDebuggingEnabler::StartMode>(mode), hostName_QString);
 }
 
-bool QQmlDebuggingEnabler_connectToLocalDebugger2(struct seaqt_string socketFileName, int mode) {
+bool QQmlDebuggingEnabler_connectToLocalDebugger_socketFileName_mode(struct seaqt_string socketFileName, int mode) {
 	QString socketFileName_QString = QString::fromUtf8(socketFileName.data, socketFileName.len);
 	return QQmlDebuggingEnabler::connectToLocalDebugger(socketFileName_QString, static_cast<QQmlDebuggingEnabler::StartMode>(mode));
 }
 
-bool QQmlDebuggingEnabler_startDebugConnector2(struct seaqt_string pluginName, struct seaqt_map /* of struct seaqt_string to QVariant* */  configuration) {
+bool QQmlDebuggingEnabler_startDebugConnector_pluginName_configuration(struct seaqt_string pluginName, struct seaqt_map /* of struct seaqt_string to QVariant* */  configuration) {
 	QString pluginName_QString = QString::fromUtf8(pluginName.data, pluginName.len);
 	QVariantHash configuration_QMap;
 	configuration_QMap.reserve(configuration.len);

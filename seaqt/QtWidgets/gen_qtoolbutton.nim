@@ -85,8 +85,8 @@ type cQToolButton*{.exportc: "QToolButton", incompleteStruct.} = object
 proc fcQToolButton_metaObject(self: pointer): pointer {.importc: "QToolButton_metaObject".}
 proc fcQToolButton_metacast(self: pointer, param1: cstring): pointer {.importc: "QToolButton_metacast".}
 proc fcQToolButton_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QToolButton_metacall".}
-proc fcQToolButton_tr(s: cstring): struct_seaqt_string {.importc: "QToolButton_tr".}
-proc fcQToolButton_trUtf8(s: cstring): struct_seaqt_string {.importc: "QToolButton_trUtf8".}
+proc fcQToolButton_trS(s: cstring): struct_seaqt_string {.importc: "QToolButton_tr_s".}
+proc fcQToolButton_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QToolButton_trUtf8_s".}
 proc fcQToolButton_sizeHint(self: pointer): pointer {.importc: "QToolButton_sizeHint".}
 proc fcQToolButton_minimumSizeHint(self: pointer): pointer {.importc: "QToolButton_minimumSizeHint".}
 proc fcQToolButton_toolButtonStyle(self: pointer): cint {.importc: "QToolButton_toolButtonStyle".}
@@ -104,10 +104,10 @@ proc fcQToolButton_setToolButtonStyle(self: pointer, style: cint): void {.import
 proc fcQToolButton_setDefaultAction(self: pointer, defaultAction: pointer): void {.importc: "QToolButton_setDefaultAction".}
 proc fcQToolButton_triggered(self: pointer, param1: pointer): void {.importc: "QToolButton_triggered".}
 proc fcQToolButton_connect_triggered(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolButton_connect_triggered".}
-proc fcQToolButton_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QToolButton_tr2".}
-proc fcQToolButton_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QToolButton_tr3".}
-proc fcQToolButton_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QToolButton_trUtf82".}
-proc fcQToolButton_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QToolButton_trUtf83".}
+proc fcQToolButton_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QToolButton_tr_s_c".}
+proc fcQToolButton_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QToolButton_tr_s_c_n".}
+proc fcQToolButton_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QToolButton_trUtf8_s_c".}
+proc fcQToolButton_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QToolButton_trUtf8_s_c_n".}
 proc fcQToolButton_vdata(self: pointer): ptr pointer {.importc: "QToolButton_vdata".}
 proc fvdata_cQToolButton(self: pointer): pointer {.importc: "vdata_QToolButton".}
 
@@ -230,7 +230,7 @@ proc fcQToolButton_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQToolButton_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QToolButton_protectedbase_receivers".}
 proc fcQToolButton_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QToolButton_protectedbase_isSignalConnected".}
 proc fcQToolButton_new(vtbl: pointer, vdata: csize_t): ptr cQToolButton {.importc: "QToolButton_new".}
-proc fcQToolButton_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQToolButton {.importc: "QToolButton_new2".}
+proc fcQToolButton_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQToolButton {.importc: "QToolButton_new_parent".}
 proc fcQToolButton_staticMetaObject(): pointer {.importc: "QToolButton_staticMetaObject".}
 
 proc metaObject*(self: gen_qtoolbutton_types.QToolButton): gen_qobjectdefs_types.QMetaObject =
@@ -243,13 +243,13 @@ proc metacall*(self: gen_qtoolbutton_types.QToolButton, param1: cint, param2: ci
   fcQToolButton_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtoolbutton_types.QToolButton, s: cstring): string =
-  let v_ms = fcQToolButton_tr(s)
+  let v_ms = fcQToolButton_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtoolbutton_types.QToolButton, s: cstring): string =
-  let v_ms = fcQToolButton_trUtf8(s)
+  let v_ms = fcQToolButton_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -320,25 +320,25 @@ proc onTriggered*(self: gen_qtoolbutton_types.QToolButton, slot: QToolButtontrig
   fcQToolButton_connect_triggered(self.h, cast[int](addr tmp[]), fcQToolButton_slot_callback_triggered, fcQToolButton_slot_callback_triggered_release)
 
 proc tr*(_: type gen_qtoolbutton_types.QToolButton, s: cstring, c: cstring): string =
-  let v_ms = fcQToolButton_tr2(s, c)
+  let v_ms = fcQToolButton_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtoolbutton_types.QToolButton, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQToolButton_tr3(s, c, n)
+  let v_ms = fcQToolButton_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtoolbutton_types.QToolButton, s: cstring, c: cstring): string =
-  let v_ms = fcQToolButton_trUtf82(s, c)
+  let v_ms = fcQToolButton_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtoolbutton_types.QToolButton, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQToolButton_trUtf83(s, c, n)
+  let v_ms = fcQToolButton_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

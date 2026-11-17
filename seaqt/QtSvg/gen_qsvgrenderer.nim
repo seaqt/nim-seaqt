@@ -67,14 +67,14 @@ type cQSvgRenderer*{.exportc: "QSvgRenderer", incompleteStruct.} = object
 proc fcQSvgRenderer_metaObject(self: pointer): pointer {.importc: "QSvgRenderer_metaObject".}
 proc fcQSvgRenderer_metacast(self: pointer, param1: cstring): pointer {.importc: "QSvgRenderer_metacast".}
 proc fcQSvgRenderer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSvgRenderer_metacall".}
-proc fcQSvgRenderer_tr(s: cstring): struct_seaqt_string {.importc: "QSvgRenderer_tr".}
-proc fcQSvgRenderer_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSvgRenderer_trUtf8".}
+proc fcQSvgRenderer_trS(s: cstring): struct_seaqt_string {.importc: "QSvgRenderer_tr_s".}
+proc fcQSvgRenderer_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSvgRenderer_trUtf8_s".}
 proc fcQSvgRenderer_isValid(self: pointer): bool {.importc: "QSvgRenderer_isValid".}
 proc fcQSvgRenderer_defaultSize(self: pointer): pointer {.importc: "QSvgRenderer_defaultSize".}
 proc fcQSvgRenderer_viewBox(self: pointer): pointer {.importc: "QSvgRenderer_viewBox".}
 proc fcQSvgRenderer_viewBoxF(self: pointer): pointer {.importc: "QSvgRenderer_viewBoxF".}
-proc fcQSvgRenderer_setViewBox(self: pointer, viewbox: pointer): void {.importc: "QSvgRenderer_setViewBox".}
-proc fcQSvgRenderer_setViewBoxWithViewbox(self: pointer, viewbox: pointer): void {.importc: "QSvgRenderer_setViewBoxWithViewbox".}
+proc fcQSvgRenderer_setViewBox_QRect(self: pointer, viewbox: pointer): void {.importc: "QSvgRenderer_setViewBox_QRect".}
+proc fcQSvgRenderer_setViewBox_QRectF(self: pointer, viewbox: pointer): void {.importc: "QSvgRenderer_setViewBox_QRectF".}
 proc fcQSvgRenderer_aspectRatioMode(self: pointer): cint {.importc: "QSvgRenderer_aspectRatioMode".}
 proc fcQSvgRenderer_setAspectRatioMode(self: pointer, mode: cint): void {.importc: "QSvgRenderer_setAspectRatioMode".}
 proc fcQSvgRenderer_animated(self: pointer): bool {.importc: "QSvgRenderer_animated".}
@@ -87,19 +87,19 @@ proc fcQSvgRenderer_boundsOnElement(self: pointer, id: struct_seaqt_string): poi
 proc fcQSvgRenderer_elementExists(self: pointer, id: struct_seaqt_string): bool {.importc: "QSvgRenderer_elementExists".}
 proc fcQSvgRenderer_matrixForElement(self: pointer, id: struct_seaqt_string): pointer {.importc: "QSvgRenderer_matrixForElement".}
 proc fcQSvgRenderer_transformForElement(self: pointer, id: struct_seaqt_string): pointer {.importc: "QSvgRenderer_transformForElement".}
-proc fcQSvgRenderer_load(self: pointer, filename: struct_seaqt_string): bool {.importc: "QSvgRenderer_load".}
-proc fcQSvgRenderer_loadWithContents(self: pointer, contents: struct_seaqt_string): bool {.importc: "QSvgRenderer_loadWithContents".}
-proc fcQSvgRenderer_load2(self: pointer, contents: pointer): bool {.importc: "QSvgRenderer_load2".}
-proc fcQSvgRenderer_render(self: pointer, p: pointer): void {.importc: "QSvgRenderer_render".}
-proc fcQSvgRenderer_render2(self: pointer, p: pointer, bounds: pointer): void {.importc: "QSvgRenderer_render2".}
-proc fcQSvgRenderer_render3(self: pointer, p: pointer, elementId: struct_seaqt_string): void {.importc: "QSvgRenderer_render3".}
+proc fcQSvgRenderer_load_QString(self: pointer, filename: struct_seaqt_string): bool {.importc: "QSvgRenderer_load_QString".}
+proc fcQSvgRenderer_load_QByteArray(self: pointer, contents: struct_seaqt_string): bool {.importc: "QSvgRenderer_load_QByteArray".}
+proc fcQSvgRenderer_load_QXmlStreamReader(self: pointer, contents: pointer): bool {.importc: "QSvgRenderer_load_QXmlStreamReader".}
+proc fcQSvgRenderer_renderP(self: pointer, p: pointer): void {.importc: "QSvgRenderer_render_p".}
+proc fcQSvgRenderer_renderPBounds(self: pointer, p: pointer, bounds: pointer): void {.importc: "QSvgRenderer_render_p_bounds".}
+proc fcQSvgRenderer_renderPElementId(self: pointer, p: pointer, elementId: struct_seaqt_string): void {.importc: "QSvgRenderer_render_p_elementId".}
 proc fcQSvgRenderer_repaintNeeded(self: pointer): void {.importc: "QSvgRenderer_repaintNeeded".}
 proc fcQSvgRenderer_connect_repaintNeeded(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSvgRenderer_connect_repaintNeeded".}
-proc fcQSvgRenderer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSvgRenderer_tr2".}
-proc fcQSvgRenderer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSvgRenderer_tr3".}
-proc fcQSvgRenderer_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSvgRenderer_trUtf82".}
-proc fcQSvgRenderer_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSvgRenderer_trUtf83".}
-proc fcQSvgRenderer_render4(self: pointer, p: pointer, elementId: struct_seaqt_string, bounds: pointer): void {.importc: "QSvgRenderer_render4".}
+proc fcQSvgRenderer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSvgRenderer_tr_s_c".}
+proc fcQSvgRenderer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSvgRenderer_tr_s_c_n".}
+proc fcQSvgRenderer_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSvgRenderer_trUtf8_s_c".}
+proc fcQSvgRenderer_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSvgRenderer_trUtf8_s_c_n".}
+proc fcQSvgRenderer_renderPElementIdBounds(self: pointer, p: pointer, elementId: struct_seaqt_string, bounds: pointer): void {.importc: "QSvgRenderer_render_p_elementId_bounds".}
 proc fcQSvgRenderer_vdata(self: pointer): ptr pointer {.importc: "QSvgRenderer_vdata".}
 proc fvdata_cQSvgRenderer(self: pointer): pointer {.importc: "vdata_QSvgRenderer".}
 
@@ -130,13 +130,13 @@ proc fcQSvgRenderer_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQSvgRenderer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSvgRenderer_protectedbase_receivers".}
 proc fcQSvgRenderer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSvgRenderer_protectedbase_isSignalConnected".}
 proc fcQSvgRenderer_new(vtbl: pointer, vdata: csize_t): ptr cQSvgRenderer {.importc: "QSvgRenderer_new".}
-proc fcQSvgRenderer_new2(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string): ptr cQSvgRenderer {.importc: "QSvgRenderer_new2".}
-proc fcQSvgRenderer_new3(vtbl: pointer, vdata: csize_t, contents: struct_seaqt_string): ptr cQSvgRenderer {.importc: "QSvgRenderer_new3".}
-proc fcQSvgRenderer_new4(vtbl: pointer, vdata: csize_t, contents: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new4".}
-proc fcQSvgRenderer_new5(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new5".}
-proc fcQSvgRenderer_new6(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string, parent: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new6".}
-proc fcQSvgRenderer_new7(vtbl: pointer, vdata: csize_t, contents: struct_seaqt_string, parent: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new7".}
-proc fcQSvgRenderer_new8(vtbl: pointer, vdata: csize_t, contents: pointer, parent: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new8".}
+proc fcQSvgRenderer_new2(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string): ptr cQSvgRenderer {.importc: "QSvgRenderer_new_QString".}
+proc fcQSvgRenderer_new3(vtbl: pointer, vdata: csize_t, contents: struct_seaqt_string): ptr cQSvgRenderer {.importc: "QSvgRenderer_new_QByteArray".}
+proc fcQSvgRenderer_new4(vtbl: pointer, vdata: csize_t, contents: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new_QXmlStreamReader".}
+proc fcQSvgRenderer_new5(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new_QObject".}
+proc fcQSvgRenderer_new6(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string, parent: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new_QString_QObject".}
+proc fcQSvgRenderer_new7(vtbl: pointer, vdata: csize_t, contents: struct_seaqt_string, parent: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new_QByteArray_QObject".}
+proc fcQSvgRenderer_new8(vtbl: pointer, vdata: csize_t, contents: pointer, parent: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new_QXmlStreamReader_QObject".}
 proc fcQSvgRenderer_staticMetaObject(): pointer {.importc: "QSvgRenderer_staticMetaObject".}
 
 proc metaObject*(self: gen_qsvgrenderer_types.QSvgRenderer): gen_qobjectdefs_types.QMetaObject =
@@ -149,13 +149,13 @@ proc metacall*(self: gen_qsvgrenderer_types.QSvgRenderer, param1: cint, param2: 
   fcQSvgRenderer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring): string =
-  let v_ms = fcQSvgRenderer_tr(s)
+  let v_ms = fcQSvgRenderer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring): string =
-  let v_ms = fcQSvgRenderer_trUtf8(s)
+  let v_ms = fcQSvgRenderer_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -173,10 +173,10 @@ proc viewBoxF*(self: gen_qsvgrenderer_types.QSvgRenderer): gen_qrect_types.QRect
   gen_qrect_types.QRectF(h: fcQSvgRenderer_viewBoxF(self.h), owned: true)
 
 proc setViewBox*(self: gen_qsvgrenderer_types.QSvgRenderer, viewbox: gen_qrect_types.QRect): void =
-  fcQSvgRenderer_setViewBox(self.h, viewbox.h)
+  fcQSvgRenderer_setViewBox_QRect(self.h, viewbox.h)
 
 proc setViewBox*(self: gen_qsvgrenderer_types.QSvgRenderer, viewbox: gen_qrect_types.QRectF): void =
-  fcQSvgRenderer_setViewBoxWithViewbox(self.h, viewbox.h)
+  fcQSvgRenderer_setViewBox_QRectF(self.h, viewbox.h)
 
 proc aspectRatioMode*(self: gen_qsvgrenderer_types.QSvgRenderer): cint =
   cint(fcQSvgRenderer_aspectRatioMode(self.h))
@@ -215,22 +215,22 @@ proc transformForElement*(self: gen_qsvgrenderer_types.QSvgRenderer, id: openArr
   gen_qtransform_types.QTransform(h: fcQSvgRenderer_transformForElement(self.h, struct_seaqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id)))), owned: true)
 
 proc load*(self: gen_qsvgrenderer_types.QSvgRenderer, filename: openArray[char]): bool =
-  fcQSvgRenderer_load(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
+  fcQSvgRenderer_load_QString(self.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
 proc load*(self: gen_qsvgrenderer_types.QSvgRenderer, contents: openArray[byte]): bool =
-  fcQSvgRenderer_loadWithContents(self.h, struct_seaqt_string(data: if len(contents) > 0: addr contents[0] else: nil, len: csize_t(len(contents))))
+  fcQSvgRenderer_load_QByteArray(self.h, struct_seaqt_string(data: if len(contents) > 0: addr contents[0] else: nil, len: csize_t(len(contents))))
 
 proc load*(self: gen_qsvgrenderer_types.QSvgRenderer, contents: gen_qxmlstream_types.QXmlStreamReader): bool =
-  fcQSvgRenderer_load2(self.h, contents.h)
+  fcQSvgRenderer_load_QXmlStreamReader(self.h, contents.h)
 
 proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QPainter): void =
-  fcQSvgRenderer_render(self.h, p.h)
+  fcQSvgRenderer_renderP(self.h, p.h)
 
 proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QPainter, bounds: gen_qrect_types.QRectF): void =
-  fcQSvgRenderer_render2(self.h, p.h, bounds.h)
+  fcQSvgRenderer_renderPBounds(self.h, p.h, bounds.h)
 
 proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QPainter, elementId: openArray[char]): void =
-  fcQSvgRenderer_render3(self.h, p.h, struct_seaqt_string(data: if len(elementId) > 0: addr elementId[0] else: nil, len: csize_t(len(elementId))))
+  fcQSvgRenderer_renderPElementId(self.h, p.h, struct_seaqt_string(data: if len(elementId) > 0: addr elementId[0] else: nil, len: csize_t(len(elementId))))
 
 proc repaintNeeded*(self: gen_qsvgrenderer_types.QSvgRenderer): void =
   fcQSvgRenderer_repaintNeeded(self.h)
@@ -251,31 +251,31 @@ proc onRepaintNeeded*(self: gen_qsvgrenderer_types.QSvgRenderer, slot: QSvgRende
   fcQSvgRenderer_connect_repaintNeeded(self.h, cast[int](addr tmp[]), fcQSvgRenderer_slot_callback_repaintNeeded, fcQSvgRenderer_slot_callback_repaintNeeded_release)
 
 proc tr*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring, c: cstring): string =
-  let v_ms = fcQSvgRenderer_tr2(s, c)
+  let v_ms = fcQSvgRenderer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSvgRenderer_tr3(s, c, n)
+  let v_ms = fcQSvgRenderer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring, c: cstring): string =
-  let v_ms = fcQSvgRenderer_trUtf82(s, c)
+  let v_ms = fcQSvgRenderer_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSvgRenderer_trUtf83(s, c, n)
+  let v_ms = fcQSvgRenderer_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QPainter, elementId: openArray[char], bounds: gen_qrect_types.QRectF): void =
-  fcQSvgRenderer_render4(self.h, p.h, struct_seaqt_string(data: if len(elementId) > 0: addr elementId[0] else: nil, len: csize_t(len(elementId))), bounds.h)
+  fcQSvgRenderer_renderPElementIdBounds(self.h, p.h, struct_seaqt_string(data: if len(elementId) > 0: addr elementId[0] else: nil, len: csize_t(len(elementId))), bounds.h)
 
 type QSvgRenderermetaObjectProc* = proc(self: QSvgRenderer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSvgRenderermetacastProc* = proc(self: QSvgRenderer, param1: cstring): pointer {.raises: [], gcsafe.}

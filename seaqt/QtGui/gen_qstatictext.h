@@ -29,10 +29,10 @@ typedef struct QTransform QTransform;
 #endif
 
 QStaticText* QStaticText_new();
-QStaticText* QStaticText_new2(struct seaqt_string text);
-QStaticText* QStaticText_new3(QStaticText* other);
+QStaticText* QStaticText_new_text(struct seaqt_string text);
+QStaticText* QStaticText_new_from(QStaticText* from);
 
-void QStaticText_operatorAssign(QStaticText* self, QStaticText* param1);
+void QStaticText_operatorAssign(QStaticText* self, QStaticText* from);
 void QStaticText_swap(QStaticText* self, QStaticText* other);
 void QStaticText_setText(QStaticText* self, struct seaqt_string text);
 struct seaqt_string QStaticText_text(const QStaticText* self);
@@ -48,8 +48,8 @@ void QStaticText_setPerformanceHint(QStaticText* self, int performanceHint);
 int QStaticText_performanceHint(const QStaticText* self);
 bool QStaticText_operatorEqual(const QStaticText* self, QStaticText* param1);
 bool QStaticText_operatorNotEqual(const QStaticText* self, QStaticText* param1);
-void QStaticText_prepareWithMatrix(QStaticText* self, QTransform* matrix);
-void QStaticText_prepare2(QStaticText* self, QTransform* matrix, QFont* font);
+void QStaticText_prepare_matrix(QStaticText* self, QTransform* matrix);
+void QStaticText_prepare_matrix_font(QStaticText* self, QTransform* matrix, QFont* font);
 
 void QStaticText_delete(QStaticText* self);
 

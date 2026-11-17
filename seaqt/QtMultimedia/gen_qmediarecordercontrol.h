@@ -34,8 +34,8 @@ void QMediaRecorderControl_virtbase(QMediaRecorderControl* src, QMediaControl** 
 QMetaObject* QMediaRecorderControl_metaObject(const QMediaRecorderControl* self);
 void* QMediaRecorderControl_metacast(QMediaRecorderControl* self, const char* param1);
 int QMediaRecorderControl_metacall(QMediaRecorderControl* self, int param1, int param2, void** param3);
-struct seaqt_string QMediaRecorderControl_tr(const char* s);
-struct seaqt_string QMediaRecorderControl_trUtf8(const char* s);
+struct seaqt_string QMediaRecorderControl_tr_s(const char* s);
+struct seaqt_string QMediaRecorderControl_trUtf8_s(const char* s);
 QUrl* QMediaRecorderControl_outputLocation(const QMediaRecorderControl* self);
 bool QMediaRecorderControl_setOutputLocation(QMediaRecorderControl* self, QUrl* location);
 int QMediaRecorderControl_state(const QMediaRecorderControl* self);
@@ -61,10 +61,10 @@ void QMediaRecorderControl_connect_error(QMediaRecorderControl* self, intptr_t s
 void QMediaRecorderControl_setState(QMediaRecorderControl* self, int state);
 void QMediaRecorderControl_setMuted(QMediaRecorderControl* self, bool muted);
 void QMediaRecorderControl_setVolume(QMediaRecorderControl* self, double volume);
-struct seaqt_string QMediaRecorderControl_tr2(const char* s, const char* c);
-struct seaqt_string QMediaRecorderControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QMediaRecorderControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QMediaRecorderControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QMediaRecorderControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMediaRecorderControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QMediaRecorderControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QMediaRecorderControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QMediaRecorderControl_staticMetaObject();
 void QMediaRecorderControl_delete(QMediaRecorderControl* self);

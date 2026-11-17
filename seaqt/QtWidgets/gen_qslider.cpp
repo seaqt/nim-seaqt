@@ -694,7 +694,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QSlider_protectedbase_initStyleOption(const VirtualQSlider* self, QStyleOptionSlider* option);
-	friend void QSlider_protectedbase_setRepeatAction(VirtualQSlider* self, int action);
+	friend void QSlider_protectedbase_setRepeatAction_action(VirtualQSlider* self, int action);
 	friend int QSlider_protectedbase_repeatAction(const VirtualQSlider* self);
 	friend void QSlider_protectedbase_updateMicroFocus(VirtualQSlider* self);
 	friend void QSlider_protectedbase_create(VirtualQSlider* self);
@@ -712,17 +712,17 @@ VirtualQSlider* QSlider_new(const QSlider_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQSlider(vtbl) : nullptr;
 }
 
-VirtualQSlider* QSlider_new2(const QSlider_VTable* vtbl, size_t vdata, int orientation) {
+VirtualQSlider* QSlider_new_orientation(const QSlider_VTable* vtbl, size_t vdata, int orientation) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSlider>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSlider(vtbl, static_cast<Qt::Orientation>(orientation)) : nullptr;
 }
 
-VirtualQSlider* QSlider_new3(const QSlider_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQSlider* QSlider_new_parent(const QSlider_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSlider>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSlider(vtbl, parent) : nullptr;
 }
 
-VirtualQSlider* QSlider_new4(const QSlider_VTable* vtbl, size_t vdata, int orientation, QWidget* parent) {
+VirtualQSlider* QSlider_new_orientation_parent(const QSlider_VTable* vtbl, size_t vdata, int orientation, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSlider>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSlider(vtbl, static_cast<Qt::Orientation>(orientation), parent) : nullptr;
 }
@@ -743,7 +743,7 @@ int QSlider_metacall(QSlider* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSlider_tr(const char* s) {
+struct seaqt_string QSlider_tr_s(const char* s) {
 	QString _ret = QSlider::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -754,7 +754,7 @@ struct seaqt_string QSlider_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QSlider_trUtf8(const char* s) {
+struct seaqt_string QSlider_trUtf8_s(const char* s) {
 	QString _ret = QSlider::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -794,7 +794,7 @@ bool QSlider_event(QSlider* self, QEvent* event) {
 	return self->event(event);
 }
 
-struct seaqt_string QSlider_tr2(const char* s, const char* c) {
+struct seaqt_string QSlider_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSlider::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -805,7 +805,7 @@ struct seaqt_string QSlider_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSlider_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSlider_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSlider::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -816,7 +816,7 @@ struct seaqt_string QSlider_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QSlider_trUtf82(const char* s, const char* c) {
+struct seaqt_string QSlider_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QSlider::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -827,7 +827,7 @@ struct seaqt_string QSlider_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSlider_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QSlider_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSlider::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1102,7 +1102,7 @@ void QSlider_protectedbase_initStyleOption(const VirtualQSlider* self, QStyleOpt
 	self->initStyleOption(option);
 }
 
-void QSlider_protectedbase_setRepeatAction(VirtualQSlider* self, int action) {
+void QSlider_protectedbase_setRepeatAction_action(VirtualQSlider* self, int action) {
 	self->setRepeatAction(static_cast<VirtualQSlider::SliderAction>(action));
 }
 

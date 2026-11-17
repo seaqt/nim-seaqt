@@ -732,7 +732,7 @@ public:
 	friend void QPdfView_virtualbase_disconnectNotify(VirtualQPdfView* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QPdfView_protectedbase_setViewportMargins(VirtualQPdfView* self, int left, int top, int right, int bottom);
+	friend void QPdfView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQPdfView* self, int left, int top, int right, int bottom);
 	friend QMargins* QPdfView_protectedbase_viewportMargins(const VirtualQPdfView* self);
 	friend void QPdfView_protectedbase_drawFrame(VirtualQPdfView* self, QPainter* param1);
 	friend void QPdfView_protectedbase_initStyleOption(const VirtualQPdfView* self, QStyleOptionFrame* option);
@@ -752,7 +752,7 @@ VirtualQPdfView* QPdfView_new(const QPdfView_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQPdfView(vtbl) : nullptr;
 }
 
-VirtualQPdfView* QPdfView_new2(const QPdfView_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQPdfView* QPdfView_new_parent(const QPdfView_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPdfView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPdfView(vtbl, parent) : nullptr;
 }
@@ -773,7 +773,7 @@ int QPdfView_metacall(QPdfView* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPdfView_tr(const char* s) {
+struct seaqt_string QPdfView_tr_s(const char* s) {
 	QString _ret = QPdfView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -784,7 +784,7 @@ struct seaqt_string QPdfView_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QPdfView_trUtf8(const char* s) {
+struct seaqt_string QPdfView_trUtf8_s(const char* s) {
 	QString _ret = QPdfView::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -949,7 +949,7 @@ void QPdfView_connect_documentMarginsChanged(QPdfView* self, intptr_t slot, void
 	QPdfView::connect(self, static_cast<void (QPdfView::*)(QMargins)>(&QPdfView::documentMarginsChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QPdfView_tr2(const char* s, const char* c) {
+struct seaqt_string QPdfView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPdfView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -960,7 +960,7 @@ struct seaqt_string QPdfView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPdfView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -971,7 +971,7 @@ struct seaqt_string QPdfView_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QPdfView_trUtf82(const char* s, const char* c) {
+struct seaqt_string QPdfView_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QPdfView::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -982,7 +982,7 @@ struct seaqt_string QPdfView_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfView_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QPdfView_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfView::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1268,7 +1268,7 @@ void QPdfView_virtualbase_disconnectNotify(VirtualQPdfView* self, QMetaMethod* s
 	self->QPdfView::disconnectNotify(*signal);
 }
 
-void QPdfView_protectedbase_setViewportMargins(VirtualQPdfView* self, int left, int top, int right, int bottom) {
+void QPdfView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQPdfView* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

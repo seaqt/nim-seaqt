@@ -63,24 +63,24 @@ typedef struct QSyntaxHighlighter_VTable{
 void* QSyntaxHighlighter_vdata(VirtualQSyntaxHighlighter* self);
 VirtualQSyntaxHighlighter* vdata_QSyntaxHighlighter(void* vdata);
 
-VirtualQSyntaxHighlighter* QSyntaxHighlighter_new(const QSyntaxHighlighter_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQSyntaxHighlighter* QSyntaxHighlighter_new2(const QSyntaxHighlighter_VTable* vtbl, size_t vdata, QTextDocument* parent);
+VirtualQSyntaxHighlighter* QSyntaxHighlighter_new_QObject(const QSyntaxHighlighter_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSyntaxHighlighter* QSyntaxHighlighter_new_QTextDocument(const QSyntaxHighlighter_VTable* vtbl, size_t vdata, QTextDocument* parent);
 
 void QSyntaxHighlighter_virtbase(QSyntaxHighlighter* src, QObject** outptr_QObject);
 QMetaObject* QSyntaxHighlighter_metaObject(const QSyntaxHighlighter* self);
 void* QSyntaxHighlighter_metacast(QSyntaxHighlighter* self, const char* param1);
 int QSyntaxHighlighter_metacall(QSyntaxHighlighter* self, int param1, int param2, void** param3);
-struct seaqt_string QSyntaxHighlighter_tr(const char* s);
-struct seaqt_string QSyntaxHighlighter_trUtf8(const char* s);
+struct seaqt_string QSyntaxHighlighter_tr_s(const char* s);
+struct seaqt_string QSyntaxHighlighter_trUtf8_s(const char* s);
 void QSyntaxHighlighter_setDocument(QSyntaxHighlighter* self, QTextDocument* doc);
 QTextDocument* QSyntaxHighlighter_document(const QSyntaxHighlighter* self);
 void QSyntaxHighlighter_rehighlight(QSyntaxHighlighter* self);
 void QSyntaxHighlighter_rehighlightBlock(QSyntaxHighlighter* self, QTextBlock* block);
 void QSyntaxHighlighter_highlightBlock(QSyntaxHighlighter* self, struct seaqt_string text);
-struct seaqt_string QSyntaxHighlighter_tr2(const char* s, const char* c);
-struct seaqt_string QSyntaxHighlighter_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSyntaxHighlighter_trUtf82(const char* s, const char* c);
-struct seaqt_string QSyntaxHighlighter_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QSyntaxHighlighter_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSyntaxHighlighter_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSyntaxHighlighter_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSyntaxHighlighter_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSyntaxHighlighter_virtualbase_metaObject(const VirtualQSyntaxHighlighter* self);
 void* QSyntaxHighlighter_virtualbase_metacast(VirtualQSyntaxHighlighter* self, const char* param1);
@@ -94,9 +94,9 @@ void QSyntaxHighlighter_virtualbase_customEvent(VirtualQSyntaxHighlighter* self,
 void QSyntaxHighlighter_virtualbase_connectNotify(VirtualQSyntaxHighlighter* self, QMetaMethod* signal);
 void QSyntaxHighlighter_virtualbase_disconnectNotify(VirtualQSyntaxHighlighter* self, QMetaMethod* signal);
 
-void QSyntaxHighlighter_protectedbase_setFormat(VirtualQSyntaxHighlighter* self, int start, int count, QTextCharFormat* format);
-void QSyntaxHighlighter_protectedbase_setFormat2(VirtualQSyntaxHighlighter* self, int start, int count, QColor* color);
-void QSyntaxHighlighter_protectedbase_setFormat3(VirtualQSyntaxHighlighter* self, int start, int count, QFont* font);
+void QSyntaxHighlighter_protectedbase_setFormat_start_count_format(VirtualQSyntaxHighlighter* self, int start, int count, QTextCharFormat* format);
+void QSyntaxHighlighter_protectedbase_setFormat_start_count_color(VirtualQSyntaxHighlighter* self, int start, int count, QColor* color);
+void QSyntaxHighlighter_protectedbase_setFormat_start_count_font(VirtualQSyntaxHighlighter* self, int start, int count, QFont* font);
 QTextCharFormat* QSyntaxHighlighter_protectedbase_format(const VirtualQSyntaxHighlighter* self, int pos);
 int QSyntaxHighlighter_protectedbase_previousBlockState(const VirtualQSyntaxHighlighter* self);
 int QSyntaxHighlighter_protectedbase_currentBlockState(const VirtualQSyntaxHighlighter* self);

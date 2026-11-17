@@ -33,16 +33,16 @@ typedef struct QSqlRecord QSqlRecord;
 #endif
 
 QSqlDriver* QSqlDriverCreatorBase_createObject(const QSqlDriverCreatorBase* self);
-void QSqlDriverCreatorBase_operatorAssign(QSqlDriverCreatorBase* self, QSqlDriverCreatorBase* param1);
+void QSqlDriverCreatorBase_operatorAssign(QSqlDriverCreatorBase* self, QSqlDriverCreatorBase* from);
 
 void QSqlDriverCreatorBase_delete(QSqlDriverCreatorBase* self);
 
 QSqlDatabase* QSqlDatabase_new();
-QSqlDatabase* QSqlDatabase_new2(QSqlDatabase* other);
+QSqlDatabase* QSqlDatabase_new_from(QSqlDatabase* from);
 
-void QSqlDatabase_operatorAssign(QSqlDatabase* self, QSqlDatabase* other);
+void QSqlDatabase_operatorAssign(QSqlDatabase* self, QSqlDatabase* from);
 bool QSqlDatabase_open(QSqlDatabase* self);
-bool QSqlDatabase_open2(QSqlDatabase* self, struct seaqt_string user, struct seaqt_string password);
+bool QSqlDatabase_open_user_password(QSqlDatabase* self, struct seaqt_string user, struct seaqt_string password);
 void QSqlDatabase_close(QSqlDatabase* self);
 bool QSqlDatabase_isOpen(const QSqlDatabase* self);
 bool QSqlDatabase_isOpenError(const QSqlDatabase* self);
@@ -72,10 +72,10 @@ struct seaqt_string QSqlDatabase_connectionName(const QSqlDatabase* self);
 void QSqlDatabase_setNumericalPrecisionPolicy(QSqlDatabase* self, int precisionPolicy);
 int QSqlDatabase_numericalPrecisionPolicy(const QSqlDatabase* self);
 QSqlDriver* QSqlDatabase_driver(const QSqlDatabase* self);
-QSqlDatabase* QSqlDatabase_addDatabase(struct seaqt_string type);
-QSqlDatabase* QSqlDatabase_addDatabaseWithDriver(QSqlDriver* driver);
-QSqlDatabase* QSqlDatabase_cloneDatabase(QSqlDatabase* other, struct seaqt_string connectionName);
-QSqlDatabase* QSqlDatabase_cloneDatabase2(struct seaqt_string other, struct seaqt_string connectionName);
+QSqlDatabase* QSqlDatabase_addDatabase_type(struct seaqt_string type);
+QSqlDatabase* QSqlDatabase_addDatabase_driver(QSqlDriver* driver);
+QSqlDatabase* QSqlDatabase_cloneDatabase_QSqlDatabase_QString(QSqlDatabase* other, struct seaqt_string connectionName);
+QSqlDatabase* QSqlDatabase_cloneDatabase_QString_QString(struct seaqt_string other, struct seaqt_string connectionName);
 QSqlDatabase* QSqlDatabase_database();
 void QSqlDatabase_removeDatabase(struct seaqt_string connectionName);
 bool QSqlDatabase_contains();
@@ -83,14 +83,14 @@ struct seaqt_array /* of struct seaqt_string */  QSqlDatabase_drivers();
 struct seaqt_array /* of struct seaqt_string */  QSqlDatabase_connectionNames();
 void QSqlDatabase_registerSqlDriver(struct seaqt_string name, QSqlDriverCreatorBase* creator);
 bool QSqlDatabase_isDriverAvailable(struct seaqt_string name);
-struct seaqt_array /* of struct seaqt_string */  QSqlDatabase_tablesWithType(const QSqlDatabase* self, int type);
-QSqlQuery* QSqlDatabase_execWithQuery(const QSqlDatabase* self, struct seaqt_string query);
-void QSqlDatabase_setConnectOptionsWithOptions(QSqlDatabase* self, struct seaqt_string options);
-QSqlDatabase* QSqlDatabase_addDatabase2(struct seaqt_string type, struct seaqt_string connectionName);
-QSqlDatabase* QSqlDatabase_addDatabase3(QSqlDriver* driver, struct seaqt_string connectionName);
-QSqlDatabase* QSqlDatabase_databaseWithConnectionName(struct seaqt_string connectionName);
-QSqlDatabase* QSqlDatabase_database2(struct seaqt_string connectionName, bool open);
-bool QSqlDatabase_containsWithConnectionName(struct seaqt_string connectionName);
+struct seaqt_array /* of struct seaqt_string */  QSqlDatabase_tables_type(const QSqlDatabase* self, int type);
+QSqlQuery* QSqlDatabase_exec_query(const QSqlDatabase* self, struct seaqt_string query);
+void QSqlDatabase_setConnectOptions_options(QSqlDatabase* self, struct seaqt_string options);
+QSqlDatabase* QSqlDatabase_addDatabase_type_connectionName(struct seaqt_string type, struct seaqt_string connectionName);
+QSqlDatabase* QSqlDatabase_addDatabase_driver_connectionName(QSqlDriver* driver, struct seaqt_string connectionName);
+QSqlDatabase* QSqlDatabase_database_connectionName(struct seaqt_string connectionName);
+QSqlDatabase* QSqlDatabase_database_connectionName_open(struct seaqt_string connectionName, bool open);
+bool QSqlDatabase_contains_connectionName(struct seaqt_string connectionName);
 
 void QSqlDatabase_delete(QSqlDatabase* self);
 

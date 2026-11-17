@@ -66,7 +66,7 @@ VirtualQQmlIncubator* QQmlIncubator_new(const QQmlIncubator_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQQmlIncubator(vtbl) : nullptr;
 }
 
-VirtualQQmlIncubator* QQmlIncubator_new2(const QQmlIncubator_VTable* vtbl, size_t vdata, int param1) {
+VirtualQQmlIncubator* QQmlIncubator_new_QQmlIncubator_IncubationMode(const QQmlIncubator_VTable* vtbl, size_t vdata, int param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlIncubator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlIncubator(vtbl, static_cast<QQmlIncubator::IncubationMode>(param1)) : nullptr;
 }
@@ -192,11 +192,11 @@ void QQmlIncubationController_incubateFor(QQmlIncubationController* self, int ms
 	self->incubateFor(static_cast<int>(msecs));
 }
 
-void QQmlIncubationController_incubateWhile(QQmlIncubationController* self, volatile bool* flag) {
+void QQmlIncubationController_incubateWhile_volatilebool(QQmlIncubationController* self, volatile bool* flag) {
 	self->incubateWhile(flag);
 }
 
-void QQmlIncubationController_incubateWhile2(QQmlIncubationController* self, volatile bool* flag, int msecs) {
+void QQmlIncubationController_incubateWhile_volatilebool_int(QQmlIncubationController* self, volatile bool* flag, int msecs) {
 	self->incubateWhile(flag, static_cast<int>(msecs));
 }
 

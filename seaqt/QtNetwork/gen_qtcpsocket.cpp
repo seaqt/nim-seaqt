@@ -87,7 +87,7 @@ public:
 	friend void QTcpSocket_virtualbase_resume(VirtualQTcpSocket* self);
 
 	virtual void connectToHost(const QString& hostName, quint16 port, QIODevice::OpenMode mode, QAbstractSocket::NetworkLayerProtocol protocol) override {
-		if (vtbl->connectToHost == 0) {
+		if (vtbl->connectToHost_hostName_port_mode_protocol == 0) {
 			QTcpSocket::connectToHost(hostName, port, mode, protocol);
 			return;
 		}
@@ -106,10 +106,10 @@ public:
 		int sigval3 = static_cast<int>(mode_ret);
 		QAbstractSocket::NetworkLayerProtocol protocol_ret = protocol;
 		int sigval4 = static_cast<int>(protocol_ret);
-		vtbl->connectToHost(this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->connectToHost_hostName_port_mode_protocol(this, sigval1, sigval2, sigval3, sigval4);
 	}
 
-	friend void QTcpSocket_virtualbase_connectToHost(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
+	friend void QTcpSocket_virtualbase_connectToHost_hostName_port_mode_protocol(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol);
 
 	virtual void disconnectFromHost() override {
 		if (vtbl->disconnectFromHost == 0) {
@@ -519,7 +519,7 @@ VirtualQTcpSocket* QTcpSocket_new(const QTcpSocket_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQTcpSocket(vtbl) : nullptr;
 }
 
-VirtualQTcpSocket* QTcpSocket_new2(const QTcpSocket_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQTcpSocket* QTcpSocket_new_parent(const QTcpSocket_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTcpSocket>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTcpSocket(vtbl, parent) : nullptr;
 }
@@ -540,7 +540,7 @@ int QTcpSocket_metacall(QTcpSocket* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTcpSocket_tr(const char* s) {
+struct seaqt_string QTcpSocket_tr_s(const char* s) {
 	QString _ret = QTcpSocket::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -551,7 +551,7 @@ struct seaqt_string QTcpSocket_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTcpSocket_trUtf8(const char* s) {
+struct seaqt_string QTcpSocket_trUtf8_s(const char* s) {
 	QString _ret = QTcpSocket::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -562,7 +562,7 @@ struct seaqt_string QTcpSocket_trUtf8(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTcpSocket_tr2(const char* s, const char* c) {
+struct seaqt_string QTcpSocket_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTcpSocket::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -573,7 +573,7 @@ struct seaqt_string QTcpSocket_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTcpSocket_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTcpSocket_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTcpSocket::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -584,7 +584,7 @@ struct seaqt_string QTcpSocket_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QTcpSocket_trUtf82(const char* s, const char* c) {
+struct seaqt_string QTcpSocket_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QTcpSocket::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -595,7 +595,7 @@ struct seaqt_string QTcpSocket_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTcpSocket_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QTcpSocket_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTcpSocket::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -630,7 +630,7 @@ void QTcpSocket_virtualbase_resume(VirtualQTcpSocket* self) {
 	self->QTcpSocket::resume();
 }
 
-void QTcpSocket_virtualbase_connectToHost(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol) {
+void QTcpSocket_virtualbase_connectToHost_hostName_port_mode_protocol(VirtualQTcpSocket* self, struct seaqt_string hostName, unsigned short port, int mode, int protocol) {
 	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
 
 	self->QTcpSocket::connectToHost(hostName_QString, static_cast<quint16>(port), static_cast<VirtualQTcpSocket::OpenMode>(mode), static_cast<VirtualQTcpSocket::NetworkLayerProtocol>(protocol));

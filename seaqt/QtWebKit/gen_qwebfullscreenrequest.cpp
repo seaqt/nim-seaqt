@@ -18,8 +18,8 @@ QWebFullScreenRequest* QWebFullScreenRequest_new() {
 	return new (std::nothrow) QWebFullScreenRequest();
 }
 
-QWebFullScreenRequest* QWebFullScreenRequest_new2(QWebFullScreenRequest* param1) {
-	return new (std::nothrow) QWebFullScreenRequest(*param1);
+QWebFullScreenRequest* QWebFullScreenRequest_new_from(QWebFullScreenRequest* from) {
+	return new (std::nothrow) QWebFullScreenRequest(*from);
 }
 
 void QWebFullScreenRequest_accept(QWebFullScreenRequest* self) {

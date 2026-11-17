@@ -99,8 +99,8 @@ type cQDateEdit*{.exportc: "QDateEdit", incompleteStruct.} = object
 proc fcQDateTimeEdit_metaObject(self: pointer): pointer {.importc: "QDateTimeEdit_metaObject".}
 proc fcQDateTimeEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "QDateTimeEdit_metacast".}
 proc fcQDateTimeEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDateTimeEdit_metacall".}
-proc fcQDateTimeEdit_tr(s: cstring): struct_seaqt_string {.importc: "QDateTimeEdit_tr".}
-proc fcQDateTimeEdit_trUtf8(s: cstring): struct_seaqt_string {.importc: "QDateTimeEdit_trUtf8".}
+proc fcQDateTimeEdit_trS(s: cstring): struct_seaqt_string {.importc: "QDateTimeEdit_tr_s".}
+proc fcQDateTimeEdit_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QDateTimeEdit_trUtf8_s".}
 proc fcQDateTimeEdit_dateTime(self: pointer): pointer {.importc: "QDateTimeEdit_dateTime".}
 proc fcQDateTimeEdit_date(self: pointer): pointer {.importc: "QDateTimeEdit_date".}
 proc fcQDateTimeEdit_time(self: pointer): pointer {.importc: "QDateTimeEdit_time".}
@@ -157,10 +157,10 @@ proc fcQDateTimeEdit_connect_dateChanged(self: pointer, slot: int, callback: pro
 proc fcQDateTimeEdit_setDateTime(self: pointer, dateTime: pointer): void {.importc: "QDateTimeEdit_setDateTime".}
 proc fcQDateTimeEdit_setDate(self: pointer, date: pointer): void {.importc: "QDateTimeEdit_setDate".}
 proc fcQDateTimeEdit_setTime(self: pointer, time: pointer): void {.importc: "QDateTimeEdit_setTime".}
-proc fcQDateTimeEdit_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDateTimeEdit_tr2".}
-proc fcQDateTimeEdit_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDateTimeEdit_tr3".}
-proc fcQDateTimeEdit_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDateTimeEdit_trUtf82".}
-proc fcQDateTimeEdit_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDateTimeEdit_trUtf83".}
+proc fcQDateTimeEdit_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDateTimeEdit_tr_s_c".}
+proc fcQDateTimeEdit_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDateTimeEdit_tr_s_c_n".}
+proc fcQDateTimeEdit_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDateTimeEdit_trUtf8_s_c".}
+proc fcQDateTimeEdit_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDateTimeEdit_trUtf8_s_c_n".}
 proc fcQDateTimeEdit_vdata(self: pointer): ptr pointer {.importc: "QDateTimeEdit_vdata".}
 proc fvdata_cQDateTimeEdit(self: pointer): pointer {.importc: "vdata_QDateTimeEdit".}
 
@@ -293,25 +293,25 @@ proc fcQDateTimeEdit_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQDateTimeEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDateTimeEdit_protectedbase_receivers".}
 proc fcQDateTimeEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDateTimeEdit_protectedbase_isSignalConnected".}
 proc fcQDateTimeEdit_new(vtbl: pointer, vdata: csize_t): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new".}
-proc fcQDateTimeEdit_new2(vtbl: pointer, vdata: csize_t, dt: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new2".}
-proc fcQDateTimeEdit_new3(vtbl: pointer, vdata: csize_t, d: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new3".}
-proc fcQDateTimeEdit_new4(vtbl: pointer, vdata: csize_t, t: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new4".}
-proc fcQDateTimeEdit_new5(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new5".}
-proc fcQDateTimeEdit_new6(vtbl: pointer, vdata: csize_t, dt: pointer, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new6".}
-proc fcQDateTimeEdit_new7(vtbl: pointer, vdata: csize_t, d: pointer, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new7".}
-proc fcQDateTimeEdit_new8(vtbl: pointer, vdata: csize_t, t: pointer, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new8".}
+proc fcQDateTimeEdit_new2(vtbl: pointer, vdata: csize_t, dt: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new_dt".}
+proc fcQDateTimeEdit_new3(vtbl: pointer, vdata: csize_t, d: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new_d".}
+proc fcQDateTimeEdit_new4(vtbl: pointer, vdata: csize_t, t: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new_t".}
+proc fcQDateTimeEdit_new5(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new_parent".}
+proc fcQDateTimeEdit_new6(vtbl: pointer, vdata: csize_t, dt: pointer, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new_dt_parent".}
+proc fcQDateTimeEdit_new7(vtbl: pointer, vdata: csize_t, d: pointer, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new_d_parent".}
+proc fcQDateTimeEdit_new8(vtbl: pointer, vdata: csize_t, t: pointer, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new_t_parent".}
 proc fcQDateTimeEdit_staticMetaObject(): pointer {.importc: "QDateTimeEdit_staticMetaObject".}
 proc fcQTimeEdit_metaObject(self: pointer): pointer {.importc: "QTimeEdit_metaObject".}
 proc fcQTimeEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "QTimeEdit_metacast".}
 proc fcQTimeEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTimeEdit_metacall".}
-proc fcQTimeEdit_tr(s: cstring): struct_seaqt_string {.importc: "QTimeEdit_tr".}
-proc fcQTimeEdit_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTimeEdit_trUtf8".}
+proc fcQTimeEdit_trS(s: cstring): struct_seaqt_string {.importc: "QTimeEdit_tr_s".}
+proc fcQTimeEdit_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTimeEdit_trUtf8_s".}
 proc fcQTimeEdit_userTimeChanged(self: pointer, time: pointer): void {.importc: "QTimeEdit_userTimeChanged".}
 proc fcQTimeEdit_connect_userTimeChanged(self: pointer, slot: int, callback: proc (slot: int, time: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTimeEdit_connect_userTimeChanged".}
-proc fcQTimeEdit_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTimeEdit_tr2".}
-proc fcQTimeEdit_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimeEdit_tr3".}
-proc fcQTimeEdit_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTimeEdit_trUtf82".}
-proc fcQTimeEdit_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimeEdit_trUtf83".}
+proc fcQTimeEdit_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTimeEdit_tr_s_c".}
+proc fcQTimeEdit_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimeEdit_tr_s_c_n".}
+proc fcQTimeEdit_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTimeEdit_trUtf8_s_c".}
+proc fcQTimeEdit_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimeEdit_trUtf8_s_c_n".}
 proc fcQTimeEdit_vdata(self: pointer): ptr pointer {.importc: "QTimeEdit_vdata".}
 proc fvdata_cQTimeEdit(self: pointer): pointer {.importc: "vdata_QTimeEdit".}
 
@@ -444,21 +444,21 @@ proc fcQTimeEdit_protectedbase_senderSignalIndex(self: pointer): cint {.importc:
 proc fcQTimeEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTimeEdit_protectedbase_receivers".}
 proc fcQTimeEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTimeEdit_protectedbase_isSignalConnected".}
 proc fcQTimeEdit_new(vtbl: pointer, vdata: csize_t): ptr cQTimeEdit {.importc: "QTimeEdit_new".}
-proc fcQTimeEdit_new2(vtbl: pointer, vdata: csize_t, time: pointer): ptr cQTimeEdit {.importc: "QTimeEdit_new2".}
-proc fcQTimeEdit_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTimeEdit {.importc: "QTimeEdit_new3".}
-proc fcQTimeEdit_new4(vtbl: pointer, vdata: csize_t, time: pointer, parent: pointer): ptr cQTimeEdit {.importc: "QTimeEdit_new4".}
+proc fcQTimeEdit_new2(vtbl: pointer, vdata: csize_t, time: pointer): ptr cQTimeEdit {.importc: "QTimeEdit_new_time".}
+proc fcQTimeEdit_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTimeEdit {.importc: "QTimeEdit_new_parent".}
+proc fcQTimeEdit_new4(vtbl: pointer, vdata: csize_t, time: pointer, parent: pointer): ptr cQTimeEdit {.importc: "QTimeEdit_new_time_parent".}
 proc fcQTimeEdit_staticMetaObject(): pointer {.importc: "QTimeEdit_staticMetaObject".}
 proc fcQDateEdit_metaObject(self: pointer): pointer {.importc: "QDateEdit_metaObject".}
 proc fcQDateEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "QDateEdit_metacast".}
 proc fcQDateEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDateEdit_metacall".}
-proc fcQDateEdit_tr(s: cstring): struct_seaqt_string {.importc: "QDateEdit_tr".}
-proc fcQDateEdit_trUtf8(s: cstring): struct_seaqt_string {.importc: "QDateEdit_trUtf8".}
+proc fcQDateEdit_trS(s: cstring): struct_seaqt_string {.importc: "QDateEdit_tr_s".}
+proc fcQDateEdit_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QDateEdit_trUtf8_s".}
 proc fcQDateEdit_userDateChanged(self: pointer, date: pointer): void {.importc: "QDateEdit_userDateChanged".}
 proc fcQDateEdit_connect_userDateChanged(self: pointer, slot: int, callback: proc (slot: int, date: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDateEdit_connect_userDateChanged".}
-proc fcQDateEdit_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDateEdit_tr2".}
-proc fcQDateEdit_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDateEdit_tr3".}
-proc fcQDateEdit_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDateEdit_trUtf82".}
-proc fcQDateEdit_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDateEdit_trUtf83".}
+proc fcQDateEdit_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDateEdit_tr_s_c".}
+proc fcQDateEdit_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDateEdit_tr_s_c_n".}
+proc fcQDateEdit_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDateEdit_trUtf8_s_c".}
+proc fcQDateEdit_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDateEdit_trUtf8_s_c_n".}
 proc fcQDateEdit_vdata(self: pointer): ptr pointer {.importc: "QDateEdit_vdata".}
 proc fvdata_cQDateEdit(self: pointer): pointer {.importc: "vdata_QDateEdit".}
 
@@ -591,9 +591,9 @@ proc fcQDateEdit_protectedbase_senderSignalIndex(self: pointer): cint {.importc:
 proc fcQDateEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDateEdit_protectedbase_receivers".}
 proc fcQDateEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDateEdit_protectedbase_isSignalConnected".}
 proc fcQDateEdit_new(vtbl: pointer, vdata: csize_t): ptr cQDateEdit {.importc: "QDateEdit_new".}
-proc fcQDateEdit_new2(vtbl: pointer, vdata: csize_t, date: pointer): ptr cQDateEdit {.importc: "QDateEdit_new2".}
-proc fcQDateEdit_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDateEdit {.importc: "QDateEdit_new3".}
-proc fcQDateEdit_new4(vtbl: pointer, vdata: csize_t, date: pointer, parent: pointer): ptr cQDateEdit {.importc: "QDateEdit_new4".}
+proc fcQDateEdit_new2(vtbl: pointer, vdata: csize_t, date: pointer): ptr cQDateEdit {.importc: "QDateEdit_new_date".}
+proc fcQDateEdit_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDateEdit {.importc: "QDateEdit_new_parent".}
+proc fcQDateEdit_new4(vtbl: pointer, vdata: csize_t, date: pointer, parent: pointer): ptr cQDateEdit {.importc: "QDateEdit_new_date_parent".}
 proc fcQDateEdit_staticMetaObject(): pointer {.importc: "QDateEdit_staticMetaObject".}
 
 proc metaObject*(self: gen_qdatetimeedit_types.QDateTimeEdit): gen_qobjectdefs_types.QMetaObject =
@@ -606,13 +606,13 @@ proc metacall*(self: gen_qdatetimeedit_types.QDateTimeEdit, param1: cint, param2
   fcQDateTimeEdit_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring): string =
-  let v_ms = fcQDateTimeEdit_tr(s)
+  let v_ms = fcQDateTimeEdit_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring): string =
-  let v_ms = fcQDateTimeEdit_trUtf8(s)
+  let v_ms = fcQDateTimeEdit_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -834,25 +834,25 @@ proc setTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, time: gen_qdatetime_t
   fcQDateTimeEdit_setTime(self.h, time.h)
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQDateTimeEdit_tr2(s, c)
+  let v_ms = fcQDateTimeEdit_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDateTimeEdit_tr3(s, c, n)
+  let v_ms = fcQDateTimeEdit_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQDateTimeEdit_trUtf82(s, c)
+  let v_ms = fcQDateTimeEdit_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDateTimeEdit_trUtf83(s, c, n)
+  let v_ms = fcQDateTimeEdit_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -3182,13 +3182,13 @@ proc metacall*(self: gen_qdatetimeedit_types.QTimeEdit, param1: cint, param2: ci
   fcQTimeEdit_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring): string =
-  let v_ms = fcQTimeEdit_tr(s)
+  let v_ms = fcQTimeEdit_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring): string =
-  let v_ms = fcQTimeEdit_trUtf8(s)
+  let v_ms = fcQTimeEdit_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -3214,25 +3214,25 @@ proc onUserTimeChanged*(self: gen_qdatetimeedit_types.QTimeEdit, slot: QTimeEdit
   fcQTimeEdit_connect_userTimeChanged(self.h, cast[int](addr tmp[]), fcQTimeEdit_slot_callback_userTimeChanged, fcQTimeEdit_slot_callback_userTimeChanged_release)
 
 proc tr*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQTimeEdit_tr2(s, c)
+  let v_ms = fcQTimeEdit_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTimeEdit_tr3(s, c, n)
+  let v_ms = fcQTimeEdit_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQTimeEdit_trUtf82(s, c)
+  let v_ms = fcQTimeEdit_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTimeEdit_trUtf83(s, c, n)
+  let v_ms = fcQTimeEdit_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -5030,13 +5030,13 @@ proc metacall*(self: gen_qdatetimeedit_types.QDateEdit, param1: cint, param2: ci
   fcQDateEdit_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring): string =
-  let v_ms = fcQDateEdit_tr(s)
+  let v_ms = fcQDateEdit_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring): string =
-  let v_ms = fcQDateEdit_trUtf8(s)
+  let v_ms = fcQDateEdit_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -5062,25 +5062,25 @@ proc onUserDateChanged*(self: gen_qdatetimeedit_types.QDateEdit, slot: QDateEdit
   fcQDateEdit_connect_userDateChanged(self.h, cast[int](addr tmp[]), fcQDateEdit_slot_callback_userDateChanged, fcQDateEdit_slot_callback_userDateChanged_release)
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQDateEdit_tr2(s, c)
+  let v_ms = fcQDateEdit_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDateEdit_tr3(s, c, n)
+  let v_ms = fcQDateEdit_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQDateEdit_trUtf82(s, c)
+  let v_ms = fcQDateEdit_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDateEdit_trUtf83(s, c, n)
+  let v_ms = fcQDateEdit_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

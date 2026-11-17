@@ -19,16 +19,16 @@ QLine* QLine_new() {
 	return new (std::nothrow) QLine();
 }
 
-QLine* QLine_new2(QPoint* pt1, QPoint* pt2) {
+QLine* QLine_new_pt1_pt2(QPoint* pt1, QPoint* pt2) {
 	return new (std::nothrow) QLine(*pt1, *pt2);
 }
 
-QLine* QLine_new3(int x1, int y1, int x2, int y2) {
+QLine* QLine_new_x1_y1_x2_y2(int x1, int y1, int x2, int y2) {
 	return new (std::nothrow) QLine(static_cast<int>(x1), static_cast<int>(y1), static_cast<int>(x2), static_cast<int>(y2));
 }
 
-QLine* QLine_new4(QLine* param1) {
-	return new (std::nothrow) QLine(*param1);
+QLine* QLine_new_from(QLine* from) {
+	return new (std::nothrow) QLine(*from);
 }
 
 bool QLine_isNull(const QLine* self) {
@@ -67,19 +67,19 @@ int QLine_dy(const QLine* self) {
 	return self->dy();
 }
 
-void QLine_translate(QLine* self, QPoint* p) {
+void QLine_translate_p(QLine* self, QPoint* p) {
 	self->translate(*p);
 }
 
-void QLine_translate2(QLine* self, int dx, int dy) {
+void QLine_translate_dx_dy(QLine* self, int dx, int dy) {
 	self->translate(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-QLine* QLine_translated(const QLine* self, QPoint* p) {
+QLine* QLine_translated_p(const QLine* self, QPoint* p) {
 	return new QLine(self->translated(*p));
 }
 
-QLine* QLine_translated2(const QLine* self, int dx, int dy) {
+QLine* QLine_translated_dx_dy(const QLine* self, int dx, int dy) {
 	return new QLine(self->translated(static_cast<int>(dx), static_cast<int>(dy)));
 }
 
@@ -119,20 +119,20 @@ QLineF* QLineF_new() {
 	return new (std::nothrow) QLineF();
 }
 
-QLineF* QLineF_new2(QPointF* pt1, QPointF* pt2) {
+QLineF* QLineF_new_pt1_pt2(QPointF* pt1, QPointF* pt2) {
 	return new (std::nothrow) QLineF(*pt1, *pt2);
 }
 
-QLineF* QLineF_new3(double x1, double y1, double x2, double y2) {
+QLineF* QLineF_new_x1_y1_x2_y2(double x1, double y1, double x2, double y2) {
 	return new (std::nothrow) QLineF(static_cast<qreal>(x1), static_cast<qreal>(y1), static_cast<qreal>(x2), static_cast<qreal>(y2));
 }
 
-QLineF* QLineF_new4(QLine* line) {
+QLineF* QLineF_new_line(QLine* line) {
 	return new (std::nothrow) QLineF(*line);
 }
 
-QLineF* QLineF_new5(QLineF* param1) {
-	return new (std::nothrow) QLineF(*param1);
+QLineF* QLineF_new_from(QLineF* from) {
+	return new (std::nothrow) QLineF(*from);
 }
 
 QLineF* QLineF_fromPolar(double length, double angle) {
@@ -222,7 +222,7 @@ int QLineF_intersect(const QLineF* self, QLineF* l, QPointF* intersectionPoint) 
 	return static_cast<int>(_ret);
 }
 
-double QLineF_angleWithQLineF(const QLineF* self, QLineF* l) {
+double QLineF_angle_l(const QLineF* self, QLineF* l) {
 	qreal _ret = self->angle(*l);
 	return static_cast<double>(_ret);
 }
@@ -231,19 +231,19 @@ QPointF* QLineF_pointAt(const QLineF* self, double t) {
 	return new QPointF(self->pointAt(static_cast<qreal>(t)));
 }
 
-void QLineF_translate(QLineF* self, QPointF* p) {
+void QLineF_translate_p(QLineF* self, QPointF* p) {
 	self->translate(*p);
 }
 
-void QLineF_translate2(QLineF* self, double dx, double dy) {
+void QLineF_translate_dx_dy(QLineF* self, double dx, double dy) {
 	self->translate(static_cast<qreal>(dx), static_cast<qreal>(dy));
 }
 
-QLineF* QLineF_translated(const QLineF* self, QPointF* p) {
+QLineF* QLineF_translated_p(const QLineF* self, QPointF* p) {
 	return new QLineF(self->translated(*p));
 }
 
-QLineF* QLineF_translated2(const QLineF* self, double dx, double dy) {
+QLineF* QLineF_translated_dx_dy(const QLineF* self, double dx, double dy) {
 	return new QLineF(self->translated(static_cast<qreal>(dx), static_cast<qreal>(dy)));
 }
 

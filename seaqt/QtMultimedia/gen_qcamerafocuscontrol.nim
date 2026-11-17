@@ -59,8 +59,8 @@ type cQCameraFocusControl*{.exportc: "QCameraFocusControl", incompleteStruct.} =
 proc fcQCameraFocusControl_metaObject(self: pointer): pointer {.importc: "QCameraFocusControl_metaObject".}
 proc fcQCameraFocusControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraFocusControl_metacast".}
 proc fcQCameraFocusControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraFocusControl_metacall".}
-proc fcQCameraFocusControl_tr(s: cstring): struct_seaqt_string {.importc: "QCameraFocusControl_tr".}
-proc fcQCameraFocusControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraFocusControl_trUtf8".}
+proc fcQCameraFocusControl_trS(s: cstring): struct_seaqt_string {.importc: "QCameraFocusControl_tr_s".}
+proc fcQCameraFocusControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraFocusControl_trUtf8_s".}
 proc fcQCameraFocusControl_focusMode(self: pointer): cint {.importc: "QCameraFocusControl_focusMode".}
 proc fcQCameraFocusControl_setFocusMode(self: pointer, mode: cint): void {.importc: "QCameraFocusControl_setFocusMode".}
 proc fcQCameraFocusControl_isFocusModeSupported(self: pointer, mode: cint): bool {.importc: "QCameraFocusControl_isFocusModeSupported".}
@@ -78,10 +78,10 @@ proc fcQCameraFocusControl_customFocusPointChanged(self: pointer, point: pointer
 proc fcQCameraFocusControl_connect_customFocusPointChanged(self: pointer, slot: int, callback: proc (slot: int, point: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraFocusControl_connect_customFocusPointChanged".}
 proc fcQCameraFocusControl_focusZonesChanged(self: pointer): void {.importc: "QCameraFocusControl_focusZonesChanged".}
 proc fcQCameraFocusControl_connect_focusZonesChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraFocusControl_connect_focusZonesChanged".}
-proc fcQCameraFocusControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFocusControl_tr2".}
-proc fcQCameraFocusControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFocusControl_tr3".}
-proc fcQCameraFocusControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFocusControl_trUtf82".}
-proc fcQCameraFocusControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFocusControl_trUtf83".}
+proc fcQCameraFocusControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFocusControl_tr_s_c".}
+proc fcQCameraFocusControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFocusControl_tr_s_c_n".}
+proc fcQCameraFocusControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFocusControl_trUtf8_s_c".}
+proc fcQCameraFocusControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFocusControl_trUtf8_s_c_n".}
 proc fcQCameraFocusControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraFocusControl_protectedbase_sender".}
 proc fcQCameraFocusControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraFocusControl_protectedbase_senderSignalIndex".}
 proc fcQCameraFocusControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFocusControl_protectedbase_receivers".}
@@ -98,13 +98,13 @@ proc metacall*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, param1: 
   fcQCameraFocusControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstring): string =
-  let v_ms = fcQCameraFocusControl_tr(s)
+  let v_ms = fcQCameraFocusControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstring): string =
-  let v_ms = fcQCameraFocusControl_trUtf8(s)
+  let v_ms = fcQCameraFocusControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -221,25 +221,25 @@ proc onFocusZonesChanged*(self: gen_qcamerafocuscontrol_types.QCameraFocusContro
   fcQCameraFocusControl_connect_focusZonesChanged(self.h, cast[int](addr tmp[]), fcQCameraFocusControl_slot_callback_focusZonesChanged, fcQCameraFocusControl_slot_callback_focusZonesChanged_release)
 
 proc tr*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraFocusControl_tr2(s, c)
+  let v_ms = fcQCameraFocusControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraFocusControl_tr3(s, c, n)
+  let v_ms = fcQCameraFocusControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraFocusControl_trUtf82(s, c)
+  let v_ms = fcQCameraFocusControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraFocusControl_trUtf83(s, c, n)
+  let v_ms = fcQCameraFocusControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

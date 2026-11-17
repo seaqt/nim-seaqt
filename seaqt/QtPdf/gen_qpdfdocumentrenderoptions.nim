@@ -54,7 +54,7 @@ proc fcQPdfDocumentRenderOptions_setScaledClipRect(self: pointer, r: pointer): v
 proc fcQPdfDocumentRenderOptions_scaledSize(self: pointer): pointer {.importc: "QPdfDocumentRenderOptions_scaledSize".}
 proc fcQPdfDocumentRenderOptions_setScaledSize(self: pointer, s: pointer): void {.importc: "QPdfDocumentRenderOptions_setScaledSize".}
 proc fcQPdfDocumentRenderOptions_new(): ptr cQPdfDocumentRenderOptions {.importc: "QPdfDocumentRenderOptions_new".}
-proc fcQPdfDocumentRenderOptions_new2(param1: pointer): ptr cQPdfDocumentRenderOptions {.importc: "QPdfDocumentRenderOptions_new2".}
+proc fcQPdfDocumentRenderOptions_new2(fromVal: pointer): ptr cQPdfDocumentRenderOptions {.importc: "QPdfDocumentRenderOptions_new_from".}
 
 proc rotation*(self: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): cint =
   cint(fcQPdfDocumentRenderOptions_rotation(self.h))
@@ -84,6 +84,6 @@ proc create*(T: type gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptio
   let tmp = gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions(h: fcQPdfDocumentRenderOptions_new(), owned: true)
   tmp
 proc create*(T: type gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions,
-    param1: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions =
-  let tmp = gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions(h: fcQPdfDocumentRenderOptions_new2(param1.h), owned: true)
+    fromVal: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions =
+  let tmp = gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions(h: fcQPdfDocumentRenderOptions_new2(fromVal.h), owned: true)
   tmp

@@ -56,8 +56,8 @@ export
 
 type cQGraphicsGridLayout*{.exportc: "QGraphicsGridLayout", incompleteStruct.} = object
 
-proc fcQGraphicsGridLayout_addItem(self: pointer, item: pointer, row: cint, column: cint, rowSpan: cint, columnSpan: cint): void {.importc: "QGraphicsGridLayout_addItem".}
-proc fcQGraphicsGridLayout_addItem2(self: pointer, item: pointer, row: cint, column: cint): void {.importc: "QGraphicsGridLayout_addItem2".}
+proc fcQGraphicsGridLayout_addItemItemRowColumnRowSpanColumnSpan(self: pointer, item: pointer, row: cint, column: cint, rowSpan: cint, columnSpan: cint): void {.importc: "QGraphicsGridLayout_addItem_item_row_column_rowSpan_columnSpan".}
+proc fcQGraphicsGridLayout_addItemItemRowColumn(self: pointer, item: pointer, row: cint, column: cint): void {.importc: "QGraphicsGridLayout_addItem_item_row_column".}
 proc fcQGraphicsGridLayout_setHorizontalSpacing(self: pointer, spacing: float64): void {.importc: "QGraphicsGridLayout_setHorizontalSpacing".}
 proc fcQGraphicsGridLayout_horizontalSpacing(self: pointer): float64 {.importc: "QGraphicsGridLayout_horizontalSpacing".}
 proc fcQGraphicsGridLayout_setVerticalSpacing(self: pointer, spacing: float64): void {.importc: "QGraphicsGridLayout_setVerticalSpacing".}
@@ -93,23 +93,23 @@ proc fcQGraphicsGridLayout_setAlignment(self: pointer, item: pointer, alignment:
 proc fcQGraphicsGridLayout_alignment(self: pointer, item: pointer): cint {.importc: "QGraphicsGridLayout_alignment".}
 proc fcQGraphicsGridLayout_rowCount(self: pointer): cint {.importc: "QGraphicsGridLayout_rowCount".}
 proc fcQGraphicsGridLayout_columnCount(self: pointer): cint {.importc: "QGraphicsGridLayout_columnCount".}
-proc fcQGraphicsGridLayout_itemAt(self: pointer, row: cint, column: cint): pointer {.importc: "QGraphicsGridLayout_itemAt".}
+proc fcQGraphicsGridLayout_itemAtRowColumn(self: pointer, row: cint, column: cint): pointer {.importc: "QGraphicsGridLayout_itemAt_row_column".}
 proc fcQGraphicsGridLayout_count(self: pointer): cint {.importc: "QGraphicsGridLayout_count".}
-proc fcQGraphicsGridLayout_itemAtWithIndex(self: pointer, index: cint): pointer {.importc: "QGraphicsGridLayout_itemAtWithIndex".}
+proc fcQGraphicsGridLayout_itemAtIndex(self: pointer, index: cint): pointer {.importc: "QGraphicsGridLayout_itemAt_index".}
 proc fcQGraphicsGridLayout_removeAt(self: pointer, index: cint): void {.importc: "QGraphicsGridLayout_removeAt".}
 proc fcQGraphicsGridLayout_removeItem(self: pointer, item: pointer): void {.importc: "QGraphicsGridLayout_removeItem".}
 proc fcQGraphicsGridLayout_invalidate(self: pointer): void {.importc: "QGraphicsGridLayout_invalidate".}
 proc fcQGraphicsGridLayout_setGeometry(self: pointer, rect: pointer): void {.importc: "QGraphicsGridLayout_setGeometry".}
 proc fcQGraphicsGridLayout_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.importc: "QGraphicsGridLayout_sizeHint".}
-proc fcQGraphicsGridLayout_addItem3(self: pointer, item: pointer, row: cint, column: cint, rowSpan: cint, columnSpan: cint, alignment: cint): void {.importc: "QGraphicsGridLayout_addItem3".}
-proc fcQGraphicsGridLayout_addItem4(self: pointer, item: pointer, row: cint, column: cint, alignment: cint): void {.importc: "QGraphicsGridLayout_addItem4".}
+proc fcQGraphicsGridLayout_addItemItemRowColumnRowSpanColumnSpanAlignment(self: pointer, item: pointer, row: cint, column: cint, rowSpan: cint, columnSpan: cint, alignment: cint): void {.importc: "QGraphicsGridLayout_addItem_item_row_column_rowSpan_columnSpan_alignment".}
+proc fcQGraphicsGridLayout_addItemItemRowColumnAlignment(self: pointer, item: pointer, row: cint, column: cint, alignment: cint): void {.importc: "QGraphicsGridLayout_addItem_item_row_column_alignment".}
 proc fcQGraphicsGridLayout_vdata(self: pointer): ptr pointer {.importc: "QGraphicsGridLayout_vdata".}
 proc fvdata_cQGraphicsGridLayout(self: pointer): pointer {.importc: "vdata_QGraphicsGridLayout".}
 
 type cQGraphicsGridLayoutVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   count*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
-  itemAtWithIndex*: proc(self: pointer, index: cint): pointer {.cdecl, raises: [], gcsafe.}
+  itemAtIndex*: proc(self: pointer, index: cint): pointer {.cdecl, raises: [], gcsafe.}
   removeAt*: proc(self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
   invalidate*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   setGeometry*: proc(self: pointer, rect: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -118,7 +118,7 @@ type cQGraphicsGridLayoutVTable {.pure.} = object
   updateGeometry*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   widgetEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
 proc fcQGraphicsGridLayout_virtualbase_count(self: pointer): cint {.importc: "QGraphicsGridLayout_virtualbase_count".}
-proc fcQGraphicsGridLayout_virtualbase_itemAtWithIndex(self: pointer, index: cint): pointer {.importc: "QGraphicsGridLayout_virtualbase_itemAtWithIndex".}
+proc fcQGraphicsGridLayout_virtualbase_itemAtIndex(self: pointer, index: cint): pointer {.importc: "QGraphicsGridLayout_virtualbase_itemAt_index".}
 proc fcQGraphicsGridLayout_virtualbase_removeAt(self: pointer, index: cint): void {.importc: "QGraphicsGridLayout_virtualbase_removeAt".}
 proc fcQGraphicsGridLayout_virtualbase_invalidate(self: pointer): void {.importc: "QGraphicsGridLayout_virtualbase_invalidate".}
 proc fcQGraphicsGridLayout_virtualbase_setGeometry(self: pointer, rect: pointer): void {.importc: "QGraphicsGridLayout_virtualbase_setGeometry".}
@@ -130,13 +130,13 @@ proc fcQGraphicsGridLayout_protectedbase_addChildLayoutItem(self: pointer, layou
 proc fcQGraphicsGridLayout_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsGridLayout_protectedbase_setGraphicsItem".}
 proc fcQGraphicsGridLayout_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsGridLayout_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsGridLayout_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsGridLayout {.importc: "QGraphicsGridLayout_new".}
-proc fcQGraphicsGridLayout_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsGridLayout {.importc: "QGraphicsGridLayout_new2".}
+proc fcQGraphicsGridLayout_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsGridLayout {.importc: "QGraphicsGridLayout_new_parent".}
 
 proc addItem*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, item: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, row: cint, column: cint, rowSpan: cint, columnSpan: cint): void =
-  fcQGraphicsGridLayout_addItem(self.h, item.h, row, column, rowSpan, columnSpan)
+  fcQGraphicsGridLayout_addItemItemRowColumnRowSpanColumnSpan(self.h, item.h, row, column, rowSpan, columnSpan)
 
 proc addItem*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, item: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, row: cint, column: cint): void =
-  fcQGraphicsGridLayout_addItem2(self.h, item.h, row, column)
+  fcQGraphicsGridLayout_addItemItemRowColumn(self.h, item.h, row, column)
 
 proc setHorizontalSpacing*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, spacing: float64): void =
   fcQGraphicsGridLayout_setHorizontalSpacing(self.h, spacing)
@@ -244,13 +244,13 @@ proc columnCount*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout): cint
   fcQGraphicsGridLayout_columnCount(self.h)
 
 proc itemAt*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, row: cint, column: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsGridLayout_itemAt(self.h, row, column), owned: false)
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsGridLayout_itemAtRowColumn(self.h, row, column), owned: false)
 
 proc count*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout): cint =
   fcQGraphicsGridLayout_count(self.h)
 
 proc itemAt*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsGridLayout_itemAtWithIndex(self.h, index), owned: false)
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsGridLayout_itemAtIndex(self.h, index), owned: false)
 
 proc removeAt*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, index: cint): void =
   fcQGraphicsGridLayout_removeAt(self.h, index)
@@ -268,13 +268,13 @@ proc sizeHint*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, which: c
   gen_qsize_types.QSizeF(h: fcQGraphicsGridLayout_sizeHint(self.h, cint(which), constraint.h), owned: true)
 
 proc addItem*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, item: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, row: cint, column: cint, rowSpan: cint, columnSpan: cint, alignment: cint): void =
-  fcQGraphicsGridLayout_addItem3(self.h, item.h, row, column, rowSpan, columnSpan, cint(alignment))
+  fcQGraphicsGridLayout_addItemItemRowColumnRowSpanColumnSpanAlignment(self.h, item.h, row, column, rowSpan, columnSpan, cint(alignment))
 
 proc addItem*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, item: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, row: cint, column: cint, alignment: cint): void =
-  fcQGraphicsGridLayout_addItem4(self.h, item.h, row, column, cint(alignment))
+  fcQGraphicsGridLayout_addItemItemRowColumnAlignment(self.h, item.h, row, column, cint(alignment))
 
 type QGraphicsGridLayoutcountProc* = proc(self: QGraphicsGridLayout): cint {.raises: [], gcsafe.}
-type QGraphicsGridLayoutitemAtWithIndexProc* = proc(self: QGraphicsGridLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem {.raises: [], gcsafe.}
+type QGraphicsGridLayoutitemAtIndexProc* = proc(self: QGraphicsGridLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem {.raises: [], gcsafe.}
 type QGraphicsGridLayoutremoveAtProc* = proc(self: QGraphicsGridLayout, index: cint): void {.raises: [], gcsafe.}
 type QGraphicsGridLayoutinvalidateProc* = proc(self: QGraphicsGridLayout): void {.raises: [], gcsafe.}
 type QGraphicsGridLayoutsetGeometryProc* = proc(self: QGraphicsGridLayout, rect: gen_qrect_types.QRectF): void {.raises: [], gcsafe.}
@@ -286,7 +286,7 @@ type QGraphicsGridLayoutwidgetEventProc* = proc(self: QGraphicsGridLayout, e: ge
 type QGraphicsGridLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsGridLayoutVTable
   count*: QGraphicsGridLayoutcountProc
-  itemAtWithIndex*: QGraphicsGridLayoutitemAtWithIndexProc
+  itemAtIndex*: QGraphicsGridLayoutitemAtIndexProc
   removeAt*: QGraphicsGridLayoutremoveAtProc
   invalidate*: QGraphicsGridLayoutinvalidateProc
   setGeometry*: QGraphicsGridLayoutsetGeometryProc
@@ -299,7 +299,7 @@ proc QGraphicsGridLayoutcount*(self: gen_qgraphicsgridlayout_types.QGraphicsGrid
   fcQGraphicsGridLayout_virtualbase_count(self.h)
 
 proc QGraphicsGridLayoutitemAt*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsGridLayout_virtualbase_itemAtWithIndex(self.h, index), owned: false)
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsGridLayout_virtualbase_itemAtIndex(self.h, index), owned: false)
 
 proc QGraphicsGridLayoutremoveAt*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, index: cint): void =
   fcQGraphicsGridLayout_virtualbase_removeAt(self.h, index)
@@ -329,11 +329,11 @@ proc fcQGraphicsGridLayout_vtable_callback_count(self: pointer): cint {.cdecl.} 
   var virtualReturn = vtbl[].count(self)
   virtualReturn
 
-proc fcQGraphicsGridLayout_vtable_callback_itemAtWithIndex(self: pointer, index: cint): pointer {.cdecl.} =
+proc fcQGraphicsGridLayout_vtable_callback_itemAtIndex(self: pointer, index: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsGridLayoutVTable](fcQGraphicsGridLayout_vdata(self)[])
   let self = QGraphicsGridLayout(h: self)
   let slotval1 = index
-  var virtualReturn = vtbl[].itemAtWithIndex(self, slotval1)
+  var virtualReturn = vtbl[].itemAtIndex(self, slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -414,7 +414,7 @@ proc fcQGraphicsGridLayout_method_callback_count(self: pointer): cint {.cdecl.} 
   var virtualReturn = inst.count()
   virtualReturn
 
-proc fcQGraphicsGridLayout_method_callback_itemAtWithIndex(self: pointer, index: cint): pointer {.cdecl.} =
+proc fcQGraphicsGridLayout_method_callback_itemAtIndex(self: pointer, index: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsGridLayout](fcQGraphicsGridLayout_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.itemAt(slotval1)
@@ -483,8 +483,8 @@ proc create*(T: type gen_qgraphicsgridlayout_types.QGraphicsGridLayout,
     GC_unref(vtbl)
   if not isNil(vtbl[].count):
     vtbl[].vtbl.count = fcQGraphicsGridLayout_vtable_callback_count
-  if not isNil(vtbl[].itemAtWithIndex):
-    vtbl[].vtbl.itemAtWithIndex = fcQGraphicsGridLayout_vtable_callback_itemAtWithIndex
+  if not isNil(vtbl[].itemAtIndex):
+    vtbl[].vtbl.itemAtIndex = fcQGraphicsGridLayout_vtable_callback_itemAtIndex
   if not isNil(vtbl[].removeAt):
     vtbl[].vtbl.removeAt = fcQGraphicsGridLayout_vtable_callback_removeAt
   if not isNil(vtbl[].invalidate):
@@ -512,8 +512,8 @@ proc create*(T: type gen_qgraphicsgridlayout_types.QGraphicsGridLayout,
     GC_unref(vtbl)
   if not isNil(vtbl[].count):
     vtbl[].vtbl.count = fcQGraphicsGridLayout_vtable_callback_count
-  if not isNil(vtbl[].itemAtWithIndex):
-    vtbl[].vtbl.itemAtWithIndex = fcQGraphicsGridLayout_vtable_callback_itemAtWithIndex
+  if not isNil(vtbl[].itemAtIndex):
+    vtbl[].vtbl.itemAtIndex = fcQGraphicsGridLayout_vtable_callback_itemAtIndex
   if not isNil(vtbl[].removeAt):
     vtbl[].vtbl.removeAt = fcQGraphicsGridLayout_vtable_callback_removeAt
   if not isNil(vtbl[].invalidate):
@@ -538,7 +538,7 @@ const cQGraphicsGridLayout_mvtbl = cQGraphicsGridLayoutVTable(
     inst[].owned = false,
 
   count: fcQGraphicsGridLayout_method_callback_count,
-  itemAtWithIndex: fcQGraphicsGridLayout_method_callback_itemAtWithIndex,
+  itemAtIndex: fcQGraphicsGridLayout_method_callback_itemAtIndex,
   removeAt: fcQGraphicsGridLayout_method_callback_removeAt,
   invalidate: fcQGraphicsGridLayout_method_callback_invalidate,
   setGeometry: fcQGraphicsGridLayout_method_callback_setGeometry,

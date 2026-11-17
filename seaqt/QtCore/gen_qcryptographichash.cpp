@@ -23,16 +23,16 @@ void QCryptographicHash_reset(QCryptographicHash* self) {
 	self->reset();
 }
 
-void QCryptographicHash_addData(QCryptographicHash* self, const char* data, int length) {
+void QCryptographicHash_addData_data_length(QCryptographicHash* self, const char* data, int length) {
 	self->addData(data, static_cast<int>(length));
 }
 
-void QCryptographicHash_addDataWithData(QCryptographicHash* self, struct seaqt_string data) {
+void QCryptographicHash_addData_data(QCryptographicHash* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->addData(data_QByteArray);
 }
 
-bool QCryptographicHash_addDataWithDevice(QCryptographicHash* self, QIODevice* device) {
+bool QCryptographicHash_addData_device(QCryptographicHash* self, QIODevice* device) {
 	return self->addData(device);
 }
 

@@ -66,8 +66,8 @@ type cQInputMethod*{.exportc: "QInputMethod", incompleteStruct.} = object
 proc fcQInputMethod_metaObject(self: pointer): pointer {.importc: "QInputMethod_metaObject".}
 proc fcQInputMethod_metacast(self: pointer, param1: cstring): pointer {.importc: "QInputMethod_metacast".}
 proc fcQInputMethod_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QInputMethod_metacall".}
-proc fcQInputMethod_tr(s: cstring): struct_seaqt_string {.importc: "QInputMethod_tr".}
-proc fcQInputMethod_trUtf8(s: cstring): struct_seaqt_string {.importc: "QInputMethod_trUtf8".}
+proc fcQInputMethod_trS(s: cstring): struct_seaqt_string {.importc: "QInputMethod_tr_s".}
+proc fcQInputMethod_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QInputMethod_trUtf8_s".}
 proc fcQInputMethod_inputItemTransform(self: pointer): pointer {.importc: "QInputMethod_inputItemTransform".}
 proc fcQInputMethod_setInputItemTransform(self: pointer, transform: pointer): void {.importc: "QInputMethod_setInputItemTransform".}
 proc fcQInputMethod_inputItemRectangle(self: pointer): pointer {.importc: "QInputMethod_inputItemRectangle".}
@@ -104,10 +104,10 @@ proc fcQInputMethod_localeChanged(self: pointer): void {.importc: "QInputMethod_
 proc fcQInputMethod_connect_localeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputMethod_connect_localeChanged".}
 proc fcQInputMethod_inputDirectionChanged(self: pointer, newDirection: cint): void {.importc: "QInputMethod_inputDirectionChanged".}
 proc fcQInputMethod_connect_inputDirectionChanged(self: pointer, slot: int, callback: proc (slot: int, newDirection: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputMethod_connect_inputDirectionChanged".}
-proc fcQInputMethod_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QInputMethod_tr2".}
-proc fcQInputMethod_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QInputMethod_tr3".}
-proc fcQInputMethod_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QInputMethod_trUtf82".}
-proc fcQInputMethod_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QInputMethod_trUtf83".}
+proc fcQInputMethod_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QInputMethod_tr_s_c".}
+proc fcQInputMethod_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QInputMethod_tr_s_c_n".}
+proc fcQInputMethod_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QInputMethod_trUtf8_s_c".}
+proc fcQInputMethod_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QInputMethod_trUtf8_s_c_n".}
 proc fcQInputMethod_protectedbase_sender(self: pointer): pointer {.importc: "QInputMethod_protectedbase_sender".}
 proc fcQInputMethod_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QInputMethod_protectedbase_senderSignalIndex".}
 proc fcQInputMethod_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QInputMethod_protectedbase_receivers".}
@@ -124,13 +124,13 @@ proc metacall*(self: gen_qinputmethod_types.QInputMethod, param1: cint, param2: 
   fcQInputMethod_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qinputmethod_types.QInputMethod, s: cstring): string =
-  let v_ms = fcQInputMethod_tr(s)
+  let v_ms = fcQInputMethod_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qinputmethod_types.QInputMethod, s: cstring): string =
-  let v_ms = fcQInputMethod_trUtf8(s)
+  let v_ms = fcQInputMethod_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -342,25 +342,25 @@ proc onInputDirectionChanged*(self: gen_qinputmethod_types.QInputMethod, slot: Q
   fcQInputMethod_connect_inputDirectionChanged(self.h, cast[int](addr tmp[]), fcQInputMethod_slot_callback_inputDirectionChanged, fcQInputMethod_slot_callback_inputDirectionChanged_release)
 
 proc tr*(_: type gen_qinputmethod_types.QInputMethod, s: cstring, c: cstring): string =
-  let v_ms = fcQInputMethod_tr2(s, c)
+  let v_ms = fcQInputMethod_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qinputmethod_types.QInputMethod, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQInputMethod_tr3(s, c, n)
+  let v_ms = fcQInputMethod_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qinputmethod_types.QInputMethod, s: cstring, c: cstring): string =
-  let v_ms = fcQInputMethod_trUtf82(s, c)
+  let v_ms = fcQInputMethod_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qinputmethod_types.QInputMethod, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQInputMethod_trUtf83(s, c, n)
+  let v_ms = fcQInputMethod_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

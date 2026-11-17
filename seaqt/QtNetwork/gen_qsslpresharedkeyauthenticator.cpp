@@ -17,12 +17,12 @@ QSslPreSharedKeyAuthenticator* QSslPreSharedKeyAuthenticator_new() {
 	return new (std::nothrow) QSslPreSharedKeyAuthenticator();
 }
 
-QSslPreSharedKeyAuthenticator* QSslPreSharedKeyAuthenticator_new2(QSslPreSharedKeyAuthenticator* authenticator) {
-	return new (std::nothrow) QSslPreSharedKeyAuthenticator(*authenticator);
+QSslPreSharedKeyAuthenticator* QSslPreSharedKeyAuthenticator_new_from(QSslPreSharedKeyAuthenticator* from) {
+	return new (std::nothrow) QSslPreSharedKeyAuthenticator(*from);
 }
 
-void QSslPreSharedKeyAuthenticator_operatorAssign(QSslPreSharedKeyAuthenticator* self, QSslPreSharedKeyAuthenticator* authenticator) {
-	self->operator=(*authenticator);
+void QSslPreSharedKeyAuthenticator_operatorAssign(QSslPreSharedKeyAuthenticator* self, QSslPreSharedKeyAuthenticator* from) {
+	self->operator=(*from);
 }
 
 void QSslPreSharedKeyAuthenticator_swap(QSslPreSharedKeyAuthenticator* self, QSslPreSharedKeyAuthenticator* other) {

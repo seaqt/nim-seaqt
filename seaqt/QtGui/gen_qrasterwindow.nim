@@ -73,12 +73,12 @@ type cQRasterWindow*{.exportc: "QRasterWindow", incompleteStruct.} = object
 proc fcQRasterWindow_metaObject(self: pointer): pointer {.importc: "QRasterWindow_metaObject".}
 proc fcQRasterWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QRasterWindow_metacast".}
 proc fcQRasterWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRasterWindow_metacall".}
-proc fcQRasterWindow_tr(s: cstring): struct_seaqt_string {.importc: "QRasterWindow_tr".}
-proc fcQRasterWindow_trUtf8(s: cstring): struct_seaqt_string {.importc: "QRasterWindow_trUtf8".}
-proc fcQRasterWindow_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRasterWindow_tr2".}
-proc fcQRasterWindow_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRasterWindow_tr3".}
-proc fcQRasterWindow_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRasterWindow_trUtf82".}
-proc fcQRasterWindow_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRasterWindow_trUtf83".}
+proc fcQRasterWindow_trS(s: cstring): struct_seaqt_string {.importc: "QRasterWindow_tr_s".}
+proc fcQRasterWindow_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QRasterWindow_trUtf8_s".}
+proc fcQRasterWindow_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRasterWindow_tr_s_c".}
+proc fcQRasterWindow_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRasterWindow_tr_s_c_n".}
+proc fcQRasterWindow_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRasterWindow_trUtf8_s_c".}
+proc fcQRasterWindow_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRasterWindow_trUtf8_s_c_n".}
 proc fcQRasterWindow_vdata(self: pointer): ptr pointer {.importc: "QRasterWindow_vdata".}
 proc fvdata_cQRasterWindow(self: pointer): pointer {.importc: "vdata_QRasterWindow".}
 
@@ -165,7 +165,7 @@ proc fcQRasterWindow_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQRasterWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRasterWindow_protectedbase_receivers".}
 proc fcQRasterWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRasterWindow_protectedbase_isSignalConnected".}
 proc fcQRasterWindow_new(vtbl: pointer, vdata: csize_t): ptr cQRasterWindow {.importc: "QRasterWindow_new".}
-proc fcQRasterWindow_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQRasterWindow {.importc: "QRasterWindow_new2".}
+proc fcQRasterWindow_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQRasterWindow {.importc: "QRasterWindow_new_parent".}
 proc fcQRasterWindow_staticMetaObject(): pointer {.importc: "QRasterWindow_staticMetaObject".}
 
 proc metaObject*(self: gen_qrasterwindow_types.QRasterWindow): gen_qobjectdefs_types.QMetaObject =
@@ -178,37 +178,37 @@ proc metacall*(self: gen_qrasterwindow_types.QRasterWindow, param1: cint, param2
   fcQRasterWindow_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring): string =
-  let v_ms = fcQRasterWindow_tr(s)
+  let v_ms = fcQRasterWindow_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring): string =
-  let v_ms = fcQRasterWindow_trUtf8(s)
+  let v_ms = fcQRasterWindow_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring, c: cstring): string =
-  let v_ms = fcQRasterWindow_tr2(s, c)
+  let v_ms = fcQRasterWindow_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRasterWindow_tr3(s, c, n)
+  let v_ms = fcQRasterWindow_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring, c: cstring): string =
-  let v_ms = fcQRasterWindow_trUtf82(s, c)
+  let v_ms = fcQRasterWindow_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRasterWindow_trUtf83(s, c, n)
+  let v_ms = fcQRasterWindow_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

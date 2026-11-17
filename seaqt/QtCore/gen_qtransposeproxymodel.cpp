@@ -830,7 +830,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QTransposeProxyModel_protectedbase_resetInternalData(VirtualQTransposeProxyModel* self);
-	friend QModelIndex* QTransposeProxyModel_protectedbase_createIndex(const VirtualQTransposeProxyModel* self, int row, int column);
+	friend QModelIndex* QTransposeProxyModel_protectedbase_createIndex_row_column(const VirtualQTransposeProxyModel* self, int row, int column);
 	friend void QTransposeProxyModel_protectedbase_encodeData(const VirtualQTransposeProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QTransposeProxyModel_protectedbase_decodeData(VirtualQTransposeProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QTransposeProxyModel_protectedbase_beginInsertRows(VirtualQTransposeProxyModel* self, QModelIndex* parent, int first, int last);
@@ -861,7 +861,7 @@ VirtualQTransposeProxyModel* QTransposeProxyModel_new(const QTransposeProxyModel
 	return _mem_ ? new (_mem_)VirtualQTransposeProxyModel(vtbl) : nullptr;
 }
 
-VirtualQTransposeProxyModel* QTransposeProxyModel_new2(const QTransposeProxyModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQTransposeProxyModel* QTransposeProxyModel_new_parent(const QTransposeProxyModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTransposeProxyModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTransposeProxyModel(vtbl, parent) : nullptr;
 }
@@ -882,7 +882,7 @@ int QTransposeProxyModel_metacall(QTransposeProxyModel* self, int param1, int pa
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTransposeProxyModel_tr(const char* s) {
+struct seaqt_string QTransposeProxyModel_tr_s(const char* s) {
 	QString _ret = QTransposeProxyModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -893,7 +893,7 @@ struct seaqt_string QTransposeProxyModel_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTransposeProxyModel_trUtf8(const char* s) {
+struct seaqt_string QTransposeProxyModel_trUtf8_s(const char* s) {
 	QString _ret = QTransposeProxyModel::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1000,7 +1000,7 @@ void QTransposeProxyModel_sort(QTransposeProxyModel* self, int column, int order
 	self->sort(static_cast<int>(column), static_cast<Qt::SortOrder>(order));
 }
 
-struct seaqt_string QTransposeProxyModel_tr2(const char* s, const char* c) {
+struct seaqt_string QTransposeProxyModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTransposeProxyModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1011,7 +1011,7 @@ struct seaqt_string QTransposeProxyModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTransposeProxyModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTransposeProxyModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTransposeProxyModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1022,7 +1022,7 @@ struct seaqt_string QTransposeProxyModel_tr3(const char* s, const char* c, int n
 	return _ms;
 }
 
-struct seaqt_string QTransposeProxyModel_trUtf82(const char* s, const char* c) {
+struct seaqt_string QTransposeProxyModel_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QTransposeProxyModel::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1033,7 +1033,7 @@ struct seaqt_string QTransposeProxyModel_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTransposeProxyModel_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QTransposeProxyModel_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTransposeProxyModel::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1370,7 +1370,7 @@ void QTransposeProxyModel_protectedbase_resetInternalData(VirtualQTransposeProxy
 	self->resetInternalData();
 }
 
-QModelIndex* QTransposeProxyModel_protectedbase_createIndex(const VirtualQTransposeProxyModel* self, int row, int column) {
+QModelIndex* QTransposeProxyModel_protectedbase_createIndex_row_column(const VirtualQTransposeProxyModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

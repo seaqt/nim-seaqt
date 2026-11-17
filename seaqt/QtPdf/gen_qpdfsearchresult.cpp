@@ -23,8 +23,8 @@ QPdfSearchResult* QPdfSearchResult_new() {
 	return new (std::nothrow) QPdfSearchResult();
 }
 
-QPdfSearchResult* QPdfSearchResult_new2(QPdfSearchResult* param1) {
-	return new (std::nothrow) QPdfSearchResult(*param1);
+QPdfSearchResult* QPdfSearchResult_new_from(QPdfSearchResult* from) {
+	return new (std::nothrow) QPdfSearchResult(*from);
 }
 
 void QPdfSearchResult_virtbase(QPdfSearchResult* src, QPdfDestination** outptr_QPdfDestination) {
@@ -66,8 +66,8 @@ struct seaqt_array /* of QRectF* */  QPdfSearchResult_rectangles(const QPdfSearc
 	return _out;
 }
 
-void QPdfSearchResult_operatorAssign(QPdfSearchResult* self, QPdfSearchResult* param1) {
-	self->operator=(*param1);
+void QPdfSearchResult_operatorAssign(QPdfSearchResult* self, QPdfSearchResult* from) {
+	self->operator=(*from);
 }
 
 const QMetaObject* QPdfSearchResult_staticMetaObject() { return &QPdfSearchResult::staticMetaObject; }

@@ -29,30 +29,30 @@ typedef struct QVariant QVariant;
 #endif
 
 QColorSpace* QColorSpace_new();
-QColorSpace* QColorSpace_new2(int namedColorSpace);
-QColorSpace* QColorSpace_new3(int primaries, int transferFunction);
-QColorSpace* QColorSpace_new4(int primaries, float gamma);
-QColorSpace* QColorSpace_new5(QPointF* whitePoint, QPointF* redPoint, QPointF* greenPoint, QPointF* bluePoint, int transferFunction);
-QColorSpace* QColorSpace_new6(QColorSpace* colorSpace);
-QColorSpace* QColorSpace_new7(int primaries, int transferFunction, float gamma);
-QColorSpace* QColorSpace_new8(QPointF* whitePoint, QPointF* redPoint, QPointF* greenPoint, QPointF* bluePoint, int transferFunction, float gamma);
+QColorSpace* QColorSpace_new_namedColorSpace(int namedColorSpace);
+QColorSpace* QColorSpace_new_primaries_transferFunction(int primaries, int transferFunction);
+QColorSpace* QColorSpace_new_primaries_gamma(int primaries, float gamma);
+QColorSpace* QColorSpace_new_whitePoint_redPoint_greenPoint_bluePoint_transferFunction(QPointF* whitePoint, QPointF* redPoint, QPointF* greenPoint, QPointF* bluePoint, int transferFunction);
+QColorSpace* QColorSpace_new_from(QColorSpace* from);
+QColorSpace* QColorSpace_new_primaries_transferFunction_gamma(int primaries, int transferFunction, float gamma);
+QColorSpace* QColorSpace_new_whitePoint_redPoint_greenPoint_bluePoint_transferFunction_gamma(QPointF* whitePoint, QPointF* redPoint, QPointF* greenPoint, QPointF* bluePoint, int transferFunction, float gamma);
 
-void QColorSpace_operatorAssign(QColorSpace* self, QColorSpace* colorSpace);
+void QColorSpace_operatorAssign(QColorSpace* self, QColorSpace* from);
 void QColorSpace_swap(QColorSpace* self, QColorSpace* colorSpace);
 int QColorSpace_primaries(const QColorSpace* self);
 int QColorSpace_transferFunction(const QColorSpace* self);
 float QColorSpace_gamma(const QColorSpace* self);
-void QColorSpace_setTransferFunction(QColorSpace* self, int transferFunction);
-QColorSpace* QColorSpace_withTransferFunction(const QColorSpace* self, int transferFunction);
-void QColorSpace_setPrimaries(QColorSpace* self, int primariesId);
-void QColorSpace_setPrimaries2(QColorSpace* self, QPointF* whitePoint, QPointF* redPoint, QPointF* greenPoint, QPointF* bluePoint);
+void QColorSpace_setTransferFunction_transferFunction(QColorSpace* self, int transferFunction);
+QColorSpace* QColorSpace_withTransferFunction_transferFunction(const QColorSpace* self, int transferFunction);
+void QColorSpace_setPrimaries_primariesId(QColorSpace* self, int primariesId);
+void QColorSpace_setPrimaries_whitePoint_redPoint_greenPoint_bluePoint(QColorSpace* self, QPointF* whitePoint, QPointF* redPoint, QPointF* greenPoint, QPointF* bluePoint);
 bool QColorSpace_isValid(const QColorSpace* self);
 QColorSpace* QColorSpace_fromIccProfile(struct seaqt_string iccProfile);
 struct seaqt_string QColorSpace_iccProfile(const QColorSpace* self);
 QColorTransform* QColorSpace_transformationToColorSpace(const QColorSpace* self, QColorSpace* colorspace);
 QVariant* QColorSpace_ToQVariant(const QColorSpace* self);
-void QColorSpace_setTransferFunction2(QColorSpace* self, int transferFunction, float gamma);
-QColorSpace* QColorSpace_withTransferFunction2(const QColorSpace* self, int transferFunction, float gamma);
+void QColorSpace_setTransferFunction_transferFunction_gamma(QColorSpace* self, int transferFunction, float gamma);
+QColorSpace* QColorSpace_withTransferFunction_transferFunction_gamma(const QColorSpace* self, int transferFunction, float gamma);
 
 const QMetaObject* QColorSpace_staticMetaObject();
 void QColorSpace_delete(QColorSpace* self);

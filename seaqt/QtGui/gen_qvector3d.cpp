@@ -23,36 +23,36 @@ QVector3D* QVector3D_new() {
 	return new (std::nothrow) QVector3D();
 }
 
-QVector3D* QVector3D_new2(int param1) {
+QVector3D* QVector3D_new_Qt_Initialization(int param1) {
 	return new (std::nothrow) QVector3D(static_cast<Qt::Initialization>(param1));
 }
 
-QVector3D* QVector3D_new3(float xpos, float ypos, float zpos) {
+QVector3D* QVector3D_new_float_float_float(float xpos, float ypos, float zpos) {
 	return new (std::nothrow) QVector3D(static_cast<float>(xpos), static_cast<float>(ypos), static_cast<float>(zpos));
 }
 
-QVector3D* QVector3D_new4(QPoint* point) {
+QVector3D* QVector3D_new_QPoint(QPoint* point) {
 	return new (std::nothrow) QVector3D(*point);
 }
 
-QVector3D* QVector3D_new5(QPointF* point) {
+QVector3D* QVector3D_new_QPointF(QPointF* point) {
 	return new (std::nothrow) QVector3D(*point);
 }
 
-QVector3D* QVector3D_new6(QVector2D* vector) {
+QVector3D* QVector3D_new_QVector2D(QVector2D* vector) {
 	return new (std::nothrow) QVector3D(*vector);
 }
 
-QVector3D* QVector3D_new7(QVector2D* vector, float zpos) {
+QVector3D* QVector3D_new_QVector2D_float(QVector2D* vector, float zpos) {
 	return new (std::nothrow) QVector3D(*vector, static_cast<float>(zpos));
 }
 
-QVector3D* QVector3D_new8(QVector4D* vector) {
+QVector3D* QVector3D_new_QVector4D(QVector4D* vector) {
 	return new (std::nothrow) QVector3D(*vector);
 }
 
-QVector3D* QVector3D_new9(QVector3D* param1) {
-	return new (std::nothrow) QVector3D(*param1);
+QVector3D* QVector3D_new_QVector3D(QVector3D* from) {
+	return new (std::nothrow) QVector3D(*from);
 }
 
 bool QVector3D_isNull(const QVector3D* self) {
@@ -115,25 +115,25 @@ QVector3D* QVector3D_operatorMinusAssign(QVector3D* self, QVector3D* vector) {
 	return &_ret;
 }
 
-QVector3D* QVector3D_operatorMultiplyAssign(QVector3D* self, float factor) {
+QVector3D* QVector3D_operatorMultiplyAssign_factor(QVector3D* self, float factor) {
 	QVector3D& _ret = self->operator*=(static_cast<float>(factor));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QVector3D* QVector3D_operatorMultiplyAssignWithVector(QVector3D* self, QVector3D* vector) {
+QVector3D* QVector3D_operatorMultiplyAssign_vector(QVector3D* self, QVector3D* vector) {
 	QVector3D& _ret = self->operator*=(*vector);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QVector3D* QVector3D_operatorDivideAssign(QVector3D* self, float divisor) {
+QVector3D* QVector3D_operatorDivideAssign_divisor(QVector3D* self, float divisor) {
 	QVector3D& _ret = self->operator/=(static_cast<float>(divisor));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QVector3D* QVector3D_operatorDivideAssignWithVector(QVector3D* self, QVector3D* vector) {
+QVector3D* QVector3D_operatorDivideAssign_vector(QVector3D* self, QVector3D* vector) {
 	QVector3D& _ret = self->operator/=(*vector);
 	// Cast returned reference into pointer
 	return &_ret;
@@ -147,11 +147,11 @@ QVector3D* QVector3D_crossProduct(QVector3D* v1, QVector3D* v2) {
 	return new QVector3D(QVector3D::crossProduct(*v1, *v2));
 }
 
-QVector3D* QVector3D_normal(QVector3D* v1, QVector3D* v2) {
+QVector3D* QVector3D_normal_v1_v2(QVector3D* v1, QVector3D* v2) {
 	return new QVector3D(QVector3D::normal(*v1, *v2));
 }
 
-QVector3D* QVector3D_normal2(QVector3D* v1, QVector3D* v2, QVector3D* v3) {
+QVector3D* QVector3D_normal_v1_v2_v3(QVector3D* v1, QVector3D* v2, QVector3D* v3) {
 	return new QVector3D(QVector3D::normal(*v1, *v2, *v3));
 }
 
@@ -167,11 +167,11 @@ float QVector3D_distanceToPoint(const QVector3D* self, QVector3D* point) {
 	return self->distanceToPoint(*point);
 }
 
-float QVector3D_distanceToPlane(const QVector3D* self, QVector3D* plane, QVector3D* normal) {
+float QVector3D_distanceToPlane_plane_normal(const QVector3D* self, QVector3D* plane, QVector3D* normal) {
 	return self->distanceToPlane(*plane, *normal);
 }
 
-float QVector3D_distanceToPlane2(const QVector3D* self, QVector3D* plane1, QVector3D* plane2, QVector3D* plane3) {
+float QVector3D_distanceToPlane_plane1_plane2_plane3(const QVector3D* self, QVector3D* plane1, QVector3D* plane2, QVector3D* plane3) {
 	return self->distanceToPlane(*plane1, *plane2, *plane3);
 }
 

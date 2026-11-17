@@ -74,8 +74,8 @@ type cQSortFilterProxyModel*{.exportc: "QSortFilterProxyModel", incompleteStruct
 proc fcQSortFilterProxyModel_metaObject(self: pointer): pointer {.importc: "QSortFilterProxyModel_metaObject".}
 proc fcQSortFilterProxyModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QSortFilterProxyModel_metacast".}
 proc fcQSortFilterProxyModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSortFilterProxyModel_metacall".}
-proc fcQSortFilterProxyModel_tr(s: cstring): struct_seaqt_string {.importc: "QSortFilterProxyModel_tr".}
-proc fcQSortFilterProxyModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSortFilterProxyModel_trUtf8".}
+proc fcQSortFilterProxyModel_trS(s: cstring): struct_seaqt_string {.importc: "QSortFilterProxyModel_tr_s".}
+proc fcQSortFilterProxyModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSortFilterProxyModel_trUtf8_s".}
 proc fcQSortFilterProxyModel_setSourceModel(self: pointer, sourceModel: pointer): void {.importc: "QSortFilterProxyModel_setSourceModel".}
 proc fcQSortFilterProxyModel_mapToSource(self: pointer, proxyIndex: pointer): pointer {.importc: "QSortFilterProxyModel_mapToSource".}
 proc fcQSortFilterProxyModel_mapFromSource(self: pointer, sourceIndex: pointer): pointer {.importc: "QSortFilterProxyModel_mapFromSource".}
@@ -101,10 +101,10 @@ proc fcQSortFilterProxyModel_filterRole(self: pointer): cint {.importc: "QSortFi
 proc fcQSortFilterProxyModel_setFilterRole(self: pointer, role: cint): void {.importc: "QSortFilterProxyModel_setFilterRole".}
 proc fcQSortFilterProxyModel_isRecursiveFilteringEnabled(self: pointer): bool {.importc: "QSortFilterProxyModel_isRecursiveFilteringEnabled".}
 proc fcQSortFilterProxyModel_setRecursiveFilteringEnabled(self: pointer, recursive: bool): void {.importc: "QSortFilterProxyModel_setRecursiveFilteringEnabled".}
-proc fcQSortFilterProxyModel_setFilterRegExp(self: pointer, pattern: struct_seaqt_string): void {.importc: "QSortFilterProxyModel_setFilterRegExp".}
-proc fcQSortFilterProxyModel_setFilterRegExpWithRegExp(self: pointer, regExp: pointer): void {.importc: "QSortFilterProxyModel_setFilterRegExpWithRegExp".}
-proc fcQSortFilterProxyModel_setFilterRegularExpression(self: pointer, pattern: struct_seaqt_string): void {.importc: "QSortFilterProxyModel_setFilterRegularExpression".}
-proc fcQSortFilterProxyModel_setFilterRegularExpressionWithRegularExpression(self: pointer, regularExpression: pointer): void {.importc: "QSortFilterProxyModel_setFilterRegularExpressionWithRegularExpression".}
+proc fcQSortFilterProxyModel_setFilterRegExpPattern(self: pointer, pattern: struct_seaqt_string): void {.importc: "QSortFilterProxyModel_setFilterRegExp_pattern".}
+proc fcQSortFilterProxyModel_setFilterRegExpRegExp(self: pointer, regExp: pointer): void {.importc: "QSortFilterProxyModel_setFilterRegExp_regExp".}
+proc fcQSortFilterProxyModel_setFilterRegularExpressionPattern(self: pointer, pattern: struct_seaqt_string): void {.importc: "QSortFilterProxyModel_setFilterRegularExpression_pattern".}
+proc fcQSortFilterProxyModel_setFilterRegularExpressionRegularExpression(self: pointer, regularExpression: pointer): void {.importc: "QSortFilterProxyModel_setFilterRegularExpression_regularExpression".}
 proc fcQSortFilterProxyModel_setFilterWildcard(self: pointer, pattern: struct_seaqt_string): void {.importc: "QSortFilterProxyModel_setFilterWildcard".}
 proc fcQSortFilterProxyModel_setFilterFixedString(self: pointer, pattern: struct_seaqt_string): void {.importc: "QSortFilterProxyModel_setFilterFixedString".}
 proc fcQSortFilterProxyModel_clear(self: pointer): void {.importc: "QSortFilterProxyModel_clear".}
@@ -148,10 +148,10 @@ proc fcQSortFilterProxyModel_filterRoleChanged(self: pointer, filterRole: cint):
 proc fcQSortFilterProxyModel_connect_filterRoleChanged(self: pointer, slot: int, callback: proc (slot: int, filterRole: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSortFilterProxyModel_connect_filterRoleChanged".}
 proc fcQSortFilterProxyModel_recursiveFilteringEnabledChanged(self: pointer, recursiveFilteringEnabled: bool): void {.importc: "QSortFilterProxyModel_recursiveFilteringEnabledChanged".}
 proc fcQSortFilterProxyModel_connect_recursiveFilteringEnabledChanged(self: pointer, slot: int, callback: proc (slot: int, recursiveFilteringEnabled: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSortFilterProxyModel_connect_recursiveFilteringEnabledChanged".}
-proc fcQSortFilterProxyModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSortFilterProxyModel_tr2".}
-proc fcQSortFilterProxyModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSortFilterProxyModel_tr3".}
-proc fcQSortFilterProxyModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSortFilterProxyModel_trUtf82".}
-proc fcQSortFilterProxyModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSortFilterProxyModel_trUtf83".}
+proc fcQSortFilterProxyModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSortFilterProxyModel_tr_s_c".}
+proc fcQSortFilterProxyModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSortFilterProxyModel_tr_s_c_n".}
+proc fcQSortFilterProxyModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSortFilterProxyModel_trUtf8_s_c".}
+proc fcQSortFilterProxyModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSortFilterProxyModel_trUtf8_s_c_n".}
 proc fcQSortFilterProxyModel_vdata(self: pointer): ptr pointer {.importc: "QSortFilterProxyModel_vdata".}
 proc fvdata_cQSortFilterProxyModel(self: pointer): pointer {.importc: "vdata_QSortFilterProxyModel".}
 
@@ -264,7 +264,7 @@ proc fcQSortFilterProxyModel_virtualbase_disconnectNotify(self: pointer, signal:
 proc fcQSortFilterProxyModel_protectedbase_filterChanged(self: pointer): void {.importc: "QSortFilterProxyModel_protectedbase_filterChanged".}
 proc fcQSortFilterProxyModel_protectedbase_invalidateFilter(self: pointer): void {.importc: "QSortFilterProxyModel_protectedbase_invalidateFilter".}
 proc fcQSortFilterProxyModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QSortFilterProxyModel_protectedbase_resetInternalData".}
-proc fcQSortFilterProxyModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QSortFilterProxyModel_protectedbase_createIndex".}
+proc fcQSortFilterProxyModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QSortFilterProxyModel_protectedbase_createIndex_row_column".}
 proc fcQSortFilterProxyModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QSortFilterProxyModel_protectedbase_encodeData".}
 proc fcQSortFilterProxyModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QSortFilterProxyModel_protectedbase_decodeData".}
 proc fcQSortFilterProxyModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QSortFilterProxyModel_protectedbase_beginInsertRows".}
@@ -289,7 +289,7 @@ proc fcQSortFilterProxyModel_protectedbase_senderSignalIndex(self: pointer): cin
 proc fcQSortFilterProxyModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSortFilterProxyModel_protectedbase_receivers".}
 proc fcQSortFilterProxyModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSortFilterProxyModel_protectedbase_isSignalConnected".}
 proc fcQSortFilterProxyModel_new(vtbl: pointer, vdata: csize_t): ptr cQSortFilterProxyModel {.importc: "QSortFilterProxyModel_new".}
-proc fcQSortFilterProxyModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSortFilterProxyModel {.importc: "QSortFilterProxyModel_new2".}
+proc fcQSortFilterProxyModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSortFilterProxyModel {.importc: "QSortFilterProxyModel_new_parent".}
 proc fcQSortFilterProxyModel_staticMetaObject(): pointer {.importc: "QSortFilterProxyModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel): gen_qobjectdefs_types.QMetaObject =
@@ -302,13 +302,13 @@ proc metacall*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, para
   fcQSortFilterProxyModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsortfilterproxymodel_types.QSortFilterProxyModel, s: cstring): string =
-  let v_ms = fcQSortFilterProxyModel_tr(s)
+  let v_ms = fcQSortFilterProxyModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsortfilterproxymodel_types.QSortFilterProxyModel, s: cstring): string =
-  let v_ms = fcQSortFilterProxyModel_trUtf8(s)
+  let v_ms = fcQSortFilterProxyModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -389,16 +389,16 @@ proc setRecursiveFilteringEnabled*(self: gen_qsortfilterproxymodel_types.QSortFi
   fcQSortFilterProxyModel_setRecursiveFilteringEnabled(self.h, recursive)
 
 proc setFilterRegExp*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, pattern: openArray[char]): void =
-  fcQSortFilterProxyModel_setFilterRegExp(self.h, struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))))
+  fcQSortFilterProxyModel_setFilterRegExpPattern(self.h, struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))))
 
 proc setFilterRegExp*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, regExp: gen_qregexp_types.QRegExp): void =
-  fcQSortFilterProxyModel_setFilterRegExpWithRegExp(self.h, regExp.h)
+  fcQSortFilterProxyModel_setFilterRegExpRegExp(self.h, regExp.h)
 
 proc setFilterRegularExpression*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, pattern: openArray[char]): void =
-  fcQSortFilterProxyModel_setFilterRegularExpression(self.h, struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))))
+  fcQSortFilterProxyModel_setFilterRegularExpressionPattern(self.h, struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))))
 
 proc setFilterRegularExpression*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, regularExpression: gen_qregularexpression_types.QRegularExpression): void =
-  fcQSortFilterProxyModel_setFilterRegularExpressionWithRegularExpression(self.h, regularExpression.h)
+  fcQSortFilterProxyModel_setFilterRegularExpressionRegularExpression(self.h, regularExpression.h)
 
 proc setFilterWildcard*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, pattern: openArray[char]): void =
   fcQSortFilterProxyModel_setFilterWildcard(self.h, struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))))
@@ -647,25 +647,25 @@ proc onRecursiveFilteringEnabledChanged*(self: gen_qsortfilterproxymodel_types.Q
   fcQSortFilterProxyModel_connect_recursiveFilteringEnabledChanged(self.h, cast[int](addr tmp[]), fcQSortFilterProxyModel_slot_callback_recursiveFilteringEnabledChanged, fcQSortFilterProxyModel_slot_callback_recursiveFilteringEnabledChanged_release)
 
 proc tr*(_: type gen_qsortfilterproxymodel_types.QSortFilterProxyModel, s: cstring, c: cstring): string =
-  let v_ms = fcQSortFilterProxyModel_tr2(s, c)
+  let v_ms = fcQSortFilterProxyModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsortfilterproxymodel_types.QSortFilterProxyModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSortFilterProxyModel_tr3(s, c, n)
+  let v_ms = fcQSortFilterProxyModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsortfilterproxymodel_types.QSortFilterProxyModel, s: cstring, c: cstring): string =
-  let v_ms = fcQSortFilterProxyModel_trUtf82(s, c)
+  let v_ms = fcQSortFilterProxyModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsortfilterproxymodel_types.QSortFilterProxyModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSortFilterProxyModel_trUtf83(s, c, n)
+  let v_ms = fcQSortFilterProxyModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2045,7 +2045,7 @@ proc resetInternalData*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyMo
   fcQSortFilterProxyModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQSortFilterProxyModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSortFilterProxyModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

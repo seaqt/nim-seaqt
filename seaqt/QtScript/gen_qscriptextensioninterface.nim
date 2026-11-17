@@ -49,7 +49,7 @@ export
 type cQScriptExtensionInterface*{.exportc: "QScriptExtensionInterface", incompleteStruct.} = object
 
 proc fcQScriptExtensionInterface_initialize(self: pointer, key: struct_seaqt_string, engine: pointer): void {.importc: "QScriptExtensionInterface_initialize".}
-proc fcQScriptExtensionInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QScriptExtensionInterface_operatorAssign".}
+proc fcQScriptExtensionInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QScriptExtensionInterface_operatorAssign".}
 proc fcQScriptExtensionInterface_vdata(self: pointer): ptr pointer {.importc: "QScriptExtensionInterface_vdata".}
 proc fvdata_cQScriptExtensionInterface(self: pointer): pointer {.importc: "vdata_QScriptExtensionInterface".}
 
@@ -57,13 +57,13 @@ type cQScriptExtensionInterfaceVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   initialize*: proc(self: pointer, key: struct_seaqt_string, engine: pointer): void {.cdecl, raises: [], gcsafe.}
   keys*: proc(self: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
-proc fcQScriptExtensionInterface_new(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQScriptExtensionInterface {.importc: "QScriptExtensionInterface_new".}
+proc fcQScriptExtensionInterface_new(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQScriptExtensionInterface {.importc: "QScriptExtensionInterface_new".}
 
 proc initialize*(self: gen_qscriptextensioninterface_types.QScriptExtensionInterface, key: openArray[char], engine: gen_qscriptengine_types.QScriptEngine): void =
   fcQScriptExtensionInterface_initialize(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), engine.h)
 
-proc operatorAssign*(self: gen_qscriptextensioninterface_types.QScriptExtensionInterface, param1: gen_qscriptextensioninterface_types.QScriptExtensionInterface): void =
-  fcQScriptExtensionInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qscriptextensioninterface_types.QScriptExtensionInterface, fromVal: gen_qscriptextensioninterface_types.QScriptExtensionInterface): void =
+  fcQScriptExtensionInterface_operatorAssign(self.h, fromVal.h)
 
 type QScriptExtensionInterfaceinitializeProc* = proc(self: QScriptExtensionInterface, key: openArray[char], engine: gen_qscriptengine_types.QScriptEngine): void {.raises: [], gcsafe.}
 type QScriptExtensionInterfacekeysProc* = proc(self: QScriptExtensionInterface): seq[string] {.raises: [], gcsafe.}
@@ -126,7 +126,7 @@ proc fcQScriptExtensionInterface_method_callback_keys(self: pointer): struct_sea
 
 
 proc create*(T: type gen_qscriptextensioninterface_types.QScriptExtensionInterface,
-    param1: gen_qscriptextensioninterface_types.QScriptExtensionInterface,
+    fromVal: gen_qscriptextensioninterface_types.QScriptExtensionInterface,
     vtbl: ref QScriptExtensionInterfaceVTable = nil): gen_qscriptextensioninterface_types.QScriptExtensionInterface =
   let vtbl = if vtbl == nil: new QScriptExtensionInterfaceVTable else: vtbl
   GC_ref(vtbl)
@@ -137,7 +137,7 @@ proc create*(T: type gen_qscriptextensioninterface_types.QScriptExtensionInterfa
     vtbl[].vtbl.initialize = fcQScriptExtensionInterface_vtable_callback_initialize
   if not isNil(vtbl[].keys):
     vtbl[].vtbl.keys = fcQScriptExtensionInterface_vtable_callback_keys
-  let tmp = gen_qscriptextensioninterface_types.QScriptExtensionInterface(h: fcQScriptExtensionInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qscriptextensioninterface_types.QScriptExtensionInterface(h: fcQScriptExtensionInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQScriptExtensionInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQScriptExtensionInterface_mvtbl = cQScriptExtensionInterfaceVTable(
@@ -150,10 +150,10 @@ const cQScriptExtensionInterface_mvtbl = cQScriptExtensionInterfaceVTable(
   keys: fcQScriptExtensionInterface_method_callback_keys,
 )
 proc create*(T: type gen_qscriptextensioninterface_types.QScriptExtensionInterface,
-    param1: gen_qscriptextensioninterface_types.QScriptExtensionInterface,
+    fromVal: gen_qscriptextensioninterface_types.QScriptExtensionInterface,
     inst: VirtualQScriptExtensionInterface) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQScriptExtensionInterface_new(addr(cQScriptExtensionInterface_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQScriptExtensionInterface_new(addr(cQScriptExtensionInterface_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQScriptExtensionInterface_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 

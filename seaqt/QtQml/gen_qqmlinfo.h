@@ -26,28 +26,28 @@ typedef struct QQmlInfo QQmlInfo;
 typedef struct QUrl QUrl;
 #endif
 
-QQmlInfo* QQmlInfo_new(QQmlInfo* param1);
+QQmlInfo* QQmlInfo_new(QQmlInfo* from);
 
 void QQmlInfo_virtbase(QQmlInfo* src, QDebug** outptr_QDebug);
-QQmlInfo* QQmlInfo_operatorShiftLeft(QQmlInfo* self, QChar* t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithBool(QQmlInfo* self, bool t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithChar(QQmlInfo* self, char t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithShort(QQmlInfo* self, short t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithUnsignedshort(QQmlInfo* self, unsigned short t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithInt(QQmlInfo* self, int t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithUnsignedint(QQmlInfo* self, unsigned int t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithLong(QQmlInfo* self, long t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithUnsignedlong(QQmlInfo* self, unsigned long t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithQint64(QQmlInfo* self, long long t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithQuint64(QQmlInfo* self, unsigned long long t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithFloat(QQmlInfo* self, float t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithDouble(QQmlInfo* self, double t);
-QQmlInfo* QQmlInfo_operatorShiftLeft2(QQmlInfo* self, const char* t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithQString(QQmlInfo* self, struct seaqt_string t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithQByteArray(QQmlInfo* self, struct seaqt_string t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithVoid(QQmlInfo* self, const void* t);
-QQmlInfo* QQmlInfo_operatorShiftLeftWithQUrl(QQmlInfo* self, QUrl* t);
-void QQmlInfo_operatorAssign(QQmlInfo* self, QQmlInfo* param1);
+QQmlInfo* QQmlInfo_operatorShiftLeft_QChar(QQmlInfo* self, QChar* t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_bool(QQmlInfo* self, bool t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_char(QQmlInfo* self, char t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_short(QQmlInfo* self, short t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_unsignedshort(QQmlInfo* self, unsigned short t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_int(QQmlInfo* self, int t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_unsignedint(QQmlInfo* self, unsigned int t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_long(QQmlInfo* self, long t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_unsignedlong(QQmlInfo* self, unsigned long t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_qint64(QQmlInfo* self, long long t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_quint64(QQmlInfo* self, unsigned long long t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_float(QQmlInfo* self, float t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_double(QQmlInfo* self, double t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_pcchar(QQmlInfo* self, const char* t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_cQString(QQmlInfo* self, struct seaqt_string t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_cQByteArray(QQmlInfo* self, struct seaqt_string t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_pcvoid(QQmlInfo* self, const void* t);
+QQmlInfo* QQmlInfo_operatorShiftLeft_cQUrl(QQmlInfo* self, QUrl* t);
+void QQmlInfo_operatorAssign(QQmlInfo* self, QQmlInfo* from);
 
 void QQmlInfo_delete(QQmlInfo* self);
 

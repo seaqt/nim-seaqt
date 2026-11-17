@@ -95,16 +95,16 @@ export
 
 type cQTextCursor*{.exportc: "QTextCursor", incompleteStruct.} = object
 
-proc fcQTextCursor_operatorAssign(self: pointer, other: pointer): void {.importc: "QTextCursor_operatorAssign".}
+proc fcQTextCursor_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTextCursor_operatorAssign".}
 proc fcQTextCursor_swap(self: pointer, other: pointer): void {.importc: "QTextCursor_swap".}
 proc fcQTextCursor_isNull(self: pointer): bool {.importc: "QTextCursor_isNull".}
-proc fcQTextCursor_setPosition(self: pointer, pos: cint): void {.importc: "QTextCursor_setPosition".}
+proc fcQTextCursor_setPositionPos(self: pointer, pos: cint): void {.importc: "QTextCursor_setPosition_pos".}
 proc fcQTextCursor_position(self: pointer): cint {.importc: "QTextCursor_position".}
 proc fcQTextCursor_positionInBlock(self: pointer): cint {.importc: "QTextCursor_positionInBlock".}
 proc fcQTextCursor_anchor(self: pointer): cint {.importc: "QTextCursor_anchor".}
-proc fcQTextCursor_insertText(self: pointer, text: struct_seaqt_string): void {.importc: "QTextCursor_insertText".}
-proc fcQTextCursor_insertText2(self: pointer, text: struct_seaqt_string, format: pointer): void {.importc: "QTextCursor_insertText2".}
-proc fcQTextCursor_movePosition(self: pointer, op: cint): bool {.importc: "QTextCursor_movePosition".}
+proc fcQTextCursor_insertTextText(self: pointer, text: struct_seaqt_string): void {.importc: "QTextCursor_insertText_text".}
+proc fcQTextCursor_insertTextTextFormat(self: pointer, text: struct_seaqt_string, format: pointer): void {.importc: "QTextCursor_insertText_text_format".}
+proc fcQTextCursor_movePosition_QTextCursor_MoveOperation(self: pointer, op: cint): bool {.importc: "QTextCursor_movePosition_QTextCursor_MoveOperation".}
 proc fcQTextCursor_visualNavigation(self: pointer): bool {.importc: "QTextCursor_visualNavigation".}
 proc fcQTextCursor_setVisualNavigation(self: pointer, b: bool): void {.importc: "QTextCursor_setVisualNavigation".}
 proc fcQTextCursor_setVerticalMovementX(self: pointer, x: cint): void {.importc: "QTextCursor_setVerticalMovementX".}
@@ -138,24 +138,24 @@ proc fcQTextCursor_atBlockEnd(self: pointer): bool {.importc: "QTextCursor_atBlo
 proc fcQTextCursor_atStart(self: pointer): bool {.importc: "QTextCursor_atStart".}
 proc fcQTextCursor_atEnd(self: pointer): bool {.importc: "QTextCursor_atEnd".}
 proc fcQTextCursor_insertBlock(self: pointer): void {.importc: "QTextCursor_insertBlock".}
-proc fcQTextCursor_insertBlockWithFormat(self: pointer, format: pointer): void {.importc: "QTextCursor_insertBlockWithFormat".}
-proc fcQTextCursor_insertBlock2(self: pointer, format: pointer, charFormat: pointer): void {.importc: "QTextCursor_insertBlock2".}
-proc fcQTextCursor_insertList(self: pointer, format: pointer): pointer {.importc: "QTextCursor_insertList".}
-proc fcQTextCursor_insertListWithStyle(self: pointer, style: cint): pointer {.importc: "QTextCursor_insertListWithStyle".}
-proc fcQTextCursor_createList(self: pointer, format: pointer): pointer {.importc: "QTextCursor_createList".}
-proc fcQTextCursor_createListWithStyle(self: pointer, style: cint): pointer {.importc: "QTextCursor_createListWithStyle".}
+proc fcQTextCursor_insertBlockFormat(self: pointer, format: pointer): void {.importc: "QTextCursor_insertBlock_format".}
+proc fcQTextCursor_insertBlockFormatCharFormat(self: pointer, format: pointer, charFormat: pointer): void {.importc: "QTextCursor_insertBlock_format_charFormat".}
+proc fcQTextCursor_insertListFormat(self: pointer, format: pointer): pointer {.importc: "QTextCursor_insertList_format".}
+proc fcQTextCursor_insertListStyle(self: pointer, style: cint): pointer {.importc: "QTextCursor_insertList_style".}
+proc fcQTextCursor_createListFormat(self: pointer, format: pointer): pointer {.importc: "QTextCursor_createList_format".}
+proc fcQTextCursor_createListStyle(self: pointer, style: cint): pointer {.importc: "QTextCursor_createList_style".}
 proc fcQTextCursor_currentList(self: pointer): pointer {.importc: "QTextCursor_currentList".}
-proc fcQTextCursor_insertTable(self: pointer, rows: cint, cols: cint, format: pointer): pointer {.importc: "QTextCursor_insertTable".}
-proc fcQTextCursor_insertTable2(self: pointer, rows: cint, cols: cint): pointer {.importc: "QTextCursor_insertTable2".}
+proc fcQTextCursor_insertTableRowsColsFormat(self: pointer, rows: cint, cols: cint, format: pointer): pointer {.importc: "QTextCursor_insertTable_rows_cols_format".}
+proc fcQTextCursor_insertTableRowsCols(self: pointer, rows: cint, cols: cint): pointer {.importc: "QTextCursor_insertTable_rows_cols".}
 proc fcQTextCursor_currentTable(self: pointer): pointer {.importc: "QTextCursor_currentTable".}
 proc fcQTextCursor_insertFrame(self: pointer, format: pointer): pointer {.importc: "QTextCursor_insertFrame".}
 proc fcQTextCursor_currentFrame(self: pointer): pointer {.importc: "QTextCursor_currentFrame".}
 proc fcQTextCursor_insertFragment(self: pointer, fragment: pointer): void {.importc: "QTextCursor_insertFragment".}
 proc fcQTextCursor_insertHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QTextCursor_insertHtml".}
-proc fcQTextCursor_insertImage(self: pointer, format: pointer, alignment: cint): void {.importc: "QTextCursor_insertImage".}
-proc fcQTextCursor_insertImageWithFormat(self: pointer, format: pointer): void {.importc: "QTextCursor_insertImageWithFormat".}
-proc fcQTextCursor_insertImageWithName(self: pointer, name: struct_seaqt_string): void {.importc: "QTextCursor_insertImageWithName".}
-proc fcQTextCursor_insertImageWithImage(self: pointer, image: pointer): void {.importc: "QTextCursor_insertImageWithImage".}
+proc fcQTextCursor_insertImageFormatAlignment(self: pointer, format: pointer, alignment: cint): void {.importc: "QTextCursor_insertImage_format_alignment".}
+proc fcQTextCursor_insertImageFormat(self: pointer, format: pointer): void {.importc: "QTextCursor_insertImage_format".}
+proc fcQTextCursor_insertImageName(self: pointer, name: struct_seaqt_string): void {.importc: "QTextCursor_insertImage_name".}
+proc fcQTextCursor_insertImageImage(self: pointer, image: pointer): void {.importc: "QTextCursor_insertImage_image".}
 proc fcQTextCursor_beginEditBlock(self: pointer): void {.importc: "QTextCursor_beginEditBlock".}
 proc fcQTextCursor_joinPreviousEditBlock(self: pointer): void {.importc: "QTextCursor_joinPreviousEditBlock".}
 proc fcQTextCursor_endEditBlock(self: pointer): void {.importc: "QTextCursor_endEditBlock".}
@@ -169,18 +169,18 @@ proc fcQTextCursor_isCopyOf(self: pointer, other: pointer): bool {.importc: "QTe
 proc fcQTextCursor_blockNumber(self: pointer): cint {.importc: "QTextCursor_blockNumber".}
 proc fcQTextCursor_columnNumber(self: pointer): cint {.importc: "QTextCursor_columnNumber".}
 proc fcQTextCursor_document(self: pointer): pointer {.importc: "QTextCursor_document".}
-proc fcQTextCursor_setPosition2(self: pointer, pos: cint, mode: cint): void {.importc: "QTextCursor_setPosition2".}
-proc fcQTextCursor_movePosition2(self: pointer, op: cint, param2: cint): bool {.importc: "QTextCursor_movePosition2".}
-proc fcQTextCursor_movePosition3(self: pointer, op: cint, param2: cint, n: cint): bool {.importc: "QTextCursor_movePosition3".}
-proc fcQTextCursor_insertImage2(self: pointer, image: pointer, name: struct_seaqt_string): void {.importc: "QTextCursor_insertImage2".}
+proc fcQTextCursor_setPositionPosMode(self: pointer, pos: cint, mode: cint): void {.importc: "QTextCursor_setPosition_pos_mode".}
+proc fcQTextCursor_movePosition_QTextCursor_MoveOperation_QTextCursor_MoveMode(self: pointer, op: cint, param2: cint): bool {.importc: "QTextCursor_movePosition_QTextCursor_MoveOperation_QTextCursor_MoveMode".}
+proc fcQTextCursor_movePosition_QTextCursor_MoveOperation_QTextCursor_MoveModeInt(self: pointer, op: cint, param2: cint, n: cint): bool {.importc: "QTextCursor_movePosition_QTextCursor_MoveOperation_QTextCursor_MoveMode_int".}
+proc fcQTextCursor_insertImageImageName(self: pointer, image: pointer, name: struct_seaqt_string): void {.importc: "QTextCursor_insertImage_image_name".}
 proc fcQTextCursor_new(): ptr cQTextCursor {.importc: "QTextCursor_new".}
-proc fcQTextCursor_new2(document: pointer): ptr cQTextCursor {.importc: "QTextCursor_new2".}
-proc fcQTextCursor_new3(frame: pointer): ptr cQTextCursor {.importc: "QTextCursor_new3".}
-proc fcQTextCursor_new4(blockVal: pointer): ptr cQTextCursor {.importc: "QTextCursor_new4".}
-proc fcQTextCursor_new5(cursor: pointer): ptr cQTextCursor {.importc: "QTextCursor_new5".}
+proc fcQTextCursor_new2(document: pointer): ptr cQTextCursor {.importc: "QTextCursor_new_document".}
+proc fcQTextCursor_new3(frame: pointer): ptr cQTextCursor {.importc: "QTextCursor_new_frame".}
+proc fcQTextCursor_new4(blockVal: pointer): ptr cQTextCursor {.importc: "QTextCursor_new_block".}
+proc fcQTextCursor_new5(fromVal: pointer): ptr cQTextCursor {.importc: "QTextCursor_new_from".}
 
-proc operatorAssign*(self: gen_qtextcursor_types.QTextCursor, other: gen_qtextcursor_types.QTextCursor): void =
-  fcQTextCursor_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qtextcursor_types.QTextCursor, fromVal: gen_qtextcursor_types.QTextCursor): void =
+  fcQTextCursor_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qtextcursor_types.QTextCursor, other: gen_qtextcursor_types.QTextCursor): void =
   fcQTextCursor_swap(self.h, other.h)
@@ -189,7 +189,7 @@ proc isNull*(self: gen_qtextcursor_types.QTextCursor): bool =
   fcQTextCursor_isNull(self.h)
 
 proc setPosition*(self: gen_qtextcursor_types.QTextCursor, pos: cint): void =
-  fcQTextCursor_setPosition(self.h, pos)
+  fcQTextCursor_setPositionPos(self.h, pos)
 
 proc position*(self: gen_qtextcursor_types.QTextCursor): cint =
   fcQTextCursor_position(self.h)
@@ -201,13 +201,13 @@ proc anchor*(self: gen_qtextcursor_types.QTextCursor): cint =
   fcQTextCursor_anchor(self.h)
 
 proc insertText*(self: gen_qtextcursor_types.QTextCursor, text: openArray[char]): void =
-  fcQTextCursor_insertText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQTextCursor_insertTextText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc insertText*(self: gen_qtextcursor_types.QTextCursor, text: openArray[char], format: gen_qtextformat_types.QTextCharFormat): void =
-  fcQTextCursor_insertText2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), format.h)
+  fcQTextCursor_insertTextTextFormat(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), format.h)
 
 proc movePosition*(self: gen_qtextcursor_types.QTextCursor, op: cint): bool =
-  fcQTextCursor_movePosition(self.h, cint(op))
+  fcQTextCursor_movePosition_QTextCursor_MoveOperation(self.h, cint(op))
 
 proc visualNavigation*(self: gen_qtextcursor_types.QTextCursor): bool =
   fcQTextCursor_visualNavigation(self.h)
@@ -312,31 +312,31 @@ proc insertBlock*(self: gen_qtextcursor_types.QTextCursor): void =
   fcQTextCursor_insertBlock(self.h)
 
 proc insertBlock*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextformat_types.QTextBlockFormat): void =
-  fcQTextCursor_insertBlockWithFormat(self.h, format.h)
+  fcQTextCursor_insertBlockFormat(self.h, format.h)
 
 proc insertBlock*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextformat_types.QTextBlockFormat, charFormat: gen_qtextformat_types.QTextCharFormat): void =
-  fcQTextCursor_insertBlock2(self.h, format.h, charFormat.h)
+  fcQTextCursor_insertBlockFormatCharFormat(self.h, format.h, charFormat.h)
 
 proc insertList*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextformat_types.QTextListFormat): gen_qtextlist_types.QTextList =
-  gen_qtextlist_types.QTextList(h: fcQTextCursor_insertList(self.h, format.h), owned: false)
+  gen_qtextlist_types.QTextList(h: fcQTextCursor_insertListFormat(self.h, format.h), owned: false)
 
 proc insertList*(self: gen_qtextcursor_types.QTextCursor, style: cint): gen_qtextlist_types.QTextList =
-  gen_qtextlist_types.QTextList(h: fcQTextCursor_insertListWithStyle(self.h, cint(style)), owned: false)
+  gen_qtextlist_types.QTextList(h: fcQTextCursor_insertListStyle(self.h, cint(style)), owned: false)
 
 proc createList*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextformat_types.QTextListFormat): gen_qtextlist_types.QTextList =
-  gen_qtextlist_types.QTextList(h: fcQTextCursor_createList(self.h, format.h), owned: false)
+  gen_qtextlist_types.QTextList(h: fcQTextCursor_createListFormat(self.h, format.h), owned: false)
 
 proc createList*(self: gen_qtextcursor_types.QTextCursor, style: cint): gen_qtextlist_types.QTextList =
-  gen_qtextlist_types.QTextList(h: fcQTextCursor_createListWithStyle(self.h, cint(style)), owned: false)
+  gen_qtextlist_types.QTextList(h: fcQTextCursor_createListStyle(self.h, cint(style)), owned: false)
 
 proc currentList*(self: gen_qtextcursor_types.QTextCursor): gen_qtextlist_types.QTextList =
   gen_qtextlist_types.QTextList(h: fcQTextCursor_currentList(self.h), owned: false)
 
 proc insertTable*(self: gen_qtextcursor_types.QTextCursor, rows: cint, cols: cint, format: gen_qtextformat_types.QTextTableFormat): gen_qtexttable_types.QTextTable =
-  gen_qtexttable_types.QTextTable(h: fcQTextCursor_insertTable(self.h, rows, cols, format.h), owned: false)
+  gen_qtexttable_types.QTextTable(h: fcQTextCursor_insertTableRowsColsFormat(self.h, rows, cols, format.h), owned: false)
 
 proc insertTable*(self: gen_qtextcursor_types.QTextCursor, rows: cint, cols: cint): gen_qtexttable_types.QTextTable =
-  gen_qtexttable_types.QTextTable(h: fcQTextCursor_insertTable2(self.h, rows, cols), owned: false)
+  gen_qtexttable_types.QTextTable(h: fcQTextCursor_insertTableRowsCols(self.h, rows, cols), owned: false)
 
 proc currentTable*(self: gen_qtextcursor_types.QTextCursor): gen_qtexttable_types.QTextTable =
   gen_qtexttable_types.QTextTable(h: fcQTextCursor_currentTable(self.h), owned: false)
@@ -354,16 +354,16 @@ proc insertHtml*(self: gen_qtextcursor_types.QTextCursor, html: openArray[char])
   fcQTextCursor_insertHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextformat_types.QTextImageFormat, alignment: cint): void =
-  fcQTextCursor_insertImage(self.h, format.h, cint(alignment))
+  fcQTextCursor_insertImageFormatAlignment(self.h, format.h, cint(alignment))
 
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextformat_types.QTextImageFormat): void =
-  fcQTextCursor_insertImageWithFormat(self.h, format.h)
+  fcQTextCursor_insertImageFormat(self.h, format.h)
 
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, name: openArray[char]): void =
-  fcQTextCursor_insertImageWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  fcQTextCursor_insertImageName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, image: gen_qimage_types.QImage): void =
-  fcQTextCursor_insertImageWithImage(self.h, image.h)
+  fcQTextCursor_insertImageImage(self.h, image.h)
 
 proc beginEditBlock*(self: gen_qtextcursor_types.QTextCursor): void =
   fcQTextCursor_beginEditBlock(self.h)
@@ -405,16 +405,16 @@ proc document*(self: gen_qtextcursor_types.QTextCursor): gen_qtextdocument_types
   gen_qtextdocument_types.QTextDocument(h: fcQTextCursor_document(self.h), owned: false)
 
 proc setPosition*(self: gen_qtextcursor_types.QTextCursor, pos: cint, mode: cint): void =
-  fcQTextCursor_setPosition2(self.h, pos, cint(mode))
+  fcQTextCursor_setPositionPosMode(self.h, pos, cint(mode))
 
 proc movePosition*(self: gen_qtextcursor_types.QTextCursor, op: cint, param2: cint): bool =
-  fcQTextCursor_movePosition2(self.h, cint(op), cint(param2))
+  fcQTextCursor_movePosition_QTextCursor_MoveOperation_QTextCursor_MoveMode(self.h, cint(op), cint(param2))
 
 proc movePosition*(self: gen_qtextcursor_types.QTextCursor, op: cint, param2: cint, n: cint): bool =
-  fcQTextCursor_movePosition3(self.h, cint(op), cint(param2), n)
+  fcQTextCursor_movePosition_QTextCursor_MoveOperation_QTextCursor_MoveModeInt(self.h, cint(op), cint(param2), n)
 
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, image: gen_qimage_types.QImage, name: openArray[char]): void =
-  fcQTextCursor_insertImage2(self.h, image.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  fcQTextCursor_insertImageImageName(self.h, image.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc create*(T: type gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
   let tmp = gen_qtextcursor_types.QTextCursor(h: fcQTextCursor_new(), owned: true)
@@ -432,6 +432,6 @@ proc create*(T: type gen_qtextcursor_types.QTextCursor,
   let tmp = gen_qtextcursor_types.QTextCursor(h: fcQTextCursor_new4(blockVal.h), owned: true)
   tmp
 proc create*(T: type gen_qtextcursor_types.QTextCursor,
-    cursor: gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
-  let tmp = gen_qtextcursor_types.QTextCursor(h: fcQTextCursor_new5(cursor.h), owned: true)
+    fromVal: gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
+  let tmp = gen_qtextcursor_types.QTextCursor(h: fcQTextCursor_new5(fromVal.h), owned: true)
   tmp

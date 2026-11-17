@@ -50,8 +50,8 @@ void QRunnable_setAutoDelete(QRunnable* self, bool _autoDelete) {
 	self->setAutoDelete(_autoDelete);
 }
 
-void QRunnable_operatorAssign(QRunnable* self, QRunnable* param1) {
-	self->operator=(*param1);
+void QRunnable_operatorAssign(QRunnable* self, QRunnable* from) {
+	self->operator=(*from);
 }
 
 void* QRunnable_vdata(VirtualQRunnable* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQRunnable>()); }

@@ -22,26 +22,26 @@ QFileInfo* QFileInfo_new() {
 	return new (std::nothrow) QFileInfo();
 }
 
-QFileInfo* QFileInfo_new2(struct seaqt_string file) {
+QFileInfo* QFileInfo_new_QString(struct seaqt_string file) {
 	QString file_QString = QString::fromUtf8(file.data, file.len);
 	return new (std::nothrow) QFileInfo(file_QString);
 }
 
-QFileInfo* QFileInfo_new3(QFile* file) {
+QFileInfo* QFileInfo_new_QFile(QFile* file) {
 	return new (std::nothrow) QFileInfo(*file);
 }
 
-QFileInfo* QFileInfo_new4(QDir* dir, struct seaqt_string file) {
+QFileInfo* QFileInfo_new_QDir_QString(QDir* dir, struct seaqt_string file) {
 	QString file_QString = QString::fromUtf8(file.data, file.len);
 	return new (std::nothrow) QFileInfo(*dir, file_QString);
 }
 
-QFileInfo* QFileInfo_new5(QFileInfo* fileinfo) {
-	return new (std::nothrow) QFileInfo(*fileinfo);
+QFileInfo* QFileInfo_new_QFileInfo(QFileInfo* from) {
+	return new (std::nothrow) QFileInfo(*from);
 }
 
-void QFileInfo_operatorAssign(QFileInfo* self, QFileInfo* fileinfo) {
-	self->operator=(*fileinfo);
+void QFileInfo_operatorAssign(QFileInfo* self, QFileInfo* from) {
+	self->operator=(*from);
 }
 
 void QFileInfo_swap(QFileInfo* self, QFileInfo* other) {
@@ -56,16 +56,16 @@ bool QFileInfo_operatorNotEqual(const QFileInfo* self, QFileInfo* fileinfo) {
 	return (*self != *fileinfo);
 }
 
-void QFileInfo_setFile(QFileInfo* self, struct seaqt_string file) {
+void QFileInfo_setFile_QString(QFileInfo* self, struct seaqt_string file) {
 	QString file_QString = QString::fromUtf8(file.data, file.len);
 	self->setFile(file_QString);
 }
 
-void QFileInfo_setFileWithFile(QFileInfo* self, QFile* file) {
+void QFileInfo_setFile_QFile(QFileInfo* self, QFile* file) {
 	self->setFile(*file);
 }
 
-void QFileInfo_setFile2(QFileInfo* self, QDir* dir, struct seaqt_string file) {
+void QFileInfo_setFile_QDir_QString(QFileInfo* self, QDir* dir, struct seaqt_string file) {
 	QString file_QString = QString::fromUtf8(file.data, file.len);
 	self->setFile(*dir, file_QString);
 }
@@ -74,7 +74,7 @@ bool QFileInfo_exists(const QFileInfo* self) {
 	return self->exists();
 }
 
-bool QFileInfo_existsWithFile(struct seaqt_string file) {
+bool QFileInfo_exists_file(struct seaqt_string file) {
 	QString file_QString = QString::fromUtf8(file.data, file.len);
 	return QFileInfo::exists(file_QString);
 }

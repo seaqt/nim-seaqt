@@ -68,15 +68,15 @@ proc fcQWebEngineCertificateError_error(self: pointer): cint {.importc: "QWebEng
 proc fcQWebEngineCertificateError_url(self: pointer): pointer {.importc: "QWebEngineCertificateError_url".}
 proc fcQWebEngineCertificateError_isOverridable(self: pointer): bool {.importc: "QWebEngineCertificateError_isOverridable".}
 proc fcQWebEngineCertificateError_errorDescription(self: pointer): struct_seaqt_string {.importc: "QWebEngineCertificateError_errorDescription".}
-proc fcQWebEngineCertificateError_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineCertificateError_operatorAssign".}
+proc fcQWebEngineCertificateError_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineCertificateError_operatorAssign".}
 proc fcQWebEngineCertificateError_deferX(self: pointer): void {.importc: "QWebEngineCertificateError_defer".}
 proc fcQWebEngineCertificateError_deferred(self: pointer): bool {.importc: "QWebEngineCertificateError_deferred".}
 proc fcQWebEngineCertificateError_rejectCertificate(self: pointer): void {.importc: "QWebEngineCertificateError_rejectCertificate".}
 proc fcQWebEngineCertificateError_ignoreCertificateError(self: pointer): void {.importc: "QWebEngineCertificateError_ignoreCertificateError".}
 proc fcQWebEngineCertificateError_answered(self: pointer): bool {.importc: "QWebEngineCertificateError_answered".}
 proc fcQWebEngineCertificateError_certificateChain(self: pointer): struct_seaqt_array {.importc: "QWebEngineCertificateError_certificateChain".}
-proc fcQWebEngineCertificateError_new(error: cint, url: pointer, overridable: bool, errorDescription: struct_seaqt_string): ptr cQWebEngineCertificateError {.importc: "QWebEngineCertificateError_new".}
-proc fcQWebEngineCertificateError_new2(other: pointer): ptr cQWebEngineCertificateError {.importc: "QWebEngineCertificateError_new2".}
+proc fcQWebEngineCertificateError_new(error: cint, url: pointer, overridable: bool, errorDescription: struct_seaqt_string): ptr cQWebEngineCertificateError {.importc: "QWebEngineCertificateError_new_error_url_overridable_errorDescription".}
+proc fcQWebEngineCertificateError_new2(fromVal: pointer): ptr cQWebEngineCertificateError {.importc: "QWebEngineCertificateError_new_from".}
 
 proc error*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): cint =
   cint(fcQWebEngineCertificateError_error(self.h))
@@ -93,8 +93,8 @@ proc errorDescription*(self: gen_qwebenginecertificateerror_types.QWebEngineCert
   c_free(v_ms.data)
   vx_ret
 
-proc operatorAssign*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, other: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): void =
-  fcQWebEngineCertificateError_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, fromVal: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): void =
+  fcQWebEngineCertificateError_operatorAssign(self.h, fromVal.h)
 
 proc deferX*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): void =
   fcQWebEngineCertificateError_deferX(self.h)
@@ -125,6 +125,6 @@ proc create*(T: type gen_qwebenginecertificateerror_types.QWebEngineCertificateE
   let tmp = gen_qwebenginecertificateerror_types.QWebEngineCertificateError(h: fcQWebEngineCertificateError_new(error, url.h, overridable, struct_seaqt_string(data: if len(errorDescription) > 0: addr errorDescription[0] else: nil, len: csize_t(len(errorDescription)))), owned: true)
   tmp
 proc create*(T: type gen_qwebenginecertificateerror_types.QWebEngineCertificateError,
-    other: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): gen_qwebenginecertificateerror_types.QWebEngineCertificateError =
-  let tmp = gen_qwebenginecertificateerror_types.QWebEngineCertificateError(h: fcQWebEngineCertificateError_new2(other.h), owned: true)
+    fromVal: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): gen_qwebenginecertificateerror_types.QWebEngineCertificateError =
+  let tmp = gen_qwebenginecertificateerror_types.QWebEngineCertificateError(h: fcQWebEngineCertificateError_new2(fromVal.h), owned: true)
   tmp

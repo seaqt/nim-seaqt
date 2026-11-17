@@ -43,11 +43,11 @@ VirtualQSGSimpleTextureNode* vdata_QSGSimpleTextureNode(void* vdata);
 VirtualQSGSimpleTextureNode* QSGSimpleTextureNode_new(const QSGSimpleTextureNode_VTable* vtbl, size_t vdata);
 
 void QSGSimpleTextureNode_virtbase(QSGSimpleTextureNode* src, QSGGeometryNode** outptr_QSGGeometryNode);
-void QSGSimpleTextureNode_setRect(QSGSimpleTextureNode* self, QRectF* rect);
-void QSGSimpleTextureNode_setRect2(QSGSimpleTextureNode* self, double x, double y, double w, double h);
+void QSGSimpleTextureNode_setRect_rect(QSGSimpleTextureNode* self, QRectF* rect);
+void QSGSimpleTextureNode_setRect_x_y_w_h(QSGSimpleTextureNode* self, double x, double y, double w, double h);
 QRectF* QSGSimpleTextureNode_rect(const QSGSimpleTextureNode* self);
-void QSGSimpleTextureNode_setSourceRect(QSGSimpleTextureNode* self, QRectF* r);
-void QSGSimpleTextureNode_setSourceRect2(QSGSimpleTextureNode* self, double x, double y, double w, double h);
+void QSGSimpleTextureNode_setSourceRect_r(QSGSimpleTextureNode* self, QRectF* r);
+void QSGSimpleTextureNode_setSourceRect_x_y_w_h(QSGSimpleTextureNode* self, double x, double y, double w, double h);
 QRectF* QSGSimpleTextureNode_sourceRect(const QSGSimpleTextureNode* self);
 void QSGSimpleTextureNode_setTexture(QSGSimpleTextureNode* self, QSGTexture* texture);
 QSGTexture* QSGSimpleTextureNode_texture(const QSGSimpleTextureNode* self);

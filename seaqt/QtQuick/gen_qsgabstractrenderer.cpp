@@ -41,7 +41,7 @@ int QSGAbstractRenderer_metacall(QSGAbstractRenderer* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSGAbstractRenderer_tr(const char* s) {
+struct seaqt_string QSGAbstractRenderer_tr_s(const char* s) {
 	QString _ret = QSGAbstractRenderer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -52,7 +52,7 @@ struct seaqt_string QSGAbstractRenderer_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QSGAbstractRenderer_trUtf8(const char* s) {
+struct seaqt_string QSGAbstractRenderer_trUtf8_s(const char* s) {
 	QString _ret = QSGAbstractRenderer::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -71,11 +71,11 @@ QSGRootNode* QSGAbstractRenderer_rootNode(const QSGAbstractRenderer* self) {
 	return self->rootNode();
 }
 
-void QSGAbstractRenderer_setDeviceRect(QSGAbstractRenderer* self, QRect* rect) {
+void QSGAbstractRenderer_setDeviceRect_rect(QSGAbstractRenderer* self, QRect* rect) {
 	self->setDeviceRect(*rect);
 }
 
-void QSGAbstractRenderer_setDeviceRectWithSize(QSGAbstractRenderer* self, QSize* size) {
+void QSGAbstractRenderer_setDeviceRect_size(QSGAbstractRenderer* self, QSize* size) {
 	self->setDeviceRect(*size);
 }
 
@@ -83,11 +83,11 @@ QRect* QSGAbstractRenderer_deviceRect(const QSGAbstractRenderer* self) {
 	return new QRect(self->deviceRect());
 }
 
-void QSGAbstractRenderer_setViewportRect(QSGAbstractRenderer* self, QRect* rect) {
+void QSGAbstractRenderer_setViewportRect_rect(QSGAbstractRenderer* self, QRect* rect) {
 	self->setViewportRect(*rect);
 }
 
-void QSGAbstractRenderer_setViewportRectWithSize(QSGAbstractRenderer* self, QSize* size) {
+void QSGAbstractRenderer_setViewportRect_size(QSGAbstractRenderer* self, QSize* size) {
 	self->setViewportRect(*size);
 }
 
@@ -95,11 +95,11 @@ QRect* QSGAbstractRenderer_viewportRect(const QSGAbstractRenderer* self) {
 	return new QRect(self->viewportRect());
 }
 
-void QSGAbstractRenderer_setProjectionMatrixToRect(QSGAbstractRenderer* self, QRectF* rect) {
+void QSGAbstractRenderer_setProjectionMatrixToRect_rect(QSGAbstractRenderer* self, QRectF* rect) {
 	self->setProjectionMatrixToRect(*rect);
 }
 
-void QSGAbstractRenderer_setProjectionMatrixToRect2(QSGAbstractRenderer* self, QRectF* rect, int flags) {
+void QSGAbstractRenderer_setProjectionMatrixToRect_rect_flags(QSGAbstractRenderer* self, QRectF* rect, int flags) {
 	self->setProjectionMatrixToRect(*rect, static_cast<QSGAbstractRenderer::MatrixTransformFlags>(flags));
 }
 
@@ -155,7 +155,7 @@ void QSGAbstractRenderer_connect_sceneGraphChanged(QSGAbstractRenderer* self, in
 	QSGAbstractRenderer::connect(self, static_cast<void (QSGAbstractRenderer::*)()>(&QSGAbstractRenderer::sceneGraphChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QSGAbstractRenderer_tr2(const char* s, const char* c) {
+struct seaqt_string QSGAbstractRenderer_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSGAbstractRenderer::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -166,7 +166,7 @@ struct seaqt_string QSGAbstractRenderer_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSGAbstractRenderer_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSGAbstractRenderer_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSGAbstractRenderer::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -177,7 +177,7 @@ struct seaqt_string QSGAbstractRenderer_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-struct seaqt_string QSGAbstractRenderer_trUtf82(const char* s, const char* c) {
+struct seaqt_string QSGAbstractRenderer_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QSGAbstractRenderer::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -188,7 +188,7 @@ struct seaqt_string QSGAbstractRenderer_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSGAbstractRenderer_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QSGAbstractRenderer_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSGAbstractRenderer::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

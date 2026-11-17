@@ -52,19 +52,19 @@ void* QGenericPlugin_vdata(VirtualQGenericPlugin* self);
 VirtualQGenericPlugin* vdata_QGenericPlugin(void* vdata);
 
 VirtualQGenericPlugin* QGenericPlugin_new(const QGenericPlugin_VTable* vtbl, size_t vdata);
-VirtualQGenericPlugin* QGenericPlugin_new2(const QGenericPlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQGenericPlugin* QGenericPlugin_new_parent(const QGenericPlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QGenericPlugin_virtbase(QGenericPlugin* src, QObject** outptr_QObject);
 QMetaObject* QGenericPlugin_metaObject(const QGenericPlugin* self);
 void* QGenericPlugin_metacast(QGenericPlugin* self, const char* param1);
 int QGenericPlugin_metacall(QGenericPlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QGenericPlugin_tr(const char* s);
-struct seaqt_string QGenericPlugin_trUtf8(const char* s);
+struct seaqt_string QGenericPlugin_tr_s(const char* s);
+struct seaqt_string QGenericPlugin_trUtf8_s(const char* s);
 QObject* QGenericPlugin_create(QGenericPlugin* self, struct seaqt_string name, struct seaqt_string spec);
-struct seaqt_string QGenericPlugin_tr2(const char* s, const char* c);
-struct seaqt_string QGenericPlugin_tr3(const char* s, const char* c, int n);
-struct seaqt_string QGenericPlugin_trUtf82(const char* s, const char* c);
-struct seaqt_string QGenericPlugin_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QGenericPlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGenericPlugin_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QGenericPlugin_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QGenericPlugin_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGenericPlugin_virtualbase_metaObject(const VirtualQGenericPlugin* self);
 void* QGenericPlugin_virtualbase_metacast(VirtualQGenericPlugin* self, const char* param1);

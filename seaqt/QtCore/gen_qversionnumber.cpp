@@ -20,7 +20,7 @@ QVersionNumber* QVersionNumber_new() {
 	return new (std::nothrow) QVersionNumber();
 }
 
-QVersionNumber* QVersionNumber_new2(struct seaqt_array /* of int */  seg) {
+QVersionNumber* QVersionNumber_new_seg(struct seaqt_array /* of int */  seg) {
 	QVector<int> seg_QList;
 	seg_QList.reserve(seg.len);
 	int* seg_arr = static_cast<int*>(seg.data);
@@ -30,20 +30,20 @@ QVersionNumber* QVersionNumber_new2(struct seaqt_array /* of int */  seg) {
 	return new (std::nothrow) QVersionNumber(seg_QList);
 }
 
-QVersionNumber* QVersionNumber_new3(int maj) {
+QVersionNumber* QVersionNumber_new_maj(int maj) {
 	return new (std::nothrow) QVersionNumber(static_cast<int>(maj));
 }
 
-QVersionNumber* QVersionNumber_new4(int maj, int min) {
+QVersionNumber* QVersionNumber_new_maj_min(int maj, int min) {
 	return new (std::nothrow) QVersionNumber(static_cast<int>(maj), static_cast<int>(min));
 }
 
-QVersionNumber* QVersionNumber_new5(int maj, int min, int mic) {
+QVersionNumber* QVersionNumber_new_maj_min_mic(int maj, int min, int mic) {
 	return new (std::nothrow) QVersionNumber(static_cast<int>(maj), static_cast<int>(min), static_cast<int>(mic));
 }
 
-QVersionNumber* QVersionNumber_new6(QVersionNumber* param1) {
-	return new (std::nothrow) QVersionNumber(*param1);
+QVersionNumber* QVersionNumber_new_from(QVersionNumber* from) {
+	return new (std::nothrow) QVersionNumber(*from);
 }
 
 bool QVersionNumber_isNull(const QVersionNumber* self) {
@@ -114,16 +114,16 @@ struct seaqt_string QVersionNumber_toString(const QVersionNumber* self) {
 	return _ms;
 }
 
-QVersionNumber* QVersionNumber_fromString(struct seaqt_string string) {
+QVersionNumber* QVersionNumber_fromString_QString(struct seaqt_string string) {
 	QString string_QString = QString::fromUtf8(string.data, string.len);
 	return new QVersionNumber(QVersionNumber::fromString(string_QString));
 }
 
-void QVersionNumber_operatorAssign(QVersionNumber* self, QVersionNumber* param1) {
-	self->operator=(*param1);
+void QVersionNumber_operatorAssign(QVersionNumber* self, QVersionNumber* from) {
+	self->operator=(*from);
 }
 
-QVersionNumber* QVersionNumber_fromString3(struct seaqt_string string, int* suffixIndex) {
+QVersionNumber* QVersionNumber_fromString_QString_int(struct seaqt_string string, int* suffixIndex) {
 	QString string_QString = QString::fromUtf8(string.data, string.len);
 	return new QVersionNumber(QVersionNumber::fromString(string_QString, static_cast<int*>(suffixIndex)));
 }

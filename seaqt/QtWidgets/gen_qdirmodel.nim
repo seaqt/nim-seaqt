@@ -78,9 +78,9 @@ type cQDirModel*{.exportc: "QDirModel", incompleteStruct.} = object
 proc fcQDirModel_metaObject(self: pointer): pointer {.importc: "QDirModel_metaObject".}
 proc fcQDirModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QDirModel_metacast".}
 proc fcQDirModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDirModel_metacall".}
-proc fcQDirModel_tr(s: cstring): struct_seaqt_string {.importc: "QDirModel_tr".}
-proc fcQDirModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QDirModel_trUtf8".}
-proc fcQDirModel_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QDirModel_index".}
+proc fcQDirModel_trS(s: cstring): struct_seaqt_string {.importc: "QDirModel_tr_s".}
+proc fcQDirModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QDirModel_trUtf8_s".}
+proc fcQDirModel_indexRowColumnParent(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QDirModel_index_row_column_parent".}
 proc fcQDirModel_parent(self: pointer, child: pointer): pointer {.importc: "QDirModel_parent".}
 proc fcQDirModel_rowCount(self: pointer, parent: pointer): cint {.importc: "QDirModel_rowCount".}
 proc fcQDirModel_columnCount(self: pointer, parent: pointer): cint {.importc: "QDirModel_columnCount".}
@@ -108,7 +108,7 @@ proc fcQDirModel_setReadOnly(self: pointer, enable: bool): void {.importc: "QDir
 proc fcQDirModel_isReadOnly(self: pointer): bool {.importc: "QDirModel_isReadOnly".}
 proc fcQDirModel_setLazyChildCount(self: pointer, enable: bool): void {.importc: "QDirModel_setLazyChildCount".}
 proc fcQDirModel_lazyChildCount(self: pointer): bool {.importc: "QDirModel_lazyChildCount".}
-proc fcQDirModel_indexWithPath(self: pointer, path: struct_seaqt_string): pointer {.importc: "QDirModel_indexWithPath".}
+proc fcQDirModel_indexPath(self: pointer, path: struct_seaqt_string): pointer {.importc: "QDirModel_index_path".}
 proc fcQDirModel_isDir(self: pointer, index: pointer): bool {.importc: "QDirModel_isDir".}
 proc fcQDirModel_mkdir(self: pointer, parent: pointer, name: struct_seaqt_string): pointer {.importc: "QDirModel_mkdir".}
 proc fcQDirModel_rmdir(self: pointer, index: pointer): bool {.importc: "QDirModel_rmdir".}
@@ -118,12 +118,12 @@ proc fcQDirModel_fileName(self: pointer, index: pointer): struct_seaqt_string {.
 proc fcQDirModel_fileIcon(self: pointer, index: pointer): pointer {.importc: "QDirModel_fileIcon".}
 proc fcQDirModel_fileInfo(self: pointer, index: pointer): pointer {.importc: "QDirModel_fileInfo".}
 proc fcQDirModel_refresh(self: pointer): void {.importc: "QDirModel_refresh".}
-proc fcQDirModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDirModel_tr2".}
-proc fcQDirModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDirModel_tr3".}
-proc fcQDirModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDirModel_trUtf82".}
-proc fcQDirModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDirModel_trUtf83".}
-proc fcQDirModel_index2(self: pointer, path: struct_seaqt_string, column: cint): pointer {.importc: "QDirModel_index2".}
-proc fcQDirModel_refreshWithParent(self: pointer, parent: pointer): void {.importc: "QDirModel_refreshWithParent".}
+proc fcQDirModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDirModel_tr_s_c".}
+proc fcQDirModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDirModel_tr_s_c_n".}
+proc fcQDirModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDirModel_trUtf8_s_c".}
+proc fcQDirModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDirModel_trUtf8_s_c_n".}
+proc fcQDirModel_indexPathColumn(self: pointer, path: struct_seaqt_string, column: cint): pointer {.importc: "QDirModel_index_path_column".}
+proc fcQDirModel_refreshParent(self: pointer, parent: pointer): void {.importc: "QDirModel_refresh_parent".}
 proc fcQDirModel_vdata(self: pointer): ptr pointer {.importc: "QDirModel_vdata".}
 proc fvdata_cQDirModel(self: pointer): pointer {.importc: "vdata_QDirModel".}
 
@@ -132,7 +132,7 @@ type cQDirModelVTable {.pure.} = object
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  index*: proc(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  indexRowColumnParent*: proc(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
   parent*: proc(self: pointer, child: pointer): pointer {.cdecl, raises: [], gcsafe.}
   rowCount*: proc(self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
   columnCount*: proc(self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
@@ -176,7 +176,7 @@ type cQDirModelVTable {.pure.} = object
 proc fcQDirModel_virtualbase_metaObject(self: pointer): pointer {.importc: "QDirModel_virtualbase_metaObject".}
 proc fcQDirModel_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QDirModel_virtualbase_metacast".}
 proc fcQDirModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDirModel_virtualbase_metacall".}
-proc fcQDirModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QDirModel_virtualbase_index".}
+proc fcQDirModel_virtualbase_indexRowColumnParent(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QDirModel_virtualbase_index_row_column_parent".}
 proc fcQDirModel_virtualbase_parent(self: pointer, child: pointer): pointer {.importc: "QDirModel_virtualbase_parent".}
 proc fcQDirModel_virtualbase_rowCount(self: pointer, parent: pointer): cint {.importc: "QDirModel_virtualbase_rowCount".}
 proc fcQDirModel_virtualbase_columnCount(self: pointer, parent: pointer): cint {.importc: "QDirModel_virtualbase_columnCount".}
@@ -218,7 +218,7 @@ proc fcQDirModel_virtualbase_customEvent(self: pointer, event: pointer): void {.
 proc fcQDirModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDirModel_virtualbase_connectNotify".}
 proc fcQDirModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDirModel_virtualbase_disconnectNotify".}
 proc fcQDirModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QDirModel_protectedbase_resetInternalData".}
-proc fcQDirModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QDirModel_protectedbase_createIndex".}
+proc fcQDirModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QDirModel_protectedbase_createIndex_row_column".}
 proc fcQDirModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QDirModel_protectedbase_encodeData".}
 proc fcQDirModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QDirModel_protectedbase_decodeData".}
 proc fcQDirModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QDirModel_protectedbase_beginInsertRows".}
@@ -242,10 +242,10 @@ proc fcQDirModel_protectedbase_sender(self: pointer): pointer {.importc: "QDirMo
 proc fcQDirModel_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDirModel_protectedbase_senderSignalIndex".}
 proc fcQDirModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDirModel_protectedbase_receivers".}
 proc fcQDirModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDirModel_protectedbase_isSignalConnected".}
-proc fcQDirModel_new(vtbl: pointer, vdata: csize_t, nameFilters: struct_seaqt_array, filters: cint, sort: cint): ptr cQDirModel {.importc: "QDirModel_new".}
-proc fcQDirModel_new2(vtbl: pointer, vdata: csize_t): ptr cQDirModel {.importc: "QDirModel_new2".}
-proc fcQDirModel_new3(vtbl: pointer, vdata: csize_t, nameFilters: struct_seaqt_array, filters: cint, sort: cint, parent: pointer): ptr cQDirModel {.importc: "QDirModel_new3".}
-proc fcQDirModel_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDirModel {.importc: "QDirModel_new4".}
+proc fcQDirModel_new(vtbl: pointer, vdata: csize_t, nameFilters: struct_seaqt_array, filters: cint, sort: cint): ptr cQDirModel {.importc: "QDirModel_new_nameFilters_filters_sort".}
+proc fcQDirModel_new2(vtbl: pointer, vdata: csize_t): ptr cQDirModel {.importc: "QDirModel_new".}
+proc fcQDirModel_new3(vtbl: pointer, vdata: csize_t, nameFilters: struct_seaqt_array, filters: cint, sort: cint, parent: pointer): ptr cQDirModel {.importc: "QDirModel_new_nameFilters_filters_sort_parent".}
+proc fcQDirModel_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDirModel {.importc: "QDirModel_new_parent".}
 proc fcQDirModel_staticMetaObject(): pointer {.importc: "QDirModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qdirmodel_types.QDirModel): gen_qobjectdefs_types.QMetaObject =
@@ -258,19 +258,19 @@ proc metacall*(self: gen_qdirmodel_types.QDirModel, param1: cint, param2: cint, 
   fcQDirModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdirmodel_types.QDirModel, s: cstring): string =
-  let v_ms = fcQDirModel_tr(s)
+  let v_ms = fcQDirModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdirmodel_types.QDirModel, s: cstring): string =
-  let v_ms = fcQDirModel_trUtf8(s)
+  let v_ms = fcQDirModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc index*(self: gen_qdirmodel_types.QDirModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_index(self.h, row, column, parent.h), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_indexRowColumnParent(self.h, row, column, parent.h), owned: true)
 
 proc parent*(self: gen_qdirmodel_types.QDirModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_parent(self.h, child.h), owned: true)
@@ -380,7 +380,7 @@ proc lazyChildCount*(self: gen_qdirmodel_types.QDirModel): bool =
   fcQDirModel_lazyChildCount(self.h)
 
 proc index*(self: gen_qdirmodel_types.QDirModel, path: openArray[char]): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_indexWithPath(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_indexPath(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
 
 proc isDir*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQDirModel_isDir(self.h, index.h)
@@ -416,39 +416,39 @@ proc refresh*(self: gen_qdirmodel_types.QDirModel): void =
   fcQDirModel_refresh(self.h)
 
 proc tr*(_: type gen_qdirmodel_types.QDirModel, s: cstring, c: cstring): string =
-  let v_ms = fcQDirModel_tr2(s, c)
+  let v_ms = fcQDirModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdirmodel_types.QDirModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDirModel_tr3(s, c, n)
+  let v_ms = fcQDirModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdirmodel_types.QDirModel, s: cstring, c: cstring): string =
-  let v_ms = fcQDirModel_trUtf82(s, c)
+  let v_ms = fcQDirModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdirmodel_types.QDirModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDirModel_trUtf83(s, c, n)
+  let v_ms = fcQDirModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc index*(self: gen_qdirmodel_types.QDirModel, path: openArray[char], column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_index2(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_indexPathColumn(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), column), owned: true)
 
 proc refresh*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQDirModel_refreshWithParent(self.h, parent.h)
+  fcQDirModel_refreshParent(self.h, parent.h)
 
 type QDirModelmetaObjectProc* = proc(self: QDirModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QDirModelmetacastProc* = proc(self: QDirModel, param1: cstring): pointer {.raises: [], gcsafe.}
 type QDirModelmetacallProc* = proc(self: QDirModel, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QDirModelindexProc* = proc(self: QDirModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QDirModelindexRowColumnParentProc* = proc(self: QDirModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
 type QDirModelparentProc* = proc(self: QDirModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
 type QDirModelrowCountProc* = proc(self: QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.raises: [], gcsafe.}
 type QDirModelcolumnCountProc* = proc(self: QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.raises: [], gcsafe.}
@@ -495,7 +495,7 @@ type QDirModelVTable* {.inheritable, pure.} = object
   metaObject*: QDirModelmetaObjectProc
   metacast*: QDirModelmetacastProc
   metacall*: QDirModelmetacallProc
-  index*: QDirModelindexProc
+  indexRowColumnParent*: QDirModelindexRowColumnParentProc
   parent*: QDirModelparentProc
   rowCount*: QDirModelrowCountProc
   columnCount*: QDirModelcolumnCountProc
@@ -547,7 +547,7 @@ proc QDirModelmetacall*(self: gen_qdirmodel_types.QDirModel, param1: cint, param
   fcQDirModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QDirModelindex*(self: gen_qdirmodel_types.QDirModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_indexRowColumnParent(self.h, row, column, parent.h), owned: true)
 
 proc QDirModelparent*(self: gen_qdirmodel_types.QDirModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_parent(self.h, child.h), owned: true)
@@ -752,13 +752,13 @@ proc fcQDirModel_vtable_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc fcQDirModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+proc fcQDirModel_vtable_callback_indexRowColumnParent(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self)[])
   let self = QDirModel(h: self)
   let slotval1 = row
   let slotval2 = column
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].indexRowColumnParent(self, slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1264,7 +1264,7 @@ proc fcQDirModel_method_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-proc fcQDirModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+proc fcQDirModel_method_callback_indexRowColumnParent(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
@@ -1626,7 +1626,7 @@ proc resetInternalData*(self: gen_qdirmodel_types.QDirModel): void =
   fcQDirModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qdirmodel_types.QDirModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qdirmodel_types.QDirModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
@@ -1733,8 +1733,8 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
     vtbl[].vtbl.metacast = fcQDirModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = fcQDirModel_vtable_callback_metacall
-  if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = fcQDirModel_vtable_callback_index
+  if not isNil(vtbl[].indexRowColumnParent):
+    vtbl[].vtbl.indexRowColumnParent = fcQDirModel_vtable_callback_indexRowColumnParent
   if not isNil(vtbl[].parent):
     vtbl[].vtbl.parent = fcQDirModel_vtable_callback_parent
   if not isNil(vtbl[].rowCount):
@@ -1831,8 +1831,8 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
     vtbl[].vtbl.metacast = fcQDirModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = fcQDirModel_vtable_callback_metacall
-  if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = fcQDirModel_vtable_callback_index
+  if not isNil(vtbl[].indexRowColumnParent):
+    vtbl[].vtbl.indexRowColumnParent = fcQDirModel_vtable_callback_indexRowColumnParent
   if not isNil(vtbl[].parent):
     vtbl[].vtbl.parent = fcQDirModel_vtable_callback_parent
   if not isNil(vtbl[].rowCount):
@@ -1934,8 +1934,8 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
     vtbl[].vtbl.metacast = fcQDirModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = fcQDirModel_vtable_callback_metacall
-  if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = fcQDirModel_vtable_callback_index
+  if not isNil(vtbl[].indexRowColumnParent):
+    vtbl[].vtbl.indexRowColumnParent = fcQDirModel_vtable_callback_indexRowColumnParent
   if not isNil(vtbl[].parent):
     vtbl[].vtbl.parent = fcQDirModel_vtable_callback_parent
   if not isNil(vtbl[].rowCount):
@@ -2033,8 +2033,8 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
     vtbl[].vtbl.metacast = fcQDirModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = fcQDirModel_vtable_callback_metacall
-  if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = fcQDirModel_vtable_callback_index
+  if not isNil(vtbl[].indexRowColumnParent):
+    vtbl[].vtbl.indexRowColumnParent = fcQDirModel_vtable_callback_indexRowColumnParent
   if not isNil(vtbl[].parent):
     vtbl[].vtbl.parent = fcQDirModel_vtable_callback_parent
   if not isNil(vtbl[].rowCount):
@@ -2127,7 +2127,7 @@ const cQDirModel_mvtbl = cQDirModelVTable(
   metaObject: fcQDirModel_method_callback_metaObject,
   metacast: fcQDirModel_method_callback_metacast,
   metacall: fcQDirModel_method_callback_metacall,
-  index: fcQDirModel_method_callback_index,
+  indexRowColumnParent: fcQDirModel_method_callback_indexRowColumnParent,
   parent: fcQDirModel_method_callback_parent,
   rowCount: fcQDirModel_method_callback_rowCount,
   columnCount: fcQDirModel_method_callback_columnCount,

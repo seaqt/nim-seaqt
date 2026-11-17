@@ -15,15 +15,15 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QOperatingSystemVersion* QOperatingSystemVersion_new(int osType, int vmajor) {
+QOperatingSystemVersion* QOperatingSystemVersion_new_osType_vmajor(int osType, int vmajor) {
 	return new (std::nothrow) QOperatingSystemVersion(static_cast<QOperatingSystemVersion::OSType>(osType), static_cast<int>(vmajor));
 }
 
-QOperatingSystemVersion* QOperatingSystemVersion_new2(int osType, int vmajor, int vminor) {
+QOperatingSystemVersion* QOperatingSystemVersion_new_osType_vmajor_vminor(int osType, int vmajor, int vminor) {
 	return new (std::nothrow) QOperatingSystemVersion(static_cast<QOperatingSystemVersion::OSType>(osType), static_cast<int>(vmajor), static_cast<int>(vminor));
 }
 
-QOperatingSystemVersion* QOperatingSystemVersion_new3(int osType, int vmajor, int vminor, int vmicro) {
+QOperatingSystemVersion* QOperatingSystemVersion_new_osType_vmajor_vminor_vmicro(int osType, int vmajor, int vminor, int vmicro) {
 	return new (std::nothrow) QOperatingSystemVersion(static_cast<QOperatingSystemVersion::OSType>(osType), static_cast<int>(vmajor), static_cast<int>(vminor), static_cast<int>(vmicro));
 }
 

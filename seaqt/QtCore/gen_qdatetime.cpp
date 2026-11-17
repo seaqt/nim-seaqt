@@ -23,16 +23,16 @@ QDate* QDate_new() {
 	return new (std::nothrow) QDate();
 }
 
-QDate* QDate_new2(int y, int m, int d) {
+QDate* QDate_new_y_m_d(int y, int m, int d) {
 	return new (std::nothrow) QDate(static_cast<int>(y), static_cast<int>(m), static_cast<int>(d));
 }
 
-QDate* QDate_new3(int y, int m, int d, QCalendar* cal) {
+QDate* QDate_new_y_m_d_cal(int y, int m, int d, QCalendar* cal) {
 	return new (std::nothrow) QDate(static_cast<int>(y), static_cast<int>(m), static_cast<int>(d), *cal);
 }
 
-QDate* QDate_new4(QDate* param1) {
-	return new (std::nothrow) QDate(*param1);
+QDate* QDate_new_from(QDate* from) {
+	return new (std::nothrow) QDate(*from);
 }
 
 bool QDate_isNull(const QDate* self) {
@@ -75,31 +75,31 @@ int QDate_weekNumber(const QDate* self) {
 	return self->weekNumber();
 }
 
-int QDate_yearWithCal(const QDate* self, QCalendar* cal) {
+int QDate_year_cal(const QDate* self, QCalendar* cal) {
 	return self->year(*cal);
 }
 
-int QDate_monthWithCal(const QDate* self, QCalendar* cal) {
+int QDate_month_cal(const QDate* self, QCalendar* cal) {
 	return self->month(*cal);
 }
 
-int QDate_dayWithCal(const QDate* self, QCalendar* cal) {
+int QDate_day_cal(const QDate* self, QCalendar* cal) {
 	return self->day(*cal);
 }
 
-int QDate_dayOfWeekWithCal(const QDate* self, QCalendar* cal) {
+int QDate_dayOfWeek_cal(const QDate* self, QCalendar* cal) {
 	return self->dayOfWeek(*cal);
 }
 
-int QDate_dayOfYearWithCal(const QDate* self, QCalendar* cal) {
+int QDate_dayOfYear_cal(const QDate* self, QCalendar* cal) {
 	return self->dayOfYear(*cal);
 }
 
-int QDate_daysInMonthWithCal(const QDate* self, QCalendar* cal) {
+int QDate_daysInMonth_cal(const QDate* self, QCalendar* cal) {
 	return self->daysInMonth(*cal);
 }
 
-int QDate_daysInYearWithCal(const QDate* self, QCalendar* cal) {
+int QDate_daysInYear_cal(const QDate* self, QCalendar* cal) {
 	return self->daysInYear(*cal);
 }
 
@@ -111,15 +111,15 @@ QDateTime* QDate_endOfDay(const QDate* self) {
 	return new QDateTime(self->endOfDay());
 }
 
-QDateTime* QDate_startOfDayWithZone(const QDate* self, QTimeZone* zone) {
+QDateTime* QDate_startOfDay_zone(const QDate* self, QTimeZone* zone) {
 	return new QDateTime(self->startOfDay(*zone));
 }
 
-QDateTime* QDate_endOfDayWithZone(const QDate* self, QTimeZone* zone) {
+QDateTime* QDate_endOfDay_zone(const QDate* self, QTimeZone* zone) {
 	return new QDateTime(self->endOfDay(*zone));
 }
 
-struct seaqt_string QDate_shortMonthName(int month) {
+struct seaqt_string QDate_shortMonthName_month(int month) {
 	QString _ret = QDate::shortMonthName(static_cast<int>(month));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -130,7 +130,7 @@ struct seaqt_string QDate_shortMonthName(int month) {
 	return _ms;
 }
 
-struct seaqt_string QDate_shortDayName(int weekday) {
+struct seaqt_string QDate_shortDayName_weekday(int weekday) {
 	QString _ret = QDate::shortDayName(static_cast<int>(weekday));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -141,7 +141,7 @@ struct seaqt_string QDate_shortDayName(int weekday) {
 	return _ms;
 }
 
-struct seaqt_string QDate_longMonthName(int month) {
+struct seaqt_string QDate_longMonthName_month(int month) {
 	QString _ret = QDate::longMonthName(static_cast<int>(month));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -152,7 +152,7 @@ struct seaqt_string QDate_longMonthName(int month) {
 	return _ms;
 }
 
-struct seaqt_string QDate_longDayName(int weekday) {
+struct seaqt_string QDate_longDayName_weekday(int weekday) {
 	QString _ret = QDate::longDayName(static_cast<int>(weekday));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -174,7 +174,7 @@ struct seaqt_string QDate_toString(const QDate* self) {
 	return _ms;
 }
 
-struct seaqt_string QDate_toString2(const QDate* self, int format, QCalendar* cal) {
+struct seaqt_string QDate_toString_Qt_DateFormat_QCalendar(const QDate* self, int format, QCalendar* cal) {
 	QString _ret = self->toString(static_cast<Qt::DateFormat>(format), *cal);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -185,7 +185,7 @@ struct seaqt_string QDate_toString2(const QDate* self, int format, QCalendar* ca
 	return _ms;
 }
 
-struct seaqt_string QDate_toStringWithFormat(const QDate* self, struct seaqt_string format) {
+struct seaqt_string QDate_toString_QString(const QDate* self, struct seaqt_string format) {
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	QString _ret = self->toString(format_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -197,7 +197,7 @@ struct seaqt_string QDate_toStringWithFormat(const QDate* self, struct seaqt_str
 	return _ms;
 }
 
-struct seaqt_string QDate_toString3(const QDate* self, struct seaqt_string format, QCalendar* cal) {
+struct seaqt_string QDate_toString_QString_QCalendar(const QDate* self, struct seaqt_string format, QCalendar* cal) {
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	QString _ret = self->toString(format_QString, *cal);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -209,19 +209,19 @@ struct seaqt_string QDate_toString3(const QDate* self, struct seaqt_string forma
 	return _ms;
 }
 
-bool QDate_setDate(QDate* self, int year, int month, int day) {
+bool QDate_setDate_year_month_day(QDate* self, int year, int month, int day) {
 	return self->setDate(static_cast<int>(year), static_cast<int>(month), static_cast<int>(day));
 }
 
-bool QDate_setDate2(QDate* self, int year, int month, int day, QCalendar* cal) {
+bool QDate_setDate_year_month_day_cal(QDate* self, int year, int month, int day, QCalendar* cal) {
 	return self->setDate(static_cast<int>(year), static_cast<int>(month), static_cast<int>(day), *cal);
 }
 
-void QDate_getDate(QDate* self, int* year, int* month, int* day) {
+void QDate_getDate_pint_pint_pint(QDate* self, int* year, int* month, int* day) {
 	self->getDate(static_cast<int*>(year), static_cast<int*>(month), static_cast<int*>(day));
 }
 
-void QDate_getDate2(const QDate* self, int* year, int* month, int* day) {
+void QDate_getDate_const_pint_pint_pint(const QDate* self, int* year, int* month, int* day) {
 	self->getDate(static_cast<int*>(year), static_cast<int*>(month), static_cast<int*>(day));
 }
 
@@ -229,19 +229,19 @@ QDate* QDate_addDays(const QDate* self, long long days) {
 	return new QDate(self->addDays(static_cast<qint64>(days)));
 }
 
-QDate* QDate_addMonths(const QDate* self, int months) {
+QDate* QDate_addMonths_months(const QDate* self, int months) {
 	return new QDate(self->addMonths(static_cast<int>(months)));
 }
 
-QDate* QDate_addYears(const QDate* self, int years) {
+QDate* QDate_addYears_years(const QDate* self, int years) {
 	return new QDate(self->addYears(static_cast<int>(years)));
 }
 
-QDate* QDate_addMonths2(const QDate* self, int months, QCalendar* cal) {
+QDate* QDate_addMonths_months_cal(const QDate* self, int months, QCalendar* cal) {
 	return new QDate(self->addMonths(static_cast<int>(months), *cal));
 }
 
-QDate* QDate_addYears2(const QDate* self, int years, QCalendar* cal) {
+QDate* QDate_addYears_years_cal(const QDate* self, int years, QCalendar* cal) {
 	return new QDate(self->addYears(static_cast<int>(years), *cal));
 }
 
@@ -278,24 +278,24 @@ QDate* QDate_currentDate() {
 	return new QDate(QDate::currentDate());
 }
 
-QDate* QDate_fromString(struct seaqt_string s) {
+QDate* QDate_fromString_s(struct seaqt_string s) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	return new QDate(QDate::fromString(s_QString));
 }
 
-QDate* QDate_fromString2(struct seaqt_string s, struct seaqt_string format) {
+QDate* QDate_fromString_s_format(struct seaqt_string s, struct seaqt_string format) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	return new QDate(QDate::fromString(s_QString, format_QString));
 }
 
-QDate* QDate_fromString3(struct seaqt_string s, struct seaqt_string format, QCalendar* cal) {
+QDate* QDate_fromString_s_format_cal(struct seaqt_string s, struct seaqt_string format, QCalendar* cal) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	return new QDate(QDate::fromString(s_QString, format_QString, *cal));
 }
 
-bool QDate_isValid2(int y, int m, int d) {
+bool QDate_isValid_y_m_d(int y, int m, int d) {
 	return QDate::isValid(static_cast<int>(y), static_cast<int>(m), static_cast<int>(d));
 }
 
@@ -312,27 +312,27 @@ long long QDate_toJulianDay(const QDate* self) {
 	return static_cast<long long>(_ret);
 }
 
-int QDate_weekNumberWithYearNum(const QDate* self, int* yearNum) {
+int QDate_weekNumber_yearNum(const QDate* self, int* yearNum) {
 	return self->weekNumber(static_cast<int*>(yearNum));
 }
 
-QDateTime* QDate_startOfDayWithSpec(const QDate* self, int spec) {
+QDateTime* QDate_startOfDay_spec(const QDate* self, int spec) {
 	return new QDateTime(self->startOfDay(static_cast<Qt::TimeSpec>(spec)));
 }
 
-QDateTime* QDate_startOfDay2(const QDate* self, int spec, int offsetSeconds) {
+QDateTime* QDate_startOfDay_spec_offsetSeconds(const QDate* self, int spec, int offsetSeconds) {
 	return new QDateTime(self->startOfDay(static_cast<Qt::TimeSpec>(spec), static_cast<int>(offsetSeconds)));
 }
 
-QDateTime* QDate_endOfDayWithSpec(const QDate* self, int spec) {
+QDateTime* QDate_endOfDay_spec(const QDate* self, int spec) {
 	return new QDateTime(self->endOfDay(static_cast<Qt::TimeSpec>(spec)));
 }
 
-QDateTime* QDate_endOfDay2(const QDate* self, int spec, int offsetSeconds) {
+QDateTime* QDate_endOfDay_spec_offsetSeconds(const QDate* self, int spec, int offsetSeconds) {
 	return new QDateTime(self->endOfDay(static_cast<Qt::TimeSpec>(spec), static_cast<int>(offsetSeconds)));
 }
 
-struct seaqt_string QDate_shortMonthName2(int month, int type) {
+struct seaqt_string QDate_shortMonthName_month_type(int month, int type) {
 	QString _ret = QDate::shortMonthName(static_cast<int>(month), static_cast<QDate::MonthNameType>(type));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -343,7 +343,7 @@ struct seaqt_string QDate_shortMonthName2(int month, int type) {
 	return _ms;
 }
 
-struct seaqt_string QDate_shortDayName2(int weekday, int type) {
+struct seaqt_string QDate_shortDayName_weekday_type(int weekday, int type) {
 	QString _ret = QDate::shortDayName(static_cast<int>(weekday), static_cast<QDate::MonthNameType>(type));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -354,7 +354,7 @@ struct seaqt_string QDate_shortDayName2(int weekday, int type) {
 	return _ms;
 }
 
-struct seaqt_string QDate_longMonthName2(int month, int type) {
+struct seaqt_string QDate_longMonthName_month_type(int month, int type) {
 	QString _ret = QDate::longMonthName(static_cast<int>(month), static_cast<QDate::MonthNameType>(type));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -365,7 +365,7 @@ struct seaqt_string QDate_longMonthName2(int month, int type) {
 	return _ms;
 }
 
-struct seaqt_string QDate_longDayName2(int weekday, int type) {
+struct seaqt_string QDate_longDayName_weekday_type(int weekday, int type) {
 	QString _ret = QDate::longDayName(static_cast<int>(weekday), static_cast<QDate::MonthNameType>(type));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -376,7 +376,7 @@ struct seaqt_string QDate_longDayName2(int weekday, int type) {
 	return _ms;
 }
 
-struct seaqt_string QDate_toString6(const QDate* self, int format) {
+struct seaqt_string QDate_toString_Qt_DateFormat(const QDate* self, int format) {
 	QString _ret = self->toString(static_cast<Qt::DateFormat>(format));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -387,7 +387,7 @@ struct seaqt_string QDate_toString6(const QDate* self, int format) {
 	return _ms;
 }
 
-QDate* QDate_fromString4(struct seaqt_string s, int f) {
+QDate* QDate_fromString_s_f(struct seaqt_string s, int f) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	return new QDate(QDate::fromString(s_QString, static_cast<Qt::DateFormat>(f)));
 }
@@ -400,19 +400,19 @@ QTime* QTime_new() {
 	return new (std::nothrow) QTime();
 }
 
-QTime* QTime_new2(int h, int m) {
+QTime* QTime_new_h_m(int h, int m) {
 	return new (std::nothrow) QTime(static_cast<int>(h), static_cast<int>(m));
 }
 
-QTime* QTime_new3(QTime* param1) {
-	return new (std::nothrow) QTime(*param1);
+QTime* QTime_new_from(QTime* from) {
+	return new (std::nothrow) QTime(*from);
 }
 
-QTime* QTime_new4(int h, int m, int s) {
+QTime* QTime_new_h_m_s(int h, int m, int s) {
 	return new (std::nothrow) QTime(static_cast<int>(h), static_cast<int>(m), static_cast<int>(s));
 }
 
-QTime* QTime_new5(int h, int m, int s, int ms) {
+QTime* QTime_new_h_m_s_ms(int h, int m, int s, int ms) {
 	return new (std::nothrow) QTime(static_cast<int>(h), static_cast<int>(m), static_cast<int>(s), static_cast<int>(ms));
 }
 
@@ -451,7 +451,7 @@ struct seaqt_string QTime_toString(const QTime* self) {
 	return _ms;
 }
 
-struct seaqt_string QTime_toStringWithFormat(const QTime* self, struct seaqt_string format) {
+struct seaqt_string QTime_toString_QString(const QTime* self, struct seaqt_string format) {
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	QString _ret = self->toString(format_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -463,7 +463,7 @@ struct seaqt_string QTime_toStringWithFormat(const QTime* self, struct seaqt_str
 	return _ms;
 }
 
-bool QTime_setHMS(QTime* self, int h, int m, int s) {
+bool QTime_setHMS_h_m_s(QTime* self, int h, int m, int s) {
 	return self->setHMS(static_cast<int>(h), static_cast<int>(m), static_cast<int>(s));
 }
 
@@ -519,18 +519,18 @@ QTime* QTime_currentTime() {
 	return new QTime(QTime::currentTime());
 }
 
-QTime* QTime_fromString(struct seaqt_string s) {
+QTime* QTime_fromString_s(struct seaqt_string s) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	return new QTime(QTime::fromString(s_QString));
 }
 
-QTime* QTime_fromString2(struct seaqt_string s, struct seaqt_string format) {
+QTime* QTime_fromString_s_format(struct seaqt_string s, struct seaqt_string format) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	return new QTime(QTime::fromString(s_QString, format_QString));
 }
 
-bool QTime_isValid2(int h, int m, int s) {
+bool QTime_isValid_h_m_s(int h, int m, int s) {
 	return QTime::isValid(static_cast<int>(h), static_cast<int>(m), static_cast<int>(s));
 }
 
@@ -546,7 +546,7 @@ int QTime_elapsed(const QTime* self) {
 	return self->elapsed();
 }
 
-struct seaqt_string QTime_toStringWithQtDateFormat(const QTime* self, int f) {
+struct seaqt_string QTime_toString_Qt_DateFormat(const QTime* self, int f) {
 	QString _ret = self->toString(static_cast<Qt::DateFormat>(f));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -557,16 +557,16 @@ struct seaqt_string QTime_toStringWithQtDateFormat(const QTime* self, int f) {
 	return _ms;
 }
 
-bool QTime_setHMS2(QTime* self, int h, int m, int s, int ms) {
+bool QTime_setHMS_h_m_s_ms(QTime* self, int h, int m, int s, int ms) {
 	return self->setHMS(static_cast<int>(h), static_cast<int>(m), static_cast<int>(s), static_cast<int>(ms));
 }
 
-QTime* QTime_fromString3(struct seaqt_string s, int f) {
+QTime* QTime_fromString_s_f(struct seaqt_string s, int f) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	return new QTime(QTime::fromString(s_QString, static_cast<Qt::DateFormat>(f)));
 }
 
-bool QTime_isValid3(int h, int m, int s, int ms) {
+bool QTime_isValid_h_m_s_ms(int h, int m, int s, int ms) {
 	return QTime::isValid(static_cast<int>(h), static_cast<int>(m), static_cast<int>(s), static_cast<int>(ms));
 }
 
@@ -578,32 +578,32 @@ QDateTime* QDateTime_new() {
 	return new (std::nothrow) QDateTime();
 }
 
-QDateTime* QDateTime_new2(QDate* param1) {
+QDateTime* QDateTime_new_QDate(QDate* param1) {
 	return new (std::nothrow) QDateTime(*param1);
 }
 
-QDateTime* QDateTime_new3(QDate* param1, QTime* param2) {
+QDateTime* QDateTime_new_QDate_QTime(QDate* param1, QTime* param2) {
 	return new (std::nothrow) QDateTime(*param1, *param2);
 }
 
-QDateTime* QDateTime_new4(QDate* date, QTime* time, int spec, int offsetSeconds) {
+QDateTime* QDateTime_new_QDate_QTime_Qt_TimeSpec_int(QDate* date, QTime* time, int spec, int offsetSeconds) {
 	return new (std::nothrow) QDateTime(*date, *time, static_cast<Qt::TimeSpec>(spec), static_cast<int>(offsetSeconds));
 }
 
-QDateTime* QDateTime_new5(QDate* date, QTime* time, QTimeZone* timeZone) {
+QDateTime* QDateTime_new_QDate_QTime_QTimeZone(QDate* date, QTime* time, QTimeZone* timeZone) {
 	return new (std::nothrow) QDateTime(*date, *time, *timeZone);
 }
 
-QDateTime* QDateTime_new6(QDateTime* other) {
-	return new (std::nothrow) QDateTime(*other);
+QDateTime* QDateTime_new_QDateTime(QDateTime* from) {
+	return new (std::nothrow) QDateTime(*from);
 }
 
-QDateTime* QDateTime_new7(QDate* param1, QTime* param2, int spec) {
+QDateTime* QDateTime_new_QDate_QTime_Qt_TimeSpec(QDate* param1, QTime* param2, int spec) {
 	return new (std::nothrow) QDateTime(*param1, *param2, static_cast<Qt::TimeSpec>(spec));
 }
 
-void QDateTime_operatorAssign(QDateTime* self, QDateTime* other) {
-	self->operator=(*other);
+void QDateTime_operatorAssign(QDateTime* self, QDateTime* from) {
+	self->operator=(*from);
 }
 
 void QDateTime_swap(QDateTime* self, QDateTime* other) {
@@ -703,7 +703,7 @@ struct seaqt_string QDateTime_toString(const QDateTime* self) {
 	return _ms;
 }
 
-struct seaqt_string QDateTime_toStringWithFormat(const QDateTime* self, struct seaqt_string format) {
+struct seaqt_string QDateTime_toString_QString(const QDateTime* self, struct seaqt_string format) {
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	QString _ret = self->toString(format_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -715,7 +715,7 @@ struct seaqt_string QDateTime_toStringWithFormat(const QDateTime* self, struct s
 	return _ms;
 }
 
-struct seaqt_string QDateTime_toString2(const QDateTime* self, struct seaqt_string format, QCalendar* cal) {
+struct seaqt_string QDateTime_toString_QString_QCalendar(const QDateTime* self, struct seaqt_string format, QCalendar* cal) {
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	QString _ret = self->toString(format_QString, *cal);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -822,61 +822,61 @@ QDateTime* QDateTime_currentDateTimeUtc() {
 	return new QDateTime(QDateTime::currentDateTimeUtc());
 }
 
-QDateTime* QDateTime_fromString(struct seaqt_string s) {
+QDateTime* QDateTime_fromString_s(struct seaqt_string s) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	return new QDateTime(QDateTime::fromString(s_QString));
 }
 
-QDateTime* QDateTime_fromString2(struct seaqt_string s, struct seaqt_string format) {
+QDateTime* QDateTime_fromString_s_format(struct seaqt_string s, struct seaqt_string format) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	return new QDateTime(QDateTime::fromString(s_QString, format_QString));
 }
 
-QDateTime* QDateTime_fromString3(struct seaqt_string s, struct seaqt_string format, QCalendar* cal) {
+QDateTime* QDateTime_fromString_s_format_cal(struct seaqt_string s, struct seaqt_string format, QCalendar* cal) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	return new QDateTime(QDateTime::fromString(s_QString, format_QString, *cal));
 }
 
-unsigned int QDateTime_toTimeT(const QDateTime* self) {
+unsigned int QDateTime_toTime_t(const QDateTime* self) {
 	uint _ret = self->toTime_t();
 	return static_cast<unsigned int>(_ret);
 }
 
-void QDateTime_setTimeT(QDateTime* self, unsigned int secsSince1Jan1970UTC) {
+void QDateTime_setTime_t(QDateTime* self, unsigned int secsSince1Jan1970UTC) {
 	self->setTime_t(static_cast<uint>(secsSince1Jan1970UTC));
 }
 
-QDateTime* QDateTime_fromTimeT(unsigned int secsSince1Jan1970UTC) {
+QDateTime* QDateTime_fromTime_t_secsSince1Jan1970UTC(unsigned int secsSince1Jan1970UTC) {
 	return new QDateTime(QDateTime::fromTime_t(static_cast<uint>(secsSince1Jan1970UTC)));
 }
 
-QDateTime* QDateTime_fromTimeT2(unsigned int secsSince1Jan1970UTC, int spec) {
+QDateTime* QDateTime_fromTime_t_secsSince1Jan1970UTC_spec(unsigned int secsSince1Jan1970UTC, int spec) {
 	return new QDateTime(QDateTime::fromTime_t(static_cast<uint>(secsSince1Jan1970UTC), static_cast<Qt::TimeSpec>(spec)));
 }
 
-QDateTime* QDateTime_fromTimeT3(unsigned int secsSince1Jan1970UTC, QTimeZone* timeZone) {
+QDateTime* QDateTime_fromTime_t_secsSince1Jan1970UTC_timeZone(unsigned int secsSince1Jan1970UTC, QTimeZone* timeZone) {
 	return new QDateTime(QDateTime::fromTime_t(static_cast<uint>(secsSince1Jan1970UTC), *timeZone));
 }
 
-QDateTime* QDateTime_fromMSecsSinceEpoch(long long msecs) {
+QDateTime* QDateTime_fromMSecsSinceEpoch_msecs(long long msecs) {
 	return new QDateTime(QDateTime::fromMSecsSinceEpoch(static_cast<qint64>(msecs)));
 }
 
-QDateTime* QDateTime_fromMSecsSinceEpoch2(long long msecs, int spec) {
+QDateTime* QDateTime_fromMSecsSinceEpoch_msecs_spec(long long msecs, int spec) {
 	return new QDateTime(QDateTime::fromMSecsSinceEpoch(static_cast<qint64>(msecs), static_cast<Qt::TimeSpec>(spec)));
 }
 
-QDateTime* QDateTime_fromSecsSinceEpoch(long long secs) {
+QDateTime* QDateTime_fromSecsSinceEpoch_secs(long long secs) {
 	return new QDateTime(QDateTime::fromSecsSinceEpoch(static_cast<qint64>(secs)));
 }
 
-QDateTime* QDateTime_fromMSecsSinceEpoch3(long long msecs, QTimeZone* timeZone) {
+QDateTime* QDateTime_fromMSecsSinceEpoch_msecs_timeZone(long long msecs, QTimeZone* timeZone) {
 	return new QDateTime(QDateTime::fromMSecsSinceEpoch(static_cast<qint64>(msecs), *timeZone));
 }
 
-QDateTime* QDateTime_fromSecsSinceEpoch2(long long secs, QTimeZone* timeZone) {
+QDateTime* QDateTime_fromSecsSinceEpoch_secs_timeZone(long long secs, QTimeZone* timeZone) {
 	return new QDateTime(QDateTime::fromSecsSinceEpoch(static_cast<qint64>(secs), *timeZone));
 }
 
@@ -890,7 +890,7 @@ long long QDateTime_currentSecsSinceEpoch() {
 	return static_cast<long long>(_ret);
 }
 
-struct seaqt_string QDateTime_toString5(const QDateTime* self, int format) {
+struct seaqt_string QDateTime_toString_Qt_DateFormat(const QDateTime* self, int format) {
 	QString _ret = self->toString(static_cast<Qt::DateFormat>(format));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -901,24 +901,24 @@ struct seaqt_string QDateTime_toString5(const QDateTime* self, int format) {
 	return _ms;
 }
 
-QDateTime* QDateTime_fromString4(struct seaqt_string s, int f) {
+QDateTime* QDateTime_fromString_s_f(struct seaqt_string s, int f) {
 	QString s_QString = QString::fromUtf8(s.data, s.len);
 	return new QDateTime(QDateTime::fromString(s_QString, static_cast<Qt::DateFormat>(f)));
 }
 
-QDateTime* QDateTime_fromTimeT4(unsigned int secsSince1Jan1970UTC, int spec, int offsetFromUtc) {
+QDateTime* QDateTime_fromTime_t_secsSince1Jan1970UTC_spec_offsetFromUtc(unsigned int secsSince1Jan1970UTC, int spec, int offsetFromUtc) {
 	return new QDateTime(QDateTime::fromTime_t(static_cast<uint>(secsSince1Jan1970UTC), static_cast<Qt::TimeSpec>(spec), static_cast<int>(offsetFromUtc)));
 }
 
-QDateTime* QDateTime_fromMSecsSinceEpoch4(long long msecs, int spec, int offsetFromUtc) {
+QDateTime* QDateTime_fromMSecsSinceEpoch_msecs_spec_offsetFromUtc(long long msecs, int spec, int offsetFromUtc) {
 	return new QDateTime(QDateTime::fromMSecsSinceEpoch(static_cast<qint64>(msecs), static_cast<Qt::TimeSpec>(spec), static_cast<int>(offsetFromUtc)));
 }
 
-QDateTime* QDateTime_fromSecsSinceEpoch3(long long secs, int spe) {
+QDateTime* QDateTime_fromSecsSinceEpoch_secs_spe(long long secs, int spe) {
 	return new QDateTime(QDateTime::fromSecsSinceEpoch(static_cast<qint64>(secs), static_cast<Qt::TimeSpec>(spe)));
 }
 
-QDateTime* QDateTime_fromSecsSinceEpoch4(long long secs, int spe, int offsetFromUtc) {
+QDateTime* QDateTime_fromSecsSinceEpoch_secs_spe_offsetFromUtc(long long secs, int spe, int offsetFromUtc) {
 	return new QDateTime(QDateTime::fromSecsSinceEpoch(static_cast<qint64>(secs), static_cast<Qt::TimeSpec>(spe), static_cast<int>(offsetFromUtc)));
 }
 

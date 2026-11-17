@@ -26,7 +26,7 @@ typedef struct QWidget QWidget;
 
 QWidget* QItemEditorCreatorBase_createWidget(const QItemEditorCreatorBase* self, QWidget* parent);
 struct seaqt_string QItemEditorCreatorBase_valuePropertyName(const QItemEditorCreatorBase* self);
-void QItemEditorCreatorBase_operatorAssign(QItemEditorCreatorBase* self, QItemEditorCreatorBase* param1);
+void QItemEditorCreatorBase_operatorAssign(QItemEditorCreatorBase* self, QItemEditorCreatorBase* from);
 
 void QItemEditorCreatorBase_delete(QItemEditorCreatorBase* self);
 
@@ -41,14 +41,14 @@ void* QItemEditorFactory_vdata(VirtualQItemEditorFactory* self);
 VirtualQItemEditorFactory* vdata_QItemEditorFactory(void* vdata);
 
 VirtualQItemEditorFactory* QItemEditorFactory_new(const QItemEditorFactory_VTable* vtbl, size_t vdata);
-VirtualQItemEditorFactory* QItemEditorFactory_new2(const QItemEditorFactory_VTable* vtbl, size_t vdata, QItemEditorFactory* param1);
+VirtualQItemEditorFactory* QItemEditorFactory_new_from(const QItemEditorFactory_VTable* vtbl, size_t vdata, QItemEditorFactory* from);
 
 QWidget* QItemEditorFactory_createEditor(const QItemEditorFactory* self, int userType, QWidget* parent);
 struct seaqt_string QItemEditorFactory_valuePropertyName(const QItemEditorFactory* self, int userType);
 void QItemEditorFactory_registerEditor(QItemEditorFactory* self, int userType, QItemEditorCreatorBase* creator);
 QItemEditorFactory* QItemEditorFactory_defaultFactory();
 void QItemEditorFactory_setDefaultFactory(QItemEditorFactory* factory);
-void QItemEditorFactory_operatorAssign(QItemEditorFactory* self, QItemEditorFactory* param1);
+void QItemEditorFactory_operatorAssign(QItemEditorFactory* self, QItemEditorFactory* from);
 
 QWidget* QItemEditorFactory_virtualbase_createEditor(const VirtualQItemEditorFactory* self, int userType, QWidget* parent);
 struct seaqt_string QItemEditorFactory_virtualbase_valuePropertyName(const VirtualQItemEditorFactory* self, int userType);

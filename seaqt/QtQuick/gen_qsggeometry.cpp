@@ -18,15 +18,15 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QSGGeometry* QSGGeometry_new(QSGGeometry__AttributeSet* attribs, int vertexCount) {
+QSGGeometry* QSGGeometry_new_attribs_vertexCount(QSGGeometry__AttributeSet* attribs, int vertexCount) {
 	return new (std::nothrow) QSGGeometry(*attribs, static_cast<int>(vertexCount));
 }
 
-QSGGeometry* QSGGeometry_new2(QSGGeometry__AttributeSet* attribs, int vertexCount, int indexCount) {
+QSGGeometry* QSGGeometry_new_attribs_vertexCount_indexCount(QSGGeometry__AttributeSet* attribs, int vertexCount, int indexCount) {
 	return new (std::nothrow) QSGGeometry(*attribs, static_cast<int>(vertexCount), static_cast<int>(indexCount));
 }
 
-QSGGeometry* QSGGeometry_new3(QSGGeometry__AttributeSet* attribs, int vertexCount, int indexCount, int indexType) {
+QSGGeometry* QSGGeometry_new_attribs_vertexCount_indexCount_indexType(QSGGeometry__AttributeSet* attribs, int vertexCount, int indexCount, int indexType) {
 	return new (std::nothrow) QSGGeometry(*attribs, static_cast<int>(vertexCount), static_cast<int>(indexCount), static_cast<int>(indexType));
 }
 
@@ -56,7 +56,7 @@ unsigned int QSGGeometry_drawingMode(const QSGGeometry* self) {
 	return self->drawingMode();
 }
 
-void QSGGeometry_allocate(QSGGeometry* self, int vertexCount) {
+void QSGGeometry_allocate_vertexCount(QSGGeometry* self, int vertexCount) {
 	self->allocate(static_cast<int>(vertexCount));
 }
 
@@ -80,19 +80,19 @@ QSGGeometry__ColoredPoint2D* QSGGeometry_vertexDataAsColoredPoint2D(QSGGeometry*
 	return self->vertexDataAsColoredPoint2D();
 }
 
-const void* QSGGeometry_vertexData2(const QSGGeometry* self) {
+const void* QSGGeometry_vertexData_const(const QSGGeometry* self) {
 	return (const void*) self->vertexData();
 }
 
-QSGGeometry__Point2D* QSGGeometry_vertexDataAsPoint2D2(const QSGGeometry* self) {
+QSGGeometry__Point2D* QSGGeometry_vertexDataAsPoint2D_const(const QSGGeometry* self) {
 	return (QSGGeometry__Point2D*) self->vertexDataAsPoint2D();
 }
 
-QSGGeometry__TexturedPoint2D* QSGGeometry_vertexDataAsTexturedPoint2D2(const QSGGeometry* self) {
+QSGGeometry__TexturedPoint2D* QSGGeometry_vertexDataAsTexturedPoint2D_const(const QSGGeometry* self) {
 	return (QSGGeometry__TexturedPoint2D*) self->vertexDataAsTexturedPoint2D();
 }
 
-QSGGeometry__ColoredPoint2D* QSGGeometry_vertexDataAsColoredPoint2D2(const QSGGeometry* self) {
+QSGGeometry__ColoredPoint2D* QSGGeometry_vertexDataAsColoredPoint2D_const(const QSGGeometry* self) {
 	return (QSGGeometry__ColoredPoint2D*) self->vertexDataAsColoredPoint2D();
 }
 
@@ -122,16 +122,16 @@ int QSGGeometry_sizeOfIndex(const QSGGeometry* self) {
 	return self->sizeOfIndex();
 }
 
-const void* QSGGeometry_indexData2(const QSGGeometry* self) {
+const void* QSGGeometry_indexData_const(const QSGGeometry* self) {
 	return (const void*) self->indexData();
 }
 
-const unsigned int* QSGGeometry_indexDataAsUInt2(const QSGGeometry* self) {
+const unsigned int* QSGGeometry_indexDataAsUInt_const(const QSGGeometry* self) {
 	const uint* _ret = self->indexDataAsUInt();
 	return static_cast<const unsigned int*>(_ret);
 }
 
-const unsigned short* QSGGeometry_indexDataAsUShort2(const QSGGeometry* self) {
+const unsigned short* QSGGeometry_indexDataAsUShort_const(const QSGGeometry* self) {
 	const quint16* _ret = self->indexDataAsUShort();
 	return static_cast<const unsigned short*>(_ret);
 }
@@ -194,7 +194,7 @@ void QSGGeometry_setLineWidth(QSGGeometry* self, float w) {
 	self->setLineWidth(static_cast<float>(w));
 }
 
-void QSGGeometry_allocate2(QSGGeometry* self, int vertexCount, int indexCount) {
+void QSGGeometry_allocate_vertexCount_indexCount(QSGGeometry* self, int vertexCount, int indexCount) {
 	self->allocate(static_cast<int>(vertexCount), static_cast<int>(indexCount));
 }
 
@@ -253,7 +253,7 @@ void QSGGeometry__Attribute_setReserved(QSGGeometry__Attribute* self, unsigned i
 	self->reserved = static_cast<uint>(reserved);
 }
 
-QSGGeometry__Attribute* QSGGeometry__Attribute_create(int pos, int tupleSize, int primitiveType) {
+QSGGeometry__Attribute* QSGGeometry__Attribute_create_pos_tupleSize_primitiveType(int pos, int tupleSize, int primitiveType) {
 	return new QSGGeometry::Attribute(QSGGeometry::Attribute::create(static_cast<int>(pos), static_cast<int>(tupleSize), static_cast<int>(primitiveType)));
 }
 
@@ -261,7 +261,7 @@ QSGGeometry__Attribute* QSGGeometry__Attribute_createWithAttributeType(int pos, 
 	return new QSGGeometry::Attribute(QSGGeometry::Attribute::createWithAttributeType(static_cast<int>(pos), static_cast<int>(tupleSize), static_cast<int>(primitiveType), static_cast<QSGGeometry::AttributeType>(attributeType)));
 }
 
-QSGGeometry__Attribute* QSGGeometry__Attribute_create2(int pos, int tupleSize, int primitiveType, bool isPosition) {
+QSGGeometry__Attribute* QSGGeometry__Attribute_create_pos_tupleSize_primitiveType_isPosition(int pos, int tupleSize, int primitiveType, bool isPosition) {
 	return new QSGGeometry::Attribute(QSGGeometry::Attribute::create(static_cast<int>(pos), static_cast<int>(tupleSize), static_cast<int>(primitiveType), isPosition));
 }
 

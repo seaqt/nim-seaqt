@@ -81,8 +81,8 @@ type cQGraphicsVideoItem*{.exportc: "QGraphicsVideoItem", incompleteStruct.} = o
 proc fcQGraphicsVideoItem_metaObject(self: pointer): pointer {.importc: "QGraphicsVideoItem_metaObject".}
 proc fcQGraphicsVideoItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsVideoItem_metacast".}
 proc fcQGraphicsVideoItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsVideoItem_metacall".}
-proc fcQGraphicsVideoItem_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsVideoItem_tr".}
-proc fcQGraphicsVideoItem_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGraphicsVideoItem_trUtf8".}
+proc fcQGraphicsVideoItem_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsVideoItem_tr_s".}
+proc fcQGraphicsVideoItem_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGraphicsVideoItem_trUtf8_s".}
 proc fcQGraphicsVideoItem_mediaObject(self: pointer): pointer {.importc: "QGraphicsVideoItem_mediaObject".}
 proc fcQGraphicsVideoItem_videoSurface(self: pointer): pointer {.importc: "QGraphicsVideoItem_videoSurface".}
 proc fcQGraphicsVideoItem_aspectRatioMode(self: pointer): cint {.importc: "QGraphicsVideoItem_aspectRatioMode".}
@@ -96,10 +96,10 @@ proc fcQGraphicsVideoItem_boundingRect(self: pointer): pointer {.importc: "QGrap
 proc fcQGraphicsVideoItem_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.importc: "QGraphicsVideoItem_paint".}
 proc fcQGraphicsVideoItem_nativeSizeChanged(self: pointer, size: pointer): void {.importc: "QGraphicsVideoItem_nativeSizeChanged".}
 proc fcQGraphicsVideoItem_connect_nativeSizeChanged(self: pointer, slot: int, callback: proc (slot: int, size: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsVideoItem_connect_nativeSizeChanged".}
-proc fcQGraphicsVideoItem_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsVideoItem_tr2".}
-proc fcQGraphicsVideoItem_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsVideoItem_tr3".}
-proc fcQGraphicsVideoItem_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsVideoItem_trUtf82".}
-proc fcQGraphicsVideoItem_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsVideoItem_trUtf83".}
+proc fcQGraphicsVideoItem_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsVideoItem_tr_s_c".}
+proc fcQGraphicsVideoItem_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsVideoItem_tr_s_c_n".}
+proc fcQGraphicsVideoItem_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsVideoItem_trUtf8_s_c".}
+proc fcQGraphicsVideoItem_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsVideoItem_trUtf8_s_c_n".}
 proc fcQGraphicsVideoItem_vdata(self: pointer): ptr pointer {.importc: "QGraphicsVideoItem_vdata".}
 proc fvdata_cQGraphicsVideoItem(self: pointer): pointer {.importc: "vdata_QGraphicsVideoItem".}
 
@@ -208,7 +208,7 @@ proc fcQGraphicsVideoItem_protectedbase_addToIndex(self: pointer): void {.import
 proc fcQGraphicsVideoItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsVideoItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsVideoItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsVideoItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsVideoItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsVideoItem {.importc: "QGraphicsVideoItem_new".}
-proc fcQGraphicsVideoItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsVideoItem {.importc: "QGraphicsVideoItem_new2".}
+proc fcQGraphicsVideoItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsVideoItem {.importc: "QGraphicsVideoItem_new_parent".}
 proc fcQGraphicsVideoItem_staticMetaObject(): pointer {.importc: "QGraphicsVideoItem_staticMetaObject".}
 
 proc metaObject*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qobjectdefs_types.QMetaObject =
@@ -221,13 +221,13 @@ proc metacall*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, param1: ci
   fcQGraphicsVideoItem_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s: cstring): string =
-  let v_ms = fcQGraphicsVideoItem_tr(s)
+  let v_ms = fcQGraphicsVideoItem_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s: cstring): string =
-  let v_ms = fcQGraphicsVideoItem_trUtf8(s)
+  let v_ms = fcQGraphicsVideoItem_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -286,25 +286,25 @@ proc onNativeSizeChanged*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem,
   fcQGraphicsVideoItem_connect_nativeSizeChanged(self.h, cast[int](addr tmp[]), fcQGraphicsVideoItem_slot_callback_nativeSizeChanged, fcQGraphicsVideoItem_slot_callback_nativeSizeChanged_release)
 
 proc tr*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsVideoItem_tr2(s, c)
+  let v_ms = fcQGraphicsVideoItem_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsVideoItem_tr3(s, c, n)
+  let v_ms = fcQGraphicsVideoItem_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsVideoItem_trUtf82(s, c)
+  let v_ms = fcQGraphicsVideoItem_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsVideoItem_trUtf83(s, c, n)
+  let v_ms = fcQGraphicsVideoItem_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

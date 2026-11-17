@@ -20,29 +20,29 @@ QTextBoundaryFinder* QTextBoundaryFinder_new() {
 	return new (std::nothrow) QTextBoundaryFinder();
 }
 
-QTextBoundaryFinder* QTextBoundaryFinder_new2(QTextBoundaryFinder* other) {
-	return new (std::nothrow) QTextBoundaryFinder(*other);
+QTextBoundaryFinder* QTextBoundaryFinder_new_from(QTextBoundaryFinder* from) {
+	return new (std::nothrow) QTextBoundaryFinder(*from);
 }
 
-QTextBoundaryFinder* QTextBoundaryFinder_new3(int type, struct seaqt_string string) {
+QTextBoundaryFinder* QTextBoundaryFinder_new_type_string(int type, struct seaqt_string string) {
 	QString string_QString = QString::fromUtf8(string.data, string.len);
 	return new (std::nothrow) QTextBoundaryFinder(static_cast<QTextBoundaryFinder::BoundaryType>(type), string_QString);
 }
 
-QTextBoundaryFinder* QTextBoundaryFinder_new4(int type, QChar* chars, int length) {
+QTextBoundaryFinder* QTextBoundaryFinder_new_type_chars_length(int type, QChar* chars, int length) {
 	return new (std::nothrow) QTextBoundaryFinder(static_cast<QTextBoundaryFinder::BoundaryType>(type), chars, static_cast<int>(length));
 }
 
-QTextBoundaryFinder* QTextBoundaryFinder_new5(int type, QChar* chars, int length, unsigned char* buffer) {
+QTextBoundaryFinder* QTextBoundaryFinder_new_type_chars_length_buffer(int type, QChar* chars, int length, unsigned char* buffer) {
 	return new (std::nothrow) QTextBoundaryFinder(static_cast<QTextBoundaryFinder::BoundaryType>(type), chars, static_cast<int>(length), static_cast<unsigned char*>(buffer));
 }
 
-QTextBoundaryFinder* QTextBoundaryFinder_new6(int type, QChar* chars, int length, unsigned char* buffer, int bufferSize) {
+QTextBoundaryFinder* QTextBoundaryFinder_new_type_chars_length_buffer_bufferSize(int type, QChar* chars, int length, unsigned char* buffer, int bufferSize) {
 	return new (std::nothrow) QTextBoundaryFinder(static_cast<QTextBoundaryFinder::BoundaryType>(type), chars, static_cast<int>(length), static_cast<unsigned char*>(buffer), static_cast<int>(bufferSize));
 }
 
-void QTextBoundaryFinder_operatorAssign(QTextBoundaryFinder* self, QTextBoundaryFinder* other) {
-	self->operator=(*other);
+void QTextBoundaryFinder_operatorAssign(QTextBoundaryFinder* self, QTextBoundaryFinder* from) {
+	self->operator=(*from);
 }
 
 bool QTextBoundaryFinder_isValid(const QTextBoundaryFinder* self) {

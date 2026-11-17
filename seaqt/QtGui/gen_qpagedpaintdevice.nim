@@ -196,12 +196,12 @@ type cQPagedPaintDeviceMargins*{.exportc: "QPagedPaintDevice__Margins", incomple
 
 proc fcQPagedPaintDevice_newPage(self: pointer): bool {.importc: "QPagedPaintDevice_newPage".}
 proc fcQPagedPaintDevice_setPageLayout(self: pointer, pageLayout: pointer): bool {.importc: "QPagedPaintDevice_setPageLayout".}
-proc fcQPagedPaintDevice_setPageSize(self: pointer, pageSize: pointer): bool {.importc: "QPagedPaintDevice_setPageSize".}
+proc fcQPagedPaintDevice_setPageSizePageSize(self: pointer, pageSize: pointer): bool {.importc: "QPagedPaintDevice_setPageSize_pageSize".}
 proc fcQPagedPaintDevice_setPageOrientation(self: pointer, orientation: cint): bool {.importc: "QPagedPaintDevice_setPageOrientation".}
-proc fcQPagedPaintDevice_setPageMargins(self: pointer, margins: pointer): bool {.importc: "QPagedPaintDevice_setPageMargins".}
-proc fcQPagedPaintDevice_setPageMargins2(self: pointer, margins: pointer, units: cint): bool {.importc: "QPagedPaintDevice_setPageMargins2".}
+proc fcQPagedPaintDevice_setPageMarginsMargins(self: pointer, margins: pointer): bool {.importc: "QPagedPaintDevice_setPageMargins_margins".}
+proc fcQPagedPaintDevice_setPageMarginsMarginsUnits(self: pointer, margins: pointer, units: cint): bool {.importc: "QPagedPaintDevice_setPageMargins_margins_units".}
 proc fcQPagedPaintDevice_pageLayout(self: pointer): pointer {.importc: "QPagedPaintDevice_pageLayout".}
-proc fcQPagedPaintDevice_setPageSizeWithSize(self: pointer, size: cint): void {.importc: "QPagedPaintDevice_setPageSizeWithSize".}
+proc fcQPagedPaintDevice_setPageSizeSize(self: pointer, size: cint): void {.importc: "QPagedPaintDevice_setPageSize_size".}
 proc fcQPagedPaintDevice_pageSize(self: pointer): cint {.importc: "QPagedPaintDevice_pageSize".}
 proc fcQPagedPaintDevice_setPageSizeMM(self: pointer, size: pointer): void {.importc: "QPagedPaintDevice_setPageSizeMM".}
 proc fcQPagedPaintDevice_pageSizeMM(self: pointer): pointer {.importc: "QPagedPaintDevice_pageSizeMM".}
@@ -213,7 +213,7 @@ proc fvdata_cQPagedPaintDevice(self: pointer): pointer {.importc: "vdata_QPagedP
 type cQPagedPaintDeviceVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   newPage*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
-  setPageSizeWithSize*: proc(self: pointer, size: cint): void {.cdecl, raises: [], gcsafe.}
+  setPageSizeSize*: proc(self: pointer, size: cint): void {.cdecl, raises: [], gcsafe.}
   setPageSizeMM*: proc(self: pointer, size: pointer): void {.cdecl, raises: [], gcsafe.}
   setMargins*: proc(self: pointer, margins: pointer): void {.cdecl, raises: [], gcsafe.}
   devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
@@ -222,7 +222,7 @@ type cQPagedPaintDeviceVTable {.pure.} = object
   initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
   redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
   sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
-proc fcQPagedPaintDevice_virtualbase_setPageSizeWithSize(self: pointer, size: cint): void {.importc: "QPagedPaintDevice_virtualbase_setPageSizeWithSize".}
+proc fcQPagedPaintDevice_virtualbase_setPageSizeSize(self: pointer, size: cint): void {.importc: "QPagedPaintDevice_virtualbase_setPageSize_size".}
 proc fcQPagedPaintDevice_virtualbase_setPageSizeMM(self: pointer, size: pointer): void {.importc: "QPagedPaintDevice_virtualbase_setPageSizeMM".}
 proc fcQPagedPaintDevice_virtualbase_setMargins(self: pointer, margins: pointer): void {.importc: "QPagedPaintDevice_virtualbase_setMargins".}
 proc fcQPagedPaintDevice_virtualbase_devType(self: pointer): cint {.importc: "QPagedPaintDevice_virtualbase_devType".}
@@ -230,8 +230,8 @@ proc fcQPagedPaintDevice_virtualbase_metric(self: pointer, metric: cint): cint {
 proc fcQPagedPaintDevice_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QPagedPaintDevice_virtualbase_initPainter".}
 proc fcQPagedPaintDevice_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QPagedPaintDevice_virtualbase_redirected".}
 proc fcQPagedPaintDevice_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QPagedPaintDevice_virtualbase_sharedPainter".}
+proc fcQPagedPaintDevice_protectedbase_devicePageLayout_const(self: pointer): pointer {.importc: "QPagedPaintDevice_protectedbase_devicePageLayout_const".}
 proc fcQPagedPaintDevice_protectedbase_devicePageLayout(self: pointer): pointer {.importc: "QPagedPaintDevice_protectedbase_devicePageLayout".}
-proc fcQPagedPaintDevice_protectedbase_devicePageLayout2(self: pointer): pointer {.importc: "QPagedPaintDevice_protectedbase_devicePageLayout2".}
 proc fcQPagedPaintDevice_new(vtbl: pointer, vdata: csize_t): ptr cQPagedPaintDevice {.importc: "QPagedPaintDevice_new".}
 proc fcQPagedPaintDeviceMargins_left(self: pointer): float64 {.importc: "QPagedPaintDevice__Margins_left".}
 proc fcQPagedPaintDeviceMargins_setLeft(self: pointer, left: float64): void {.importc: "QPagedPaintDevice__Margins_setLeft".}
@@ -249,22 +249,22 @@ proc setPageLayout*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, pageLay
   fcQPagedPaintDevice_setPageLayout(self.h, pageLayout.h)
 
 proc setPageSize*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, pageSize: gen_qpagesize_types.QPageSize): bool =
-  fcQPagedPaintDevice_setPageSize(self.h, pageSize.h)
+  fcQPagedPaintDevice_setPageSizePageSize(self.h, pageSize.h)
 
 proc setPageOrientation*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, orientation: cint): bool =
   fcQPagedPaintDevice_setPageOrientation(self.h, cint(orientation))
 
 proc setPageMargins*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, margins: gen_qmargins_types.QMarginsF): bool =
-  fcQPagedPaintDevice_setPageMargins(self.h, margins.h)
+  fcQPagedPaintDevice_setPageMarginsMargins(self.h, margins.h)
 
 proc setPageMargins*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, margins: gen_qmargins_types.QMarginsF, units: cint): bool =
-  fcQPagedPaintDevice_setPageMargins2(self.h, margins.h, cint(units))
+  fcQPagedPaintDevice_setPageMarginsMarginsUnits(self.h, margins.h, cint(units))
 
 proc pageLayout*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice): gen_qpagelayout_types.QPageLayout =
   gen_qpagelayout_types.QPageLayout(h: fcQPagedPaintDevice_pageLayout(self.h), owned: true)
 
 proc setPageSize*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, size: cint): void =
-  fcQPagedPaintDevice_setPageSizeWithSize(self.h, cint(size))
+  fcQPagedPaintDevice_setPageSizeSize(self.h, cint(size))
 
 proc pageSize*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice): cint =
   cint(fcQPagedPaintDevice_pageSize(self.h))
@@ -282,7 +282,7 @@ proc margins*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice): gen_qpagedpa
   gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins(h: fcQPagedPaintDevice_margins(self.h), owned: true)
 
 type QPagedPaintDevicenewPageProc* = proc(self: QPagedPaintDevice): bool {.raises: [], gcsafe.}
-type QPagedPaintDevicesetPageSizeWithSizeProc* = proc(self: QPagedPaintDevice, size: cint): void {.raises: [], gcsafe.}
+type QPagedPaintDevicesetPageSizeSizeProc* = proc(self: QPagedPaintDevice, size: cint): void {.raises: [], gcsafe.}
 type QPagedPaintDevicesetPageSizeMMProc* = proc(self: QPagedPaintDevice, size: gen_qsize_types.QSizeF): void {.raises: [], gcsafe.}
 type QPagedPaintDevicesetMarginsProc* = proc(self: QPagedPaintDevice, margins: gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins): void {.raises: [], gcsafe.}
 type QPagedPaintDevicedevTypeProc* = proc(self: QPagedPaintDevice): cint {.raises: [], gcsafe.}
@@ -295,7 +295,7 @@ type QPagedPaintDevicesharedPainterProc* = proc(self: QPagedPaintDevice): gen_qp
 type QPagedPaintDeviceVTable* {.inheritable, pure.} = object
   vtbl: cQPagedPaintDeviceVTable
   newPage*: QPagedPaintDevicenewPageProc
-  setPageSizeWithSize*: QPagedPaintDevicesetPageSizeWithSizeProc
+  setPageSizeSize*: QPagedPaintDevicesetPageSizeSizeProc
   setPageSizeMM*: QPagedPaintDevicesetPageSizeMMProc
   setMargins*: QPagedPaintDevicesetMarginsProc
   devType*: QPagedPaintDevicedevTypeProc
@@ -306,7 +306,7 @@ type QPagedPaintDeviceVTable* {.inheritable, pure.} = object
   sharedPainter*: QPagedPaintDevicesharedPainterProc
 
 proc QPagedPaintDevicesetPageSize*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, size: cint): void =
-  fcQPagedPaintDevice_virtualbase_setPageSizeWithSize(self.h, cint(size))
+  fcQPagedPaintDevice_virtualbase_setPageSizeSize(self.h, cint(size))
 
 proc QPagedPaintDevicesetPageSizeMM*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, size: gen_qsize_types.QSizeF): void =
   fcQPagedPaintDevice_virtualbase_setPageSizeMM(self.h, size.h)
@@ -336,11 +336,11 @@ proc fcQPagedPaintDevice_vtable_callback_newPage(self: pointer): bool {.cdecl.} 
   var virtualReturn = vtbl[].newPage(self)
   virtualReturn
 
-proc fcQPagedPaintDevice_vtable_callback_setPageSizeWithSize(self: pointer, size: cint): void {.cdecl.} =
+proc fcQPagedPaintDevice_vtable_callback_setPageSizeSize(self: pointer, size: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPagedPaintDeviceVTable](fcQPagedPaintDevice_vdata(self)[])
   let self = QPagedPaintDevice(h: self)
   let slotval1 = cint(size)
-  vtbl[].setPageSizeWithSize(self, slotval1)
+  vtbl[].setPageSizeSize(self, slotval1)
 
 proc fcQPagedPaintDevice_vtable_callback_setPageSizeMM(self: pointer, size: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPagedPaintDeviceVTable](fcQPagedPaintDevice_vdata(self)[])
@@ -430,7 +430,7 @@ proc fcQPagedPaintDevice_method_callback_newPage(self: pointer): bool {.cdecl.} 
   var virtualReturn = inst.newPage()
   virtualReturn
 
-proc fcQPagedPaintDevice_method_callback_setPageSizeWithSize(self: pointer, size: cint): void {.cdecl.} =
+proc fcQPagedPaintDevice_method_callback_setPageSizeSize(self: pointer, size: cint): void {.cdecl.} =
   let inst = cast[VirtualQPagedPaintDevice](fcQPagedPaintDevice_vdata(self)[])
   let slotval1 = cint(size)
   inst.setPageSize(slotval1)
@@ -488,10 +488,10 @@ proc fcQPagedPaintDevice_method_callback_sharedPainter(self: pointer): pointer {
 
 
 proc devicePageLayout*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice): gen_qpagelayout_types.QPageLayout =
-  gen_qpagelayout_types.QPageLayout(h: fcQPagedPaintDevice_protectedbase_devicePageLayout(self.h), owned: true)
+  gen_qpagelayout_types.QPageLayout(h: fcQPagedPaintDevice_protectedbase_devicePageLayout_const(self.h), owned: true)
 
 proc devicePageLayout*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice): gen_qpagelayout_types.QPageLayout =
-  gen_qpagelayout_types.QPageLayout(h: fcQPagedPaintDevice_protectedbase_devicePageLayout2(self.h), owned: false)
+  gen_qpagelayout_types.QPageLayout(h: fcQPagedPaintDevice_protectedbase_devicePageLayout(self.h), owned: false)
 
 proc create*(T: type gen_qpagedpaintdevice_types.QPagedPaintDevice,
     vtbl: ref QPagedPaintDeviceVTable = nil): gen_qpagedpaintdevice_types.QPagedPaintDevice =
@@ -502,8 +502,8 @@ proc create*(T: type gen_qpagedpaintdevice_types.QPagedPaintDevice,
     GC_unref(vtbl)
   if not isNil(vtbl[].newPage):
     vtbl[].vtbl.newPage = fcQPagedPaintDevice_vtable_callback_newPage
-  if not isNil(vtbl[].setPageSizeWithSize):
-    vtbl[].vtbl.setPageSizeWithSize = fcQPagedPaintDevice_vtable_callback_setPageSizeWithSize
+  if not isNil(vtbl[].setPageSizeSize):
+    vtbl[].vtbl.setPageSizeSize = fcQPagedPaintDevice_vtable_callback_setPageSizeSize
   if not isNil(vtbl[].setPageSizeMM):
     vtbl[].vtbl.setPageSizeMM = fcQPagedPaintDevice_vtable_callback_setPageSizeMM
   if not isNil(vtbl[].setMargins):
@@ -530,7 +530,7 @@ const cQPagedPaintDevice_mvtbl = cQPagedPaintDeviceVTable(
     inst[].owned = false,
 
   newPage: fcQPagedPaintDevice_method_callback_newPage,
-  setPageSizeWithSize: fcQPagedPaintDevice_method_callback_setPageSizeWithSize,
+  setPageSizeSize: fcQPagedPaintDevice_method_callback_setPageSizeSize,
   setPageSizeMM: fcQPagedPaintDevice_method_callback_setPageSizeMM,
   setMargins: fcQPagedPaintDevice_method_callback_setMargins,
   devType: fcQPagedPaintDevice_method_callback_devType,

@@ -66,20 +66,20 @@ proc fcQResource_lastModified(self: pointer): pointer {.importc: "QResource_last
 proc fcQResource_addSearchPath(path: struct_seaqt_string): void {.importc: "QResource_addSearchPath".}
 proc fcQResource_searchPaths(): struct_seaqt_array {.importc: "QResource_searchPaths".}
 proc fcQResource_isCompressed(self: pointer): bool {.importc: "QResource_isCompressed".}
-proc fcQResource_registerResource(rccFilename: struct_seaqt_string): bool {.importc: "QResource_registerResource".}
-proc fcQResource_unregisterResource(rccFilename: struct_seaqt_string): bool {.importc: "QResource_unregisterResource".}
-proc fcQResource_registerResourceWithRccData(rccData: ptr uint8): bool {.importc: "QResource_registerResourceWithRccData".}
-proc fcQResource_unregisterResourceWithRccData(rccData: ptr uint8): bool {.importc: "QResource_unregisterResourceWithRccData".}
-proc fcQResource_registerResource2(rccFilename: struct_seaqt_string, resourceRoot: struct_seaqt_string): bool {.importc: "QResource_registerResource2".}
-proc fcQResource_unregisterResource2(rccFilename: struct_seaqt_string, resourceRoot: struct_seaqt_string): bool {.importc: "QResource_unregisterResource2".}
-proc fcQResource_registerResource3(rccData: ptr uint8, resourceRoot: struct_seaqt_string): bool {.importc: "QResource_registerResource3".}
-proc fcQResource_unregisterResource3(rccData: ptr uint8, resourceRoot: struct_seaqt_string): bool {.importc: "QResource_unregisterResource3".}
+proc fcQResource_registerResourceRccFilename(rccFilename: struct_seaqt_string): bool {.importc: "QResource_registerResource_rccFilename".}
+proc fcQResource_unregisterResourceRccFilename(rccFilename: struct_seaqt_string): bool {.importc: "QResource_unregisterResource_rccFilename".}
+proc fcQResource_registerResourceRccData(rccData: ptr uint8): bool {.importc: "QResource_registerResource_rccData".}
+proc fcQResource_unregisterResourceRccData(rccData: ptr uint8): bool {.importc: "QResource_unregisterResource_rccData".}
+proc fcQResource_registerResourceRccFilenameResourceRoot(rccFilename: struct_seaqt_string, resourceRoot: struct_seaqt_string): bool {.importc: "QResource_registerResource_rccFilename_resourceRoot".}
+proc fcQResource_unregisterResourceRccFilenameResourceRoot(rccFilename: struct_seaqt_string, resourceRoot: struct_seaqt_string): bool {.importc: "QResource_unregisterResource_rccFilename_resourceRoot".}
+proc fcQResource_registerResourceRccDataResourceRoot(rccData: ptr uint8, resourceRoot: struct_seaqt_string): bool {.importc: "QResource_registerResource_rccData_resourceRoot".}
+proc fcQResource_unregisterResourceRccDataResourceRoot(rccData: ptr uint8, resourceRoot: struct_seaqt_string): bool {.importc: "QResource_unregisterResource_rccData_resourceRoot".}
 proc fcQResource_protectedbase_isDir(self: pointer): bool {.importc: "QResource_protectedbase_isDir".}
 proc fcQResource_protectedbase_isFile(self: pointer): bool {.importc: "QResource_protectedbase_isFile".}
 proc fcQResource_protectedbase_children(self: pointer): struct_seaqt_array {.importc: "QResource_protectedbase_children".}
 proc fcQResource_new(): ptr cQResource {.importc: "QResource_new".}
-proc fcQResource_new2(file: struct_seaqt_string): ptr cQResource {.importc: "QResource_new2".}
-proc fcQResource_new3(file: struct_seaqt_string, locale: pointer): ptr cQResource {.importc: "QResource_new3".}
+proc fcQResource_new2(file: struct_seaqt_string): ptr cQResource {.importc: "QResource_new_file".}
+proc fcQResource_new3(file: struct_seaqt_string, locale: pointer): ptr cQResource {.importc: "QResource_new_file_locale".}
 
 proc setFileName*(self: gen_qresource_types.QResource, file: openArray[char]): void =
   fcQResource_setFileName(self.h, struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
@@ -145,28 +145,28 @@ proc isCompressed*(self: gen_qresource_types.QResource): bool =
   fcQResource_isCompressed(self.h)
 
 proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char]): bool =
-  fcQResource_registerResource(struct_seaqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))))
+  fcQResource_registerResourceRccFilename(struct_seaqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))))
 
 proc unregisterResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char]): bool =
-  fcQResource_unregisterResource(struct_seaqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))))
+  fcQResource_unregisterResourceRccFilename(struct_seaqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))))
 
 proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8): bool =
-  fcQResource_registerResourceWithRccData(rccData)
+  fcQResource_registerResourceRccData(rccData)
 
 proc unregisterResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8): bool =
-  fcQResource_unregisterResourceWithRccData(rccData)
+  fcQResource_unregisterResourceRccData(rccData)
 
 proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char], resourceRoot: openArray[char]): bool =
-  fcQResource_registerResource2(struct_seaqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))), struct_seaqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
+  fcQResource_registerResourceRccFilenameResourceRoot(struct_seaqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))), struct_seaqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
 proc unregisterResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char], resourceRoot: openArray[char]): bool =
-  fcQResource_unregisterResource2(struct_seaqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))), struct_seaqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
+  fcQResource_unregisterResourceRccFilenameResourceRoot(struct_seaqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))), struct_seaqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
 proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: openArray[char]): bool =
-  fcQResource_registerResource3(rccData, struct_seaqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
+  fcQResource_registerResourceRccDataResourceRoot(rccData, struct_seaqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
 proc unregisterResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: openArray[char]): bool =
-  fcQResource_unregisterResource3(rccData, struct_seaqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
+  fcQResource_unregisterResourceRccDataResourceRoot(rccData, struct_seaqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
 proc isDir*(self: gen_qresource_types.QResource): bool =
   fcQResource_protectedbase_isDir(self.h)

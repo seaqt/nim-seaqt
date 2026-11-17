@@ -24,9 +24,9 @@ typedef struct QPdfSelection QPdfSelection;
 typedef struct QRectF QRectF;
 #endif
 
-QPdfSelection* QPdfSelection_new(QPdfSelection* other);
+QPdfSelection* QPdfSelection_new(QPdfSelection* from);
 
-void QPdfSelection_operatorAssign(QPdfSelection* self, QPdfSelection* other);
+void QPdfSelection_operatorAssign(QPdfSelection* self, QPdfSelection* from);
 void QPdfSelection_swap(QPdfSelection* self, QPdfSelection* other);
 bool QPdfSelection_isValid(const QPdfSelection* self);
 struct seaqt_string QPdfSelection_text(const QPdfSelection* self);
@@ -34,7 +34,7 @@ QRectF* QPdfSelection_boundingRectangle(const QPdfSelection* self);
 int QPdfSelection_startIndex(const QPdfSelection* self);
 int QPdfSelection_endIndex(const QPdfSelection* self);
 void QPdfSelection_copyToClipboard(const QPdfSelection* self);
-void QPdfSelection_copyToClipboardWithMode(const QPdfSelection* self, int mode);
+void QPdfSelection_copyToClipboard_mode(const QPdfSelection* self, int mode);
 
 const QMetaObject* QPdfSelection_staticMetaObject();
 void QPdfSelection_delete(QPdfSelection* self);

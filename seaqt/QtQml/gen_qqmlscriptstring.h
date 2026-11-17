@@ -21,9 +21,9 @@ typedef struct QQmlScriptString QQmlScriptString;
 #endif
 
 QQmlScriptString* QQmlScriptString_new();
-QQmlScriptString* QQmlScriptString_new2(QQmlScriptString* param1);
+QQmlScriptString* QQmlScriptString_new_from(QQmlScriptString* from);
 
-void QQmlScriptString_operatorAssign(QQmlScriptString* self, QQmlScriptString* param1);
+void QQmlScriptString_operatorAssign(QQmlScriptString* self, QQmlScriptString* from);
 bool QQmlScriptString_operatorEqual(const QQmlScriptString* self, QQmlScriptString* param1);
 bool QQmlScriptString_operatorNotEqual(const QQmlScriptString* self, QQmlScriptString* param1);
 bool QQmlScriptString_isEmpty(const QQmlScriptString* self);

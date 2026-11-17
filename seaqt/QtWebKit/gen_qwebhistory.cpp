@@ -22,12 +22,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QWebHistoryItem* QWebHistoryItem_new(QWebHistoryItem* other) {
-	return new (std::nothrow) QWebHistoryItem(*other);
+QWebHistoryItem* QWebHistoryItem_new(QWebHistoryItem* from) {
+	return new (std::nothrow) QWebHistoryItem(*from);
 }
 
-void QWebHistoryItem_operatorAssign(QWebHistoryItem* self, QWebHistoryItem* other) {
-	self->operator=(*other);
+void QWebHistoryItem_operatorAssign(QWebHistoryItem* self, QWebHistoryItem* from) {
+	self->operator=(*from);
 }
 
 QUrl* QWebHistoryItem_originalUrl(const QWebHistoryItem* self) {
