@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qnetworkrequestfactory
+export gen_qnetworkrequestfactory

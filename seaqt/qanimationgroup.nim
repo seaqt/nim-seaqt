@@ -1,0 +1,2 @@
+import ./QtCore/gen_qanimationgroup
+export gen_qanimationgroup

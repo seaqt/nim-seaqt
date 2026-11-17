@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qaudiobufferoutput
+export gen_qaudiobufferoutput

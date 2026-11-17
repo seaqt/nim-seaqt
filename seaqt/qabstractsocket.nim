@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qabstractsocket
+export gen_qabstractsocket

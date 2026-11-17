@@ -1,0 +1,2 @@
+import ./QtCore/gen_qabstractproxymodel
+export gen_qabstractproxymodel

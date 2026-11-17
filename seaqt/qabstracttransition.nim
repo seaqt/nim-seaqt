@@ -1,0 +1,2 @@
+import ./QtStateMachine/gen_qabstracttransition
+export gen_qabstracttransition

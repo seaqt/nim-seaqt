@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qvideoframeinput
+export gen_qvideoframeinput

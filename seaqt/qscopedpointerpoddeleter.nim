@@ -1,0 +1,2 @@
+import ./QtCore/gen_qscopedpointer
+export gen_qscopedpointer

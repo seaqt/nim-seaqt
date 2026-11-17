@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qmdisubwindow
+export gen_qmdisubwindow

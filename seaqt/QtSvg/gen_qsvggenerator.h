@@ -1,0 +1,93 @@
+#pragma once
+#ifndef SEAQT_QTSVG_GEN_QSVGGENERATOR_H
+#define SEAQT_QTSVG_GEN_QSVGGENERATOR_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QIODevice;
+class QPaintDevice;
+class QPaintEngine;
+class QPainter;
+class QPoint;
+class QRect;
+class QRectF;
+class QSize;
+class QSvgGenerator;
+#else
+typedef struct QIODevice QIODevice;
+typedef struct QPaintDevice QPaintDevice;
+typedef struct QPaintEngine QPaintEngine;
+typedef struct QPainter QPainter;
+typedef struct QPoint QPoint;
+typedef struct QRect QRect;
+typedef struct QRectF QRectF;
+typedef struct QSize QSize;
+typedef struct QSvgGenerator QSvgGenerator;
+#endif
+
+typedef struct VirtualQSvgGenerator VirtualQSvgGenerator;
+typedef struct QSvgGenerator_VTable{
+	void (*destructor)(VirtualQSvgGenerator* self);
+	QPaintEngine* (*paintEngine)(const VirtualQSvgGenerator* self);
+	int (*metric)(const VirtualQSvgGenerator* self, int metric);
+	void (*initPainter)(const VirtualQSvgGenerator* self, QPainter* param1);
+	int (*devType)(const VirtualQSvgGenerator* self);
+	QPaintDevice* (*redirected)(const VirtualQSvgGenerator* self, QPoint* offset);
+	QPainter* (*sharedPainter)(const VirtualQSvgGenerator* self);
+}QSvgGenerator_VTable;
+
+void* QSvgGenerator_vdata(VirtualQSvgGenerator* self);
+VirtualQSvgGenerator* vdata_QSvgGenerator(void* vdata);
+
+VirtualQSvgGenerator* QSvgGenerator_new(const QSvgGenerator_VTable* vtbl, size_t vdata);
+VirtualQSvgGenerator* QSvgGenerator_new_version(const QSvgGenerator_VTable* vtbl, size_t vdata, int version);
+
+void QSvgGenerator_virtbase(QSvgGenerator* src, QPaintDevice** outptr_QPaintDevice);
+struct seaqt_string QSvgGenerator_title(const QSvgGenerator* self);
+void QSvgGenerator_setTitle(QSvgGenerator* self, struct seaqt_string title);
+struct seaqt_string QSvgGenerator_description(const QSvgGenerator* self);
+void QSvgGenerator_setDescription(QSvgGenerator* self, struct seaqt_string description);
+QSize* QSvgGenerator_size(const QSvgGenerator* self);
+void QSvgGenerator_setSize(QSvgGenerator* self, QSize* size);
+QRect* QSvgGenerator_viewBox(const QSvgGenerator* self);
+QRectF* QSvgGenerator_viewBoxF(const QSvgGenerator* self);
+void QSvgGenerator_setViewBox_QRect(QSvgGenerator* self, QRect* viewBox);
+void QSvgGenerator_setViewBox_QRectF(QSvgGenerator* self, QRectF* viewBox);
+struct seaqt_string QSvgGenerator_fileName(const QSvgGenerator* self);
+void QSvgGenerator_setFileName(QSvgGenerator* self, struct seaqt_string fileName);
+QIODevice* QSvgGenerator_outputDevice(const QSvgGenerator* self);
+void QSvgGenerator_setOutputDevice(QSvgGenerator* self, QIODevice* outputDevice);
+void QSvgGenerator_setResolution(QSvgGenerator* self, int dpi);
+int QSvgGenerator_resolution(const QSvgGenerator* self);
+int QSvgGenerator_svgVersion(const QSvgGenerator* self);
+QPaintEngine* QSvgGenerator_paintEngine(const QSvgGenerator* self);
+int QSvgGenerator_metric(const QSvgGenerator* self, int metric);
+void QSvgGenerator_initPainter(const QSvgGenerator* self, QPainter* param1);
+
+QPaintEngine* QSvgGenerator_virtualbase_paintEngine(const VirtualQSvgGenerator* self);
+int QSvgGenerator_virtualbase_metric(const VirtualQSvgGenerator* self, int metric);
+void QSvgGenerator_virtualbase_initPainter(const VirtualQSvgGenerator* self, QPainter* param1);
+int QSvgGenerator_virtualbase_devType(const VirtualQSvgGenerator* self);
+QPaintDevice* QSvgGenerator_virtualbase_redirected(const VirtualQSvgGenerator* self, QPoint* offset);
+QPainter* QSvgGenerator_virtualbase_sharedPainter(const VirtualQSvgGenerator* self);
+
+double QSvgGenerator_protectedbase_getDecodedMetricF(const VirtualQSvgGenerator* self, int metricA, int metricB);
+
+void QSvgGenerator_delete(QSvgGenerator* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

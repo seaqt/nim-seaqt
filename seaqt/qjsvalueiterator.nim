@@ -1,0 +1,2 @@
+import ./QtQml/gen_qjsvalueiterator
+export gen_qjsvalueiterator

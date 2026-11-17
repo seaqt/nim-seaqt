@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qquickrendertarget
+export gen_qquickrendertarget

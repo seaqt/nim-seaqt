@@ -1,0 +1,34 @@
+#include <QSharedData>
+#include <qshareddata.h>
+#include "gen_qshareddata.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QSharedData* QSharedData_new() {
+	return new (std::nothrow) QSharedData();
+}
+
+QSharedData* QSharedData_new_from(QSharedData* from) {
+	return new (std::nothrow) QSharedData(*from);
+}
+
+void QSharedData_delete(QSharedData* self) {
+	delete self;
+}
+
+QAdoptSharedDataTag* QAdoptSharedDataTag_new() {
+	return new (std::nothrow) QAdoptSharedDataTag();
+}
+
+void QAdoptSharedDataTag_delete(QAdoptSharedDataTag* self) {
+	delete self;
+}
+

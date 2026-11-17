@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginedesktopmediarequest
+export gen_qwebenginedesktopmediarequest

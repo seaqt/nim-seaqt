@@ -1,0 +1,69 @@
+#include <QSslEllipticCurve>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <qsslellipticcurve.h>
+#include "gen_qsslellipticcurve.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QSslEllipticCurve* QSslEllipticCurve_new() {
+	return new (std::nothrow) QSslEllipticCurve();
+}
+
+QSslEllipticCurve* QSslEllipticCurve_new_from(QSslEllipticCurve* from) {
+	return new (std::nothrow) QSslEllipticCurve(*from);
+}
+
+QSslEllipticCurve* QSslEllipticCurve_fromShortName(struct seaqt_string name) {
+	QString name_QString = QString::fromUtf8(name.data, name.len);
+	return new QSslEllipticCurve(QSslEllipticCurve::fromShortName(name_QString));
+}
+
+QSslEllipticCurve* QSslEllipticCurve_fromLongName(struct seaqt_string name) {
+	QString name_QString = QString::fromUtf8(name.data, name.len);
+	return new QSslEllipticCurve(QSslEllipticCurve::fromLongName(name_QString));
+}
+
+struct seaqt_string QSslEllipticCurve_shortName(const QSslEllipticCurve* self) {
+	QString _ret = self->shortName();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QSslEllipticCurve_longName(const QSslEllipticCurve* self) {
+	QString _ret = self->longName();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+bool QSslEllipticCurve_isValid(const QSslEllipticCurve* self) {
+	return self->isValid();
+}
+
+bool QSslEllipticCurve_isTlsNamedCurve(const QSslEllipticCurve* self) {
+	return self->isTlsNamedCurve();
+}
+
+void QSslEllipticCurve_delete(QSslEllipticCurve* self) {
+	delete self;
+}
+

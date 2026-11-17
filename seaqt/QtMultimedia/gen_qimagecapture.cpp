@@ -1,0 +1,583 @@
+#include <QChildEvent>
+#include <QEvent>
+#include <QImage>
+#include <QImageCapture>
+#include <QList>
+#include <QMediaCaptureSession>
+#include <QMediaMetaData>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QSize>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTimerEvent>
+#include <QVideoFrame>
+#include <qimagecapture.h>
+#include "gen_qimagecapture.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQImageCapture final : public QImageCapture {
+	const QImageCapture_VTable* vtbl;
+public:
+	friend void* QImageCapture_vdata(VirtualQImageCapture* self);
+	friend VirtualQImageCapture* vdata_QImageCapture(void* vdata);
+
+	VirtualQImageCapture(const QImageCapture_VTable* vtbl): QImageCapture(), vtbl(vtbl) {}
+	VirtualQImageCapture(const QImageCapture_VTable* vtbl, QObject* parent): QImageCapture(parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQImageCapture() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QImageCapture::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QImageCapture_virtualbase_metaObject(const VirtualQImageCapture* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QImageCapture::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QImageCapture_virtualbase_metacast(VirtualQImageCapture* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QImageCapture::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QImageCapture_virtualbase_metacall(VirtualQImageCapture* self, int param1, int param2, void** param3);
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QImageCapture::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QImageCapture_virtualbase_event(VirtualQImageCapture* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QImageCapture::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QImageCapture_virtualbase_eventFilter(VirtualQImageCapture* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QImageCapture::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QImageCapture_virtualbase_timerEvent(VirtualQImageCapture* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QImageCapture::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QImageCapture_virtualbase_childEvent(VirtualQImageCapture* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QImageCapture::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QImageCapture_virtualbase_customEvent(VirtualQImageCapture* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QImageCapture::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QImageCapture_virtualbase_connectNotify(VirtualQImageCapture* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QImageCapture::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QImageCapture_virtualbase_disconnectNotify(VirtualQImageCapture* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend QObject* QImageCapture_protectedbase_sender(const VirtualQImageCapture* self);
+	friend int QImageCapture_protectedbase_senderSignalIndex(const VirtualQImageCapture* self);
+	friend int QImageCapture_protectedbase_receivers(const VirtualQImageCapture* self, const char* signal);
+	friend bool QImageCapture_protectedbase_isSignalConnected(const VirtualQImageCapture* self, QMetaMethod* signal);
+};
+
+VirtualQImageCapture* QImageCapture_new(const QImageCapture_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQImageCapture>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQImageCapture(vtbl) : nullptr;
+}
+
+VirtualQImageCapture* QImageCapture_new_parent(const QImageCapture_VTable* vtbl, size_t vdata, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQImageCapture>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQImageCapture(vtbl, parent) : nullptr;
+}
+
+void QImageCapture_virtbase(QImageCapture* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QImageCapture_metaObject(const QImageCapture* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QImageCapture_metacast(QImageCapture* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QImageCapture_metacall(QImageCapture* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QImageCapture_tr_s(const char* s) {
+	QString _ret = QImageCapture::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+bool QImageCapture_isAvailable(const QImageCapture* self) {
+	return self->isAvailable();
+}
+
+QMediaCaptureSession* QImageCapture_captureSession(const QImageCapture* self) {
+	return self->captureSession();
+}
+
+int QImageCapture_error(const QImageCapture* self) {
+	QImageCapture::Error _ret = self->error();
+	return static_cast<int>(_ret);
+}
+
+struct seaqt_string QImageCapture_errorString(const QImageCapture* self) {
+	QString _ret = self->errorString();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+bool QImageCapture_isReadyForCapture(const QImageCapture* self) {
+	return self->isReadyForCapture();
+}
+
+int QImageCapture_fileFormat(const QImageCapture* self) {
+	QImageCapture::FileFormat _ret = self->fileFormat();
+	return static_cast<int>(_ret);
+}
+
+void QImageCapture_setFileFormat(QImageCapture* self, int format) {
+	self->setFileFormat(static_cast<QImageCapture::FileFormat>(format));
+}
+
+struct seaqt_array /* of int */  QImageCapture_supportedFormats() {
+	QList<QImageCapture::FileFormat> _ret = QImageCapture::supportedFormats();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	int* _arr = static_cast<int*>(malloc(sizeof(int) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QImageCapture::FileFormat _lv_ret = _ret[i];
+		_arr[i] = static_cast<int>(_lv_ret);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_string QImageCapture_fileFormatName(int c) {
+	QString _ret = QImageCapture::fileFormatName(static_cast<QImageCapture::FileFormat>(c));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QImageCapture_fileFormatDescription(int c) {
+	QString _ret = QImageCapture::fileFormatDescription(static_cast<QImageCapture::FileFormat>(c));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QSize* QImageCapture_resolution(const QImageCapture* self) {
+	return new QSize(self->resolution());
+}
+
+void QImageCapture_setResolution_resolution(QImageCapture* self, QSize* resolution) {
+	self->setResolution(*resolution);
+}
+
+void QImageCapture_setResolution_width_height(QImageCapture* self, int width, int height) {
+	self->setResolution(static_cast<int>(width), static_cast<int>(height));
+}
+
+int QImageCapture_quality(const QImageCapture* self) {
+	QImageCapture::Quality _ret = self->quality();
+	return static_cast<int>(_ret);
+}
+
+void QImageCapture_setQuality(QImageCapture* self, int quality) {
+	self->setQuality(static_cast<QImageCapture::Quality>(quality));
+}
+
+QMediaMetaData* QImageCapture_metaData(const QImageCapture* self) {
+	return new QMediaMetaData(self->metaData());
+}
+
+void QImageCapture_setMetaData(QImageCapture* self, QMediaMetaData* metaData) {
+	self->setMetaData(*metaData);
+}
+
+void QImageCapture_addMetaData(QImageCapture* self, QMediaMetaData* metaData) {
+	self->addMetaData(*metaData);
+}
+
+int QImageCapture_captureToFile(QImageCapture* self) {
+	return self->captureToFile();
+}
+
+int QImageCapture_capture(QImageCapture* self) {
+	return self->capture();
+}
+
+void QImageCapture_errorChanged(QImageCapture* self) {
+	self->errorChanged();
+}
+
+void QImageCapture_connect_errorChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::errorChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QImageCapture_errorOccurred(QImageCapture* self, int id, int error, struct seaqt_string errorString) {
+	QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
+	self->errorOccurred(static_cast<int>(id), static_cast<QImageCapture::Error>(error), errorString_QString);
+}
+
+void QImageCapture_connect_errorOccurred(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, QImageCapture::Error, const QString&)>(&QImageCapture::errorOccurred), self, [callback, release = seaqt::release_callback{slot,release}](int id, QImageCapture::Error error, const QString& errorString) {
+			int sigval1 = id;
+			QImageCapture::Error error_ret = error;
+			int sigval2 = static_cast<int>(error_ret);
+			const QString errorString_ret = errorString;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray errorString_b = errorString_ret.toUtf8();
+			struct seaqt_string errorString_ms;
+			errorString_ms.len = errorString_b.length();
+			errorString_ms.data = static_cast<char*>(malloc(errorString_ms.len));
+			memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
+			struct seaqt_string sigval3 = errorString_ms;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QImageCapture_readyForCaptureChanged(QImageCapture* self, bool ready) {
+	self->readyForCaptureChanged(ready);
+}
+
+void QImageCapture_connect_readyForCaptureChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(bool)>(&QImageCapture::readyForCaptureChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool ready) {
+			bool sigval1 = ready;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QImageCapture_metaDataChanged(QImageCapture* self) {
+	self->metaDataChanged();
+}
+
+void QImageCapture_connect_metaDataChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::metaDataChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QImageCapture_fileFormatChanged(QImageCapture* self) {
+	self->fileFormatChanged();
+}
+
+void QImageCapture_connect_fileFormatChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::fileFormatChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QImageCapture_qualityChanged(QImageCapture* self) {
+	self->qualityChanged();
+}
+
+void QImageCapture_connect_qualityChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::qualityChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QImageCapture_resolutionChanged(QImageCapture* self) {
+	self->resolutionChanged();
+}
+
+void QImageCapture_connect_resolutionChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::resolutionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QImageCapture_imageExposed(QImageCapture* self, int id) {
+	self->imageExposed(static_cast<int>(id));
+}
+
+void QImageCapture_connect_imageExposed(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int)>(&QImageCapture::imageExposed), self, [callback, release = seaqt::release_callback{slot,release}](int id) {
+			int sigval1 = id;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QImageCapture_imageCaptured(QImageCapture* self, int id, QImage* preview) {
+	self->imageCaptured(static_cast<int>(id), *preview);
+}
+
+void QImageCapture_connect_imageCaptured(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, QImage*), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QImage&)>(&QImageCapture::imageCaptured), self, [callback, release = seaqt::release_callback{slot,release}](int id, const QImage& preview) {
+			int sigval1 = id;
+			const QImage& preview_ret = preview;
+			// Cast returned reference into pointer
+			QImage* sigval2 = const_cast<QImage*>(&preview_ret);
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QImageCapture_imageMetadataAvailable(QImageCapture* self, int id, QMediaMetaData* metaData) {
+	self->imageMetadataAvailable(static_cast<int>(id), *metaData);
+}
+
+void QImageCapture_connect_imageMetadataAvailable(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, QMediaMetaData*), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QMediaMetaData&)>(&QImageCapture::imageMetadataAvailable), self, [callback, release = seaqt::release_callback{slot,release}](int id, const QMediaMetaData& metaData) {
+			int sigval1 = id;
+			const QMediaMetaData& metaData_ret = metaData;
+			// Cast returned reference into pointer
+			QMediaMetaData* sigval2 = const_cast<QMediaMetaData*>(&metaData_ret);
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QImageCapture_imageAvailable(QImageCapture* self, int id, QVideoFrame* frame) {
+	self->imageAvailable(static_cast<int>(id), *frame);
+}
+
+void QImageCapture_connect_imageAvailable(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, QVideoFrame*), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QVideoFrame&)>(&QImageCapture::imageAvailable), self, [callback, release = seaqt::release_callback{slot,release}](int id, const QVideoFrame& frame) {
+			int sigval1 = id;
+			const QVideoFrame& frame_ret = frame;
+			// Cast returned reference into pointer
+			QVideoFrame* sigval2 = const_cast<QVideoFrame*>(&frame_ret);
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QImageCapture_imageSaved(QImageCapture* self, int id, struct seaqt_string fileName) {
+	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
+	self->imageSaved(static_cast<int>(id), fileName_QString);
+}
+
+void QImageCapture_connect_imageSaved(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QString&)>(&QImageCapture::imageSaved), self, [callback, release = seaqt::release_callback{slot,release}](int id, const QString& fileName) {
+			int sigval1 = id;
+			const QString fileName_ret = fileName;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray fileName_b = fileName_ret.toUtf8();
+			struct seaqt_string fileName_ms;
+			fileName_ms.len = fileName_b.length();
+			fileName_ms.data = static_cast<char*>(malloc(fileName_ms.len));
+			memcpy(fileName_ms.data, fileName_b.data(), fileName_ms.len);
+			struct seaqt_string sigval2 = fileName_ms;
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+struct seaqt_string QImageCapture_tr_s_c(const char* s, const char* c) {
+	QString _ret = QImageCapture::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QImageCapture_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QImageCapture::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+int QImageCapture_captureToFile_location(QImageCapture* self, struct seaqt_string location) {
+	QString location_QString = QString::fromUtf8(location.data, location.len);
+	return self->captureToFile(location_QString);
+}
+
+const QMetaObject* QImageCapture_staticMetaObject() { return &QImageCapture::staticMetaObject; }
+void* QImageCapture_vdata(VirtualQImageCapture* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQImageCapture>()); }
+VirtualQImageCapture* vdata_QImageCapture(void* vdata) { return reinterpret_cast<VirtualQImageCapture*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQImageCapture>()); }
+
+QMetaObject* QImageCapture_virtualbase_metaObject(const VirtualQImageCapture* self) {
+
+	return (QMetaObject*) self->QImageCapture::metaObject();
+}
+
+void* QImageCapture_virtualbase_metacast(VirtualQImageCapture* self, const char* param1) {
+
+	return self->QImageCapture::qt_metacast(param1);
+}
+
+int QImageCapture_virtualbase_metacall(VirtualQImageCapture* self, int param1, int param2, void** param3) {
+
+	return self->QImageCapture::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+bool QImageCapture_virtualbase_event(VirtualQImageCapture* self, QEvent* event) {
+
+	return self->QImageCapture::event(event);
+}
+
+bool QImageCapture_virtualbase_eventFilter(VirtualQImageCapture* self, QObject* watched, QEvent* event) {
+
+	return self->QImageCapture::eventFilter(watched, event);
+}
+
+void QImageCapture_virtualbase_timerEvent(VirtualQImageCapture* self, QTimerEvent* event) {
+
+	self->QImageCapture::timerEvent(event);
+}
+
+void QImageCapture_virtualbase_childEvent(VirtualQImageCapture* self, QChildEvent* event) {
+
+	self->QImageCapture::childEvent(event);
+}
+
+void QImageCapture_virtualbase_customEvent(VirtualQImageCapture* self, QEvent* event) {
+
+	self->QImageCapture::customEvent(event);
+}
+
+void QImageCapture_virtualbase_connectNotify(VirtualQImageCapture* self, QMetaMethod* signal) {
+
+	self->QImageCapture::connectNotify(*signal);
+}
+
+void QImageCapture_virtualbase_disconnectNotify(VirtualQImageCapture* self, QMetaMethod* signal) {
+
+	self->QImageCapture::disconnectNotify(*signal);
+}
+
+QObject* QImageCapture_protectedbase_sender(const VirtualQImageCapture* self) {
+	return self->QImageCapture::sender();
+}
+
+int QImageCapture_protectedbase_senderSignalIndex(const VirtualQImageCapture* self) {
+	return self->QImageCapture::senderSignalIndex();
+}
+
+int QImageCapture_protectedbase_receivers(const VirtualQImageCapture* self, const char* signal) {
+	return self->QImageCapture::receivers(signal);
+}
+
+bool QImageCapture_protectedbase_isSignalConnected(const VirtualQImageCapture* self, QMetaMethod* signal) {
+	return self->QImageCapture::isSignalConnected(*signal);
+}
+
+void QImageCapture_delete(QImageCapture* self) {
+	delete self;
+}
+

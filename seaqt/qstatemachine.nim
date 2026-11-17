@@ -1,0 +1,2 @@
+import ./QtStateMachine/gen_qstatemachine
+export gen_qstatemachine

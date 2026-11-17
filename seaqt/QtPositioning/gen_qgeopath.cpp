@@ -1,0 +1,190 @@
+#include <QGeoCoordinate>
+#include <QGeoPath>
+#include <QGeoShape>
+#include <QList>
+#include <QMetaObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QVariant>
+#include <qgeopath.h>
+#include "gen_qgeopath.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QGeoPath* QGeoPath_new() {
+	return new (std::nothrow) QGeoPath();
+}
+
+QGeoPath* QGeoPath_new_path(struct seaqt_array /* of QGeoCoordinate* */  path) {
+	QList<QGeoCoordinate> path_QList;
+	path_QList.reserve(path.len);
+	QGeoCoordinate** path_arr = static_cast<QGeoCoordinate**>(path.data);
+	for(size_t i = 0; i < path.len; ++i) {
+		path_QList.push_back(*(path_arr[i]));
+	}
+	return new (std::nothrow) QGeoPath(path_QList);
+}
+
+QGeoPath* QGeoPath_new_from(QGeoPath* from) {
+	return new (std::nothrow) QGeoPath(*from);
+}
+
+QGeoPath* QGeoPath_new_other(QGeoShape* other) {
+	return new (std::nothrow) QGeoPath(*other);
+}
+
+QGeoPath* QGeoPath_new_path_width(struct seaqt_array /* of QGeoCoordinate* */  path, const double* width) {
+	QList<QGeoCoordinate> path_QList;
+	path_QList.reserve(path.len);
+	QGeoCoordinate** path_arr = static_cast<QGeoCoordinate**>(path.data);
+	for(size_t i = 0; i < path.len; ++i) {
+		path_QList.push_back(*(path_arr[i]));
+	}
+	return new (std::nothrow) QGeoPath(path_QList, static_cast<const qreal&>(*width));
+}
+
+void QGeoPath_virtbase(QGeoPath* src, QGeoShape** outptr_QGeoShape) {
+	*outptr_QGeoShape = static_cast<QGeoShape*>(src);
+}
+
+void QGeoPath_operatorAssign(QGeoPath* self, QGeoPath* from) {
+	self->operator=(*from);
+}
+
+void QGeoPath_setPath(QGeoPath* self, struct seaqt_array /* of QGeoCoordinate* */  path) {
+	QList<QGeoCoordinate> path_QList;
+	path_QList.reserve(path.len);
+	QGeoCoordinate** path_arr = static_cast<QGeoCoordinate**>(path.data);
+	for(size_t i = 0; i < path.len; ++i) {
+		path_QList.push_back(*(path_arr[i]));
+	}
+	self->setPath(path_QList);
+}
+
+struct seaqt_array /* of QGeoCoordinate* */  QGeoPath_path(const QGeoPath* self) {
+	const QList<QGeoCoordinate>& _ret = self->path();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGeoCoordinate** _arr = static_cast<QGeoCoordinate**>(malloc(sizeof(QGeoCoordinate*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QGeoCoordinate(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QGeoPath_clearPath(QGeoPath* self) {
+	self->clearPath();
+}
+
+void QGeoPath_setVariantPath(QGeoPath* self, struct seaqt_array /* of QVariant* */  path) {
+	QVariantList path_QList;
+	path_QList.reserve(path.len);
+	QVariant** path_arr = static_cast<QVariant**>(path.data);
+	for(size_t i = 0; i < path.len; ++i) {
+		path_QList.push_back(*(path_arr[i]));
+	}
+	self->setVariantPath(path_QList);
+}
+
+struct seaqt_array /* of QVariant* */  QGeoPath_variantPath(const QGeoPath* self) {
+	QVariantList _ret = self->variantPath();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QVariant** _arr = static_cast<QVariant**>(malloc(sizeof(QVariant*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QVariant(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QGeoPath_setWidth(QGeoPath* self, const double* width) {
+	self->setWidth(static_cast<const qreal&>(*width));
+}
+
+double QGeoPath_width(const QGeoPath* self) {
+	qreal _ret = self->width();
+	return static_cast<double>(_ret);
+}
+
+void QGeoPath_translate(QGeoPath* self, double degreesLatitude, double degreesLongitude) {
+	self->translate(static_cast<double>(degreesLatitude), static_cast<double>(degreesLongitude));
+}
+
+QGeoPath* QGeoPath_translated(const QGeoPath* self, double degreesLatitude, double degreesLongitude) {
+	return new QGeoPath(self->translated(static_cast<double>(degreesLatitude), static_cast<double>(degreesLongitude)));
+}
+
+double QGeoPath_length(const QGeoPath* self) {
+	return self->length();
+}
+
+ptrdiff_t QGeoPath_size(const QGeoPath* self) {
+	qsizetype _ret = self->size();
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+void QGeoPath_addCoordinate(QGeoPath* self, QGeoCoordinate* coordinate) {
+	self->addCoordinate(*coordinate);
+}
+
+void QGeoPath_insertCoordinate(QGeoPath* self, ptrdiff_t index, QGeoCoordinate* coordinate) {
+	self->insertCoordinate((qsizetype)(index), *coordinate);
+}
+
+void QGeoPath_replaceCoordinate(QGeoPath* self, ptrdiff_t index, QGeoCoordinate* coordinate) {
+	self->replaceCoordinate((qsizetype)(index), *coordinate);
+}
+
+QGeoCoordinate* QGeoPath_coordinateAt(const QGeoPath* self, ptrdiff_t index) {
+	return new QGeoCoordinate(self->coordinateAt((qsizetype)(index)));
+}
+
+bool QGeoPath_containsCoordinate(const QGeoPath* self, QGeoCoordinate* coordinate) {
+	return self->containsCoordinate(*coordinate);
+}
+
+void QGeoPath_removeCoordinate_coordinate(QGeoPath* self, QGeoCoordinate* coordinate) {
+	self->removeCoordinate(*coordinate);
+}
+
+void QGeoPath_removeCoordinate_index(QGeoPath* self, ptrdiff_t index) {
+	self->removeCoordinate((qsizetype)(index));
+}
+
+struct seaqt_string QGeoPath_toString(const QGeoPath* self) {
+	QString _ret = self->toString();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+double QGeoPath_length_indexFrom(const QGeoPath* self, ptrdiff_t indexFrom) {
+	return self->length((qsizetype)(indexFrom));
+}
+
+double QGeoPath_length_indexFrom_indexTo(const QGeoPath* self, ptrdiff_t indexFrom, ptrdiff_t indexTo) {
+	return self->length((qsizetype)(indexFrom), (qsizetype)(indexTo));
+}
+
+const QMetaObject* QGeoPath_staticMetaObject() { return &QGeoPath::staticMetaObject; }
+void QGeoPath_delete(QGeoPath* self) {
+	delete self;
+}
+

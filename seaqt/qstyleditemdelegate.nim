@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qstyleditemdelegate
+export gen_qstyleditemdelegate

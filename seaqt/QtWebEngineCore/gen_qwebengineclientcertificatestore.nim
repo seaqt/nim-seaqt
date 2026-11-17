@@ -1,0 +1,73 @@
+import ./qtwebenginecore_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free, c_malloc
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+{.compile("gen_qwebengineclientcertificatestore.cpp", QtWebEngineCoreCFlags).}
+
+
+import ./gen_qwebengineclientcertificatestore_types
+export gen_qwebengineclientcertificatestore_types
+
+import
+  ../QtNetwork/gen_qsslcertificate_types,
+  ../QtNetwork/gen_qsslkey_types
+export
+  gen_qsslcertificate_types,
+  gen_qsslkey_types
+
+type cQWebEngineClientCertificateStore*{.exportc: "QWebEngineClientCertificateStore", incompleteStruct.} = object
+
+proc fcQWebEngineClientCertificateStore_add(self: pointer, certificate: pointer, privateKey: pointer): void {.importc: "QWebEngineClientCertificateStore_add".}
+proc fcQWebEngineClientCertificateStore_certificates(self: pointer): struct_seaqt_array {.importc: "QWebEngineClientCertificateStore_certificates".}
+proc fcQWebEngineClientCertificateStore_remove(self: pointer, certificate: pointer): void {.importc: "QWebEngineClientCertificateStore_remove".}
+proc fcQWebEngineClientCertificateStore_clear(self: pointer): void {.importc: "QWebEngineClientCertificateStore_clear".}
+
+proc add*(self: gen_qwebengineclientcertificatestore_types.QWebEngineClientCertificateStore, certificate: gen_qsslcertificate_types.QSslCertificate, privateKey: gen_qsslkey_types.QSslKey): void =
+  fcQWebEngineClientCertificateStore_add(self.h, certificate.h, privateKey.h)
+
+proc certificates*(self: gen_qwebengineclientcertificatestore_types.QWebEngineClientCertificateStore): seq[gen_qsslcertificate_types.QSslCertificate] =
+  var v_ma = fcQWebEngineClientCertificateStore_certificates(self.h)
+  var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc remove*(self: gen_qwebengineclientcertificatestore_types.QWebEngineClientCertificateStore, certificate: gen_qsslcertificate_types.QSslCertificate): void =
+  fcQWebEngineClientCertificateStore_remove(self.h, certificate.h)
+
+proc clear*(self: gen_qwebengineclientcertificatestore_types.QWebEngineClientCertificateStore): void =
+  fcQWebEngineClientCertificateStore_clear(self.h)
+

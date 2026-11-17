@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginehistory
+export gen_qwebenginehistory

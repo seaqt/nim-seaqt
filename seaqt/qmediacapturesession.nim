@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediacapturesession
+export gen_qmediacapturesession

@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractmetadatabase
+export gen_abstractmetadatabase

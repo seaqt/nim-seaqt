@@ -1,0 +1,90 @@
+#pragma once
+#ifndef SEAQT_QTGUI_GEN_QPICTURE_H
+#define SEAQT_QTGUI_GEN_QPICTURE_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QIODevice;
+class QPaintDevice;
+class QPaintEngine;
+class QPainter;
+class QPicture;
+class QPoint;
+class QRect;
+#else
+typedef struct QIODevice QIODevice;
+typedef struct QPaintDevice QPaintDevice;
+typedef struct QPaintEngine QPaintEngine;
+typedef struct QPainter QPainter;
+typedef struct QPicture QPicture;
+typedef struct QPoint QPoint;
+typedef struct QRect QRect;
+#endif
+
+typedef struct VirtualQPicture VirtualQPicture;
+typedef struct QPicture_VTable{
+	void (*destructor)(VirtualQPicture* self);
+	int (*devType)(const VirtualQPicture* self);
+	void (*setData)(VirtualQPicture* self, const char* data, unsigned int size);
+	QPaintEngine* (*paintEngine)(const VirtualQPicture* self);
+	int (*metric)(const VirtualQPicture* self, int m);
+	void (*initPainter)(const VirtualQPicture* self, QPainter* painter);
+	QPaintDevice* (*redirected)(const VirtualQPicture* self, QPoint* offset);
+	QPainter* (*sharedPainter)(const VirtualQPicture* self);
+}QPicture_VTable;
+
+void* QPicture_vdata(VirtualQPicture* self);
+VirtualQPicture* vdata_QPicture(void* vdata);
+
+VirtualQPicture* QPicture_new(const QPicture_VTable* vtbl, size_t vdata);
+VirtualQPicture* QPicture_new_from(const QPicture_VTable* vtbl, size_t vdata, QPicture* from);
+VirtualQPicture* QPicture_new_formatVersion(const QPicture_VTable* vtbl, size_t vdata, int formatVersion);
+
+void QPicture_virtbase(QPicture* src, QPaintDevice** outptr_QPaintDevice);
+bool QPicture_isNull(const QPicture* self);
+int QPicture_devType(const QPicture* self);
+unsigned int QPicture_size(const QPicture* self);
+const char* QPicture_data(const QPicture* self);
+void QPicture_setData(QPicture* self, const char* data, unsigned int size);
+bool QPicture_play(QPicture* self, QPainter* p);
+bool QPicture_load_dev(QPicture* self, QIODevice* dev);
+bool QPicture_load_fileName(QPicture* self, struct seaqt_string fileName);
+bool QPicture_save_dev(QPicture* self, QIODevice* dev);
+bool QPicture_save_fileName(QPicture* self, struct seaqt_string fileName);
+QRect* QPicture_boundingRect(const QPicture* self);
+void QPicture_setBoundingRect(QPicture* self, QRect* r);
+void QPicture_operatorAssign(QPicture* self, QPicture* from);
+void QPicture_swap(QPicture* self, QPicture* other);
+void QPicture_detach(QPicture* self);
+bool QPicture_isDetached(const QPicture* self);
+QPaintEngine* QPicture_paintEngine(const QPicture* self);
+int QPicture_metric(const QPicture* self, int m);
+
+int QPicture_virtualbase_devType(const VirtualQPicture* self);
+void QPicture_virtualbase_setData(VirtualQPicture* self, const char* data, unsigned int size);
+QPaintEngine* QPicture_virtualbase_paintEngine(const VirtualQPicture* self);
+int QPicture_virtualbase_metric(const VirtualQPicture* self, int m);
+void QPicture_virtualbase_initPainter(const VirtualQPicture* self, QPainter* painter);
+QPaintDevice* QPicture_virtualbase_redirected(const VirtualQPicture* self, QPoint* offset);
+QPainter* QPicture_virtualbase_sharedPainter(const VirtualQPicture* self);
+
+double QPicture_protectedbase_getDecodedMetricF(const VirtualQPicture* self, int metricA, int metricB);
+
+void QPicture_delete(QPicture* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

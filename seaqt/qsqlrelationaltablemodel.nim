@@ -1,0 +1,2 @@
+import ./QtSql/gen_qsqlrelationaltablemodel
+export gen_qsqlrelationaltablemodel

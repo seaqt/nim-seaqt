@@ -1,0 +1,2 @@
+import ./QtWebSockets/gen_qwebsocketcorsauthenticator
+export gen_qwebsocketcorsauthenticator

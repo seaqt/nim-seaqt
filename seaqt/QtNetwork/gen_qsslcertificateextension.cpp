@@ -1,0 +1,72 @@
+#include <QSslCertificateExtension>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QVariant>
+#include <qsslcertificateextension.h>
+#include "gen_qsslcertificateextension.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QSslCertificateExtension* QSslCertificateExtension_new() {
+	return new (std::nothrow) QSslCertificateExtension();
+}
+
+QSslCertificateExtension* QSslCertificateExtension_new_from(QSslCertificateExtension* from) {
+	return new (std::nothrow) QSslCertificateExtension(*from);
+}
+
+void QSslCertificateExtension_operatorAssign(QSslCertificateExtension* self, QSslCertificateExtension* from) {
+	self->operator=(*from);
+}
+
+void QSslCertificateExtension_swap(QSslCertificateExtension* self, QSslCertificateExtension* other) {
+	self->swap(*other);
+}
+
+struct seaqt_string QSslCertificateExtension_oid(const QSslCertificateExtension* self) {
+	QString _ret = self->oid();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QSslCertificateExtension_name(const QSslCertificateExtension* self) {
+	QString _ret = self->name();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QVariant* QSslCertificateExtension_value(const QSslCertificateExtension* self) {
+	return new QVariant(self->value());
+}
+
+bool QSslCertificateExtension_isCritical(const QSslCertificateExtension* self) {
+	return self->isCritical();
+}
+
+bool QSslCertificateExtension_isSupported(const QSslCertificateExtension* self) {
+	return self->isSupported();
+}
+
+void QSslCertificateExtension_delete(QSslCertificateExtension* self) {
+	delete self;
+}
+

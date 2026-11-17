@@ -1,0 +1,2178 @@
+#include <QChildEvent>
+#include <QCursor>
+#include <QDragEnterEvent>
+#include <QDragLeaveEvent>
+#include <QDragMoveEvent>
+#include <QDropEvent>
+#include <QEvent>
+#include <QFocusEvent>
+#include <QHoverEvent>
+#include <QInputMethodEvent>
+#include <QKeyEvent>
+#include <QList>
+#include <QMatrix4x4>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QMouseEvent>
+#include <QObject>
+#include <QPointF>
+#include <QQmlParserStatus>
+#include <QQuickItem>
+#define WORKAROUND_INNER_CLASS_DEFINITION_QQuickItem__ItemChangeData
+#define WORKAROUND_INNER_CLASS_DEFINITION_QQuickItem__UpdatePaintNodeData
+#include <QQuickTransform>
+#include <QQuickWindow>
+#include <QRectF>
+#include <QSGNode>
+#include <QSGTextureProvider>
+#include <QSGTransformNode>
+#include <QSizeF>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTimerEvent>
+#include <QTouchEvent>
+#include <QTransform>
+#include <QVariant>
+#include <QWheelEvent>
+#include <qquickitem.h>
+#include "gen_qquickitem.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQQuickTransform final : public QQuickTransform {
+	const QQuickTransform_VTable* vtbl;
+public:
+	friend void* QQuickTransform_vdata(VirtualQQuickTransform* self);
+	friend VirtualQQuickTransform* vdata_QQuickTransform(void* vdata);
+
+	VirtualQQuickTransform(const QQuickTransform_VTable* vtbl): QQuickTransform(), vtbl(vtbl) {}
+	VirtualQQuickTransform(const QQuickTransform_VTable* vtbl, QObject* parent): QQuickTransform(parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQQuickTransform() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QQuickTransform::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QQuickTransform_virtualbase_metaObject(const VirtualQQuickTransform* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QQuickTransform::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QQuickTransform_virtualbase_metacast(VirtualQQuickTransform* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QQuickTransform::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QQuickTransform_virtualbase_metacall(VirtualQQuickTransform* self, int param1, int param2, void** param3);
+
+	virtual void applyTo(QMatrix4x4* matrix) const override {
+		if (vtbl->applyTo == 0) {
+			return; // Pure virtual, there is no base we can call
+		}
+
+		QMatrix4x4* sigval1 = matrix;
+		vtbl->applyTo(this, sigval1);
+	}
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QQuickTransform::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QQuickTransform_virtualbase_event(VirtualQQuickTransform* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QQuickTransform::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QQuickTransform_virtualbase_eventFilter(VirtualQQuickTransform* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QQuickTransform::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QQuickTransform_virtualbase_timerEvent(VirtualQQuickTransform* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QQuickTransform::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QQuickTransform_virtualbase_childEvent(VirtualQQuickTransform* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QQuickTransform::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QQuickTransform_virtualbase_customEvent(VirtualQQuickTransform* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QQuickTransform::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QQuickTransform_virtualbase_connectNotify(VirtualQQuickTransform* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QQuickTransform::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QQuickTransform_virtualbase_disconnectNotify(VirtualQQuickTransform* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend void QQuickTransform_protectedbase_update(VirtualQQuickTransform* self);
+	friend QObject* QQuickTransform_protectedbase_sender(const VirtualQQuickTransform* self);
+	friend int QQuickTransform_protectedbase_senderSignalIndex(const VirtualQQuickTransform* self);
+	friend int QQuickTransform_protectedbase_receivers(const VirtualQQuickTransform* self, const char* signal);
+	friend bool QQuickTransform_protectedbase_isSignalConnected(const VirtualQQuickTransform* self, QMetaMethod* signal);
+};
+
+VirtualQQuickTransform* QQuickTransform_new(const QQuickTransform_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickTransform>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQQuickTransform(vtbl) : nullptr;
+}
+
+VirtualQQuickTransform* QQuickTransform_new_parent(const QQuickTransform_VTable* vtbl, size_t vdata, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickTransform>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQQuickTransform(vtbl, parent) : nullptr;
+}
+
+void QQuickTransform_virtbase(QQuickTransform* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QQuickTransform_metaObject(const QQuickTransform* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QQuickTransform_metacast(QQuickTransform* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QQuickTransform_metacall(QQuickTransform* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QQuickTransform_tr_s(const char* s) {
+	QString _ret = QQuickTransform::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QQuickTransform_appendToItem(QQuickTransform* self, QQuickItem* param1) {
+	self->appendToItem(param1);
+}
+
+void QQuickTransform_prependToItem(QQuickTransform* self, QQuickItem* param1) {
+	self->prependToItem(param1);
+}
+
+void QQuickTransform_applyTo(const QQuickTransform* self, QMatrix4x4* matrix) {
+	self->applyTo(matrix);
+}
+
+struct seaqt_string QQuickTransform_tr_s_c(const char* s, const char* c) {
+	QString _ret = QQuickTransform::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QQuickTransform_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QQuickTransform::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QQuickTransform_staticMetaObject() { return &QQuickTransform::staticMetaObject; }
+void* QQuickTransform_vdata(VirtualQQuickTransform* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQQuickTransform>()); }
+VirtualQQuickTransform* vdata_QQuickTransform(void* vdata) { return reinterpret_cast<VirtualQQuickTransform*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQQuickTransform>()); }
+
+QMetaObject* QQuickTransform_virtualbase_metaObject(const VirtualQQuickTransform* self) {
+
+	return (QMetaObject*) self->QQuickTransform::metaObject();
+}
+
+void* QQuickTransform_virtualbase_metacast(VirtualQQuickTransform* self, const char* param1) {
+
+	return self->QQuickTransform::qt_metacast(param1);
+}
+
+int QQuickTransform_virtualbase_metacall(VirtualQQuickTransform* self, int param1, int param2, void** param3) {
+
+	return self->QQuickTransform::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+bool QQuickTransform_virtualbase_event(VirtualQQuickTransform* self, QEvent* event) {
+
+	return self->QQuickTransform::event(event);
+}
+
+bool QQuickTransform_virtualbase_eventFilter(VirtualQQuickTransform* self, QObject* watched, QEvent* event) {
+
+	return self->QQuickTransform::eventFilter(watched, event);
+}
+
+void QQuickTransform_virtualbase_timerEvent(VirtualQQuickTransform* self, QTimerEvent* event) {
+
+	self->QQuickTransform::timerEvent(event);
+}
+
+void QQuickTransform_virtualbase_childEvent(VirtualQQuickTransform* self, QChildEvent* event) {
+
+	self->QQuickTransform::childEvent(event);
+}
+
+void QQuickTransform_virtualbase_customEvent(VirtualQQuickTransform* self, QEvent* event) {
+
+	self->QQuickTransform::customEvent(event);
+}
+
+void QQuickTransform_virtualbase_connectNotify(VirtualQQuickTransform* self, QMetaMethod* signal) {
+
+	self->QQuickTransform::connectNotify(*signal);
+}
+
+void QQuickTransform_virtualbase_disconnectNotify(VirtualQQuickTransform* self, QMetaMethod* signal) {
+
+	self->QQuickTransform::disconnectNotify(*signal);
+}
+
+void QQuickTransform_protectedbase_update(VirtualQQuickTransform* self) {
+	self->QQuickTransform::update();
+}
+
+QObject* QQuickTransform_protectedbase_sender(const VirtualQQuickTransform* self) {
+	return self->QQuickTransform::sender();
+}
+
+int QQuickTransform_protectedbase_senderSignalIndex(const VirtualQQuickTransform* self) {
+	return self->QQuickTransform::senderSignalIndex();
+}
+
+int QQuickTransform_protectedbase_receivers(const VirtualQQuickTransform* self, const char* signal) {
+	return self->QQuickTransform::receivers(signal);
+}
+
+bool QQuickTransform_protectedbase_isSignalConnected(const VirtualQQuickTransform* self, QMetaMethod* signal) {
+	return self->QQuickTransform::isSignalConnected(*signal);
+}
+
+void QQuickTransform_delete(QQuickTransform* self) {
+	delete self;
+}
+
+class VirtualQQuickItem final : public QQuickItem {
+	const QQuickItem_VTable* vtbl;
+public:
+	friend void* QQuickItem_vdata(VirtualQQuickItem* self);
+	friend VirtualQQuickItem* vdata_QQuickItem(void* vdata);
+
+	VirtualQQuickItem(const QQuickItem_VTable* vtbl): QQuickItem(), vtbl(vtbl) {}
+	VirtualQQuickItem(const QQuickItem_VTable* vtbl, QQuickItem* parent): QQuickItem(parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQQuickItem() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QQuickItem::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QQuickItem_virtualbase_metaObject(const VirtualQQuickItem* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QQuickItem::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QQuickItem_virtualbase_metacast(VirtualQQuickItem* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QQuickItem::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QQuickItem_virtualbase_metacall(VirtualQQuickItem* self, int param1, int param2, void** param3);
+
+	virtual QRectF boundingRect() const override {
+		if (vtbl->boundingRect == 0) {
+			return QQuickItem::boundingRect();
+		}
+
+		QRectF* callback_return_value = vtbl->boundingRect(this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QRectF* QQuickItem_virtualbase_boundingRect(const VirtualQQuickItem* self);
+
+	virtual QRectF clipRect() const override {
+		if (vtbl->clipRect == 0) {
+			return QQuickItem::clipRect();
+		}
+
+		QRectF* callback_return_value = vtbl->clipRect(this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QRectF* QQuickItem_virtualbase_clipRect(const VirtualQQuickItem* self);
+
+	virtual bool contains(const QPointF& point) const override {
+		if (vtbl->contains == 0) {
+			return QQuickItem::contains(point);
+		}
+
+		const QPointF& point_ret = point;
+		// Cast returned reference into pointer
+		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
+		bool callback_return_value = vtbl->contains(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QQuickItem_virtualbase_contains(const VirtualQQuickItem* self, QPointF* point);
+
+	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
+		if (vtbl->inputMethodQuery == 0) {
+			return QQuickItem::inputMethodQuery(query);
+		}
+
+		Qt::InputMethodQuery query_ret = query;
+		int sigval1 = static_cast<int>(query_ret);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QVariant* QQuickItem_virtualbase_inputMethodQuery(const VirtualQQuickItem* self, int query);
+
+	virtual bool isTextureProvider() const override {
+		if (vtbl->isTextureProvider == 0) {
+			return QQuickItem::isTextureProvider();
+		}
+
+		bool callback_return_value = vtbl->isTextureProvider(this);
+		return callback_return_value;
+	}
+
+	friend bool QQuickItem_virtualbase_isTextureProvider(const VirtualQQuickItem* self);
+
+	virtual QSGTextureProvider* textureProvider() const override {
+		if (vtbl->textureProvider == 0) {
+			return QQuickItem::textureProvider();
+		}
+
+		QSGTextureProvider* callback_return_value = vtbl->textureProvider(this);
+		return callback_return_value;
+	}
+
+	friend QSGTextureProvider* QQuickItem_virtualbase_textureProvider(const VirtualQQuickItem* self);
+
+	virtual bool event(QEvent* param1) override {
+		if (vtbl->event == 0) {
+			return QQuickItem::event(param1);
+		}
+
+		QEvent* sigval1 = param1;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QQuickItem_virtualbase_event(VirtualQQuickItem* self, QEvent* param1);
+
+	virtual void itemChange(QQuickItem::ItemChange param1, const QQuickItem::ItemChangeData& param2) override {
+		if (vtbl->itemChange == 0) {
+			QQuickItem::itemChange(param1, param2);
+			return;
+		}
+
+		QQuickItem::ItemChange param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		const QQuickItem::ItemChangeData& param2_ret = param2;
+		// Cast returned reference into pointer
+		QQuickItem__ItemChangeData* sigval2 = const_cast<QQuickItem::ItemChangeData*>(&param2_ret);
+		vtbl->itemChange(this, sigval1, sigval2);
+	}
+
+	friend void QQuickItem_virtualbase_itemChange(VirtualQQuickItem* self, int param1, QQuickItem__ItemChangeData* param2);
+
+	virtual void geometryChange(const QRectF& newGeometry, const QRectF& oldGeometry) override {
+		if (vtbl->geometryChange == 0) {
+			QQuickItem::geometryChange(newGeometry, oldGeometry);
+			return;
+		}
+
+		const QRectF& newGeometry_ret = newGeometry;
+		// Cast returned reference into pointer
+		QRectF* sigval1 = const_cast<QRectF*>(&newGeometry_ret);
+		const QRectF& oldGeometry_ret = oldGeometry;
+		// Cast returned reference into pointer
+		QRectF* sigval2 = const_cast<QRectF*>(&oldGeometry_ret);
+		vtbl->geometryChange(this, sigval1, sigval2);
+	}
+
+	friend void QQuickItem_virtualbase_geometryChange(VirtualQQuickItem* self, QRectF* newGeometry, QRectF* oldGeometry);
+
+	virtual void classBegin() override {
+		if (vtbl->classBegin == 0) {
+			QQuickItem::classBegin();
+			return;
+		}
+
+		vtbl->classBegin(this);
+	}
+
+	friend void QQuickItem_virtualbase_classBegin(VirtualQQuickItem* self);
+
+	virtual void componentComplete() override {
+		if (vtbl->componentComplete == 0) {
+			QQuickItem::componentComplete();
+			return;
+		}
+
+		vtbl->componentComplete(this);
+	}
+
+	friend void QQuickItem_virtualbase_componentComplete(VirtualQQuickItem* self);
+
+	virtual void keyPressEvent(QKeyEvent* event) override {
+		if (vtbl->keyPressEvent == 0) {
+			QQuickItem::keyPressEvent(event);
+			return;
+		}
+
+		QKeyEvent* sigval1 = event;
+		vtbl->keyPressEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_keyPressEvent(VirtualQQuickItem* self, QKeyEvent* event);
+
+	virtual void keyReleaseEvent(QKeyEvent* event) override {
+		if (vtbl->keyReleaseEvent == 0) {
+			QQuickItem::keyReleaseEvent(event);
+			return;
+		}
+
+		QKeyEvent* sigval1 = event;
+		vtbl->keyReleaseEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_keyReleaseEvent(VirtualQQuickItem* self, QKeyEvent* event);
+
+	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
+		if (vtbl->inputMethodEvent == 0) {
+			QQuickItem::inputMethodEvent(param1);
+			return;
+		}
+
+		QInputMethodEvent* sigval1 = param1;
+		vtbl->inputMethodEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_inputMethodEvent(VirtualQQuickItem* self, QInputMethodEvent* param1);
+
+	virtual void focusInEvent(QFocusEvent* param1) override {
+		if (vtbl->focusInEvent == 0) {
+			QQuickItem::focusInEvent(param1);
+			return;
+		}
+
+		QFocusEvent* sigval1 = param1;
+		vtbl->focusInEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_focusInEvent(VirtualQQuickItem* self, QFocusEvent* param1);
+
+	virtual void focusOutEvent(QFocusEvent* param1) override {
+		if (vtbl->focusOutEvent == 0) {
+			QQuickItem::focusOutEvent(param1);
+			return;
+		}
+
+		QFocusEvent* sigval1 = param1;
+		vtbl->focusOutEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_focusOutEvent(VirtualQQuickItem* self, QFocusEvent* param1);
+
+	virtual void mousePressEvent(QMouseEvent* event) override {
+		if (vtbl->mousePressEvent == 0) {
+			QQuickItem::mousePressEvent(event);
+			return;
+		}
+
+		QMouseEvent* sigval1 = event;
+		vtbl->mousePressEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_mousePressEvent(VirtualQQuickItem* self, QMouseEvent* event);
+
+	virtual void mouseMoveEvent(QMouseEvent* event) override {
+		if (vtbl->mouseMoveEvent == 0) {
+			QQuickItem::mouseMoveEvent(event);
+			return;
+		}
+
+		QMouseEvent* sigval1 = event;
+		vtbl->mouseMoveEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_mouseMoveEvent(VirtualQQuickItem* self, QMouseEvent* event);
+
+	virtual void mouseReleaseEvent(QMouseEvent* event) override {
+		if (vtbl->mouseReleaseEvent == 0) {
+			QQuickItem::mouseReleaseEvent(event);
+			return;
+		}
+
+		QMouseEvent* sigval1 = event;
+		vtbl->mouseReleaseEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_mouseReleaseEvent(VirtualQQuickItem* self, QMouseEvent* event);
+
+	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
+		if (vtbl->mouseDoubleClickEvent == 0) {
+			QQuickItem::mouseDoubleClickEvent(event);
+			return;
+		}
+
+		QMouseEvent* sigval1 = event;
+		vtbl->mouseDoubleClickEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_mouseDoubleClickEvent(VirtualQQuickItem* self, QMouseEvent* event);
+
+	virtual void mouseUngrabEvent() override {
+		if (vtbl->mouseUngrabEvent == 0) {
+			QQuickItem::mouseUngrabEvent();
+			return;
+		}
+
+		vtbl->mouseUngrabEvent(this);
+	}
+
+	friend void QQuickItem_virtualbase_mouseUngrabEvent(VirtualQQuickItem* self);
+
+	virtual void touchUngrabEvent() override {
+		if (vtbl->touchUngrabEvent == 0) {
+			QQuickItem::touchUngrabEvent();
+			return;
+		}
+
+		vtbl->touchUngrabEvent(this);
+	}
+
+	friend void QQuickItem_virtualbase_touchUngrabEvent(VirtualQQuickItem* self);
+
+	virtual void wheelEvent(QWheelEvent* event) override {
+		if (vtbl->wheelEvent == 0) {
+			QQuickItem::wheelEvent(event);
+			return;
+		}
+
+		QWheelEvent* sigval1 = event;
+		vtbl->wheelEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_wheelEvent(VirtualQQuickItem* self, QWheelEvent* event);
+
+	virtual void touchEvent(QTouchEvent* event) override {
+		if (vtbl->touchEvent == 0) {
+			QQuickItem::touchEvent(event);
+			return;
+		}
+
+		QTouchEvent* sigval1 = event;
+		vtbl->touchEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_touchEvent(VirtualQQuickItem* self, QTouchEvent* event);
+
+	virtual void hoverEnterEvent(QHoverEvent* event) override {
+		if (vtbl->hoverEnterEvent == 0) {
+			QQuickItem::hoverEnterEvent(event);
+			return;
+		}
+
+		QHoverEvent* sigval1 = event;
+		vtbl->hoverEnterEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_hoverEnterEvent(VirtualQQuickItem* self, QHoverEvent* event);
+
+	virtual void hoverMoveEvent(QHoverEvent* event) override {
+		if (vtbl->hoverMoveEvent == 0) {
+			QQuickItem::hoverMoveEvent(event);
+			return;
+		}
+
+		QHoverEvent* sigval1 = event;
+		vtbl->hoverMoveEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_hoverMoveEvent(VirtualQQuickItem* self, QHoverEvent* event);
+
+	virtual void hoverLeaveEvent(QHoverEvent* event) override {
+		if (vtbl->hoverLeaveEvent == 0) {
+			QQuickItem::hoverLeaveEvent(event);
+			return;
+		}
+
+		QHoverEvent* sigval1 = event;
+		vtbl->hoverLeaveEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_hoverLeaveEvent(VirtualQQuickItem* self, QHoverEvent* event);
+
+	virtual void dragEnterEvent(QDragEnterEvent* param1) override {
+		if (vtbl->dragEnterEvent == 0) {
+			QQuickItem::dragEnterEvent(param1);
+			return;
+		}
+
+		QDragEnterEvent* sigval1 = param1;
+		vtbl->dragEnterEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_dragEnterEvent(VirtualQQuickItem* self, QDragEnterEvent* param1);
+
+	virtual void dragMoveEvent(QDragMoveEvent* param1) override {
+		if (vtbl->dragMoveEvent == 0) {
+			QQuickItem::dragMoveEvent(param1);
+			return;
+		}
+
+		QDragMoveEvent* sigval1 = param1;
+		vtbl->dragMoveEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_dragMoveEvent(VirtualQQuickItem* self, QDragMoveEvent* param1);
+
+	virtual void dragLeaveEvent(QDragLeaveEvent* param1) override {
+		if (vtbl->dragLeaveEvent == 0) {
+			QQuickItem::dragLeaveEvent(param1);
+			return;
+		}
+
+		QDragLeaveEvent* sigval1 = param1;
+		vtbl->dragLeaveEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_dragLeaveEvent(VirtualQQuickItem* self, QDragLeaveEvent* param1);
+
+	virtual void dropEvent(QDropEvent* param1) override {
+		if (vtbl->dropEvent == 0) {
+			QQuickItem::dropEvent(param1);
+			return;
+		}
+
+		QDropEvent* sigval1 = param1;
+		vtbl->dropEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_dropEvent(VirtualQQuickItem* self, QDropEvent* param1);
+
+	virtual bool childMouseEventFilter(QQuickItem* param1, QEvent* param2) override {
+		if (vtbl->childMouseEventFilter == 0) {
+			return QQuickItem::childMouseEventFilter(param1, param2);
+		}
+
+		QQuickItem* sigval1 = param1;
+		QEvent* sigval2 = param2;
+		bool callback_return_value = vtbl->childMouseEventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QQuickItem_virtualbase_childMouseEventFilter(VirtualQQuickItem* self, QQuickItem* param1, QEvent* param2);
+
+	virtual QSGNode* updatePaintNode(QSGNode* param1, QQuickItem::UpdatePaintNodeData* param2) override {
+		if (vtbl->updatePaintNode == 0) {
+			return QQuickItem::updatePaintNode(param1, param2);
+		}
+
+		QSGNode* sigval1 = param1;
+		QQuickItem__UpdatePaintNodeData* sigval2 = param2;
+		QSGNode* callback_return_value = vtbl->updatePaintNode(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend QSGNode* QQuickItem_virtualbase_updatePaintNode(VirtualQQuickItem* self, QSGNode* param1, QQuickItem__UpdatePaintNodeData* param2);
+
+	virtual void releaseResources() override {
+		if (vtbl->releaseResources == 0) {
+			QQuickItem::releaseResources();
+			return;
+		}
+
+		vtbl->releaseResources(this);
+	}
+
+	friend void QQuickItem_virtualbase_releaseResources(VirtualQQuickItem* self);
+
+	virtual void updatePolish() override {
+		if (vtbl->updatePolish == 0) {
+			QQuickItem::updatePolish();
+			return;
+		}
+
+		vtbl->updatePolish(this);
+	}
+
+	friend void QQuickItem_virtualbase_updatePolish(VirtualQQuickItem* self);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QQuickItem::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QQuickItem_virtualbase_eventFilter(VirtualQQuickItem* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QQuickItem::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_timerEvent(VirtualQQuickItem* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QQuickItem::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_childEvent(VirtualQQuickItem* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QQuickItem::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_customEvent(VirtualQQuickItem* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QQuickItem::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_connectNotify(VirtualQQuickItem* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QQuickItem::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QQuickItem_virtualbase_disconnectNotify(VirtualQQuickItem* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend bool QQuickItem_protectedbase_isComponentComplete(const VirtualQQuickItem* self);
+	friend void QQuickItem_protectedbase_updateInputMethod(VirtualQQuickItem* self);
+	friend bool QQuickItem_protectedbase_widthValid(const VirtualQQuickItem* self);
+	friend bool QQuickItem_protectedbase_heightValid(const VirtualQQuickItem* self);
+	friend void QQuickItem_protectedbase_setImplicitSize(VirtualQQuickItem* self, double param1, double param2);
+	friend void QQuickItem_protectedbase_updateInputMethod_queries(VirtualQQuickItem* self, int queries);
+	friend QObject* QQuickItem_protectedbase_sender(const VirtualQQuickItem* self);
+	friend int QQuickItem_protectedbase_senderSignalIndex(const VirtualQQuickItem* self);
+	friend int QQuickItem_protectedbase_receivers(const VirtualQQuickItem* self, const char* signal);
+	friend bool QQuickItem_protectedbase_isSignalConnected(const VirtualQQuickItem* self, QMetaMethod* signal);
+};
+
+VirtualQQuickItem* QQuickItem_new(const QQuickItem_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickItem>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQQuickItem(vtbl) : nullptr;
+}
+
+VirtualQQuickItem* QQuickItem_new_parent(const QQuickItem_VTable* vtbl, size_t vdata, QQuickItem* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickItem>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQQuickItem(vtbl, parent) : nullptr;
+}
+
+void QQuickItem_virtbase(QQuickItem* src, QObject** outptr_QObject, QQmlParserStatus** outptr_QQmlParserStatus) {
+	*outptr_QObject = static_cast<QObject*>(src);
+	*outptr_QQmlParserStatus = static_cast<QQmlParserStatus*>(src);
+}
+
+QMetaObject* QQuickItem_metaObject(const QQuickItem* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QQuickItem_metacast(QQuickItem* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QQuickItem_metacall(QQuickItem* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QQuickItem_tr_s(const char* s) {
+	QString _ret = QQuickItem::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QQuickWindow* QQuickItem_window(const QQuickItem* self) {
+	return self->window();
+}
+
+QQuickItem* QQuickItem_parentItem(const QQuickItem* self) {
+	return self->parentItem();
+}
+
+void QQuickItem_setParentItem(QQuickItem* self, QQuickItem* parent) {
+	self->setParentItem(parent);
+}
+
+void QQuickItem_stackBefore(QQuickItem* self, QQuickItem* param1) {
+	self->stackBefore(param1);
+}
+
+void QQuickItem_stackAfter(QQuickItem* self, QQuickItem* param1) {
+	self->stackAfter(param1);
+}
+
+QRectF* QQuickItem_childrenRect(QQuickItem* self) {
+	return new QRectF(self->childrenRect());
+}
+
+struct seaqt_array /* of QQuickItem* */  QQuickItem_childItems(const QQuickItem* self) {
+	QList<QQuickItem *> _ret = self->childItems();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QQuickItem** _arr = static_cast<QQuickItem**>(malloc(sizeof(QQuickItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+bool QQuickItem_clip(const QQuickItem* self) {
+	return self->clip();
+}
+
+void QQuickItem_setClip(QQuickItem* self, bool clip) {
+	self->setClip(clip);
+}
+
+struct seaqt_string QQuickItem_state(const QQuickItem* self) {
+	QString _ret = self->state();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QQuickItem_setState(QQuickItem* self, struct seaqt_string state) {
+	QString state_QString = QString::fromUtf8(state.data, state.len);
+	self->setState(state_QString);
+}
+
+double QQuickItem_baselineOffset(const QQuickItem* self) {
+	qreal _ret = self->baselineOffset();
+	return static_cast<double>(_ret);
+}
+
+void QQuickItem_setBaselineOffset(QQuickItem* self, double baselineOffset) {
+	self->setBaselineOffset(static_cast<qreal>(baselineOffset));
+}
+
+double QQuickItem_x(const QQuickItem* self) {
+	qreal _ret = self->x();
+	return static_cast<double>(_ret);
+}
+
+double QQuickItem_y(const QQuickItem* self) {
+	qreal _ret = self->y();
+	return static_cast<double>(_ret);
+}
+
+QPointF* QQuickItem_position(const QQuickItem* self) {
+	return new QPointF(self->position());
+}
+
+void QQuickItem_setX(QQuickItem* self, double x) {
+	self->setX(static_cast<qreal>(x));
+}
+
+void QQuickItem_setY(QQuickItem* self, double y) {
+	self->setY(static_cast<qreal>(y));
+}
+
+void QQuickItem_setPosition(QQuickItem* self, QPointF* position) {
+	self->setPosition(*position);
+}
+
+double QQuickItem_width(const QQuickItem* self) {
+	qreal _ret = self->width();
+	return static_cast<double>(_ret);
+}
+
+void QQuickItem_setWidth(QQuickItem* self, double width) {
+	self->setWidth(static_cast<qreal>(width));
+}
+
+void QQuickItem_resetWidth(QQuickItem* self) {
+	self->resetWidth();
+}
+
+void QQuickItem_setImplicitWidth(QQuickItem* self, double implicitWidth) {
+	self->setImplicitWidth(static_cast<qreal>(implicitWidth));
+}
+
+double QQuickItem_implicitWidth(const QQuickItem* self) {
+	qreal _ret = self->implicitWidth();
+	return static_cast<double>(_ret);
+}
+
+double QQuickItem_height(const QQuickItem* self) {
+	qreal _ret = self->height();
+	return static_cast<double>(_ret);
+}
+
+void QQuickItem_setHeight(QQuickItem* self, double height) {
+	self->setHeight(static_cast<qreal>(height));
+}
+
+void QQuickItem_resetHeight(QQuickItem* self) {
+	self->resetHeight();
+}
+
+void QQuickItem_setImplicitHeight(QQuickItem* self, double implicitHeight) {
+	self->setImplicitHeight(static_cast<qreal>(implicitHeight));
+}
+
+double QQuickItem_implicitHeight(const QQuickItem* self) {
+	qreal _ret = self->implicitHeight();
+	return static_cast<double>(_ret);
+}
+
+QSizeF* QQuickItem_size(const QQuickItem* self) {
+	return new QSizeF(self->size());
+}
+
+void QQuickItem_setSize(QQuickItem* self, QSizeF* size) {
+	self->setSize(*size);
+}
+
+int QQuickItem_transformOrigin(const QQuickItem* self) {
+	QQuickItem::TransformOrigin _ret = self->transformOrigin();
+	return static_cast<int>(_ret);
+}
+
+void QQuickItem_setTransformOrigin(QQuickItem* self, int transformOrigin) {
+	self->setTransformOrigin(static_cast<QQuickItem::TransformOrigin>(transformOrigin));
+}
+
+QPointF* QQuickItem_transformOriginPoint(const QQuickItem* self) {
+	return new QPointF(self->transformOriginPoint());
+}
+
+void QQuickItem_setTransformOriginPoint(QQuickItem* self, QPointF* transformOriginPoint) {
+	self->setTransformOriginPoint(*transformOriginPoint);
+}
+
+double QQuickItem_z(const QQuickItem* self) {
+	qreal _ret = self->z();
+	return static_cast<double>(_ret);
+}
+
+void QQuickItem_setZ(QQuickItem* self, double z) {
+	self->setZ(static_cast<qreal>(z));
+}
+
+double QQuickItem_rotation(const QQuickItem* self) {
+	qreal _ret = self->rotation();
+	return static_cast<double>(_ret);
+}
+
+void QQuickItem_setRotation(QQuickItem* self, double rotation) {
+	self->setRotation(static_cast<qreal>(rotation));
+}
+
+double QQuickItem_scale(const QQuickItem* self) {
+	qreal _ret = self->scale();
+	return static_cast<double>(_ret);
+}
+
+void QQuickItem_setScale(QQuickItem* self, double scale) {
+	self->setScale(static_cast<qreal>(scale));
+}
+
+double QQuickItem_opacity(const QQuickItem* self) {
+	qreal _ret = self->opacity();
+	return static_cast<double>(_ret);
+}
+
+void QQuickItem_setOpacity(QQuickItem* self, double opacity) {
+	self->setOpacity(static_cast<qreal>(opacity));
+}
+
+bool QQuickItem_isVisible(const QQuickItem* self) {
+	return self->isVisible();
+}
+
+void QQuickItem_setVisible(QQuickItem* self, bool visible) {
+	self->setVisible(visible);
+}
+
+bool QQuickItem_isEnabled(const QQuickItem* self) {
+	return self->isEnabled();
+}
+
+void QQuickItem_setEnabled(QQuickItem* self, bool enabled) {
+	self->setEnabled(enabled);
+}
+
+bool QQuickItem_smooth(const QQuickItem* self) {
+	return self->smooth();
+}
+
+void QQuickItem_setSmooth(QQuickItem* self, bool smooth) {
+	self->setSmooth(smooth);
+}
+
+bool QQuickItem_activeFocusOnTab(const QQuickItem* self) {
+	return self->activeFocusOnTab();
+}
+
+void QQuickItem_setActiveFocusOnTab(QQuickItem* self, bool activeFocusOnTab) {
+	self->setActiveFocusOnTab(activeFocusOnTab);
+}
+
+bool QQuickItem_antialiasing(const QQuickItem* self) {
+	return self->antialiasing();
+}
+
+void QQuickItem_setAntialiasing(QQuickItem* self, bool antialiasing) {
+	self->setAntialiasing(antialiasing);
+}
+
+void QQuickItem_resetAntialiasing(QQuickItem* self) {
+	self->resetAntialiasing();
+}
+
+int QQuickItem_flags(const QQuickItem* self) {
+	QQuickItem::Flags _ret = self->flags();
+	return static_cast<int>(_ret);
+}
+
+void QQuickItem_setFlag_flag(QQuickItem* self, int flag) {
+	self->setFlag(static_cast<QQuickItem::Flag>(flag));
+}
+
+void QQuickItem_setFlags(QQuickItem* self, int flags) {
+	self->setFlags(static_cast<QQuickItem::Flags>(flags));
+}
+
+QRectF* QQuickItem_boundingRect(const QQuickItem* self) {
+	return new QRectF(self->boundingRect());
+}
+
+QRectF* QQuickItem_clipRect(const QQuickItem* self) {
+	return new QRectF(self->clipRect());
+}
+
+QQuickItem* QQuickItem_viewportItem(const QQuickItem* self) {
+	return self->viewportItem();
+}
+
+bool QQuickItem_hasActiveFocus(const QQuickItem* self) {
+	return self->hasActiveFocus();
+}
+
+bool QQuickItem_hasFocus(const QQuickItem* self) {
+	return self->hasFocus();
+}
+
+void QQuickItem_setFocus_focus(QQuickItem* self, bool focus) {
+	self->setFocus(focus);
+}
+
+void QQuickItem_setFocus_focus_reason(QQuickItem* self, bool focus, int reason) {
+	self->setFocus(focus, static_cast<Qt::FocusReason>(reason));
+}
+
+bool QQuickItem_isFocusScope(const QQuickItem* self) {
+	return self->isFocusScope();
+}
+
+QQuickItem* QQuickItem_scopedFocusItem(const QQuickItem* self) {
+	return self->scopedFocusItem();
+}
+
+int QQuickItem_focusPolicy(const QQuickItem* self) {
+	Qt::FocusPolicy _ret = self->focusPolicy();
+	return static_cast<int>(_ret);
+}
+
+void QQuickItem_setFocusPolicy(QQuickItem* self, int policy) {
+	self->setFocusPolicy(static_cast<Qt::FocusPolicy>(policy));
+}
+
+bool QQuickItem_isAncestorOf(const QQuickItem* self, QQuickItem* child) {
+	return self->isAncestorOf(child);
+}
+
+int QQuickItem_acceptedMouseButtons(const QQuickItem* self) {
+	Qt::MouseButtons _ret = self->acceptedMouseButtons();
+	return static_cast<int>(_ret);
+}
+
+void QQuickItem_setAcceptedMouseButtons(QQuickItem* self, int buttons) {
+	self->setAcceptedMouseButtons(static_cast<Qt::MouseButtons>(buttons));
+}
+
+bool QQuickItem_acceptHoverEvents(const QQuickItem* self) {
+	return self->acceptHoverEvents();
+}
+
+void QQuickItem_setAcceptHoverEvents(QQuickItem* self, bool enabled) {
+	self->setAcceptHoverEvents(enabled);
+}
+
+bool QQuickItem_acceptTouchEvents(const QQuickItem* self) {
+	return self->acceptTouchEvents();
+}
+
+void QQuickItem_setAcceptTouchEvents(QQuickItem* self, bool accept) {
+	self->setAcceptTouchEvents(accept);
+}
+
+QCursor* QQuickItem_cursor(const QQuickItem* self) {
+	return new QCursor(self->cursor());
+}
+
+void QQuickItem_setCursor(QQuickItem* self, QCursor* cursor) {
+	self->setCursor(*cursor);
+}
+
+void QQuickItem_unsetCursor(QQuickItem* self) {
+	self->unsetCursor();
+}
+
+bool QQuickItem_isUnderMouse(const QQuickItem* self) {
+	return self->isUnderMouse();
+}
+
+void QQuickItem_grabMouse(QQuickItem* self) {
+	self->grabMouse();
+}
+
+void QQuickItem_ungrabMouse(QQuickItem* self) {
+	self->ungrabMouse();
+}
+
+bool QQuickItem_keepMouseGrab(const QQuickItem* self) {
+	return self->keepMouseGrab();
+}
+
+void QQuickItem_setKeepMouseGrab(QQuickItem* self, bool keepMouseGrab) {
+	self->setKeepMouseGrab(keepMouseGrab);
+}
+
+bool QQuickItem_filtersChildMouseEvents(const QQuickItem* self) {
+	return self->filtersChildMouseEvents();
+}
+
+void QQuickItem_setFiltersChildMouseEvents(QQuickItem* self, bool filter) {
+	self->setFiltersChildMouseEvents(filter);
+}
+
+void QQuickItem_grabTouchPoints(QQuickItem* self, struct seaqt_array /* of int */  ids) {
+	QList<int> ids_QList;
+	ids_QList.reserve(ids.len);
+	int* ids_arr = static_cast<int*>(ids.data);
+	for(size_t i = 0; i < ids.len; ++i) {
+		ids_QList.push_back(static_cast<int>(ids_arr[i]));
+	}
+	self->grabTouchPoints(ids_QList);
+}
+
+void QQuickItem_ungrabTouchPoints(QQuickItem* self) {
+	self->ungrabTouchPoints();
+}
+
+bool QQuickItem_keepTouchGrab(const QQuickItem* self) {
+	return self->keepTouchGrab();
+}
+
+void QQuickItem_setKeepTouchGrab(QQuickItem* self, bool keepTouchGrab) {
+	self->setKeepTouchGrab(keepTouchGrab);
+}
+
+bool QQuickItem_contains(const QQuickItem* self, QPointF* point) {
+	return self->contains(*point);
+}
+
+QObject* QQuickItem_containmentMask(const QQuickItem* self) {
+	return self->containmentMask();
+}
+
+void QQuickItem_setContainmentMask(QQuickItem* self, QObject* mask) {
+	self->setContainmentMask(mask);
+}
+
+QTransform* QQuickItem_itemTransform(const QQuickItem* self, QQuickItem* param1, bool* param2) {
+	return new QTransform(self->itemTransform(param1, param2));
+}
+
+QPointF* QQuickItem_mapToScene(const QQuickItem* self, QPointF* point) {
+	return new QPointF(self->mapToScene(*point));
+}
+
+QRectF* QQuickItem_mapRectToItem(const QQuickItem* self, QQuickItem* item, QRectF* rect) {
+	return new QRectF(self->mapRectToItem(item, *rect));
+}
+
+QRectF* QQuickItem_mapRectToScene(const QQuickItem* self, QRectF* rect) {
+	return new QRectF(self->mapRectToScene(*rect));
+}
+
+QPointF* QQuickItem_mapFromScene(const QQuickItem* self, QPointF* point) {
+	return new QPointF(self->mapFromScene(*point));
+}
+
+QRectF* QQuickItem_mapRectFromItem(const QQuickItem* self, QQuickItem* item, QRectF* rect) {
+	return new QRectF(self->mapRectFromItem(item, *rect));
+}
+
+QRectF* QQuickItem_mapRectFromScene(const QQuickItem* self, QRectF* rect) {
+	return new QRectF(self->mapRectFromScene(*rect));
+}
+
+void QQuickItem_polish(QQuickItem* self) {
+	self->polish();
+}
+
+QPointF* QQuickItem_mapFromItem_QQuickItem_QPointF(const QQuickItem* self, QQuickItem* item, QPointF* point) {
+	return new QPointF(self->mapFromItem(item, *point));
+}
+
+QPointF* QQuickItem_mapFromItem_QQuickItem_qreal_qreal(QQuickItem* self, QQuickItem* item, double x, double y) {
+	return new QPointF(self->mapFromItem(item, static_cast<qreal>(x), static_cast<qreal>(y)));
+}
+
+QRectF* QQuickItem_mapFromItem_QQuickItem_QRectF(const QQuickItem* self, QQuickItem* item, QRectF* rect) {
+	return new QRectF(self->mapFromItem(item, *rect));
+}
+
+QRectF* QQuickItem_mapFromItem_QQuickItem_qreal_qreal_qreal_qreal(const QQuickItem* self, QQuickItem* item, double x, double y, double width, double height) {
+	return new QRectF(self->mapFromItem(item, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(width), static_cast<qreal>(height)));
+}
+
+QPointF* QQuickItem_mapToItem_QQuickItem_QPointF(const QQuickItem* self, QQuickItem* item, QPointF* point) {
+	return new QPointF(self->mapToItem(item, *point));
+}
+
+QPointF* QQuickItem_mapToItem_QQuickItem_qreal_qreal(QQuickItem* self, QQuickItem* item, double x, double y) {
+	return new QPointF(self->mapToItem(item, static_cast<qreal>(x), static_cast<qreal>(y)));
+}
+
+QRectF* QQuickItem_mapToItem_QQuickItem_QRectF(const QQuickItem* self, QQuickItem* item, QRectF* rect) {
+	return new QRectF(self->mapToItem(item, *rect));
+}
+
+QRectF* QQuickItem_mapToItem_QQuickItem_qreal_qreal_qreal_qreal(const QQuickItem* self, QQuickItem* item, double x, double y, double width, double height) {
+	return new QRectF(self->mapToItem(item, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(width), static_cast<qreal>(height)));
+}
+
+QPointF* QQuickItem_mapFromGlobal_qreal_qreal(const QQuickItem* self, double x, double y) {
+	return new QPointF(self->mapFromGlobal(static_cast<qreal>(x), static_cast<qreal>(y)));
+}
+
+QPointF* QQuickItem_mapFromGlobal_QPointF(const QQuickItem* self, QPointF* point) {
+	return new QPointF(self->mapFromGlobal(*point));
+}
+
+QPointF* QQuickItem_mapToGlobal_qreal_qreal(const QQuickItem* self, double x, double y) {
+	return new QPointF(self->mapToGlobal(static_cast<qreal>(x), static_cast<qreal>(y)));
+}
+
+QPointF* QQuickItem_mapToGlobal_QPointF(const QQuickItem* self, QPointF* point) {
+	return new QPointF(self->mapToGlobal(*point));
+}
+
+void QQuickItem_forceActiveFocus(QQuickItem* self) {
+	self->forceActiveFocus();
+}
+
+void QQuickItem_forceActiveFocus_reason(QQuickItem* self, int reason) {
+	self->forceActiveFocus(static_cast<Qt::FocusReason>(reason));
+}
+
+QQuickItem* QQuickItem_nextItemInFocusChain(QQuickItem* self) {
+	return self->nextItemInFocusChain();
+}
+
+QQuickItem* QQuickItem_childAt(const QQuickItem* self, double x, double y) {
+	return self->childAt(static_cast<qreal>(x), static_cast<qreal>(y));
+}
+
+void QQuickItem_ensurePolished(QQuickItem* self) {
+	self->ensurePolished();
+}
+
+void QQuickItem_dumpItemTree(const QQuickItem* self) {
+	self->dumpItemTree();
+}
+
+QVariant* QQuickItem_inputMethodQuery(const QQuickItem* self, int query) {
+	return new QVariant(self->inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
+}
+
+bool QQuickItem_isTextureProvider(const QQuickItem* self) {
+	return self->isTextureProvider();
+}
+
+QSGTextureProvider* QQuickItem_textureProvider(const QQuickItem* self) {
+	return self->textureProvider();
+}
+
+void QQuickItem_update(QQuickItem* self) {
+	self->update();
+}
+
+void QQuickItem_childrenRectChanged(QQuickItem* self, QRectF* param1) {
+	self->childrenRectChanged(*param1);
+}
+
+void QQuickItem_connect_childrenRectChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(const QRectF&)>(&QQuickItem::childrenRectChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QRectF& param1) {
+			const QRectF& param1_ret = param1;
+			// Cast returned reference into pointer
+			QRectF* sigval1 = const_cast<QRectF*>(&param1_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_baselineOffsetChanged(QQuickItem* self, double param1) {
+	self->baselineOffsetChanged(static_cast<qreal>(param1));
+}
+
+void QQuickItem_connect_baselineOffsetChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(qreal)>(&QQuickItem::baselineOffsetChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal param1) {
+			qreal param1_ret = param1;
+			double sigval1 = static_cast<double>(param1_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_stateChanged(QQuickItem* self, struct seaqt_string param1) {
+	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
+	self->stateChanged(param1_QString);
+}
+
+void QQuickItem_connect_stateChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(const QString&)>(&QQuickItem::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& param1) {
+			const QString param1_ret = param1;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray param1_b = param1_ret.toUtf8();
+			struct seaqt_string param1_ms;
+			param1_ms.len = param1_b.length();
+			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
+			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
+			struct seaqt_string sigval1 = param1_ms;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_focusChanged(QQuickItem* self, bool param1) {
+	self->focusChanged(param1);
+}
+
+void QQuickItem_connect_focusChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::focusChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
+			bool sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_activeFocusChanged(QQuickItem* self, bool param1) {
+	self->activeFocusChanged(param1);
+}
+
+void QQuickItem_connect_activeFocusChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::activeFocusChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
+			bool sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_focusPolicyChanged(QQuickItem* self, int param1) {
+	self->focusPolicyChanged(static_cast<Qt::FocusPolicy>(param1));
+}
+
+void QQuickItem_connect_focusPolicyChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(Qt::FocusPolicy)>(&QQuickItem::focusPolicyChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::FocusPolicy param1) {
+			Qt::FocusPolicy param1_ret = param1;
+			int sigval1 = static_cast<int>(param1_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_activeFocusOnTabChanged(QQuickItem* self, bool param1) {
+	self->activeFocusOnTabChanged(param1);
+}
+
+void QQuickItem_connect_activeFocusOnTabChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::activeFocusOnTabChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
+			bool sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_parentChanged(QQuickItem* self, QQuickItem* param1) {
+	self->parentChanged(param1);
+}
+
+void QQuickItem_connect_parentChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, QQuickItem*), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(QQuickItem*)>(&QQuickItem::parentChanged), self, [callback, release = seaqt::release_callback{slot,release}](QQuickItem* param1) {
+			QQuickItem* sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_transformOriginChanged(QQuickItem* self, int param1) {
+	self->transformOriginChanged(static_cast<QQuickItem::TransformOrigin>(param1));
+}
+
+void QQuickItem_connect_transformOriginChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(QQuickItem::TransformOrigin)>(&QQuickItem::transformOriginChanged), self, [callback, release = seaqt::release_callback{slot,release}](QQuickItem::TransformOrigin param1) {
+			QQuickItem::TransformOrigin param1_ret = param1;
+			int sigval1 = static_cast<int>(param1_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_smoothChanged(QQuickItem* self, bool param1) {
+	self->smoothChanged(param1);
+}
+
+void QQuickItem_connect_smoothChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::smoothChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
+			bool sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_antialiasingChanged(QQuickItem* self, bool param1) {
+	self->antialiasingChanged(param1);
+}
+
+void QQuickItem_connect_antialiasingChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::antialiasingChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
+			bool sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_clipChanged(QQuickItem* self, bool param1) {
+	self->clipChanged(param1);
+}
+
+void QQuickItem_connect_clipChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::clipChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
+			bool sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_windowChanged(QQuickItem* self, QQuickWindow* window) {
+	self->windowChanged(window);
+}
+
+void QQuickItem_connect_windowChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, QQuickWindow*), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)(QQuickWindow*)>(&QQuickItem::windowChanged), self, [callback, release = seaqt::release_callback{slot,release}](QQuickWindow* window) {
+			QQuickWindow* sigval1 = window;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickItem_childrenChanged(QQuickItem* self) {
+	self->childrenChanged();
+}
+
+void QQuickItem_connect_childrenChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::childrenChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_opacityChanged(QQuickItem* self) {
+	self->opacityChanged();
+}
+
+void QQuickItem_connect_opacityChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::opacityChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_enabledChanged(QQuickItem* self) {
+	self->enabledChanged();
+}
+
+void QQuickItem_connect_enabledChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::enabledChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_visibleChanged(QQuickItem* self) {
+	self->visibleChanged();
+}
+
+void QQuickItem_connect_visibleChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::visibleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_visibleChildrenChanged(QQuickItem* self) {
+	self->visibleChildrenChanged();
+}
+
+void QQuickItem_connect_visibleChildrenChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::visibleChildrenChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_rotationChanged(QQuickItem* self) {
+	self->rotationChanged();
+}
+
+void QQuickItem_connect_rotationChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::rotationChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_scaleChanged(QQuickItem* self) {
+	self->scaleChanged();
+}
+
+void QQuickItem_connect_scaleChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::scaleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_xChanged(QQuickItem* self) {
+	self->xChanged();
+}
+
+void QQuickItem_connect_xChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::xChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_yChanged(QQuickItem* self) {
+	self->yChanged();
+}
+
+void QQuickItem_connect_yChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::yChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_widthChanged(QQuickItem* self) {
+	self->widthChanged();
+}
+
+void QQuickItem_connect_widthChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::widthChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_heightChanged(QQuickItem* self) {
+	self->heightChanged();
+}
+
+void QQuickItem_connect_heightChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::heightChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_zChanged(QQuickItem* self) {
+	self->zChanged();
+}
+
+void QQuickItem_connect_zChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::zChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_implicitWidthChanged(QQuickItem* self) {
+	self->implicitWidthChanged();
+}
+
+void QQuickItem_connect_implicitWidthChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::implicitWidthChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_implicitHeightChanged(QQuickItem* self) {
+	self->implicitHeightChanged();
+}
+
+void QQuickItem_connect_implicitHeightChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::implicitHeightChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_containmentMaskChanged(QQuickItem* self) {
+	self->containmentMaskChanged();
+}
+
+void QQuickItem_connect_containmentMaskChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::containmentMaskChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_paletteChanged(QQuickItem* self) {
+	self->paletteChanged();
+}
+
+void QQuickItem_connect_paletteChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::paletteChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickItem_paletteCreated(QQuickItem* self) {
+	self->paletteCreated();
+}
+
+void QQuickItem_connect_paletteCreated(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::paletteCreated), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+struct seaqt_string QQuickItem_tr_s_c(const char* s, const char* c) {
+	QString _ret = QQuickItem::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QQuickItem_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QQuickItem::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QQuickItem_setFlag_flag_enabled(QQuickItem* self, int flag, bool enabled) {
+	self->setFlag(static_cast<QQuickItem::Flag>(flag), enabled);
+}
+
+QQuickItem* QQuickItem_nextItemInFocusChain_forward(QQuickItem* self, bool forward) {
+	return self->nextItemInFocusChain(forward);
+}
+
+const QMetaObject* QQuickItem_staticMetaObject() { return &QQuickItem::staticMetaObject; }
+void* QQuickItem_vdata(VirtualQQuickItem* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQQuickItem>()); }
+VirtualQQuickItem* vdata_QQuickItem(void* vdata) { return reinterpret_cast<VirtualQQuickItem*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQQuickItem>()); }
+
+QMetaObject* QQuickItem_virtualbase_metaObject(const VirtualQQuickItem* self) {
+
+	return (QMetaObject*) self->QQuickItem::metaObject();
+}
+
+void* QQuickItem_virtualbase_metacast(VirtualQQuickItem* self, const char* param1) {
+
+	return self->QQuickItem::qt_metacast(param1);
+}
+
+int QQuickItem_virtualbase_metacall(VirtualQQuickItem* self, int param1, int param2, void** param3) {
+
+	return self->QQuickItem::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+QRectF* QQuickItem_virtualbase_boundingRect(const VirtualQQuickItem* self) {
+
+	return new QRectF(self->QQuickItem::boundingRect());
+}
+
+QRectF* QQuickItem_virtualbase_clipRect(const VirtualQQuickItem* self) {
+
+	return new QRectF(self->QQuickItem::clipRect());
+}
+
+bool QQuickItem_virtualbase_contains(const VirtualQQuickItem* self, QPointF* point) {
+
+	return self->QQuickItem::contains(*point);
+}
+
+QVariant* QQuickItem_virtualbase_inputMethodQuery(const VirtualQQuickItem* self, int query) {
+
+	return new QVariant(self->QQuickItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
+}
+
+bool QQuickItem_virtualbase_isTextureProvider(const VirtualQQuickItem* self) {
+
+	return self->QQuickItem::isTextureProvider();
+}
+
+QSGTextureProvider* QQuickItem_virtualbase_textureProvider(const VirtualQQuickItem* self) {
+
+	return self->QQuickItem::textureProvider();
+}
+
+bool QQuickItem_virtualbase_event(VirtualQQuickItem* self, QEvent* param1) {
+
+	return self->QQuickItem::event(param1);
+}
+
+void QQuickItem_virtualbase_itemChange(VirtualQQuickItem* self, int param1, QQuickItem__ItemChangeData* param2) {
+
+	self->QQuickItem::itemChange(static_cast<VirtualQQuickItem::ItemChange>(param1), *param2);
+}
+
+void QQuickItem_virtualbase_geometryChange(VirtualQQuickItem* self, QRectF* newGeometry, QRectF* oldGeometry) {
+
+	self->QQuickItem::geometryChange(*newGeometry, *oldGeometry);
+}
+
+void QQuickItem_virtualbase_classBegin(VirtualQQuickItem* self) {
+
+	self->QQuickItem::classBegin();
+}
+
+void QQuickItem_virtualbase_componentComplete(VirtualQQuickItem* self) {
+
+	self->QQuickItem::componentComplete();
+}
+
+void QQuickItem_virtualbase_keyPressEvent(VirtualQQuickItem* self, QKeyEvent* event) {
+
+	self->QQuickItem::keyPressEvent(event);
+}
+
+void QQuickItem_virtualbase_keyReleaseEvent(VirtualQQuickItem* self, QKeyEvent* event) {
+
+	self->QQuickItem::keyReleaseEvent(event);
+}
+
+void QQuickItem_virtualbase_inputMethodEvent(VirtualQQuickItem* self, QInputMethodEvent* param1) {
+
+	self->QQuickItem::inputMethodEvent(param1);
+}
+
+void QQuickItem_virtualbase_focusInEvent(VirtualQQuickItem* self, QFocusEvent* param1) {
+
+	self->QQuickItem::focusInEvent(param1);
+}
+
+void QQuickItem_virtualbase_focusOutEvent(VirtualQQuickItem* self, QFocusEvent* param1) {
+
+	self->QQuickItem::focusOutEvent(param1);
+}
+
+void QQuickItem_virtualbase_mousePressEvent(VirtualQQuickItem* self, QMouseEvent* event) {
+
+	self->QQuickItem::mousePressEvent(event);
+}
+
+void QQuickItem_virtualbase_mouseMoveEvent(VirtualQQuickItem* self, QMouseEvent* event) {
+
+	self->QQuickItem::mouseMoveEvent(event);
+}
+
+void QQuickItem_virtualbase_mouseReleaseEvent(VirtualQQuickItem* self, QMouseEvent* event) {
+
+	self->QQuickItem::mouseReleaseEvent(event);
+}
+
+void QQuickItem_virtualbase_mouseDoubleClickEvent(VirtualQQuickItem* self, QMouseEvent* event) {
+
+	self->QQuickItem::mouseDoubleClickEvent(event);
+}
+
+void QQuickItem_virtualbase_mouseUngrabEvent(VirtualQQuickItem* self) {
+
+	self->QQuickItem::mouseUngrabEvent();
+}
+
+void QQuickItem_virtualbase_touchUngrabEvent(VirtualQQuickItem* self) {
+
+	self->QQuickItem::touchUngrabEvent();
+}
+
+void QQuickItem_virtualbase_wheelEvent(VirtualQQuickItem* self, QWheelEvent* event) {
+
+	self->QQuickItem::wheelEvent(event);
+}
+
+void QQuickItem_virtualbase_touchEvent(VirtualQQuickItem* self, QTouchEvent* event) {
+
+	self->QQuickItem::touchEvent(event);
+}
+
+void QQuickItem_virtualbase_hoverEnterEvent(VirtualQQuickItem* self, QHoverEvent* event) {
+
+	self->QQuickItem::hoverEnterEvent(event);
+}
+
+void QQuickItem_virtualbase_hoverMoveEvent(VirtualQQuickItem* self, QHoverEvent* event) {
+
+	self->QQuickItem::hoverMoveEvent(event);
+}
+
+void QQuickItem_virtualbase_hoverLeaveEvent(VirtualQQuickItem* self, QHoverEvent* event) {
+
+	self->QQuickItem::hoverLeaveEvent(event);
+}
+
+void QQuickItem_virtualbase_dragEnterEvent(VirtualQQuickItem* self, QDragEnterEvent* param1) {
+
+	self->QQuickItem::dragEnterEvent(param1);
+}
+
+void QQuickItem_virtualbase_dragMoveEvent(VirtualQQuickItem* self, QDragMoveEvent* param1) {
+
+	self->QQuickItem::dragMoveEvent(param1);
+}
+
+void QQuickItem_virtualbase_dragLeaveEvent(VirtualQQuickItem* self, QDragLeaveEvent* param1) {
+
+	self->QQuickItem::dragLeaveEvent(param1);
+}
+
+void QQuickItem_virtualbase_dropEvent(VirtualQQuickItem* self, QDropEvent* param1) {
+
+	self->QQuickItem::dropEvent(param1);
+}
+
+bool QQuickItem_virtualbase_childMouseEventFilter(VirtualQQuickItem* self, QQuickItem* param1, QEvent* param2) {
+
+	return self->QQuickItem::childMouseEventFilter(param1, param2);
+}
+
+QSGNode* QQuickItem_virtualbase_updatePaintNode(VirtualQQuickItem* self, QSGNode* param1, QQuickItem__UpdatePaintNodeData* param2) {
+
+	return self->QQuickItem::updatePaintNode(param1, param2);
+}
+
+void QQuickItem_virtualbase_releaseResources(VirtualQQuickItem* self) {
+
+	self->QQuickItem::releaseResources();
+}
+
+void QQuickItem_virtualbase_updatePolish(VirtualQQuickItem* self) {
+
+	self->QQuickItem::updatePolish();
+}
+
+bool QQuickItem_virtualbase_eventFilter(VirtualQQuickItem* self, QObject* watched, QEvent* event) {
+
+	return self->QQuickItem::eventFilter(watched, event);
+}
+
+void QQuickItem_virtualbase_timerEvent(VirtualQQuickItem* self, QTimerEvent* event) {
+
+	self->QQuickItem::timerEvent(event);
+}
+
+void QQuickItem_virtualbase_childEvent(VirtualQQuickItem* self, QChildEvent* event) {
+
+	self->QQuickItem::childEvent(event);
+}
+
+void QQuickItem_virtualbase_customEvent(VirtualQQuickItem* self, QEvent* event) {
+
+	self->QQuickItem::customEvent(event);
+}
+
+void QQuickItem_virtualbase_connectNotify(VirtualQQuickItem* self, QMetaMethod* signal) {
+
+	self->QQuickItem::connectNotify(*signal);
+}
+
+void QQuickItem_virtualbase_disconnectNotify(VirtualQQuickItem* self, QMetaMethod* signal) {
+
+	self->QQuickItem::disconnectNotify(*signal);
+}
+
+bool QQuickItem_protectedbase_isComponentComplete(const VirtualQQuickItem* self) {
+	return self->QQuickItem::isComponentComplete();
+}
+
+void QQuickItem_protectedbase_updateInputMethod(VirtualQQuickItem* self) {
+	self->QQuickItem::updateInputMethod();
+}
+
+bool QQuickItem_protectedbase_widthValid(const VirtualQQuickItem* self) {
+	return self->QQuickItem::widthValid();
+}
+
+bool QQuickItem_protectedbase_heightValid(const VirtualQQuickItem* self) {
+	return self->QQuickItem::heightValid();
+}
+
+void QQuickItem_protectedbase_setImplicitSize(VirtualQQuickItem* self, double param1, double param2) {
+	self->QQuickItem::setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
+}
+
+void QQuickItem_protectedbase_updateInputMethod_queries(VirtualQQuickItem* self, int queries) {
+	self->QQuickItem::updateInputMethod(static_cast<Qt::InputMethodQueries>(queries));
+}
+
+QObject* QQuickItem_protectedbase_sender(const VirtualQQuickItem* self) {
+	return self->QQuickItem::sender();
+}
+
+int QQuickItem_protectedbase_senderSignalIndex(const VirtualQQuickItem* self) {
+	return self->QQuickItem::senderSignalIndex();
+}
+
+int QQuickItem_protectedbase_receivers(const VirtualQQuickItem* self, const char* signal) {
+	return self->QQuickItem::receivers(signal);
+}
+
+bool QQuickItem_protectedbase_isSignalConnected(const VirtualQQuickItem* self, QMetaMethod* signal) {
+	return self->QQuickItem::isSignalConnected(*signal);
+}
+
+void QQuickItem_delete(QQuickItem* self) {
+	delete self;
+}
+
+QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new_QQuickItem(QQuickItem* v) {
+	return new (std::nothrow) QQuickItem__ItemChangeData(v);
+}
+
+QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new_QQuickWindow(QQuickWindow* v) {
+	return new (std::nothrow) QQuickItem__ItemChangeData(v);
+}
+
+QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new_qreal(double v) {
+	return new (std::nothrow) QQuickItem__ItemChangeData(static_cast<qreal>(v));
+}
+
+QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new_bool(bool v) {
+	return new (std::nothrow) QQuickItem__ItemChangeData(v);
+}
+
+QQuickItem* QQuickItem__ItemChangeData_item(const QQuickItem__ItemChangeData* self) {
+	return self->item;
+}
+
+void QQuickItem__ItemChangeData_setItem(QQuickItem__ItemChangeData* self, QQuickItem* item) {
+	self->item = item;
+}
+
+QQuickWindow* QQuickItem__ItemChangeData_window(const QQuickItem__ItemChangeData* self) {
+	return self->window;
+}
+
+void QQuickItem__ItemChangeData_setWindow(QQuickItem__ItemChangeData* self, QQuickWindow* window) {
+	self->window = window;
+}
+
+double QQuickItem__ItemChangeData_realValue(const QQuickItem__ItemChangeData* self) {
+	qreal realValue_ret = self->realValue;
+	return static_cast<double>(realValue_ret);
+}
+
+void QQuickItem__ItemChangeData_setRealValue(QQuickItem__ItemChangeData* self, double realValue) {
+	self->realValue = static_cast<qreal>(realValue);
+}
+
+bool QQuickItem__ItemChangeData_boolValue(const QQuickItem__ItemChangeData* self) {
+	return self->boolValue;
+}
+
+void QQuickItem__ItemChangeData_setBoolValue(QQuickItem__ItemChangeData* self, bool boolValue) {
+	self->boolValue = boolValue;
+}
+
+void QQuickItem__ItemChangeData_delete(QQuickItem__ItemChangeData* self) {
+	delete self;
+}
+
+QSGTransformNode* QQuickItem__UpdatePaintNodeData_transformNode(const QQuickItem__UpdatePaintNodeData* self) {
+	return self->transformNode;
+}
+
+void QQuickItem__UpdatePaintNodeData_setTransformNode(QQuickItem__UpdatePaintNodeData* self, QSGTransformNode* transformNode) {
+	self->transformNode = transformNode;
+}
+
+void QQuickItem__UpdatePaintNodeData_delete(QQuickItem__UpdatePaintNodeData* self) {
+	delete self;
+}
+

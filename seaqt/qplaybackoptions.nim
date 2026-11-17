@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qplaybackoptions
+export gen_qplaybackoptions

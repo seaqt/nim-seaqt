@@ -1,0 +1,997 @@
+#include <QAbstractTextDocumentLayout>
+#include <QAbstractUndoItem>
+#include <QChar>
+#include <QChildEvent>
+#include <QEvent>
+#include <QFont>
+#include <QList>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QPagedPaintDevice>
+#include <QPainter>
+#include <QRectF>
+#include <QRegularExpression>
+#include <QSizeF>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTextBlock>
+#include <QTextCursor>
+#include <QTextDocument>
+#include <QTextFormat>
+#include <QTextFrame>
+#include <QTextObject>
+#include <QTextOption>
+#include <QTimerEvent>
+#include <QUrl>
+#include <QVariant>
+#include <qtextdocument.h>
+#include "gen_qtextdocument.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QAbstractUndoItem_undo(QAbstractUndoItem* self) {
+	self->undo();
+}
+
+void QAbstractUndoItem_redo(QAbstractUndoItem* self) {
+	self->redo();
+}
+
+void QAbstractUndoItem_operatorAssign(QAbstractUndoItem* self, QAbstractUndoItem* from) {
+	self->operator=(*from);
+}
+
+void QAbstractUndoItem_delete(QAbstractUndoItem* self) {
+	delete self;
+}
+
+class VirtualQTextDocument final : public QTextDocument {
+	const QTextDocument_VTable* vtbl;
+public:
+	friend void* QTextDocument_vdata(VirtualQTextDocument* self);
+	friend VirtualQTextDocument* vdata_QTextDocument(void* vdata);
+
+	VirtualQTextDocument(const QTextDocument_VTable* vtbl): QTextDocument(), vtbl(vtbl) {}
+	VirtualQTextDocument(const QTextDocument_VTable* vtbl, const QString& text): QTextDocument(text), vtbl(vtbl) {}
+	VirtualQTextDocument(const QTextDocument_VTable* vtbl, QObject* parent): QTextDocument(parent), vtbl(vtbl) {}
+	VirtualQTextDocument(const QTextDocument_VTable* vtbl, const QString& text, QObject* parent): QTextDocument(text, parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQTextDocument() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QTextDocument::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QTextDocument_virtualbase_metaObject(const VirtualQTextDocument* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QTextDocument::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QTextDocument_virtualbase_metacast(VirtualQTextDocument* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QTextDocument::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QTextDocument_virtualbase_metacall(VirtualQTextDocument* self, int param1, int param2, void** param3);
+
+	virtual void clear() override {
+		if (vtbl->clear == 0) {
+			QTextDocument::clear();
+			return;
+		}
+
+		vtbl->clear(this);
+	}
+
+	friend void QTextDocument_virtualbase_clear(VirtualQTextDocument* self);
+
+	virtual QTextObject* createObject(const QTextFormat& f) override {
+		if (vtbl->createObject == 0) {
+			return QTextDocument::createObject(f);
+		}
+
+		const QTextFormat& f_ret = f;
+		// Cast returned reference into pointer
+		QTextFormat* sigval1 = const_cast<QTextFormat*>(&f_ret);
+		QTextObject* callback_return_value = vtbl->createObject(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend QTextObject* QTextDocument_virtualbase_createObject(VirtualQTextDocument* self, QTextFormat* f);
+
+	virtual QVariant loadResource(int type, const QUrl& name) override {
+		if (vtbl->loadResource == 0) {
+			return QTextDocument::loadResource(type, name);
+		}
+
+		int sigval1 = type;
+		const QUrl& name_ret = name;
+		// Cast returned reference into pointer
+		QUrl* sigval2 = const_cast<QUrl*>(&name_ret);
+		QVariant* callback_return_value = vtbl->loadResource(this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QVariant* QTextDocument_virtualbase_loadResource(VirtualQTextDocument* self, int type, QUrl* name);
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QTextDocument::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QTextDocument_virtualbase_event(VirtualQTextDocument* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QTextDocument::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QTextDocument_virtualbase_eventFilter(VirtualQTextDocument* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QTextDocument::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QTextDocument_virtualbase_timerEvent(VirtualQTextDocument* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QTextDocument::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QTextDocument_virtualbase_childEvent(VirtualQTextDocument* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QTextDocument::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QTextDocument_virtualbase_customEvent(VirtualQTextDocument* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QTextDocument::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QTextDocument_virtualbase_connectNotify(VirtualQTextDocument* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QTextDocument::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QTextDocument_virtualbase_disconnectNotify(VirtualQTextDocument* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend QObject* QTextDocument_protectedbase_sender(const VirtualQTextDocument* self);
+	friend int QTextDocument_protectedbase_senderSignalIndex(const VirtualQTextDocument* self);
+	friend int QTextDocument_protectedbase_receivers(const VirtualQTextDocument* self, const char* signal);
+	friend bool QTextDocument_protectedbase_isSignalConnected(const VirtualQTextDocument* self, QMetaMethod* signal);
+};
+
+VirtualQTextDocument* QTextDocument_new(const QTextDocument_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTextDocument>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQTextDocument(vtbl) : nullptr;
+}
+
+VirtualQTextDocument* QTextDocument_new_text(const QTextDocument_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTextDocument>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQTextDocument(vtbl, text_QString) : nullptr;
+}
+
+VirtualQTextDocument* QTextDocument_new_parent(const QTextDocument_VTable* vtbl, size_t vdata, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTextDocument>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQTextDocument(vtbl, parent) : nullptr;
+}
+
+VirtualQTextDocument* QTextDocument_new_text_parent(const QTextDocument_VTable* vtbl, size_t vdata, struct seaqt_string text, QObject* parent) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTextDocument>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQTextDocument(vtbl, text_QString, parent) : nullptr;
+}
+
+void QTextDocument_virtbase(QTextDocument* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QTextDocument_metaObject(const QTextDocument* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QTextDocument_metacast(QTextDocument* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QTextDocument_metacall(QTextDocument* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QTextDocument_tr_s(const char* s) {
+	QString _ret = QTextDocument::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QTextDocument* QTextDocument_clone(const QTextDocument* self) {
+	return self->clone();
+}
+
+bool QTextDocument_isEmpty(const QTextDocument* self) {
+	return self->isEmpty();
+}
+
+void QTextDocument_clear(QTextDocument* self) {
+	self->clear();
+}
+
+void QTextDocument_setUndoRedoEnabled(QTextDocument* self, bool enable) {
+	self->setUndoRedoEnabled(enable);
+}
+
+bool QTextDocument_isUndoRedoEnabled(const QTextDocument* self) {
+	return self->isUndoRedoEnabled();
+}
+
+bool QTextDocument_isUndoAvailable(const QTextDocument* self) {
+	return self->isUndoAvailable();
+}
+
+bool QTextDocument_isRedoAvailable(const QTextDocument* self) {
+	return self->isRedoAvailable();
+}
+
+int QTextDocument_availableUndoSteps(const QTextDocument* self) {
+	return self->availableUndoSteps();
+}
+
+int QTextDocument_availableRedoSteps(const QTextDocument* self) {
+	return self->availableRedoSteps();
+}
+
+int QTextDocument_revision(const QTextDocument* self) {
+	return self->revision();
+}
+
+void QTextDocument_setDocumentLayout(QTextDocument* self, QAbstractTextDocumentLayout* layout) {
+	self->setDocumentLayout(layout);
+}
+
+QAbstractTextDocumentLayout* QTextDocument_documentLayout(const QTextDocument* self) {
+	return self->documentLayout();
+}
+
+void QTextDocument_setMetaInformation(QTextDocument* self, int info, struct seaqt_string param2) {
+	QString param2_QString = QString::fromUtf8(param2.data, param2.len);
+	self->setMetaInformation(static_cast<QTextDocument::MetaInformation>(info), param2_QString);
+}
+
+struct seaqt_string QTextDocument_metaInformation(const QTextDocument* self, int info) {
+	QString _ret = self->metaInformation(static_cast<QTextDocument::MetaInformation>(info));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QTextDocument_toHtml(const QTextDocument* self) {
+	QString _ret = self->toHtml();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QTextDocument_setHtml(QTextDocument* self, struct seaqt_string html) {
+	QString html_QString = QString::fromUtf8(html.data, html.len);
+	self->setHtml(html_QString);
+}
+
+struct seaqt_string QTextDocument_toMarkdown(const QTextDocument* self) {
+	QString _ret = self->toMarkdown();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QTextDocument_setMarkdown_markdown(QTextDocument* self, struct seaqt_string markdown) {
+	QString markdown_QString = QString::fromUtf8(markdown.data, markdown.len);
+	self->setMarkdown(markdown_QString);
+}
+
+struct seaqt_string QTextDocument_toRawText(const QTextDocument* self) {
+	QString _ret = self->toRawText();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QTextDocument_toPlainText(const QTextDocument* self) {
+	QString _ret = self->toPlainText();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QTextDocument_setPlainText(QTextDocument* self, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	self->setPlainText(text_QString);
+}
+
+QChar* QTextDocument_characterAt(const QTextDocument* self, int pos) {
+	return new QChar(self->characterAt(static_cast<int>(pos)));
+}
+
+QTextCursor* QTextDocument_find_subString(const QTextDocument* self, struct seaqt_string subString) {
+	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
+	return new QTextCursor(self->find(subString_QString));
+}
+
+QTextCursor* QTextDocument_find_subString_cursor(const QTextDocument* self, struct seaqt_string subString, QTextCursor* cursor) {
+	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
+	return new QTextCursor(self->find(subString_QString, *cursor));
+}
+
+QTextCursor* QTextDocument_find_expr(const QTextDocument* self, QRegularExpression* expr) {
+	return new QTextCursor(self->find(*expr));
+}
+
+QTextCursor* QTextDocument_find_expr_cursor(const QTextDocument* self, QRegularExpression* expr, QTextCursor* cursor) {
+	return new QTextCursor(self->find(*expr, *cursor));
+}
+
+QTextFrame* QTextDocument_frameAt(const QTextDocument* self, int pos) {
+	return self->frameAt(static_cast<int>(pos));
+}
+
+QTextFrame* QTextDocument_rootFrame(const QTextDocument* self) {
+	return self->rootFrame();
+}
+
+QTextObject* QTextDocument_object(const QTextDocument* self, int objectIndex) {
+	return self->object(static_cast<int>(objectIndex));
+}
+
+QTextObject* QTextDocument_objectForFormat(const QTextDocument* self, QTextFormat* param1) {
+	return self->objectForFormat(*param1);
+}
+
+QTextBlock* QTextDocument_findBlock(const QTextDocument* self, int pos) {
+	return new QTextBlock(self->findBlock(static_cast<int>(pos)));
+}
+
+QTextBlock* QTextDocument_findBlockByNumber(const QTextDocument* self, int blockNumber) {
+	return new QTextBlock(self->findBlockByNumber(static_cast<int>(blockNumber)));
+}
+
+QTextBlock* QTextDocument_findBlockByLineNumber(const QTextDocument* self, int blockNumber) {
+	return new QTextBlock(self->findBlockByLineNumber(static_cast<int>(blockNumber)));
+}
+
+QTextBlock* QTextDocument_begin(const QTextDocument* self) {
+	return new QTextBlock(self->begin());
+}
+
+QTextBlock* QTextDocument_end(const QTextDocument* self) {
+	return new QTextBlock(self->end());
+}
+
+QTextBlock* QTextDocument_firstBlock(const QTextDocument* self) {
+	return new QTextBlock(self->firstBlock());
+}
+
+QTextBlock* QTextDocument_lastBlock(const QTextDocument* self) {
+	return new QTextBlock(self->lastBlock());
+}
+
+void QTextDocument_setPageSize(QTextDocument* self, QSizeF* size) {
+	self->setPageSize(*size);
+}
+
+QSizeF* QTextDocument_pageSize(const QTextDocument* self) {
+	return new QSizeF(self->pageSize());
+}
+
+void QTextDocument_setDefaultFont(QTextDocument* self, QFont* font) {
+	self->setDefaultFont(*font);
+}
+
+QFont* QTextDocument_defaultFont(const QTextDocument* self) {
+	return new QFont(self->defaultFont());
+}
+
+void QTextDocument_setSuperScriptBaseline(QTextDocument* self, double baseline) {
+	self->setSuperScriptBaseline(static_cast<qreal>(baseline));
+}
+
+double QTextDocument_superScriptBaseline(const QTextDocument* self) {
+	qreal _ret = self->superScriptBaseline();
+	return static_cast<double>(_ret);
+}
+
+void QTextDocument_setSubScriptBaseline(QTextDocument* self, double baseline) {
+	self->setSubScriptBaseline(static_cast<qreal>(baseline));
+}
+
+double QTextDocument_subScriptBaseline(const QTextDocument* self) {
+	qreal _ret = self->subScriptBaseline();
+	return static_cast<double>(_ret);
+}
+
+void QTextDocument_setBaselineOffset(QTextDocument* self, double baseline) {
+	self->setBaselineOffset(static_cast<qreal>(baseline));
+}
+
+double QTextDocument_baselineOffset(const QTextDocument* self) {
+	qreal _ret = self->baselineOffset();
+	return static_cast<double>(_ret);
+}
+
+int QTextDocument_pageCount(const QTextDocument* self) {
+	return self->pageCount();
+}
+
+bool QTextDocument_isModified(const QTextDocument* self) {
+	return self->isModified();
+}
+
+void QTextDocument_print(const QTextDocument* self, QPagedPaintDevice* printer) {
+	self->print(printer);
+}
+
+QVariant* QTextDocument_resource(const QTextDocument* self, int type, QUrl* name) {
+	return new QVariant(self->resource(static_cast<int>(type), *name));
+}
+
+void QTextDocument_addResource(QTextDocument* self, int type, QUrl* name, QVariant* resource) {
+	self->addResource(static_cast<int>(type), *name, *resource);
+}
+
+struct seaqt_array /* of QTextFormat* */  QTextDocument_allFormats(const QTextDocument* self) {
+	QList<QTextFormat> _ret = self->allFormats();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QTextFormat** _arr = static_cast<QTextFormat**>(malloc(sizeof(QTextFormat*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QTextFormat(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QTextDocument_markContentsDirty(QTextDocument* self, int from, int length) {
+	self->markContentsDirty(static_cast<int>(from), static_cast<int>(length));
+}
+
+void QTextDocument_setUseDesignMetrics(QTextDocument* self, bool b) {
+	self->setUseDesignMetrics(b);
+}
+
+bool QTextDocument_useDesignMetrics(const QTextDocument* self) {
+	return self->useDesignMetrics();
+}
+
+void QTextDocument_setLayoutEnabled(QTextDocument* self, bool b) {
+	self->setLayoutEnabled(b);
+}
+
+bool QTextDocument_isLayoutEnabled(const QTextDocument* self) {
+	return self->isLayoutEnabled();
+}
+
+void QTextDocument_drawContents_painter(QTextDocument* self, QPainter* painter) {
+	self->drawContents(painter);
+}
+
+void QTextDocument_setTextWidth(QTextDocument* self, double width) {
+	self->setTextWidth(static_cast<qreal>(width));
+}
+
+double QTextDocument_textWidth(const QTextDocument* self) {
+	qreal _ret = self->textWidth();
+	return static_cast<double>(_ret);
+}
+
+double QTextDocument_idealWidth(const QTextDocument* self) {
+	qreal _ret = self->idealWidth();
+	return static_cast<double>(_ret);
+}
+
+double QTextDocument_indentWidth(const QTextDocument* self) {
+	qreal _ret = self->indentWidth();
+	return static_cast<double>(_ret);
+}
+
+void QTextDocument_setIndentWidth(QTextDocument* self, double width) {
+	self->setIndentWidth(static_cast<qreal>(width));
+}
+
+double QTextDocument_documentMargin(const QTextDocument* self) {
+	qreal _ret = self->documentMargin();
+	return static_cast<double>(_ret);
+}
+
+void QTextDocument_setDocumentMargin(QTextDocument* self, double margin) {
+	self->setDocumentMargin(static_cast<qreal>(margin));
+}
+
+void QTextDocument_adjustSize(QTextDocument* self) {
+	self->adjustSize();
+}
+
+QSizeF* QTextDocument_size(const QTextDocument* self) {
+	return new QSizeF(self->size());
+}
+
+int QTextDocument_blockCount(const QTextDocument* self) {
+	return self->blockCount();
+}
+
+int QTextDocument_lineCount(const QTextDocument* self) {
+	return self->lineCount();
+}
+
+int QTextDocument_characterCount(const QTextDocument* self) {
+	return self->characterCount();
+}
+
+void QTextDocument_setDefaultStyleSheet(QTextDocument* self, struct seaqt_string sheet) {
+	QString sheet_QString = QString::fromUtf8(sheet.data, sheet.len);
+	self->setDefaultStyleSheet(sheet_QString);
+}
+
+struct seaqt_string QTextDocument_defaultStyleSheet(const QTextDocument* self) {
+	QString _ret = self->defaultStyleSheet();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QTextDocument_undo_cursor(QTextDocument* self, QTextCursor* cursor) {
+	self->undo(cursor);
+}
+
+void QTextDocument_redo_cursor(QTextDocument* self, QTextCursor* cursor) {
+	self->redo(cursor);
+}
+
+void QTextDocument_clearUndoRedoStacks(QTextDocument* self) {
+	self->clearUndoRedoStacks();
+}
+
+int QTextDocument_maximumBlockCount(const QTextDocument* self) {
+	return self->maximumBlockCount();
+}
+
+void QTextDocument_setMaximumBlockCount(QTextDocument* self, int maximum) {
+	self->setMaximumBlockCount(static_cast<int>(maximum));
+}
+
+QTextOption* QTextDocument_defaultTextOption(const QTextDocument* self) {
+	return new QTextOption(self->defaultTextOption());
+}
+
+void QTextDocument_setDefaultTextOption(QTextDocument* self, QTextOption* option) {
+	self->setDefaultTextOption(*option);
+}
+
+QUrl* QTextDocument_baseUrl(const QTextDocument* self) {
+	return new QUrl(self->baseUrl());
+}
+
+void QTextDocument_setBaseUrl(QTextDocument* self, QUrl* url) {
+	self->setBaseUrl(*url);
+}
+
+int QTextDocument_defaultCursorMoveStyle(const QTextDocument* self) {
+	Qt::CursorMoveStyle _ret = self->defaultCursorMoveStyle();
+	return static_cast<int>(_ret);
+}
+
+void QTextDocument_setDefaultCursorMoveStyle(QTextDocument* self, int style) {
+	self->setDefaultCursorMoveStyle(static_cast<Qt::CursorMoveStyle>(style));
+}
+
+void QTextDocument_contentsChange(QTextDocument* self, int from, int charsRemoved, int charsAdded) {
+	self->contentsChange(static_cast<int>(from), static_cast<int>(charsRemoved), static_cast<int>(charsAdded));
+}
+
+void QTextDocument_connect_contentsChange(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
+	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(int, int, int)>(&QTextDocument::contentsChange), self, [callback, release = seaqt::release_callback{slot,release}](int from, int charsRemoved, int charsAdded) {
+			int sigval1 = from;
+			int sigval2 = charsRemoved;
+			int sigval3 = charsAdded;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QTextDocument_contentsChanged(QTextDocument* self) {
+	self->contentsChanged();
+}
+
+void QTextDocument_connect_contentsChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::contentsChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QTextDocument_undoAvailable(QTextDocument* self, bool param1) {
+	self->undoAvailable(param1);
+}
+
+void QTextDocument_connect_undoAvailable(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::undoAvailable), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
+			bool sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTextDocument_redoAvailable(QTextDocument* self, bool param1) {
+	self->redoAvailable(param1);
+}
+
+void QTextDocument_connect_redoAvailable(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::redoAvailable), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
+			bool sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTextDocument_undoCommandAdded(QTextDocument* self) {
+	self->undoCommandAdded();
+}
+
+void QTextDocument_connect_undoCommandAdded(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::undoCommandAdded), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QTextDocument_modificationChanged(QTextDocument* self, bool m) {
+	self->modificationChanged(m);
+}
+
+void QTextDocument_connect_modificationChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::modificationChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool m) {
+			bool sigval1 = m;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTextDocument_cursorPositionChanged(QTextDocument* self, QTextCursor* cursor) {
+	self->cursorPositionChanged(*cursor);
+}
+
+void QTextDocument_connect_cursorPositionChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, QTextCursor*), void (*release)(intptr_t)) {
+	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(const QTextCursor&)>(&QTextDocument::cursorPositionChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QTextCursor& cursor) {
+			const QTextCursor& cursor_ret = cursor;
+			// Cast returned reference into pointer
+			QTextCursor* sigval1 = const_cast<QTextCursor*>(&cursor_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTextDocument_blockCountChanged(QTextDocument* self, int newBlockCount) {
+	self->blockCountChanged(static_cast<int>(newBlockCount));
+}
+
+void QTextDocument_connect_blockCountChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(int)>(&QTextDocument::blockCountChanged), self, [callback, release = seaqt::release_callback{slot,release}](int newBlockCount) {
+			int sigval1 = newBlockCount;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTextDocument_baseUrlChanged(QTextDocument* self, QUrl* url) {
+	self->baseUrlChanged(*url);
+}
+
+void QTextDocument_connect_baseUrlChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(const QUrl&)>(&QTextDocument::baseUrlChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& url) {
+			const QUrl& url_ret = url;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTextDocument_documentLayoutChanged(QTextDocument* self) {
+	self->documentLayoutChanged();
+}
+
+void QTextDocument_connect_documentLayoutChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::documentLayoutChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QTextDocument_undo(QTextDocument* self) {
+	self->undo();
+}
+
+void QTextDocument_redo(QTextDocument* self) {
+	self->redo();
+}
+
+void QTextDocument_appendUndoItem(QTextDocument* self, QAbstractUndoItem* param1) {
+	self->appendUndoItem(param1);
+}
+
+void QTextDocument_setModified(QTextDocument* self) {
+	self->setModified();
+}
+
+struct seaqt_string QTextDocument_tr_s_c(const char* s, const char* c) {
+	QString _ret = QTextDocument::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QTextDocument_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QTextDocument::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QTextDocument* QTextDocument_clone_parent(const QTextDocument* self, QObject* parent) {
+	return self->clone(parent);
+}
+
+struct seaqt_string QTextDocument_toMarkdown_features(const QTextDocument* self, int features) {
+	QString _ret = self->toMarkdown(static_cast<QTextDocument::MarkdownFeatures>(features));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QTextDocument_setMarkdown_markdown_features(QTextDocument* self, struct seaqt_string markdown, int features) {
+	QString markdown_QString = QString::fromUtf8(markdown.data, markdown.len);
+	self->setMarkdown(markdown_QString, static_cast<QTextDocument::MarkdownFeatures>(features));
+}
+
+QTextCursor* QTextDocument_find_subString_from(const QTextDocument* self, struct seaqt_string subString, int from) {
+	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
+	return new QTextCursor(self->find(subString_QString, static_cast<int>(from)));
+}
+
+QTextCursor* QTextDocument_find_subString_from_options(const QTextDocument* self, struct seaqt_string subString, int from, int options) {
+	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
+	return new QTextCursor(self->find(subString_QString, static_cast<int>(from), static_cast<QTextDocument::FindFlags>(options)));
+}
+
+QTextCursor* QTextDocument_find_subString_cursor_options(const QTextDocument* self, struct seaqt_string subString, QTextCursor* cursor, int options) {
+	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
+	return new QTextCursor(self->find(subString_QString, *cursor, static_cast<QTextDocument::FindFlags>(options)));
+}
+
+QTextCursor* QTextDocument_find_expr_from(const QTextDocument* self, QRegularExpression* expr, int from) {
+	return new QTextCursor(self->find(*expr, static_cast<int>(from)));
+}
+
+QTextCursor* QTextDocument_find_expr_from_options(const QTextDocument* self, QRegularExpression* expr, int from, int options) {
+	return new QTextCursor(self->find(*expr, static_cast<int>(from), static_cast<QTextDocument::FindFlags>(options)));
+}
+
+QTextCursor* QTextDocument_find_expr_cursor_options(const QTextDocument* self, QRegularExpression* expr, QTextCursor* cursor, int options) {
+	return new QTextCursor(self->find(*expr, *cursor, static_cast<QTextDocument::FindFlags>(options)));
+}
+
+void QTextDocument_drawContents_painter_rect(QTextDocument* self, QPainter* painter, QRectF* rect) {
+	self->drawContents(painter, *rect);
+}
+
+void QTextDocument_clearUndoRedoStacks_historyToClear(QTextDocument* self, int historyToClear) {
+	self->clearUndoRedoStacks(static_cast<QTextDocument::Stacks>(historyToClear));
+}
+
+void QTextDocument_setModified_m(QTextDocument* self, bool m) {
+	self->setModified(m);
+}
+
+const QMetaObject* QTextDocument_staticMetaObject() { return &QTextDocument::staticMetaObject; }
+void* QTextDocument_vdata(VirtualQTextDocument* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQTextDocument>()); }
+VirtualQTextDocument* vdata_QTextDocument(void* vdata) { return reinterpret_cast<VirtualQTextDocument*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQTextDocument>()); }
+
+QMetaObject* QTextDocument_virtualbase_metaObject(const VirtualQTextDocument* self) {
+
+	return (QMetaObject*) self->QTextDocument::metaObject();
+}
+
+void* QTextDocument_virtualbase_metacast(VirtualQTextDocument* self, const char* param1) {
+
+	return self->QTextDocument::qt_metacast(param1);
+}
+
+int QTextDocument_virtualbase_metacall(VirtualQTextDocument* self, int param1, int param2, void** param3) {
+
+	return self->QTextDocument::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+void QTextDocument_virtualbase_clear(VirtualQTextDocument* self) {
+
+	self->QTextDocument::clear();
+}
+
+QTextObject* QTextDocument_virtualbase_createObject(VirtualQTextDocument* self, QTextFormat* f) {
+
+	return self->QTextDocument::createObject(*f);
+}
+
+QVariant* QTextDocument_virtualbase_loadResource(VirtualQTextDocument* self, int type, QUrl* name) {
+
+	return new QVariant(self->QTextDocument::loadResource(static_cast<int>(type), *name));
+}
+
+bool QTextDocument_virtualbase_event(VirtualQTextDocument* self, QEvent* event) {
+
+	return self->QTextDocument::event(event);
+}
+
+bool QTextDocument_virtualbase_eventFilter(VirtualQTextDocument* self, QObject* watched, QEvent* event) {
+
+	return self->QTextDocument::eventFilter(watched, event);
+}
+
+void QTextDocument_virtualbase_timerEvent(VirtualQTextDocument* self, QTimerEvent* event) {
+
+	self->QTextDocument::timerEvent(event);
+}
+
+void QTextDocument_virtualbase_childEvent(VirtualQTextDocument* self, QChildEvent* event) {
+
+	self->QTextDocument::childEvent(event);
+}
+
+void QTextDocument_virtualbase_customEvent(VirtualQTextDocument* self, QEvent* event) {
+
+	self->QTextDocument::customEvent(event);
+}
+
+void QTextDocument_virtualbase_connectNotify(VirtualQTextDocument* self, QMetaMethod* signal) {
+
+	self->QTextDocument::connectNotify(*signal);
+}
+
+void QTextDocument_virtualbase_disconnectNotify(VirtualQTextDocument* self, QMetaMethod* signal) {
+
+	self->QTextDocument::disconnectNotify(*signal);
+}
+
+QObject* QTextDocument_protectedbase_sender(const VirtualQTextDocument* self) {
+	return self->QTextDocument::sender();
+}
+
+int QTextDocument_protectedbase_senderSignalIndex(const VirtualQTextDocument* self) {
+	return self->QTextDocument::senderSignalIndex();
+}
+
+int QTextDocument_protectedbase_receivers(const VirtualQTextDocument* self, const char* signal) {
+	return self->QTextDocument::receivers(signal);
+}
+
+bool QTextDocument_protectedbase_isSignalConnected(const VirtualQTextDocument* self, QMetaMethod* signal) {
+	return self->QTextDocument::isSignalConnected(*signal);
+}
+
+void QTextDocument_delete(QTextDocument* self) {
+	delete self;
+}
+

@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineextensionmanager
+export gen_qwebengineextensionmanager

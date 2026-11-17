@@ -1,0 +1,919 @@
+import ./qtcore_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free, c_malloc
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+{.compile("gen_qcoreapplication.cpp", QtCoreCFlags).}
+
+
+type QCoreApplicationEnumEnum* = distinct cint
+template ApplicationFlags*(_: type QCoreApplicationEnumEnum): untyped = 396033
+
+
+import ./gen_qcoreapplication_types
+export gen_qcoreapplication_types
+
+import
+  ./gen_qabstracteventdispatcher_types,
+  ./gen_qabstractnativeeventfilter_types,
+  ./gen_qcoreevent_types,
+  ./gen_qdeadlinetimer_types,
+  ./gen_qmetaobject_types,
+  ./gen_qobject,
+  ./gen_qobjectdefs_types,
+  ./gen_qpermissions_types,
+  ./gen_qtranslator_types,
+  std/cmdline,
+  std/os
+export
+  gen_qabstracteventdispatcher_types,
+  gen_qabstractnativeeventfilter_types,
+  gen_qcoreevent_types,
+  gen_qdeadlinetimer_types,
+  gen_qmetaobject_types,
+  gen_qobject,
+  gen_qobjectdefs_types,
+  gen_qpermissions_types,
+  gen_qtranslator_types
+
+type cQCoreApplication*{.exportc: "QCoreApplication", incompleteStruct.} = object
+
+proc fcQCoreApplication_metaObject(self: pointer): pointer {.importc: "QCoreApplication_metaObject".}
+proc fcQCoreApplication_metacast(self: pointer, param1: cstring): pointer {.importc: "QCoreApplication_metacast".}
+proc fcQCoreApplication_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCoreApplication_metacall".}
+proc fcQCoreApplication_trS(s: cstring): struct_seaqt_string {.importc: "QCoreApplication_tr_s".}
+proc fcQCoreApplication_arguments(): struct_seaqt_array {.importc: "QCoreApplication_arguments".}
+proc fcQCoreApplication_setAttributeAttribute(attribute: cint): void {.importc: "QCoreApplication_setAttribute_attribute".}
+proc fcQCoreApplication_testAttribute(attribute: cint): bool {.importc: "QCoreApplication_testAttribute".}
+proc fcQCoreApplication_setOrganizationDomain(orgDomain: struct_seaqt_string): void {.importc: "QCoreApplication_setOrganizationDomain".}
+proc fcQCoreApplication_organizationDomain(): struct_seaqt_string {.importc: "QCoreApplication_organizationDomain".}
+proc fcQCoreApplication_setOrganizationName(orgName: struct_seaqt_string): void {.importc: "QCoreApplication_setOrganizationName".}
+proc fcQCoreApplication_organizationName(): struct_seaqt_string {.importc: "QCoreApplication_organizationName".}
+proc fcQCoreApplication_setApplicationName(application: struct_seaqt_string): void {.importc: "QCoreApplication_setApplicationName".}
+proc fcQCoreApplication_applicationName(): struct_seaqt_string {.importc: "QCoreApplication_applicationName".}
+proc fcQCoreApplication_setApplicationVersion(version: struct_seaqt_string): void {.importc: "QCoreApplication_setApplicationVersion".}
+proc fcQCoreApplication_applicationVersion(): struct_seaqt_string {.importc: "QCoreApplication_applicationVersion".}
+proc fcQCoreApplication_setSetuidAllowed(allow: bool): void {.importc: "QCoreApplication_setSetuidAllowed".}
+proc fcQCoreApplication_isSetuidAllowed(): bool {.importc: "QCoreApplication_isSetuidAllowed".}
+proc fcQCoreApplication_instance(): pointer {.importc: "QCoreApplication_instance".}
+proc fcQCoreApplication_instanceExists(): bool {.importc: "QCoreApplication_instanceExists".}
+proc fcQCoreApplication_exec(): cint {.importc: "QCoreApplication_exec".}
+proc fcQCoreApplication_processEvents(): void {.importc: "QCoreApplication_processEvents".}
+proc fcQCoreApplication_processEventsFlagsMaxtime(flags: cint, maxtime: cint): void {.importc: "QCoreApplication_processEvents_flags_maxtime".}
+proc fcQCoreApplication_processEventsFlagsDeadline(flags: cint, deadline: pointer): void {.importc: "QCoreApplication_processEvents_flags_deadline".}
+proc fcQCoreApplication_sendEvent(receiver: pointer, event: pointer): bool {.importc: "QCoreApplication_sendEvent".}
+proc fcQCoreApplication_postEventReceiverEvent(receiver: pointer, event: pointer): void {.importc: "QCoreApplication_postEvent_receiver_event".}
+proc fcQCoreApplication_sendPostedEvents(): void {.importc: "QCoreApplication_sendPostedEvents".}
+proc fcQCoreApplication_removePostedEventsReceiver(receiver: pointer): void {.importc: "QCoreApplication_removePostedEvents_receiver".}
+proc fcQCoreApplication_eventDispatcher(): pointer {.importc: "QCoreApplication_eventDispatcher".}
+proc fcQCoreApplication_setEventDispatcher(eventDispatcher: pointer): void {.importc: "QCoreApplication_setEventDispatcher".}
+proc fcQCoreApplication_notify(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QCoreApplication_notify".}
+proc fcQCoreApplication_startingUp(): bool {.importc: "QCoreApplication_startingUp".}
+proc fcQCoreApplication_closingDown(): bool {.importc: "QCoreApplication_closingDown".}
+proc fcQCoreApplication_applicationDirPath(): struct_seaqt_string {.importc: "QCoreApplication_applicationDirPath".}
+proc fcQCoreApplication_applicationFilePath(): struct_seaqt_string {.importc: "QCoreApplication_applicationFilePath".}
+proc fcQCoreApplication_applicationPid(): clonglong {.importc: "QCoreApplication_applicationPid".}
+proc fcQCoreApplication_checkPermission(self: pointer, permission: pointer): cint {.importc: "QCoreApplication_checkPermission".}
+proc fcQCoreApplication_setLibraryPaths(libraryPaths: struct_seaqt_array): void {.importc: "QCoreApplication_setLibraryPaths".}
+proc fcQCoreApplication_libraryPaths(): struct_seaqt_array {.importc: "QCoreApplication_libraryPaths".}
+proc fcQCoreApplication_addLibraryPath(param1: struct_seaqt_string): void {.importc: "QCoreApplication_addLibraryPath".}
+proc fcQCoreApplication_removeLibraryPath(param1: struct_seaqt_string): void {.importc: "QCoreApplication_removeLibraryPath".}
+proc fcQCoreApplication_installTranslator(messageFile: pointer): bool {.importc: "QCoreApplication_installTranslator".}
+proc fcQCoreApplication_removeTranslator(messageFile: pointer): bool {.importc: "QCoreApplication_removeTranslator".}
+proc fcQCoreApplication_translateContextKey(context: cstring, key: cstring): struct_seaqt_string {.importc: "QCoreApplication_translate_context_key".}
+proc fcQCoreApplication_installNativeEventFilter(self: pointer, filterObj: pointer): void {.importc: "QCoreApplication_installNativeEventFilter".}
+proc fcQCoreApplication_connect_installNativeEventFilter(self: pointer, slot: int, callback: proc (slot: int, filterObj: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_installNativeEventFilter".}
+proc fcQCoreApplication_removeNativeEventFilter(self: pointer, filterObj: pointer): void {.importc: "QCoreApplication_removeNativeEventFilter".}
+proc fcQCoreApplication_connect_removeNativeEventFilter(self: pointer, slot: int, callback: proc (slot: int, filterObj: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_removeNativeEventFilter".}
+proc fcQCoreApplication_isQuitLockEnabled(): bool {.importc: "QCoreApplication_isQuitLockEnabled".}
+proc fcQCoreApplication_setQuitLockEnabled(enabled: bool): void {.importc: "QCoreApplication_setQuitLockEnabled".}
+proc fcQCoreApplication_quit(): void {.importc: "QCoreApplication_quit".}
+proc fcQCoreApplication_exit(): void {.importc: "QCoreApplication_exit".}
+proc fcQCoreApplication_organizationNameChanged(self: pointer): void {.importc: "QCoreApplication_organizationNameChanged".}
+proc fcQCoreApplication_connect_organizationNameChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_organizationNameChanged".}
+proc fcQCoreApplication_organizationDomainChanged(self: pointer): void {.importc: "QCoreApplication_organizationDomainChanged".}
+proc fcQCoreApplication_connect_organizationDomainChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_organizationDomainChanged".}
+proc fcQCoreApplication_applicationNameChanged(self: pointer): void {.importc: "QCoreApplication_applicationNameChanged".}
+proc fcQCoreApplication_connect_applicationNameChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_applicationNameChanged".}
+proc fcQCoreApplication_applicationVersionChanged(self: pointer): void {.importc: "QCoreApplication_applicationVersionChanged".}
+proc fcQCoreApplication_connect_applicationVersionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_applicationVersionChanged".}
+proc fcQCoreApplication_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCoreApplication_tr_s_c".}
+proc fcQCoreApplication_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCoreApplication_tr_s_c_n".}
+proc fcQCoreApplication_setAttributeAttributeOn(attribute: cint, on: bool): void {.importc: "QCoreApplication_setAttribute_attribute_on".}
+proc fcQCoreApplication_processEventsFlags(flags: cint): void {.importc: "QCoreApplication_processEvents_flags".}
+proc fcQCoreApplication_postEventReceiverEventPriority(receiver: pointer, event: pointer, priority: cint): void {.importc: "QCoreApplication_postEvent_receiver_event_priority".}
+proc fcQCoreApplication_sendPostedEventsReceiver(receiver: pointer): void {.importc: "QCoreApplication_sendPostedEvents_receiver".}
+proc fcQCoreApplication_sendPostedEventsReceiverEventType(receiver: pointer, event_type: cint): void {.importc: "QCoreApplication_sendPostedEvents_receiver_event_type".}
+proc fcQCoreApplication_removePostedEventsReceiverEventType(receiver: pointer, eventType: cint): void {.importc: "QCoreApplication_removePostedEvents_receiver_eventType".}
+proc fcQCoreApplication_translateContextKeyDisambiguation(context: cstring, key: cstring, disambiguation: cstring): struct_seaqt_string {.importc: "QCoreApplication_translate_context_key_disambiguation".}
+proc fcQCoreApplication_translateContextKeyDisambiguationN(context: cstring, key: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QCoreApplication_translate_context_key_disambiguation_n".}
+proc fcQCoreApplication_exitRetcode(retcode: cint): void {.importc: "QCoreApplication_exit_retcode".}
+proc fcQCoreApplication_connect_aboutToQuit(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_aboutToQuit".}
+proc fcQCoreApplication_vdata(self: pointer): ptr pointer {.importc: "QCoreApplication_vdata".}
+proc fvdata_cQCoreApplication(self: pointer): pointer {.importc: "vdata_QCoreApplication".}
+
+type cQCoreApplicationVTable {.pure.} = object
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  notify*: proc(self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQCoreApplication_virtualbase_metaObject(self: pointer): pointer {.importc: "QCoreApplication_virtualbase_metaObject".}
+proc fcQCoreApplication_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QCoreApplication_virtualbase_metacast".}
+proc fcQCoreApplication_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCoreApplication_virtualbase_metacall".}
+proc fcQCoreApplication_virtualbase_notify(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QCoreApplication_virtualbase_notify".}
+proc fcQCoreApplication_virtualbase_event(self: pointer, param1: pointer): bool {.importc: "QCoreApplication_virtualbase_event".}
+proc fcQCoreApplication_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QCoreApplication_virtualbase_eventFilter".}
+proc fcQCoreApplication_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QCoreApplication_virtualbase_timerEvent".}
+proc fcQCoreApplication_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QCoreApplication_virtualbase_childEvent".}
+proc fcQCoreApplication_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QCoreApplication_virtualbase_customEvent".}
+proc fcQCoreApplication_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCoreApplication_virtualbase_connectNotify".}
+proc fcQCoreApplication_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCoreApplication_virtualbase_disconnectNotify".}
+proc fcQCoreApplication_protectedbase_resolveInterface(self: pointer, name: cstring, revision: cint): pointer {.importc: "QCoreApplication_protectedbase_resolveInterface".}
+proc fcQCoreApplication_protectedbase_sender(self: pointer): pointer {.importc: "QCoreApplication_protectedbase_sender".}
+proc fcQCoreApplication_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCoreApplication_protectedbase_senderSignalIndex".}
+proc fcQCoreApplication_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCoreApplication_protectedbase_receivers".}
+proc fcQCoreApplication_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCoreApplication_protectedbase_isSignalConnected".}
+proc fcQCoreApplication_new(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray): ptr cQCoreApplication {.importc: "QCoreApplication_new_int_char".}
+proc fcQCoreApplication_new2(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQCoreApplication {.importc: "QCoreApplication_new_int_char_int".}
+proc fcQCoreApplication_staticMetaObject(): pointer {.importc: "QCoreApplication_staticMetaObject".}
+
+proc metaObject*(self: gen_qcoreapplication_types.QCoreApplication): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCoreApplication_metaObject(self.h), owned: false)
+
+proc metacast*(self: gen_qcoreapplication_types.QCoreApplication, param1: cstring): pointer =
+  fcQCoreApplication_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcoreapplication_types.QCoreApplication, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCoreApplication_metacall(self.h, cint(param1), param2, param3)
+
+proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring): string =
+  let v_ms = fcQCoreApplication_trS(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc arguments*(_: type gen_qcoreapplication_types.QCoreApplication): seq[string] =
+  var v_ma = fcQCoreApplication_arguments()
+  var vx_ret = newSeq[string](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    let vx_lv_ms = v_outCast[i]
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
+    c_free(vx_lv_ms.data)
+    vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
+  vx_ret
+
+proc setAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribute: cint): void =
+  fcQCoreApplication_setAttributeAttribute(cint(attribute))
+
+proc testAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribute: cint): bool =
+  fcQCoreApplication_testAttribute(cint(attribute))
+
+proc setOrganizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication, orgDomain: openArray[char]): void =
+  fcQCoreApplication_setOrganizationDomain(struct_seaqt_string(data: if len(orgDomain) > 0: addr orgDomain[0] else: nil, len: csize_t(len(orgDomain))))
+
+proc organizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication): string =
+  let v_ms = fcQCoreApplication_organizationDomain()
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setOrganizationName*(_: type gen_qcoreapplication_types.QCoreApplication, orgName: openArray[char]): void =
+  fcQCoreApplication_setOrganizationName(struct_seaqt_string(data: if len(orgName) > 0: addr orgName[0] else: nil, len: csize_t(len(orgName))))
+
+proc organizationName*(_: type gen_qcoreapplication_types.QCoreApplication): string =
+  let v_ms = fcQCoreApplication_organizationName()
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setApplicationName*(_: type gen_qcoreapplication_types.QCoreApplication, application: openArray[char]): void =
+  fcQCoreApplication_setApplicationName(struct_seaqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))))
+
+proc applicationName*(_: type gen_qcoreapplication_types.QCoreApplication): string =
+  let v_ms = fcQCoreApplication_applicationName()
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setApplicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication, version: openArray[char]): void =
+  fcQCoreApplication_setApplicationVersion(struct_seaqt_string(data: if len(version) > 0: addr version[0] else: nil, len: csize_t(len(version))))
+
+proc applicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication): string =
+  let v_ms = fcQCoreApplication_applicationVersion()
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setSetuidAllowed*(_: type gen_qcoreapplication_types.QCoreApplication, allow: bool): void =
+  fcQCoreApplication_setSetuidAllowed(allow)
+
+proc isSetuidAllowed*(_: type gen_qcoreapplication_types.QCoreApplication): bool =
+  fcQCoreApplication_isSetuidAllowed()
+
+proc instance*(_: type gen_qcoreapplication_types.QCoreApplication): gen_qcoreapplication_types.QCoreApplication =
+  gen_qcoreapplication_types.QCoreApplication(h: fcQCoreApplication_instance(), owned: false)
+
+proc instanceExists*(_: type gen_qcoreapplication_types.QCoreApplication): bool =
+  fcQCoreApplication_instanceExists()
+
+proc exec*(_: type gen_qcoreapplication_types.QCoreApplication): cint =
+  fcQCoreApplication_exec()
+
+proc processEvents*(_: type gen_qcoreapplication_types.QCoreApplication): void =
+  fcQCoreApplication_processEvents()
+
+proc processEvents*(_: type gen_qcoreapplication_types.QCoreApplication, flags: cint, maxtime: cint): void =
+  fcQCoreApplication_processEventsFlagsMaxtime(cint(flags), maxtime)
+
+proc processEvents*(_: type gen_qcoreapplication_types.QCoreApplication, flags: cint, deadline: gen_qdeadlinetimer_types.QDeadlineTimer): void =
+  fcQCoreApplication_processEventsFlagsDeadline(cint(flags), deadline.h)
+
+proc sendEvent*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQCoreApplication_sendEvent(receiver.h, event.h)
+
+proc postEvent*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): void =
+  fcQCoreApplication_postEventReceiverEvent(receiver.h, event.h)
+
+proc sendPostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication): void =
+  fcQCoreApplication_sendPostedEvents()
+
+proc removePostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject): void =
+  fcQCoreApplication_removePostedEventsReceiver(receiver.h)
+
+proc eventDispatcher*(_: type gen_qcoreapplication_types.QCoreApplication): gen_qabstracteventdispatcher_types.QAbstractEventDispatcher =
+  gen_qabstracteventdispatcher_types.QAbstractEventDispatcher(h: fcQCoreApplication_eventDispatcher(), owned: false)
+
+proc setEventDispatcher*(_: type gen_qcoreapplication_types.QCoreApplication, eventDispatcher: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): void =
+  fcQCoreApplication_setEventDispatcher(eventDispatcher.h)
+
+proc notify*(self: gen_qcoreapplication_types.QCoreApplication, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQCoreApplication_notify(self.h, param1.h, param2.h)
+
+proc startingUp*(_: type gen_qcoreapplication_types.QCoreApplication): bool =
+  fcQCoreApplication_startingUp()
+
+proc closingDown*(_: type gen_qcoreapplication_types.QCoreApplication): bool =
+  fcQCoreApplication_closingDown()
+
+proc applicationDirPath*(_: type gen_qcoreapplication_types.QCoreApplication): string =
+  let v_ms = fcQCoreApplication_applicationDirPath()
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc applicationFilePath*(_: type gen_qcoreapplication_types.QCoreApplication): string =
+  let v_ms = fcQCoreApplication_applicationFilePath()
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc applicationPid*(_: type gen_qcoreapplication_types.QCoreApplication): clonglong =
+  fcQCoreApplication_applicationPid()
+
+proc checkPermission*(self: gen_qcoreapplication_types.QCoreApplication, permission: gen_qpermissions_types.QPermission): cint =
+  cint(fcQCoreApplication_checkPermission(self.h, permission.h))
+
+proc setLibraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication, libraryPaths: openArray[string]): void =
+  var libraryPaths_CArray = newSeq[struct_seaqt_string](len(libraryPaths))
+  for i in 0..<len(libraryPaths):
+    libraryPaths_CArray[i] = struct_seaqt_string(data: if len(libraryPaths[i]) > 0: addr libraryPaths[i][0] else: nil, len: csize_t(len(libraryPaths[i])))
+
+  fcQCoreApplication_setLibraryPaths(struct_seaqt_array(len: csize_t(len(libraryPaths)), data: if len(libraryPaths) == 0: nil else: addr(libraryPaths_CArray[0])))
+
+proc libraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication): seq[string] =
+  var v_ma = fcQCoreApplication_libraryPaths()
+  var vx_ret = newSeq[string](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    let vx_lv_ms = v_outCast[i]
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
+    c_free(vx_lv_ms.data)
+    vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
+  vx_ret
+
+proc addLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: openArray[char]): void =
+  fcQCoreApplication_addLibraryPath(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
+
+proc removeLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: openArray[char]): void =
+  fcQCoreApplication_removeLibraryPath(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
+
+proc installTranslator*(_: type gen_qcoreapplication_types.QCoreApplication, messageFile: gen_qtranslator_types.QTranslator): bool =
+  fcQCoreApplication_installTranslator(messageFile.h)
+
+proc removeTranslator*(_: type gen_qcoreapplication_types.QCoreApplication, messageFile: gen_qtranslator_types.QTranslator): bool =
+  fcQCoreApplication_removeTranslator(messageFile.h)
+
+proc translate*(_: type gen_qcoreapplication_types.QCoreApplication, context: cstring, key: cstring): string =
+  let v_ms = fcQCoreApplication_translateContextKey(context, key)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc installNativeEventFilter*(self: gen_qcoreapplication_types.QCoreApplication, filterObj: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter): void =
+  fcQCoreApplication_installNativeEventFilter(self.h, filterObj.h)
+
+type QCoreApplicationinstallNativeEventFilterSlot* = proc(filterObj: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter)
+proc fcQCoreApplication_slot_callback_installNativeEventFilter(slot: int, filterObj: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QCoreApplicationinstallNativeEventFilterSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter(h: filterObj, owned: false)
+
+  nimfunc[](slotval1)
+
+proc fcQCoreApplication_slot_callback_installNativeEventFilter_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationinstallNativeEventFilterSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onInstallNativeEventFilter*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationinstallNativeEventFilterSlot) =
+  var tmp = new QCoreApplicationinstallNativeEventFilterSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCoreApplication_connect_installNativeEventFilter(self.h, cast[int](addr tmp[]), fcQCoreApplication_slot_callback_installNativeEventFilter, fcQCoreApplication_slot_callback_installNativeEventFilter_release)
+
+proc removeNativeEventFilter*(self: gen_qcoreapplication_types.QCoreApplication, filterObj: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter): void =
+  fcQCoreApplication_removeNativeEventFilter(self.h, filterObj.h)
+
+type QCoreApplicationremoveNativeEventFilterSlot* = proc(filterObj: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter)
+proc fcQCoreApplication_slot_callback_removeNativeEventFilter(slot: int, filterObj: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QCoreApplicationremoveNativeEventFilterSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter(h: filterObj, owned: false)
+
+  nimfunc[](slotval1)
+
+proc fcQCoreApplication_slot_callback_removeNativeEventFilter_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationremoveNativeEventFilterSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onRemoveNativeEventFilter*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationremoveNativeEventFilterSlot) =
+  var tmp = new QCoreApplicationremoveNativeEventFilterSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCoreApplication_connect_removeNativeEventFilter(self.h, cast[int](addr tmp[]), fcQCoreApplication_slot_callback_removeNativeEventFilter, fcQCoreApplication_slot_callback_removeNativeEventFilter_release)
+
+proc isQuitLockEnabled*(_: type gen_qcoreapplication_types.QCoreApplication): bool =
+  fcQCoreApplication_isQuitLockEnabled()
+
+proc setQuitLockEnabled*(_: type gen_qcoreapplication_types.QCoreApplication, enabled: bool): void =
+  fcQCoreApplication_setQuitLockEnabled(enabled)
+
+proc quit*(_: type gen_qcoreapplication_types.QCoreApplication): void =
+  fcQCoreApplication_quit()
+
+proc exit*(_: type gen_qcoreapplication_types.QCoreApplication): void =
+  fcQCoreApplication_exit()
+
+proc organizationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication): void =
+  fcQCoreApplication_organizationNameChanged(self.h)
+
+type QCoreApplicationorganizationNameChangedSlot* = proc()
+proc fcQCoreApplication_slot_callback_organizationNameChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QCoreApplicationorganizationNameChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQCoreApplication_slot_callback_organizationNameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationorganizationNameChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onOrganizationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationorganizationNameChangedSlot) =
+  var tmp = new QCoreApplicationorganizationNameChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCoreApplication_connect_organizationNameChanged(self.h, cast[int](addr tmp[]), fcQCoreApplication_slot_callback_organizationNameChanged, fcQCoreApplication_slot_callback_organizationNameChanged_release)
+
+proc organizationDomainChanged*(self: gen_qcoreapplication_types.QCoreApplication): void =
+  fcQCoreApplication_organizationDomainChanged(self.h)
+
+type QCoreApplicationorganizationDomainChangedSlot* = proc()
+proc fcQCoreApplication_slot_callback_organizationDomainChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QCoreApplicationorganizationDomainChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQCoreApplication_slot_callback_organizationDomainChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationorganizationDomainChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onOrganizationDomainChanged*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationorganizationDomainChangedSlot) =
+  var tmp = new QCoreApplicationorganizationDomainChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCoreApplication_connect_organizationDomainChanged(self.h, cast[int](addr tmp[]), fcQCoreApplication_slot_callback_organizationDomainChanged, fcQCoreApplication_slot_callback_organizationDomainChanged_release)
+
+proc applicationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication): void =
+  fcQCoreApplication_applicationNameChanged(self.h)
+
+type QCoreApplicationapplicationNameChangedSlot* = proc()
+proc fcQCoreApplication_slot_callback_applicationNameChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QCoreApplicationapplicationNameChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQCoreApplication_slot_callback_applicationNameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationapplicationNameChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onApplicationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationapplicationNameChangedSlot) =
+  var tmp = new QCoreApplicationapplicationNameChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCoreApplication_connect_applicationNameChanged(self.h, cast[int](addr tmp[]), fcQCoreApplication_slot_callback_applicationNameChanged, fcQCoreApplication_slot_callback_applicationNameChanged_release)
+
+proc applicationVersionChanged*(self: gen_qcoreapplication_types.QCoreApplication): void =
+  fcQCoreApplication_applicationVersionChanged(self.h)
+
+type QCoreApplicationapplicationVersionChangedSlot* = proc()
+proc fcQCoreApplication_slot_callback_applicationVersionChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QCoreApplicationapplicationVersionChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQCoreApplication_slot_callback_applicationVersionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationapplicationVersionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onApplicationVersionChanged*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationapplicationVersionChangedSlot) =
+  var tmp = new QCoreApplicationapplicationVersionChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCoreApplication_connect_applicationVersionChanged(self.h, cast[int](addr tmp[]), fcQCoreApplication_slot_callback_applicationVersionChanged, fcQCoreApplication_slot_callback_applicationVersionChanged_release)
+
+proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring, c: cstring): string =
+  let v_ms = fcQCoreApplication_trSC(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQCoreApplication_trSCN(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribute: cint, on: bool): void =
+  fcQCoreApplication_setAttributeAttributeOn(cint(attribute), on)
+
+proc processEvents*(_: type gen_qcoreapplication_types.QCoreApplication, flags: cint): void =
+  fcQCoreApplication_processEventsFlags(cint(flags))
+
+proc postEvent*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent, priority: cint): void =
+  fcQCoreApplication_postEventReceiverEventPriority(receiver.h, event.h, priority)
+
+proc sendPostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject): void =
+  fcQCoreApplication_sendPostedEventsReceiver(receiver.h)
+
+proc sendPostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, event_type: cint): void =
+  fcQCoreApplication_sendPostedEventsReceiverEventType(receiver.h, event_type)
+
+proc removePostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, eventType: cint): void =
+  fcQCoreApplication_removePostedEventsReceiverEventType(receiver.h, eventType)
+
+proc translate*(_: type gen_qcoreapplication_types.QCoreApplication, context: cstring, key: cstring, disambiguation: cstring): string =
+  let v_ms = fcQCoreApplication_translateContextKeyDisambiguation(context, key, disambiguation)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc translate*(_: type gen_qcoreapplication_types.QCoreApplication, context: cstring, key: cstring, disambiguation: cstring, n: cint): string =
+  let v_ms = fcQCoreApplication_translateContextKeyDisambiguationN(context, key, disambiguation, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc exit*(_: type gen_qcoreapplication_types.QCoreApplication, retcode: cint): void =
+  fcQCoreApplication_exitRetcode(retcode)
+
+type QCoreApplicationaboutToQuitSlot* = proc()
+proc fcQCoreApplication_slot_callback_aboutToQuit(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QCoreApplicationaboutToQuitSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQCoreApplication_slot_callback_aboutToQuit_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationaboutToQuitSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onAboutToQuit*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationaboutToQuitSlot) =
+  var tmp = new QCoreApplicationaboutToQuitSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCoreApplication_connect_aboutToQuit(self.h, cast[int](addr tmp[]), fcQCoreApplication_slot_callback_aboutToQuit, fcQCoreApplication_slot_callback_aboutToQuit_release)
+
+type QCoreApplicationmetaObjectProc* = proc(self: QCoreApplication): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QCoreApplicationmetacastProc* = proc(self: QCoreApplication, param1: cstring): pointer {.raises: [], gcsafe.}
+type QCoreApplicationmetacallProc* = proc(self: QCoreApplication, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QCoreApplicationnotifyProc* = proc(self: QCoreApplication, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QCoreApplicationeventProc* = proc(self: QCoreApplication, param1: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QCoreApplicationeventFilterProc* = proc(self: QCoreApplication, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QCoreApplicationtimerEventProc* = proc(self: QCoreApplication, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QCoreApplicationchildEventProc* = proc(self: QCoreApplication, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QCoreApplicationcustomEventProc* = proc(self: QCoreApplication, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QCoreApplicationconnectNotifyProc* = proc(self: QCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QCoreApplicationdisconnectNotifyProc* = proc(self: QCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
+type QCoreApplicationVTable* {.inheritable, pure.} = object
+  vtbl: cQCoreApplicationVTable
+  metaObject*: QCoreApplicationmetaObjectProc
+  metacast*: QCoreApplicationmetacastProc
+  metacall*: QCoreApplicationmetacallProc
+  notify*: QCoreApplicationnotifyProc
+  event*: QCoreApplicationeventProc
+  eventFilter*: QCoreApplicationeventFilterProc
+  timerEvent*: QCoreApplicationtimerEventProc
+  childEvent*: QCoreApplicationchildEventProc
+  customEvent*: QCoreApplicationcustomEventProc
+  connectNotify*: QCoreApplicationconnectNotifyProc
+  disconnectNotify*: QCoreApplicationdisconnectNotifyProc
+
+proc QCoreApplicationmetaObject*(self: gen_qcoreapplication_types.QCoreApplication): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCoreApplication_virtualbase_metaObject(self.h), owned: false)
+
+proc QCoreApplicationmetacast*(self: gen_qcoreapplication_types.QCoreApplication, param1: cstring): pointer =
+  fcQCoreApplication_virtualbase_metacast(self.h, param1)
+
+proc QCoreApplicationmetacall*(self: gen_qcoreapplication_types.QCoreApplication, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCoreApplication_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QCoreApplicationnotify*(self: gen_qcoreapplication_types.QCoreApplication, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQCoreApplication_virtualbase_notify(self.h, param1.h, param2.h)
+
+proc QCoreApplicationevent*(self: gen_qcoreapplication_types.QCoreApplication, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQCoreApplication_virtualbase_event(self.h, param1.h)
+
+proc QCoreApplicationeventFilter*(self: gen_qcoreapplication_types.QCoreApplication, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQCoreApplication_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QCoreApplicationtimerEvent*(self: gen_qcoreapplication_types.QCoreApplication, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQCoreApplication_virtualbase_timerEvent(self.h, event.h)
+
+proc QCoreApplicationchildEvent*(self: gen_qcoreapplication_types.QCoreApplication, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQCoreApplication_virtualbase_childEvent(self.h, event.h)
+
+proc QCoreApplicationcustomEvent*(self: gen_qcoreapplication_types.QCoreApplication, event: gen_qcoreevent_types.QEvent): void =
+  fcQCoreApplication_virtualbase_customEvent(self.h, event.h)
+
+proc QCoreApplicationconnectNotify*(self: gen_qcoreapplication_types.QCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQCoreApplication_virtualbase_connectNotify(self.h, signal.h)
+
+proc QCoreApplicationdisconnectNotify*(self: gen_qcoreapplication_types.QCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQCoreApplication_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQCoreApplication_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQCoreApplication_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQCoreApplication_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQCoreApplication_vtable_callback_notify(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
+  var virtualReturn = vtbl[].notify(self, slotval1, slotval2)
+  virtualReturn
+
+proc fcQCoreApplication_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  var virtualReturn = vtbl[].event(self, slotval1)
+  virtualReturn
+
+proc fcQCoreApplication_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
+  virtualReturn
+
+proc fcQCoreApplication_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl[].timerEvent(self, slotval1)
+
+proc fcQCoreApplication_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl[].childEvent(self, slotval1)
+
+proc fcQCoreApplication_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl[].customEvent(self, slotval1)
+
+proc fcQCoreApplication_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl[].connectNotify(self, slotval1)
+
+proc fcQCoreApplication_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+  let self = QCoreApplication(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQCoreApplication* {.inheritable.} = ref object of QCoreApplication
+  vtbl*: cQCoreApplicationVTable
+
+method metaObject*(self: VirtualQCoreApplication): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QCoreApplicationmetaObject(self[])
+method metacast*(self: VirtualQCoreApplication, param1: cstring): pointer {.base.} =
+  QCoreApplicationmetacast(self[], param1)
+method metacall*(self: VirtualQCoreApplication, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QCoreApplicationmetacall(self[], param1, param2, param3)
+method notify*(self: VirtualQCoreApplication, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QCoreApplicationnotify(self[], param1, param2)
+method event*(self: VirtualQCoreApplication, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QCoreApplicationevent(self[], param1)
+method eventFilter*(self: VirtualQCoreApplication, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QCoreApplicationeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQCoreApplication, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QCoreApplicationtimerEvent(self[], event)
+method childEvent*(self: VirtualQCoreApplication, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QCoreApplicationchildEvent(self[], event)
+method customEvent*(self: VirtualQCoreApplication, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QCoreApplicationcustomEvent(self[], event)
+method connectNotify*(self: VirtualQCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QCoreApplicationconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QCoreApplicationdisconnectNotify(self[], signal)
+
+proc fcQCoreApplication_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  var virtualReturn = inst.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQCoreApplication_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  let slotval1 = (param1)
+  var virtualReturn = inst.metacast(slotval1)
+  virtualReturn
+
+proc fcQCoreApplication_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQCoreApplication_method_callback_notify(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
+  var virtualReturn = inst.notify(slotval1, slotval2)
+  virtualReturn
+
+proc fcQCoreApplication_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  var virtualReturn = inst.event(slotval1)
+  virtualReturn
+
+proc fcQCoreApplication_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+proc fcQCoreApplication_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  inst.timerEvent(slotval1)
+
+proc fcQCoreApplication_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  inst.childEvent(slotval1)
+
+proc fcQCoreApplication_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  inst.customEvent(slotval1)
+
+proc fcQCoreApplication_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  inst.connectNotify(slotval1)
+
+proc fcQCoreApplication_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  inst.disconnectNotify(slotval1)
+
+
+proc resolveInterface*(self: gen_qcoreapplication_types.QCoreApplication, name: cstring, revision: cint): pointer =
+  fcQCoreApplication_protectedbase_resolveInterface(self.h, name, revision)
+
+proc sender*(self: gen_qcoreapplication_types.QCoreApplication): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCoreApplication_protectedbase_sender(self.h), owned: false)
+
+proc senderSignalIndex*(self: gen_qcoreapplication_types.QCoreApplication): cint =
+  fcQCoreApplication_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcoreapplication_types.QCoreApplication, signal: cstring): cint =
+  fcQCoreApplication_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcoreapplication_types.QCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCoreApplication_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
+    vtbl: ref QCoreApplicationVTable = nil): gen_qcoreapplication_types.QCoreApplication =
+  # Convert []string to long-lived int& argc, char** argv, never call free()
+  var args2 = @[getAppFilename()]
+  try:
+    args2.add commandLineParams()
+  except OSError:
+    echo getCurrentExceptionMsg()
+  var argv: cStringArray = allocCstringArray(args2)
+  var argc {.threadvar.}: cint
+  argc = args2.len.cint
+  let vtbl = if vtbl == nil: new QCoreApplicationVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQCoreApplication_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQCoreApplication_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQCoreApplication_vtable_callback_metacall
+  if not isNil(vtbl[].notify):
+    vtbl[].vtbl.notify = fcQCoreApplication_vtable_callback_notify
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQCoreApplication_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQCoreApplication_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQCoreApplication_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQCoreApplication_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQCoreApplication_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQCoreApplication_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQCoreApplication_vtable_callback_disconnectNotify
+  let tmp = gen_qcoreapplication_types.QCoreApplication(h: fcQCoreApplication_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), addr argc, argv), owned: true)
+  fcQCoreApplication_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
+    param3: cint,
+    vtbl: ref QCoreApplicationVTable = nil): gen_qcoreapplication_types.QCoreApplication =
+  # Convert []string to long-lived int& argc, char** argv, never call free()
+  var args2 = @[getAppFilename()]
+  try:
+    args2.add commandLineParams()
+  except OSError:
+    echo getCurrentExceptionMsg()
+  var argv: cStringArray = allocCstringArray(args2)
+  var argc {.threadvar.}: cint
+  argc = args2.len.cint
+  let vtbl = if vtbl == nil: new QCoreApplicationVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QCoreApplicationVTable](fcQCoreApplication_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQCoreApplication_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQCoreApplication_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQCoreApplication_vtable_callback_metacall
+  if not isNil(vtbl[].notify):
+    vtbl[].vtbl.notify = fcQCoreApplication_vtable_callback_notify
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQCoreApplication_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQCoreApplication_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQCoreApplication_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQCoreApplication_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQCoreApplication_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQCoreApplication_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQCoreApplication_vtable_callback_disconnectNotify
+  let tmp = gen_qcoreapplication_types.QCoreApplication(h: fcQCoreApplication_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), addr argc, argv, param3), owned: true)
+  fcQCoreApplication_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+const cQCoreApplication_mvtbl = cQCoreApplicationVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQCoreApplication()[])](self.fcQCoreApplication_vdata()[])
+    inst[].h = nil
+    inst[].owned = false,
+
+  metaObject: fcQCoreApplication_method_callback_metaObject,
+  metacast: fcQCoreApplication_method_callback_metacast,
+  metacall: fcQCoreApplication_method_callback_metacall,
+  notify: fcQCoreApplication_method_callback_notify,
+  event: fcQCoreApplication_method_callback_event,
+  eventFilter: fcQCoreApplication_method_callback_eventFilter,
+  timerEvent: fcQCoreApplication_method_callback_timerEvent,
+  childEvent: fcQCoreApplication_method_callback_childEvent,
+  customEvent: fcQCoreApplication_method_callback_customEvent,
+  connectNotify: fcQCoreApplication_method_callback_connectNotify,
+  disconnectNotify: fcQCoreApplication_method_callback_disconnectNotify,
+)
+proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
+    inst: VirtualQCoreApplication) =
+  # Convert []string to long-lived int& argc, char** argv, never call free()
+  var args2 = @[getAppFilename()]
+  try:
+    args2.add commandLineParams()
+  except OSError:
+    echo getCurrentExceptionMsg()
+  var argv: cStringArray = allocCstringArray(args2)
+  var argc {.threadvar.}: cint
+  argc = args2.len.cint
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQCoreApplication_new(addr(cQCoreApplication_mvtbl), csize_t(sizeof(pointer)), addr argc, argv)
+  fcQCoreApplication_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
+    param3: cint,
+    inst: VirtualQCoreApplication) =
+  # Convert []string to long-lived int& argc, char** argv, never call free()
+  var args2 = @[getAppFilename()]
+  try:
+    args2.add commandLineParams()
+  except OSError:
+    echo getCurrentExceptionMsg()
+  var argv: cStringArray = allocCstringArray(args2)
+  var argc {.threadvar.}: cint
+  argc = args2.len.cint
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQCoreApplication_new2(addr(cQCoreApplication_mvtbl), csize_t(sizeof(pointer)), addr argc, argv, param3)
+  fcQCoreApplication_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc staticMetaObject*(_: type gen_qcoreapplication_types.QCoreApplication): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCoreApplication_staticMetaObject())

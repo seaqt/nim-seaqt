@@ -1,0 +1,2 @@
+import ./QtCore/gen_qregularexpression
+export gen_qregularexpression

@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractoptionspage
+export gen_abstractoptionspage

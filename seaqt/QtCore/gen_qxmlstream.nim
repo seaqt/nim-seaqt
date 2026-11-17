@@ -1,0 +1,676 @@
+import ./qtcore_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free, c_malloc
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+type QXmlStreamReaderTokenTypeEnum* = distinct cint
+template NoToken*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 0
+template Invalid*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 1
+template StartDocument*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 2
+template EndDocument*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 3
+template StartElement*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 4
+template EndElement*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 5
+template Characters*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 6
+template Comment*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 7
+template DTD*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 8
+template EntityReference*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 9
+template ProcessingInstruction*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 10
+
+
+type QXmlStreamReaderReadElementTextBehaviourEnum* = distinct cint
+template ErrorOnUnexpectedElement*(_: type QXmlStreamReaderReadElementTextBehaviourEnum): untyped = 0
+template IncludeChildElements*(_: type QXmlStreamReaderReadElementTextBehaviourEnum): untyped = 1
+template SkipChildElements*(_: type QXmlStreamReaderReadElementTextBehaviourEnum): untyped = 2
+
+
+type QXmlStreamReaderErrorEnum* = distinct cint
+template NoError*(_: type QXmlStreamReaderErrorEnum): untyped = 0
+template UnexpectedElementError*(_: type QXmlStreamReaderErrorEnum): untyped = 1
+template CustomError*(_: type QXmlStreamReaderErrorEnum): untyped = 2
+template NotWellFormedError*(_: type QXmlStreamReaderErrorEnum): untyped = 3
+template PrematureEndOfDocumentError*(_: type QXmlStreamReaderErrorEnum): untyped = 4
+
+
+type QXmlStreamWriterErrorEnum* = distinct cint
+template None*(_: type QXmlStreamWriterErrorEnum): untyped = 0
+template IO*(_: type QXmlStreamWriterErrorEnum): untyped = 1
+template Encoding*(_: type QXmlStreamWriterErrorEnum): untyped = 2
+template InvalidCharacter*(_: type QXmlStreamWriterErrorEnum): untyped = 3
+template Custom*(_: type QXmlStreamWriterErrorEnum): untyped = 4
+
+
+import ./gen_qxmlstream_types
+export gen_qxmlstream_types
+
+import
+  ./gen_qiodevice_types
+export
+  gen_qiodevice_types
+
+type cQXmlStreamAttribute*{.exportc: "QXmlStreamAttribute", incompleteStruct.} = object
+type cQXmlStreamNamespaceDeclaration*{.exportc: "QXmlStreamNamespaceDeclaration", incompleteStruct.} = object
+type cQXmlStreamNotationDeclaration*{.exportc: "QXmlStreamNotationDeclaration", incompleteStruct.} = object
+type cQXmlStreamEntityDeclaration*{.exportc: "QXmlStreamEntityDeclaration", incompleteStruct.} = object
+type cQXmlStreamEntityResolver*{.exportc: "QXmlStreamEntityResolver", incompleteStruct.} = object
+type cQXmlStreamReader*{.exportc: "QXmlStreamReader", incompleteStruct.} = object
+type cQXmlStreamWriter*{.exportc: "QXmlStreamWriter", incompleteStruct.} = object
+
+proc fcQXmlStreamAttribute_isDefault(self: pointer): bool {.importc: "QXmlStreamAttribute_isDefault".}
+proc fcQXmlStreamAttribute_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QXmlStreamAttribute_operatorAssign".}
+proc fcQXmlStreamAttribute_new(): ptr cQXmlStreamAttribute {.importc: "QXmlStreamAttribute_new".}
+proc fcQXmlStreamAttribute_new2(qualifiedName: struct_seaqt_string, value: struct_seaqt_string): ptr cQXmlStreamAttribute {.importc: "QXmlStreamAttribute_new_qualifiedName_value".}
+proc fcQXmlStreamAttribute_new3(namespaceUri: struct_seaqt_string, name: struct_seaqt_string, value: struct_seaqt_string): ptr cQXmlStreamAttribute {.importc: "QXmlStreamAttribute_new_namespaceUri_name_value".}
+proc fcQXmlStreamAttribute_new4(fromVal: pointer): ptr cQXmlStreamAttribute {.importc: "QXmlStreamAttribute_new_from".}
+proc fcQXmlStreamNamespaceDeclaration_new(): ptr cQXmlStreamNamespaceDeclaration {.importc: "QXmlStreamNamespaceDeclaration_new".}
+proc fcQXmlStreamNamespaceDeclaration_new2(prefix: struct_seaqt_string, namespaceUri: struct_seaqt_string): ptr cQXmlStreamNamespaceDeclaration {.importc: "QXmlStreamNamespaceDeclaration_new_prefix_namespaceUri".}
+proc fcQXmlStreamNamespaceDeclaration_new3(fromVal: pointer): ptr cQXmlStreamNamespaceDeclaration {.importc: "QXmlStreamNamespaceDeclaration_new_from".}
+proc fcQXmlStreamNotationDeclaration_new(): ptr cQXmlStreamNotationDeclaration {.importc: "QXmlStreamNotationDeclaration_new".}
+proc fcQXmlStreamNotationDeclaration_new2(fromVal: pointer): ptr cQXmlStreamNotationDeclaration {.importc: "QXmlStreamNotationDeclaration_new_from".}
+proc fcQXmlStreamEntityDeclaration_new(): ptr cQXmlStreamEntityDeclaration {.importc: "QXmlStreamEntityDeclaration_new".}
+proc fcQXmlStreamEntityDeclaration_new2(fromVal: pointer): ptr cQXmlStreamEntityDeclaration {.importc: "QXmlStreamEntityDeclaration_new_from".}
+proc fcQXmlStreamEntityResolver_resolveEntity(self: pointer, publicId: struct_seaqt_string, systemId: struct_seaqt_string): struct_seaqt_string {.importc: "QXmlStreamEntityResolver_resolveEntity".}
+proc fcQXmlStreamEntityResolver_resolveUndeclaredEntity(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.importc: "QXmlStreamEntityResolver_resolveUndeclaredEntity".}
+proc fcQXmlStreamEntityResolver_vdata(self: pointer): ptr pointer {.importc: "QXmlStreamEntityResolver_vdata".}
+proc fvdata_cQXmlStreamEntityResolver(self: pointer): pointer {.importc: "vdata_QXmlStreamEntityResolver".}
+
+type cQXmlStreamEntityResolverVTable {.pure.} = object
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  resolveEntity*: proc(self: pointer, publicId: struct_seaqt_string, systemId: struct_seaqt_string): struct_seaqt_string {.cdecl, raises: [], gcsafe.}
+  resolveUndeclaredEntity*: proc(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.cdecl, raises: [], gcsafe.}
+proc fcQXmlStreamEntityResolver_virtualbase_resolveEntity(self: pointer, publicId: struct_seaqt_string, systemId: struct_seaqt_string): struct_seaqt_string {.importc: "QXmlStreamEntityResolver_virtualbase_resolveEntity".}
+proc fcQXmlStreamEntityResolver_virtualbase_resolveUndeclaredEntity(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.importc: "QXmlStreamEntityResolver_virtualbase_resolveUndeclaredEntity".}
+proc fcQXmlStreamEntityResolver_new(vtbl: pointer, vdata: csize_t): ptr cQXmlStreamEntityResolver {.importc: "QXmlStreamEntityResolver_new".}
+proc fcQXmlStreamReader_setDevice(self: pointer, device: pointer): void {.importc: "QXmlStreamReader_setDevice".}
+proc fcQXmlStreamReader_device(self: pointer): pointer {.importc: "QXmlStreamReader_device".}
+proc fcQXmlStreamReader_addData(self: pointer, data: struct_seaqt_string): void {.importc: "QXmlStreamReader_addData".}
+proc fcQXmlStreamReader_clear(self: pointer): void {.importc: "QXmlStreamReader_clear".}
+proc fcQXmlStreamReader_atEnd(self: pointer): bool {.importc: "QXmlStreamReader_atEnd".}
+proc fcQXmlStreamReader_readNext(self: pointer): cint {.importc: "QXmlStreamReader_readNext".}
+proc fcQXmlStreamReader_readNextStartElement(self: pointer): bool {.importc: "QXmlStreamReader_readNextStartElement".}
+proc fcQXmlStreamReader_skipCurrentElement(self: pointer): void {.importc: "QXmlStreamReader_skipCurrentElement".}
+proc fcQXmlStreamReader_readRawInnerData(self: pointer): struct_seaqt_string {.importc: "QXmlStreamReader_readRawInnerData".}
+proc fcQXmlStreamReader_tokenType(self: pointer): cint {.importc: "QXmlStreamReader_tokenType".}
+proc fcQXmlStreamReader_tokenString(self: pointer): struct_seaqt_string {.importc: "QXmlStreamReader_tokenString".}
+proc fcQXmlStreamReader_setNamespaceProcessing(self: pointer, namespaceProcessing: bool): void {.importc: "QXmlStreamReader_setNamespaceProcessing".}
+proc fcQXmlStreamReader_namespaceProcessing(self: pointer): bool {.importc: "QXmlStreamReader_namespaceProcessing".}
+proc fcQXmlStreamReader_isStartDocument(self: pointer): bool {.importc: "QXmlStreamReader_isStartDocument".}
+proc fcQXmlStreamReader_isEndDocument(self: pointer): bool {.importc: "QXmlStreamReader_isEndDocument".}
+proc fcQXmlStreamReader_isStartElement(self: pointer): bool {.importc: "QXmlStreamReader_isStartElement".}
+proc fcQXmlStreamReader_isEndElement(self: pointer): bool {.importc: "QXmlStreamReader_isEndElement".}
+proc fcQXmlStreamReader_isCharacters(self: pointer): bool {.importc: "QXmlStreamReader_isCharacters".}
+proc fcQXmlStreamReader_isWhitespace(self: pointer): bool {.importc: "QXmlStreamReader_isWhitespace".}
+proc fcQXmlStreamReader_isCDATA(self: pointer): bool {.importc: "QXmlStreamReader_isCDATA".}
+proc fcQXmlStreamReader_isComment(self: pointer): bool {.importc: "QXmlStreamReader_isComment".}
+proc fcQXmlStreamReader_isDTD(self: pointer): bool {.importc: "QXmlStreamReader_isDTD".}
+proc fcQXmlStreamReader_isEntityReference(self: pointer): bool {.importc: "QXmlStreamReader_isEntityReference".}
+proc fcQXmlStreamReader_isProcessingInstruction(self: pointer): bool {.importc: "QXmlStreamReader_isProcessingInstruction".}
+proc fcQXmlStreamReader_isStandaloneDocument(self: pointer): bool {.importc: "QXmlStreamReader_isStandaloneDocument".}
+proc fcQXmlStreamReader_hasStandaloneDeclaration(self: pointer): bool {.importc: "QXmlStreamReader_hasStandaloneDeclaration".}
+proc fcQXmlStreamReader_lineNumber(self: pointer): clonglong {.importc: "QXmlStreamReader_lineNumber".}
+proc fcQXmlStreamReader_columnNumber(self: pointer): clonglong {.importc: "QXmlStreamReader_columnNumber".}
+proc fcQXmlStreamReader_characterOffset(self: pointer): clonglong {.importc: "QXmlStreamReader_characterOffset".}
+proc fcQXmlStreamReader_readElementText(self: pointer): struct_seaqt_string {.importc: "QXmlStreamReader_readElementText".}
+proc fcQXmlStreamReader_namespaceDeclarations(self: pointer): struct_seaqt_array {.importc: "QXmlStreamReader_namespaceDeclarations".}
+proc fcQXmlStreamReader_addExtraNamespaceDeclaration(self: pointer, extraNamespaceDeclaraction: pointer): void {.importc: "QXmlStreamReader_addExtraNamespaceDeclaration".}
+proc fcQXmlStreamReader_addExtraNamespaceDeclarations(self: pointer, extraNamespaceDeclaractions: struct_seaqt_array): void {.importc: "QXmlStreamReader_addExtraNamespaceDeclarations".}
+proc fcQXmlStreamReader_notationDeclarations(self: pointer): struct_seaqt_array {.importc: "QXmlStreamReader_notationDeclarations".}
+proc fcQXmlStreamReader_entityDeclarations(self: pointer): struct_seaqt_array {.importc: "QXmlStreamReader_entityDeclarations".}
+proc fcQXmlStreamReader_entityExpansionLimit(self: pointer): cint {.importc: "QXmlStreamReader_entityExpansionLimit".}
+proc fcQXmlStreamReader_setEntityExpansionLimit(self: pointer, limit: cint): void {.importc: "QXmlStreamReader_setEntityExpansionLimit".}
+proc fcQXmlStreamReader_raiseError(self: pointer): void {.importc: "QXmlStreamReader_raiseError".}
+proc fcQXmlStreamReader_errorString(self: pointer): struct_seaqt_string {.importc: "QXmlStreamReader_errorString".}
+proc fcQXmlStreamReader_error(self: pointer): cint {.importc: "QXmlStreamReader_error".}
+proc fcQXmlStreamReader_hasError(self: pointer): bool {.importc: "QXmlStreamReader_hasError".}
+proc fcQXmlStreamReader_setEntityResolver(self: pointer, resolver: pointer): void {.importc: "QXmlStreamReader_setEntityResolver".}
+proc fcQXmlStreamReader_entityResolver(self: pointer): pointer {.importc: "QXmlStreamReader_entityResolver".}
+proc fcQXmlStreamReader_readElementTextBehaviour(self: pointer, behaviour: cint): struct_seaqt_string {.importc: "QXmlStreamReader_readElementText_behaviour".}
+proc fcQXmlStreamReader_raiseErrorMessage(self: pointer, message: struct_seaqt_string): void {.importc: "QXmlStreamReader_raiseError_message".}
+proc fcQXmlStreamReader_new(): ptr cQXmlStreamReader {.importc: "QXmlStreamReader_new".}
+proc fcQXmlStreamReader_new2(device: pointer): ptr cQXmlStreamReader {.importc: "QXmlStreamReader_new_device".}
+proc fcQXmlStreamReader_new3(data: struct_seaqt_string): ptr cQXmlStreamReader {.importc: "QXmlStreamReader_new_data".}
+proc fcQXmlStreamWriter_setDevice(self: pointer, device: pointer): void {.importc: "QXmlStreamWriter_setDevice".}
+proc fcQXmlStreamWriter_device(self: pointer): pointer {.importc: "QXmlStreamWriter_device".}
+proc fcQXmlStreamWriter_setAutoFormatting(self: pointer, autoFormatting: bool): void {.importc: "QXmlStreamWriter_setAutoFormatting".}
+proc fcQXmlStreamWriter_autoFormatting(self: pointer): bool {.importc: "QXmlStreamWriter_autoFormatting".}
+proc fcQXmlStreamWriter_setAutoFormattingIndent(self: pointer, spacesOrTabs: cint): void {.importc: "QXmlStreamWriter_setAutoFormattingIndent".}
+proc fcQXmlStreamWriter_autoFormattingIndent(self: pointer): cint {.importc: "QXmlStreamWriter_autoFormattingIndent".}
+proc fcQXmlStreamWriter_setStopWritingOnError(self: pointer, stop: bool): void {.importc: "QXmlStreamWriter_setStopWritingOnError".}
+proc fcQXmlStreamWriter_stopWritingOnError(self: pointer): bool {.importc: "QXmlStreamWriter_stopWritingOnError".}
+proc fcQXmlStreamWriter_writeAttributeQualifiedNameValue(self: pointer, qualifiedName: struct_seaqt_string, value: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeAttribute_qualifiedName_value".}
+proc fcQXmlStreamWriter_writeAttributeNamespaceUriNameValue(self: pointer, namespaceUri: struct_seaqt_string, name: struct_seaqt_string, value: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeAttribute_namespaceUri_name_value".}
+proc fcQXmlStreamWriter_writeAttributeAttribute(self: pointer, attribute: pointer): void {.importc: "QXmlStreamWriter_writeAttribute_attribute".}
+proc fcQXmlStreamWriter_writeCDATA(self: pointer, text: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeCDATA".}
+proc fcQXmlStreamWriter_writeCharacters(self: pointer, text: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeCharacters".}
+proc fcQXmlStreamWriter_writeComment(self: pointer, text: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeComment".}
+proc fcQXmlStreamWriter_writeDTD(self: pointer, dtd: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeDTD".}
+proc fcQXmlStreamWriter_writeEmptyElementQualifiedName(self: pointer, qualifiedName: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeEmptyElement_qualifiedName".}
+proc fcQXmlStreamWriter_writeEmptyElementNamespaceUriName(self: pointer, namespaceUri: struct_seaqt_string, name: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeEmptyElement_namespaceUri_name".}
+proc fcQXmlStreamWriter_writeTextElementQualifiedNameText(self: pointer, qualifiedName: struct_seaqt_string, text: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeTextElement_qualifiedName_text".}
+proc fcQXmlStreamWriter_writeTextElementNamespaceUriNameText(self: pointer, namespaceUri: struct_seaqt_string, name: struct_seaqt_string, text: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeTextElement_namespaceUri_name_text".}
+proc fcQXmlStreamWriter_writeEndDocument(self: pointer): void {.importc: "QXmlStreamWriter_writeEndDocument".}
+proc fcQXmlStreamWriter_writeEndElement(self: pointer): void {.importc: "QXmlStreamWriter_writeEndElement".}
+proc fcQXmlStreamWriter_writeEntityReference(self: pointer, name: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeEntityReference".}
+proc fcQXmlStreamWriter_writeNamespaceNamespaceUri(self: pointer, namespaceUri: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeNamespace_namespaceUri".}
+proc fcQXmlStreamWriter_writeDefaultNamespace(self: pointer, namespaceUri: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeDefaultNamespace".}
+proc fcQXmlStreamWriter_writeProcessingInstructionTarget(self: pointer, target: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeProcessingInstruction_target".}
+proc fcQXmlStreamWriter_writeStartDocument(self: pointer): void {.importc: "QXmlStreamWriter_writeStartDocument".}
+proc fcQXmlStreamWriter_writeStartDocumentVersion(self: pointer, version: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeStartDocument_version".}
+proc fcQXmlStreamWriter_writeStartDocumentVersionStandalone(self: pointer, version: struct_seaqt_string, standalone: bool): void {.importc: "QXmlStreamWriter_writeStartDocument_version_standalone".}
+proc fcQXmlStreamWriter_writeStartElementQualifiedName(self: pointer, qualifiedName: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeStartElement_qualifiedName".}
+proc fcQXmlStreamWriter_writeStartElementNamespaceUriName(self: pointer, namespaceUri: struct_seaqt_string, name: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeStartElement_namespaceUri_name".}
+proc fcQXmlStreamWriter_writeCurrentToken(self: pointer, reader: pointer): void {.importc: "QXmlStreamWriter_writeCurrentToken".}
+proc fcQXmlStreamWriter_raiseError(self: pointer, message: struct_seaqt_string): void {.importc: "QXmlStreamWriter_raiseError".}
+proc fcQXmlStreamWriter_errorString(self: pointer): struct_seaqt_string {.importc: "QXmlStreamWriter_errorString".}
+proc fcQXmlStreamWriter_error(self: pointer): cint {.importc: "QXmlStreamWriter_error".}
+proc fcQXmlStreamWriter_hasError(self: pointer): bool {.importc: "QXmlStreamWriter_hasError".}
+proc fcQXmlStreamWriter_writeNamespaceNamespaceUriPrefix(self: pointer, namespaceUri: struct_seaqt_string, prefix: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeNamespace_namespaceUri_prefix".}
+proc fcQXmlStreamWriter_writeProcessingInstructionTargetData(self: pointer, target: struct_seaqt_string, data: struct_seaqt_string): void {.importc: "QXmlStreamWriter_writeProcessingInstruction_target_data".}
+proc fcQXmlStreamWriter_new(): ptr cQXmlStreamWriter {.importc: "QXmlStreamWriter_new".}
+proc fcQXmlStreamWriter_new2(device: pointer): ptr cQXmlStreamWriter {.importc: "QXmlStreamWriter_new_device".}
+
+proc isDefault*(self: gen_qxmlstream_types.QXmlStreamAttribute): bool =
+  fcQXmlStreamAttribute_isDefault(self.h)
+
+proc operatorAssign*(self: gen_qxmlstream_types.QXmlStreamAttribute, fromVal: gen_qxmlstream_types.QXmlStreamAttribute): void =
+  fcQXmlStreamAttribute_operatorAssign(self.h, fromVal.h)
+
+proc create*(T: type gen_qxmlstream_types.QXmlStreamAttribute): gen_qxmlstream_types.QXmlStreamAttribute =
+  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new(), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamAttribute,
+    qualifiedName: openArray[char], value: openArray[char]): gen_qxmlstream_types.QXmlStreamAttribute =
+  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new2(struct_seaqt_string(data: if len(qualifiedName) > 0: addr qualifiedName[0] else: nil, len: csize_t(len(qualifiedName))), struct_seaqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value)))), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamAttribute,
+    namespaceUri: openArray[char], name: openArray[char], value: openArray[char]): gen_qxmlstream_types.QXmlStreamAttribute =
+  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new3(struct_seaqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value)))), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamAttribute,
+    fromVal: gen_qxmlstream_types.QXmlStreamAttribute): gen_qxmlstream_types.QXmlStreamAttribute =
+  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new4(fromVal.h), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamNamespaceDeclaration): gen_qxmlstream_types.QXmlStreamNamespaceDeclaration =
+  let tmp = gen_qxmlstream_types.QXmlStreamNamespaceDeclaration(h: fcQXmlStreamNamespaceDeclaration_new(), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamNamespaceDeclaration,
+    prefix: openArray[char], namespaceUri: openArray[char]): gen_qxmlstream_types.QXmlStreamNamespaceDeclaration =
+  let tmp = gen_qxmlstream_types.QXmlStreamNamespaceDeclaration(h: fcQXmlStreamNamespaceDeclaration_new2(struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_seaqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri)))), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamNamespaceDeclaration,
+    fromVal: gen_qxmlstream_types.QXmlStreamNamespaceDeclaration): gen_qxmlstream_types.QXmlStreamNamespaceDeclaration =
+  let tmp = gen_qxmlstream_types.QXmlStreamNamespaceDeclaration(h: fcQXmlStreamNamespaceDeclaration_new3(fromVal.h), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamNotationDeclaration): gen_qxmlstream_types.QXmlStreamNotationDeclaration =
+  let tmp = gen_qxmlstream_types.QXmlStreamNotationDeclaration(h: fcQXmlStreamNotationDeclaration_new(), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamNotationDeclaration,
+    fromVal: gen_qxmlstream_types.QXmlStreamNotationDeclaration): gen_qxmlstream_types.QXmlStreamNotationDeclaration =
+  let tmp = gen_qxmlstream_types.QXmlStreamNotationDeclaration(h: fcQXmlStreamNotationDeclaration_new2(fromVal.h), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamEntityDeclaration): gen_qxmlstream_types.QXmlStreamEntityDeclaration =
+  let tmp = gen_qxmlstream_types.QXmlStreamEntityDeclaration(h: fcQXmlStreamEntityDeclaration_new(), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamEntityDeclaration,
+    fromVal: gen_qxmlstream_types.QXmlStreamEntityDeclaration): gen_qxmlstream_types.QXmlStreamEntityDeclaration =
+  let tmp = gen_qxmlstream_types.QXmlStreamEntityDeclaration(h: fcQXmlStreamEntityDeclaration_new2(fromVal.h), owned: true)
+  tmp
+proc resolveEntity*(self: gen_qxmlstream_types.QXmlStreamEntityResolver, publicId: openArray[char], systemId: openArray[char]): string =
+  let v_ms = fcQXmlStreamEntityResolver_resolveEntity(self.h, struct_seaqt_string(data: if len(publicId) > 0: addr publicId[0] else: nil, len: csize_t(len(publicId))), struct_seaqt_string(data: if len(systemId) > 0: addr systemId[0] else: nil, len: csize_t(len(systemId))))
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc resolveUndeclaredEntity*(self: gen_qxmlstream_types.QXmlStreamEntityResolver, name: openArray[char]): string =
+  let v_ms = fcQXmlStreamEntityResolver_resolveUndeclaredEntity(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+type QXmlStreamEntityResolverresolveEntityProc* = proc(self: QXmlStreamEntityResolver, publicId: openArray[char], systemId: openArray[char]): string {.raises: [], gcsafe.}
+type QXmlStreamEntityResolverresolveUndeclaredEntityProc* = proc(self: QXmlStreamEntityResolver, name: openArray[char]): string {.raises: [], gcsafe.}
+
+type QXmlStreamEntityResolverVTable* {.inheritable, pure.} = object
+  vtbl: cQXmlStreamEntityResolverVTable
+  resolveEntity*: QXmlStreamEntityResolverresolveEntityProc
+  resolveUndeclaredEntity*: QXmlStreamEntityResolverresolveUndeclaredEntityProc
+
+proc QXmlStreamEntityResolverresolveEntity*(self: gen_qxmlstream_types.QXmlStreamEntityResolver, publicId: openArray[char], systemId: openArray[char]): string =
+  let v_ms = fcQXmlStreamEntityResolver_virtualbase_resolveEntity(self.h, struct_seaqt_string(data: if len(publicId) > 0: addr publicId[0] else: nil, len: csize_t(len(publicId))), struct_seaqt_string(data: if len(systemId) > 0: addr systemId[0] else: nil, len: csize_t(len(systemId))))
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc QXmlStreamEntityResolverresolveUndeclaredEntity*(self: gen_qxmlstream_types.QXmlStreamEntityResolver, name: openArray[char]): string =
+  let v_ms = fcQXmlStreamEntityResolver_virtualbase_resolveUndeclaredEntity(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+
+proc fcQXmlStreamEntityResolver_vtable_callback_resolveEntity(self: pointer, publicId: struct_seaqt_string, systemId: struct_seaqt_string): struct_seaqt_string {.cdecl.} =
+  let vtbl = cast[ptr QXmlStreamEntityResolverVTable](fcQXmlStreamEntityResolver_vdata(self)[])
+  let self = QXmlStreamEntityResolver(h: self)
+  let vpublicId_ms = publicId
+  let vpublicIdx_ret = string.fromBytes(vpublicId_ms)
+  c_free(vpublicId_ms.data)
+  let slotval1 = vpublicIdx_ret
+  let vsystemId_ms = systemId
+  let vsystemIdx_ret = string.fromBytes(vsystemId_ms)
+  c_free(vsystemId_ms.data)
+  let slotval2 = vsystemIdx_ret
+  var virtualReturn = vtbl[].resolveEntity(self, slotval1, slotval2)
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_seaqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
+
+proc fcQXmlStreamEntityResolver_vtable_callback_resolveUndeclaredEntity(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.cdecl.} =
+  let vtbl = cast[ptr QXmlStreamEntityResolverVTable](fcQXmlStreamEntityResolver_vdata(self)[])
+  let self = QXmlStreamEntityResolver(h: self)
+  let vname_ms = name
+  let vnamex_ret = string.fromBytes(vname_ms)
+  c_free(vname_ms.data)
+  let slotval1 = vnamex_ret
+  var virtualReturn = vtbl[].resolveUndeclaredEntity(self, slotval1)
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_seaqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
+
+type VirtualQXmlStreamEntityResolver* {.inheritable.} = ref object of QXmlStreamEntityResolver
+  vtbl*: cQXmlStreamEntityResolverVTable
+
+method resolveEntity*(self: VirtualQXmlStreamEntityResolver, publicId: openArray[char], systemId: openArray[char]): string {.base.} =
+  QXmlStreamEntityResolverresolveEntity(self[], publicId, systemId)
+method resolveUndeclaredEntity*(self: VirtualQXmlStreamEntityResolver, name: openArray[char]): string {.base.} =
+  QXmlStreamEntityResolverresolveUndeclaredEntity(self[], name)
+
+proc fcQXmlStreamEntityResolver_method_callback_resolveEntity(self: pointer, publicId: struct_seaqt_string, systemId: struct_seaqt_string): struct_seaqt_string {.cdecl.} =
+  let inst = cast[VirtualQXmlStreamEntityResolver](fcQXmlStreamEntityResolver_vdata(self)[])
+  let vpublicId_ms = publicId
+  let vpublicIdx_ret = string.fromBytes(vpublicId_ms)
+  c_free(vpublicId_ms.data)
+  let slotval1 = vpublicIdx_ret
+  let vsystemId_ms = systemId
+  let vsystemIdx_ret = string.fromBytes(vsystemId_ms)
+  c_free(vsystemId_ms.data)
+  let slotval2 = vsystemIdx_ret
+  var virtualReturn = inst.resolveEntity(slotval1, slotval2)
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_seaqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
+
+proc fcQXmlStreamEntityResolver_method_callback_resolveUndeclaredEntity(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.cdecl.} =
+  let inst = cast[VirtualQXmlStreamEntityResolver](fcQXmlStreamEntityResolver_vdata(self)[])
+  let vname_ms = name
+  let vnamex_ret = string.fromBytes(vname_ms)
+  c_free(vname_ms.data)
+  let slotval1 = vnamex_ret
+  var virtualReturn = inst.resolveUndeclaredEntity(slotval1)
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_seaqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
+
+
+proc create*(T: type gen_qxmlstream_types.QXmlStreamEntityResolver,
+    vtbl: ref QXmlStreamEntityResolverVTable = nil): gen_qxmlstream_types.QXmlStreamEntityResolver =
+  let vtbl = if vtbl == nil: new QXmlStreamEntityResolverVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QXmlStreamEntityResolverVTable](fcQXmlStreamEntityResolver_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].resolveEntity):
+    vtbl[].vtbl.resolveEntity = fcQXmlStreamEntityResolver_vtable_callback_resolveEntity
+  if not isNil(vtbl[].resolveUndeclaredEntity):
+    vtbl[].vtbl.resolveUndeclaredEntity = fcQXmlStreamEntityResolver_vtable_callback_resolveUndeclaredEntity
+  let tmp = gen_qxmlstream_types.QXmlStreamEntityResolver(h: fcQXmlStreamEntityResolver_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
+  fcQXmlStreamEntityResolver_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+const cQXmlStreamEntityResolver_mvtbl = cQXmlStreamEntityResolverVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQXmlStreamEntityResolver()[])](self.fcQXmlStreamEntityResolver_vdata()[])
+    inst[].h = nil
+    inst[].owned = false,
+
+  resolveEntity: fcQXmlStreamEntityResolver_method_callback_resolveEntity,
+  resolveUndeclaredEntity: fcQXmlStreamEntityResolver_method_callback_resolveUndeclaredEntity,
+)
+proc create*(T: type gen_qxmlstream_types.QXmlStreamEntityResolver,
+    inst: VirtualQXmlStreamEntityResolver) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQXmlStreamEntityResolver_new(addr(cQXmlStreamEntityResolver_mvtbl), csize_t(sizeof(pointer)))
+  fcQXmlStreamEntityResolver_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc setDevice*(self: gen_qxmlstream_types.QXmlStreamReader, device: gen_qiodevice_types.QIODevice): void =
+  fcQXmlStreamReader_setDevice(self.h, device.h)
+
+proc device*(self: gen_qxmlstream_types.QXmlStreamReader): gen_qiodevice_types.QIODevice =
+  gen_qiodevice_types.QIODevice(h: fcQXmlStreamReader_device(self.h), owned: false)
+
+proc addData*(self: gen_qxmlstream_types.QXmlStreamReader, data: openArray[char]): void =
+  fcQXmlStreamReader_addData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+
+proc clear*(self: gen_qxmlstream_types.QXmlStreamReader): void =
+  fcQXmlStreamReader_clear(self.h)
+
+proc atEnd*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_atEnd(self.h)
+
+proc readNext*(self: gen_qxmlstream_types.QXmlStreamReader): cint =
+  cint(fcQXmlStreamReader_readNext(self.h))
+
+proc readNextStartElement*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_readNextStartElement(self.h)
+
+proc skipCurrentElement*(self: gen_qxmlstream_types.QXmlStreamReader): void =
+  fcQXmlStreamReader_skipCurrentElement(self.h)
+
+proc readRawInnerData*(self: gen_qxmlstream_types.QXmlStreamReader): string =
+  let v_ms = fcQXmlStreamReader_readRawInnerData(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc tokenType*(self: gen_qxmlstream_types.QXmlStreamReader): cint =
+  cint(fcQXmlStreamReader_tokenType(self.h))
+
+proc tokenString*(self: gen_qxmlstream_types.QXmlStreamReader): string =
+  let v_ms = fcQXmlStreamReader_tokenString(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setNamespaceProcessing*(self: gen_qxmlstream_types.QXmlStreamReader, namespaceProcessing: bool): void =
+  fcQXmlStreamReader_setNamespaceProcessing(self.h, namespaceProcessing)
+
+proc namespaceProcessing*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_namespaceProcessing(self.h)
+
+proc isStartDocument*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isStartDocument(self.h)
+
+proc isEndDocument*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isEndDocument(self.h)
+
+proc isStartElement*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isStartElement(self.h)
+
+proc isEndElement*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isEndElement(self.h)
+
+proc isCharacters*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isCharacters(self.h)
+
+proc isWhitespace*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isWhitespace(self.h)
+
+proc isCDATA*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isCDATA(self.h)
+
+proc isComment*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isComment(self.h)
+
+proc isDTD*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isDTD(self.h)
+
+proc isEntityReference*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isEntityReference(self.h)
+
+proc isProcessingInstruction*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isProcessingInstruction(self.h)
+
+proc isStandaloneDocument*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_isStandaloneDocument(self.h)
+
+proc hasStandaloneDeclaration*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_hasStandaloneDeclaration(self.h)
+
+proc lineNumber*(self: gen_qxmlstream_types.QXmlStreamReader): clonglong =
+  fcQXmlStreamReader_lineNumber(self.h)
+
+proc columnNumber*(self: gen_qxmlstream_types.QXmlStreamReader): clonglong =
+  fcQXmlStreamReader_columnNumber(self.h)
+
+proc characterOffset*(self: gen_qxmlstream_types.QXmlStreamReader): clonglong =
+  fcQXmlStreamReader_characterOffset(self.h)
+
+proc readElementText*(self: gen_qxmlstream_types.QXmlStreamReader): string =
+  let v_ms = fcQXmlStreamReader_readElementText(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc namespaceDeclarations*(self: gen_qxmlstream_types.QXmlStreamReader): seq[gen_qxmlstream_types.QXmlStreamNamespaceDeclaration] =
+  var v_ma = fcQXmlStreamReader_namespaceDeclarations(self.h)
+  var vx_ret = newSeq[gen_qxmlstream_types.QXmlStreamNamespaceDeclaration](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qxmlstream_types.QXmlStreamNamespaceDeclaration(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc addExtraNamespaceDeclaration*(self: gen_qxmlstream_types.QXmlStreamReader, extraNamespaceDeclaraction: gen_qxmlstream_types.QXmlStreamNamespaceDeclaration): void =
+  fcQXmlStreamReader_addExtraNamespaceDeclaration(self.h, extraNamespaceDeclaraction.h)
+
+proc addExtraNamespaceDeclarations*(self: gen_qxmlstream_types.QXmlStreamReader, extraNamespaceDeclaractions: openArray[gen_qxmlstream_types.QXmlStreamNamespaceDeclaration]): void =
+  var extraNamespaceDeclaractions_CArray = newSeq[pointer](len(extraNamespaceDeclaractions))
+  for i in 0..<len(extraNamespaceDeclaractions):
+    extraNamespaceDeclaractions_CArray[i] = extraNamespaceDeclaractions[i].h
+
+  fcQXmlStreamReader_addExtraNamespaceDeclarations(self.h, struct_seaqt_array(len: csize_t(len(extraNamespaceDeclaractions)), data: if len(extraNamespaceDeclaractions) == 0: nil else: addr(extraNamespaceDeclaractions_CArray[0])))
+
+proc notationDeclarations*(self: gen_qxmlstream_types.QXmlStreamReader): seq[gen_qxmlstream_types.QXmlStreamNotationDeclaration] =
+  var v_ma = fcQXmlStreamReader_notationDeclarations(self.h)
+  var vx_ret = newSeq[gen_qxmlstream_types.QXmlStreamNotationDeclaration](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qxmlstream_types.QXmlStreamNotationDeclaration(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc entityDeclarations*(self: gen_qxmlstream_types.QXmlStreamReader): seq[gen_qxmlstream_types.QXmlStreamEntityDeclaration] =
+  var v_ma = fcQXmlStreamReader_entityDeclarations(self.h)
+  var vx_ret = newSeq[gen_qxmlstream_types.QXmlStreamEntityDeclaration](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qxmlstream_types.QXmlStreamEntityDeclaration(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc entityExpansionLimit*(self: gen_qxmlstream_types.QXmlStreamReader): cint =
+  fcQXmlStreamReader_entityExpansionLimit(self.h)
+
+proc setEntityExpansionLimit*(self: gen_qxmlstream_types.QXmlStreamReader, limit: cint): void =
+  fcQXmlStreamReader_setEntityExpansionLimit(self.h, limit)
+
+proc raiseError*(self: gen_qxmlstream_types.QXmlStreamReader): void =
+  fcQXmlStreamReader_raiseError(self.h)
+
+proc errorString*(self: gen_qxmlstream_types.QXmlStreamReader): string =
+  let v_ms = fcQXmlStreamReader_errorString(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc error*(self: gen_qxmlstream_types.QXmlStreamReader): cint =
+  cint(fcQXmlStreamReader_error(self.h))
+
+proc hasError*(self: gen_qxmlstream_types.QXmlStreamReader): bool =
+  fcQXmlStreamReader_hasError(self.h)
+
+proc setEntityResolver*(self: gen_qxmlstream_types.QXmlStreamReader, resolver: gen_qxmlstream_types.QXmlStreamEntityResolver): void =
+  fcQXmlStreamReader_setEntityResolver(self.h, resolver.h)
+
+proc entityResolver*(self: gen_qxmlstream_types.QXmlStreamReader): gen_qxmlstream_types.QXmlStreamEntityResolver =
+  gen_qxmlstream_types.QXmlStreamEntityResolver(h: fcQXmlStreamReader_entityResolver(self.h), owned: false)
+
+proc readElementText*(self: gen_qxmlstream_types.QXmlStreamReader, behaviour: cint): string =
+  let v_ms = fcQXmlStreamReader_readElementTextBehaviour(self.h, cint(behaviour))
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc raiseError*(self: gen_qxmlstream_types.QXmlStreamReader, message: openArray[char]): void =
+  fcQXmlStreamReader_raiseErrorMessage(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
+
+proc create*(T: type gen_qxmlstream_types.QXmlStreamReader): gen_qxmlstream_types.QXmlStreamReader =
+  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new(), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamReader,
+    device: gen_qiodevice_types.QIODevice): gen_qxmlstream_types.QXmlStreamReader =
+  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new2(device.h), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamReader,
+    data: openArray[char]): gen_qxmlstream_types.QXmlStreamReader =
+  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new3(struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: true)
+  tmp
+proc setDevice*(self: gen_qxmlstream_types.QXmlStreamWriter, device: gen_qiodevice_types.QIODevice): void =
+  fcQXmlStreamWriter_setDevice(self.h, device.h)
+
+proc device*(self: gen_qxmlstream_types.QXmlStreamWriter): gen_qiodevice_types.QIODevice =
+  gen_qiodevice_types.QIODevice(h: fcQXmlStreamWriter_device(self.h), owned: false)
+
+proc setAutoFormatting*(self: gen_qxmlstream_types.QXmlStreamWriter, autoFormatting: bool): void =
+  fcQXmlStreamWriter_setAutoFormatting(self.h, autoFormatting)
+
+proc autoFormatting*(self: gen_qxmlstream_types.QXmlStreamWriter): bool =
+  fcQXmlStreamWriter_autoFormatting(self.h)
+
+proc setAutoFormattingIndent*(self: gen_qxmlstream_types.QXmlStreamWriter, spacesOrTabs: cint): void =
+  fcQXmlStreamWriter_setAutoFormattingIndent(self.h, spacesOrTabs)
+
+proc autoFormattingIndent*(self: gen_qxmlstream_types.QXmlStreamWriter): cint =
+  fcQXmlStreamWriter_autoFormattingIndent(self.h)
+
+proc setStopWritingOnError*(self: gen_qxmlstream_types.QXmlStreamWriter, stop: bool): void =
+  fcQXmlStreamWriter_setStopWritingOnError(self.h, stop)
+
+proc stopWritingOnError*(self: gen_qxmlstream_types.QXmlStreamWriter): bool =
+  fcQXmlStreamWriter_stopWritingOnError(self.h)
+
+proc writeAttribute*(self: gen_qxmlstream_types.QXmlStreamWriter, qualifiedName: openArray[char], value: openArray[char]): void =
+  fcQXmlStreamWriter_writeAttributeQualifiedNameValue(self.h, struct_seaqt_string(data: if len(qualifiedName) > 0: addr qualifiedName[0] else: nil, len: csize_t(len(qualifiedName))), struct_seaqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
+
+proc writeAttribute*(self: gen_qxmlstream_types.QXmlStreamWriter, namespaceUri: openArray[char], name: openArray[char], value: openArray[char]): void =
+  fcQXmlStreamWriter_writeAttributeNamespaceUriNameValue(self.h, struct_seaqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
+
+proc writeAttribute*(self: gen_qxmlstream_types.QXmlStreamWriter, attribute: gen_qxmlstream_types.QXmlStreamAttribute): void =
+  fcQXmlStreamWriter_writeAttributeAttribute(self.h, attribute.h)
+
+proc writeCDATA*(self: gen_qxmlstream_types.QXmlStreamWriter, text: openArray[char]): void =
+  fcQXmlStreamWriter_writeCDATA(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+
+proc writeCharacters*(self: gen_qxmlstream_types.QXmlStreamWriter, text: openArray[char]): void =
+  fcQXmlStreamWriter_writeCharacters(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+
+proc writeComment*(self: gen_qxmlstream_types.QXmlStreamWriter, text: openArray[char]): void =
+  fcQXmlStreamWriter_writeComment(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+
+proc writeDTD*(self: gen_qxmlstream_types.QXmlStreamWriter, dtd: openArray[char]): void =
+  fcQXmlStreamWriter_writeDTD(self.h, struct_seaqt_string(data: if len(dtd) > 0: addr dtd[0] else: nil, len: csize_t(len(dtd))))
+
+proc writeEmptyElement*(self: gen_qxmlstream_types.QXmlStreamWriter, qualifiedName: openArray[char]): void =
+  fcQXmlStreamWriter_writeEmptyElementQualifiedName(self.h, struct_seaqt_string(data: if len(qualifiedName) > 0: addr qualifiedName[0] else: nil, len: csize_t(len(qualifiedName))))
+
+proc writeEmptyElement*(self: gen_qxmlstream_types.QXmlStreamWriter, namespaceUri: openArray[char], name: openArray[char]): void =
+  fcQXmlStreamWriter_writeEmptyElementNamespaceUriName(self.h, struct_seaqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+
+proc writeTextElement*(self: gen_qxmlstream_types.QXmlStreamWriter, qualifiedName: openArray[char], text: openArray[char]): void =
+  fcQXmlStreamWriter_writeTextElementQualifiedNameText(self.h, struct_seaqt_string(data: if len(qualifiedName) > 0: addr qualifiedName[0] else: nil, len: csize_t(len(qualifiedName))), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+
+proc writeTextElement*(self: gen_qxmlstream_types.QXmlStreamWriter, namespaceUri: openArray[char], name: openArray[char], text: openArray[char]): void =
+  fcQXmlStreamWriter_writeTextElementNamespaceUriNameText(self.h, struct_seaqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+
+proc writeEndDocument*(self: gen_qxmlstream_types.QXmlStreamWriter): void =
+  fcQXmlStreamWriter_writeEndDocument(self.h)
+
+proc writeEndElement*(self: gen_qxmlstream_types.QXmlStreamWriter): void =
+  fcQXmlStreamWriter_writeEndElement(self.h)
+
+proc writeEntityReference*(self: gen_qxmlstream_types.QXmlStreamWriter, name: openArray[char]): void =
+  fcQXmlStreamWriter_writeEntityReference(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+
+proc writeNamespace*(self: gen_qxmlstream_types.QXmlStreamWriter, namespaceUri: openArray[char]): void =
+  fcQXmlStreamWriter_writeNamespaceNamespaceUri(self.h, struct_seaqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))))
+
+proc writeDefaultNamespace*(self: gen_qxmlstream_types.QXmlStreamWriter, namespaceUri: openArray[char]): void =
+  fcQXmlStreamWriter_writeDefaultNamespace(self.h, struct_seaqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))))
+
+proc writeProcessingInstruction*(self: gen_qxmlstream_types.QXmlStreamWriter, target: openArray[char]): void =
+  fcQXmlStreamWriter_writeProcessingInstructionTarget(self.h, struct_seaqt_string(data: if len(target) > 0: addr target[0] else: nil, len: csize_t(len(target))))
+
+proc writeStartDocument*(self: gen_qxmlstream_types.QXmlStreamWriter): void =
+  fcQXmlStreamWriter_writeStartDocument(self.h)
+
+proc writeStartDocument*(self: gen_qxmlstream_types.QXmlStreamWriter, version: openArray[char]): void =
+  fcQXmlStreamWriter_writeStartDocumentVersion(self.h, struct_seaqt_string(data: if len(version) > 0: addr version[0] else: nil, len: csize_t(len(version))))
+
+proc writeStartDocument*(self: gen_qxmlstream_types.QXmlStreamWriter, version: openArray[char], standalone: bool): void =
+  fcQXmlStreamWriter_writeStartDocumentVersionStandalone(self.h, struct_seaqt_string(data: if len(version) > 0: addr version[0] else: nil, len: csize_t(len(version))), standalone)
+
+proc writeStartElement*(self: gen_qxmlstream_types.QXmlStreamWriter, qualifiedName: openArray[char]): void =
+  fcQXmlStreamWriter_writeStartElementQualifiedName(self.h, struct_seaqt_string(data: if len(qualifiedName) > 0: addr qualifiedName[0] else: nil, len: csize_t(len(qualifiedName))))
+
+proc writeStartElement*(self: gen_qxmlstream_types.QXmlStreamWriter, namespaceUri: openArray[char], name: openArray[char]): void =
+  fcQXmlStreamWriter_writeStartElementNamespaceUriName(self.h, struct_seaqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+
+proc writeCurrentToken*(self: gen_qxmlstream_types.QXmlStreamWriter, reader: gen_qxmlstream_types.QXmlStreamReader): void =
+  fcQXmlStreamWriter_writeCurrentToken(self.h, reader.h)
+
+proc raiseError*(self: gen_qxmlstream_types.QXmlStreamWriter, message: openArray[char]): void =
+  fcQXmlStreamWriter_raiseError(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
+
+proc errorString*(self: gen_qxmlstream_types.QXmlStreamWriter): string =
+  let v_ms = fcQXmlStreamWriter_errorString(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc error*(self: gen_qxmlstream_types.QXmlStreamWriter): cint =
+  cint(fcQXmlStreamWriter_error(self.h))
+
+proc hasError*(self: gen_qxmlstream_types.QXmlStreamWriter): bool =
+  fcQXmlStreamWriter_hasError(self.h)
+
+proc writeNamespace*(self: gen_qxmlstream_types.QXmlStreamWriter, namespaceUri: openArray[char], prefix: openArray[char]): void =
+  fcQXmlStreamWriter_writeNamespaceNamespaceUriPrefix(self.h, struct_seaqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
+
+proc writeProcessingInstruction*(self: gen_qxmlstream_types.QXmlStreamWriter, target: openArray[char], data: openArray[char]): void =
+  fcQXmlStreamWriter_writeProcessingInstructionTargetData(self.h, struct_seaqt_string(data: if len(target) > 0: addr target[0] else: nil, len: csize_t(len(target))), struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+
+proc create*(T: type gen_qxmlstream_types.QXmlStreamWriter): gen_qxmlstream_types.QXmlStreamWriter =
+  let tmp = gen_qxmlstream_types.QXmlStreamWriter(h: fcQXmlStreamWriter_new(), owned: true)
+  tmp
+proc create*(T: type gen_qxmlstream_types.QXmlStreamWriter,
+    device: gen_qiodevice_types.QIODevice): gen_qxmlstream_types.QXmlStreamWriter =
+  let tmp = gen_qxmlstream_types.QXmlStreamWriter(h: fcQXmlStreamWriter_new2(device.h), owned: true)
+  tmp

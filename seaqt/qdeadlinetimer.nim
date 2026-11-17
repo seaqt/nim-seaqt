@@ -1,0 +1,2 @@
+import ./QtCore/gen_qdeadlinetimer
+export gen_qdeadlinetimer

@@ -1,0 +1,75 @@
+#include <QMetaObject>
+#include <QQmlScriptString>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <qqmlscriptstring.h>
+#include "gen_qqmlscriptstring.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QQmlScriptString* QQmlScriptString_new() {
+	return new (std::nothrow) QQmlScriptString();
+}
+
+QQmlScriptString* QQmlScriptString_new_from(QQmlScriptString* from) {
+	return new (std::nothrow) QQmlScriptString(*from);
+}
+
+void QQmlScriptString_operatorAssign(QQmlScriptString* self, QQmlScriptString* from) {
+	self->operator=(*from);
+}
+
+bool QQmlScriptString_operatorEqual(const QQmlScriptString* self, QQmlScriptString* param1) {
+	return (*self == *param1);
+}
+
+bool QQmlScriptString_operatorNotEqual(const QQmlScriptString* self, QQmlScriptString* param1) {
+	return (*self != *param1);
+}
+
+bool QQmlScriptString_isEmpty(const QQmlScriptString* self) {
+	return self->isEmpty();
+}
+
+bool QQmlScriptString_isUndefinedLiteral(const QQmlScriptString* self) {
+	return self->isUndefinedLiteral();
+}
+
+bool QQmlScriptString_isNullLiteral(const QQmlScriptString* self) {
+	return self->isNullLiteral();
+}
+
+struct seaqt_string QQmlScriptString_stringLiteral(const QQmlScriptString* self) {
+	QString _ret = self->stringLiteral();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+double QQmlScriptString_numberLiteral(const QQmlScriptString* self, bool* ok) {
+	qreal _ret = self->numberLiteral(ok);
+	return static_cast<double>(_ret);
+}
+
+bool QQmlScriptString_booleanLiteral(const QQmlScriptString* self, bool* ok) {
+	return self->booleanLiteral(ok);
+}
+
+const QMetaObject* QQmlScriptString_staticMetaObject() { return &QQmlScriptString::staticMetaObject; }
+void QQmlScriptString_delete(QQmlScriptString* self) {
+	delete self;
+}
+

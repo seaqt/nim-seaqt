@@ -1,0 +1,434 @@
+#include <QAudioDevice>
+#include <QAudioEngine>
+#include <QChildEvent>
+#include <QEvent>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTimerEvent>
+#include <qaudioengine.h>
+#include "gen_qaudioengine.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQAudioEngine final : public QAudioEngine {
+	const QAudioEngine_VTable* vtbl;
+public:
+	friend void* QAudioEngine_vdata(VirtualQAudioEngine* self);
+	friend VirtualQAudioEngine* vdata_QAudioEngine(void* vdata);
+
+	VirtualQAudioEngine(const QAudioEngine_VTable* vtbl): QAudioEngine(), vtbl(vtbl) {}
+	VirtualQAudioEngine(const QAudioEngine_VTable* vtbl, QObject* parent): QAudioEngine(parent), vtbl(vtbl) {}
+	VirtualQAudioEngine(const QAudioEngine_VTable* vtbl, int sampleRate): QAudioEngine(sampleRate), vtbl(vtbl) {}
+	VirtualQAudioEngine(const QAudioEngine_VTable* vtbl, int sampleRate, QObject* parent): QAudioEngine(sampleRate, parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQAudioEngine() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QAudioEngine::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QAudioEngine_virtualbase_metaObject(const VirtualQAudioEngine* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QAudioEngine::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QAudioEngine_virtualbase_metacast(VirtualQAudioEngine* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QAudioEngine::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QAudioEngine_virtualbase_metacall(VirtualQAudioEngine* self, int param1, int param2, void** param3);
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QAudioEngine::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QAudioEngine_virtualbase_event(VirtualQAudioEngine* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QAudioEngine::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QAudioEngine_virtualbase_eventFilter(VirtualQAudioEngine* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QAudioEngine::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QAudioEngine_virtualbase_timerEvent(VirtualQAudioEngine* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QAudioEngine::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QAudioEngine_virtualbase_childEvent(VirtualQAudioEngine* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QAudioEngine::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QAudioEngine_virtualbase_customEvent(VirtualQAudioEngine* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QAudioEngine::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QAudioEngine_virtualbase_connectNotify(VirtualQAudioEngine* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QAudioEngine::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QAudioEngine_virtualbase_disconnectNotify(VirtualQAudioEngine* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend QObject* QAudioEngine_protectedbase_sender(const VirtualQAudioEngine* self);
+	friend int QAudioEngine_protectedbase_senderSignalIndex(const VirtualQAudioEngine* self);
+	friend int QAudioEngine_protectedbase_receivers(const VirtualQAudioEngine* self, const char* signal);
+	friend bool QAudioEngine_protectedbase_isSignalConnected(const VirtualQAudioEngine* self, QMetaMethod* signal);
+};
+
+VirtualQAudioEngine* QAudioEngine_new(const QAudioEngine_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioEngine>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQAudioEngine(vtbl) : nullptr;
+}
+
+VirtualQAudioEngine* QAudioEngine_new_parent(const QAudioEngine_VTable* vtbl, size_t vdata, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioEngine>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQAudioEngine(vtbl, parent) : nullptr;
+}
+
+VirtualQAudioEngine* QAudioEngine_new_sampleRate(const QAudioEngine_VTable* vtbl, size_t vdata, int sampleRate) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioEngine>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQAudioEngine(vtbl, static_cast<int>(sampleRate)) : nullptr;
+}
+
+VirtualQAudioEngine* QAudioEngine_new_sampleRate_parent(const QAudioEngine_VTable* vtbl, size_t vdata, int sampleRate, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioEngine>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQAudioEngine(vtbl, static_cast<int>(sampleRate), parent) : nullptr;
+}
+
+void QAudioEngine_virtbase(QAudioEngine* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QAudioEngine_metaObject(const QAudioEngine* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QAudioEngine_metacast(QAudioEngine* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QAudioEngine_metacall(QAudioEngine* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QAudioEngine_tr_s(const char* s) {
+	QString _ret = QAudioEngine::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QAudioEngine_setOutputMode(QAudioEngine* self, int mode) {
+	self->setOutputMode(static_cast<QAudioEngine::OutputMode>(mode));
+}
+
+int QAudioEngine_outputMode(const QAudioEngine* self) {
+	QAudioEngine::OutputMode _ret = self->outputMode();
+	return static_cast<int>(_ret);
+}
+
+int QAudioEngine_sampleRate(const QAudioEngine* self) {
+	return self->sampleRate();
+}
+
+void QAudioEngine_setOutputDevice(QAudioEngine* self, QAudioDevice* device) {
+	self->setOutputDevice(*device);
+}
+
+QAudioDevice* QAudioEngine_outputDevice(const QAudioEngine* self) {
+	return new QAudioDevice(self->outputDevice());
+}
+
+void QAudioEngine_setMasterVolume(QAudioEngine* self, float volume) {
+	self->setMasterVolume(static_cast<float>(volume));
+}
+
+float QAudioEngine_masterVolume(const QAudioEngine* self) {
+	return self->masterVolume();
+}
+
+void QAudioEngine_setPaused(QAudioEngine* self, bool paused) {
+	self->setPaused(paused);
+}
+
+bool QAudioEngine_paused(const QAudioEngine* self) {
+	return self->paused();
+}
+
+void QAudioEngine_setRoomEffectsEnabled(QAudioEngine* self, bool enabled) {
+	self->setRoomEffectsEnabled(enabled);
+}
+
+bool QAudioEngine_roomEffectsEnabled(const QAudioEngine* self) {
+	return self->roomEffectsEnabled();
+}
+
+void QAudioEngine_setDistanceScale(QAudioEngine* self, float scale) {
+	self->setDistanceScale(static_cast<float>(scale));
+}
+
+float QAudioEngine_distanceScale(const QAudioEngine* self) {
+	return self->distanceScale();
+}
+
+void QAudioEngine_outputModeChanged(QAudioEngine* self) {
+	self->outputModeChanged();
+}
+
+void QAudioEngine_connect_outputModeChanged(QAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAudioEngine::connect(self, static_cast<void (QAudioEngine::*)()>(&QAudioEngine::outputModeChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QAudioEngine_outputDeviceChanged(QAudioEngine* self) {
+	self->outputDeviceChanged();
+}
+
+void QAudioEngine_connect_outputDeviceChanged(QAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAudioEngine::connect(self, static_cast<void (QAudioEngine::*)()>(&QAudioEngine::outputDeviceChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QAudioEngine_masterVolumeChanged(QAudioEngine* self) {
+	self->masterVolumeChanged();
+}
+
+void QAudioEngine_connect_masterVolumeChanged(QAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAudioEngine::connect(self, static_cast<void (QAudioEngine::*)()>(&QAudioEngine::masterVolumeChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QAudioEngine_pausedChanged(QAudioEngine* self) {
+	self->pausedChanged();
+}
+
+void QAudioEngine_connect_pausedChanged(QAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAudioEngine::connect(self, static_cast<void (QAudioEngine::*)()>(&QAudioEngine::pausedChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QAudioEngine_distanceScaleChanged(QAudioEngine* self) {
+	self->distanceScaleChanged();
+}
+
+void QAudioEngine_connect_distanceScaleChanged(QAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAudioEngine::connect(self, static_cast<void (QAudioEngine::*)()>(&QAudioEngine::distanceScaleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QAudioEngine_start(QAudioEngine* self) {
+	self->start();
+}
+
+void QAudioEngine_stop(QAudioEngine* self) {
+	self->stop();
+}
+
+void QAudioEngine_pause(QAudioEngine* self) {
+	self->pause();
+}
+
+void QAudioEngine_resume(QAudioEngine* self) {
+	self->resume();
+}
+
+struct seaqt_string QAudioEngine_tr_s_c(const char* s, const char* c) {
+	QString _ret = QAudioEngine::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QAudioEngine_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QAudioEngine::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QAudioEngine_staticMetaObject() { return &QAudioEngine::staticMetaObject; }
+void* QAudioEngine_vdata(VirtualQAudioEngine* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQAudioEngine>()); }
+VirtualQAudioEngine* vdata_QAudioEngine(void* vdata) { return reinterpret_cast<VirtualQAudioEngine*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQAudioEngine>()); }
+
+QMetaObject* QAudioEngine_virtualbase_metaObject(const VirtualQAudioEngine* self) {
+
+	return (QMetaObject*) self->QAudioEngine::metaObject();
+}
+
+void* QAudioEngine_virtualbase_metacast(VirtualQAudioEngine* self, const char* param1) {
+
+	return self->QAudioEngine::qt_metacast(param1);
+}
+
+int QAudioEngine_virtualbase_metacall(VirtualQAudioEngine* self, int param1, int param2, void** param3) {
+
+	return self->QAudioEngine::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+bool QAudioEngine_virtualbase_event(VirtualQAudioEngine* self, QEvent* event) {
+
+	return self->QAudioEngine::event(event);
+}
+
+bool QAudioEngine_virtualbase_eventFilter(VirtualQAudioEngine* self, QObject* watched, QEvent* event) {
+
+	return self->QAudioEngine::eventFilter(watched, event);
+}
+
+void QAudioEngine_virtualbase_timerEvent(VirtualQAudioEngine* self, QTimerEvent* event) {
+
+	self->QAudioEngine::timerEvent(event);
+}
+
+void QAudioEngine_virtualbase_childEvent(VirtualQAudioEngine* self, QChildEvent* event) {
+
+	self->QAudioEngine::childEvent(event);
+}
+
+void QAudioEngine_virtualbase_customEvent(VirtualQAudioEngine* self, QEvent* event) {
+
+	self->QAudioEngine::customEvent(event);
+}
+
+void QAudioEngine_virtualbase_connectNotify(VirtualQAudioEngine* self, QMetaMethod* signal) {
+
+	self->QAudioEngine::connectNotify(*signal);
+}
+
+void QAudioEngine_virtualbase_disconnectNotify(VirtualQAudioEngine* self, QMetaMethod* signal) {
+
+	self->QAudioEngine::disconnectNotify(*signal);
+}
+
+QObject* QAudioEngine_protectedbase_sender(const VirtualQAudioEngine* self) {
+	return self->QAudioEngine::sender();
+}
+
+int QAudioEngine_protectedbase_senderSignalIndex(const VirtualQAudioEngine* self) {
+	return self->QAudioEngine::senderSignalIndex();
+}
+
+int QAudioEngine_protectedbase_receivers(const VirtualQAudioEngine* self, const char* signal) {
+	return self->QAudioEngine::receivers(signal);
+}
+
+bool QAudioEngine_protectedbase_isSignalConnected(const VirtualQAudioEngine* self, QMetaMethod* signal) {
+	return self->QAudioEngine::isSignalConnected(*signal);
+}
+
+void QAudioEngine_delete(QAudioEngine* self) {
+	delete self;
+}
+

@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlparserstatus
+export gen_qqmlparserstatus

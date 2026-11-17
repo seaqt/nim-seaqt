@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgsimpletexturenode
+export gen_qsgsimpletexturenode

@@ -1,0 +1,82 @@
+#include <QHttp2Configuration>
+#include <qhttp2configuration.h>
+#include "gen_qhttp2configuration.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QHttp2Configuration* QHttp2Configuration_new() {
+	return new (std::nothrow) QHttp2Configuration();
+}
+
+QHttp2Configuration* QHttp2Configuration_new_from(QHttp2Configuration* from) {
+	return new (std::nothrow) QHttp2Configuration(*from);
+}
+
+void QHttp2Configuration_operatorAssign(QHttp2Configuration* self, QHttp2Configuration* from) {
+	self->operator=(*from);
+}
+
+void QHttp2Configuration_setServerPushEnabled(QHttp2Configuration* self, bool enable) {
+	self->setServerPushEnabled(enable);
+}
+
+bool QHttp2Configuration_serverPushEnabled(const QHttp2Configuration* self) {
+	return self->serverPushEnabled();
+}
+
+void QHttp2Configuration_setHuffmanCompressionEnabled(QHttp2Configuration* self, bool enable) {
+	self->setHuffmanCompressionEnabled(enable);
+}
+
+bool QHttp2Configuration_huffmanCompressionEnabled(const QHttp2Configuration* self) {
+	return self->huffmanCompressionEnabled();
+}
+
+bool QHttp2Configuration_setSessionReceiveWindowSize(QHttp2Configuration* self, unsigned int size) {
+	return self->setSessionReceiveWindowSize(static_cast<unsigned int>(size));
+}
+
+unsigned int QHttp2Configuration_sessionReceiveWindowSize(const QHttp2Configuration* self) {
+	return self->sessionReceiveWindowSize();
+}
+
+bool QHttp2Configuration_setStreamReceiveWindowSize(QHttp2Configuration* self, unsigned int size) {
+	return self->setStreamReceiveWindowSize(static_cast<unsigned int>(size));
+}
+
+unsigned int QHttp2Configuration_streamReceiveWindowSize(const QHttp2Configuration* self) {
+	return self->streamReceiveWindowSize();
+}
+
+bool QHttp2Configuration_setMaxFrameSize(QHttp2Configuration* self, unsigned int size) {
+	return self->setMaxFrameSize(static_cast<unsigned int>(size));
+}
+
+unsigned int QHttp2Configuration_maxFrameSize(const QHttp2Configuration* self) {
+	return self->maxFrameSize();
+}
+
+void QHttp2Configuration_setMaxConcurrentStreams(QHttp2Configuration* self, unsigned int value) {
+	self->setMaxConcurrentStreams(static_cast<unsigned int>(value));
+}
+
+unsigned int QHttp2Configuration_maxConcurrentStreams(const QHttp2Configuration* self) {
+	return self->maxConcurrentStreams();
+}
+
+void QHttp2Configuration_swap(QHttp2Configuration* self, QHttp2Configuration* other) {
+	self->swap(*other);
+}
+
+void QHttp2Configuration_delete(QHttp2Configuration* self) {
+	delete self;
+}
+

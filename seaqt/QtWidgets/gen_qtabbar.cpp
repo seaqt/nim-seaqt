@@ -1,0 +1,1483 @@
+#include <QActionEvent>
+#include <QByteArray>
+#include <QChildEvent>
+#include <QCloseEvent>
+#include <QColor>
+#include <QContextMenuEvent>
+#include <QDragEnterEvent>
+#include <QDragLeaveEvent>
+#include <QDragMoveEvent>
+#include <QDropEvent>
+#include <QEnterEvent>
+#include <QEvent>
+#include <QFocusEvent>
+#include <QHideEvent>
+#include <QIcon>
+#include <QInputMethodEvent>
+#include <QKeyEvent>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QMouseEvent>
+#include <QMoveEvent>
+#include <QObject>
+#include <QPaintDevice>
+#include <QPaintEngine>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QPoint>
+#include <QRect>
+#include <QResizeEvent>
+#include <QShowEvent>
+#include <QSize>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QStyleOptionTab>
+#include <QTabBar>
+#include <QTabletEvent>
+#include <QTimerEvent>
+#include <QVariant>
+#include <QWheelEvent>
+#include <QWidget>
+#include <qtabbar.h>
+#include "gen_qtabbar.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQTabBar final : public QTabBar {
+	const QTabBar_VTable* vtbl;
+public:
+	friend void* QTabBar_vdata(VirtualQTabBar* self);
+	friend VirtualQTabBar* vdata_QTabBar(void* vdata);
+
+	VirtualQTabBar(const QTabBar_VTable* vtbl): QTabBar(), vtbl(vtbl) {}
+	VirtualQTabBar(const QTabBar_VTable* vtbl, QWidget* parent): QTabBar(parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQTabBar() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QTabBar::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QTabBar_virtualbase_metaObject(const VirtualQTabBar* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QTabBar::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QTabBar_virtualbase_metacast(VirtualQTabBar* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QTabBar::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QTabBar_virtualbase_metacall(VirtualQTabBar* self, int param1, int param2, void** param3);
+
+	virtual QSize sizeHint() const override {
+		if (vtbl->sizeHint == 0) {
+			return QTabBar::sizeHint();
+		}
+
+		QSize* callback_return_value = vtbl->sizeHint(this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QSize* QTabBar_virtualbase_sizeHint(const VirtualQTabBar* self);
+
+	virtual QSize minimumSizeHint() const override {
+		if (vtbl->minimumSizeHint == 0) {
+			return QTabBar::minimumSizeHint();
+		}
+
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QSize* QTabBar_virtualbase_minimumSizeHint(const VirtualQTabBar* self);
+
+	virtual QSize tabSizeHint(int index) const override {
+		if (vtbl->tabSizeHint == 0) {
+			return QTabBar::tabSizeHint(index);
+		}
+
+		int sigval1 = index;
+		QSize* callback_return_value = vtbl->tabSizeHint(this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QSize* QTabBar_virtualbase_tabSizeHint(const VirtualQTabBar* self, int index);
+
+	virtual QSize minimumTabSizeHint(int index) const override {
+		if (vtbl->minimumTabSizeHint == 0) {
+			return QTabBar::minimumTabSizeHint(index);
+		}
+
+		int sigval1 = index;
+		QSize* callback_return_value = vtbl->minimumTabSizeHint(this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QSize* QTabBar_virtualbase_minimumTabSizeHint(const VirtualQTabBar* self, int index);
+
+	virtual void tabInserted(int index) override {
+		if (vtbl->tabInserted == 0) {
+			QTabBar::tabInserted(index);
+			return;
+		}
+
+		int sigval1 = index;
+		vtbl->tabInserted(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_tabInserted(VirtualQTabBar* self, int index);
+
+	virtual void tabRemoved(int index) override {
+		if (vtbl->tabRemoved == 0) {
+			QTabBar::tabRemoved(index);
+			return;
+		}
+
+		int sigval1 = index;
+		vtbl->tabRemoved(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_tabRemoved(VirtualQTabBar* self, int index);
+
+	virtual void tabLayoutChange() override {
+		if (vtbl->tabLayoutChange == 0) {
+			QTabBar::tabLayoutChange();
+			return;
+		}
+
+		vtbl->tabLayoutChange(this);
+	}
+
+	friend void QTabBar_virtualbase_tabLayoutChange(VirtualQTabBar* self);
+
+	virtual bool event(QEvent* param1) override {
+		if (vtbl->event == 0) {
+			return QTabBar::event(param1);
+		}
+
+		QEvent* sigval1 = param1;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QTabBar_virtualbase_event(VirtualQTabBar* self, QEvent* param1);
+
+	virtual void resizeEvent(QResizeEvent* param1) override {
+		if (vtbl->resizeEvent == 0) {
+			QTabBar::resizeEvent(param1);
+			return;
+		}
+
+		QResizeEvent* sigval1 = param1;
+		vtbl->resizeEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_resizeEvent(VirtualQTabBar* self, QResizeEvent* param1);
+
+	virtual void showEvent(QShowEvent* param1) override {
+		if (vtbl->showEvent == 0) {
+			QTabBar::showEvent(param1);
+			return;
+		}
+
+		QShowEvent* sigval1 = param1;
+		vtbl->showEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_showEvent(VirtualQTabBar* self, QShowEvent* param1);
+
+	virtual void hideEvent(QHideEvent* param1) override {
+		if (vtbl->hideEvent == 0) {
+			QTabBar::hideEvent(param1);
+			return;
+		}
+
+		QHideEvent* sigval1 = param1;
+		vtbl->hideEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_hideEvent(VirtualQTabBar* self, QHideEvent* param1);
+
+	virtual void paintEvent(QPaintEvent* param1) override {
+		if (vtbl->paintEvent == 0) {
+			QTabBar::paintEvent(param1);
+			return;
+		}
+
+		QPaintEvent* sigval1 = param1;
+		vtbl->paintEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_paintEvent(VirtualQTabBar* self, QPaintEvent* param1);
+
+	virtual void mousePressEvent(QMouseEvent* param1) override {
+		if (vtbl->mousePressEvent == 0) {
+			QTabBar::mousePressEvent(param1);
+			return;
+		}
+
+		QMouseEvent* sigval1 = param1;
+		vtbl->mousePressEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_mousePressEvent(VirtualQTabBar* self, QMouseEvent* param1);
+
+	virtual void mouseMoveEvent(QMouseEvent* param1) override {
+		if (vtbl->mouseMoveEvent == 0) {
+			QTabBar::mouseMoveEvent(param1);
+			return;
+		}
+
+		QMouseEvent* sigval1 = param1;
+		vtbl->mouseMoveEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_mouseMoveEvent(VirtualQTabBar* self, QMouseEvent* param1);
+
+	virtual void mouseReleaseEvent(QMouseEvent* param1) override {
+		if (vtbl->mouseReleaseEvent == 0) {
+			QTabBar::mouseReleaseEvent(param1);
+			return;
+		}
+
+		QMouseEvent* sigval1 = param1;
+		vtbl->mouseReleaseEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_mouseReleaseEvent(VirtualQTabBar* self, QMouseEvent* param1);
+
+	virtual void mouseDoubleClickEvent(QMouseEvent* param1) override {
+		if (vtbl->mouseDoubleClickEvent == 0) {
+			QTabBar::mouseDoubleClickEvent(param1);
+			return;
+		}
+
+		QMouseEvent* sigval1 = param1;
+		vtbl->mouseDoubleClickEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_mouseDoubleClickEvent(VirtualQTabBar* self, QMouseEvent* param1);
+
+	virtual void wheelEvent(QWheelEvent* event) override {
+		if (vtbl->wheelEvent == 0) {
+			QTabBar::wheelEvent(event);
+			return;
+		}
+
+		QWheelEvent* sigval1 = event;
+		vtbl->wheelEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_wheelEvent(VirtualQTabBar* self, QWheelEvent* event);
+
+	virtual void keyPressEvent(QKeyEvent* param1) override {
+		if (vtbl->keyPressEvent == 0) {
+			QTabBar::keyPressEvent(param1);
+			return;
+		}
+
+		QKeyEvent* sigval1 = param1;
+		vtbl->keyPressEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_keyPressEvent(VirtualQTabBar* self, QKeyEvent* param1);
+
+	virtual void changeEvent(QEvent* param1) override {
+		if (vtbl->changeEvent == 0) {
+			QTabBar::changeEvent(param1);
+			return;
+		}
+
+		QEvent* sigval1 = param1;
+		vtbl->changeEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_changeEvent(VirtualQTabBar* self, QEvent* param1);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QTabBar::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_timerEvent(VirtualQTabBar* self, QTimerEvent* event);
+
+	virtual void initStyleOption(QStyleOptionTab* option, int tabIndex) const override {
+		if (vtbl->initStyleOption == 0) {
+			QTabBar::initStyleOption(option, tabIndex);
+			return;
+		}
+
+		QStyleOptionTab* sigval1 = option;
+		int sigval2 = tabIndex;
+		vtbl->initStyleOption(this, sigval1, sigval2);
+	}
+
+	friend void QTabBar_virtualbase_initStyleOption(const VirtualQTabBar* self, QStyleOptionTab* option, int tabIndex);
+
+	virtual int devType() const override {
+		if (vtbl->devType == 0) {
+			return QTabBar::devType();
+		}
+
+		int callback_return_value = vtbl->devType(this);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QTabBar_virtualbase_devType(const VirtualQTabBar* self);
+
+	virtual void setVisible(bool visible) override {
+		if (vtbl->setVisible == 0) {
+			QTabBar::setVisible(visible);
+			return;
+		}
+
+		bool sigval1 = visible;
+		vtbl->setVisible(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_setVisible(VirtualQTabBar* self, bool visible);
+
+	virtual int heightForWidth(int param1) const override {
+		if (vtbl->heightForWidth == 0) {
+			return QTabBar::heightForWidth(param1);
+		}
+
+		int sigval1 = param1;
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QTabBar_virtualbase_heightForWidth(const VirtualQTabBar* self, int param1);
+
+	virtual bool hasHeightForWidth() const override {
+		if (vtbl->hasHeightForWidth == 0) {
+			return QTabBar::hasHeightForWidth();
+		}
+
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
+		return callback_return_value;
+	}
+
+	friend bool QTabBar_virtualbase_hasHeightForWidth(const VirtualQTabBar* self);
+
+	virtual QPaintEngine* paintEngine() const override {
+		if (vtbl->paintEngine == 0) {
+			return QTabBar::paintEngine();
+		}
+
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
+		return callback_return_value;
+	}
+
+	friend QPaintEngine* QTabBar_virtualbase_paintEngine(const VirtualQTabBar* self);
+
+	virtual void keyReleaseEvent(QKeyEvent* event) override {
+		if (vtbl->keyReleaseEvent == 0) {
+			QTabBar::keyReleaseEvent(event);
+			return;
+		}
+
+		QKeyEvent* sigval1 = event;
+		vtbl->keyReleaseEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_keyReleaseEvent(VirtualQTabBar* self, QKeyEvent* event);
+
+	virtual void focusInEvent(QFocusEvent* event) override {
+		if (vtbl->focusInEvent == 0) {
+			QTabBar::focusInEvent(event);
+			return;
+		}
+
+		QFocusEvent* sigval1 = event;
+		vtbl->focusInEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_focusInEvent(VirtualQTabBar* self, QFocusEvent* event);
+
+	virtual void focusOutEvent(QFocusEvent* event) override {
+		if (vtbl->focusOutEvent == 0) {
+			QTabBar::focusOutEvent(event);
+			return;
+		}
+
+		QFocusEvent* sigval1 = event;
+		vtbl->focusOutEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_focusOutEvent(VirtualQTabBar* self, QFocusEvent* event);
+
+	virtual void enterEvent(QEnterEvent* event) override {
+		if (vtbl->enterEvent == 0) {
+			QTabBar::enterEvent(event);
+			return;
+		}
+
+		QEnterEvent* sigval1 = event;
+		vtbl->enterEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_enterEvent(VirtualQTabBar* self, QEnterEvent* event);
+
+	virtual void leaveEvent(QEvent* event) override {
+		if (vtbl->leaveEvent == 0) {
+			QTabBar::leaveEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->leaveEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_leaveEvent(VirtualQTabBar* self, QEvent* event);
+
+	virtual void moveEvent(QMoveEvent* event) override {
+		if (vtbl->moveEvent == 0) {
+			QTabBar::moveEvent(event);
+			return;
+		}
+
+		QMoveEvent* sigval1 = event;
+		vtbl->moveEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_moveEvent(VirtualQTabBar* self, QMoveEvent* event);
+
+	virtual void closeEvent(QCloseEvent* event) override {
+		if (vtbl->closeEvent == 0) {
+			QTabBar::closeEvent(event);
+			return;
+		}
+
+		QCloseEvent* sigval1 = event;
+		vtbl->closeEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_closeEvent(VirtualQTabBar* self, QCloseEvent* event);
+
+	virtual void contextMenuEvent(QContextMenuEvent* event) override {
+		if (vtbl->contextMenuEvent == 0) {
+			QTabBar::contextMenuEvent(event);
+			return;
+		}
+
+		QContextMenuEvent* sigval1 = event;
+		vtbl->contextMenuEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_contextMenuEvent(VirtualQTabBar* self, QContextMenuEvent* event);
+
+	virtual void tabletEvent(QTabletEvent* event) override {
+		if (vtbl->tabletEvent == 0) {
+			QTabBar::tabletEvent(event);
+			return;
+		}
+
+		QTabletEvent* sigval1 = event;
+		vtbl->tabletEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_tabletEvent(VirtualQTabBar* self, QTabletEvent* event);
+
+	virtual void actionEvent(QActionEvent* event) override {
+		if (vtbl->actionEvent == 0) {
+			QTabBar::actionEvent(event);
+			return;
+		}
+
+		QActionEvent* sigval1 = event;
+		vtbl->actionEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_actionEvent(VirtualQTabBar* self, QActionEvent* event);
+
+	virtual void dragEnterEvent(QDragEnterEvent* event) override {
+		if (vtbl->dragEnterEvent == 0) {
+			QTabBar::dragEnterEvent(event);
+			return;
+		}
+
+		QDragEnterEvent* sigval1 = event;
+		vtbl->dragEnterEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_dragEnterEvent(VirtualQTabBar* self, QDragEnterEvent* event);
+
+	virtual void dragMoveEvent(QDragMoveEvent* event) override {
+		if (vtbl->dragMoveEvent == 0) {
+			QTabBar::dragMoveEvent(event);
+			return;
+		}
+
+		QDragMoveEvent* sigval1 = event;
+		vtbl->dragMoveEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_dragMoveEvent(VirtualQTabBar* self, QDragMoveEvent* event);
+
+	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
+		if (vtbl->dragLeaveEvent == 0) {
+			QTabBar::dragLeaveEvent(event);
+			return;
+		}
+
+		QDragLeaveEvent* sigval1 = event;
+		vtbl->dragLeaveEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_dragLeaveEvent(VirtualQTabBar* self, QDragLeaveEvent* event);
+
+	virtual void dropEvent(QDropEvent* event) override {
+		if (vtbl->dropEvent == 0) {
+			QTabBar::dropEvent(event);
+			return;
+		}
+
+		QDropEvent* sigval1 = event;
+		vtbl->dropEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_dropEvent(VirtualQTabBar* self, QDropEvent* event);
+
+	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
+		if (vtbl->nativeEvent == 0) {
+			return QTabBar::nativeEvent(eventType, message, result);
+		}
+
+		const QByteArray eventType_qb = eventType;
+		struct seaqt_string eventType_ms;
+		eventType_ms.len = eventType_qb.length();
+		eventType_ms.data = static_cast<char*>(malloc(eventType_ms.len));
+		memcpy(eventType_ms.data, eventType_qb.data(), eventType_ms.len);
+		struct seaqt_string sigval1 = eventType_ms;
+		void* sigval2 = message;
+		qintptr* result_ret = result;
+		intptr_t* sigval3 = (intptr_t*)(result_ret);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
+		return callback_return_value;
+	}
+
+	friend bool QTabBar_virtualbase_nativeEvent(VirtualQTabBar* self, struct seaqt_string eventType, void* message, intptr_t* result);
+
+	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
+		if (vtbl->metric == 0) {
+			return QTabBar::metric(param1);
+		}
+
+		QPaintDevice::PaintDeviceMetric param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int callback_return_value = vtbl->metric(this, sigval1);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QTabBar_virtualbase_metric(const VirtualQTabBar* self, int param1);
+
+	virtual void initPainter(QPainter* painter) const override {
+		if (vtbl->initPainter == 0) {
+			QTabBar::initPainter(painter);
+			return;
+		}
+
+		QPainter* sigval1 = painter;
+		vtbl->initPainter(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_initPainter(const VirtualQTabBar* self, QPainter* painter);
+
+	virtual QPaintDevice* redirected(QPoint* offset) const override {
+		if (vtbl->redirected == 0) {
+			return QTabBar::redirected(offset);
+		}
+
+		QPoint* sigval1 = offset;
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend QPaintDevice* QTabBar_virtualbase_redirected(const VirtualQTabBar* self, QPoint* offset);
+
+	virtual QPainter* sharedPainter() const override {
+		if (vtbl->sharedPainter == 0) {
+			return QTabBar::sharedPainter();
+		}
+
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
+		return callback_return_value;
+	}
+
+	friend QPainter* QTabBar_virtualbase_sharedPainter(const VirtualQTabBar* self);
+
+	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
+		if (vtbl->inputMethodEvent == 0) {
+			QTabBar::inputMethodEvent(param1);
+			return;
+		}
+
+		QInputMethodEvent* sigval1 = param1;
+		vtbl->inputMethodEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_inputMethodEvent(VirtualQTabBar* self, QInputMethodEvent* param1);
+
+	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
+		if (vtbl->inputMethodQuery == 0) {
+			return QTabBar::inputMethodQuery(param1);
+		}
+
+		Qt::InputMethodQuery param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QVariant* QTabBar_virtualbase_inputMethodQuery(const VirtualQTabBar* self, int param1);
+
+	virtual bool focusNextPrevChild(bool next) override {
+		if (vtbl->focusNextPrevChild == 0) {
+			return QTabBar::focusNextPrevChild(next);
+		}
+
+		bool sigval1 = next;
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QTabBar_virtualbase_focusNextPrevChild(VirtualQTabBar* self, bool next);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QTabBar::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QTabBar_virtualbase_eventFilter(VirtualQTabBar* self, QObject* watched, QEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QTabBar::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_childEvent(VirtualQTabBar* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QTabBar::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_customEvent(VirtualQTabBar* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QTabBar::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_connectNotify(VirtualQTabBar* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QTabBar::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QTabBar_virtualbase_disconnectNotify(VirtualQTabBar* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend void QTabBar_protectedbase_updateMicroFocus(VirtualQTabBar* self);
+	friend void QTabBar_protectedbase_create(VirtualQTabBar* self);
+	friend void QTabBar_protectedbase_destroy(VirtualQTabBar* self);
+	friend bool QTabBar_protectedbase_focusNextChild(VirtualQTabBar* self);
+	friend bool QTabBar_protectedbase_focusPreviousChild(VirtualQTabBar* self);
+	friend QObject* QTabBar_protectedbase_sender(const VirtualQTabBar* self);
+	friend int QTabBar_protectedbase_senderSignalIndex(const VirtualQTabBar* self);
+	friend int QTabBar_protectedbase_receivers(const VirtualQTabBar* self, const char* signal);
+	friend bool QTabBar_protectedbase_isSignalConnected(const VirtualQTabBar* self, QMetaMethod* signal);
+	friend double QTabBar_protectedbase_getDecodedMetricF(const VirtualQTabBar* self, int metricA, int metricB);
+};
+
+VirtualQTabBar* QTabBar_new(const QTabBar_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTabBar>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQTabBar(vtbl) : nullptr;
+}
+
+VirtualQTabBar* QTabBar_new_parent(const QTabBar_VTable* vtbl, size_t vdata, QWidget* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTabBar>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQTabBar(vtbl, parent) : nullptr;
+}
+
+void QTabBar_virtbase(QTabBar* src, QWidget** outptr_QWidget) {
+	*outptr_QWidget = static_cast<QWidget*>(src);
+}
+
+QMetaObject* QTabBar_metaObject(const QTabBar* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QTabBar_metacast(QTabBar* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QTabBar_metacall(QTabBar* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QTabBar_tr_s(const char* s) {
+	QString _ret = QTabBar::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+int QTabBar_shape(const QTabBar* self) {
+	QTabBar::Shape _ret = self->shape();
+	return static_cast<int>(_ret);
+}
+
+void QTabBar_setShape(QTabBar* self, int shape) {
+	self->setShape(static_cast<QTabBar::Shape>(shape));
+}
+
+int QTabBar_addTab_text(QTabBar* self, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	return self->addTab(text_QString);
+}
+
+int QTabBar_addTab_icon_text(QTabBar* self, QIcon* icon, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	return self->addTab(*icon, text_QString);
+}
+
+int QTabBar_insertTab_index_text(QTabBar* self, int index, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	return self->insertTab(static_cast<int>(index), text_QString);
+}
+
+int QTabBar_insertTab_index_icon_text(QTabBar* self, int index, QIcon* icon, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	return self->insertTab(static_cast<int>(index), *icon, text_QString);
+}
+
+void QTabBar_removeTab(QTabBar* self, int index) {
+	self->removeTab(static_cast<int>(index));
+}
+
+void QTabBar_moveTab(QTabBar* self, int from, int to) {
+	self->moveTab(static_cast<int>(from), static_cast<int>(to));
+}
+
+bool QTabBar_isTabEnabled(const QTabBar* self, int index) {
+	return self->isTabEnabled(static_cast<int>(index));
+}
+
+void QTabBar_setTabEnabled(QTabBar* self, int index, bool enabled) {
+	self->setTabEnabled(static_cast<int>(index), enabled);
+}
+
+bool QTabBar_isTabVisible(const QTabBar* self, int index) {
+	return self->isTabVisible(static_cast<int>(index));
+}
+
+void QTabBar_setTabVisible(QTabBar* self, int index, bool visible) {
+	self->setTabVisible(static_cast<int>(index), visible);
+}
+
+struct seaqt_string QTabBar_tabText(const QTabBar* self, int index) {
+	QString _ret = self->tabText(static_cast<int>(index));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QTabBar_setTabText(QTabBar* self, int index, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	self->setTabText(static_cast<int>(index), text_QString);
+}
+
+QColor* QTabBar_tabTextColor(const QTabBar* self, int index) {
+	return new QColor(self->tabTextColor(static_cast<int>(index)));
+}
+
+void QTabBar_setTabTextColor(QTabBar* self, int index, QColor* color) {
+	self->setTabTextColor(static_cast<int>(index), *color);
+}
+
+QIcon* QTabBar_tabIcon(const QTabBar* self, int index) {
+	return new QIcon(self->tabIcon(static_cast<int>(index)));
+}
+
+void QTabBar_setTabIcon(QTabBar* self, int index, QIcon* icon) {
+	self->setTabIcon(static_cast<int>(index), *icon);
+}
+
+int QTabBar_elideMode(const QTabBar* self) {
+	Qt::TextElideMode _ret = self->elideMode();
+	return static_cast<int>(_ret);
+}
+
+void QTabBar_setElideMode(QTabBar* self, int mode) {
+	self->setElideMode(static_cast<Qt::TextElideMode>(mode));
+}
+
+void QTabBar_setTabToolTip(QTabBar* self, int index, struct seaqt_string tip) {
+	QString tip_QString = QString::fromUtf8(tip.data, tip.len);
+	self->setTabToolTip(static_cast<int>(index), tip_QString);
+}
+
+struct seaqt_string QTabBar_tabToolTip(const QTabBar* self, int index) {
+	QString _ret = self->tabToolTip(static_cast<int>(index));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QTabBar_setTabWhatsThis(QTabBar* self, int index, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	self->setTabWhatsThis(static_cast<int>(index), text_QString);
+}
+
+struct seaqt_string QTabBar_tabWhatsThis(const QTabBar* self, int index) {
+	QString _ret = self->tabWhatsThis(static_cast<int>(index));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QTabBar_setTabData(QTabBar* self, int index, QVariant* data) {
+	self->setTabData(static_cast<int>(index), *data);
+}
+
+QVariant* QTabBar_tabData(const QTabBar* self, int index) {
+	return new QVariant(self->tabData(static_cast<int>(index)));
+}
+
+QRect* QTabBar_tabRect(const QTabBar* self, int index) {
+	return new QRect(self->tabRect(static_cast<int>(index)));
+}
+
+int QTabBar_tabAt(const QTabBar* self, QPoint* pos) {
+	return self->tabAt(*pos);
+}
+
+int QTabBar_currentIndex(const QTabBar* self) {
+	return self->currentIndex();
+}
+
+int QTabBar_count(const QTabBar* self) {
+	return self->count();
+}
+
+QSize* QTabBar_sizeHint(const QTabBar* self) {
+	return new QSize(self->sizeHint());
+}
+
+QSize* QTabBar_minimumSizeHint(const QTabBar* self) {
+	return new QSize(self->minimumSizeHint());
+}
+
+void QTabBar_setDrawBase(QTabBar* self, bool drawTheBase) {
+	self->setDrawBase(drawTheBase);
+}
+
+bool QTabBar_drawBase(const QTabBar* self) {
+	return self->drawBase();
+}
+
+QSize* QTabBar_iconSize(const QTabBar* self) {
+	return new QSize(self->iconSize());
+}
+
+void QTabBar_setIconSize(QTabBar* self, QSize* size) {
+	self->setIconSize(*size);
+}
+
+bool QTabBar_usesScrollButtons(const QTabBar* self) {
+	return self->usesScrollButtons();
+}
+
+void QTabBar_setUsesScrollButtons(QTabBar* self, bool useButtons) {
+	self->setUsesScrollButtons(useButtons);
+}
+
+bool QTabBar_tabsClosable(const QTabBar* self) {
+	return self->tabsClosable();
+}
+
+void QTabBar_setTabsClosable(QTabBar* self, bool closable) {
+	self->setTabsClosable(closable);
+}
+
+void QTabBar_setTabButton(QTabBar* self, int index, int position, QWidget* widget) {
+	self->setTabButton(static_cast<int>(index), static_cast<QTabBar::ButtonPosition>(position), widget);
+}
+
+QWidget* QTabBar_tabButton(const QTabBar* self, int index, int position) {
+	return self->tabButton(static_cast<int>(index), static_cast<QTabBar::ButtonPosition>(position));
+}
+
+int QTabBar_selectionBehaviorOnRemove(const QTabBar* self) {
+	QTabBar::SelectionBehavior _ret = self->selectionBehaviorOnRemove();
+	return static_cast<int>(_ret);
+}
+
+void QTabBar_setSelectionBehaviorOnRemove(QTabBar* self, int behavior) {
+	self->setSelectionBehaviorOnRemove(static_cast<QTabBar::SelectionBehavior>(behavior));
+}
+
+bool QTabBar_expanding(const QTabBar* self) {
+	return self->expanding();
+}
+
+void QTabBar_setExpanding(QTabBar* self, bool enabled) {
+	self->setExpanding(enabled);
+}
+
+bool QTabBar_isMovable(const QTabBar* self) {
+	return self->isMovable();
+}
+
+void QTabBar_setMovable(QTabBar* self, bool movable) {
+	self->setMovable(movable);
+}
+
+bool QTabBar_documentMode(const QTabBar* self) {
+	return self->documentMode();
+}
+
+void QTabBar_setDocumentMode(QTabBar* self, bool set) {
+	self->setDocumentMode(set);
+}
+
+bool QTabBar_autoHide(const QTabBar* self) {
+	return self->autoHide();
+}
+
+void QTabBar_setAutoHide(QTabBar* self, bool hide) {
+	self->setAutoHide(hide);
+}
+
+bool QTabBar_changeCurrentOnDrag(const QTabBar* self) {
+	return self->changeCurrentOnDrag();
+}
+
+void QTabBar_setChangeCurrentOnDrag(QTabBar* self, bool change) {
+	self->setChangeCurrentOnDrag(change);
+}
+
+struct seaqt_string QTabBar_accessibleTabName(const QTabBar* self, int index) {
+	QString _ret = self->accessibleTabName(static_cast<int>(index));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QTabBar_setAccessibleTabName(QTabBar* self, int index, struct seaqt_string name) {
+	QString name_QString = QString::fromUtf8(name.data, name.len);
+	self->setAccessibleTabName(static_cast<int>(index), name_QString);
+}
+
+void QTabBar_setCurrentIndex(QTabBar* self, int index) {
+	self->setCurrentIndex(static_cast<int>(index));
+}
+
+void QTabBar_currentChanged(QTabBar* self, int index) {
+	self->currentChanged(static_cast<int>(index));
+}
+
+void QTabBar_connect_currentChanged(QTabBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::currentChanged), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
+			int sigval1 = index;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTabBar_tabCloseRequested(QTabBar* self, int index) {
+	self->tabCloseRequested(static_cast<int>(index));
+}
+
+void QTabBar_connect_tabCloseRequested(QTabBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::tabCloseRequested), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
+			int sigval1 = index;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTabBar_tabMoved(QTabBar* self, int from, int to) {
+	self->tabMoved(static_cast<int>(from), static_cast<int>(to));
+}
+
+void QTabBar_connect_tabMoved(QTabBar* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	QTabBar::connect(self, static_cast<void (QTabBar::*)(int, int)>(&QTabBar::tabMoved), self, [callback, release = seaqt::release_callback{slot,release}](int from, int to) {
+			int sigval1 = from;
+			int sigval2 = to;
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QTabBar_tabBarClicked(QTabBar* self, int index) {
+	self->tabBarClicked(static_cast<int>(index));
+}
+
+void QTabBar_connect_tabBarClicked(QTabBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::tabBarClicked), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
+			int sigval1 = index;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTabBar_tabBarDoubleClicked(QTabBar* self, int index) {
+	self->tabBarDoubleClicked(static_cast<int>(index));
+}
+
+void QTabBar_connect_tabBarDoubleClicked(QTabBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::tabBarDoubleClicked), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
+			int sigval1 = index;
+			callback(release.slot, sigval1);
+	});
+}
+
+struct seaqt_string QTabBar_tr_s_c(const char* s, const char* c) {
+	QString _ret = QTabBar::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QTabBar_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QTabBar::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QTabBar_staticMetaObject() { return &QTabBar::staticMetaObject; }
+void* QTabBar_vdata(VirtualQTabBar* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQTabBar>()); }
+VirtualQTabBar* vdata_QTabBar(void* vdata) { return reinterpret_cast<VirtualQTabBar*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQTabBar>()); }
+
+QMetaObject* QTabBar_virtualbase_metaObject(const VirtualQTabBar* self) {
+
+	return (QMetaObject*) self->QTabBar::metaObject();
+}
+
+void* QTabBar_virtualbase_metacast(VirtualQTabBar* self, const char* param1) {
+
+	return self->QTabBar::qt_metacast(param1);
+}
+
+int QTabBar_virtualbase_metacall(VirtualQTabBar* self, int param1, int param2, void** param3) {
+
+	return self->QTabBar::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+QSize* QTabBar_virtualbase_sizeHint(const VirtualQTabBar* self) {
+
+	return new QSize(self->QTabBar::sizeHint());
+}
+
+QSize* QTabBar_virtualbase_minimumSizeHint(const VirtualQTabBar* self) {
+
+	return new QSize(self->QTabBar::minimumSizeHint());
+}
+
+QSize* QTabBar_virtualbase_tabSizeHint(const VirtualQTabBar* self, int index) {
+
+	return new QSize(self->QTabBar::tabSizeHint(static_cast<int>(index)));
+}
+
+QSize* QTabBar_virtualbase_minimumTabSizeHint(const VirtualQTabBar* self, int index) {
+
+	return new QSize(self->QTabBar::minimumTabSizeHint(static_cast<int>(index)));
+}
+
+void QTabBar_virtualbase_tabInserted(VirtualQTabBar* self, int index) {
+
+	self->QTabBar::tabInserted(static_cast<int>(index));
+}
+
+void QTabBar_virtualbase_tabRemoved(VirtualQTabBar* self, int index) {
+
+	self->QTabBar::tabRemoved(static_cast<int>(index));
+}
+
+void QTabBar_virtualbase_tabLayoutChange(VirtualQTabBar* self) {
+
+	self->QTabBar::tabLayoutChange();
+}
+
+bool QTabBar_virtualbase_event(VirtualQTabBar* self, QEvent* param1) {
+
+	return self->QTabBar::event(param1);
+}
+
+void QTabBar_virtualbase_resizeEvent(VirtualQTabBar* self, QResizeEvent* param1) {
+
+	self->QTabBar::resizeEvent(param1);
+}
+
+void QTabBar_virtualbase_showEvent(VirtualQTabBar* self, QShowEvent* param1) {
+
+	self->QTabBar::showEvent(param1);
+}
+
+void QTabBar_virtualbase_hideEvent(VirtualQTabBar* self, QHideEvent* param1) {
+
+	self->QTabBar::hideEvent(param1);
+}
+
+void QTabBar_virtualbase_paintEvent(VirtualQTabBar* self, QPaintEvent* param1) {
+
+	self->QTabBar::paintEvent(param1);
+}
+
+void QTabBar_virtualbase_mousePressEvent(VirtualQTabBar* self, QMouseEvent* param1) {
+
+	self->QTabBar::mousePressEvent(param1);
+}
+
+void QTabBar_virtualbase_mouseMoveEvent(VirtualQTabBar* self, QMouseEvent* param1) {
+
+	self->QTabBar::mouseMoveEvent(param1);
+}
+
+void QTabBar_virtualbase_mouseReleaseEvent(VirtualQTabBar* self, QMouseEvent* param1) {
+
+	self->QTabBar::mouseReleaseEvent(param1);
+}
+
+void QTabBar_virtualbase_mouseDoubleClickEvent(VirtualQTabBar* self, QMouseEvent* param1) {
+
+	self->QTabBar::mouseDoubleClickEvent(param1);
+}
+
+void QTabBar_virtualbase_wheelEvent(VirtualQTabBar* self, QWheelEvent* event) {
+
+	self->QTabBar::wheelEvent(event);
+}
+
+void QTabBar_virtualbase_keyPressEvent(VirtualQTabBar* self, QKeyEvent* param1) {
+
+	self->QTabBar::keyPressEvent(param1);
+}
+
+void QTabBar_virtualbase_changeEvent(VirtualQTabBar* self, QEvent* param1) {
+
+	self->QTabBar::changeEvent(param1);
+}
+
+void QTabBar_virtualbase_timerEvent(VirtualQTabBar* self, QTimerEvent* event) {
+
+	self->QTabBar::timerEvent(event);
+}
+
+void QTabBar_virtualbase_initStyleOption(const VirtualQTabBar* self, QStyleOptionTab* option, int tabIndex) {
+
+	self->QTabBar::initStyleOption(option, static_cast<int>(tabIndex));
+}
+
+int QTabBar_virtualbase_devType(const VirtualQTabBar* self) {
+
+	return self->QTabBar::devType();
+}
+
+void QTabBar_virtualbase_setVisible(VirtualQTabBar* self, bool visible) {
+
+	self->QTabBar::setVisible(visible);
+}
+
+int QTabBar_virtualbase_heightForWidth(const VirtualQTabBar* self, int param1) {
+
+	return self->QTabBar::heightForWidth(static_cast<int>(param1));
+}
+
+bool QTabBar_virtualbase_hasHeightForWidth(const VirtualQTabBar* self) {
+
+	return self->QTabBar::hasHeightForWidth();
+}
+
+QPaintEngine* QTabBar_virtualbase_paintEngine(const VirtualQTabBar* self) {
+
+	return self->QTabBar::paintEngine();
+}
+
+void QTabBar_virtualbase_keyReleaseEvent(VirtualQTabBar* self, QKeyEvent* event) {
+
+	self->QTabBar::keyReleaseEvent(event);
+}
+
+void QTabBar_virtualbase_focusInEvent(VirtualQTabBar* self, QFocusEvent* event) {
+
+	self->QTabBar::focusInEvent(event);
+}
+
+void QTabBar_virtualbase_focusOutEvent(VirtualQTabBar* self, QFocusEvent* event) {
+
+	self->QTabBar::focusOutEvent(event);
+}
+
+void QTabBar_virtualbase_enterEvent(VirtualQTabBar* self, QEnterEvent* event) {
+
+	self->QTabBar::enterEvent(event);
+}
+
+void QTabBar_virtualbase_leaveEvent(VirtualQTabBar* self, QEvent* event) {
+
+	self->QTabBar::leaveEvent(event);
+}
+
+void QTabBar_virtualbase_moveEvent(VirtualQTabBar* self, QMoveEvent* event) {
+
+	self->QTabBar::moveEvent(event);
+}
+
+void QTabBar_virtualbase_closeEvent(VirtualQTabBar* self, QCloseEvent* event) {
+
+	self->QTabBar::closeEvent(event);
+}
+
+void QTabBar_virtualbase_contextMenuEvent(VirtualQTabBar* self, QContextMenuEvent* event) {
+
+	self->QTabBar::contextMenuEvent(event);
+}
+
+void QTabBar_virtualbase_tabletEvent(VirtualQTabBar* self, QTabletEvent* event) {
+
+	self->QTabBar::tabletEvent(event);
+}
+
+void QTabBar_virtualbase_actionEvent(VirtualQTabBar* self, QActionEvent* event) {
+
+	self->QTabBar::actionEvent(event);
+}
+
+void QTabBar_virtualbase_dragEnterEvent(VirtualQTabBar* self, QDragEnterEvent* event) {
+
+	self->QTabBar::dragEnterEvent(event);
+}
+
+void QTabBar_virtualbase_dragMoveEvent(VirtualQTabBar* self, QDragMoveEvent* event) {
+
+	self->QTabBar::dragMoveEvent(event);
+}
+
+void QTabBar_virtualbase_dragLeaveEvent(VirtualQTabBar* self, QDragLeaveEvent* event) {
+
+	self->QTabBar::dragLeaveEvent(event);
+}
+
+void QTabBar_virtualbase_dropEvent(VirtualQTabBar* self, QDropEvent* event) {
+
+	self->QTabBar::dropEvent(event);
+}
+
+bool QTabBar_virtualbase_nativeEvent(VirtualQTabBar* self, struct seaqt_string eventType, void* message, intptr_t* result) {
+	QByteArray eventType_QByteArray(eventType.data, eventType.len);
+
+	return self->QTabBar::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
+}
+
+int QTabBar_virtualbase_metric(const VirtualQTabBar* self, int param1) {
+
+	return self->QTabBar::metric(static_cast<VirtualQTabBar::PaintDeviceMetric>(param1));
+}
+
+void QTabBar_virtualbase_initPainter(const VirtualQTabBar* self, QPainter* painter) {
+
+	self->QTabBar::initPainter(painter);
+}
+
+QPaintDevice* QTabBar_virtualbase_redirected(const VirtualQTabBar* self, QPoint* offset) {
+
+	return self->QTabBar::redirected(offset);
+}
+
+QPainter* QTabBar_virtualbase_sharedPainter(const VirtualQTabBar* self) {
+
+	return self->QTabBar::sharedPainter();
+}
+
+void QTabBar_virtualbase_inputMethodEvent(VirtualQTabBar* self, QInputMethodEvent* param1) {
+
+	self->QTabBar::inputMethodEvent(param1);
+}
+
+QVariant* QTabBar_virtualbase_inputMethodQuery(const VirtualQTabBar* self, int param1) {
+
+	return new QVariant(self->QTabBar::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
+}
+
+bool QTabBar_virtualbase_focusNextPrevChild(VirtualQTabBar* self, bool next) {
+
+	return self->QTabBar::focusNextPrevChild(next);
+}
+
+bool QTabBar_virtualbase_eventFilter(VirtualQTabBar* self, QObject* watched, QEvent* event) {
+
+	return self->QTabBar::eventFilter(watched, event);
+}
+
+void QTabBar_virtualbase_childEvent(VirtualQTabBar* self, QChildEvent* event) {
+
+	self->QTabBar::childEvent(event);
+}
+
+void QTabBar_virtualbase_customEvent(VirtualQTabBar* self, QEvent* event) {
+
+	self->QTabBar::customEvent(event);
+}
+
+void QTabBar_virtualbase_connectNotify(VirtualQTabBar* self, QMetaMethod* signal) {
+
+	self->QTabBar::connectNotify(*signal);
+}
+
+void QTabBar_virtualbase_disconnectNotify(VirtualQTabBar* self, QMetaMethod* signal) {
+
+	self->QTabBar::disconnectNotify(*signal);
+}
+
+void QTabBar_protectedbase_updateMicroFocus(VirtualQTabBar* self) {
+	self->QTabBar::updateMicroFocus();
+}
+
+void QTabBar_protectedbase_create(VirtualQTabBar* self) {
+	self->QTabBar::create();
+}
+
+void QTabBar_protectedbase_destroy(VirtualQTabBar* self) {
+	self->QTabBar::destroy();
+}
+
+bool QTabBar_protectedbase_focusNextChild(VirtualQTabBar* self) {
+	return self->QTabBar::focusNextChild();
+}
+
+bool QTabBar_protectedbase_focusPreviousChild(VirtualQTabBar* self) {
+	return self->QTabBar::focusPreviousChild();
+}
+
+QObject* QTabBar_protectedbase_sender(const VirtualQTabBar* self) {
+	return self->QTabBar::sender();
+}
+
+int QTabBar_protectedbase_senderSignalIndex(const VirtualQTabBar* self) {
+	return self->QTabBar::senderSignalIndex();
+}
+
+int QTabBar_protectedbase_receivers(const VirtualQTabBar* self, const char* signal) {
+	return self->QTabBar::receivers(signal);
+}
+
+bool QTabBar_protectedbase_isSignalConnected(const VirtualQTabBar* self, QMetaMethod* signal) {
+	return self->QTabBar::isSignalConnected(*signal);
+}
+
+double QTabBar_protectedbase_getDecodedMetricF(const VirtualQTabBar* self, int metricA, int metricB) {
+	return self->QTabBar::getDecodedMetricF(static_cast<VirtualQTabBar::PaintDeviceMetric>(metricA), static_cast<VirtualQTabBar::PaintDeviceMetric>(metricB));
+}
+
+void QTabBar_delete(QTabBar* self) {
+	delete self;
+}
+

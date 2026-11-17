@@ -1,0 +1,61 @@
+#pragma once
+#ifndef SEAQT_QTMULTIMEDIA_GEN_QMEDIAFORMAT_H
+#define SEAQT_QTMULTIMEDIA_GEN_QMEDIAFORMAT_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QMediaFormat;
+class QMetaObject;
+class QMimeType;
+#else
+typedef struct QMediaFormat QMediaFormat;
+typedef struct QMetaObject QMetaObject;
+typedef struct QMimeType QMimeType;
+#endif
+
+QMediaFormat* QMediaFormat_new();
+QMediaFormat* QMediaFormat_new_from(QMediaFormat* from);
+QMediaFormat* QMediaFormat_new_format(int format);
+
+void QMediaFormat_operatorAssign(QMediaFormat* self, QMediaFormat* from);
+void QMediaFormat_swap(QMediaFormat* self, QMediaFormat* other);
+int QMediaFormat_fileFormat(const QMediaFormat* self);
+void QMediaFormat_setFileFormat(QMediaFormat* self, int f);
+void QMediaFormat_setVideoCodec(QMediaFormat* self, int codec);
+int QMediaFormat_videoCodec(const QMediaFormat* self);
+void QMediaFormat_setAudioCodec(QMediaFormat* self, int codec);
+int QMediaFormat_audioCodec(const QMediaFormat* self);
+bool QMediaFormat_isSupported(const QMediaFormat* self, int mode);
+QMimeType* QMediaFormat_mimeType(const QMediaFormat* self);
+struct seaqt_array /* of int */  QMediaFormat_supportedFileFormats(QMediaFormat* self, int m);
+struct seaqt_array /* of int */  QMediaFormat_supportedVideoCodecs(QMediaFormat* self, int m);
+struct seaqt_array /* of int */  QMediaFormat_supportedAudioCodecs(QMediaFormat* self, int m);
+struct seaqt_string QMediaFormat_fileFormatName(int fileFormat);
+struct seaqt_string QMediaFormat_audioCodecName(int codec);
+struct seaqt_string QMediaFormat_videoCodecName(int codec);
+struct seaqt_string QMediaFormat_fileFormatDescription(int fileFormat);
+struct seaqt_string QMediaFormat_audioCodecDescription(int codec);
+struct seaqt_string QMediaFormat_videoCodecDescription(int codec);
+bool QMediaFormat_operatorEqual(const QMediaFormat* self, QMediaFormat* other);
+bool QMediaFormat_operatorNotEqual(const QMediaFormat* self, QMediaFormat* other);
+void QMediaFormat_resolveForEncoding(QMediaFormat* self, int flags);
+
+const QMetaObject* QMediaFormat_staticMetaObject();
+void QMediaFormat_delete(QMediaFormat* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

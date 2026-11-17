@@ -1,0 +1,812 @@
+#include <QAbstractItemModel>
+#include <QChildEvent>
+#include <QEvent>
+#include <QItemSelection>
+#include <QItemSelectionModel>
+#include <QItemSelectionRange>
+#include <QList>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QModelIndex>
+#include <QObject>
+#include <QPersistentModelIndex>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTimerEvent>
+#include <qitemselectionmodel.h>
+#include "gen_qitemselectionmodel.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QItemSelectionRange* QItemSelectionRange_new() {
+	return new (std::nothrow) QItemSelectionRange();
+}
+
+QItemSelectionRange* QItemSelectionRange_new_topL_bottomR(QModelIndex* topL, QModelIndex* bottomR) {
+	return new (std::nothrow) QItemSelectionRange(*topL, *bottomR);
+}
+
+QItemSelectionRange* QItemSelectionRange_new_index(QModelIndex* index) {
+	return new (std::nothrow) QItemSelectionRange(*index);
+}
+
+QItemSelectionRange* QItemSelectionRange_new_from(QItemSelectionRange* from) {
+	return new (std::nothrow) QItemSelectionRange(*from);
+}
+
+void QItemSelectionRange_swap(QItemSelectionRange* self, QItemSelectionRange* other) {
+	self->swap(*other);
+}
+
+int QItemSelectionRange_top(const QItemSelectionRange* self) {
+	return self->top();
+}
+
+int QItemSelectionRange_left(const QItemSelectionRange* self) {
+	return self->left();
+}
+
+int QItemSelectionRange_bottom(const QItemSelectionRange* self) {
+	return self->bottom();
+}
+
+int QItemSelectionRange_right(const QItemSelectionRange* self) {
+	return self->right();
+}
+
+int QItemSelectionRange_width(const QItemSelectionRange* self) {
+	return self->width();
+}
+
+int QItemSelectionRange_height(const QItemSelectionRange* self) {
+	return self->height();
+}
+
+QPersistentModelIndex* QItemSelectionRange_topLeft(const QItemSelectionRange* self) {
+	const QPersistentModelIndex& _ret = self->topLeft();
+	// Cast returned reference into pointer
+	return const_cast<QPersistentModelIndex*>(&_ret);
+}
+
+QPersistentModelIndex* QItemSelectionRange_bottomRight(const QItemSelectionRange* self) {
+	const QPersistentModelIndex& _ret = self->bottomRight();
+	// Cast returned reference into pointer
+	return const_cast<QPersistentModelIndex*>(&_ret);
+}
+
+QModelIndex* QItemSelectionRange_parent(const QItemSelectionRange* self) {
+	return new QModelIndex(self->parent());
+}
+
+QAbstractItemModel* QItemSelectionRange_model(const QItemSelectionRange* self) {
+	return (QAbstractItemModel*) self->model();
+}
+
+bool QItemSelectionRange_contains_index(const QItemSelectionRange* self, QModelIndex* index) {
+	return self->contains(*index);
+}
+
+bool QItemSelectionRange_contains_row_column_parentIndex(const QItemSelectionRange* self, int row, int column, QModelIndex* parentIndex) {
+	return self->contains(static_cast<int>(row), static_cast<int>(column), *parentIndex);
+}
+
+bool QItemSelectionRange_intersects(const QItemSelectionRange* self, QItemSelectionRange* other) {
+	return self->intersects(*other);
+}
+
+QItemSelectionRange* QItemSelectionRange_intersected(const QItemSelectionRange* self, QItemSelectionRange* other) {
+	return new QItemSelectionRange(self->intersected(*other));
+}
+
+bool QItemSelectionRange_isValid(const QItemSelectionRange* self) {
+	return self->isValid();
+}
+
+bool QItemSelectionRange_isEmpty(const QItemSelectionRange* self) {
+	return self->isEmpty();
+}
+
+struct seaqt_array /* of QModelIndex* */  QItemSelectionRange_indexes(const QItemSelectionRange* self) {
+	QModelIndexList _ret = self->indexes();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QModelIndex(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QItemSelectionRange_operatorAssign(QItemSelectionRange* self, QItemSelectionRange* from) {
+	self->operator=(*from);
+}
+
+void QItemSelectionRange_delete(QItemSelectionRange* self) {
+	delete self;
+}
+
+class VirtualQItemSelectionModel final : public QItemSelectionModel {
+	const QItemSelectionModel_VTable* vtbl;
+public:
+	friend void* QItemSelectionModel_vdata(VirtualQItemSelectionModel* self);
+	friend VirtualQItemSelectionModel* vdata_QItemSelectionModel(void* vdata);
+
+	VirtualQItemSelectionModel(const QItemSelectionModel_VTable* vtbl): QItemSelectionModel(), vtbl(vtbl) {}
+	VirtualQItemSelectionModel(const QItemSelectionModel_VTable* vtbl, QAbstractItemModel* model, QObject* parent): QItemSelectionModel(model, parent), vtbl(vtbl) {}
+	VirtualQItemSelectionModel(const QItemSelectionModel_VTable* vtbl, QAbstractItemModel* model): QItemSelectionModel(model), vtbl(vtbl) {}
+
+	virtual ~VirtualQItemSelectionModel() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QItemSelectionModel::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QItemSelectionModel_virtualbase_metaObject(const VirtualQItemSelectionModel* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QItemSelectionModel::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QItemSelectionModel_virtualbase_metacast(VirtualQItemSelectionModel* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QItemSelectionModel::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QItemSelectionModel_virtualbase_metacall(VirtualQItemSelectionModel* self, int param1, int param2, void** param3);
+
+	virtual void setCurrentIndex(const QModelIndex& index, QItemSelectionModel::SelectionFlags command) override {
+		if (vtbl->setCurrentIndex == 0) {
+			QItemSelectionModel::setCurrentIndex(index, command);
+			return;
+		}
+
+		const QModelIndex& index_ret = index;
+		// Cast returned reference into pointer
+		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
+		QItemSelectionModel::SelectionFlags command_ret = command;
+		int sigval2 = static_cast<int>(command_ret);
+		vtbl->setCurrentIndex(this, sigval1, sigval2);
+	}
+
+	friend void QItemSelectionModel_virtualbase_setCurrentIndex(VirtualQItemSelectionModel* self, QModelIndex* index, int command);
+
+	virtual void select(const QModelIndex& index, QItemSelectionModel::SelectionFlags command) override {
+		if (vtbl->select_index_command == 0) {
+			QItemSelectionModel::select(index, command);
+			return;
+		}
+
+		const QModelIndex& index_ret = index;
+		// Cast returned reference into pointer
+		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
+		QItemSelectionModel::SelectionFlags command_ret = command;
+		int sigval2 = static_cast<int>(command_ret);
+		vtbl->select_index_command(this, sigval1, sigval2);
+	}
+
+	friend void QItemSelectionModel_virtualbase_select_index_command(VirtualQItemSelectionModel* self, QModelIndex* index, int command);
+
+	virtual void select(const QItemSelection& selection, QItemSelectionModel::SelectionFlags command) override {
+		if (vtbl->select_selection_command == 0) {
+			QItemSelectionModel::select(selection, command);
+			return;
+		}
+
+		const QItemSelection& selection_ret = selection;
+		// Cast returned reference into pointer
+		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
+		QItemSelectionModel::SelectionFlags command_ret = command;
+		int sigval2 = static_cast<int>(command_ret);
+		vtbl->select_selection_command(this, sigval1, sigval2);
+	}
+
+	friend void QItemSelectionModel_virtualbase_select_selection_command(VirtualQItemSelectionModel* self, QItemSelection* selection, int command);
+
+	virtual void clear() override {
+		if (vtbl->clear == 0) {
+			QItemSelectionModel::clear();
+			return;
+		}
+
+		vtbl->clear(this);
+	}
+
+	friend void QItemSelectionModel_virtualbase_clear(VirtualQItemSelectionModel* self);
+
+	virtual void reset() override {
+		if (vtbl->reset == 0) {
+			QItemSelectionModel::reset();
+			return;
+		}
+
+		vtbl->reset(this);
+	}
+
+	friend void QItemSelectionModel_virtualbase_reset(VirtualQItemSelectionModel* self);
+
+	virtual void clearCurrentIndex() override {
+		if (vtbl->clearCurrentIndex == 0) {
+			QItemSelectionModel::clearCurrentIndex();
+			return;
+		}
+
+		vtbl->clearCurrentIndex(this);
+	}
+
+	friend void QItemSelectionModel_virtualbase_clearCurrentIndex(VirtualQItemSelectionModel* self);
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QItemSelectionModel::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QItemSelectionModel_virtualbase_event(VirtualQItemSelectionModel* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QItemSelectionModel::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QItemSelectionModel_virtualbase_eventFilter(VirtualQItemSelectionModel* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QItemSelectionModel::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QItemSelectionModel_virtualbase_timerEvent(VirtualQItemSelectionModel* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QItemSelectionModel::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QItemSelectionModel_virtualbase_childEvent(VirtualQItemSelectionModel* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QItemSelectionModel::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QItemSelectionModel_virtualbase_customEvent(VirtualQItemSelectionModel* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QItemSelectionModel::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QItemSelectionModel_virtualbase_connectNotify(VirtualQItemSelectionModel* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QItemSelectionModel::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QItemSelectionModel_virtualbase_disconnectNotify(VirtualQItemSelectionModel* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend void QItemSelectionModel_protectedbase_emitSelectionChanged(VirtualQItemSelectionModel* self, QItemSelection* newSelection, QItemSelection* oldSelection);
+	friend QObject* QItemSelectionModel_protectedbase_sender(const VirtualQItemSelectionModel* self);
+	friend int QItemSelectionModel_protectedbase_senderSignalIndex(const VirtualQItemSelectionModel* self);
+	friend int QItemSelectionModel_protectedbase_receivers(const VirtualQItemSelectionModel* self, const char* signal);
+	friend bool QItemSelectionModel_protectedbase_isSignalConnected(const VirtualQItemSelectionModel* self, QMetaMethod* signal);
+};
+
+VirtualQItemSelectionModel* QItemSelectionModel_new(const QItemSelectionModel_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQItemSelectionModel>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQItemSelectionModel(vtbl) : nullptr;
+}
+
+VirtualQItemSelectionModel* QItemSelectionModel_new_model_parent(const QItemSelectionModel_VTable* vtbl, size_t vdata, QAbstractItemModel* model, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQItemSelectionModel>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQItemSelectionModel(vtbl, model, parent) : nullptr;
+}
+
+VirtualQItemSelectionModel* QItemSelectionModel_new_model(const QItemSelectionModel_VTable* vtbl, size_t vdata, QAbstractItemModel* model) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQItemSelectionModel>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQItemSelectionModel(vtbl, model) : nullptr;
+}
+
+void QItemSelectionModel_virtbase(QItemSelectionModel* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QItemSelectionModel_metaObject(const QItemSelectionModel* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QItemSelectionModel_metacast(QItemSelectionModel* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QItemSelectionModel_metacall(QItemSelectionModel* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QItemSelectionModel_tr_s(const char* s) {
+	QString _ret = QItemSelectionModel::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QModelIndex* QItemSelectionModel_currentIndex(const QItemSelectionModel* self) {
+	return new QModelIndex(self->currentIndex());
+}
+
+bool QItemSelectionModel_isSelected(const QItemSelectionModel* self, QModelIndex* index) {
+	return self->isSelected(*index);
+}
+
+bool QItemSelectionModel_isRowSelected_row(const QItemSelectionModel* self, int row) {
+	return self->isRowSelected(static_cast<int>(row));
+}
+
+bool QItemSelectionModel_isColumnSelected_column(const QItemSelectionModel* self, int column) {
+	return self->isColumnSelected(static_cast<int>(column));
+}
+
+bool QItemSelectionModel_rowIntersectsSelection_row(const QItemSelectionModel* self, int row) {
+	return self->rowIntersectsSelection(static_cast<int>(row));
+}
+
+bool QItemSelectionModel_columnIntersectsSelection_column(const QItemSelectionModel* self, int column) {
+	return self->columnIntersectsSelection(static_cast<int>(column));
+}
+
+bool QItemSelectionModel_hasSelection(const QItemSelectionModel* self) {
+	return self->hasSelection();
+}
+
+struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedIndexes(const QItemSelectionModel* self) {
+	QModelIndexList _ret = self->selectedIndexes();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QModelIndex(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedRows(const QItemSelectionModel* self) {
+	QModelIndexList _ret = self->selectedRows();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QModelIndex(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedColumns(const QItemSelectionModel* self) {
+	QModelIndexList _ret = self->selectedColumns();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QModelIndex(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+QItemSelection* QItemSelectionModel_selection(const QItemSelectionModel* self) {
+	return new QItemSelection(self->selection());
+}
+
+QAbstractItemModel* QItemSelectionModel_model_const(const QItemSelectionModel* self) {
+	return (QAbstractItemModel*) self->model();
+}
+
+QAbstractItemModel* QItemSelectionModel_model(QItemSelectionModel* self) {
+	return self->model();
+}
+
+void QItemSelectionModel_setModel(QItemSelectionModel* self, QAbstractItemModel* model) {
+	self->setModel(model);
+}
+
+void QItemSelectionModel_setCurrentIndex(QItemSelectionModel* self, QModelIndex* index, int command) {
+	self->setCurrentIndex(*index, static_cast<QItemSelectionModel::SelectionFlags>(command));
+}
+
+void QItemSelectionModel_select_index_command(QItemSelectionModel* self, QModelIndex* index, int command) {
+	self->select(*index, static_cast<QItemSelectionModel::SelectionFlags>(command));
+}
+
+void QItemSelectionModel_select_selection_command(QItemSelectionModel* self, QItemSelection* selection, int command) {
+	self->select(*selection, static_cast<QItemSelectionModel::SelectionFlags>(command));
+}
+
+void QItemSelectionModel_clear(QItemSelectionModel* self) {
+	self->clear();
+}
+
+void QItemSelectionModel_reset(QItemSelectionModel* self) {
+	self->reset();
+}
+
+void QItemSelectionModel_clearSelection(QItemSelectionModel* self) {
+	self->clearSelection();
+}
+
+void QItemSelectionModel_clearCurrentIndex(QItemSelectionModel* self) {
+	self->clearCurrentIndex();
+}
+
+void QItemSelectionModel_selectionChanged(QItemSelectionModel* self, QItemSelection* selected, QItemSelection* deselected) {
+	self->selectionChanged(*selected, *deselected);
+}
+
+void QItemSelectionModel_connect_selectionChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QItemSelection*, QItemSelection*), void (*release)(intptr_t)) {
+	QItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QItemSelection&, const QItemSelection&)>(&QItemSelectionModel::selectionChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QItemSelection& selected, const QItemSelection& deselected) {
+			const QItemSelection& selected_ret = selected;
+			// Cast returned reference into pointer
+			QItemSelection* sigval1 = const_cast<QItemSelection*>(&selected_ret);
+			const QItemSelection& deselected_ret = deselected;
+			// Cast returned reference into pointer
+			QItemSelection* sigval2 = const_cast<QItemSelection*>(&deselected_ret);
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QItemSelectionModel_currentChanged(QItemSelectionModel* self, QModelIndex* current, QModelIndex* previous) {
+	self->currentChanged(*current, *previous);
+}
+
+void QItemSelectionModel_connect_currentChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
+	QItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QModelIndex&, const QModelIndex&)>(&QItemSelectionModel::currentChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& current, const QModelIndex& previous) {
+			const QModelIndex& current_ret = current;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&current_ret);
+			const QModelIndex& previous_ret = previous;
+			// Cast returned reference into pointer
+			QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QItemSelectionModel_currentRowChanged(QItemSelectionModel* self, QModelIndex* current, QModelIndex* previous) {
+	self->currentRowChanged(*current, *previous);
+}
+
+void QItemSelectionModel_connect_currentRowChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
+	QItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QModelIndex&, const QModelIndex&)>(&QItemSelectionModel::currentRowChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& current, const QModelIndex& previous) {
+			const QModelIndex& current_ret = current;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&current_ret);
+			const QModelIndex& previous_ret = previous;
+			// Cast returned reference into pointer
+			QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QItemSelectionModel_currentColumnChanged(QItemSelectionModel* self, QModelIndex* current, QModelIndex* previous) {
+	self->currentColumnChanged(*current, *previous);
+}
+
+void QItemSelectionModel_connect_currentColumnChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
+	QItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QModelIndex&, const QModelIndex&)>(&QItemSelectionModel::currentColumnChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& current, const QModelIndex& previous) {
+			const QModelIndex& current_ret = current;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&current_ret);
+			const QModelIndex& previous_ret = previous;
+			// Cast returned reference into pointer
+			QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QItemSelectionModel_modelChanged(QItemSelectionModel* self, QAbstractItemModel* model) {
+	self->modelChanged(model);
+}
+
+void QItemSelectionModel_connect_modelChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QAbstractItemModel*), void (*release)(intptr_t)) {
+	QItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(QAbstractItemModel*)>(&QItemSelectionModel::modelChanged), self, [callback, release = seaqt::release_callback{slot,release}](QAbstractItemModel* model) {
+			QAbstractItemModel* sigval1 = model;
+			callback(release.slot, sigval1);
+	});
+}
+
+struct seaqt_string QItemSelectionModel_tr_s_c(const char* s, const char* c) {
+	QString _ret = QItemSelectionModel::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QItemSelectionModel_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QItemSelectionModel::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+bool QItemSelectionModel_isRowSelected_row_parent(const QItemSelectionModel* self, int row, QModelIndex* parent) {
+	return self->isRowSelected(static_cast<int>(row), *parent);
+}
+
+bool QItemSelectionModel_isColumnSelected_column_parent(const QItemSelectionModel* self, int column, QModelIndex* parent) {
+	return self->isColumnSelected(static_cast<int>(column), *parent);
+}
+
+bool QItemSelectionModel_rowIntersectsSelection_row_parent(const QItemSelectionModel* self, int row, QModelIndex* parent) {
+	return self->rowIntersectsSelection(static_cast<int>(row), *parent);
+}
+
+bool QItemSelectionModel_columnIntersectsSelection_column_parent(const QItemSelectionModel* self, int column, QModelIndex* parent) {
+	return self->columnIntersectsSelection(static_cast<int>(column), *parent);
+}
+
+struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedRows_column(const QItemSelectionModel* self, int column) {
+	QModelIndexList _ret = self->selectedRows(static_cast<int>(column));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QModelIndex(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedColumns_row(const QItemSelectionModel* self, int row) {
+	QModelIndexList _ret = self->selectedColumns(static_cast<int>(row));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QModelIndex(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+const QMetaObject* QItemSelectionModel_staticMetaObject() { return &QItemSelectionModel::staticMetaObject; }
+void* QItemSelectionModel_vdata(VirtualQItemSelectionModel* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQItemSelectionModel>()); }
+VirtualQItemSelectionModel* vdata_QItemSelectionModel(void* vdata) { return reinterpret_cast<VirtualQItemSelectionModel*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQItemSelectionModel>()); }
+
+QMetaObject* QItemSelectionModel_virtualbase_metaObject(const VirtualQItemSelectionModel* self) {
+
+	return (QMetaObject*) self->QItemSelectionModel::metaObject();
+}
+
+void* QItemSelectionModel_virtualbase_metacast(VirtualQItemSelectionModel* self, const char* param1) {
+
+	return self->QItemSelectionModel::qt_metacast(param1);
+}
+
+int QItemSelectionModel_virtualbase_metacall(VirtualQItemSelectionModel* self, int param1, int param2, void** param3) {
+
+	return self->QItemSelectionModel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+void QItemSelectionModel_virtualbase_setCurrentIndex(VirtualQItemSelectionModel* self, QModelIndex* index, int command) {
+
+	self->QItemSelectionModel::setCurrentIndex(*index, static_cast<VirtualQItemSelectionModel::SelectionFlags>(command));
+}
+
+void QItemSelectionModel_virtualbase_select_index_command(VirtualQItemSelectionModel* self, QModelIndex* index, int command) {
+
+	self->QItemSelectionModel::select(*index, static_cast<VirtualQItemSelectionModel::SelectionFlags>(command));
+}
+
+void QItemSelectionModel_virtualbase_select_selection_command(VirtualQItemSelectionModel* self, QItemSelection* selection, int command) {
+
+	self->QItemSelectionModel::select(*selection, static_cast<VirtualQItemSelectionModel::SelectionFlags>(command));
+}
+
+void QItemSelectionModel_virtualbase_clear(VirtualQItemSelectionModel* self) {
+
+	self->QItemSelectionModel::clear();
+}
+
+void QItemSelectionModel_virtualbase_reset(VirtualQItemSelectionModel* self) {
+
+	self->QItemSelectionModel::reset();
+}
+
+void QItemSelectionModel_virtualbase_clearCurrentIndex(VirtualQItemSelectionModel* self) {
+
+	self->QItemSelectionModel::clearCurrentIndex();
+}
+
+bool QItemSelectionModel_virtualbase_event(VirtualQItemSelectionModel* self, QEvent* event) {
+
+	return self->QItemSelectionModel::event(event);
+}
+
+bool QItemSelectionModel_virtualbase_eventFilter(VirtualQItemSelectionModel* self, QObject* watched, QEvent* event) {
+
+	return self->QItemSelectionModel::eventFilter(watched, event);
+}
+
+void QItemSelectionModel_virtualbase_timerEvent(VirtualQItemSelectionModel* self, QTimerEvent* event) {
+
+	self->QItemSelectionModel::timerEvent(event);
+}
+
+void QItemSelectionModel_virtualbase_childEvent(VirtualQItemSelectionModel* self, QChildEvent* event) {
+
+	self->QItemSelectionModel::childEvent(event);
+}
+
+void QItemSelectionModel_virtualbase_customEvent(VirtualQItemSelectionModel* self, QEvent* event) {
+
+	self->QItemSelectionModel::customEvent(event);
+}
+
+void QItemSelectionModel_virtualbase_connectNotify(VirtualQItemSelectionModel* self, QMetaMethod* signal) {
+
+	self->QItemSelectionModel::connectNotify(*signal);
+}
+
+void QItemSelectionModel_virtualbase_disconnectNotify(VirtualQItemSelectionModel* self, QMetaMethod* signal) {
+
+	self->QItemSelectionModel::disconnectNotify(*signal);
+}
+
+void QItemSelectionModel_protectedbase_emitSelectionChanged(VirtualQItemSelectionModel* self, QItemSelection* newSelection, QItemSelection* oldSelection) {
+	self->QItemSelectionModel::emitSelectionChanged(*newSelection, *oldSelection);
+}
+
+QObject* QItemSelectionModel_protectedbase_sender(const VirtualQItemSelectionModel* self) {
+	return self->QItemSelectionModel::sender();
+}
+
+int QItemSelectionModel_protectedbase_senderSignalIndex(const VirtualQItemSelectionModel* self) {
+	return self->QItemSelectionModel::senderSignalIndex();
+}
+
+int QItemSelectionModel_protectedbase_receivers(const VirtualQItemSelectionModel* self, const char* signal) {
+	return self->QItemSelectionModel::receivers(signal);
+}
+
+bool QItemSelectionModel_protectedbase_isSignalConnected(const VirtualQItemSelectionModel* self, QMetaMethod* signal) {
+	return self->QItemSelectionModel::isSignalConnected(*signal);
+}
+
+void QItemSelectionModel_delete(QItemSelectionModel* self) {
+	delete self;
+}
+
+QItemSelection* QItemSelection_new_topLeft_bottomRight(QModelIndex* topLeft, QModelIndex* bottomRight) {
+	return new (std::nothrow) QItemSelection(*topLeft, *bottomRight);
+}
+
+QItemSelection* QItemSelection_new() {
+	return new (std::nothrow) QItemSelection();
+}
+
+QItemSelection* QItemSelection_new_from(QItemSelection* from) {
+	return new (std::nothrow) QItemSelection(*from);
+}
+
+void QItemSelection_select(QItemSelection* self, QModelIndex* topLeft, QModelIndex* bottomRight) {
+	self->select(*topLeft, *bottomRight);
+}
+
+bool QItemSelection_contains(const QItemSelection* self, QModelIndex* index) {
+	return self->contains(*index);
+}
+
+struct seaqt_array /* of QModelIndex* */  QItemSelection_indexes(const QItemSelection* self) {
+	QModelIndexList _ret = self->indexes();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QModelIndex(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QItemSelection_merge(QItemSelection* self, QItemSelection* other, int command) {
+	self->merge(*other, static_cast<QItemSelectionModel::SelectionFlags>(command));
+}
+
+void QItemSelection_split(QItemSelectionRange* range, QItemSelectionRange* other, QItemSelection* result) {
+	QItemSelection::split(*range, *other, result);
+}
+
+void QItemSelection_delete(QItemSelection* self) {
+	delete self;
+}
+

@@ -1,0 +1,2 @@
+import ./QtGui/gen_qfilesystemmodel
+export gen_qfilesystemmodel

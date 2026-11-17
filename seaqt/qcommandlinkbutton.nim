@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qcommandlinkbutton
+export gen_qcommandlinkbutton

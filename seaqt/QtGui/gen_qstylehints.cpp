@@ -1,0 +1,395 @@
+#include <QAccessibilityHints>
+#include <QChar>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QStyleHints>
+#include <qstylehints.h>
+#include "gen_qstylehints.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QStyleHints_virtbase(QStyleHints* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QStyleHints_metaObject(const QStyleHints* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QStyleHints_metacast(QStyleHints* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QStyleHints_metacall(QStyleHints* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QStyleHints_tr_s(const char* s) {
+	QString _ret = QStyleHints::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QStyleHints_setMouseDoubleClickInterval(QStyleHints* self, int mouseDoubleClickInterval) {
+	self->setMouseDoubleClickInterval(static_cast<int>(mouseDoubleClickInterval));
+}
+
+int QStyleHints_mouseDoubleClickInterval(const QStyleHints* self) {
+	return self->mouseDoubleClickInterval();
+}
+
+int QStyleHints_mouseDoubleClickDistance(const QStyleHints* self) {
+	return self->mouseDoubleClickDistance();
+}
+
+int QStyleHints_touchDoubleTapDistance(const QStyleHints* self) {
+	return self->touchDoubleTapDistance();
+}
+
+void QStyleHints_setMousePressAndHoldInterval(QStyleHints* self, int mousePressAndHoldInterval) {
+	self->setMousePressAndHoldInterval(static_cast<int>(mousePressAndHoldInterval));
+}
+
+int QStyleHints_mousePressAndHoldInterval(const QStyleHints* self) {
+	return self->mousePressAndHoldInterval();
+}
+
+void QStyleHints_setStartDragDistance(QStyleHints* self, int startDragDistance) {
+	self->setStartDragDistance(static_cast<int>(startDragDistance));
+}
+
+int QStyleHints_startDragDistance(const QStyleHints* self) {
+	return self->startDragDistance();
+}
+
+void QStyleHints_setStartDragTime(QStyleHints* self, int startDragTime) {
+	self->setStartDragTime(static_cast<int>(startDragTime));
+}
+
+int QStyleHints_startDragTime(const QStyleHints* self) {
+	return self->startDragTime();
+}
+
+int QStyleHints_startDragVelocity(const QStyleHints* self) {
+	return self->startDragVelocity();
+}
+
+void QStyleHints_setKeyboardInputInterval(QStyleHints* self, int keyboardInputInterval) {
+	self->setKeyboardInputInterval(static_cast<int>(keyboardInputInterval));
+}
+
+int QStyleHints_keyboardInputInterval(const QStyleHints* self) {
+	return self->keyboardInputInterval();
+}
+
+int QStyleHints_keyboardAutoRepeatRate(const QStyleHints* self) {
+	return self->keyboardAutoRepeatRate();
+}
+
+double QStyleHints_keyboardAutoRepeatRateF(const QStyleHints* self) {
+	qreal _ret = self->keyboardAutoRepeatRateF();
+	return static_cast<double>(_ret);
+}
+
+void QStyleHints_setCursorFlashTime(QStyleHints* self, int cursorFlashTime) {
+	self->setCursorFlashTime(static_cast<int>(cursorFlashTime));
+}
+
+int QStyleHints_cursorFlashTime(const QStyleHints* self) {
+	return self->cursorFlashTime();
+}
+
+bool QStyleHints_showIsFullScreen(const QStyleHints* self) {
+	return self->showIsFullScreen();
+}
+
+bool QStyleHints_showIsMaximized(const QStyleHints* self) {
+	return self->showIsMaximized();
+}
+
+bool QStyleHints_showShortcutsInContextMenus(const QStyleHints* self) {
+	return self->showShortcutsInContextMenus();
+}
+
+void QStyleHints_setShowShortcutsInContextMenus(QStyleHints* self, bool showShortcutsInContextMenus) {
+	self->setShowShortcutsInContextMenus(showShortcutsInContextMenus);
+}
+
+int QStyleHints_contextMenuTrigger(const QStyleHints* self) {
+	Qt::ContextMenuTrigger _ret = self->contextMenuTrigger();
+	return static_cast<int>(_ret);
+}
+
+void QStyleHints_setContextMenuTrigger(QStyleHints* self, int contextMenuTrigger) {
+	self->setContextMenuTrigger(static_cast<Qt::ContextMenuTrigger>(contextMenuTrigger));
+}
+
+bool QStyleHints_menuSelectionWraps(const QStyleHints* self) {
+	return self->menuSelectionWraps();
+}
+
+int QStyleHints_passwordMaskDelay(const QStyleHints* self) {
+	return self->passwordMaskDelay();
+}
+
+QChar* QStyleHints_passwordMaskCharacter(const QStyleHints* self) {
+	return new QChar(self->passwordMaskCharacter());
+}
+
+double QStyleHints_fontSmoothingGamma(const QStyleHints* self) {
+	qreal _ret = self->fontSmoothingGamma();
+	return static_cast<double>(_ret);
+}
+
+bool QStyleHints_useRtlExtensions(const QStyleHints* self) {
+	return self->useRtlExtensions();
+}
+
+bool QStyleHints_setFocusOnTouchRelease(const QStyleHints* self) {
+	return self->setFocusOnTouchRelease();
+}
+
+int QStyleHints_tabFocusBehavior(const QStyleHints* self) {
+	Qt::TabFocusBehavior _ret = self->tabFocusBehavior();
+	return static_cast<int>(_ret);
+}
+
+void QStyleHints_setTabFocusBehavior(QStyleHints* self, int tabFocusBehavior) {
+	self->setTabFocusBehavior(static_cast<Qt::TabFocusBehavior>(tabFocusBehavior));
+}
+
+bool QStyleHints_singleClickActivation(const QStyleHints* self) {
+	return self->singleClickActivation();
+}
+
+bool QStyleHints_useHoverEffects(const QStyleHints* self) {
+	return self->useHoverEffects();
+}
+
+void QStyleHints_setUseHoverEffects(QStyleHints* self, bool useHoverEffects) {
+	self->setUseHoverEffects(useHoverEffects);
+}
+
+int QStyleHints_wheelScrollLines(const QStyleHints* self) {
+	return self->wheelScrollLines();
+}
+
+void QStyleHints_setWheelScrollLines(QStyleHints* self, int scrollLines) {
+	self->setWheelScrollLines(static_cast<int>(scrollLines));
+}
+
+void QStyleHints_setMouseQuickSelectionThreshold(QStyleHints* self, int threshold) {
+	self->setMouseQuickSelectionThreshold(static_cast<int>(threshold));
+}
+
+int QStyleHints_mouseQuickSelectionThreshold(const QStyleHints* self) {
+	return self->mouseQuickSelectionThreshold();
+}
+
+int QStyleHints_colorScheme(const QStyleHints* self) {
+	Qt::ColorScheme _ret = self->colorScheme();
+	return static_cast<int>(_ret);
+}
+
+void QStyleHints_setColorScheme(QStyleHints* self, int scheme) {
+	self->setColorScheme(static_cast<Qt::ColorScheme>(scheme));
+}
+
+void QStyleHints_unsetColorScheme(QStyleHints* self) {
+	self->unsetColorScheme();
+}
+
+QAccessibilityHints* QStyleHints_accessibility(const QStyleHints* self) {
+	return (QAccessibilityHints*) self->accessibility();
+}
+
+void QStyleHints_cursorFlashTimeChanged(QStyleHints* self, int cursorFlashTime) {
+	self->cursorFlashTimeChanged(static_cast<int>(cursorFlashTime));
+}
+
+void QStyleHints_connect_cursorFlashTimeChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::cursorFlashTimeChanged), self, [callback, release = seaqt::release_callback{slot,release}](int cursorFlashTime) {
+			int sigval1 = cursorFlashTime;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_keyboardInputIntervalChanged(QStyleHints* self, int keyboardInputInterval) {
+	self->keyboardInputIntervalChanged(static_cast<int>(keyboardInputInterval));
+}
+
+void QStyleHints_connect_keyboardInputIntervalChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::keyboardInputIntervalChanged), self, [callback, release = seaqt::release_callback{slot,release}](int keyboardInputInterval) {
+			int sigval1 = keyboardInputInterval;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_mouseDoubleClickIntervalChanged(QStyleHints* self, int mouseDoubleClickInterval) {
+	self->mouseDoubleClickIntervalChanged(static_cast<int>(mouseDoubleClickInterval));
+}
+
+void QStyleHints_connect_mouseDoubleClickIntervalChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mouseDoubleClickIntervalChanged), self, [callback, release = seaqt::release_callback{slot,release}](int mouseDoubleClickInterval) {
+			int sigval1 = mouseDoubleClickInterval;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_mousePressAndHoldIntervalChanged(QStyleHints* self, int mousePressAndHoldInterval) {
+	self->mousePressAndHoldIntervalChanged(static_cast<int>(mousePressAndHoldInterval));
+}
+
+void QStyleHints_connect_mousePressAndHoldIntervalChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mousePressAndHoldIntervalChanged), self, [callback, release = seaqt::release_callback{slot,release}](int mousePressAndHoldInterval) {
+			int sigval1 = mousePressAndHoldInterval;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_startDragDistanceChanged(QStyleHints* self, int startDragDistance) {
+	self->startDragDistanceChanged(static_cast<int>(startDragDistance));
+}
+
+void QStyleHints_connect_startDragDistanceChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::startDragDistanceChanged), self, [callback, release = seaqt::release_callback{slot,release}](int startDragDistance) {
+			int sigval1 = startDragDistance;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_startDragTimeChanged(QStyleHints* self, int startDragTime) {
+	self->startDragTimeChanged(static_cast<int>(startDragTime));
+}
+
+void QStyleHints_connect_startDragTimeChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::startDragTimeChanged), self, [callback, release = seaqt::release_callback{slot,release}](int startDragTime) {
+			int sigval1 = startDragTime;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_tabFocusBehaviorChanged(QStyleHints* self, int tabFocusBehavior) {
+	self->tabFocusBehaviorChanged(static_cast<Qt::TabFocusBehavior>(tabFocusBehavior));
+}
+
+void QStyleHints_connect_tabFocusBehaviorChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(Qt::TabFocusBehavior)>(&QStyleHints::tabFocusBehaviorChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::TabFocusBehavior tabFocusBehavior) {
+			Qt::TabFocusBehavior tabFocusBehavior_ret = tabFocusBehavior;
+			int sigval1 = static_cast<int>(tabFocusBehavior_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_useHoverEffectsChanged(QStyleHints* self, bool useHoverEffects) {
+	self->useHoverEffectsChanged(useHoverEffects);
+}
+
+void QStyleHints_connect_useHoverEffectsChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(bool)>(&QStyleHints::useHoverEffectsChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool useHoverEffects) {
+			bool sigval1 = useHoverEffects;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_showShortcutsInContextMenusChanged(QStyleHints* self, bool param1) {
+	self->showShortcutsInContextMenusChanged(param1);
+}
+
+void QStyleHints_connect_showShortcutsInContextMenusChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(bool)>(&QStyleHints::showShortcutsInContextMenusChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
+			bool sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_contextMenuTriggerChanged(QStyleHints* self, int contextMenuTrigger) {
+	self->contextMenuTriggerChanged(static_cast<Qt::ContextMenuTrigger>(contextMenuTrigger));
+}
+
+void QStyleHints_connect_contextMenuTriggerChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(Qt::ContextMenuTrigger)>(&QStyleHints::contextMenuTriggerChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::ContextMenuTrigger contextMenuTrigger) {
+			Qt::ContextMenuTrigger contextMenuTrigger_ret = contextMenuTrigger;
+			int sigval1 = static_cast<int>(contextMenuTrigger_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_wheelScrollLinesChanged(QStyleHints* self, int scrollLines) {
+	self->wheelScrollLinesChanged(static_cast<int>(scrollLines));
+}
+
+void QStyleHints_connect_wheelScrollLinesChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::wheelScrollLinesChanged), self, [callback, release = seaqt::release_callback{slot,release}](int scrollLines) {
+			int sigval1 = scrollLines;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_mouseQuickSelectionThresholdChanged(QStyleHints* self, int threshold) {
+	self->mouseQuickSelectionThresholdChanged(static_cast<int>(threshold));
+}
+
+void QStyleHints_connect_mouseQuickSelectionThresholdChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mouseQuickSelectionThresholdChanged), self, [callback, release = seaqt::release_callback{slot,release}](int threshold) {
+			int sigval1 = threshold;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QStyleHints_colorSchemeChanged(QStyleHints* self, int colorScheme) {
+	self->colorSchemeChanged(static_cast<Qt::ColorScheme>(colorScheme));
+}
+
+void QStyleHints_connect_colorSchemeChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(Qt::ColorScheme)>(&QStyleHints::colorSchemeChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::ColorScheme colorScheme) {
+			Qt::ColorScheme colorScheme_ret = colorScheme;
+			int sigval1 = static_cast<int>(colorScheme_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+struct seaqt_string QStyleHints_tr_s_c(const char* s, const char* c) {
+	QString _ret = QStyleHints::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QStyleHints_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QStyleHints::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QStyleHints_staticMetaObject() { return &QStyleHints::staticMetaObject; }
+void QStyleHints_delete(QStyleHints* self) {
+	delete self;
+}
+
