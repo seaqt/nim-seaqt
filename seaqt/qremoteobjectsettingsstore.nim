@@ -1,0 +1,2 @@
+import ./QtRemoteObjects/gen_qremoteobjectsettingsstore
+export gen_qremoteobjectsettingsstore

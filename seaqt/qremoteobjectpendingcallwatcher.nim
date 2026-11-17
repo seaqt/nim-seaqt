@@ -1,0 +1,2 @@
+import ./QtRemoteObjects/gen_qremoteobjectpendingcall
+export gen_qremoteobjectpendingcall

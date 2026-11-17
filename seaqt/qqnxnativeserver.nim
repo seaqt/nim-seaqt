@@ -1,0 +1,2 @@
+import ./QtRemoteObjects/gen_qconnection_qnx_server
+export gen_qconnection_qnx_server

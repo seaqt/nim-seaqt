@@ -1,0 +1,2 @@
+import ./QtRemoteObjects/gen_qconnection_qnx_qiodevices
+export gen_qconnection_qnx_qiodevices

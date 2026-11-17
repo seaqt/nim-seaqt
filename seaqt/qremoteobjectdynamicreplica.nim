@@ -1,0 +1,2 @@
+import ./QtRemoteObjects/gen_qremoteobjectdynamicreplica
+export gen_qremoteobjectdynamicreplica
