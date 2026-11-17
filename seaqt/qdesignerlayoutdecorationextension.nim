@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_layoutdecoration
+export gen_layoutdecoration

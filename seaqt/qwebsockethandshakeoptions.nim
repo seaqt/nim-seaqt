@@ -1,0 +1,2 @@
+import ./QtWebSockets/gen_qwebsockethandshakeoptions
+export gen_qwebsockethandshakeoptions

@@ -1,0 +1,2 @@
+import ./QtGui/gen_qpointingdevice
+export gen_qpointingdevice

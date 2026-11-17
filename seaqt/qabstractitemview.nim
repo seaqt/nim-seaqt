@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qabstractitemview
+export gen_qabstractitemview

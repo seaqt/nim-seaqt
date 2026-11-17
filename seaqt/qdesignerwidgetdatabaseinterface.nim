@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractwidgetdatabase
+export gen_abstractwidgetdatabase

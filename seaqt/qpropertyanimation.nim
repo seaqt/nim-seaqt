@@ -1,0 +1,2 @@
+import ./QtCore/gen_qpropertyanimation
+export gen_qpropertyanimation

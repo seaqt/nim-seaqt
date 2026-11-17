@@ -1,0 +1,2 @@
+import ./QtCore/gen_qsortfilterproxymodel
+export gen_qsortfilterproxymodel

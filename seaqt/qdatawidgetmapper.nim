@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qdatawidgetmapper
+export gen_qdatawidgetmapper

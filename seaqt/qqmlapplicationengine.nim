@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlapplicationengine
+export gen_qqmlapplicationengine

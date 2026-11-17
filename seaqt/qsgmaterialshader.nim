@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgmaterialshader
+export gen_qsgmaterialshader

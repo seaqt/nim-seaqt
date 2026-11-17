@@ -1,0 +1,2 @@
+import ./QtSql/gen_qsqltablemodel
+export gen_qsqltablemodel

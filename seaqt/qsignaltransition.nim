@@ -1,0 +1,2 @@
+import ./QtStateMachine/gen_qsignaltransition
+export gen_qsignaltransition

@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgrendererinterface
+export gen_qsgrendererinterface

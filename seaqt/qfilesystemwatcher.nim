@@ -1,0 +1,2 @@
+import ./QtCore/gen_qfilesystemwatcher
+export gen_qfilesystemwatcher

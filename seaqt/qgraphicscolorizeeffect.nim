@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qgraphicseffect
+export gen_qgraphicseffect

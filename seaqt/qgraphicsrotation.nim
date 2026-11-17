@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qgraphicstransform
+export gen_qgraphicstransform

@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_propertysheet
+export gen_propertysheet

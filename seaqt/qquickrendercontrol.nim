@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qquickrendercontrol
+export gen_qquickrendercontrol
